@@ -1,0 +1,729 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		006A5FE41B318D230045395A /* MoMOSFramework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 006A5FE51B318D230045395A /* Build configuration list for PBXAggregateTarget "MoMOSFramework" */;
+			buildPhases = (
+			);
+			dependencies = (
+				006A5FE91B318D2B0045395A /* PBXTargetDependency */,
+				006A5FEB1B318D2B0045395A /* PBXTargetDependency */,
+			);
+			name = MoMOSFramework;
+			productName = MoMOSFramework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		006A5FB81B318CAC0045395A /* MoMOSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* MoMOSCore.framework */; };
+		006A5FBF1B318CAC0045395A /* MoMOSCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* MoMOSCoreTests.swift */; };
+		006A5FD61B318CBC0045395A /* MoMOSNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */; };
+		006A5FDD1B318CBC0045395A /* MoMOSNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FDC1B318CBC0045395A /* MoMOSNetworkingTests.swift */; };
+		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
+		006A60541B31BA9B0045395A /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60531B31BA9B0045395A /* Networking.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		006A5FB91B318CAC0045395A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 006A5FAC1B318CAC0045395A;
+			remoteInfo = MoMOSCore;
+		};
+		006A5FD71B318CBC0045395A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 006A5FCA1B318CBC0045395A;
+			remoteInfo = MoMOSNetworking;
+		};
+		006A5FE81B318D2B0045395A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 006A5FAC1B318CAC0045395A;
+			remoteInfo = MoMOSCore;
+		};
+		006A5FEA1B318D2B0045395A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 006A5FCA1B318CBC0045395A;
+			remoteInfo = MoMOSNetworking;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		006A5FAD1B318CAC0045395A /* MoMOSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoMOSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FB01B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006A5FB71B318CAC0045395A /* MoMOSCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoMOSCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FBD1B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006A5FBE1B318CAC0045395A /* MoMOSCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoMOSCoreTests.swift; sourceTree = "<group>"; };
+		006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoMOSNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FCE1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006A5FD51B318CBC0045395A /* MoMOSNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoMOSNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FDB1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006A5FDC1B318CBC0045395A /* MoMOSNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoMOSNetworkingTests.swift; sourceTree = "<group>"; };
+		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		006A60531B31BA9B0045395A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		006A5FA91B318CAC0045395A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FB41B318CAC0045395A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006A5FB81B318CAC0045395A /* MoMOSCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FC71B318CBC0045395A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FD21B318CBC0045395A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006A5FD61B318CBC0045395A /* MoMOSNetworking.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		006A5F821B318C6E0045395A = {
+			isa = PBXGroup;
+			children = (
+				006A5FAE1B318CAC0045395A /* MoMOSCore */,
+				006A5FCC1B318CBC0045395A /* MoMOSNetworking */,
+				006A5FBB1B318CAC0045395A /* MoMOSCoreTests */,
+				006A5FD91B318CBC0045395A /* MoMOSNetworkingTests */,
+				006A5F8D1B318C6E0045395A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		006A5F8D1B318C6E0045395A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FAD1B318CAC0045395A /* MoMOSCore.framework */,
+				006A5FB71B318CAC0045395A /* MoMOSCoreTests.xctest */,
+				006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */,
+				006A5FD51B318CBC0045395A /* MoMOSNetworkingTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		006A5FAE1B318CAC0045395A /* MoMOSCore */ = {
+			isa = PBXGroup;
+			children = (
+				006A60211B318DCC0045395A /* Manager.swift */,
+				006A5FAF1B318CAC0045395A /* Supporting Files */,
+			);
+			path = MoMOSCore;
+			sourceTree = "<group>";
+		};
+		006A5FAF1B318CAC0045395A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FB01B318CAC0045395A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		006A5FBB1B318CAC0045395A /* MoMOSCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FBE1B318CAC0045395A /* MoMOSCoreTests.swift */,
+				006A5FBC1B318CAC0045395A /* Supporting Files */,
+			);
+			path = MoMOSCoreTests;
+			sourceTree = "<group>";
+		};
+		006A5FBC1B318CAC0045395A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FBD1B318CAC0045395A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		006A5FCC1B318CBC0045395A /* MoMOSNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FCD1B318CBC0045395A /* Supporting Files */,
+				006A60531B31BA9B0045395A /* Networking.swift */,
+			);
+			path = MoMOSNetworking;
+			sourceTree = "<group>";
+		};
+		006A5FCD1B318CBC0045395A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FCE1B318CBC0045395A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		006A5FD91B318CBC0045395A /* MoMOSNetworkingTests */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FDC1B318CBC0045395A /* MoMOSNetworkingTests.swift */,
+				006A5FDA1B318CBC0045395A /* Supporting Files */,
+			);
+			path = MoMOSNetworkingTests;
+			sourceTree = "<group>";
+		};
+		006A5FDA1B318CBC0045395A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				006A5FDB1B318CBC0045395A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		006A5FAA1B318CAC0045395A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FC81B318CBC0045395A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		006A5FAC1B318CAC0045395A /* MoMOSCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCore" */;
+			buildPhases = (
+				006A5FA81B318CAC0045395A /* Sources */,
+				006A5FA91B318CAC0045395A /* Frameworks */,
+				006A5FAA1B318CAC0045395A /* Headers */,
+				006A5FAB1B318CAC0045395A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MoMOSCore;
+			productName = MoMOSCore;
+			productReference = 006A5FAD1B318CAC0045395A /* MoMOSCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		006A5FB61B318CAC0045395A /* MoMOSCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCoreTests" */;
+			buildPhases = (
+				006A5FB31B318CAC0045395A /* Sources */,
+				006A5FB41B318CAC0045395A /* Frameworks */,
+				006A5FB51B318CAC0045395A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				006A5FBA1B318CAC0045395A /* PBXTargetDependency */,
+			);
+			name = MoMOSCoreTests;
+			productName = MoMOSCoreTests;
+			productReference = 006A5FB71B318CAC0045395A /* MoMOSCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		006A5FCA1B318CBC0045395A /* MoMOSNetworking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 006A5FDE1B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworking" */;
+			buildPhases = (
+				006A5FC61B318CBC0045395A /* Sources */,
+				006A5FC71B318CBC0045395A /* Frameworks */,
+				006A5FC81B318CBC0045395A /* Headers */,
+				006A5FC91B318CBC0045395A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MoMOSNetworking;
+			productName = MoMOSNetworking;
+			productReference = 006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		006A5FD41B318CBC0045395A /* MoMOSNetworkingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 006A5FE11B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworkingTests" */;
+			buildPhases = (
+				006A5FD11B318CBC0045395A /* Sources */,
+				006A5FD21B318CBC0045395A /* Frameworks */,
+				006A5FD31B318CBC0045395A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				006A5FD81B318CBC0045395A /* PBXTargetDependency */,
+			);
+			name = MoMOSNetworkingTests;
+			productName = MoMOSNetworkingTests;
+			productReference = 006A5FD51B318CBC0045395A /* MoMOSNetworkingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		006A5F831B318C6E0045395A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "MOBGEN Technology";
+				TargetAttributes = {
+					006A5FAC1B318CAC0045395A = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					006A5FB61B318CAC0045395A = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					006A5FCA1B318CBC0045395A = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					006A5FD41B318CBC0045395A = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					006A5FE41B318D230045395A = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
+			};
+			buildConfigurationList = 006A5F861B318C6E0045395A /* Build configuration list for PBXProject "MoMOSFramework" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 006A5F821B318C6E0045395A;
+			productRefGroup = 006A5F8D1B318C6E0045395A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				006A5FE41B318D230045395A /* MoMOSFramework */,
+				006A5FAC1B318CAC0045395A /* MoMOSCore */,
+				006A5FB61B318CAC0045395A /* MoMOSCoreTests */,
+				006A5FCA1B318CBC0045395A /* MoMOSNetworking */,
+				006A5FD41B318CBC0045395A /* MoMOSNetworkingTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		006A5FAB1B318CAC0045395A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FB51B318CAC0045395A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FC91B318CBC0045395A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FD31B318CBC0045395A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		006A5FA81B318CAC0045395A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006A60221B318DCC0045395A /* Manager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FB31B318CAC0045395A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006A5FBF1B318CAC0045395A /* MoMOSCoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FC61B318CBC0045395A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006A60541B31BA9B0045395A /* Networking.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006A5FD11B318CBC0045395A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006A5FDD1B318CBC0045395A /* MoMOSNetworkingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		006A5FBA1B318CAC0045395A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 006A5FAC1B318CAC0045395A /* MoMOSCore */;
+			targetProxy = 006A5FB91B318CAC0045395A /* PBXContainerItemProxy */;
+		};
+		006A5FD81B318CBC0045395A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 006A5FCA1B318CBC0045395A /* MoMOSNetworking */;
+			targetProxy = 006A5FD71B318CBC0045395A /* PBXContainerItemProxy */;
+		};
+		006A5FE91B318D2B0045395A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 006A5FAC1B318CAC0045395A /* MoMOSCore */;
+			targetProxy = 006A5FE81B318D2B0045395A /* PBXContainerItemProxy */;
+		};
+		006A5FEB1B318D2B0045395A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 006A5FCA1B318CBC0045395A /* MoMOSNetworking */;
+			targetProxy = 006A5FEA1B318D2B0045395A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		006A5FA01B318C6E0045395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		006A5FA11B318C6E0045395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		006A5FC11B318CAC0045395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MoMOSCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		006A5FC21B318CAC0045395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MoMOSCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		006A5FC41B318CAC0045395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MoMOSCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		006A5FC51B318CAC0045395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MoMOSCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		006A5FDF1B318CBC0045395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MoMOSNetworking/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		006A5FE01B318CBC0045395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MoMOSNetworking/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		006A5FE21B318CBC0045395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MoMOSNetworkingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		006A5FE31B318CBC0045395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MoMOSNetworkingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		006A5FE61B318D230045395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		006A5FE71B318D230045395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		006A5F861B318C6E0045395A /* Build configuration list for PBXProject "MoMOSFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006A5FA01B318C6E0045395A /* Debug */,
+				006A5FA11B318C6E0045395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006A5FC11B318CAC0045395A /* Debug */,
+				006A5FC21B318CAC0045395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006A5FC41B318CAC0045395A /* Debug */,
+				006A5FC51B318CAC0045395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		006A5FDE1B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006A5FDF1B318CBC0045395A /* Debug */,
+				006A5FE01B318CBC0045395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		006A5FE11B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworkingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006A5FE21B318CBC0045395A /* Debug */,
+				006A5FE31B318CBC0045395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		006A5FE51B318D230045395A /* Build configuration list for PBXAggregateTarget "MoMOSFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006A5FE61B318D230045395A /* Debug */,
+				006A5FE71B318D230045395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 006A5F831B318C6E0045395A /* Project object */;
+}
