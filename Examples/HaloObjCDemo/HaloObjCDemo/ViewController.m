@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <MoMOSCore/MoMOSCore-Swift.h>
+#import <HaloCore/HaloCore-Swift.h>
 
 @interface ViewController ()
 

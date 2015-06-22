@@ -7,25 +7,25 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		006A5FE41B318D230045395A /* MoMOSFramework */ = {
+		006A5FE41B318D230045395A /* HaloFramework */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 006A5FE51B318D230045395A /* Build configuration list for PBXAggregateTarget "MoMOSFramework" */;
+			buildConfigurationList = 006A5FE51B318D230045395A /* Build configuration list for PBXAggregateTarget "HaloFramework" */;
 			buildPhases = (
 			);
 			dependencies = (
 				006A5FE91B318D2B0045395A /* PBXTargetDependency */,
 				006A5FEB1B318D2B0045395A /* PBXTargetDependency */,
 			);
-			name = MoMOSFramework;
+			name = HaloFramework;
 			productName = MoMOSFramework;
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		006A5FB81B318CAC0045395A /* MoMOSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* MoMOSCore.framework */; };
-		006A5FBF1B318CAC0045395A /* MoMOSCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* MoMOSCoreTests.swift */; };
-		006A5FD61B318CBC0045395A /* MoMOSNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */; };
-		006A5FDD1B318CBC0045395A /* MoMOSNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FDC1B318CBC0045395A /* MoMOSNetworkingTests.swift */; };
+		006A5FB81B318CAC0045395A /* HaloCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* HaloCore.framework */; };
+		006A5FBF1B318CAC0045395A /* HaloCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* HaloCoreTests.swift */; };
+		006A5FD61B318CBC0045395A /* HaloNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FCB1B318CBC0045395A /* HaloNetworking.framework */; };
+		006A5FDD1B318CBC0045395A /* HaloNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FDC1B318CBC0045395A /* HaloNetworkingTests.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
 		006A60541B31BA9B0045395A /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60531B31BA9B0045395A /* Networking.swift */; };
 /* End PBXBuildFile section */
@@ -62,16 +62,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		006A5FAD1B318CAC0045395A /* MoMOSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoMOSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FAD1B318CAC0045395A /* HaloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB01B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006A5FB71B318CAC0045395A /* MoMOSCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoMOSCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FB71B318CAC0045395A /* HaloCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FBD1B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006A5FBE1B318CAC0045395A /* MoMOSCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoMOSCoreTests.swift; sourceTree = "<group>"; };
-		006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoMOSNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FBE1B318CAC0045395A /* HaloCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloCoreTests.swift; sourceTree = "<group>"; };
+		006A5FCB1B318CBC0045395A /* HaloNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FCE1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006A5FD51B318CBC0045395A /* MoMOSNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoMOSNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FD51B318CBC0045395A /* HaloNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FDB1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006A5FDC1B318CBC0045395A /* MoMOSNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoMOSNetworkingTests.swift; sourceTree = "<group>"; };
+		006A5FDC1B318CBC0045395A /* HaloNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloNetworkingTests.swift; sourceTree = "<group>"; };
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		006A60531B31BA9B0045395A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006A5FB81B318CAC0045395A /* MoMOSCore.framework in Frameworks */,
+				006A5FB81B318CAC0045395A /* HaloCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006A5FD61B318CBC0045395A /* MoMOSNetworking.framework in Frameworks */,
+				006A5FD61B318CBC0045395A /* HaloNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,10 +113,10 @@
 		006A5F821B318C6E0045395A = {
 			isa = PBXGroup;
 			children = (
-				006A5FAE1B318CAC0045395A /* MoMOSCore */,
-				006A5FCC1B318CBC0045395A /* MoMOSNetworking */,
-				006A5FBB1B318CAC0045395A /* MoMOSCoreTests */,
-				006A5FD91B318CBC0045395A /* MoMOSNetworkingTests */,
+				006A5FAE1B318CAC0045395A /* HaloCore */,
+				006A5FCC1B318CBC0045395A /* HaloNetworking */,
+				006A5FBB1B318CAC0045395A /* HaloCoreTests */,
+				006A5FD91B318CBC0045395A /* HaloNetworkingTests */,
 				006A5F8D1B318C6E0045395A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -124,21 +124,21 @@
 		006A5F8D1B318C6E0045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A5FAD1B318CAC0045395A /* MoMOSCore.framework */,
-				006A5FB71B318CAC0045395A /* MoMOSCoreTests.xctest */,
-				006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */,
-				006A5FD51B318CBC0045395A /* MoMOSNetworkingTests.xctest */,
+				006A5FAD1B318CAC0045395A /* HaloCore.framework */,
+				006A5FB71B318CAC0045395A /* HaloCoreTests.xctest */,
+				006A5FCB1B318CBC0045395A /* HaloNetworking.framework */,
+				006A5FD51B318CBC0045395A /* HaloNetworkingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		006A5FAE1B318CAC0045395A /* MoMOSCore */ = {
+		006A5FAE1B318CAC0045395A /* HaloCore */ = {
 			isa = PBXGroup;
 			children = (
 				006A60211B318DCC0045395A /* Manager.swift */,
 				006A5FAF1B318CAC0045395A /* Supporting Files */,
 			);
-			path = MoMOSCore;
+			path = HaloCore;
 			sourceTree = "<group>";
 		};
 		006A5FAF1B318CAC0045395A /* Supporting Files */ = {
@@ -149,13 +149,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		006A5FBB1B318CAC0045395A /* MoMOSCoreTests */ = {
+		006A5FBB1B318CAC0045395A /* HaloCoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				006A5FBE1B318CAC0045395A /* MoMOSCoreTests.swift */,
+				006A5FBE1B318CAC0045395A /* HaloCoreTests.swift */,
 				006A5FBC1B318CAC0045395A /* Supporting Files */,
 			);
-			path = MoMOSCoreTests;
+			path = HaloCoreTests;
 			sourceTree = "<group>";
 		};
 		006A5FBC1B318CAC0045395A /* Supporting Files */ = {
@@ -166,13 +166,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		006A5FCC1B318CBC0045395A /* MoMOSNetworking */ = {
+		006A5FCC1B318CBC0045395A /* HaloNetworking */ = {
 			isa = PBXGroup;
 			children = (
 				006A5FCD1B318CBC0045395A /* Supporting Files */,
 				006A60531B31BA9B0045395A /* Networking.swift */,
 			);
-			path = MoMOSNetworking;
+			path = HaloNetworking;
 			sourceTree = "<group>";
 		};
 		006A5FCD1B318CBC0045395A /* Supporting Files */ = {
@@ -183,13 +183,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		006A5FD91B318CBC0045395A /* MoMOSNetworkingTests */ = {
+		006A5FD91B318CBC0045395A /* HaloNetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
-				006A5FDC1B318CBC0045395A /* MoMOSNetworkingTests.swift */,
+				006A5FDC1B318CBC0045395A /* HaloNetworkingTests.swift */,
 				006A5FDA1B318CBC0045395A /* Supporting Files */,
 			);
-			path = MoMOSNetworkingTests;
+			path = HaloNetworkingTests;
 			sourceTree = "<group>";
 		};
 		006A5FDA1B318CBC0045395A /* Supporting Files */ = {
@@ -220,9 +220,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		006A5FAC1B318CAC0045395A /* MoMOSCore */ = {
+		006A5FAC1B318CAC0045395A /* HaloCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCore" */;
+			buildConfigurationList = 006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "HaloCore" */;
 			buildPhases = (
 				006A5FA81B318CAC0045395A /* Sources */,
 				006A5FA91B318CAC0045395A /* Frameworks */,
@@ -233,14 +233,14 @@
 			);
 			dependencies = (
 			);
-			name = MoMOSCore;
+			name = HaloCore;
 			productName = MoMOSCore;
-			productReference = 006A5FAD1B318CAC0045395A /* MoMOSCore.framework */;
+			productReference = 006A5FAD1B318CAC0045395A /* HaloCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		006A5FB61B318CAC0045395A /* MoMOSCoreTests */ = {
+		006A5FB61B318CAC0045395A /* HaloCoreTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCoreTests" */;
+			buildConfigurationList = 006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "HaloCoreTests" */;
 			buildPhases = (
 				006A5FB31B318CAC0045395A /* Sources */,
 				006A5FB41B318CAC0045395A /* Frameworks */,
@@ -251,14 +251,14 @@
 			dependencies = (
 				006A5FBA1B318CAC0045395A /* PBXTargetDependency */,
 			);
-			name = MoMOSCoreTests;
+			name = HaloCoreTests;
 			productName = MoMOSCoreTests;
-			productReference = 006A5FB71B318CAC0045395A /* MoMOSCoreTests.xctest */;
+			productReference = 006A5FB71B318CAC0045395A /* HaloCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		006A5FCA1B318CBC0045395A /* MoMOSNetworking */ = {
+		006A5FCA1B318CBC0045395A /* HaloNetworking */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A5FDE1B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworking" */;
+			buildConfigurationList = 006A5FDE1B318CBC0045395A /* Build configuration list for PBXNativeTarget "HaloNetworking" */;
 			buildPhases = (
 				006A5FC61B318CBC0045395A /* Sources */,
 				006A5FC71B318CBC0045395A /* Frameworks */,
@@ -269,14 +269,14 @@
 			);
 			dependencies = (
 			);
-			name = MoMOSNetworking;
+			name = HaloNetworking;
 			productName = MoMOSNetworking;
-			productReference = 006A5FCB1B318CBC0045395A /* MoMOSNetworking.framework */;
+			productReference = 006A5FCB1B318CBC0045395A /* HaloNetworking.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		006A5FD41B318CBC0045395A /* MoMOSNetworkingTests */ = {
+		006A5FD41B318CBC0045395A /* HaloNetworkingTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A5FE11B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworkingTests" */;
+			buildConfigurationList = 006A5FE11B318CBC0045395A /* Build configuration list for PBXNativeTarget "HaloNetworkingTests" */;
 			buildPhases = (
 				006A5FD11B318CBC0045395A /* Sources */,
 				006A5FD21B318CBC0045395A /* Frameworks */,
@@ -287,9 +287,9 @@
 			dependencies = (
 				006A5FD81B318CBC0045395A /* PBXTargetDependency */,
 			);
-			name = MoMOSNetworkingTests;
+			name = HaloNetworkingTests;
 			productName = MoMOSNetworkingTests;
-			productReference = 006A5FD51B318CBC0045395A /* MoMOSNetworkingTests.xctest */;
+			productReference = 006A5FD51B318CBC0045395A /* HaloNetworkingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -318,7 +318,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 006A5F861B318C6E0045395A /* Build configuration list for PBXProject "MoMOSFramework" */;
+			buildConfigurationList = 006A5F861B318C6E0045395A /* Build configuration list for PBXProject "HaloFramework" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -330,11 +330,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				006A5FE41B318D230045395A /* MoMOSFramework */,
-				006A5FAC1B318CAC0045395A /* MoMOSCore */,
-				006A5FB61B318CAC0045395A /* MoMOSCoreTests */,
-				006A5FCA1B318CBC0045395A /* MoMOSNetworking */,
-				006A5FD41B318CBC0045395A /* MoMOSNetworkingTests */,
+				006A5FE41B318D230045395A /* HaloFramework */,
+				006A5FAC1B318CAC0045395A /* HaloCore */,
+				006A5FB61B318CAC0045395A /* HaloCoreTests */,
+				006A5FCA1B318CBC0045395A /* HaloNetworking */,
+				006A5FD41B318CBC0045395A /* HaloNetworkingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -383,7 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006A5FBF1B318CAC0045395A /* MoMOSCoreTests.swift in Sources */,
+				006A5FBF1B318CAC0045395A /* HaloCoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006A5FDD1B318CBC0045395A /* MoMOSNetworkingTests.swift in Sources */,
+				006A5FDD1B318CBC0045395A /* HaloNetworkingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,22 +408,22 @@
 /* Begin PBXTargetDependency section */
 		006A5FBA1B318CAC0045395A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 006A5FAC1B318CAC0045395A /* MoMOSCore */;
+			target = 006A5FAC1B318CAC0045395A /* HaloCore */;
 			targetProxy = 006A5FB91B318CAC0045395A /* PBXContainerItemProxy */;
 		};
 		006A5FD81B318CBC0045395A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 006A5FCA1B318CBC0045395A /* MoMOSNetworking */;
+			target = 006A5FCA1B318CBC0045395A /* HaloNetworking */;
 			targetProxy = 006A5FD71B318CBC0045395A /* PBXContainerItemProxy */;
 		};
 		006A5FE91B318D2B0045395A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 006A5FAC1B318CAC0045395A /* MoMOSCore */;
+			target = 006A5FAC1B318CAC0045395A /* HaloCore */;
 			targetProxy = 006A5FE81B318D2B0045395A /* PBXContainerItemProxy */;
 		};
 		006A5FEB1B318D2B0045395A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 006A5FCA1B318CBC0045395A /* MoMOSNetworking */;
+			target = 006A5FCA1B318CBC0045395A /* HaloNetworking */;
 			targetProxy = 006A5FEA1B318D2B0045395A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -530,7 +530,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MoMOSCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -547,7 +546,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = MoMOSCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -566,7 +564,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MoMOSCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -579,7 +576,6 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MoMOSCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -597,7 +593,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MoMOSNetworking/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -614,7 +609,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = MoMOSNetworking/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -633,7 +627,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MoMOSNetworkingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -646,7 +639,6 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MoMOSNetworkingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -655,21 +647,21 @@
 		006A5FE61B318D230045395A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HaloFramework;
 			};
 			name = Debug;
 		};
 		006A5FE71B318D230045395A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HaloFramework;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		006A5F861B318C6E0045395A /* Build configuration list for PBXProject "MoMOSFramework" */ = {
+		006A5F861B318C6E0045395A /* Build configuration list for PBXProject "HaloFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FA01B318C6E0045395A /* Debug */,
@@ -678,7 +670,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCore" */ = {
+		006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "HaloCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FC11B318CAC0045395A /* Debug */,
@@ -687,7 +679,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "MoMOSCoreTests" */ = {
+		006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "HaloCoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FC41B318CAC0045395A /* Debug */,
@@ -696,7 +688,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5FDE1B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworking" */ = {
+		006A5FDE1B318CBC0045395A /* Build configuration list for PBXNativeTarget "HaloNetworking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FDF1B318CBC0045395A /* Debug */,
@@ -705,7 +697,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5FE11B318CBC0045395A /* Build configuration list for PBXNativeTarget "MoMOSNetworkingTests" */ = {
+		006A5FE11B318CBC0045395A /* Build configuration list for PBXNativeTarget "HaloNetworkingTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FE21B318CBC0045395A /* Debug */,
@@ -714,7 +706,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5FE51B318D230045395A /* Build configuration list for PBXAggregateTarget "MoMOSFramework" */ = {
+		006A5FE51B318D230045395A /* Build configuration list for PBXAggregateTarget "HaloFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FE61B318D230045395A /* Debug */,
