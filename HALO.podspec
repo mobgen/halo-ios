@@ -8,7 +8,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "MoMOS"
+  s.name             = "HALOFramework"
   s.version          = "0.1.0"
   s.summary          = "A short description of test."
   s.description      = <<-DESC
@@ -27,20 +27,20 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'MoMOSFramework/**/*.{h,swift}'
-  s.public_header_files = 'MoMOSFramework/**/*.h'
+  s.source_files = 'HALOFramework/**/*.{h,swift}'
+  s.public_header_files = 'HALOFramework/**/*.h'
   s.frameworks = 'Foundation'
   #s.resource_bundles = {
   #  'test' => ['Pod/Assets/*.png']
   #}
 
   s.subspec 'Core' do |core|
-  	core.source_files = 'MoMOSFramework/MoMOSCore/*.{h,swift}'
+  	core.source_files = 'HALOFramework/HALOCore/*.{h,swift}'
   end
 
   s.subspec 'Networking' do |net|
-  	net.source_files = 'MoMOSFramework/MoMOSNetworking/*.{h,swift}'
-  	net.dependency 'MoMOS/Core'
+  	net.source_files = 'HALOFramework/HALONetworking/*.{h,swift}'
+  	net.dependency 'HALOFramework/Core'
   end
 
   # s.subspec 'Push' do |p|

@@ -73,12 +73,12 @@
 /* Begin PBXFileReference section */
 		006A5FAD1B318CAC0045395A /* HALOCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HALOCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB01B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006A5FB71B318CAC0045395A /* HaloCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FB71B318CAC0045395A /* HALOCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HALOCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FBD1B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FBE1B318CAC0045395A /* HALOCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HALOCoreTests.swift; sourceTree = "<group>"; };
 		006A5FCB1B318CBC0045395A /* HALONetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HALONetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FCE1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006A5FD51B318CBC0045395A /* HaloNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FD51B318CBC0045395A /* HALONetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HALONetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FDB1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FDC1B318CBC0045395A /* HALONetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HALONetworkingTests.swift; sourceTree = "<group>"; };
 		006A60211B318DCC0045395A /* HALOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HALOManager.swift; sourceTree = "<group>"; };
@@ -136,9 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				006A5FAD1B318CAC0045395A /* HALOCore.framework */,
-				006A5FB71B318CAC0045395A /* HaloCoreTests.xctest */,
+				006A5FB71B318CAC0045395A /* HALOCoreTests.xctest */,
 				006A5FCB1B318CBC0045395A /* HALONetworking.framework */,
-				006A5FD51B318CBC0045395A /* HaloNetworkingTests.xctest */,
+				006A5FD51B318CBC0045395A /* HALONetworkingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 			);
 			name = HALOCoreTests;
 			productName = MoMOSCoreTests;
-			productReference = 006A5FB71B318CAC0045395A /* HaloCoreTests.xctest */;
+			productReference = 006A5FB71B318CAC0045395A /* HALOCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		006A5FCA1B318CBC0045395A /* HALONetworking */ = {
@@ -306,7 +306,7 @@
 			);
 			name = HALONetworkingTests;
 			productName = MoMOSNetworkingTests;
-			productReference = 006A5FD51B318CBC0045395A /* HaloNetworkingTests.xctest */;
+			productReference = 006A5FD51B318CBC0045395A /* HALONetworkingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */

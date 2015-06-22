@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/borja/Documents/git/momos-sdk-ios/HaloFramework/HALOFramework.xcodeproj">
+      location = "group:HALOFramework/HALOFramework.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:/Users/borja/Documents/git/momos-sdk-ios/Examples/HaloObjCDemo/HALOObjCDemo.xcodeproj">
