@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0047A2EE1B381E0F00E97BBB /* HaloApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047A2ED1B381E0F00E97BBB /* HaloApplication.swift */; };
 		006A5FB81B318CAC0045395A /* HaloCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* HaloCore.framework */; };
 		006A5FBF1B318CAC0045395A /* HaloCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* HaloCoreTests.swift */; };
 		006A5FD61B318CBC0045395A /* HaloNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FCB1B318CBC0045395A /* HaloNetworking.framework */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0047A2ED1B381E0F00E97BBB /* HaloApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloApplication.swift; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* HaloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB01B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FB71B318CAC0045395A /* HaloCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				006A60211B318DCC0045395A /* Manager.swift */,
+				0047A2ED1B381E0F00E97BBB /* HaloApplication.swift */,
 				006A5FAF1B318CAC0045395A /* Supporting Files */,
 			);
 			path = HaloCore;
@@ -375,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0047A2EE1B381E0F00E97BBB /* HaloApplication.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,6 +534,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				INFOPLIST_FILE = "$(SRCROOT)/HaloCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -546,6 +551,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/HaloCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -593,6 +599,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				INFOPLIST_FILE = "$(SRCROOT)/HaloNetworking/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -609,6 +616,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/HaloNetworking/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

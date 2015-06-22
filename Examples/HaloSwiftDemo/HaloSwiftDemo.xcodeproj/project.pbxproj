@@ -11,6 +11,7 @@
 		0047A2E91B37F86300E97BBB /* HaloCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2E71B37F86300E97BBB /* HaloCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0047A2EB1B37F86300E97BBB /* HaloNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2EA1B37F86300E97BBB /* HaloNetworking.framework */; };
 		0047A2EC1B37F86300E97BBB /* HaloNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2EA1B37F86300E97BBB /* HaloNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0047A2F01B381FC400E97BBB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047A2EF1B381FC400E97BBB /* main.swift */; };
 		006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFA1B318D600045395A /* AppDelegate.swift */; };
 		006A5FFD1B318D600045395A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFC1B318D600045395A /* ViewController.swift */; };
 		006A60021B318D600045395A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006A60011B318D600045395A /* Images.xcassets */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		0047A2E71B37F86300E97BBB /* HaloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloCore.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloCore.framework"; sourceTree = "<absolute>"; };
 		0047A2EA1B37F86300E97BBB /* HaloNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloNetworking.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloNetworking.framework"; sourceTree = "<absolute>"; };
+		0047A2EF1B381FC400E97BBB /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		006A5FF51B318D600045395A /* HaloSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				006A5FFC1B318D600045395A /* ViewController.swift */,
 				006A60011B318D600045395A /* Images.xcassets */,
 				006A5FF81B318D600045395A /* Supporting Files */,
+				0047A2EF1B381FC400E97BBB /* main.swift */,
 			);
 			path = HaloSwiftDemo;
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 				TargetAttributes = {
 					006A5FF41B318D600045395A = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 4DWNK4MCTP;
 					};
 				};
 			};
@@ -175,6 +179,7 @@
 			files = (
 				006A5FFD1B318D600045395A /* ViewController.swift in Sources */,
 				006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */,
+				0047A2F01B381FC400E97BBB /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos",
@@ -284,6 +290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos",

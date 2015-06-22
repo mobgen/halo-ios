@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MoMOSCore
+import HaloCore
 
 class ViewController: UIViewController {
 
