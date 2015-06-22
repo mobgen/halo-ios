@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:HaloFramework/HaloFramework.xcodeproj">
+      location = "group:/Users/borja/Documents/git/momos-sdk-ios/HaloFramework/HALOFramework.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Examples/HaloObjCDemo/HaloObjCDemo.xcodeproj">
+      location = "group:/Users/borja/Documents/git/momos-sdk-ios/Examples/HaloObjCDemo/HALOObjCDemo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Examples/HaloSwiftDemo/HaloSwiftDemo.xcodeproj">
+      location = "group:/Users/borja/Documents/git/momos-sdk-ios/Examples/HaloSwiftDemo/HALOSwiftDemo.xcodeproj">
    </FileRef>
 </Workspace>

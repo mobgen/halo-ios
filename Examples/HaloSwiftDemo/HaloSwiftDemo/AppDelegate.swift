@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import HaloCore
 
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -16,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        
         
         let vc = ViewController()
         window!.rootViewController = vc

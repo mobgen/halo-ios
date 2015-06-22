@@ -7,10 +7,9 @@
 //
 
 import Foundation
+import HALOCore
 
 @objc
-public class Networking {
-    
-    public static let shared = Networking()
+public class HALONetworking: HALOModule {
     
 }

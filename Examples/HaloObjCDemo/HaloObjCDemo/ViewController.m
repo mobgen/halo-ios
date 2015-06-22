@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    Manager *manager = [Manager shared];
     
     self.view.backgroundColor = [UIColor blueColor];
 }
