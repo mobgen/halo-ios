@@ -7,25 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0047A2E81B37F86300E97BBB /* HaloCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2E71B37F86300E97BBB /* HaloCore.framework */; };
-		0047A2E91B37F86300E97BBB /* HaloCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2E71B37F86300E97BBB /* HaloCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0047A2EB1B37F86300E97BBB /* HaloNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2EA1B37F86300E97BBB /* HaloNetworking.framework */; };
-		0047A2EC1B37F86300E97BBB /* HaloNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2EA1B37F86300E97BBB /* HaloNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFA1B318D600045395A /* AppDelegate.swift */; };
 		006A5FFD1B318D600045395A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFC1B318D600045395A /* ViewController.swift */; };
 		006A60021B318D600045395A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006A60011B318D600045395A /* Images.xcassets */; };
 		006A60241B31928B0045395A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006A60231B31928B0045395A /* Launch Screen.xib */; };
+		00930AE11B385B2D002FF4F0 /* HALO.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00930AE01B385B2D002FF4F0 /* HALO.plist */; };
+		00930AED1B3860A8002FF4F0 /* HALOCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00930AEC1B3860A8002FF4F0 /* HALOCore.framework */; };
+		00930AEE1B3860A8002FF4F0 /* HALOCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00930AEC1B3860A8002FF4F0 /* HALOCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		00930AF01B3860A8002FF4F0 /* HALONetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00930AEF1B3860A8002FF4F0 /* HALONetworking.framework */; };
+		00930AF11B3860A8002FF4F0 /* HALONetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00930AEF1B3860A8002FF4F0 /* HALONetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		006A60201B318DA90045395A /* Embed Frameworks */ = {
+		00930AEB1B385EDF002FF4F0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0047A2EC1B37F86300E97BBB /* HaloNetworking.framework in Embed Frameworks */,
-				0047A2E91B37F86300E97BBB /* HaloCore.framework in Embed Frameworks */,
+				00930AF11B3860A8002FF4F0 /* HALONetworking.framework in Embed Frameworks */,
+				00930AEE1B3860A8002FF4F0 /* HALOCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -33,14 +34,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0047A2E71B37F86300E97BBB /* HaloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloCore.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloCore.framework"; sourceTree = "<absolute>"; };
-		0047A2EA1B37F86300E97BBB /* HaloNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloNetworking.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloNetworking.framework"; sourceTree = "<absolute>"; };
-		006A5FF51B318D600045395A /* HALOSwiftDemo.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HALOSwiftDemo.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FF51B318D600045395A /* HALOSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HALOSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006A5FFC1B318D600045395A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		006A60011B318D600045395A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		006A60231B31928B0045395A /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		00930AE01B385B2D002FF4F0 /* HALO.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HALO.plist; sourceTree = "<group>"; };
+		00930AEC1B3860A8002FF4F0 /* HALOCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HALOCore.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HALOCore.framework"; sourceTree = "<absolute>"; };
+		00930AEF1B3860A8002FF4F0 /* HALONetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HALONetworking.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HALONetworking.framework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,8 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0047A2EB1B37F86300E97BBB /* HaloNetworking.framework in Frameworks */,
-				0047A2E81B37F86300E97BBB /* HaloCore.framework in Frameworks */,
+				00930AF01B3860A8002FF4F0 /* HALONetworking.framework in Frameworks */,
+				00930AED1B3860A8002FF4F0 /* HALOCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +61,8 @@
 		006A5FEC1B318D600045395A = {
 			isa = PBXGroup;
 			children = (
+				00930AEF1B3860A8002FF4F0 /* HALONetworking.framework */,
+				00930AEC1B3860A8002FF4F0 /* HALOCore.framework */,
 				006A5FF71B318D600045395A /* HaloSwiftDemo */,
 				00D43B261B31C1EF0014D36F /* Frameworks */,
 				006A5FF61B318D600045395A /* Products */,
@@ -68,7 +72,7 @@
 		006A5FF61B318D600045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A5FF51B318D600045395A /* HALOSwiftDemo.temp_caseinsensitive_rename.app */,
+				006A5FF51B318D600045395A /* HALOSwiftDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,6 +85,7 @@
 				006A5FFC1B318D600045395A /* ViewController.swift */,
 				006A60011B318D600045395A /* Images.xcassets */,
 				006A5FF81B318D600045395A /* Supporting Files */,
+				00930AE01B385B2D002FF4F0 /* HALO.plist */,
 			);
 			path = HaloSwiftDemo;
 			sourceTree = "<group>";
@@ -96,8 +101,6 @@
 		00D43B261B31C1EF0014D36F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0047A2EA1B37F86300E97BBB /* HaloNetworking.framework */,
-				0047A2E71B37F86300E97BBB /* HaloCore.framework */,
 			);
 			name = Frameworks;
 			path = HaloSwiftDemo;
@@ -106,22 +109,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		006A5FF41B318D600045395A /* HALOSwiftDemo.temp_caseinsensitive_rename */ = {
+		006A5FF41B318D600045395A /* HALOSwiftDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A60141B318D600045395A /* Build configuration list for PBXNativeTarget "HALOSwiftDemo.temp_caseinsensitive_rename" */;
+			buildConfigurationList = 006A60141B318D600045395A /* Build configuration list for PBXNativeTarget "HALOSwiftDemo" */;
 			buildPhases = (
 				006A5FF11B318D600045395A /* Sources */,
 				006A5FF21B318D600045395A /* Frameworks */,
 				006A5FF31B318D600045395A /* Resources */,
-				006A60201B318DA90045395A /* Embed Frameworks */,
+				00930AEB1B385EDF002FF4F0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = HALOSwiftDemo.temp_caseinsensitive_rename;
+			name = HALOSwiftDemo;
 			productName = MoMOSSwiftDemo;
-			productReference = 006A5FF51B318D600045395A /* HALOSwiftDemo.temp_caseinsensitive_rename.app */;
+			productReference = 006A5FF51B318D600045395A /* HALOSwiftDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -152,7 +155,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				006A5FF41B318D600045395A /* HALOSwiftDemo.temp_caseinsensitive_rename */,
+				006A5FF41B318D600045395A /* HALOSwiftDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				006A60021B318D600045395A /* Images.xcassets in Resources */,
+				00930AE11B385B2D002FF4F0 /* HALO.plist in Resources */,
 				006A60241B31928B0045395A /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,7 +282,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloSwiftDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HALOSwiftDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = HALOSwiftDemo;
 			};
 			name = Debug;
 		};
@@ -293,7 +297,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloSwiftDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HALOSwiftDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = HALOSwiftDemo;
 			};
 			name = Release;
 		};
@@ -309,7 +313,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A60141B318D600045395A /* Build configuration list for PBXNativeTarget "HALOSwiftDemo.temp_caseinsensitive_rename" */ = {
+		006A60141B318D600045395A /* Build configuration list for PBXNativeTarget "HALOSwiftDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A60151B318D600045395A /* Debug */,

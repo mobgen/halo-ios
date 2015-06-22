@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import HaloCore
+import HALOCore
 
 class ViewController: UIViewController {
 
@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let m = Manager.shared
+        let m = HALOManager.sharedManager()
         
         view.backgroundColor = UIColor.redColor()
         

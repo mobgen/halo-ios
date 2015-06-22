@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		0047A2E11B37F83A00E97BBB /* HaloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloCore.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloCore.framework"; sourceTree = "<absolute>"; };
 		0047A2E41B37F83A00E97BBB /* HaloNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloNetworking.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloNetworking.framework"; sourceTree = "<absolute>"; };
-		006A605E1B31BBD80045395A /* HALOObjCDemo.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HALOObjCDemo.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A605E1B31BBD80045395A /* HALOObjCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HALOObjCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A60621B31BBD80045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A60631B31BBD80045395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		006A60651B31BBD80045395A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		006A605F1B31BBD80045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A605E1B31BBD80045395A /* HALOObjCDemo.temp_caseinsensitive_rename.app */,
+				006A605E1B31BBD80045395A /* HALOObjCDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,9 +112,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		006A605D1B31BBD80045395A /* HALOObjCDemo.temp_caseinsensitive_rename */ = {
+		006A605D1B31BBD80045395A /* HALOObjCDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HALOObjCDemo.temp_caseinsensitive_rename" */;
+			buildConfigurationList = 006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HALOObjCDemo" */;
 			buildPhases = (
 				006A605A1B31BBD80045395A /* Sources */,
 				006A605B1B31BBD80045395A /* Frameworks */,
@@ -125,9 +125,9 @@
 			);
 			dependencies = (
 			);
-			name = HALOObjCDemo.temp_caseinsensitive_rename;
+			name = HALOObjCDemo;
 			productName = MoMOSObjCDemo;
-			productReference = 006A605E1B31BBD80045395A /* HALOObjCDemo.temp_caseinsensitive_rename.app */;
+			productReference = 006A605E1B31BBD80045395A /* HALOObjCDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -157,7 +157,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				006A605D1B31BBD80045395A /* HALOObjCDemo.temp_caseinsensitive_rename */,
+				006A605D1B31BBD80045395A /* HALOObjCDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -292,7 +292,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HALOObjCDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = HALOObjCDemo;
 			};
 			name = Debug;
 		};
@@ -307,7 +307,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HALOObjCDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = HALOObjCDemo;
 			};
 			name = Release;
 		};
@@ -323,7 +323,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HALOObjCDemo.temp_caseinsensitive_rename" */ = {
+		006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HALOObjCDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A60821B31BBD80045395A /* Debug */,

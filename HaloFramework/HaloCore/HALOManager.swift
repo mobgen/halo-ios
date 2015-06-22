@@ -18,7 +18,17 @@ public class HALOManager {
     
     var modules:Dictionary<NSString, HALOModule> = Dictionary()
 
-    public func sharedManager() -> HALOManager {
+    init() {
+        let bundle = NSBundle.mainBundle()
+        let path = bundle.pathForResource("HALO", ofType: "plist")
+        
+        if let data = NSDictionary(contentsOfFile: path!) {
+            println(data.description)
+        }
+
+    }
+    
+    public static func sharedManager() -> HALOManager {
         return HALOManager.shared
     }
     
