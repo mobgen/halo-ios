@@ -8,6 +8,7 @@
 
 import UIKit
 import HALOCore
+import HALONetworking
 
 class ViewController: UIViewController {
 
@@ -15,7 +16,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let m = HALOManager.sharedManager()
+        // Start HALO
+        HALOManager.shared.launch()
+        
+        let net:HALONetworking = HALOManager.shared.getModule("networking") as! HALONetworking
+        
+        net.authenticate()
         
         view.backgroundColor = UIColor.redColor()
         

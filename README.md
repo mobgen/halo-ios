@@ -1,1 +1,1 @@
-# MoMOS iOS SDK
+# HALO iOS SDK

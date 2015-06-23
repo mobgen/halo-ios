@@ -169,7 +169,7 @@
 				006A5FBC1B318CAC0045395A /* Supporting Files */,
 			);
 			name = HALOCoreTests;
-			path = HaloCoreTests;
+			path = ../Tests/HALOCoreTests;
 			sourceTree = "<group>";
 		};
 		006A5FBC1B318CAC0045395A /* Supporting Files */ = {
@@ -205,7 +205,7 @@
 				006A5FDA1B318CBC0045395A /* Supporting Files */,
 			);
 			name = HALONetworkingTests;
-			path = HaloNetworkingTests;
+			path = ../Tests/HALONetworkingTests;
 			sourceTree = "<group>";
 		};
 		006A5FDA1B318CBC0045395A /* Supporting Files */ = {

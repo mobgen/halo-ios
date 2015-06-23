@@ -9,7 +9,15 @@
 import Foundation
 import HALOCore
 
-@objc
+@objc(HALONetworking)
 public class HALONetworking: HALOModule {
+    
+    var token:String?
+    var refreshToken:String?
+    
+    public func authenticate() -> Bool {
+        println("Trying to authenticate...")
+        return true
+    }
     
 }

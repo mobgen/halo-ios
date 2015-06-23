@@ -8,17 +8,17 @@
 
 import Foundation
 
-@objc
+@objc(HALOModule)
 public class HALOModule {
     
-    let uniqueId:Int
+    public let moduleName:String
     
-    init(config: NSDictionary) {
-        uniqueId = config.description.hash
+    required public init(config: NSDictionary) {
+        moduleName = config["HALO_MODULE_NAME"] as! String
     }
     
     public func moduleDescription() -> String {
-        return  "id: \(uniqueId), name: \(toString(self))"
+        return  "name: \(moduleName) class: \(toString(self))"
     }
     
 }

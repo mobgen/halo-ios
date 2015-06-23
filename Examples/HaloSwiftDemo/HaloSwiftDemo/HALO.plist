@@ -2,7 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Test</key>
-	<string>yiiha!</string>
+	<key>API_KEY</key>
+	<string>apikey</string>
+	<key>CLIENT_SECRET</key>
+	<string>clientsecret</string>
+	<key>MODULES</key>
+	<array>
+		<dict>
+			<key>HALO_MODULE_NAME</key>
+			<string>networking</string>
+			<key>HALO_MODULE_CLASS</key>
+			<string>HALONetworking</string>
+			<key>AUTH_PROVIDER</key>
+			<string>oauth</string>
+		</dict>
+	</array>
 </dict>
 </plist>
