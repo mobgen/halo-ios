@@ -22,7 +22,7 @@
     
     [[Manager sharedInstance] launch];
     
-    Networking *net = [[Manager sharedInstance] getModule:@"networking"];
+    Networking *net = (Networking *)[[Manager sharedInstance] getModule:@"networking"];
     
     self.view.backgroundColor = [UIColor blueColor];
 }
