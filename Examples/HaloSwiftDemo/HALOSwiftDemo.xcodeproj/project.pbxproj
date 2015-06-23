@@ -83,7 +83,6 @@
 				006A5FFC1B318D600045395A /* ViewController.swift */,
 				006A60011B318D600045395A /* Images.xcassets */,
 				006A5FF81B318D600045395A /* Supporting Files */,
-				00930AE01B385B2D002FF4F0 /* HALO.plist */,
 			);
 			path = HaloSwiftDemo;
 			sourceTree = "<group>";
@@ -91,6 +90,7 @@
 		006A5FF81B318D600045395A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00930AE01B385B2D002FF4F0 /* HALO.plist */,
 				006A5FF91B318D600045395A /* Info.plist */,
 			);
 			name = "Supporting Files";

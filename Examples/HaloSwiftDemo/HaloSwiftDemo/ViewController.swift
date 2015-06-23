@@ -16,12 +16,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Manual init when the HALO.plist file is not present
+        
+        // Manager.sharedInstance.apiKey = "apikey"
+        // Manager.sharedInstance.clientSecret = "clientsecret"
+        // Manager.sharedInstance.addModule(Networking(name: "networking"))
+        
         // Start HALO
         Manager.sharedInstance.launch()
         
         let net = Manager.sharedInstance.getModule("networking") as! Networking
-        
-        net.authenticate()
         
         view.backgroundColor = UIColor.redColor()
         

@@ -15,6 +15,8 @@ public class Manager {
     
     public var apiKey:String?
     public var clientSecret:String?
+    public var token:String?
+    public var refreshToken:String?
     
     var modules:Dictionary<String, Module> = Dictionary()
     
@@ -25,29 +27,25 @@ public class Manager {
         println("********************************")
         
         let bundle = NSBundle.mainBundle()
-        let path = bundle.pathForResource("HALO", ofType: "plist")
-        
-        if let data = NSDictionary(contentsOfFile: path!) {
-            apiKey = data["API_KEY"] as? String
-            clientSecret = data["CLIENT_SECRET"] as? String
+        if let path = bundle.pathForResource("HALO", ofType: "plist") {
             
-            println("Using API key: \(apiKey!) and client secret: \(clientSecret!)")
-            
-            if let arr = data["MODULES"] as? Array<NSDictionary> {
-                for d in arr {
-                    let cl = NSClassFromString(d["HALO_MODULE_CLASS"] as! String) as! Module.Type
-                    let instance = cl(config: d)
-                    addModule(instance)
+            if let data = NSDictionary(contentsOfFile: path) {
+                apiKey = data["API_KEY"] as? String
+                clientSecret = data["CLIENT_SECRET"] as? String
+                
+                if let arr = data["MODULES"] as? Array<NSDictionary> {
+                    for d in arr {
+                        let cl = NSClassFromString(d["HALO_MODULE_CLASS"] as! String) as! Module.Type
+                        let instance = cl(config: d)
+                        addModule(instance)
+                    }
                 }
             }
-            
-            listModules()
-            return true
-            
-        } else {
-            println("Error reading \(path)")
-            return false
         }
+        
+        println("Using API key: \(apiKey!) and client secret: \(clientSecret!)")
+        listModules()
+        return false
     }
     
     public func addModule(module: Module) -> Bool {

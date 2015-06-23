@@ -13,10 +13,7 @@ import Alamofire
 @objc(Networking)
 public class Networking: Module {
     
-    var token:String?
-    var refreshToken:String?
-    
-    public func authenticate() -> Bool {
+    func authenticate() -> Bool {
         println("Trying to authenticate...")
         return true
     }

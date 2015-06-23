@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0047A2E21B37F83A00E97BBB /* HaloCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2E11B37F83A00E97BBB /* HaloCore.framework */; };
-		0047A2E31B37F83A00E97BBB /* HaloCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2E11B37F83A00E97BBB /* HaloCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0047A2E51B37F83A00E97BBB /* HaloNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2E41B37F83A00E97BBB /* HaloNetworking.framework */; };
-		0047A2E61B37F83A00E97BBB /* HaloNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0047A2E41B37F83A00E97BBB /* HaloNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		005AAF9C1B399D8300146A6C /* HALOCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005AAF9B1B399D8300146A6C /* HALOCore.framework */; };
+		005AAF9D1B399D8300146A6C /* HALOCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 005AAF9B1B399D8300146A6C /* HALOCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		005AAF9F1B399D8300146A6C /* HALONetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005AAF9E1B399D8300146A6C /* HALONetworking.framework */; };
+		005AAFA01B399D8300146A6C /* HALONetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 005AAF9E1B399D8300146A6C /* HALONetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		005AAFA31B399DE400146A6C /* HALO.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005AAFA21B399DE400146A6C /* HALO.plist */; };
 		006A60641B31BBD80045395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60631B31BBD80045395A /* main.m */; };
 		006A60671B31BBD80045395A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60661B31BBD80045395A /* AppDelegate.m */; };
 		006A606A1B31BBD80045395A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60691B31BBD80045395A /* ViewController.m */; };
@@ -19,14 +20,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		00D43B241B31BDBC0014D36F /* Embed Frameworks */ = {
+		005AAFA11B399D8300146A6C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0047A2E61B37F83A00E97BBB /* HaloNetworking.framework in Embed Frameworks */,
-				0047A2E31B37F83A00E97BBB /* HaloCore.framework in Embed Frameworks */,
+				005AAFA01B399D8300146A6C /* HALONetworking.framework in Embed Frameworks */,
+				005AAF9D1B399D8300146A6C /* HALOCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -34,8 +35,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0047A2E11B37F83A00E97BBB /* HaloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloCore.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloCore.framework"; sourceTree = "<absolute>"; };
-		0047A2E41B37F83A00E97BBB /* HaloNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HaloNetworking.framework; path = "/Users/borja/Library/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos/HaloNetworking.framework"; sourceTree = "<absolute>"; };
+		005AAF9B1B399D8300146A6C /* HALOCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HALOCore.framework; path = "/Users/borja/Documents/git/momos-sdk-ios/DerivedData/HALO/Build/Products/Debug-iphoneos/HALOCore.framework"; sourceTree = "<absolute>"; };
+		005AAF9E1B399D8300146A6C /* HALONetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HALONetworking.framework; path = "/Users/borja/Documents/git/momos-sdk-ios/DerivedData/HALO/Build/Products/Debug-iphoneos/HALONetworking.framework"; sourceTree = "<absolute>"; };
+		005AAFA21B399DE400146A6C /* HALO.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HALO.plist; sourceTree = "<group>"; };
 		006A605E1B31BBD80045395A /* HALOObjCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HALOObjCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A60621B31BBD80045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A60631B31BBD80045395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,8 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0047A2E51B37F83A00E97BBB /* HaloNetworking.framework in Frameworks */,
-				0047A2E21B37F83A00E97BBB /* HaloCore.framework in Frameworks */,
+				005AAF9F1B399D8300146A6C /* HALONetworking.framework in Frameworks */,
+				005AAF9C1B399D8300146A6C /* HALOCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +96,7 @@
 		006A60611B31BBD80045395A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				005AAFA21B399DE400146A6C /* HALO.plist */,
 				006A60621B31BBD80045395A /* Info.plist */,
 				006A60631B31BBD80045395A /* main.m */,
 			);
@@ -103,8 +106,8 @@
 		00D43B251B31BDC30014D36F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0047A2E41B37F83A00E97BBB /* HaloNetworking.framework */,
-				0047A2E11B37F83A00E97BBB /* HaloCore.framework */,
+				005AAF9E1B399D8300146A6C /* HALONetworking.framework */,
+				005AAF9B1B399D8300146A6C /* HALOCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,7 +122,7 @@
 				006A605A1B31BBD80045395A /* Sources */,
 				006A605B1B31BBD80045395A /* Frameworks */,
 				006A605C1B31BBD80045395A /* Resources */,
-				00D43B241B31BDBC0014D36F /* Embed Frameworks */,
+				005AAFA11B399D8300146A6C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				006A60721B31BBD80045395A /* LaunchScreen.xib in Resources */,
+				005AAFA31B399DE400146A6C /* HALO.plist in Resources */,
 				006A606F1B31BBD80045395A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +293,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos",
+					"/Users/borja/Documents/git/momos-sdk-ios/DerivedData/HALO/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -304,6 +309,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoMOS-fpvzdslxjfnvopeypxpmqcfwmjle/Build/Products/Debug-iphoneos",
+					"/Users/borja/Documents/git/momos-sdk-ios/DerivedData/HALO/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -13,6 +13,10 @@ public class Module {
     
     public let moduleName:String
     
+    required public init(name: String) {
+        moduleName = name
+    }
+    
     required public init(config: NSDictionary) {
         moduleName = config["HALO_MODULE_NAME"] as! String
     }

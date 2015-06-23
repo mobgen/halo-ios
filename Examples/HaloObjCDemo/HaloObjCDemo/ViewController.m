@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import <HaloCore/HaloCore-Swift.h>
+#import <HALOCore/HALOCore-Swift.h>
+#import <HALONetworking/HALONetworking-Swift.h>
 
 @interface ViewController ()
 
@@ -18,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [[Manager sharedInstance] launch];
+    
+    Networking *net = [[Manager sharedInstance] getModule:@"networking"];
     
     self.view.backgroundColor = [UIColor blueColor];
 }
