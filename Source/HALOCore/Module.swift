@@ -8,8 +8,8 @@
 
 import Foundation
 
-@objc(HALOModule)
-public class HALOModule {
+@objc(Module)
+public class Module {
     
     public let moduleName:String
     

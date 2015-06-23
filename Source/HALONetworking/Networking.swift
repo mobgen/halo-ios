@@ -8,9 +8,10 @@
 
 import Foundation
 import HALOCore
+import Alamofire
 
-@objc(HALONetworking)
-public class HALONetworking: HALOModule {
+@objc(Networking)
+public class Networking: Module {
     
     var token:String?
     var refreshToken:String?

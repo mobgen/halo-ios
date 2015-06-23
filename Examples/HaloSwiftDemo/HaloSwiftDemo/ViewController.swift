@@ -17,9 +17,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Start HALO
-        HALOManager.shared.launch()
+        Manager.sharedInstance.launch()
         
-        let net:HALONetworking = HALOManager.shared.getModule("networking") as! HALONetworking
+        let net = Manager.sharedInstance.getModule("networking") as! Networking
         
         net.authenticate()
         

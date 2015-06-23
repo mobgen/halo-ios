@@ -8,15 +8,15 @@
 
 import Foundation
 
-@objc(HALOManager)
-public class HALOManager {
+@objc(Manager)
+public class Manager {
     
-    public static let shared = HALOManager()
+    public static let sharedInstance = Manager()
     
     public var apiKey:String?
     public var clientSecret:String?
     
-    var modules:Dictionary<String, HALOModule> = Dictionary()
+    var modules:Dictionary<String, Module> = Dictionary()
     
     public func launch() -> Bool {
         
@@ -35,7 +35,7 @@ public class HALOManager {
             
             if let arr = data["MODULES"] as? Array<NSDictionary> {
                 for d in arr {
-                    let cl = NSClassFromString(d["HALO_MODULE_CLASS"] as! String) as! HALOModule.Type
+                    let cl = NSClassFromString(d["HALO_MODULE_CLASS"] as! String) as! Module.Type
                     let instance = cl(config: d)
                     addModule(instance)
                 }
@@ -50,18 +50,18 @@ public class HALOManager {
         }
     }
     
-    public func addModule(module: HALOModule) -> Bool {
+    public func addModule(module: Module) -> Bool {
         modules[module.moduleName] = module
         return true;
     }
     
-    public func getModule(moduleName: String) -> HALOModule? {
+    public func getModule(moduleName: String) -> Module? {
         return modules[moduleName]
     }
     
     public func listModules() {
         println("--- Listing active modules ---")
-        for (k: String, mod:HALOModule) in modules {
+        for (k: String, mod:HALOCore.Module) in modules {
             println(mod.moduleDescription())
         }
         println("------------------------------")

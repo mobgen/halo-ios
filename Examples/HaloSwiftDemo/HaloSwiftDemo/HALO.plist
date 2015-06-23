@@ -12,7 +12,7 @@
 			<key>HALO_MODULE_NAME</key>
 			<string>networking</string>
 			<key>HALO_MODULE_CLASS</key>
-			<string>HALONetworking</string>
+			<string>Networking</string>
 			<key>AUTH_PROVIDER</key>
 			<string>oauth</string>
 		</dict>
