@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>API_KEY</key>
-	<string>apikey</string>
+	<key>CLIENT_ID</key>
+	<string>shellappclient</string>
 	<key>CLIENT_SECRET</key>
-	<string>clientsecret</string>
+	<string>shellappsecret</string>
 	<key>MODULES</key>
 	<array>
 		<dict>
