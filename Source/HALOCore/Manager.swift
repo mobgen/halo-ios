@@ -72,6 +72,7 @@ public class Manager {
     */
     public func addModule(module: Module) -> Bool {
         modules[module.moduleName] = module
+        module.manager = self
         return true;
     }
     
@@ -90,7 +91,8 @@ public class Manager {
     */
     public func listModules() {
         println("--- Listing active modules ---")
-        for (k: String, mod:HALOCore.Module) in modules {
+
+        for (k: String, mod:Module) in modules {
             println(mod.moduleDescription())
         }
         println("------------------------------")

@@ -14,6 +14,7 @@ import Foundation
 public class Module {
     
     let moduleName:String
+    public var manager:Manager?
     
     /**
     Initialise the module only providing a name. Any extra configuration should be

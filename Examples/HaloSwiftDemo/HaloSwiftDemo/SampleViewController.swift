@@ -35,29 +35,37 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     func login(sender: UIButton) {
         sender.becomeFirstResponder()
         
         let net = Manager.sharedInstance.getModule("networking") as! Networking
-        
-        net.haloAuthenticate(myView!.clientId.text, clientSecret: myView!.clientSecret.text) { (responseObject, err) -> Void in
-            
-            var title: String
-            var message: String
-            
-            if let json = responseObject {
-                let token = json["access_token"] as? String
-                title = "Wahey!"
-                message = "Access token: \(token!)"
-            } else {
-                title = "Awww"
-                message = "Sorry man. Wrong credentials"
-            }
-         
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+
+        net.haloModules { (result) -> Void in
+            self.navigationController?.pushViewController(ModuleListTableViewController(modules: result.value), animated: true)
         }
+        
+//        net.haloAuthenticate(myView!.clientId.text, clientSecret: myView!.clientSecret.text) { (responseObject, err) -> Void in
+//            
+//            var title: String
+//            var message: String
+//            
+//            if let json = responseObject {
+//                let token = json["access_token"] as? String
+//                title = "Wahey!"
+//                message = "Access token: \(token!)"
+//            } else {
+//                title = "Awww"
+//                message = "Sorry man. Wrong credentials"
+//            }
+//         
+//            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        }
         
     }
     

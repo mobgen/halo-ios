@@ -13,31 +13,13 @@
 		006A60241B31928B0045395A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006A60231B31928B0045395A /* Launch Screen.xib */; };
 		00930AE11B385B2D002FF4F0 /* HALO.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00930AE01B385B2D002FF4F0 /* HALO.plist */; };
 		00A52BFA1B3BEAE700C77F98 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A52BF91B3BEAE700C77F98 /* SampleView.swift */; };
-		00A52BFC1B3BEDDF00C77F98 /* HALOCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A52BFB1B3BEDDF00C77F98 /* HALOCore.framework */; };
-		00A52BFD1B3BEDDF00C77F98 /* HALOCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00A52BFB1B3BEDDF00C77F98 /* HALOCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		00A52BFF1B3BEDDF00C77F98 /* HALONetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A52BFE1B3BEDDF00C77F98 /* HALONetworking.framework */; };
-		00A52C001B3BEDDF00C77F98 /* HALONetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00A52BFE1B3BEDDF00C77F98 /* HALONetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00A52C071B3BF2CE00C77F98 /* Gotham-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00A52C021B3BF2CE00C77F98 /* Gotham-Bold.ttf */; };
 		00A52C081B3BF2CE00C77F98 /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00A52C031B3BF2CE00C77F98 /* Gotham-Book.ttf */; };
 		00A52C091B3BF2CE00C77F98 /* Lab-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00A52C041B3BF2CE00C77F98 /* Lab-Bold.ttf */; };
 		00A52C0A1B3BF2CE00C77F98 /* Lab-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00A52C051B3BF2CE00C77F98 /* Lab-Light.ttf */; };
 		00A52C0B1B3BF2CE00C77F98 /* Lab-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00A52C061B3BF2CE00C77F98 /* Lab-Medium.ttf */; };
+		00D1A3681B42738C008DFB71 /* ModuleListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1A3671B42738C008DFB71 /* ModuleListTableViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		00A52C011B3BEDDF00C77F98 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				00A52C001B3BEDDF00C77F98 /* HALONetworking.framework in Embed Frameworks */,
-				00A52BFD1B3BEDDF00C77F98 /* HALOCore.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		006A5FF51B318D600045395A /* HALOSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HALOSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +37,7 @@
 		00A52C041B3BF2CE00C77F98 /* Lab-Bold.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Lab-Bold.ttf"; sourceTree = "<group>"; };
 		00A52C051B3BF2CE00C77F98 /* Lab-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Light.ttf"; sourceTree = "<group>"; };
 		00A52C061B3BF2CE00C77F98 /* Lab-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Medium.ttf"; sourceTree = "<group>"; };
+		00D1A3671B42738C008DFB71 /* ModuleListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A52BFF1B3BEDDF00C77F98 /* HALONetworking.framework in Frameworks */,
-				00A52BFC1B3BEDDF00C77F98 /* HALOCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +75,7 @@
 				006A5FFA1B318D600045395A /* AppDelegate.swift */,
 				006A5FFC1B318D600045395A /* SampleViewController.swift */,
 				00A52BF91B3BEAE700C77F98 /* SampleView.swift */,
+				00D1A3671B42738C008DFB71 /* ModuleListTableViewController.swift */,
 				006A60011B318D600045395A /* Images.xcassets */,
 				006A5FF81B318D600045395A /* Supporting Files */,
 			);
@@ -134,7 +116,6 @@
 				006A5FF11B318D600045395A /* Sources */,
 				006A5FF21B318D600045395A /* Frameworks */,
 				006A5FF31B318D600045395A /* Resources */,
-				00A52C011B3BEDDF00C77F98 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -204,6 +185,7 @@
 				006A5FFD1B318D600045395A /* SampleViewController.swift in Sources */,
 				00A52BFA1B3BEAE700C77F98 /* SampleView.swift in Sources */,
 				006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */,
+				00D1A3681B42738C008DFB71 /* ModuleListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +231,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";

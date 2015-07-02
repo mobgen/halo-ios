@@ -5,7 +5,7 @@
 	<key>CLIENT_ID</key>
 	<string>shellappclient</string>
 	<key>CLIENT_SECRET</key>
-	<string>shellappsecret</string>
+	<string>shellapppass</string>
 	<key>MODULES</key>
 	<array>
 		<dict>
