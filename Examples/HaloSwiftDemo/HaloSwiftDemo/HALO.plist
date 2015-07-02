@@ -11,8 +11,6 @@
 		<dict>
 			<key>HALO_MODULE_NAME</key>
 			<string>networking</string>
-			<key>HALO_MODULE_CLASS</key>
-			<string>Networking</string>
 		</dict>
 	</array>
 </dict>

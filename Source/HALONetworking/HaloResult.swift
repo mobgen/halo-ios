@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Result<SuccessType,ErrorType> {
+public enum HaloResult<SuccessType,ErrorType> {
     
     case Success(Box<SuccessType>)
     case Failure(Box<ErrorType>)
@@ -41,7 +41,7 @@ public enum Result<SuccessType,ErrorType> {
     :param: transform
     :returns: result
     */
-    public func map<U>(transform: SuccessType -> U) -> Result<U,ErrorType> {
+    public func map<U>(transform: SuccessType -> U) -> HaloResult<U,ErrorType> {
         switch self {
         case .Success(let box):
             return .Success(Box(transform(box.unbox)))
@@ -58,7 +58,7 @@ public enum Result<SuccessType,ErrorType> {
     :param: transform
     :returns: result
     */
-    public func flatMap<U>(transform:SuccessType -> Result<U,ErrorType>) -> Result<U,ErrorType> {
+    public func flatMap<U>(transform:SuccessType -> HaloResult<U,ErrorType>) -> HaloResult<U,ErrorType> {
         switch self {
         case Success(let value): return transform(value.unbox)
         case Failure(let error): return .Failure(error)

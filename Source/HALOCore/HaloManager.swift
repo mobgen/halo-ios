@@ -11,11 +11,11 @@ import Foundation
 
 /// Core manager of the Framework implemented as a Singleton which has knowledge
 /// about all the existing and active modules
-@objc(Manager)
-public class Manager {
+@objc(HaloManager)
+public class HaloManager {
     
     /// Shared instance of the manager (Singleton pattern)
-    public static let sharedInstance = Manager()
+    public static let sharedInstance = HaloManager()
     
     /// Client id to be used when authenticating against the HALO backend
     public var clientId:String?
@@ -29,7 +29,8 @@ public class Manager {
     /// Refresh token to be used when the existing one has expired
     internal(set) public var refreshToken:String?
     
-    var modules:Dictionary<String, Module> = Dictionary()
+    /// Collection of installed modules
+    var modules:Dictionary<String, HaloModule> = Dictionary()
     
     /**
     Start the HALO core
@@ -49,9 +50,9 @@ public class Manager {
                 clientId = data["CLIENT_ID"] as? String
                 clientSecret = data["CLIENT_SECRET"] as? String
                 
-                if let arr = data["MODULES"] as? Array<NSDictionary> {
+                if let arr = data["MODULES"] as? Array<Dictionary<String,AnyObject>> {
                     for d in arr {
-                        let cl = NSClassFromString(d["HALO_MODULE_CLASS"] as! String) as! Module.Type
+                        let cl = NSClassFromString(d["HALO_MODULE_CLASS"] as! String) as! HaloModule.Type
                         let instance = cl(config: d)
                         addModule(instance)
                     }
@@ -70,10 +71,14 @@ public class Manager {
     :param: module   New module to be added
     :returns: Boolean specifying whether the operation has succeeded or not
     */
-    public func addModule(module: Module) -> Bool {
-        modules[module.moduleName] = module
-        module.manager = self
-        return true;
+    public func addModule(module: HaloModule) -> Bool {
+        
+        if let type = module.moduleType {
+            modules[type.raw] = module
+            module.manager = self
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -82,8 +87,8 @@ public class Manager {
     :param: moduleName   Name of the module to be retrieved
     :returns: The requested module (if it exists)
     */
-    public func getModule(moduleName: String) -> Module? {
-        return modules[moduleName]
+    public func getModule(type: HaloModuleType) -> HaloModule? {
+        return modules[type.raw]
     }
     
     /**
@@ -92,7 +97,7 @@ public class Manager {
     public func listModules() {
         println("--- Listing active modules ---")
 
-        for (k: String, mod:Module) in modules {
+        for (k: String, mod:HaloModule) in modules {
             println(mod.moduleDescription())
         }
         println("------------------------------")

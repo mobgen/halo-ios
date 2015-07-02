@@ -20,11 +20,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [[Manager sharedInstance] launch];
+    HaloManager *mgr = [HaloManager sharedInstance];
     
-    Networking *net = (Networking *)[[Manager sharedInstance] getModule:@"networking"];
+    [mgr launch];
     
-    self.view.backgroundColor = [UIColor blueColor];
+    HaloNetworking *net = (HaloNetworking *)[mgr getModule:HaloModuleTypeNetworking];
+    
+    [net haloModules:^(NSDictionary * __nonnull) {
+        <#code#>
+    } onFailure:^(NSError * __nonnull) {
+        <#code#>
+    }]
+    
 }
 
 - (void)didReceiveMemoryWarning {

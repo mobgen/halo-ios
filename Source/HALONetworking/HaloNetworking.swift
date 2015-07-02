@@ -11,15 +11,16 @@ import HALOCore
 import Alamofire
 
 /// Module encapsulating all the networking features of the Framework
-@objc(Networking)
-public class Networking: Module {
+@objc(HaloNetworking)
+public class HaloNetworking: HaloModule {
     
     var tokenType:String?
     var token:String? = "WO62Z1kAKAB9qtxeN9RioMDuYySF1PrgvcIBQ9HM"
     
     let alamofire = Alamofire.Manager.sharedInstance
-    let baseUrl = "http://halo.mobgen.com:3000"
-    let modulesListUrl = "/api/generalcontent/module/list"
+    
+    public typealias HaloSuccessHandler = (responseObject: NSDictionary) -> Void
+    public typealias HaloFailureHandler = (error: NSError) -> Void
     
     /**
     Authenticate against the HALO backend using a client id and a client secret
@@ -28,7 +29,7 @@ public class Networking: Module {
     :param: clientSecret        Client secret to be used for authentication
     :param: completionHandler   Callback where the response from the server can be processed
     */
-    public func haloAuthenticate(clientId: String!, clientSecret: String!, completionHandler: (result: Result<Dictionary<String,AnyObject>, NSError>) -> Void) -> Void {
+    public func haloAuthenticate(clientId: String!, clientSecret: String!, onSuccess: HaloSuccessHandler, onFailure: HaloFailureHandler) -> Void {
         
         let params = [
             "grant_type" : "client_credentials",
@@ -36,7 +37,7 @@ public class Networking: Module {
             "client_secret" : clientSecret
         ]
         
-        alamofire.request(.POST, "\(baseUrl)/api/oauth/token?_1", parameters: params, encoding: .URL).responseJSON { (req, resp:NSHTTPURLResponse?, json, error:NSError?) -> Void in
+        alamofire.request(.POST, HaloURL.OAuth.URL, parameters: params, encoding: .URL).responseJSON { (req, resp:NSHTTPURLResponse?, json, error:NSError?) -> Void in
             
             if resp != nil && resp?.statusCode == 200 {
                 
@@ -45,36 +46,39 @@ public class Networking: Module {
                     self.tokenType = jsonDict["token_type"] as? String
                     //self.token = jsonDict["access_token"] as? String
                     self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.tokenType!) \(self.token)"]
-                    completionHandler(result: Result.Success(Box(jsonDict)))
+                    onSuccess(responseObject: jsonDict)
                 } else {
-                    
-                    completionHandler(result: .Failure(Box(error!)))
+                    onFailure(error: NSError())
                 }
             } else {
-                completionHandler(result: .Failure(Box(error!)))
+                onFailure(error: error!)
             }
         }
     }
     
-    public func haloModules(completionHandler handler: (result: Result<[String],NSError>) -> Void) {
+    public func haloModules(onSuccess: HaloSuccessHandler, onFailure: HaloFailureHandler) -> Void {
         
         if let localToken = self.token {
             
-            alamofire.request(.GET, "\(self.baseUrl)\(self.modulesListUrl)", parameters: nil, encoding: .URL).responseJSON { (req:NSURLRequest, resp:NSHTTPURLResponse?, json, error) -> Void in
+            alamofire.request(.GET, HaloURL.ModulesList.URL, parameters: nil, encoding: .URL).responseJSON { (req:NSURLRequest, resp:NSHTTPURLResponse?, json, error) -> Void in
                 
                 if resp?.statusCode == 200 {
                     
-                    handler(result: .Success(Box([])))
+                    let arr = [String]()
+                    
+                    onSuccess(responseObject: json as! NSDictionary)
                     
                 } else {
-                    handler(result: .Failure(Box(error!)))
+                    onFailure(error: NSError())
                     println("Error getting module list")
                 }
                 
             }
         } else {
-            haloAuthenticate(self.manager?.clientId, clientSecret: self.manager?.clientSecret, completionHandler: { (result) -> Void in
-                self.haloModules(completionHandler: handler)
+            haloAuthenticate(manager?.clientId, clientSecret: manager?.clientSecret, onSuccess: { (responseObject) -> Void in
+                self.haloModules(onSuccess, onFailure: onFailure)
+            }, onFailure: { (error) -> Void in
+                println("Error authenticating")
             })
         }
     }

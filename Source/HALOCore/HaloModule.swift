@@ -10,11 +10,13 @@ import Foundation
 
 
 /// Generic class which holds the common features of a module within the Framework
-@objc(Module)
-public class Module {
+@objc(HaloModule)
+public class HaloModule {
     
-    let moduleName:String
-    public var manager:Manager?
+    let moduleType:HaloModuleType?
+    
+    /// Provides access to the manager containing this specific module
+    public var manager:HaloManager?
     
     /**
     Initialise the module only providing a name. Any extra configuration should be
@@ -22,8 +24,8 @@ public class Module {
     
     :param: name   String representing the module's name
     */
-    required public init(name: String) {
-        moduleName = name
+    required public init(type: HaloModuleType) {
+        moduleType = type
     }
     
     /**
@@ -31,17 +33,23 @@ public class Module {
     
     :param: config   Dictionary containing all the configuration details for this module
     */
-    required public init(config: NSDictionary) {
-        moduleName = config["HALO_MODULE_NAME"] as! String
+    required public init(config: NSDictionary?) {
+        if let dict = config as? Dictionary<String,AnyObject> {
+            if let name = dict[HaloCoreConstants.moduleNameKey] as? String {
+                moduleType = HaloModuleType.fromRaw(name.lowercaseString)
+                return
+            }
+        }
+        moduleType = nil
     }
-    
+
     /**
     Verbose description of the module intended to be used for debugging
     
-    :returns: A string representation of the module, containing its name and its class name
+    :returns: A string representation of the module, containing its class name
     */
     public func moduleDescription() -> String {
-        return  "name: \(moduleName) class: \(toString(self))"
+        return  "Module: \(toString(self))"
     }
     
 }
