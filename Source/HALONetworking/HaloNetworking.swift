@@ -11,7 +11,7 @@ import HALOCore
 import Alamofire
 
 /// Module encapsulating all the networking features of the Framework
-@objc(HaloNetworking)
+@objc
 public class HaloNetworking: HaloModule {
     
     var tokenType:String?
