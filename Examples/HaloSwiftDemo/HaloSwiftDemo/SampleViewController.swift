@@ -12,7 +12,7 @@ import HALONetworking
 
 class SampleViewController: UIViewController, UITextFieldDelegate {
 
-    var myView:SampleView?
+    var myView:SampleView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +24,14 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
         // Manager.sharedInstance.clientSecret = "clientsecret"
         // Manager.sharedInstance.addModule(Networking(name: "networking"))
         
-        myView = view as? SampleView
+        myView = view as! SampleView
         
         myView!.button.addTarget(self, action: "login:", forControlEvents: .TouchUpInside)
         myView!.clientId.delegate = self
         myView!.clientSecret.delegate = self
         
         // Start HALO
-        Manager.sharedInstance.launch()
+        HaloManager.sharedInstance.launch()
         
     }
     
@@ -42,31 +42,30 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
     func login(sender: UIButton) {
         sender.becomeFirstResponder()
         
-        let net = Manager.sharedInstance.getModule("networking") as! Networking
-
-        net.haloModules { (result) -> Void in
-            self.navigationController?.pushViewController(ModuleListTableViewController(modules: result.value), animated: true)
+        let mgr = HaloManager.sharedInstance
+        
+        let net = mgr.getModule(HaloNetworking) as! HaloNetworking
+        var title = "", message = ""
+        
+        net.haloAuthenticate(myView.clientId.text, clientSecret: myView.clientSecret.text) { (result) -> Void in
+            switch result {
+            case .Success(let box):
+                title = "Wahey!"
+                let token:String = box.unbox["access_token"] as! String
+                message = "Successfully authenticated!\nAccess token: \(token)"
+                self.showAlert(title, message: message)
+            case .Failure(let error):
+                title = "Awww... :("
+                message = "Sorry man, wrong credentials!"
+                self.showAlert(title, message: message)
+            }
         }
-        
-//        net.haloAuthenticate(myView!.clientId.text, clientSecret: myView!.clientSecret.text) { (responseObject, err) -> Void in
-//            
-//            var title: String
-//            var message: String
-//            
-//            if let json = responseObject {
-//                let token = json["access_token"] as? String
-//                title = "Wahey!"
-//                message = "Access token: \(token!)"
-//            } else {
-//                title = "Awww"
-//                message = "Sorry man. Wrong credentials"
-//            }
-//         
-//            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-//        }
-        
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

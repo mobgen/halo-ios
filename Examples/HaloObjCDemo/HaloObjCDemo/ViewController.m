@@ -25,13 +25,6 @@
     [mgr launch];
     
     HaloNetworking *net = (HaloNetworking *)[mgr getModule:HaloModuleTypeNetworking];
-    
-    [net haloModules:^(NSDictionary * __nonnull) {
-        <#code#>
-    } onFailure:^(NSError * __nonnull) {
-        <#code#>
-    }]
-    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -132,6 +132,7 @@
 		006A5FED1B318D600045395A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "MOBGEN Technology";
 				TargetAttributes = {

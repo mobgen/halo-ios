@@ -11,7 +11,7 @@ import Foundation
 
 /// Core manager of the Framework implemented as a Singleton which has knowledge
 /// about all the existing and active modules
-@objc(HaloManager)
+@objc
 public class HaloManager {
     
     /// Shared instance of the manager (Singleton pattern)
@@ -52,15 +52,18 @@ public class HaloManager {
                 
                 if let arr = data["MODULES"] as? Array<Dictionary<String,AnyObject>> {
                     for d in arr {
-                        let cl = NSClassFromString(d["HALO_MODULE_CLASS"] as! String) as! HaloModule.Type
-                        let instance = cl(config: d)
+                        let cl = NSClassFromString(d["HALO_MODULE_NAME"] as! String) as! HaloModule.Type
+                        let instance = cl(configuration: d)
                         addModule(instance)
                     }
                 }
             }
         }
         
-        println("Using client ID: \(clientId!) and client secret: \(clientSecret!)")
+        if let cId = clientId {
+            println("Using client ID: \(cId) and client secret: \(clientSecret!)")
+        }
+        
         listModules()
         return false
     }
@@ -73,12 +76,9 @@ public class HaloManager {
     */
     public func addModule(module: HaloModule) -> Bool {
         
-        if let type = module.moduleType {
-            modules[type.raw] = module
-            module.manager = self
-            return true;
-        }
-        return false;
+        modules[toString(module.dynamicType)] = module
+        module.manager = self
+        return true
     }
     
     /**
@@ -87,8 +87,8 @@ public class HaloManager {
     :param: moduleName   Name of the module to be retrieved
     :returns: The requested module (if it exists)
     */
-    public func getModule(type: HaloModuleType) -> HaloModule? {
-        return modules[type.raw]
+    public func getModule(moduleClass: HaloModule.Type) -> HaloModule? {
+        return modules[toString(moduleClass)]
     }
     
     /**

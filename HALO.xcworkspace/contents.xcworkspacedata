@@ -5,9 +5,9 @@
       location = "group:Source/HALOFramework.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/borja/Documents/git/momos-sdk-ios/Examples/HaloObjCDemo/HALOObjCDemo.xcodeproj">
+      location = "group:/Users/borja/Documents/git/momos-sdk-ios/Examples/HaloSwiftDemo/HALOSwiftDemo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/borja/Documents/git/momos-sdk-ios/Examples/HaloSwiftDemo/HALOSwiftDemo.xcodeproj">
+      location = "group:/Users/borja/Documents/git/momos-sdk-ios/Examples/HaloObjCDemo/HALOObjCDemo.xcodeproj">
    </FileRef>
 </Workspace>

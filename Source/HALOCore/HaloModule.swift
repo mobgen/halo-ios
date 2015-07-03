@@ -8,39 +8,24 @@
 
 import Foundation
 
-
 /// Generic class which holds the common features of a module within the Framework
-@objc(HaloModule)
+@objc
 public class HaloModule {
-    
-    let moduleType:HaloModuleType?
     
     /// Provides access to the manager containing this specific module
     public var manager:HaloManager?
-    
-    /**
-    Initialise the module only providing a name. Any extra configuration should be
-    done manually afterwards
-    
-    :param: name   String representing the module's name
-    */
-    required public init(type: HaloModuleType) {
-        moduleType = type
-    }
     
     /**
     Initialise the module from a provided configuration
     
     :param: config   Dictionary containing all the configuration details for this module
     */
-    required public init(config: NSDictionary?) {
-        if let dict = config as? Dictionary<String,AnyObject> {
-            if let name = dict[HaloCoreConstants.moduleNameKey] as? String {
-                moduleType = HaloModuleType.fromRaw(name.lowercaseString)
-                return
-            }
+    required public init(configuration: NSDictionary?) {
+        if let dict = configuration as? Dictionary<String,AnyObject> {
+//            if let name = dict[HaloCoreConstants.moduleNameKey] as? String {
+//                
+//            }
         }
-        moduleType = nil
     }
 
     /**
