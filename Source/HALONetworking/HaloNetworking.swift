@@ -54,6 +54,11 @@ public class HaloNetworking: HaloModule {
         }
     }
     
+    /**
+    Get the list of available modules for a given client id/client secret pair
+    
+    :param: completionHandler   Callback executed when the request has finished
+    */
     public func haloModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
         
         if let localToken = self.token {

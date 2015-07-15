@@ -13,6 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    func setupCrittercism() {
+        Crittercism.enableWithAppID(Config.crittercismAppId)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -21,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nav = UINavigationController(rootViewController: SampleViewController())
         window!.rootViewController = nav
         window!.makeKeyAndVisible()
+        
+        setupCrittercism()
         
         return true
     }

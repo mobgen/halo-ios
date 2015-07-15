@@ -25,6 +25,7 @@
     [mgr launch];
     
     HaloNetworking *net = (HaloNetworking *)[mgr getModule:HaloModuleTypeNetworking];
+    
 }
 
 - (void)didReceiveMemoryWarning {
