@@ -24,6 +24,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		005C57891B5CEA260018839D /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C57881B5CEA260018839D /* Box.framework */; };
+		005C578B1B5CEA2D0018839D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
+		005C578E1B5CEA380018839D /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578C1B5CEA380018839D /* ReactiveCocoa.framework */; };
+		005C578F1B5CEA380018839D /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578D1B5CEA380018839D /* Result.framework */; };
+		005C579B1B5CEC590018839D /* HALOCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* HALOCore.framework */; };
 		006A5FB81B318CAC0045395A /* HALOCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* HALOCore.framework */; };
 		006A5FBF1B318CAC0045395A /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreTests.swift */; };
 		006A5FD61B318CBC0045395A /* HALONetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FCB1B318CBC0045395A /* HALONetworking.framework */; };
@@ -32,7 +37,6 @@
 		006A60541B31BA9B0045395A /* HaloNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60531B31BA9B0045395A /* HaloNetworking.swift */; };
 		00930ADC1B384556002FF4F0 /* HaloModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00930ADB1B384556002FF4F0 /* HaloModule.swift */; };
 		00930ADD1B384D81002FF4F0 /* HALOCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* HALOCore.framework */; };
-		00D1A35E1B419598008DFB71 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005AAF931B397BA200146A6C /* Alamofire.framework */; };
 		00D1A3791B42CA45008DFB71 /* HALOStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D1A36E1B42CA45008DFB71 /* HALOStorage.framework */; };
 		00D1A3801B42CA45008DFB71 /* HALOStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1A37F1B42CA45008DFB71 /* HALOStorageTests.swift */; };
 		00D1A3881B42CAD4008DFB71 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1A3871B42CAD4008DFB71 /* Manager.swift */; };
@@ -42,34 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		005AAF921B397BA200146A6C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 005AAF7C1B39791700146A6C /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
-		005AAF941B397BA200146A6C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 005AAF7C1B39791700146A6C /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
-			remoteInfo = "Alamofire OSX";
-		};
-		005AAF961B397BA200146A6C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 005AAF7C1B39791700146A6C /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS Tests";
-		};
-		005AAF981B397BA200146A6C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 005AAF7C1B39791700146A6C /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
-			remoteInfo = "Alamofire OSX Tests";
-		};
 		006A5FB91B318CAC0045395A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
@@ -122,7 +98,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		005AAF7C1B39791700146A6C /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../../Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		005C57881B5CEA260018839D /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = ../Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
+		005C578A1B5CEA2D0018839D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		005C578C1B5CEA380018839D /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		005C578D1B5CEA380018839D /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* HALOCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HALOCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB01B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FB71B318CAC0045395A /* HALOCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HALOCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +131,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005C578F1B5CEA380018839D /* Result.framework in Frameworks */,
+				005C57891B5CEA260018839D /* Box.framework in Frameworks */,
+				005C578E1B5CEA380018839D /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +149,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00D1A35E1B419598008DFB71 /* Alamofire.framework in Frameworks */,
 				00930ADD1B384D81002FF4F0 /* HALOCore.framework in Frameworks */,
+				005C578B1B5CEA2D0018839D /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005C579B1B5CEC590018839D /* HALOCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,15 +181,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		005AAF8C1B397BA200146A6C /* Products */ = {
+		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				005AAF931B397BA200146A6C /* Alamofire.framework */,
-				005AAF951B397BA200146A6C /* Alamofire.framework */,
-				005AAF971B397BA200146A6C /* Alamofire iOS Tests.xctest */,
-				005AAF991B397BA200146A6C /* Alamofire OSX Tests.xctest */,
+				005C578C1B5CEA380018839D /* ReactiveCocoa.framework */,
+				005C578D1B5CEA380018839D /* Result.framework */,
+				005C578A1B5CEA2D0018839D /* Alamofire.framework */,
+				005C57881B5CEA260018839D /* Box.framework */,
 			);
-			name = Products;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		006A5F821B318C6E0045395A = {
@@ -218,6 +201,7 @@
 				006A5FBB1B318CAC0045395A /* HALOCoreTests */,
 				006A5FD91B318CBC0045395A /* HALONetworkingTests */,
 				00D1A37C1B42CA45008DFB71 /* HALOStorageTests */,
+				005C577F1B5CE6BF0018839D /* Frameworks */,
 				006A5F8D1B318C6E0045395A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -276,11 +260,10 @@
 		006A5FCC1B318CBC0045395A /* HALONetworking */ = {
 			isa = PBXGroup;
 			children = (
-				005AAF7C1B39791700146A6C /* Alamofire.xcodeproj */,
 				006A60531B31BA9B0045395A /* HaloNetworking.swift */,
-				006A5FCD1B318CBC0045395A /* Supporting Files */,
 				00D1A3891B43E76A008DFB71 /* HaloResult.swift */,
 				00FF95631B4549ED00E751E3 /* HaloURL.swift */,
+				006A5FCD1B318CBC0045395A /* Supporting Files */,
 			);
 			name = HALONetworking;
 			path = HaloNetworking;
@@ -382,6 +365,7 @@
 				006A5FA91B318CAC0045395A /* Frameworks */,
 				006A5FAA1B318CAC0045395A /* Headers */,
 				006A5FAB1B318CAC0045395A /* Resources */,
+				005C57911B5CEB260018839D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -418,6 +402,7 @@
 				006A5FC71B318CBC0045395A /* Frameworks */,
 				006A5FC81B318CBC0045395A /* Headers */,
 				006A5FC91B318CBC0045395A /* Resources */,
+				005C57921B5CEB3D0018839D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -529,12 +514,6 @@
 			mainGroup = 006A5F821B318C6E0045395A;
 			productRefGroup = 006A5F8D1B318C6E0045395A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 005AAF8C1B397BA200146A6C /* Products */;
-					ProjectRef = 005AAF7C1B39791700146A6C /* Alamofire.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				006A5FE41B318D230045395A /* HALOFramework */,
@@ -547,37 +526,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		005AAF931B397BA200146A6C /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 005AAF921B397BA200146A6C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		005AAF951B397BA200146A6C /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 005AAF941B397BA200146A6C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		005AAF971B397BA200146A6C /* Alamofire iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire iOS Tests.xctest";
-			remoteRef = 005AAF961B397BA200146A6C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		005AAF991B397BA200146A6C /* Alamofire OSX Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire OSX Tests.xctest";
-			remoteRef = 005AAF981B397BA200146A6C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		006A5FAB1B318CAC0045395A /* Resources */ = {
@@ -625,6 +573,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		005C57911B5CEB260018839D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/iOS/ReactiveCocoa.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		005C57921B5CEB3D0018839D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		00A52C571B3D52DA00C77F98 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -834,6 +810,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -855,6 +836,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloCore/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_paths/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -899,6 +885,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)",
+					"/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -920,6 +912,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)",
+					"/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloNetworking/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -976,6 +974,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -998,6 +1000,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HALOStorage/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
