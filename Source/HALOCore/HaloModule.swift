@@ -20,7 +20,7 @@ public class HaloModule {
     
     :param: config   Dictionary containing all the configuration details for this module
     */
-    required public init(configuration: NSDictionary?) {
+    required public init(configuration: NSDictionary? = nil) {
         if let dict = configuration as? Dictionary<String,AnyObject> {
 //            if let name = dict[HaloCoreConstants.moduleNameKey] as? String {
 //                

@@ -33,14 +33,14 @@ public class HaloManager {
     var modules:Dictionary<String, HaloModule> = Dictionary()
     
     /**
-    Start the HALO core
+    Start the Halo SDK setup
     
     :returns: Bool describing whether the process has succeeded
     */
     public func launch() -> Bool {
         
         println("********************************")
-        println("*** Launching HALO Framework ***")
+        println("***** Welcome to Halo SDK ******")
         println("********************************")
         
         let bundle = NSBundle.mainBundle()
@@ -49,23 +49,16 @@ public class HaloManager {
             if let data = NSDictionary(contentsOfFile: path) {
                 clientId = data["CLIENT_ID"] as? String
                 clientSecret = data["CLIENT_SECRET"] as? String
-                
-                if let arr = data["MODULES"] as? Array<Dictionary<String,AnyObject>> {
-                    for d in arr {
-                        let cl = NSClassFromString(d["HALO_MODULE_NAME"] as! String) as! HaloModule.Type
-                        let instance = cl(configuration: d)
-                        addModule(instance)
-                    }
-                }
             }
         }
+        
+        addModule(HaloNetworking());
         
         if let cId = clientId {
             println("Using client ID: \(cId) and client secret: \(clientSecret!)")
         }
         
-        listModules()
-        return false
+        return true
     }
     
     /**
