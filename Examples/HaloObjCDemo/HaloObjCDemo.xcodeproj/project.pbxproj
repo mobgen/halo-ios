@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		005AAFA21B399DE400146A6C /* HALO.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HALO.plist; sourceTree = "<group>"; };
-		006A605E1B31BBD80045395A /* HALOObjCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HALOObjCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A605E1B31BBD80045395A /* HaloObjCDemo.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloObjCDemo.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A60621B31BBD80045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A60631B31BBD80045395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		006A60651B31BBD80045395A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		006A605F1B31BBD80045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A605E1B31BBD80045395A /* HALOObjCDemo.app */,
+				006A605E1B31BBD80045395A /* HaloObjCDemo.temp_caseinsensitive_rename.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,9 +115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		006A605D1B31BBD80045395A /* HALOObjCDemo */ = {
+		006A605D1B31BBD80045395A /* HaloObjCDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HALOObjCDemo" */;
+			buildConfigurationList = 006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HaloObjCDemo" */;
 			buildPhases = (
 				006A605A1B31BBD80045395A /* Sources */,
 				006A605B1B31BBD80045395A /* Frameworks */,
@@ -128,9 +128,9 @@
 			);
 			dependencies = (
 			);
-			name = HALOObjCDemo;
+			name = HaloObjCDemo;
 			productName = MoMOSObjCDemo;
-			productReference = 006A605E1B31BBD80045395A /* HALOObjCDemo.app */;
+			productReference = 006A605E1B31BBD80045395A /* HaloObjCDemo.temp_caseinsensitive_rename.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -139,7 +139,7 @@
 		006A60561B31BBD80045395A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "MOBGEN Technology";
 				TargetAttributes = {
 					006A605D1B31BBD80045395A = {
@@ -148,7 +148,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 006A60591B31BBD80045395A /* Build configuration list for PBXProject "HALOObjCDemo" */;
+			buildConfigurationList = 006A60591B31BBD80045395A /* Build configuration list for PBXProject "HaloObjCDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -161,7 +161,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				006A605D1B31BBD80045395A /* HALOObjCDemo */,
+				006A605D1B31BBD80045395A /* HaloObjCDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -242,6 +242,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -298,7 +299,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HALOObjCDemo;
+				PRODUCT_NAME = HaloObjCDemo.temp_caseinsensitive_rename;
 			};
 			name = Debug;
 		};
@@ -315,14 +316,14 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HALOObjCDemo;
+				PRODUCT_NAME = HaloObjCDemo.temp_caseinsensitive_rename;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		006A60591B31BBD80045395A /* Build configuration list for PBXProject "HALOObjCDemo" */ = {
+		006A60591B31BBD80045395A /* Build configuration list for PBXProject "HaloObjCDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A607F1B31BBD80045395A /* Debug */,
@@ -331,7 +332,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HALOObjCDemo" */ = {
+		006A60811B31BBD80045395A /* Build configuration list for PBXNativeTarget "HaloObjCDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A60821B31BBD80045395A /* Debug */,

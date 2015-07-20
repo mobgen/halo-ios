@@ -10,7 +10,7 @@
 	<array>
 		<dict>
 			<key>HALO_MODULE_NAME</key>
-			<string>HALONetworking.HaloNetworking</string>
+			<string>HaloNetworking</string>
 		</dict>
 	</array>
 </dict>

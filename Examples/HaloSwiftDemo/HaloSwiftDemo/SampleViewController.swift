@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import HALOCore
-import HALONetworking
+import HaloSDK
 
 class SampleViewController: UIViewController, UITextFieldDelegate {
 
