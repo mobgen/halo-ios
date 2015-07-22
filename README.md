@@ -1,6 +1,4 @@
-<p align="center">
-	<img src="halo.png" style="margin:auto" width="250px">
-</p>
+![Halo](halo.png)
 
 # HALO iOS SDK
 
