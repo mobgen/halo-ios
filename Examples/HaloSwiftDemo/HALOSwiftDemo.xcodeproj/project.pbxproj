@@ -37,7 +37,7 @@
 		000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		005C57AA1B5D1FF30018839D /* HaloSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HaloSDK.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos/HaloSDK.framework"; sourceTree = "<group>"; };
-		006A5FF51B318D600045395A /* HaloSwiftDemo.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloSwiftDemo.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FF51B318D600045395A /* HaloSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006A5FFC1B318D600045395A /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		006A5FF61B318D600045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A5FF51B318D600045395A /* HaloSwiftDemo.temp_caseinsensitive_rename.app */,
+				006A5FF51B318D600045395A /* HaloSwiftDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,7 +156,7 @@
 			);
 			name = HaloSwiftDemo;
 			productName = MoMOSSwiftDemo;
-			productReference = 006A5FF51B318D600045395A /* HaloSwiftDemo.temp_caseinsensitive_rename.app */;
+			productReference = 006A5FF51B318D600045395A /* HaloSwiftDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -166,7 +166,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "MOBGEN Technology";
 				TargetAttributes = {
 					006A5FF41B318D600045395A = {
@@ -175,7 +175,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 006A5FF01B318D600045395A /* Build configuration list for PBXProject "HaloSwiftDemo" */;
+			buildConfigurationList = 006A5FF01B318D600045395A /* Build configuration list for PBXProject "HALOSwiftDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -266,6 +266,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -335,18 +336,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HALO-cgosxkdbbjpemkemtpjwceyhzhvf/Build/Products/Debug-iphoneos",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/HaloSwiftDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HaloSwiftDemo/CrittercismSDK",
 				);
-				PRODUCT_NAME = HaloSwiftDemo.temp_caseinsensitive_rename;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = HaloSwiftDemo;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HALOSwiftDemo-Bridging-Header.h";
 			};
 			name = Debug;
@@ -356,18 +354,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HALO-cgosxkdbbjpemkemtpjwceyhzhvf/Build/Products/Debug-iphoneos",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/HaloSwiftDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HaloSwiftDemo/CrittercismSDK",
 				);
-				PRODUCT_NAME = HaloSwiftDemo.temp_caseinsensitive_rename;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = HaloSwiftDemo;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HALOSwiftDemo-Bridging-Header.h";
 			};
 			name = Release;
@@ -375,7 +370,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		006A5FF01B318D600045395A /* Build configuration list for PBXProject "HaloSwiftDemo" */ = {
+		006A5FF01B318D600045395A /* Build configuration list for PBXProject "HALOSwiftDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A60121B318D600045395A /* Debug */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class ModuleListTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+public class ModuleListTableViewController: UITableViewController {
     
     let cellIdent = "cell"
     var modules:[String]?
@@ -21,11 +21,11 @@ public class ModuleListTableViewController: UITableViewController, UITableViewDa
         self.tableView.dataSource = self
     }
     
-    override init!(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    required public init!(coder aDecoder: NSCoder!) {
+    required public init!(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -47,7 +47,7 @@ public class ModuleListTableViewController: UITableViewController, UITableViewDa
         
         var cell:UITableViewCell? = tableView.cellForRowAtIndexPath(indexPath)
         
-        if let tableCell = cell {
+        if let _ = cell {
         } else {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdent)
         }

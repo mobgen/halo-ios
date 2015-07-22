@@ -57,6 +57,7 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
                 title = "Awww... :("
                 message = "Sorry man, wrong credentials!"
                 self.showAlert(title, message: message)
+                NSLog("%s", error.unbox.localizedDescription)
             }
         }
     }
