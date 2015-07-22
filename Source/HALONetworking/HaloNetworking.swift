@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 /// Module encapsulating all the networking features of the Framework
-@objc
 public class HaloNetworking: HaloModule {
     
     var tokenType:String?
@@ -45,10 +44,10 @@ public class HaloNetworking: HaloModule {
                     
                     handler(result: .Success(Box(jsonDict)))
                 } else {
-                    handler(result: .Failure(Box(NSError())))
+                    handler(result: .Failure(Box(NSError(domain: "", code: 0, userInfo: nil))))
                 }
             } else {
-                handler(result: .Failure(Box(NSError())))
+                handler(result: .Failure(Box(NSError(domain: "", code: 0, userInfo: nil))))
             }
         }
     }
@@ -60,21 +59,20 @@ public class HaloNetworking: HaloModule {
     */
     public func haloModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
         
-        if let localToken = self.token {
+        if let _ = self.token {
             
-            alamofire.request(.GET, HaloURL.ModulesList.URL, parameters: nil, encoding: .URL).responseJSON { (req:NSURLRequest, resp:NSHTTPURLResponse?, json, error) -> Void in
-                
+            alamofire.request(.GET, HaloURL.ModulesList.URL, parameters: nil, encoding: .URL).responseJSON(completionHandler: { (req, resp, json, error) -> Void in
                 if resp?.statusCode == 200 {
                     let arr = [String]()
                     handler(result:.Success(Box(arr)))
                 } else {
                     let error = NSError(domain: "halo.mobgen.com", code: -1, userInfo: nil)
                     handler(result:.Failure(Box(error)))
-                    println(resp)
-                    println(error)
+                    print(resp)
+                    print(error)
                 }
-                
-            }
+            });
+            
         } else {
             haloAuthenticate(manager?.clientId, clientSecret: manager?.clientSecret, completionHandler: { (result) -> Void in
                 self.haloModules(completionHandler: handler)

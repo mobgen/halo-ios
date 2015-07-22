@@ -9,7 +9,6 @@
 import Foundation
 
 /// Generic class which holds the common features of a module within the Framework
-@objc
 public class HaloModule {
     
     /// Provides access to the manager containing this specific module
@@ -21,7 +20,7 @@ public class HaloModule {
     :param: config   Dictionary containing all the configuration details for this module
     */
     required public init(configuration: NSDictionary? = nil) {
-        if let dict = configuration as? Dictionary<String,AnyObject> {
+        if let _ = configuration as? Dictionary<String,AnyObject> {
 //            if let name = dict[HaloCoreConstants.moduleNameKey] as? String {
 //                
 //            }
@@ -34,7 +33,7 @@ public class HaloModule {
     :returns: A string representation of the module, containing its class name
     */
     public func moduleDescription() -> String {
-        return  "Module: \(toString(self))"
+        return  "Module: \(String(self))"
     }
     
 }

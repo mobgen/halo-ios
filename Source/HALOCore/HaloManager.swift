@@ -8,10 +8,8 @@
 
 import Foundation
 
-
 /// Core manager of the Framework implemented as a Singleton which has knowledge
 /// about all the existing and active modules
-@objc
 public class HaloManager {
     
     /// Shared instance of the manager (Singleton pattern)
@@ -39,9 +37,9 @@ public class HaloManager {
     */
     public func launch() -> Bool {
         
-        println("********************************")
-        println("***** Welcome to Halo SDK ******")
-        println("********************************")
+        print("********************************")
+        print("***** Welcome to Halo SDK ******")
+        print("********************************")
         
         let bundle = NSBundle.mainBundle()
         if let path = bundle.pathForResource("HALO", ofType: "plist") {
@@ -55,7 +53,7 @@ public class HaloManager {
         addModule(HaloNetworking());
         
         if let cId = clientId {
-            println("Using client ID: \(cId) and client secret: \(clientSecret!)")
+            print("Using client ID: \(cId) and client secret: \(clientSecret!)")
         }
         
         return true
@@ -69,7 +67,7 @@ public class HaloManager {
     */
     public func addModule(module: HaloModule) -> Bool {
         
-        modules[toString(module.dynamicType)] = module
+        modules[String(module.dynamicType)] = module
         module.manager = self
         return true
     }
@@ -81,19 +79,19 @@ public class HaloManager {
     :returns: The requested module (if it exists)
     */
     public func getModule(moduleClass: HaloModule.Type) -> HaloModule? {
-        return modules[toString(moduleClass)]
+        return modules[String(moduleClass)]
     }
     
     /**
     Prints a list of all the active modules. Intended to be used for debugging
     */
     public func listModules() {
-        println("--- Listing active modules ---")
-
-        for (k: String, mod:HaloModule) in modules {
-            println(mod.moduleDescription())
+        print("--- Listing active modules ---")
+        
+        for (_, mod) in modules {
+            print(mod.moduleDescription())
         }
-        println("------------------------------")
+        print("------------------------------")
     }
     
 }
