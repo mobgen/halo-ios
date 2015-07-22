@@ -175,7 +175,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 006A5FF01B318D600045395A /* Build configuration list for PBXProject "HALOSwiftDemo" */;
+			buildConfigurationList = 006A5FF01B318D600045395A /* Build configuration list for PBXProject "HaloSwiftDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -370,7 +370,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		006A5FF01B318D600045395A /* Build configuration list for PBXProject "HALOSwiftDemo" */ = {
+		006A5FF01B318D600045395A /* Build configuration list for PBXProject "HaloSwiftDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A60121B318D600045395A /* Debug */,

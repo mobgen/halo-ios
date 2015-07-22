@@ -17,7 +17,7 @@
 
 /* Begin PBXFileReference section */
 		005AAFA21B399DE400146A6C /* HALO.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HALO.plist; sourceTree = "<group>"; };
-		006A605E1B31BBD80045395A /* HaloObjCDemo.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloObjCDemo.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A605E1B31BBD80045395A /* HaloObjCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloObjCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A60621B31BBD80045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A60631B31BBD80045395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		006A60651B31BBD80045395A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		006A605F1B31BBD80045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A605E1B31BBD80045395A /* HaloObjCDemo.temp_caseinsensitive_rename.app */,
+				006A605E1B31BBD80045395A /* HaloObjCDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,7 +108,7 @@
 			);
 			name = HaloObjCDemo;
 			productName = MoMOSObjCDemo;
-			productReference = 006A605E1B31BBD80045395A /* HaloObjCDemo.temp_caseinsensitive_rename.app */;
+			productReference = 006A605E1B31BBD80045395A /* HaloObjCDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -277,7 +277,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HaloObjCDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = HaloObjCDemo;
 			};
 			name = Debug;
 		};
@@ -294,7 +294,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = HaloObjCDemo.temp_caseinsensitive_rename;
+				PRODUCT_NAME = HaloObjCDemo;
 			};
 			name = Release;
 		};

@@ -5,7 +5,7 @@
       location = "container:/Users/borja/Documents/git/halo-sdk-ios/Source/HaloSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:Examples/HaloSwiftDemo/HALOSwiftDemo.xcodeproj">
+      location = "container:/Users/borja/Documents/git/halo-sdk-ios/Examples/HaloSwiftDemo/HaloSwiftDemo.xcodeproj">
    </FileRef>
    <FileRef
       location = "container:/Users/borja/Documents/git/halo-sdk-ios/Examples/HaloObjCDemo/HaloObjCDemo.xcodeproj">
