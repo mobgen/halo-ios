@@ -7,7 +7,6 @@
 //
 
 #import "HALMainViewController.h"
-#import <HaloSDK/HaloSDK-Swift.h>
 
 @interface HALMainViewController ()
 
@@ -16,6 +15,8 @@
 @end
 
 @implementation HALMainViewController
+
+@dynamic view;
 
 - (void)loadView {
     [super loadView];

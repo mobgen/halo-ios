@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         setupCrittercism()
-        Halo.sharedInstance.launch()
+        Halo.Manager.sharedInstance.launch()
         
         return true
     }

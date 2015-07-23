@@ -34,7 +34,7 @@ class HaloNetworking: HaloModule {
         
         alamofire.request(.POST, HaloURL.OAuth.URL, parameters: params, encoding: .URL).responseJSON { (req, resp:NSHTTPURLResponse?, json, error:NSError?) -> Void in
             
-            if resp != nil && resp?.statusCode == 200 {
+            if resp?.statusCode == 200 {
                 
                 if let jsonDict = json as? NSDictionary {
                 

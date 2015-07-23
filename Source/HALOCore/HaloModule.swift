@@ -12,7 +12,7 @@ import Foundation
 class HaloModule : NSObject {
     
     /// Provides access to the manager containing this specific module
-    var manager:Halo?
+    var manager:Manager?
     
     /**
     Initialise the module from a provided configuration

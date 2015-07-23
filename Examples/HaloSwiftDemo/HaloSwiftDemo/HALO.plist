@@ -6,12 +6,5 @@
 	<string>shellappclient</string>
 	<key>CLIENT_SECRET</key>
 	<string>shellapppass</string>
-	<key>MODULES</key>
-	<array>
-		<dict>
-			<key>HALO_MODULE_NAME</key>
-			<string>HaloNetworking</string>
-		</dict>
-	</array>
 </dict>
 </plist>

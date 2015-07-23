@@ -7,20 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0002FB681B6169F100B06A9C /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0002FB671B6169F100B06A9C /* Halo.framework */; };
+		0002FB691B6169F100B06A9C /* Halo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0002FB671B6169F100B06A9C /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0002FB8B1B616B4C00B06A9C /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB891B616B4C00B06A9C /* dsym_upload.sh */; };
+		0002FB8C1B616B4C00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0002FB8A1B616B4C00B06A9C /* libCrittercism_v5_2_0.a */; };
+		0002FB951B616B6B00B06A9C /* Gotham-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB8E1B616B6B00B06A9C /* Gotham-Bold.ttf */; };
+		0002FB961B616B6B00B06A9C /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB8F1B616B6B00B06A9C /* Gotham-Book.ttf */; };
+		0002FB971B616B6B00B06A9C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB901B616B6B00B06A9C /* Images.xcassets */; };
+		0002FB981B616B6B00B06A9C /* Lab-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB911B616B6B00B06A9C /* Lab-Bold.ttf */; };
+		0002FB991B616B6B00B06A9C /* Lab-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB921B616B6B00B06A9C /* Lab-Light.ttf */; };
+		0002FB9A1B616B6B00B06A9C /* Lab-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB931B616B6B00B06A9C /* Lab-Medium.ttf */; };
+		0002FB9B1B616B6B00B06A9C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB941B616B6B00B06A9C /* LaunchScreen.xib */; };
+		0002FB9D1B616B8B00B06A9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */; };
 		002219461B6105F700D0F27A /* HALMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002219451B6105F700D0F27A /* HALMainView.m */; };
-		0022194C1B613DC400D0F27A /* Gotham-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002219471B613DC400D0F27A /* Gotham-Bold.ttf */; };
-		0022194D1B613DC400D0F27A /* Gotham-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002219481B613DC400D0F27A /* Gotham-Book.ttf */; };
-		0022194E1B613DC400D0F27A /* Lab-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 002219491B613DC400D0F27A /* Lab-Bold.ttf */; };
-		0022194F1B613DC400D0F27A /* Lab-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0022194A1B613DC400D0F27A /* Lab-Light.ttf */; };
-		002219501B613DC400D0F27A /* Lab-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0022194B1B613DC400D0F27A /* Lab-Medium.ttf */; };
 		005AAFA31B399DE400146A6C /* HALO.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005AAFA21B399DE400146A6C /* HALO.plist */; };
 		006A60641B31BBD80045395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60631B31BBD80045395A /* main.m */; };
 		006A60671B31BBD80045395A /* HALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60661B31BBD80045395A /* HALAppDelegate.m */; };
 		006A606A1B31BBD80045395A /* HALMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60691B31BBD80045395A /* HALMainViewController.m */; };
-		006A606F1B31BBD80045395A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006A606E1B31BBD80045395A /* Images.xcassets */; };
-		006A60721B31BBD80045395A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006A60701B31BBD80045395A /* LaunchScreen.xib */; };
-		007EDC481B60F1180037C2F6 /* HaloSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007EDC471B60F1180037C2F6 /* HaloSDK.framework */; };
-		007EDC491B60F1180037C2F6 /* HaloSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 007EDC471B60F1180037C2F6 /* HaloSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,7 +33,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				007EDC491B60F1180037C2F6 /* HaloSDK.framework in Embed Frameworks */,
+				0002FB691B6169F100B06A9C /* Halo.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,13 +41,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0002FB671B6169F100B06A9C /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0002FB851B616B4C00B06A9C /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
+		0002FB861B616B4C00B06A9C /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
+		0002FB871B616B4C00B06A9C /* CrittercismConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismConfig.h; sourceTree = "<group>"; };
+		0002FB881B616B4C00B06A9C /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
+		0002FB891B616B4C00B06A9C /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
+		0002FB8A1B616B4C00B06A9C /* libCrittercism_v5_2_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v5_2_0.a; sourceTree = "<group>"; };
+		0002FB8E1B616B6B00B06A9C /* Gotham-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.ttf"; sourceTree = "<group>"; };
+		0002FB8F1B616B6B00B06A9C /* Gotham-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.ttf"; sourceTree = "<group>"; };
+		0002FB901B616B6B00B06A9C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0002FB911B616B6B00B06A9C /* Lab-Bold.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Lab-Bold.ttf"; sourceTree = "<group>"; };
+		0002FB921B616B6B00B06A9C /* Lab-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Light.ttf"; sourceTree = "<group>"; };
+		0002FB931B616B6B00B06A9C /* Lab-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Medium.ttf"; sourceTree = "<group>"; };
+		0002FB941B616B6B00B06A9C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		002219441B6105F700D0F27A /* HALMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HALMainView.h; sourceTree = "<group>"; };
 		002219451B6105F700D0F27A /* HALMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HALMainView.m; sourceTree = "<group>"; };
-		002219471B613DC400D0F27A /* Gotham-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.ttf"; sourceTree = "<group>"; };
-		002219481B613DC400D0F27A /* Gotham-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.ttf"; sourceTree = "<group>"; };
-		002219491B613DC400D0F27A /* Lab-Bold.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Lab-Bold.ttf"; sourceTree = "<group>"; };
-		0022194A1B613DC400D0F27A /* Lab-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Light.ttf"; sourceTree = "<group>"; };
-		0022194B1B613DC400D0F27A /* Lab-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Medium.ttf"; sourceTree = "<group>"; };
 		005AAFA21B399DE400146A6C /* HALO.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HALO.plist; sourceTree = "<group>"; };
 		006A605E1B31BBD80045395A /* HaloObjCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloObjCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A60621B31BBD80045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,9 +66,6 @@
 		006A60661B31BBD80045395A /* HALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HALAppDelegate.m; sourceTree = "<group>"; };
 		006A60681B31BBD80045395A /* HALMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HALMainViewController.h; sourceTree = "<group>"; };
 		006A60691B31BBD80045395A /* HALMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HALMainViewController.m; sourceTree = "<group>"; };
-		006A606E1B31BBD80045395A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		006A60711B31BBD80045395A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		007EDC471B60F1180037C2F6 /* HaloSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HaloSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,13 +73,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				007EDC481B60F1180037C2F6 /* HaloSDK.framework in Frameworks */,
+				0002FB9D1B616B8B00B06A9C /* SystemConfiguration.framework in Frameworks */,
+				0002FB8C1B616B4C00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */,
+				0002FB681B6169F100B06A9C /* Halo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0002FB841B616B4C00B06A9C /* CrittercismSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0002FB851B616B4C00B06A9C /* CRFilter.h */,
+				0002FB861B616B4C00B06A9C /* Crittercism.h */,
+				0002FB871B616B4C00B06A9C /* CrittercismConfig.h */,
+				0002FB881B616B4C00B06A9C /* CrittercismDelegate.h */,
+				0002FB891B616B4C00B06A9C /* dsym_upload.sh */,
+				0002FB8A1B616B4C00B06A9C /* libCrittercism_v5_2_0.a */,
+			);
+			name = CrittercismSDK;
+			path = HaloObjCDemo/Frameworks/CrittercismSDK;
+			sourceTree = "<group>";
+		};
+		0002FB8D1B616B6B00B06A9C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0002FB8E1B616B6B00B06A9C /* Gotham-Bold.ttf */,
+				0002FB8F1B616B6B00B06A9C /* Gotham-Book.ttf */,
+				0002FB901B616B6B00B06A9C /* Images.xcassets */,
+				0002FB911B616B6B00B06A9C /* Lab-Bold.ttf */,
+				0002FB921B616B6B00B06A9C /* Lab-Light.ttf */,
+				0002FB931B616B6B00B06A9C /* Lab-Medium.ttf */,
+				0002FB941B616B6B00B06A9C /* LaunchScreen.xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		006A60551B31BBD80045395A = {
 			isa = PBXGroup;
 			children = (
@@ -96,8 +136,7 @@
 				006A60691B31BBD80045395A /* HALMainViewController.m */,
 				002219441B6105F700D0F27A /* HALMainView.h */,
 				002219451B6105F700D0F27A /* HALMainView.m */,
-				006A606E1B31BBD80045395A /* Images.xcassets */,
-				006A60701B31BBD80045395A /* LaunchScreen.xib */,
+				0002FB8D1B616B6B00B06A9C /* Resources */,
 				006A60611B31BBD80045395A /* Supporting Files */,
 			);
 			path = HaloObjCDemo;
@@ -106,11 +145,6 @@
 		006A60611B31BBD80045395A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				002219471B613DC400D0F27A /* Gotham-Bold.ttf */,
-				002219481B613DC400D0F27A /* Gotham-Book.ttf */,
-				002219491B613DC400D0F27A /* Lab-Bold.ttf */,
-				0022194A1B613DC400D0F27A /* Lab-Light.ttf */,
-				0022194B1B613DC400D0F27A /* Lab-Medium.ttf */,
 				005AAFA21B399DE400146A6C /* HALO.plist */,
 				006A60621B31BBD80045395A /* Info.plist */,
 				006A60631B31BBD80045395A /* main.m */,
@@ -121,7 +155,9 @@
 		00D43B251B31BDC30014D36F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				007EDC471B60F1180037C2F6 /* HaloSDK.framework */,
+				0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */,
+				0002FB841B616B4C00B06A9C /* CrittercismSDK */,
+				0002FB671B6169F100B06A9C /* Halo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -186,14 +222,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0022194F1B613DC400D0F27A /* Lab-Light.ttf in Resources */,
-				006A60721B31BBD80045395A /* LaunchScreen.xib in Resources */,
-				0022194C1B613DC400D0F27A /* Gotham-Bold.ttf in Resources */,
-				0022194D1B613DC400D0F27A /* Gotham-Book.ttf in Resources */,
+				0002FB8B1B616B4C00B06A9C /* dsym_upload.sh in Resources */,
+				0002FB951B616B6B00B06A9C /* Gotham-Bold.ttf in Resources */,
+				0002FB9A1B616B6B00B06A9C /* Lab-Medium.ttf in Resources */,
+				0002FB961B616B6B00B06A9C /* Gotham-Book.ttf in Resources */,
+				0002FB991B616B6B00B06A9C /* Lab-Light.ttf in Resources */,
 				005AAFA31B399DE400146A6C /* HALO.plist in Resources */,
-				006A606F1B31BBD80045395A /* Images.xcassets in Resources */,
-				0022194E1B613DC400D0F27A /* Lab-Bold.ttf in Resources */,
-				002219501B613DC400D0F27A /* Lab-Medium.ttf in Resources */,
+				0002FB971B616B6B00B06A9C /* Images.xcassets in Resources */,
+				0002FB9B1B616B6B00B06A9C /* LaunchScreen.xib in Resources */,
+				0002FB981B616B6B00B06A9C /* Lab-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,17 +249,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		006A60701B31BBD80045395A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				006A60711B31BBD80045395A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		006A607F1B31BBD80045395A /* Debug */ = {
@@ -313,8 +339,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "@rpath/Frameworks";
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HaloObjCDemo/Frameworks/CrittercismSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = HaloObjCDemo;
 			};
@@ -325,8 +356,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "@rpath/Frameworks";
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HaloObjCDemo/Frameworks/CrittercismSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = HaloObjCDemo;
 			};
