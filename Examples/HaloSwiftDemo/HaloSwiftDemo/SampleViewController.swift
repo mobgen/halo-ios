@@ -29,9 +29,6 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
         myView!.clientId.delegate = self
         myView!.clientSecret.delegate = self
         
-        // Start HALO
-        HaloManager.sharedInstance.launch()
-        
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HaloSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         setupCrittercism()
+        HaloManager.sharedInstance.launch()
         
         return true
     }
