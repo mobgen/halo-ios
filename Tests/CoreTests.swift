@@ -26,6 +26,8 @@ class CoreTests: XCTestCase {
     func testSDKSetup() {
         XCTAssertNotNil(Manager.sharedInstance, "Halo Manager shared instance is nil")
         XCTAssertNotNil(Manager.sharedInstance.networking, "Networking module is nil")
+        XCTAssertNil(Manager.sharedInstance.clientId, "Client ID is not nil by default")
+        XCTAssertNil(Manager.sharedInstance.clientSecret, "Client password is not nil by default")
     }
 
 }
