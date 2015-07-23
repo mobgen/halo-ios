@@ -7,9 +7,11 @@
 //
 
 #import "HALMainViewController.h"
-#import "HALMainView.h"
+#import <HaloSDK/HaloSDK-Swift.h>
 
 @interface HALMainViewController ()
+
+- (void) submitAction:(id)sender;
 
 @end
 
@@ -23,12 +25,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self.view.button addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)submitAction:(id)sender {
+    
 }
 
 @end

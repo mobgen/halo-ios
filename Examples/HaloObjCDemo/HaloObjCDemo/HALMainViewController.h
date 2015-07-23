@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HALMainView.h"
 
 @interface HALMainViewController : UIViewController
 
+@property (nonatomic, strong) HALMainView   *view;
 
 @end
 
