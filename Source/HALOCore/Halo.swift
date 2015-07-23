@@ -10,10 +10,11 @@ import Foundation
 
 /// Core manager of the Framework implemented as a Singleton which has knowledge
 /// about all the existing and active modules
-public class HaloManager {
+@objc
+public class Halo : NSObject {
     
     /// Shared instance of the manager (Singleton pattern)
-    public static let sharedInstance = HaloManager()
+    public static let sharedInstance = Halo()
     
     /// Client id to be used when authenticating against the HALO backend
     public var clientId:String?
@@ -29,6 +30,8 @@ public class HaloManager {
     
     /// Collection of installed modules
     var modules:Dictionary<String, HaloModule> = Dictionary()
+    
+    let networking:HaloNetworking = HaloNetworking()
     
     /**
     Start the Halo SDK setup
@@ -59,13 +62,21 @@ public class HaloManager {
         return true
     }
     
+    public func haloAuthenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
+        networking.haloAuthenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
+    }
+    
+    public func haloModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
+        networking.haloModules(completionHandler: handler)
+    }
+    
     /**
     Add a module to the list of active modules
     
     :param: module   New module to be added
     :returns: Boolean specifying whether the operation has succeeded or not
     */
-    public func addModule(module: HaloModule) -> Bool {
+    func addModule(module: HaloModule) -> Bool {
         
         modules[String(module.dynamicType)] = module
         module.manager = self
@@ -78,14 +89,14 @@ public class HaloManager {
     :param: moduleName   Name of the module to be retrieved
     :returns: The requested module (if it exists)
     */
-    public func getModule(moduleClass: HaloModule.Type) -> HaloModule? {
+    func getModule(moduleClass: HaloModule.Type) -> HaloModule? {
         return modules[String(moduleClass)]
     }
     
     /**
     Prints a list of all the active modules. Intended to be used for debugging
     */
-    public func listModules() {
+    func listModules() {
         print("--- Listing active modules ---")
         
         for (_, mod) in modules {

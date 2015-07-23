@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import <HaloCore/HaloCore-Swift.h>
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {

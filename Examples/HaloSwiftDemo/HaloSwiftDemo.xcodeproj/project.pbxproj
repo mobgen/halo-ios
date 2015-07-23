@@ -36,7 +36,7 @@
 		000590BE1B5658E100DED5D2 /* HALOSwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HALOSwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		005C57AA1B5D1FF30018839D /* HaloSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HaloSDK.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos/HaloSDK.framework"; sourceTree = "<group>"; };
+		005C57AA1B5D1FF30018839D /* HaloSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HaloSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF51B318D600045395A /* HaloSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };

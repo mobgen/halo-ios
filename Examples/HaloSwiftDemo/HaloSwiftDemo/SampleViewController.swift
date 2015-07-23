@@ -38,24 +38,21 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
     func login(sender: UIButton) {
         sender.becomeFirstResponder()
         
-        let mgr = HaloManager.sharedInstance
+        let mgr = Halo.sharedInstance
+        var title = "Awww.. :("
+        var message = "Sorry man, wrong credentials!"
         
-        let net = mgr.getModule(HaloNetworking) as! HaloNetworking
-        var title = "", message = ""
-        
-        net.haloAuthenticate(myView.clientId.text, clientSecret: myView.clientSecret.text) { (result) -> Void in
+        mgr.haloAuthenticate(myView.clientId.text, clientSecret: myView.clientSecret.text) { (result) -> Void in
             switch result {
             case .Success(let box):
                 title = "Wahey!"
                 let token:String = box.unbox["access_token"] as! String
                 message = "Successfully authenticated!\nAccess token: \(token)"
-                self.showAlert(title, message: message)
             case .Failure(let error):
-                title = "Awww... :("
-                message = "Sorry man, wrong credentials!"
-                self.showAlert(title, message: message)
                 NSLog("%s", error.unbox.localizedDescription)
             }
+            
+            self.showAlert(title, message: message)
         }
     }
     

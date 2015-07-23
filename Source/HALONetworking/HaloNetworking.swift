@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 /// Module encapsulating all the networking features of the Framework
-public class HaloNetworking: HaloModule {
+class HaloNetworking: HaloModule {
     
     var tokenType:String?
     var token:String?
@@ -24,7 +24,7 @@ public class HaloNetworking: HaloModule {
     :param: clientSecret        Client secret to be used for authentication
     :param: completionHandler   Callback where the response from the server can be processed
     */
-    public func haloAuthenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
+    func haloAuthenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
         
         let params = [
             "grant_type" : "client_credentials",
@@ -57,7 +57,7 @@ public class HaloNetworking: HaloModule {
     
     :param: completionHandler   Callback executed when the request has finished
     */
-    public func haloModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
+    func haloModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
         
         if let _ = self.token {
             

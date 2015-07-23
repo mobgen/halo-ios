@@ -9,17 +9,17 @@
 import Foundation
 
 /// Generic class which holds the common features of a module within the Framework
-public class HaloModule {
+class HaloModule : NSObject {
     
     /// Provides access to the manager containing this specific module
-    public var manager:HaloManager?
+    var manager:Halo?
     
     /**
     Initialise the module from a provided configuration
     
     :param: config   Dictionary containing all the configuration details for this module
     */
-    required public init(configuration: NSDictionary? = nil) {
+    required init(configuration: NSDictionary? = nil) {
         if let _ = configuration as? Dictionary<String,AnyObject> {
 //            if let name = dict[HaloCoreConstants.moduleNameKey] as? String {
 //                
@@ -32,7 +32,7 @@ public class HaloModule {
     
     :returns: A string representation of the module, containing its class name
     */
-    public func moduleDescription() -> String {
+    func moduleDescription() -> String {
         return  "Module: \(String(self))"
     }
     

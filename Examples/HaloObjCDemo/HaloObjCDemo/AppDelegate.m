@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import <HaloSDK/HaloSDK-Swift.h>
 
 @interface AppDelegate ()
 
@@ -25,6 +26,8 @@
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
+    
+    [HaloManager.sharedInstance launch];
     
     return YES;
 }
