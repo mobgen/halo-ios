@@ -1,20 +1,20 @@
 //
 //  AppDelegate.m
-//  MoMOSObjCDemo
+//  HaloObjCDemo
 //
 //  Created by Borja Santos-Díez on 17/06/15.
 //  Copyright (c) 2015 MOBGEN Technology. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "ViewController.h"
+#import "HALAppDelegate.h"
+#import "HALMainViewController.h"
 #import <HaloSDK/HaloSDK-Swift.h>
 
-@interface AppDelegate ()
+@interface HALAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation HALAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -22,12 +22,12 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    ViewController *vc = [ViewController new];
+    HALMainViewController *vc = [HALMainViewController new];
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     
-    [HaloManager.sharedInstance launch];
+    [Halo.sharedInstance launch];
     
     return YES;
 }

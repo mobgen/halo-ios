@@ -1,18 +1,25 @@
 //
 //  ViewController.m
-//  MoMOSObjCDemo
+//  HaloObjCDemo
 //
 //  Created by Borja Santos-Díez on 17/06/15.
 //  Copyright (c) 2015 MOBGEN Technology. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HALMainViewController.h"
+#import "HALMainView.h"
 
-@interface ViewController ()
+@interface HALMainViewController ()
 
 @end
 
-@implementation ViewController
+@implementation HALMainViewController
+
+- (void)loadView {
+    [super loadView];
+    
+    self.view = [HALMainView new];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
