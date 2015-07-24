@@ -355,7 +355,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/CrittercismSDK",
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
 				PRODUCT_NAME = HaloSwiftDemo;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HALOSwiftDemo-Bridging-Header.h";
 			};
@@ -374,7 +374,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/CrittercismSDK",
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.poc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
 				PRODUCT_NAME = HaloSwiftDemo;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HALOSwiftDemo-Bridging-Header.h";
 			};

@@ -346,7 +346,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HaloObjCDemo/Frameworks/CrittercismSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
 				PRODUCT_NAME = HaloObjCDemo;
 			};
 			name = Debug;
@@ -363,7 +363,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HaloObjCDemo/Frameworks/CrittercismSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
 				PRODUCT_NAME = HaloObjCDemo;
 			};
 			name = Release;
