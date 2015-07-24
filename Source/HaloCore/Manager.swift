@@ -10,6 +10,7 @@ import Foundation
 
 /// Core manager of the Framework implemented as a Singleton which has knowledge
 /// about all the existing and active modules
+
 @objc(HaloManager)
 public class Manager : NSObject {
     
@@ -61,12 +62,21 @@ public class Manager : NSObject {
     }
     
     
-    public func haloAuthenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
+    public func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
         networking.haloAuthenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
     }
     
-    public func haloModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
+    public func getModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
         networking.haloModules(completionHandler: handler)
+    }
+    
+    // MARK: ObjC exposed methods
+    
+    @objc(authenticateWithClientId:clientSecret:completionHandler:)
+    public func authenticateFromObjC(clientId: String!, clientSecret: String!, completionHandler handler: (userData: NSDictionary?, error: NSError?) -> Void) -> Void {
+        networking.haloAuthenticate(clientId, clientSecret: clientSecret) { (result) -> Void in
+            handler(userData: result.value, error: result.error);
+        }
     }
     
 }
