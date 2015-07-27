@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import HaloSDK
+import Halo
 
 class SampleViewController: UIViewController, UITextFieldDelegate {
 
@@ -38,11 +38,11 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
     func login(sender: UIButton) {
         sender.becomeFirstResponder()
         
-        let mgr = Halo.sharedInstance
+        let mgr = Halo.Manager.sharedInstance
         var title = "Awww.. :("
         var message = "Sorry man, wrong credentials!"
         
-        mgr.haloAuthenticate(myView.clientId.text, clientSecret: myView.clientSecret.text) { (result) -> Void in
+        mgr.authenticate(myView.clientId.text, clientSecret: myView.clientSecret.text) { (result) -> Void in
             switch result {
             case .Success(let box):
                 title = "Wahey!"

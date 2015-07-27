@@ -233,7 +233,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APP_ID=\"55a613cf63235a0f00ad8efa\"\nAPI_KEY=\"w9l2c9pfMqvrvgeidRirX884RwFzdIpO\"\nsource ${SRCROOT}/HaloSwiftDemo/CrittercismSDK/dsym_upload.sh";
+			shellScript = "APP_ID=\"55a613cf63235a0f00ad8efa\"\nAPI_KEY=\"w9l2c9pfMqvrvgeidRirX884RwFzdIpO\"\nsource ${SRCROOT}/HaloSwiftDemo/Frameworks/CrittercismSDK/dsym_upload.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -352,7 +352,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/HaloSwiftDemo/CrittercismSDK",
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
@@ -371,7 +370,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/HaloSwiftDemo/CrittercismSDK",
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;

@@ -1,23 +1,19 @@
 //
 //  AppDelegate.swift
-//  MoMOSSwiftDemo
+//  HaloSwiftDemo
 //
 //  Created by Borja Santos-Díez on 17/06/15.
 //  Copyright (c) 2015 MOBGEN Technology. All rights reserved.
 //
 
 import UIKit
-import HaloSDK
+import Halo
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func setupCrittercism() {
-        Crittercism.enableWithAppID(Config.crittercismAppId)
-    }
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -28,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         setupCrittercism()
+        application.registerForRemoteNotifications()
+        
         Halo.Manager.sharedInstance.launch()
         
         return true
@@ -55,6 +53,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    // MARK: Custom setup functions
+    
+    func setupCrittercism() {
+        Crittercism.enableWithAppID(Config.crittercismAppId)
+    }
+    
+    // MARK: Push notifications
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        print("Got token data! \(deviceToken)")
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Couldn't register: \(error)")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        print("Registered settings \(notificationSettings)")
+    }
+    
 }
 
