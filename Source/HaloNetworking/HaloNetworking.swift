@@ -24,7 +24,7 @@ class HaloNetworking: HaloModule {
     :param: clientSecret        Client secret to be used for authentication
     :param: completionHandler   Callback where the response from the server can be processed
     */
-    func haloAuthenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
+    func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
         
         let params = [
             "grant_type" : "client_credentials",
@@ -57,7 +57,7 @@ class HaloNetworking: HaloModule {
     
     :param: completionHandler   Callback executed when the request has finished
     */
-    func haloModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
+    func getModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
         
         if let _ = self.token {
             

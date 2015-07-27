@@ -63,18 +63,18 @@ public class Manager : NSObject {
     
     
     public func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
-        networking.haloAuthenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
+        networking.authenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
     }
     
     public func getModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
-        networking.haloModules(completionHandler: handler)
+        networking.getModules(completionHandler: handler)
     }
     
     // MARK: ObjC exposed methods
     
     @objc(authenticateWithClientId:clientSecret:completionHandler:)
     public func authenticateFromObjC(clientId: String!, clientSecret: String!, completionHandler handler: (userData: NSDictionary?, error: NSError?) -> Void) -> Void {
-        networking.haloAuthenticate(clientId, clientSecret: clientSecret) { (result) -> Void in
+        networking.authenticate(clientId, clientSecret: clientSecret) { (result) -> Void in
             handler(userData: result.value, error: result.error);
         }
     }
