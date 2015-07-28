@@ -11,7 +11,7 @@ import Alamofire
 import Result
 
 /// Module encapsulating all the networking features of the Framework
-class Networking {
+class Networking : Component {
     
     var token:HaloToken?
     
@@ -26,11 +26,46 @@ class Networking {
     */
     func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
         
-        let params = [
-            "grant_type" : "client_credentials",
-            "client_id" : clientId,
-            "client_secret" : clientSecret
-        ]
+        if let haloToken = token {
+            if haloToken.isExpired() {
+                haloAuthenticate(clientId, clientSecret: clientSecret, refreshToken: haloToken.refreshToken, completionHandler: { (result) -> Void in
+                    self.token = result.value
+                })
+            }
+        } else {
+            haloAuthenticate(clientId, clientSecret: clientSecret, refreshToken: nil, completionHandler: { (result) -> Void in
+                self.token = result.value
+            })
+        }
+        
+    }
+    
+    /**
+    Internal call to the authentication process
+    
+    :param: clientId
+    :param: clientSecret
+    :param: refreshToken
+    :param: completionHandler
+    */
+    private func haloAuthenticate(clientId: String!, clientSecret: String!, refreshToken: String?, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
+        
+        let params:Dictionary<String,String>;
+        
+        if let refresh = refreshToken {
+            params = [
+                "grant_type" : "refresh_token",
+                "client_id" : clientId,
+                "client_secret" : clientSecret,
+                "refresh_token" : refresh
+            ]
+        } else {
+            params = [
+                "grant_type" : "client_credentials",
+                "client_id" : clientId,
+                "client_secret" : clientSecret
+            ]
+        }
         
         alamofire.request(.POST, HaloURL.OAuth.URL, parameters: params, encoding: .URL).responseJSON { (req, resp:NSHTTPURLResponse?, json, error:NSError?) -> Void in
             
@@ -47,62 +82,51 @@ class Networking {
     }
     
     /**
-    Refresh the OAuth token
-    
-    :param: clientId        The client id
-    :param: clientSecret    The client secret
-    :param: refreshToken    The refresh token to be used
-    */
-    private func refreshToken(clientId: String!, clientSecret: String!, refreshToken: String!) -> Void {
-        
-        let params = [
-            "grant_type" : "refresh_token",
-            "client_id" : clientId,
-            "client_secret" : clientSecret,
-            "refresh_token" : refreshToken
-        ]
-        
-        alamofire.request(.POST, HaloURL.OAuth.URL, parameters: params, encoding: .URL).responseJSON { (req, resp:NSHTTPURLResponse?, json, error:NSError?) -> Void in
-            
-            if let jsonDict = json as? Dictionary<String,AnyObject> {
-                
-                self.token = HaloToken(dict: jsonDict)
-                self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.token?.tokenType) \(self.token?.token)"]
-                
-            } else {
-                print(error?.localizedDescription)
-            }
-        }
-    }
-    
-    /**
     Get the list of available modules for a given client id/client secret pair
     
     :param: completionHandler   Callback executed when the request has finished
     */
-    func getModules(completionHandler handler: (result: Result<[String], NSError>) -> Void) -> Void {
+    func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
         
-        if let _ = self.token {
+        if let token = self.token {
             
-            alamofire.request(.GET, HaloURL.ModulesList.URL, parameters: nil, encoding: .URL).responseJSON(completionHandler: { (req, resp, json, error) -> Void in
-                
-                if let jsonDict = json as? Dictionary<String,AnyObject> {
-                    print(jsonDict)
-                    let arr = [String]()
-                    handler(result:.Success(arr))
-                } else {
-                    let error = NSError(domain: "halo.mobgen.com", code: -1, userInfo: nil)
-                    handler(result:.Failure(error))
-                    print(resp)
-                    print(error)
-                }
-            });
+            if token.isValid() {
+            
+                alamofire.request(.GET, HaloURL.ModulesList.URL, parameters: nil, encoding: .URL).responseJSON(completionHandler: { (req, resp, json, error) -> Void in
+                    
+                    if let jsonArr = json as? [Dictionary<String,AnyObject>] {
+                        let arr = self.parseModules(jsonArr)
+                        handler(result:.Success(arr))
+                    } else {
+                        let error = NSError(domain: "halo.mobgen.com", code: -1, userInfo: nil)
+                        handler(result:.Failure(error))
+                        print(resp)
+                        print(error)
+                    }
+                });
+            } else {
+                self.authenticate(manager.clientId, clientSecret: manager.clientSecret, completionHandler: { (result) -> Void in
+                    self.getModules(completionHandler: handler)
+                })
+            }
             
         } else {
-            authenticate(manager?.clientId, clientSecret: manager?.clientSecret, completionHandler: { (result) -> Void in
+            authenticate(manager.clientId, clientSecret: manager.clientSecret, completionHandler: { (result) -> Void in
                 self.getModules(completionHandler: handler)
             })
         }
+    }
+    
+    private func parseModules(modules: [Dictionary<String,AnyObject>]) -> [HaloModule] {
+        
+        var modArray = [HaloModule]()
+        
+        for dict in modules {
+            modArray.append(HaloModule(dict: dict))
+        }
+        
+        return modArray
+        
     }
     
 }

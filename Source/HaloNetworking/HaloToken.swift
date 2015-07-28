@@ -29,4 +29,7 @@ public class HaloToken : NSObject {
         return expirationDate.timeIntervalSinceDate(NSDate()) < 0
     }
     
+    public func isValid() -> Bool {
+        return !isExpired()
+    }
 }

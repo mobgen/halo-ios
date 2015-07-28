@@ -25,12 +25,13 @@ public class Manager : NSObject {
     public var clientSecret:String?
     
     /// User token to be used for API requests
-    internal(set) public var token:String?
+    public var token:HaloToken? {
+        get {
+            return networking.token
+        }
+    }
     
-    /// Refresh token to be used when the existing one has expired
-    internal(set) public var refreshToken:String?
-    
-    let networking = Networking()
+    let networking = Networking(manager: sharedInstance)
     
     /**
     Start the Halo SDK setup
@@ -64,7 +65,7 @@ public class Manager : NSObject {
         networking.authenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
     }
     
-    public func getModules(completionHandler handler: (result: Result<[String], NSError>) -> Void) -> Void {
+    public func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
         networking.getModules(completionHandler: handler)
     }
     

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		004539351B67BF8C0060C30B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004539341B67BF8C0060C30B /* Result.framework */; };
+		004539381B67E3BE0060C30B /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004539371B67E3BE0060C30B /* Component.swift */; };
+		0045393B1B67E8170060C30B /* HaloModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* HaloModule.swift */; };
 		005822981B5FBBDD005BF8F4 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
 		005C57A01B5D1C2D0018839D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60531B31BA9B0045395A /* Networking.swift */; };
 		005C57A41B5D1C310018839D /* HaloURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95631B4549ED00E751E3 /* HaloURL.swift */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		004539341B67BF8C0060C30B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		004539371B67E3BE0060C30B /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		0045393A1B67E8170060C30B /* HaloModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloModule.swift; sourceTree = "<group>"; };
 		005C578A1B5CEA2D0018839D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0068D27B1B6778CA00B1E147 /* HaloToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HaloToken.swift; path = HaloNetworking/HaloToken.swift; sourceTree = SOURCE_ROOT; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		004539391B67E8090060C30B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0045393A1B67E8170060C30B /* HaloModule.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +112,10 @@
 		006A5FAE1B318CAC0045395A /* HaloCore */ = {
 			isa = PBXGroup;
 			children = (
+				004539391B67E8090060C30B /* Model */,
 				006A60211B318DCC0045395A /* Manager.swift */,
 				00FF95611B4547D200E751E3 /* CoreConstants.swift */,
+				004539371B67E3BE0060C30B /* Component.swift */,
 			);
 			path = HaloCore;
 			sourceTree = "<group>";
@@ -295,9 +309,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */,
+				004539381B67E3BE0060C30B /* Component.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				005C57A01B5D1C2D0018839D /* Networking.swift in Sources */,
 				005C57A61B5D1C3A0018839D /* Storage.swift in Sources */,
+				0045393B1B67E8170060C30B /* HaloModule.swift in Sources */,
 				005C57A41B5D1C310018839D /* HaloURL.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* HaloToken.swift in Sources */,
 			);

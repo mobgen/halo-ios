@@ -32,6 +32,7 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
         sender.becomeFirstResponder()
         
         let mgr = Halo.Manager.sharedInstance
+        
         var title = "Awww.. :("
         var message = "Sorry man, wrong credentials!"
         
