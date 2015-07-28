@@ -30,9 +30,6 @@ public class Manager : NSObject {
     /// Refresh token to be used when the existing one has expired
     internal(set) public var refreshToken:String?
     
-    /// Collection of installed modules
-    var modules:Dictionary<String, HaloModule> = Dictionary()
-    
     let networking:HaloNetworking = HaloNetworking()
     
     /**
