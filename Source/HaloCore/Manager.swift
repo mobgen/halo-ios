@@ -19,10 +19,24 @@ public class Manager : NSObject {
     public static let sharedInstance = Manager()
     
     /// Client id to be used when authenticating against the HALO backend
-    public var clientId:String?
+    public var clientId:String? {
+        set {
+            networking.clientId = newValue
+        }
+        get {
+            return networking.clientId
+        }
+    }
     
     /// Client secret to be used when authenticating against the HALO backend
-    public var clientSecret:String?
+    public var clientSecret:String? {
+        set {
+            networking.clientSecret = newValue
+        }
+        get {
+            return networking.clientSecret
+        }
+    }
     
     /// User token to be used for API requests
     public var token:HaloToken? {
@@ -31,7 +45,7 @@ public class Manager : NSObject {
         }
     }
     
-    let networking = Networking(manager: sharedInstance)
+    let networking = Networking()
     
     /**
     Start the Halo SDK setup
@@ -48,8 +62,8 @@ public class Manager : NSObject {
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
             
             if let data = NSDictionary(contentsOfFile: path) {
-                clientId = data[HaloCoreConstants.clientIdKey] as? String
-                clientSecret = data[HaloCoreConstants.clientSecret] as? String
+                self.clientId = data[HaloCoreConstants.clientIdKey] as? String
+                self.clientSecret = data[HaloCoreConstants.clientSecret] as? String
             }
         }
         

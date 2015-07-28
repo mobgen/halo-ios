@@ -15,10 +15,14 @@
 		005C57A41B5D1C310018839D /* HaloURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95631B4549ED00E751E3 /* HaloURL.swift */; };
 		005C57A61B5D1C3A0018839D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1A3871B42CAD4008DFB71 /* Storage.swift */; };
 		0068D27C1B6778CA00B1E147 /* HaloToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* HaloToken.swift */; };
-		006A5FB81B318CAC0045395A /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		006A5FBF1B318CAC0045395A /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreTests.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
 		008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; };
+		008E8DE61B683ABE00711DA5 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		008E8DE81B683AD100711DA5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; };
+		008E8DE91B683AE800711DA5 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		008E8DEB1B683B8D00711DA5 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004539341B67BF8C0060C30B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		008E8DEC1B683B8D00711DA5 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +35,31 @@
 			remoteInfo = MoMOSCore;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		008E8DE51B683AAE00711DA5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				008E8DE91B683AE800711DA5 /* Nimble.framework in CopyFiles */,
+				008E8DE61B683ABE00711DA5 /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		008E8DEA1B683B7F00711DA5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				008E8DEB1B683B8D00711DA5 /* Result.framework in CopyFiles */,
+				008E8DEC1B683B8D00711DA5 /* Alamofire.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		004539341B67BF8C0060C30B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
@@ -46,6 +75,7 @@
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		006A60531B31BA9B0045395A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		008E8DE31B68305900711DA5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		008E8DE71B683AD100711DA5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		00D1A3871B42CAD4008DFB71 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = ../HaloStorage/Storage.swift; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreConstants.swift; path = HaloCore/CoreConstants.swift; sourceTree = SOURCE_ROOT; };
 		00FF95631B4549ED00E751E3 /* HaloURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HaloURL.swift; path = HaloNetworking/HaloURL.swift; sourceTree = SOURCE_ROOT; };
@@ -65,8 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008E8DE81B683AD100711DA5 /* Nimble.framework in Frameworks */,
 				008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */,
-				006A5FB81B318CAC0045395A /* Halo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +114,7 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				008E8DE71B683AD100711DA5 /* Nimble.framework */,
 				008E8DE31B68305900711DA5 /* Quick.framework */,
 				004539341B67BF8C0060C30B /* Result.framework */,
 				005C578A1B5CEA2D0018839D /* Alamofire.framework */,
@@ -191,7 +222,7 @@
 				006A5FA91B318CAC0045395A /* Frameworks */,
 				006A5FAA1B318CAC0045395A /* Headers */,
 				006A5FAB1B318CAC0045395A /* Resources */,
-				005C57911B5CEB260018839D /* ShellScript */,
+				008E8DEA1B683B7F00711DA5 /* CopyFiles */,
 				005C579C1B5D1BE40018839D /* ShellScript */,
 			);
 			buildRules = (
@@ -210,6 +241,7 @@
 				006A5FB31B318CAC0045395A /* Sources */,
 				006A5FB41B318CAC0045395A /* Frameworks */,
 				006A5FB51B318CAC0045395A /* Resources */,
+				008E8DE51B683AAE00711DA5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -277,21 +309,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		005C57911B5CEB260018839D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/Result.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		005C579C1B5D1BE40018839D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

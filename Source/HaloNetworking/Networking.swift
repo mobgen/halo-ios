@@ -11,9 +11,11 @@ import Alamofire
 import Result
 
 /// Module encapsulating all the networking features of the Framework
-class Networking : Component {
+class Networking {
     
     var token:HaloToken?
+    var clientId:String?
+    var clientSecret:String?
     
     let alamofire = Alamofire.Manager.sharedInstance
     
@@ -105,13 +107,13 @@ class Networking : Component {
                     }
                 });
             } else {
-                self.authenticate(manager.clientId, clientSecret: manager.clientSecret, completionHandler: { (result) -> Void in
+                self.authenticate(clientId, clientSecret: clientSecret, completionHandler: { (result) -> Void in
                     self.getModules(completionHandler: handler)
                 })
             }
             
         } else {
-            authenticate(manager.clientId, clientSecret: manager.clientSecret, completionHandler: { (result) -> Void in
+            authenticate(clientId, clientSecret: clientSecret, completionHandler: { (result) -> Void in
                 self.getModules(completionHandler: handler)
             })
         }
