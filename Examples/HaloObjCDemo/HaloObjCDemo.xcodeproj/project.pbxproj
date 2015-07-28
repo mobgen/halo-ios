@@ -20,7 +20,7 @@
 		0002FB9B1B616B6B00B06A9C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB941B616B6B00B06A9C /* LaunchScreen.xib */; };
 		0002FB9D1B616B8B00B06A9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */; };
 		002219461B6105F700D0F27A /* HALMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002219451B6105F700D0F27A /* HALMainView.m */; };
-		005AAFA31B399DE400146A6C /* HALO.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005AAFA21B399DE400146A6C /* HALO.plist */; };
+		005AAFA31B399DE400146A6C /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005AAFA21B399DE400146A6C /* Halo.plist */; };
 		006A60641B31BBD80045395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60631B31BBD80045395A /* main.m */; };
 		006A60671B31BBD80045395A /* HALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60661B31BBD80045395A /* HALAppDelegate.m */; };
 		006A606A1B31BBD80045395A /* HALMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60691B31BBD80045395A /* HALMainViewController.m */; };
@@ -58,7 +58,7 @@
 		0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		002219441B6105F700D0F27A /* HALMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HALMainView.h; sourceTree = "<group>"; };
 		002219451B6105F700D0F27A /* HALMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HALMainView.m; sourceTree = "<group>"; };
-		005AAFA21B399DE400146A6C /* HALO.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HALO.plist; sourceTree = "<group>"; };
+		005AAFA21B399DE400146A6C /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
 		006A605E1B31BBD80045395A /* HaloObjCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloObjCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A60621B31BBD80045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A60631B31BBD80045395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		006A60611B31BBD80045395A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				005AAFA21B399DE400146A6C /* HALO.plist */,
+				005AAFA21B399DE400146A6C /* Halo.plist */,
 				006A60621B31BBD80045395A /* Info.plist */,
 				006A60631B31BBD80045395A /* main.m */,
 			);
@@ -232,7 +232,7 @@
 				0002FB9A1B616B6B00B06A9C /* Lab-Medium.ttf in Resources */,
 				0002FB961B616B6B00B06A9C /* Gotham-Book.ttf in Resources */,
 				0002FB991B616B6B00B06A9C /* Lab-Light.ttf in Resources */,
-				005AAFA31B399DE400146A6C /* HALO.plist in Resources */,
+				005AAFA31B399DE400146A6C /* Halo.plist in Resources */,
 				0002FB971B616B6B00B06A9C /* Images.xcassets in Resources */,
 				0002FB9B1B616B6B00B06A9C /* LaunchScreen.xib in Resources */,
 				0002FB981B616B6B00B06A9C /* Lab-Bold.ttf in Resources */,

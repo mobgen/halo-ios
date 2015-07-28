@@ -11,7 +11,7 @@ import Alamofire
 import Result
 
 /// Module encapsulating all the networking features of the Framework
-class HaloNetworking: HaloModule {
+class HaloNetworking {
     
     var token:HaloToken?
     
@@ -34,19 +34,43 @@ class HaloNetworking: HaloModule {
         
         alamofire.request(.POST, HaloURL.OAuth.URL, parameters: params, encoding: .URL).responseJSON { (req, resp:NSHTTPURLResponse?, json, error:NSError?) -> Void in
             
-            if resp?.statusCode == 200 {
+            if let jsonDict = json as? Dictionary<String,AnyObject> {
                 
-                if let jsonDict = json as? Dictionary<String,AnyObject> {
+                self.token = HaloToken(dict: jsonDict)
+                self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.token?.tokenType) \(self.token?.token)"]
+                handler(result: .Success(self.token!))
                 
-                    self.token = HaloToken(dict: jsonDict)
-                    self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.token?.tokenType) \(self.token?.token)"]
-                    
-                    handler(result: .Success(self.token!))
-                } else {
-                    handler(result: .Failure(NSError(domain: "", code: 0, userInfo: nil)))
-                }
             } else {
                 handler(result: .Failure(NSError(domain: "", code: 0, userInfo: nil)))
+            }
+        }
+    }
+    
+    /**
+    Refresh the OAuth token
+    
+    :param: clientId        The client id
+    :param: clientSecret    The client secret
+    :param: refreshToken    The refresh token to be used
+    */
+    private func refreshToken(clientId: String!, clientSecret: String!, refreshToken: String!) -> Void {
+        
+        let params = [
+            "grant_type" : "refresh_token",
+            "client_id" : clientId,
+            "client_secret" : clientSecret,
+            "refresh_token" : refreshToken
+        ]
+        
+        alamofire.request(.POST, HaloURL.OAuth.URL, parameters: params, encoding: .URL).responseJSON { (req, resp:NSHTTPURLResponse?, json, error:NSError?) -> Void in
+            
+            if let jsonDict = json as? Dictionary<String,AnyObject> {
+                
+                self.token = HaloToken(dict: jsonDict)
+                self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.token?.tokenType) \(self.token?.token)"]
+                
+            } else {
+                print(error?.localizedDescription)
             }
         }
     }
@@ -61,7 +85,9 @@ class HaloNetworking: HaloModule {
         if let _ = self.token {
             
             alamofire.request(.GET, HaloURL.ModulesList.URL, parameters: nil, encoding: .URL).responseJSON(completionHandler: { (req, resp, json, error) -> Void in
-                if resp?.statusCode == 200 {
+                
+                if let jsonDict = json as? Dictionary<String,AnyObject> {
+                    print(jsonDict)
                     let arr = [String]()
                     handler(result:.Success(arr))
                 } else {

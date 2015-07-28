@@ -10,7 +10,7 @@ import Foundation
 
 enum HaloURL: String {
     
-    case ModulesList = "api/generalcontent/module/list"
+    case ModulesList = "api/authentication/module/list"
     case OAuth = "api/oauth/token?_1"
     
     var URL: String {

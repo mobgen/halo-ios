@@ -40,7 +40,7 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
             case .Success(let tokenObj):
                 title = "Wahey!"
                 let token:String = tokenObj.token
-                let date:String = NSDateFormatter.localizedStringFromDate(NSDate().dateByAddingTimeInterval(tokenObj.expiresIn), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+                let date:String = NSDateFormatter.localizedStringFromDate(tokenObj.expirationDate, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
                 message = "Successfully authenticated!\nAccess token: \(token)\nExpiration: \(date)"
             case .Failure(let error):
                 NSLog("%s", error.localizedDescription)

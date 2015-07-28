@@ -47,7 +47,7 @@ public class Manager : NSObject {
         print("********************************")
         
         let bundle = NSBundle.mainBundle()
-        if let path = bundle.pathForResource("HALO", ofType: "plist") {
+        if let path = bundle.pathForResource("Halo", ofType: "plist") {
             
             if let data = NSDictionary(contentsOfFile: path) {
                 clientId = data[HaloCoreConstants.clientIdKey] as? String

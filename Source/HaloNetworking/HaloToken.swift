@@ -13,16 +13,20 @@ public class HaloToken : NSObject {
     public var token:String
     public var refreshToken:String
     public var tokenType:String
-    public var expiresIn:NSTimeInterval
+    public var expirationDate:NSDate
     
     init(dict: Dictionary<String,AnyObject>) {
-        self.token = dict["access_token"] as! String
-        self.refreshToken = dict["refresh_token"] as! String
-        self.tokenType = dict["token_type"] as! String
+        token = dict["access_token"] as! String
+        refreshToken = dict["refresh_token"] as! String
+        tokenType = dict["token_type"] as! String
         
         let expire = dict["expires_in"] as! NSNumber
         
-        self.expiresIn =  expire.doubleValue/1000
+        expirationDate = NSDate().dateByAddingTimeInterval(expire.doubleValue/1000)
+    }
+    
+    public func isExpired() -> Bool {
+        return expirationDate.timeIntervalSinceDate(NSDate()) < 0
     }
     
 }
