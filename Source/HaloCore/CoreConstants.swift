@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CoreConstants {
+class HaloCoreConstants {
     
     /// Key which identifies the client id within the configuration plist
     static let clientIdKey = "CLIENT_ID"

@@ -30,7 +30,7 @@ public class Manager : NSObject {
     /// Refresh token to be used when the existing one has expired
     internal(set) public var refreshToken:String?
     
-    let networking:HaloNetworking = HaloNetworking()
+    let networking = Networking()
     
     /**
     Start the Halo SDK setup

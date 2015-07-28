@@ -11,7 +11,7 @@ import Alamofire
 import Result
 
 /// Module encapsulating all the networking features of the Framework
-class HaloNetworking {
+class Networking {
     
     var token:HaloToken?
     
