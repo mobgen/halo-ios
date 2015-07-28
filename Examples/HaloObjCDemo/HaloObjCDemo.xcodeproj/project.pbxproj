@@ -196,6 +196,11 @@
 					006A605D1B31BBD80045395A = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 4DWNK4MCTP;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

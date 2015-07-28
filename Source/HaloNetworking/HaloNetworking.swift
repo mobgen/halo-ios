@@ -74,8 +74,8 @@ class HaloNetworking: HaloModule {
             });
             
         } else {
-            haloAuthenticate(manager?.clientId, clientSecret: manager?.clientSecret, completionHandler: { (result) -> Void in
-                self.haloModules(completionHandler: handler)
+            authenticate(manager?.clientId, clientSecret: manager?.clientSecret, completionHandler: { (result) -> Void in
+                self.getModules(completionHandler: handler)
             })
         }
     }
