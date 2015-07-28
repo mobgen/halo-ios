@@ -2,6 +2,10 @@
 
 # HALO iOS SDK
 
+![](https://img.shields.io/badge/Swift-2.0-blue.svg)
+![](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg)
+![](https://img.shields.io/badge/CocoaPods-compatible-brightgreen.svg)
+
 ## Initial setup
 
 In order to start developing the Halo SDK, there are some required packages/tools to be installed first:

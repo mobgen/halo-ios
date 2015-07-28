@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 MOBGEN Technology. All rights reserved.
 //
 
-import XCTest
+import Quick
+import Nimble
 @testable import Halo
 
 class CoreTests: XCTestCase {
