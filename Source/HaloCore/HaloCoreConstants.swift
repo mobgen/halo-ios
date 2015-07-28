@@ -10,6 +10,10 @@ import Foundation
 
 class HaloCoreConstants {
     
-    static let moduleNameKey = "HALO_MODULE_NAME"
+    /// Key which identifies the client id within the configuration plist
+    static let clientIdKey = "CLIENT_ID"
+    
+    /// Key which identifies the client secret within the configuration plist
+    static let clientSecret = "CLIENT_SECRET"
     
 }

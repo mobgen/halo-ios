@@ -12,8 +12,7 @@ import Alamofire
 /// Module encapsulating all the networking features of the Framework
 class HaloNetworking: HaloModule {
     
-    var tokenType:String?
-    var token:String?
+    var token:HaloToken?
     
     let alamofire = Alamofire.Manager.sharedInstance
     
@@ -24,7 +23,7 @@ class HaloNetworking: HaloModule {
     :param: clientSecret        Client secret to be used for authentication
     :param: completionHandler   Callback where the response from the server can be processed
     */
-    func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
+    func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<Dictionary<String,AnyObject>, NSError>) -> Void) -> Void {
         
         let params = [
             "grant_type" : "client_credentials",
@@ -36,11 +35,10 @@ class HaloNetworking: HaloModule {
             
             if resp?.statusCode == 200 {
                 
-                if let jsonDict = json as? NSDictionary {
+                if let jsonDict = json as? Dictionary<String,AnyObject> {
                 
-                    self.tokenType = jsonDict["token_type"] as? String
-                    self.token = jsonDict["access_token"] as? String
-                    self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.tokenType!) \(self.token)"]
+                    self.token = HaloToken(dict: jsonDict)
+                    self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.token?.tokenType) \(self.token?.token)"]
                     
                     handler(result: .Success(Box(jsonDict)))
                 } else {

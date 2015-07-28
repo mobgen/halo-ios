@@ -49,8 +49,8 @@ public class Manager : NSObject {
         if let path = bundle.pathForResource("HALO", ofType: "plist") {
             
             if let data = NSDictionary(contentsOfFile: path) {
-                clientId = data["CLIENT_ID"] as? String
-                clientSecret = data["CLIENT_SECRET"] as? String
+                clientId = data[HaloCoreConstants.clientIdKey] as? String
+                clientSecret = data[HaloCoreConstants.clientSecret] as? String
             }
         }
         
@@ -62,7 +62,7 @@ public class Manager : NSObject {
     }
     
     
-    public func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<NSDictionary, NSError>) -> Void) -> Void {
+    public func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<Dictionary<String,AnyObject>, NSError>) -> Void) -> Void {
         networking.authenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
     }
     
