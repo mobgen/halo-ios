@@ -37,15 +37,14 @@
 }
 
 - (void)submitAction:(id)sender {
-    [HaloManager.sharedInstance authenticateWithClientId:self.view.clientId.text clientSecret:self.view.clientPass.text completionHandler:^(NSDictionary * userData, NSError * _Nullable error) {
+    [HaloManager.sharedInstance authenticateWithClientId:self.view.clientId.text clientSecret:self.view.clientPass.text completionHandler:^(HaloToken * _Nullable haloToken, NSError * _Nullable error) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         
-        if (userData) {
+        if (haloToken) {
             alert.title = @"Wahey!";
-            NSString *token = userData[@"access_token"];
-            alert.message = [NSString stringWithFormat:@"Successfully authenticated!\nAccess token: %@", token];
+            alert.message = [NSString stringWithFormat:@"Successfully authenticated!\nAccess token: %@", haloToken.token];
         } else {
             alert.title = @"Awww.. :(";
             alert.message = @"Sorry man, wrong credentials!";

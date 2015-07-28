@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import Result
 
 /// Module encapsulating all the networking features of the Framework
 class HaloNetworking: HaloModule {
@@ -23,7 +24,7 @@ class HaloNetworking: HaloModule {
     :param: clientSecret        Client secret to be used for authentication
     :param: completionHandler   Callback where the response from the server can be processed
     */
-    func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<Dictionary<String,AnyObject>, NSError>) -> Void) -> Void {
+    func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
         
         let params = [
             "grant_type" : "client_credentials",
@@ -40,12 +41,12 @@ class HaloNetworking: HaloModule {
                     self.token = HaloToken(dict: jsonDict)
                     self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.token?.tokenType) \(self.token?.token)"]
                     
-                    handler(result: .Success(Box(jsonDict)))
+                    handler(result: .Success(self.token!))
                 } else {
-                    handler(result: .Failure(Box(NSError(domain: "", code: 0, userInfo: nil))))
+                    handler(result: .Failure(NSError(domain: "", code: 0, userInfo: nil)))
                 }
             } else {
-                handler(result: .Failure(Box(NSError(domain: "", code: 0, userInfo: nil))))
+                handler(result: .Failure(NSError(domain: "", code: 0, userInfo: nil)))
             }
         }
     }
@@ -55,17 +56,17 @@ class HaloNetworking: HaloModule {
     
     :param: completionHandler   Callback executed when the request has finished
     */
-    func getModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
+    func getModules(completionHandler handler: (result: Result<[String], NSError>) -> Void) -> Void {
         
         if let _ = self.token {
             
             alamofire.request(.GET, HaloURL.ModulesList.URL, parameters: nil, encoding: .URL).responseJSON(completionHandler: { (req, resp, json, error) -> Void in
                 if resp?.statusCode == 200 {
                     let arr = [String]()
-                    handler(result:.Success(Box(arr)))
+                    handler(result:.Success(arr))
                 } else {
                     let error = NSError(domain: "halo.mobgen.com", code: -1, userInfo: nil)
-                    handler(result:.Failure(Box(error)))
+                    handler(result:.Failure(error))
                     print(resp)
                     print(error)
                 }

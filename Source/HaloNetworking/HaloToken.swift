@@ -8,13 +8,12 @@
 
 import Foundation
 
-class HaloToken : NSObject {
+public class HaloToken : NSObject {
     
-    // 
-    var token:String
-    var refreshToken:String
-    var tokenType:String
-    var expiresIn:NSTimeInterval
+    public var token:String
+    public var refreshToken:String
+    public var tokenType:String
+    public var expiresIn:NSTimeInterval
     
     init(dict: Dictionary<String,AnyObject>) {
         self.token = dict["access_token"] as! String
@@ -23,7 +22,7 @@ class HaloToken : NSObject {
         
         let expire = dict["expires_in"] as! NSNumber
         
-        self.expiresIn =  expire.doubleValue/100
+        self.expiresIn =  expire.doubleValue/1000
     }
     
 }

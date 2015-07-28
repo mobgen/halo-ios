@@ -15,13 +15,6 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // Manual init when the HALO.plist file is not present
-        
-        // Manager.sharedInstance.apiKey = "apikey"
-        // Manager.sharedInstance.clientSecret = "clientsecret"
-        // Manager.sharedInstance.addModule(Networking(name: "networking"))
         
         myView = view as! SampleView
         
@@ -44,12 +37,13 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
         
         mgr.authenticate(myView.clientId.text, clientSecret: myView.clientSecret.text) { (result) -> Void in
             switch result {
-            case .Success(let box):
+            case .Success(let tokenObj):
                 title = "Wahey!"
-                let token:String = box.unbox["access_token"] as! String
-                message = "Successfully authenticated!\nAccess token: \(token)"
+                let token:String = tokenObj.token
+                let date:String = NSDateFormatter.localizedStringFromDate(NSDate().dateByAddingTimeInterval(tokenObj.expiresIn), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+                message = "Successfully authenticated!\nAccess token: \(token)\nExpiration: \(date)"
             case .Failure(let error):
-                NSLog("%s", error.unbox.localizedDescription)
+                NSLog("%s", error.localizedDescription)
             }
             
             self.showAlert(title, message: message)

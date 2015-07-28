@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Result
 
 /// Core manager of the Framework implemented as a Singleton which has knowledge
 /// about all the existing and active modules
@@ -62,20 +63,20 @@ public class Manager : NSObject {
     }
     
     
-    public func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: HaloResult<Dictionary<String,AnyObject>, NSError>) -> Void) -> Void {
+    public func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
         networking.authenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
     }
     
-    public func getModules(completionHandler handler: (result: HaloResult<[String], NSError>) -> Void) -> Void {
+    public func getModules(completionHandler handler: (result: Result<[String], NSError>) -> Void) -> Void {
         networking.getModules(completionHandler: handler)
     }
     
     // MARK: ObjC exposed methods
     
     @objc(authenticateWithClientId:clientSecret:completionHandler:)
-    public func authenticateFromObjC(clientId: String!, clientSecret: String!, completionHandler handler: (userData: NSDictionary?, error: NSError?) -> Void) -> Void {
-        networking.authenticate(clientId, clientSecret: clientSecret) { (result) -> Void in
-            handler(userData: result.value, error: result.error);
+    public func authenticateFromObjC(clientId: String!, clientSecret: String!, completionHandler handler: (userData: HaloToken?, error: NSError?) -> Void) -> Void {
+        self.authenticate(clientId, clientSecret: clientSecret) { (result) -> Void in
+            handler(userData: result.value, error: result.error)
         }
     }
     
