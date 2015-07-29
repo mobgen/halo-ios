@@ -19,4 +19,4 @@ Once that's done, the initial setup of the project can be done. From the root fo
 
 ... and you're done! Enjoy developing this wonderful SDK! :heart:
 
-[API documentation](docs/)
+[API documentation](http://borjasantos.bitbucket.org/docs/ios/halo-sdk/)
