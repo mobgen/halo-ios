@@ -14,7 +14,7 @@ enum HaloURL: String {
     case OAuth = "api/oauth/token?_1"
     
     var URL: String {
-        return "http://halo.mobgen.com:3000/\(self.rawValue)"
+        return "http://halo-int.mobgen.com:3000/\(self.rawValue)"
     }
     
 }

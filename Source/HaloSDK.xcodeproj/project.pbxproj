@@ -21,8 +21,6 @@
 		008E8DE61B683ABE00711DA5 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		008E8DE81B683AD100711DA5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; };
 		008E8DE91B683AE800711DA5 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		008E8DEB1B683B8D00711DA5 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004539341B67BF8C0060C30B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		008E8DEC1B683B8D00711DA5 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,17 +43,6 @@
 			files = (
 				008E8DE91B683AE800711DA5 /* Nimble.framework in CopyFiles */,
 				008E8DE61B683ABE00711DA5 /* Quick.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		008E8DEA1B683B7F00711DA5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				008E8DEB1B683B8D00711DA5 /* Result.framework in CopyFiles */,
-				008E8DEC1B683B8D00711DA5 /* Alamofire.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +209,6 @@
 				006A5FA91B318CAC0045395A /* Frameworks */,
 				006A5FAA1B318CAC0045395A /* Headers */,
 				006A5FAB1B318CAC0045395A /* Resources */,
-				008E8DEA1B683B7F00711DA5 /* CopyFiles */,
 				005C579C1B5D1BE40018839D /* ShellScript */,
 			);
 			buildRules = (
@@ -470,8 +456,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_paths/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.Halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -493,8 +479,8 @@
 					"/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_paths/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.$(PRODUCT_NAME:rfc1034identifier)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.Halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

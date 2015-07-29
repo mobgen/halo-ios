@@ -26,18 +26,17 @@ class Networking {
     :param: clientSecret        Client secret to be used for authentication
     :param: completionHandler   Callback where the response from the server can be processed
     */
-    func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
+    func authenticate(completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
         
         if let haloToken = token {
             if haloToken.isExpired() {
-                haloAuthenticate(clientId, clientSecret: clientSecret, refreshToken: haloToken.refreshToken, completionHandler: { (result) -> Void in
-                    self.token = result.value
-                })
+                /// Refresh token
+                haloAuthenticate(haloToken.refreshToken, completionHandler: handler)
+            } else {
+                handler(result: .Success(haloToken))
             }
         } else {
-            haloAuthenticate(clientId, clientSecret: clientSecret, refreshToken: nil, completionHandler: { (result) -> Void in
-                self.token = result.value
-            })
+            haloAuthenticate(nil, completionHandler: handler)
         }
         
     }
@@ -50,22 +49,22 @@ class Networking {
     :param: refreshToken
     :param: completionHandler
     */
-    private func haloAuthenticate(clientId: String!, clientSecret: String!, refreshToken: String?, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
+    private func haloAuthenticate(refreshToken: String?, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
         
-        let params:Dictionary<String,String>;
+        let params:[String:String]
         
         if let refresh = refreshToken {
             params = [
                 "grant_type" : "refresh_token",
-                "client_id" : clientId,
-                "client_secret" : clientSecret,
+                "client_id" : clientId!,
+                "client_secret" : clientSecret!,
                 "refresh_token" : refresh
             ]
         } else {
             params = [
                 "grant_type" : "client_credentials",
-                "client_id" : clientId,
-                "client_secret" : clientSecret
+                "client_id" : clientId!,
+                "client_secret" : clientSecret!
             ]
         }
         
@@ -75,10 +74,11 @@ class Networking {
                 
                 self.token = HaloToken(dict: jsonDict)
                 self.alamofire.session.configuration.HTTPAdditionalHeaders = ["Authorization" : "\(self.token?.tokenType) \(self.token?.token)"]
+                print(jsonDict)
                 handler(result: .Success(self.token!))
                 
             } else {
-                handler(result: .Failure(NSError(domain: "", code: 0, userInfo: nil)))
+                handler(result: .Failure(error!))
             }
         }
     }
@@ -107,15 +107,15 @@ class Networking {
                     }
                 });
             } else {
-                self.authenticate(clientId, clientSecret: clientSecret, completionHandler: { (result) -> Void in
+                self.authenticate { (result) -> Void in
                     self.getModules(completionHandler: handler)
-                })
+                }
             }
             
         } else {
-            authenticate(clientId, clientSecret: clientSecret, completionHandler: { (result) -> Void in
+            authenticate { (result) -> Void in
                 self.getModules(completionHandler: handler)
-            })
+            }
         }
     }
     

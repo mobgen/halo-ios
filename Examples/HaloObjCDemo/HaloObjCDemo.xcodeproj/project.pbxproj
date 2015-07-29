@@ -19,6 +19,10 @@
 		0002FB9A1B616B6B00B06A9C /* Lab-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB931B616B6B00B06A9C /* Lab-Medium.ttf */; };
 		0002FB9B1B616B6B00B06A9C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0002FB941B616B6B00B06A9C /* LaunchScreen.xib */; };
 		0002FB9D1B616B8B00B06A9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */; };
+		000826F41B690C60001E8248 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F01B690C4D001E8248 /* Alamofire.framework */; };
+		000826F51B690C60001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F01B690C4D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		000826F61B690C60001E8248 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F11B690C4D001E8248 /* Result.framework */; };
+		000826F71B690C60001E8248 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F11B690C4D001E8248 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		002219461B6105F700D0F27A /* HALMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002219451B6105F700D0F27A /* HALMainView.m */; };
 		005AAFA31B399DE400146A6C /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005AAFA21B399DE400146A6C /* Halo.plist */; };
 		006A60641B31BBD80045395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60631B31BBD80045395A /* main.m */; };
@@ -33,7 +37,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				000826F71B690C60001E8248 /* Result.framework in Embed Frameworks */,
 				0002FB691B6169F100B06A9C /* Halo.framework in Embed Frameworks */,
+				000826F51B690C60001E8248 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +62,8 @@
 		0002FB931B616B6B00B06A9C /* Lab-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Medium.ttf"; sourceTree = "<group>"; };
 		0002FB941B616B6B00B06A9C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		000826F01B690C4D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Examples/HaloSwiftDemo/HaloSwiftDemo/../../../Carthage/Build/iOS/Alamofire.framework"; sourceTree = "<absolute>"; };
+		000826F11B690C4D001E8248 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Examples/HaloSwiftDemo/HaloSwiftDemo/../../../Carthage/Build/iOS/Result.framework"; sourceTree = "<absolute>"; };
 		002219441B6105F700D0F27A /* HALMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HALMainView.h; sourceTree = "<group>"; };
 		002219451B6105F700D0F27A /* HALMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HALMainView.m; sourceTree = "<group>"; };
 		005AAFA21B399DE400146A6C /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
@@ -75,7 +83,9 @@
 			files = (
 				0002FB9D1B616B8B00B06A9C /* SystemConfiguration.framework in Frameworks */,
 				0002FB8C1B616B4C00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */,
+				000826F61B690C60001E8248 /* Result.framework in Frameworks */,
 				0002FB681B6169F100B06A9C /* Halo.framework in Frameworks */,
+				000826F41B690C60001E8248 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +165,8 @@
 		00D43B251B31BDC30014D36F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				000826F01B690C4D001E8248 /* Alamofire.framework */,
+				000826F11B690C4D001E8248 /* Result.framework */,
 				0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */,
 				0002FB841B616B4C00B06A9C /* CrittercismSDK */,
 				0002FB671B6169F100B06A9C /* Halo.framework */,
@@ -344,6 +356,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../../Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -360,6 +376,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../../Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/HaloObjCDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

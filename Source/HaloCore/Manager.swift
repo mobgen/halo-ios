@@ -75,8 +75,8 @@ public class Manager : NSObject {
     }
     
     
-    public func authenticate(clientId: String!, clientSecret: String!, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
-        networking.authenticate(clientId, clientSecret: clientSecret, completionHandler: handler)
+    public func authenticate(completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
+        networking.authenticate(completionHandler: handler)
     }
     
     public func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
@@ -87,7 +87,7 @@ public class Manager : NSObject {
     
     @objc(authenticateWithClientId:clientSecret:completionHandler:)
     public func authenticateFromObjC(clientId: String!, clientSecret: String!, completionHandler handler: (userData: HaloToken?, error: NSError?) -> Void) -> Void {
-        self.authenticate(clientId, clientSecret: clientSecret) { (result) -> Void in
+        self.authenticate() { (result) -> Void in
             handler(userData: result.value, error: result.error)
         }
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Halo
+import Result
 
 class SampleViewController: UIViewController, UITextFieldDelegate {
 
@@ -36,7 +37,7 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
         var title = "Awww.. :("
         var message = "Sorry man, wrong credentials!"
         
-        mgr.authenticate(myView.clientId.text, clientSecret: myView.clientSecret.text) { (result) -> Void in
+        mgr.authenticate { (result) -> Void in
             switch result {
             case .Success(let tokenObj):
                 title = "Wahey!"
@@ -44,7 +45,7 @@ class SampleViewController: UIViewController, UITextFieldDelegate {
                 let date:String = NSDateFormatter.localizedStringFromDate(tokenObj.expirationDate, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
                 message = "Successfully authenticated!\nAccess token: \(token)\nExpiration: \(date)"
             case .Failure(let error):
-                NSLog("%s", error.localizedDescription)
+                print("Error: \(error.localizedDescription)")
             }
             
             self.showAlert(title, message: message)
