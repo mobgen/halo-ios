@@ -306,7 +306,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#jazzy -o ../docs -a \"MOBGEN Technology\" -m \"HaloSDK\"";
+			shellScript = "#jazzy -o ../docs --min-acl internal -a \"MOBGEN Technology\" -m \"HaloSDK\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

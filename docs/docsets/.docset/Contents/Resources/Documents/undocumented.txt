@@ -1,0 +1,16 @@
+Manager.swift
+	public func authenticate(completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void
+	public func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void
+	public func authenticateFromObjC(clientId: String!, clientSecret: String!, completionHandler handler: (userData: HaloToken?, error: NSError?) -> Void) -> Void
+HaloModule.swift
+	public class HaloModule : NSObject
+	public let id:NSNumber
+	public let name:String
+HaloToken.swift
+	public class HaloToken : NSObject
+	public var token:String
+	public var refreshToken:String
+	public var tokenType:String
+	public var expirationDate:NSDate
+	public func isExpired() -> Bool
+	public func isValid() -> Bool

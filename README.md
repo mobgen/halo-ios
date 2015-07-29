@@ -18,3 +18,5 @@ Once that's done, the initial setup of the project can be done. From the root fo
 * `carthage bootstrap --platform iOS` will set up the project, downloading any extra libraries/SDKs needed.
 
 ... and you're done! Enjoy developing this wonderful SDK! :heart:
+
+[API documentation](docs/)
