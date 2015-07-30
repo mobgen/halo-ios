@@ -11,17 +11,32 @@ import Halo
 import Result
 
 class SampleViewController: UITableViewController {
-    
+
     var modules = [HaloModule]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "HALO Modules"
+
         tableView.delegate = self
         tableView.dataSource = self
+
+        // setupNavigation()
         loadData()
     }
-    
+
+    func setupNavigation() {
+        let items = ["Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
+        let menuView = BTNavigationDropdownMenu(frame:  CGRectMake(0.0, 0.0, 300, 44), title: items.first!, items: items, containerView: self.view)
+        menuView.backgroundColor = UIColor.clearColor()
+        menuView.cellTextLabelFont = UIFont(name: "Lab-Medium", size: 30)
+        self.navigationItem.titleView = menuView
+
+        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
+            print("Clicked \(indexPath)")
+        }
+    }
+
     func loadData() {
         modules.removeAll()
         
@@ -37,7 +52,7 @@ class SampleViewController: UITableViewController {
         }
         
     }
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -50,12 +65,15 @@ class SampleViewController: UITableViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier("cell")
         
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cell")
         }
         
         let finalCell = cell!
-        
-        finalCell.textLabel?.text = modules[indexPath.row].name
+
+        let module = modules[indexPath.row]
+
+        finalCell.textLabel?.text = module.name
+        finalCell.detailTextLabel?.text = module.moduleType?.name
         return finalCell
     }
     

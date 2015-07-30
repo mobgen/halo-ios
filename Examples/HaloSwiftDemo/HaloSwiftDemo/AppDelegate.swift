@@ -18,11 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
+
+        let navigationBarAppearace = UINavigationBar.appearance()
+
+        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Lab-Medium", size: 34)!]
+        navigationBarAppearace.tintColor = UIColor(rgba: "#ffffff")
+        navigationBarAppearace.barTintColor = UIColor(rgba: "#F49E00")
+
         let nav = UINavigationController(rootViewController: SampleViewController())
         window!.rootViewController = nav
         window!.makeKeyAndVisible()
-        
+
         setupCrittercism()
         application.registerForRemoteNotifications()
         

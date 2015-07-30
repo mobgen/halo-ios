@@ -12,9 +12,14 @@ public class HaloModule: NSObject {
 
     public var moduleId: NSNumber?
     public var name: String?
+    public var moduleType: HaloModuleType?
 
     init(dict: Dictionary<String,AnyObject>) {
         moduleId = dict["id"] as? NSNumber
         name = dict["name"] as? String
+
+        let moduleTypeDict = dict["moduleType"] as? Dictionary<String, AnyObject> ?? [String: AnyObject]()
+
+        moduleType = HaloModuleType(dict: moduleTypeDict)
     }
 }

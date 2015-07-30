@@ -24,10 +24,12 @@
 		000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		000826E91B690B39001E8248 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DE1B690B0D001E8248 /* Result.framework */; };
 		000826EA1B690B39001E8248 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DE1B690B0D001E8248 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		000827751B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000827621B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle */; };
+		000827761B6A61BE001E8248 /* BTNavigationDropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827631B6A61BE001E8248 /* BTNavigationDropdownMenu.swift */; };
+		000827871B6A6E6E001E8248 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827821B6A6E6E001E8248 /* UIColorExtension.swift */; };
 		006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFA1B318D600045395A /* AppDelegate.swift */; };
 		006A5FFD1B318D600045395A /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFC1B318D600045395A /* SampleViewController.swift */; };
 		00930AE11B385B2D002FF4F0 /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00930AE01B385B2D002FF4F0 /* Halo.plist */; };
-		00A52BFA1B3BEAE700C77F98 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A52BF91B3BEAE700C77F98 /* SampleView.swift */; };
 		00D1A3681B42738C008DFB71 /* ModuleListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1A3671B42738C008DFB71 /* ModuleListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,12 +69,14 @@
 		000826DA1B690A5B001E8248 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		000826DD1B690B0D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		000826DE1B690B0D001E8248 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../../../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		000827621B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BTNavigationDropdownMenu.bundle; sourceTree = "<group>"; };
+		000827631B6A61BE001E8248 /* BTNavigationDropdownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTNavigationDropdownMenu.swift; sourceTree = "<group>"; };
+		000827821B6A6E6E001E8248 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		006A5FF51B318D600045395A /* HaloSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006A5FFC1B318D600045395A /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		00930AE01B385B2D002FF4F0 /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
-		00A52BF91B3BEAE700C77F98 /* SampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
 		00D1A3671B42738C008DFB71 /* ModuleListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,11 +124,48 @@
 			path = Frameworks/CrittercismSDK;
 			sourceTree = "<group>";
 		};
+		000827021B6A5D01001E8248 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				0008277D1B6A6E6E001E8248 /* UIColor-Hex-Swift */,
+				000827451B6A61BE001E8248 /* BTNavigationDropdownMenu */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		000827451B6A61BE001E8248 /* BTNavigationDropdownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				000827611B6A61BE001E8248 /* Source */,
+			);
+			name = BTNavigationDropdownMenu;
+			path = HaloSwiftDemo/Carthage/Checkouts/BTNavigationDropdownMenu;
+			sourceTree = "<group>";
+		};
+		000827611B6A61BE001E8248 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				000827621B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle */,
+				000827631B6A61BE001E8248 /* BTNavigationDropdownMenu.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		0008277D1B6A6E6E001E8248 /* UIColor-Hex-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				000827821B6A6E6E001E8248 /* UIColorExtension.swift */,
+			);
+			name = "UIColor-Hex-Swift";
+			path = "HaloSwiftDemo/Carthage/Checkouts/UIColor-Hex-Swift";
+			sourceTree = "<group>";
+		};
 		006A5FEC1B318D600045395A = {
 			isa = PBXGroup;
 			children = (
 				006A5FF71B318D600045395A /* HaloSwiftDemo */,
 				00D43B261B31C1EF0014D36F /* Frameworks */,
+				000827021B6A5D01001E8248 /* Libraries */,
 				006A5FF61B318D600045395A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -143,7 +184,6 @@
 				000590C11B565C7D00DED5D2 /* Config.swift */,
 				006A5FFA1B318D600045395A /* AppDelegate.swift */,
 				006A5FFC1B318D600045395A /* SampleViewController.swift */,
-				00A52BF91B3BEAE700C77F98 /* SampleView.swift */,
 				00D1A3671B42738C008DFB71 /* ModuleListTableViewController.swift */,
 				0002FB6C1B616ACE00B06A9C /* Resources */,
 				006A5FF81B318D600045395A /* Supporting Files */,
@@ -242,6 +282,7 @@
 			files = (
 				0002FB821B616AFC00B06A9C /* dsym_upload.sh in Resources */,
 				0002FB741B616ACE00B06A9C /* Gotham-Bold.ttf in Resources */,
+				000827751B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle in Resources */,
 				0002FB791B616ACE00B06A9C /* Lab-Medium.ttf in Resources */,
 				0002FB781B616ACE00B06A9C /* Lab-Light.ttf in Resources */,
 				0002FB761B616ACE00B06A9C /* Images.xcassets in Resources */,
@@ -275,11 +316,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000827871B6A6E6E001E8248 /* UIColorExtension.swift in Sources */,
 				006A5FFD1B318D600045395A /* SampleViewController.swift in Sources */,
-				00A52BFA1B3BEAE700C77F98 /* SampleView.swift in Sources */,
 				000590C21B565C7D00DED5D2 /* Config.swift in Sources */,
 				006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */,
 				00D1A3681B42738C008DFB71 /* ModuleListTableViewController.swift in Sources */,
+				000827761B6A61BE001E8248 /* BTNavigationDropdownMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

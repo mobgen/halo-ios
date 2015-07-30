@@ -19,7 +19,6 @@ public class Manager: NSObject {
     public static let sharedInstance = Manager()
 
     let networking = Networking.sharedInstance
-    let generalContent = GeneralContent.sharedInstance
 
     private override init() {}
 
