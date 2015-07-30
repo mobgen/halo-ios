@@ -21,6 +21,11 @@ class SampleViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl!.attributedTitle = NSAttributedString(string: "Fetching modules")
+        self.refreshControl!.addTarget(self, action: "loadData", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl!)
+
         // setupNavigation()
         loadData()
     }
@@ -49,6 +54,7 @@ class SampleViewController: UITableViewController {
             }
             
             self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
         
     }
