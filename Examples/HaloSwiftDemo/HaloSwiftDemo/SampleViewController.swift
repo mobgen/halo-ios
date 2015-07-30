@@ -10,74 +10,59 @@ import UIKit
 import Halo
 import Result
 
-class SampleViewController: UIViewController, UITextFieldDelegate {
-
-    var myView:SampleView!
+class SampleViewController: UITableViewController {
+    
+    var modules = [HaloModule]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        myView = view as! SampleView
-        
-        myView!.button.addTarget(self, action: "login:", forControlEvents: .TouchUpInside)
-        myView!.clientId.delegate = self
-        myView!.clientSecret.delegate = self
-        
+        self.title = "HALO Modules"
+        tableView.delegate = self
+        tableView.dataSource = self
+        loadData()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    func login(sender: UIButton) {
-        sender.becomeFirstResponder()
+    func loadData() {
+        modules.removeAll()
         
-        let mgr = Halo.Manager.sharedInstance
-        
-        var title = "Awww.. :("
-        var message = "Sorry man, wrong credentials!"
-        
-        mgr.authenticate { (result) -> Void in
-            switch result {
-            case .Success(let tokenObj):
-                title = "Wahey!"
-                let token:String = tokenObj.token
-                let date:String = NSDateFormatter.localizedStringFromDate(tokenObj.expirationDate, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
-                message = "Successfully authenticated!\nAccess token: \(token)\nExpiration: \(date)"
-            case .Failure(let error):
-                print("Error: \(error.localizedDescription)")
+        Manager.sharedInstance.getModules { (result) -> Void in
+            switch (result) {
+            case .Success(let mod):
+                self.modules.extend(mod)
+            case .Failure(let err):
+                print("Error: \(err.localizedDescription)")
             }
             
-            self.showAlert(title, message: message)
-        }
-    }
-    
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        if textField == myView!.clientId {
-            myView!.clientSecret.becomeFirstResponder()
-        } else {
-            login(myView!.button)
+            self.tableView.reloadData()
         }
         
-        return true
     }
     
-    override func loadView() {
-        view = SampleView(frame: CGRectZero)
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return modules.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
+        }
+        
+        let finalCell = cell!
+        
+        finalCell.textLabel?.text = modules[indexPath.row].name
+        return finalCell
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 

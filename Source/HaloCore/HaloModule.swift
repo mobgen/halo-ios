@@ -8,15 +8,13 @@
 
 import Foundation
 
-public class HaloModule : NSObject {
-    
-    public let id:NSNumber
-    public let name:String
-    
+public class HaloModule: NSObject {
+
+    public var moduleId: NSNumber?
+    public var name: String?
+
     init(dict: Dictionary<String,AnyObject>) {
-        id = dict["id"] as! NSNumber
-        name = dict["name"] as! String
+        moduleId = dict["id"] as? NSNumber
+        name = dict["name"] as? String
     }
-    
-    
 }

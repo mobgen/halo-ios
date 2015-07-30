@@ -8,27 +8,35 @@
 
 import Foundation
 
-public class HaloToken : NSObject {
-    
-    public var token:String
-    public var refreshToken:String
-    public var tokenType:String
-    public var expirationDate:NSDate
-    
+/// Class holding all the information related to the authentication token
+public class HaloToken: NSObject {
+
+    /// Access token
+    public var token: String?
+
+    /// Refresh token
+    public var refreshToken: String?
+
+    /// Type of the auth token
+    public var tokenType: String?
+
+    /// Expiration date of this authentication token
+    public var expirationDate: NSDate?
+
     init(dict: Dictionary<String,AnyObject>) {
-        token = dict["access_token"] as! String
-        refreshToken = dict["refresh_token"] as! String
-        tokenType = dict["token_type"] as! String
-        
-        let expire = dict["expires_in"] as! NSNumber
-        
-        expirationDate = NSDate().dateByAddingTimeInterval(expire.doubleValue/1000)
+        token = dict["access_token"] as? String
+        refreshToken = dict["refresh_token"] as? String
+        tokenType = dict["token_type"] as? String
+
+        if let expire = dict["expires_in"] as? NSNumber {
+            expirationDate = NSDate().dateByAddingTimeInterval(expire.doubleValue/1000)
+        }
     }
-    
+
     public func isExpired() -> Bool {
-        return expirationDate.timeIntervalSinceDate(NSDate()) < 0
+        return expirationDate?.timeIntervalSinceDate(NSDate()) < 0
     }
-    
+
     public func isValid() -> Bool {
         return !isExpired()
     }
