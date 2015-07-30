@@ -77,9 +77,14 @@ class SampleViewController: UITableViewController {
         let finalCell = cell!
 
         let module = modules[indexPath.row]
-
+        
         finalCell.textLabel?.text = module.name
-        finalCell.detailTextLabel?.text = module.moduleType?.name
+
+        if let name = module.moduleType?.name {
+            let dateString = NSDateFormatter.localizedStringFromDate(module.lastUpdate!, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+            finalCell.detailTextLabel?.text = "\(name) | Last updated: \(dateString)"
+        }
+
         return finalCell
     }
     
