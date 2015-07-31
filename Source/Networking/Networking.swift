@@ -29,7 +29,7 @@ class Networking {
 
     - parameter completionHandler:  Callback where the response from the server can be processed
     */
-    func authenticate(completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
+    func authenticate(completionHandler handler: (result: Result<Token, NSError>) -> Void) -> Void {
 
         if let haloToken = Router.token {
             if haloToken.isExpired() {
@@ -50,7 +50,7 @@ class Networking {
     - parameter refreshToken:       Refresh token (if any)
     - parameter completionHandler:  Callback to handle the result of the request
     */
-    private func haloAuthenticate(refreshToken: String?, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
+    private func haloAuthenticate(refreshToken: String?, completionHandler handler: (result: Result<Token, NSError>) -> Void) -> Void {
 
         let params:[String: String]
 
@@ -72,7 +72,7 @@ class Networking {
         alamofire.request(Router.OAuth(params)).responseJSON { (req, resp, json, error) -> Void in
             if let jsonDict = json as? Dictionary<String,AnyObject> {
 
-                let token = HaloToken(dict: jsonDict)
+                let token = Token(dict: jsonDict)
 
                 Router.token = token
                 handler(result: .Success(token))
@@ -127,6 +127,10 @@ class Networking {
         }
     }
 
+    func getModuleInstances(internalId: String, completionHandler handler: (Result<[Dictionary<String, AnyObject>], NSError>) -> Void) -> Void {
+        
+    }
+    
     /**
     Parse a list of dictionaries (from the JSON response) into a list of modules
     

@@ -16,7 +16,7 @@ enum Router: URLRequestConvertible {
     static let baseURL = NSURL(string: "http://halo-int.mobgen.com:3000")
 
     /// Token to be used for authentication purposes
-    static var token:HaloToken?
+    static var token:Token?
 
     /// Request authentication providing the required parameters
     case OAuth([String: AnyObject])
@@ -24,6 +24,8 @@ enum Router: URLRequestConvertible {
     /// Request the existing modules for a given client
     case Modules
 
+    /// Get the existing instances of a given general content module
+    case GeneralContentInstances([String: AnyObject])
 
     /// Decide the HTTP method based on the specific request
     var method: Alamofire.Method {
@@ -42,6 +44,8 @@ enum Router: URLRequestConvertible {
             return "/api/oauth/token?_1"
         case .Modules:
             return "/api/authentication/module/list"
+        case .GeneralContentInstances(_):
+            return "api/generalcontent/instance/list"
         }
     }
 
@@ -59,6 +63,8 @@ enum Router: URLRequestConvertible {
 
         switch self {
         case .OAuth(let params):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+        case .GeneralContentInstances(let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         default:
             return mutableURLRequest

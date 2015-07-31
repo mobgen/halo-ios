@@ -9,7 +9,7 @@
 import Foundation
 
 /// Model class representing an existing module type within Halo
-public class HaloModuleType: NSObject {
+public class ModuleType: NSObject {
 
     /// Unique identifier of the module type
     public var typeId: NSNumber?

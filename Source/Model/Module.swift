@@ -18,7 +18,7 @@ public class HaloModule: NSObject {
     public var name: String?
 
     /// Type of the module
-    public var moduleType: HaloModuleType?
+    public var moduleType: ModuleType?
 
     /// Date of the last update performed in this module
     public var lastUpdate: NSDate?
@@ -33,7 +33,7 @@ public class HaloModule: NSObject {
         name = dict["name"] as? String
 
         let moduleTypeDict = dict["moduleType"] as? Dictionary<String, AnyObject> ?? [String: AnyObject]()
-        moduleType = HaloModuleType(dict: moduleTypeDict)
+        moduleType = ModuleType(dict: moduleTypeDict)
 
         if let updated = dict["updatedAt"] as? NSNumber {
             lastUpdate = NSDate(timeIntervalSince1970: updated.doubleValue/1000)

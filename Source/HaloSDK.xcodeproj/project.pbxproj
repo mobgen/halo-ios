@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		000826FF1B6A34DE001E8248 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000826FE1B6A34DE001E8248 /* Router.swift */; };
-		000827011B6A57A5001E8248 /* HaloModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827001B6A57A5001E8248 /* HaloModuleType.swift */; };
+		000827011B6A57A5001E8248 /* ModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827001B6A57A5001E8248 /* ModuleType.swift */; };
 		004539351B67BF8C0060C30B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004539341B67BF8C0060C30B /* Result.framework */; };
-		0045393B1B67E8170060C30B /* HaloModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* HaloModule.swift */; };
+		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		005822981B5FBBDD005BF8F4 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
 		005C57A01B5D1C2D0018839D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60531B31BA9B0045395A /* Networking.swift */; };
-		0068D27C1B6778CA00B1E147 /* HaloToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* HaloToken.swift */; };
+		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreTests.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
+		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; };
 		008E8DE61B683ABE00711DA5 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		008E8DE81B683AD100711DA5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; };
@@ -49,11 +50,11 @@
 
 /* Begin PBXFileReference section */
 		000826FE1B6A34DE001E8248 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		000827001B6A57A5001E8248 /* HaloModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloModuleType.swift; sourceTree = "<group>"; };
+		000827001B6A57A5001E8248 /* ModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
 		004539341B67BF8C0060C30B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		0045393A1B67E8170060C30B /* HaloModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloModule.swift; sourceTree = "<group>"; };
+		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		005C578A1B5CEA2D0018839D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		0068D27B1B6778CA00B1E147 /* HaloToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HaloToken.swift; path = HaloNetworking/HaloToken.swift; sourceTree = SOURCE_ROOT; };
+		0068D27B1B6778CA00B1E147 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB71B318CAC0045395A /* HaloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FBD1B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,9 +62,10 @@
 		006A5FCE1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		006A60531B31BA9B0045395A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
 		008E8DE31B68305900711DA5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		008E8DE71B683AD100711DA5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
-		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreConstants.swift; path = HaloCore/CoreConstants.swift; sourceTree = SOURCE_ROOT; };
+		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,10 +93,11 @@
 		004539391B67E8090060C30B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0045393A1B67E8170060C30B /* HaloModule.swift */,
-				000827001B6A57A5001E8248 /* HaloModuleType.swift */,
+				0068D27B1B6778CA00B1E147 /* Token.swift */,
+				0045393A1B67E8170060C30B /* Module.swift */,
+				000827001B6A57A5001E8248 /* ModuleType.swift */,
 			);
-			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
@@ -111,10 +114,11 @@
 		006A5F821B318C6E0045395A = {
 			isa = PBXGroup;
 			children = (
-				006A5FAE1B318CAC0045395A /* HaloCore */,
-				006A5FCC1B318CBC0045395A /* HaloNetworking */,
-				00D1A36F1B42CA45008DFB71 /* HaloStorage */,
-				006A5FBB1B318CAC0045395A /* HaloTests */,
+				006A5FAE1B318CAC0045395A /* Core */,
+				006A5FCC1B318CBC0045395A /* Networking */,
+				00D1A36F1B42CA45008DFB71 /* GeneralContent */,
+				004539391B67E8090060C30B /* Model */,
+				006A5FBB1B318CAC0045395A /* Tests */,
 				005C577F1B5CE6BF0018839D /* Frameworks */,
 				006A5F8D1B318C6E0045395A /* Products */,
 				006A5FCD1B318CBC0045395A /* Supporting Files */,
@@ -130,23 +134,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		006A5FAE1B318CAC0045395A /* HaloCore */ = {
+		006A5FAE1B318CAC0045395A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				004539391B67E8090060C30B /* Model */,
 				006A60211B318DCC0045395A /* Manager.swift */,
 				00FF95611B4547D200E751E3 /* CoreConstants.swift */,
 			);
-			path = HaloCore;
+			path = Core;
 			sourceTree = "<group>";
 		};
-		006A5FBB1B318CAC0045395A /* HaloTests */ = {
+		006A5FBB1B318CAC0045395A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				006A5FBE1B318CAC0045395A /* CoreTests.swift */,
 				006A5FBC1B318CAC0045395A /* Supporting Files */,
 			);
-			name = HaloTests;
+			name = Tests;
 			path = ../Tests;
 			sourceTree = "<group>";
 		};
@@ -158,14 +161,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		006A5FCC1B318CBC0045395A /* HaloNetworking */ = {
+		006A5FCC1B318CBC0045395A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				006A60531B31BA9B0045395A /* Networking.swift */,
-				0068D27B1B6778CA00B1E147 /* HaloToken.swift */,
 				000826FE1B6A34DE001E8248 /* Router.swift */,
 			);
-			path = HaloNetworking;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		006A5FCD1B318CBC0045395A /* Supporting Files */ = {
@@ -177,12 +179,12 @@
 			path = HaloNetworking;
 			sourceTree = "<group>";
 		};
-		00D1A36F1B42CA45008DFB71 /* HaloStorage */ = {
+		00D1A36F1B42CA45008DFB71 /* GeneralContent */ = {
 			isa = PBXGroup;
 			children = (
+				0086F52D1B6C20C2001F70DE /* GeneralContent.swift */,
 			);
-			name = HaloStorage;
-			path = HALOStorage;
+			path = GeneralContent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,13 +297,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */,
 				00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				005C57A01B5D1C2D0018839D /* Networking.swift in Sources */,
-				000827011B6A57A5001E8248 /* HaloModuleType.swift in Sources */,
+				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
-				0045393B1B67E8170060C30B /* HaloModule.swift in Sources */,
-				0068D27C1B6778CA00B1E147 /* HaloToken.swift in Sources */,
+				0045393B1B67E8170060C30B /* Module.swift in Sources */,
+				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

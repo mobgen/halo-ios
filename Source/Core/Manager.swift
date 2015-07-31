@@ -17,7 +17,7 @@ public class Manager: NSObject {
     public static let sharedInstance = Manager()
 
     /// Singleton instance of the networking component
-    let networking = Networking.sharedInstance
+    private let net = Networking.sharedInstance
 
     private override init() {}
 
@@ -36,13 +36,13 @@ public class Manager: NSObject {
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
-                networking.clientId = data[HaloCoreConstants.clientIdKey] as? String
-                networking.clientSecret = data[HaloCoreConstants.clientSecret] as? String
+                net.clientId = data[HaloCoreConstants.clientIdKey] as? String
+                net.clientSecret = data[HaloCoreConstants.clientSecret] as? String
             }
         }
 
-        if let cId = networking.clientId {
-            print("Using client ID: \(cId) and client secret: \(networking.clientSecret!)")
+        if let cId = net.clientId {
+            print("Using client ID: \(cId) and client secret: \(net.clientSecret!)")
         }
 
         return true
@@ -54,7 +54,7 @@ public class Manager: NSObject {
     - parameter completionHandler:  Callback to handle the result of the request asynchronously
     */
     public func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
-        networking.getModules(completionHandler: handler)
+        net.getModules(completionHandler: handler)
     }
 
     // MARK: ObjC exposed methods

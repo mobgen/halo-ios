@@ -9,7 +9,7 @@
 import Foundation
 
 /// Class holding all the information related to the authentication token
-public class HaloToken: NSObject {
+public class Token: NSObject {
 
     /// Access token
     public var token: String?
