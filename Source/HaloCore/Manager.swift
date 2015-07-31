@@ -9,14 +9,14 @@
 import Foundation
 import Result
 
-// Core manager of the Framework implemented as a Singleton
+/// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
 public class Manager: NSObject {
 
-    // Shared instance of the manager (Singleton pattern)
+    /// Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Manager()
 
-    // Singleton instance of the networking component
+    /// Singleton instance of the networking component
     let networking = Networking.sharedInstance
 
     private override init() {}

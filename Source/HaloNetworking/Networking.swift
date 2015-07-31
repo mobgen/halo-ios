@@ -10,17 +10,17 @@ import Foundation
 import Alamofire
 import Result
 
-// Module encapsulating all the networking features of the Framework
+/// Module encapsulating all the networking features of the Framework
 class Networking {
 
     private let alamofire = Alamofire.Manager.sharedInstance
 
     static let sharedInstance = Networking()
 
-    // Client id to be used for authentication throughout the SDK
+    /// Client id to be used for authentication throughout the SDK
     var clientId: String?
 
-    // Client secret to be used for authentication throughout the SDK
+    /// Client secret to be used for authentication throughout the SDK
     var clientSecret: String?
 
     /**

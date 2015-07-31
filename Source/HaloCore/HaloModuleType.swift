@@ -8,19 +8,19 @@
 
 import Foundation
 
-// Model class representing an existing module type within Halo
+/// Model class representing an existing module type within Halo
 public class HaloModuleType: NSObject {
 
-    // Unique identifier of the module type
+    /// Unique identifier of the module type
     public var typeId: NSNumber?
 
-    // Flag determining whether the module type is enabled or not
+    /// Flag determining whether the module type is enabled or not
     public var enabled: Bool = false
 
-    // Visual name of the module type
+    /// Visual name of the module type
     public var name: String?
 
-    // Url of the module type
+    /// Url of the module type
     public var typeUrl: String?
 
     init(dict: Dictionary<String, AnyObject>) {

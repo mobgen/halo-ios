@@ -8,19 +8,19 @@
 
 import Foundation
 
-// Class holding all the information related to the authentication token
+/// Class holding all the information related to the authentication token
 public class HaloToken: NSObject {
 
-    // Access token
+    /// Access token
     public var token: String?
 
-    // Refresh token
+    /// Refresh token
     public var refreshToken: String?
 
-    // Type of the auth token
+    /// Type of the auth token
     public var tokenType: String?
 
-    // Expiration date of this authentication token
+    /// Expiration date of this authentication token
     public var expirationDate: NSDate?
 
     init(dict: Dictionary<String,AnyObject>) {
