@@ -67,7 +67,7 @@
 		002219441B6105F700D0F27A /* HALMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HALMainView.h; sourceTree = "<group>"; };
 		002219451B6105F700D0F27A /* HALMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HALMainView.m; sourceTree = "<group>"; };
 		005AAFA21B399DE400146A6C /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
-		006A605E1B31BBD80045395A /* HaloObjCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloObjCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A605E1B31BBD80045395A /* Halo Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Halo Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A60621B31BBD80045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A60631B31BBD80045395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		006A60651B31BBD80045395A /* HALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HALAppDelegate.h; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		006A605F1B31BBD80045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A605E1B31BBD80045395A /* HaloObjCDemo.app */,
+				006A605E1B31BBD80045395A /* Halo Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,7 +192,7 @@
 			);
 			name = HaloObjCDemo;
 			productName = MoMOSObjCDemo;
-			productReference = 006A605E1B31BBD80045395A /* HaloObjCDemo.app */;
+			productReference = 006A605E1B31BBD80045395A /* Halo Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -367,7 +367,7 @@
 					"$(PROJECT_DIR)/HaloObjCDemo/Frameworks/CrittercismSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
-				PRODUCT_NAME = HaloObjCDemo;
+				PRODUCT_NAME = "Halo Demo";
 			};
 			name = Debug;
 		};
@@ -387,7 +387,7 @@
 					"$(PROJECT_DIR)/HaloObjCDemo/Frameworks/CrittercismSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
-				PRODUCT_NAME = HaloObjCDemo;
+				PRODUCT_NAME = "Halo Demo";
 			};
 			name = Release;
 		};

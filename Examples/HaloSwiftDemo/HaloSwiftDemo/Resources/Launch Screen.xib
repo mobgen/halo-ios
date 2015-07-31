@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,41 +11,47 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 MOBGEN Technology. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="  Copyright (c) 2015. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact">
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     </variation>
                 </label>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="mobgen" translatesAutoresizingMaskIntoConstraints="NO" id="3EB-3l-AXX">
-                    <rect key="frame" x="178" y="150" width="124" height="48"/>
+                    <rect key="frame" x="178" y="383" width="124" height="48"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swift" translatesAutoresizingMaskIntoConstraints="NO" id="0wh-S4-8hf">
+                    <rect key="frame" x="190" y="190" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="1QG-PX-RqB"/>
+                        <constraint firstAttribute="width" constant="100" id="YAF-3M-c1g"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="3EB-3l-AXX" secondAttribute="centerX" id="1HO-nh-QUu"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="3EB-3l-AXX" secondAttribute="bottom" constant="151" id="5Fn-yB-ARd"/>
-                <constraint firstItem="3EB-3l-AXX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="192" id="5PJ-AK-akA"/>
-                <constraint firstItem="3EB-3l-AXX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="116" id="JJN-fs-FCx"/>
+                <constraint firstItem="0wh-S4-8hf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9p8-hy-rjE"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="3EB-3l-AXX" secondAttribute="bottom" constant="8" id="Abv-sC-2wG"/>
+                <constraint firstItem="0wh-S4-8hf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="145" id="Bad-By-R7e"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="trailing" secondItem="3EB-3l-AXX" secondAttribute="trailing" constant="116" id="UG1-TU-DD1"/>
-                <constraint firstItem="3EB-3l-AXX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="Vt0-Si-wFl"/>
+                <constraint firstAttribute="trailing" secondItem="0wh-S4-8hf" secondAttribute="trailing" constant="145" id="SCi-pF-xhX"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstAttribute="centerY" secondItem="3EB-3l-AXX" secondAttribute="centerY" id="fsq-j4-6PU"/>
+                <constraint firstItem="0wh-S4-8hf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vF9-aF-2i9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="5PJ-AK-akA"/>
-                    <exclude reference="JJN-fs-FCx"/>
-                    <exclude reference="UG1-TU-DD1"/>
-                    <exclude reference="fsq-j4-6PU"/>
+                    <exclude reference="Bad-By-R7e"/>
+                    <exclude reference="SCi-pF-xhX"/>
                     <exclude reference="5Fn-yB-ARd"/>
+                    <exclude reference="MfP-vx-nX0"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="404" y="445"/>
@@ -52,5 +59,6 @@
     </objects>
     <resources>
         <image name="mobgen" width="124" height="48"/>
+        <image name="swift" width="341" height="341"/>
     </resources>
 </document>
