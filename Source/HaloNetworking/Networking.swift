@@ -27,8 +27,6 @@ class Networking {
     /**
     Authenticate against the HALO backend using a client id and a client secret
 
-    - parameter clientId:           Client id to be used for authentication
-    - parameter clientSecret:       Client secret to be used for authentication
     - parameter completionHandler:  Callback where the response from the server can be processed
     */
     func authenticate(completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
