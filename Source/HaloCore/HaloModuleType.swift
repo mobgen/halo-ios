@@ -23,6 +23,11 @@ public class HaloModuleType: NSObject {
     /// Url of the module type
     public var typeUrl: String?
 
+    /**
+    Initialise the module type from a dictionary
+    
+    - parameter dict: Dictionary containing all the data about the module type
+    */
     init(dict: Dictionary<String, AnyObject>) {
         super.init()
         typeId = dict["id"] as? NSNumber

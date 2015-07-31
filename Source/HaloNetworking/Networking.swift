@@ -15,6 +15,7 @@ class Networking {
 
     private let alamofire = Alamofire.Manager.sharedInstance
 
+    /// Singleton instance of the networking component
     static let sharedInstance = Networking()
 
     /// Client id to be used for authentication throughout the SDK

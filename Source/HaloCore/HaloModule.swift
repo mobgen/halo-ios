@@ -23,6 +23,11 @@ public class HaloModule: NSObject {
     /// Date of the last update performed in this module
     public var lastUpdate: NSDate?
 
+    /**
+    Initialise a HaloModule from a dictionary
+    
+    - parameter dict:   Dictionary containing the information about the module
+    */
     init(dict: Dictionary<String,AnyObject>) {
         moduleId = dict["id"] as? NSNumber
         name = dict["name"] as? String

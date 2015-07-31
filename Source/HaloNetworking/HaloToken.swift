@@ -23,6 +23,11 @@ public class HaloToken: NSObject {
     /// Expiration date of this authentication token
     public var expirationDate: NSDate?
 
+    /**
+    Initialise a HaloToken from a given dictionary
+    
+    - parameter dict: Dictionary containing all the token related information
+    */
     init(dict: Dictionary<String,AnyObject>) {
         token = dict["access_token"] as? String
         refreshToken = dict["refresh_token"] as? String

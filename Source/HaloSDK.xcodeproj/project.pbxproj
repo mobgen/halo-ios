@@ -13,7 +13,6 @@
 		0045393B1B67E8170060C30B /* HaloModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* HaloModule.swift */; };
 		005822981B5FBBDD005BF8F4 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
 		005C57A01B5D1C2D0018839D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60531B31BA9B0045395A /* Networking.swift */; };
-		005C57A61B5D1C3A0018839D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1A3871B42CAD4008DFB71 /* Storage.swift */; };
 		0068D27C1B6778CA00B1E147 /* HaloToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* HaloToken.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreTests.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
@@ -64,7 +63,6 @@
 		006A60531B31BA9B0045395A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		008E8DE31B68305900711DA5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		008E8DE71B683AD100711DA5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
-		00D1A3871B42CAD4008DFB71 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storage.swift; path = ../HaloStorage/Storage.swift; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreConstants.swift; path = HaloCore/CoreConstants.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -182,7 +180,6 @@
 		00D1A36F1B42CA45008DFB71 /* HaloStorage */ = {
 			isa = PBXGroup;
 			children = (
-				00D1A3871B42CAD4008DFB71 /* Storage.swift */,
 			);
 			name = HaloStorage;
 			path = HALOStorage;
@@ -302,7 +299,6 @@
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				005C57A01B5D1C2D0018839D /* Networking.swift in Sources */,
 				000827011B6A57A5001E8248 /* HaloModuleType.swift in Sources */,
-				005C57A61B5D1C3A0018839D /* Storage.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
 				0045393B1B67E8170060C30B /* HaloModule.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* HaloToken.swift in Sources */,

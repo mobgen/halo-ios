@@ -47,6 +47,7 @@ enum Router: URLRequestConvertible {
 
     // MARK: URLRequestConvertible
 
+    /// Get the right URL request with the right headers
     var URLRequest: NSMutableURLRequest {
         let url = NSURL(string: path, relativeToURL: Router.baseURL)
         let mutableURLRequest = NSMutableURLRequest(URL: url!)
