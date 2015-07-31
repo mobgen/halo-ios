@@ -9,16 +9,14 @@
 import Foundation
 import Result
 
-/// Core manager of the Framework implemented as a Singleton which has knowledge
-/// about all the existing and active modules
-
+// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
 public class Manager: NSObject {
 
-    /// Shared instance of the manager (Singleton pattern)
+    // Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Manager()
 
-    /// Singleton instance of the networking component
+    // Singleton instance of the networking component
     let networking = Networking.sharedInstance
 
     private override init() {}
@@ -26,7 +24,7 @@ public class Manager: NSObject {
     /**
     Perform the initial tasks to properly set up the SDK
 
-    :returns: Bool describing whether the process has succeeded
+    - returns Bool describing whether the process has succeeded
     */
     public func launch() -> Bool {
 
@@ -53,7 +51,7 @@ public class Manager: NSObject {
     /**
     Get a list of the existing modules for the provided client credentials
     
-    :param:     completionHandler   Callback to handle the result of the request asynchronously
+    - parameter completionHandler:  Callback to handle the result of the request asynchronously
     */
     public func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
         networking.getModules(completionHandler: handler)
@@ -64,7 +62,7 @@ public class Manager: NSObject {
     /**
     Get a list of the existing modules (from ObjC code) for the provided client credentials
 
-    :param:     completionHandler   Callback to handle the result of the request asynchronously
+    - parameter completionHandler:  Callback to handle the result of the request asynchronously
     */
     @objc(getModulesWithCompletionHandler:)
     public func getModulesFromObjC(completionHandler handler: (userData: [HaloModule]?, error: NSError?) -> Void) -> Void {

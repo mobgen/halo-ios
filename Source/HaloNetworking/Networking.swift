@@ -10,25 +10,25 @@ import Foundation
 import Alamofire
 import Result
 
-/// Module encapsulating all the networking features of the Framework
+// Module encapsulating all the networking features of the Framework
 class Networking {
 
-    let alamofire = Alamofire.Manager.sharedInstance
+    private let alamofire = Alamofire.Manager.sharedInstance
 
     static let sharedInstance = Networking()
 
-    /// Client id to be used for authentication throughout the SDK
+    // Client id to be used for authentication throughout the SDK
     var clientId: String?
 
-    /// Client secret to be used for authentication throughout the SDK
+    // Client secret to be used for authentication throughout the SDK
     var clientSecret: String?
 
     /**
     Authenticate against the HALO backend using a client id and a client secret
 
-    :param: clientId            Client id to be used for authentication
-    :param: clientSecret        Client secret to be used for authentication
-    :param: completionHandler   Callback where the response from the server can be processed
+    - parameter clientId:           Client id to be used for authentication
+    - parameter clientSecret:       Client secret to be used for authentication
+    - parameter completionHandler:  Callback where the response from the server can be processed
     */
     func authenticate(completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
 
@@ -48,8 +48,8 @@ class Networking {
     Internal call to the authentication process. If a refresh token is provided, then the existing
     token is refreshed. Otherwise, a fresh one is requested
 
-    :param: refreshToken        Refresh token (if any)
-    :param: completionHandler   Callback to handle the result of the request
+    - parameter refreshToken:       Refresh token (if any)
+    - parameter completionHandler:  Callback to handle the result of the request
     */
     private func haloAuthenticate(refreshToken: String?, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
 
@@ -87,7 +87,7 @@ class Networking {
     /**
     Get the list of available modules for a given client id/client secret pair
 
-    :param: completionHandler   Callback executed when the request has finished
+    - parameter completionHandler:  Callback executed when the request has finished
     */
     func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
 
@@ -131,8 +131,9 @@ class Networking {
     /**
     Parse a list of dictionaries (from the JSON response) into a list of modules
     
-    :param:     modules     List of dictionaries coming from the JSON response
-    :returns:   The list of the parsed modules
+    - parameter modules:     List of dictionaries coming from the JSON response
+    
+    - returns   The list of the parsed modules
     */
     private func parseModules(modules: [Dictionary<String,AnyObject>]) -> [HaloModule] {
 

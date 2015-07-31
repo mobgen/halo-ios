@@ -8,19 +8,19 @@
 
 import Foundation
 
-/// Model class representing the different modules available in Halo
+// Model class representing the different modules available in Halo
 public class HaloModule: NSObject {
 
-    /// Unique identifier of the module
+    // Unique identifier of the module
     public var moduleId: NSNumber?
 
-    /// Visual name of the module
+    // Visual name of the module
     public var name: String?
 
-    /// Type of the module
+    // Type of the module
     public var moduleType: HaloModuleType?
 
-    /// Date of the last update performed in this module
+    // Date of the last update performed in this module
     public var lastUpdate: NSDate?
 
     init(dict: Dictionary<String,AnyObject>) {

@@ -8,19 +8,19 @@
 
 import Foundation
 
-/// Class holding all the information related to the authentication token
+// Class holding all the information related to the authentication token
 public class HaloToken: NSObject {
 
-    /// Access token
+    // Access token
     public var token: String?
 
-    /// Refresh token
+    // Refresh token
     public var refreshToken: String?
 
-    /// Type of the auth token
+    // Type of the auth token
     public var tokenType: String?
 
-    /// Expiration date of this authentication token
+    // Expiration date of this authentication token
     public var expirationDate: NSDate?
 
     init(dict: Dictionary<String,AnyObject>) {
@@ -36,7 +36,7 @@ public class HaloToken: NSObject {
     /**
     Utility function to check whether the current token has expired or not
 
-    :returns: Boolean determining whether the token has expired or not
+    - returns Boolean determining whether the token has expired or not
     */
     public func isExpired() -> Bool {
         return expirationDate?.timeIntervalSinceDate(NSDate()) < 0
@@ -45,7 +45,7 @@ public class HaloToken: NSObject {
     /**
     Utility function to check whether the current token is still valid or not
 
-    :returns: Boolean determining whether the token is still valid or not
+    - returns Boolean determining whether the token is still valid or not
     */
     public func isValid() -> Bool {
         return !isExpired()

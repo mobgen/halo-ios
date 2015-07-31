@@ -8,12 +8,13 @@
 
 import Foundation
 
+// Utility class containing some of the constants to be used within the SDK
 class HaloCoreConstants {
 
-    /// Key which identifies the client id within the configuration plist
+    // Key which identifies the client id within the configuration plist
     static let clientIdKey = "CLIENT_ID"
 
-    /// Key which identifies the client secret within the configuration plist
+    // Key which identifies the client secret within the configuration plist
     static let clientSecret = "CLIENT_SECRET"
 
 }
