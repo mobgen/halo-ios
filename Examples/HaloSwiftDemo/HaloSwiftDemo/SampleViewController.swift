@@ -18,13 +18,9 @@ class SampleViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "HALO Modules"
 
-        tableView.delegate = self
-        tableView.dataSource = self
-
         self.refreshControl = UIRefreshControl()
         self.refreshControl!.attributedTitle = NSAttributedString(string: "Fetching modules")
         self.refreshControl!.addTarget(self, action: "loadData", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.addSubview(refreshControl!)
 
         // setupNavigation()
         loadData()
@@ -77,7 +73,7 @@ class SampleViewController: UITableViewController {
         let finalCell = cell!
 
         let module = modules[indexPath.row]
-        
+
         finalCell.textLabel?.text = module.name
 
         if let name = module.moduleType?.name {
