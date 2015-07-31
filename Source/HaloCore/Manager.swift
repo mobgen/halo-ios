@@ -18,12 +18,13 @@ public class Manager: NSObject {
     /// Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Manager()
 
+    /// Singleton instance of the networking component
     let networking = Networking.sharedInstance
 
     private override init() {}
 
     /**
-    Start the Halo SDK setup
+    Perform the initial tasks to properly set up the SDK
 
     :returns: Bool describing whether the process has succeeded
     */
@@ -49,20 +50,25 @@ public class Manager: NSObject {
         return true
     }
 
-
-    public func authenticate(completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
-        networking.authenticate(completionHandler: handler)
-    }
-
+    /**
+    Get a list of the existing modules for the provided client credentials
+    
+    :param:     completionHandler   Callback to handle the result of the request asynchronously
+    */
     public func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
         networking.getModules(completionHandler: handler)
     }
 
     // MARK: ObjC exposed methods
 
-    @objc(authenticateWithClientId:clientSecret:completionHandler:)
-    public func authenticateFromObjC(clientId: String!, clientSecret: String!, completionHandler handler: (userData: HaloToken?, error: NSError?) -> Void) -> Void {
-        self.authenticate() { (result) -> Void in
+    /**
+    Get a list of the existing modules (from ObjC code) for the provided client credentials
+
+    :param:     completionHandler   Callback to handle the result of the request asynchronously
+    */
+    @objc(getModulesWithCompletionHandler:)
+    public func getModulesFromObjC(completionHandler handler: (userData: [HaloModule]?, error: NSError?) -> Void) -> Void {
+        self.getModules { (result) -> Void in
             handler(userData: result.value, error: result.error)
         }
     }

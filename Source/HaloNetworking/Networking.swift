@@ -17,7 +17,10 @@ class Networking {
 
     static let sharedInstance = Networking()
 
+    /// Client id to be used for authentication throughout the SDK
     var clientId: String?
+
+    /// Client secret to be used for authentication throughout the SDK
     var clientSecret: String?
 
     /**
@@ -42,12 +45,11 @@ class Networking {
     }
 
     /**
-    Internal call to the authentication process
+    Internal call to the authentication process. If a refresh token is provided, then the existing
+    token is refreshed. Otherwise, a fresh one is requested
 
-    :param: clientId
-    :param: clientSecret
-    :param: refreshToken
-    :param: completionHandler
+    :param: refreshToken        Refresh token (if any)
+    :param: completionHandler   Callback to handle the result of the request
     */
     private func haloAuthenticate(refreshToken: String?, completionHandler handler: (result: Result<HaloToken, NSError>) -> Void) -> Void {
 
@@ -126,6 +128,12 @@ class Networking {
         }
     }
 
+    /**
+    Parse a list of dictionaries (from the JSON response) into a list of modules
+    
+    :param:     modules     List of dictionaries coming from the JSON response
+    :returns:   The list of the parsed modules
+    */
     private func parseModules(modules: [Dictionary<String,AnyObject>]) -> [HaloModule] {
 
         var modArray = [HaloModule]()

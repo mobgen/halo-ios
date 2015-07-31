@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-/// Custom implementation of the URLRequestConvertible protocol to handle the HTTP requests
+/// Custom implementation of the URLRequestConvertible protocol to handle the HTTP requests nicely
 enum Router: URLRequestConvertible {
     static let baseURL = NSURL(string: "http://halo-int.mobgen.com:3000")
     static var token:HaloToken?
@@ -17,6 +17,7 @@ enum Router: URLRequestConvertible {
     case Modules
     case OAuth([String: AnyObject])
 
+    /// Decide the HTTP method based on the specific request
     var method: Alamofire.Method {
         switch self {
         case .OAuth(_):
@@ -26,6 +27,7 @@ enum Router: URLRequestConvertible {
         }
     }
 
+    /// Decide the URL based on the specific request
     var path: String {
         switch self {
         case .OAuth(_):
