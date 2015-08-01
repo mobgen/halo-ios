@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import Result
 
 /// Module encapsulating all the networking features of the Framework
 class Networking {
@@ -16,7 +15,7 @@ class Networking {
     private let alamofire = Alamofire.Manager.sharedInstance
 
     /// Singleton instance of the networking component
-    static let sharedInstance = Networking()
+    static let sharedInstance = Halo.Networking()
 
     /// Client id to be used for authentication throughout the SDK
     var clientId: String?
@@ -29,7 +28,7 @@ class Networking {
 
     - parameter completionHandler:  Callback where the response from the server can be processed
     */
-    func authenticate(completionHandler handler: (result: Result<Token, NSError>) -> Void) -> Void {
+    func authenticate(completionHandler handler: (result: Alamofire.Result<Halo.Token>) -> Void) -> Void {
 
         if let haloToken = Router.token {
             if haloToken.isExpired() {
@@ -48,9 +47,9 @@ class Networking {
     token is refreshed. Otherwise, a fresh one is requested
 
     - parameter refreshToken:       Refresh token (if any)
-    - parameter completionHandler:  Callback to handle the result of the request
+    - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    private func haloAuthenticate(refreshToken: String?, completionHandler handler: (result: Result<Token, NSError>) -> Void) -> Void {
+    private func haloAuthenticate(refreshToken: String?, completionHandler handler: (result: Alamofire.Result<Halo.Token>) -> Void) -> Void {
 
         let params:[String: String]
 
@@ -69,16 +68,15 @@ class Networking {
             ]
         }
 
-        alamofire.request(Router.OAuth(params)).responseJSON { (req, resp, json, error) -> Void in
-            if let jsonDict = json as? Dictionary<String,AnyObject> {
+        alamofire.request(Router.OAuth(params)).responseJSON { (_, _, result) -> Void in
 
-                let token = Token(dict: jsonDict)
-
+            switch result {
+            case .Success(let data):
+                let token = Halo.Token(dict: data as! Dictionary<String,AnyObject>)
                 Router.token = token
                 handler(result: .Success(token))
-
-            } else {
-                handler(result: .Failure(error!))
+            case .Failure(let data, let err):
+                handler(result: .Failure(data, err))
             }
         }
     }
@@ -86,30 +84,31 @@ class Networking {
     /**
     Get the list of available modules for a given client id/client secret pair
 
-    - parameter completionHandler:  Callback executed when the request has finished
+    - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
+    func getModules(completionHandler handler: (result: Alamofire.Result<[Halo.HaloModule]>) -> Void) -> Void {
 
         if let tok = Router.token {
 
             if tok.isValid() {
 
-                alamofire.request(Router.Modules).responseJSON(completionHandler: { (_, _, json, error) -> Void in
+                alamofire.request(Router.Modules).responseJSON(completionHandler: { (_, _, result) -> Void in
 
-                    if let jsonArr = json as? [Dictionary<String,AnyObject>] {
-                        let arr = self.parseModules(jsonArr)
-                        handler(result:.Success(arr))
-                    } else {
-                        let error = NSError(domain: "halo.mobgen.com", code: 100, userInfo: nil)
-                        handler(result:.Failure(error))
+                    switch result {
+                    case .Success(let data):
+                        let arr = self.parseModules(data as! [Dictionary<String,AnyObject>])
+                        handler(result: .Success(arr))
+                    case .Failure(_, let error):
+                        print("Error: \(error.localizedDescription)")
                     }
+
                 });
             } else {
                 self.authenticate { (result) -> Void in
                     switch (result) {
                     case .Success(_):
                         self.getModules(completionHandler: handler)
-                    case .Failure(let err):
+                    case .Failure(_, let err):
                         print("Error: \(err.localizedDescription)")
                     }
                 }
@@ -120,14 +119,14 @@ class Networking {
                 switch (result) {
                 case .Success(_) :
                     self.getModules(completionHandler: handler)
-                case .Failure(let err):
+                case .Failure(_, let err):
                     print("Error: \(err.localizedDescription)")
                 }
             }
         }
     }
 
-    func getModuleInstances(internalId: String, completionHandler handler: (Result<[Dictionary<String, AnyObject>], NSError>) -> Void) -> Void {
+    func getModuleInstances(internalId: String, completionHandler handler: (Alamofire.Result<[Dictionary<String, AnyObject>]>) -> Void) -> Void {
         
     }
     

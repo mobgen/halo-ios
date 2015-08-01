@@ -1,4 +1,3 @@
-github "Alamofire/Alamofire" "fedbc04501bf2e0b675a6da5871421507e3d7d41"
+github "Alamofire/Alamofire" "88ca2a248ee0142064e2c760ea9f15279c7489df"
 github "Quick/Nimble" "v1.0.0"
 github "Quick/Quick" "v0.5.1"
-github "antitypical/Result" "18a10d680af395d93b47ff4a3d8b0af3b8cad094"

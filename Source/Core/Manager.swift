@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Result
+import Alamofire
 
 /// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
@@ -17,7 +17,7 @@ public class Manager: NSObject {
     public static let sharedInstance = Manager()
 
     /// Singleton instance of the networking component
-    private let net = Networking.sharedInstance
+    private let net = Halo.Networking.sharedInstance
 
     private override init() {}
 
@@ -53,7 +53,7 @@ public class Manager: NSObject {
     
     - parameter completionHandler:  Callback to handle the result of the request asynchronously
     */
-    public func getModules(completionHandler handler: (result: Result<[HaloModule], NSError>) -> Void) -> Void {
+    public func getModules(completionHandler handler: (result: Alamofire.Result<[Halo.HaloModule]>) -> Void) -> Void {
         net.getModules(completionHandler: handler)
     }
 

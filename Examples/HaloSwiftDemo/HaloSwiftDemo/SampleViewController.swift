@@ -8,7 +8,7 @@
 
 import UIKit
 import Halo
-import Result
+import Alamofire
 
 class SampleViewController: UITableViewController {
 
@@ -45,7 +45,7 @@ class SampleViewController: UITableViewController {
             switch (result) {
             case .Success(let mod):
                 self.modules.extend(mod)
-            case .Failure(let err):
+            case .Failure(_, let err):
                 print("Error: \(err.localizedDescription)")
             }
             

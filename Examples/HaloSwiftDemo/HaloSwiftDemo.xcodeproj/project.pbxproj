@@ -22,8 +22,6 @@
 		000826E61B690B39001E8248 /* Halo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DA1B690A5B001E8248 /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; };
 		000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		000826E91B690B39001E8248 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DE1B690B0D001E8248 /* Result.framework */; };
-		000826EA1B690B39001E8248 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DE1B690B0D001E8248 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		000827751B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 000827621B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle */; };
 		000827761B6A61BE001E8248 /* BTNavigationDropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827631B6A61BE001E8248 /* BTNavigationDropdownMenu.swift */; };
 		000827871B6A6E6E001E8248 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827821B6A6E6E001E8248 /* UIColorExtension.swift */; };
@@ -40,7 +38,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				000826EA1B690B39001E8248 /* Result.framework in Embed Frameworks */,
 				000826E61B690B39001E8248 /* Halo.framework in Embed Frameworks */,
 				000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -68,7 +65,6 @@
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		000826DA1B690A5B001E8248 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		000826DD1B690B0D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		000826DE1B690B0D001E8248 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../../../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		000827621B6A61BE001E8248 /* BTNavigationDropdownMenu.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BTNavigationDropdownMenu.bundle; sourceTree = "<group>"; };
 		000827631B6A61BE001E8248 /* BTNavigationDropdownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTNavigationDropdownMenu.swift; sourceTree = "<group>"; };
 		000827821B6A6E6E001E8248 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -87,7 +83,6 @@
 			files = (
 				0002FB831B616AFC00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */,
 				000590C01B565B7300DED5D2 /* SystemConfiguration.framework in Frameworks */,
-				000826E91B690B39001E8248 /* Result.framework in Frameworks */,
 				000826E51B690B39001E8248 /* Halo.framework in Frameworks */,
 				000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */,
 			);
@@ -205,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				000826DD1B690B0D001E8248 /* Alamofire.framework */,
-				000826DE1B690B0D001E8248 /* Result.framework */,
 				000826DA1B690A5B001E8248 /* Halo.framework */,
 				0002FB7B1B616AFC00B06A9C /* CrittercismSDK */,
 				000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */,

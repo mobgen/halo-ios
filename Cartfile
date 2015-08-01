@@ -1,4 +1,3 @@
 github "Alamofire/Alamofire" "swift-2.0"
-github "antitypical/Result" "18a10d680af395d93b47ff4a3d8b0af3b8cad094"
 github "Quick/Quick"
 github "Quick/Nimble"
