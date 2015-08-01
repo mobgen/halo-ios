@@ -126,7 +126,7 @@ class Networking {
         }
     }
 
-    func getModuleInstances(internalId: String, completionHandler handler: (Alamofire.Result<[Dictionary<String, AnyObject>]>) -> Void) -> Void {
+    func getModuleInstances(internalId id: String, completionHandler handler: (Alamofire.Result<[Dictionary<String, AnyObject>]>) -> Void) -> Void {
         
     }
     
