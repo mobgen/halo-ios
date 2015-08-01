@@ -15,8 +15,6 @@ public class GeneralContent: NSObject {
     
     public func getModuleInstances(internalId: String, completionHandler handler: (Alamofire.Result<[Dictionary<String,AnyObject>]>) -> Void) -> Void {
         
-        
-        
     }
     
 }

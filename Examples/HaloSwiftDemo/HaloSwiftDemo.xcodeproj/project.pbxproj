@@ -60,7 +60,7 @@
 		0002FB7F1B616AFC00B06A9C /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
 		0002FB801B616AFC00B06A9C /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
 		0002FB811B616AFC00B06A9C /* libCrittercism_v5_2_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v5_2_0.a; sourceTree = "<group>"; };
-		000590BE1B5658E100DED5D2 /* HALOSwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HALOSwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		000590BE1B5658E100DED5D2 /* HaloSwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HaloSwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		000826DA1B690A5B001E8248 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,7 +191,7 @@
 			children = (
 				00930AE01B385B2D002FF4F0 /* Halo.plist */,
 				006A5FF91B318D600045395A /* Info.plist */,
-				000590BE1B5658E100DED5D2 /* HALOSwiftDemo-Bridging-Header.h */,
+				000590BE1B5658E100DED5D2 /* HaloSwiftDemo-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -428,7 +428,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
 				PRODUCT_NAME = "Halo Demo";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HALOSwiftDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -449,7 +449,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
 				PRODUCT_NAME = "Halo Demo";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HALOSwiftDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = Release;
 		};

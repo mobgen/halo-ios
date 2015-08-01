@@ -26,7 +26,7 @@ class Networking {
     /**
     Authenticate against the HALO backend using a client id and a client secret
 
-    - parameter completionHandler:  Callback where the response from the server can be processed
+    - parameter completionHandler:  Closure where the response from the server can be processed
     */
     func authenticate(completionHandler handler: (result: Alamofire.Result<Halo.Token>) -> Void) -> Void {
 

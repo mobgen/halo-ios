@@ -51,7 +51,7 @@ public class Manager: NSObject {
     /**
     Get a list of the existing modules for the provided client credentials
     
-    - parameter completionHandler:  Callback to handle the result of the request asynchronously
+    - parameter completionHandler:  Closure to handle the result of the request asynchronously
     */
     public func getModules(completionHandler handler: (result: Alamofire.Result<[Halo.HaloModule]>) -> Void) -> Void {
         net.getModules(completionHandler: handler)
@@ -62,7 +62,7 @@ public class Manager: NSObject {
     /**
     Get a list of the existing modules (from ObjC code) for the provided client credentials
 
-    - parameter completionHandler:  Callback to handle the result of the request asynchronously
+    - parameter completionHandler:  Closure to handle the result of the request asynchronously
     */
     @objc(getModulesWithCompletionHandler:)
     public func getModulesFromObjC(completionHandler handler: (userData: [HaloModule]?, error: NSError?) -> Void) -> Void {
