@@ -22,11 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationBarAppearace = UINavigationBar.appearance()
 
         navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Lab-Medium", size: 34)!]
-        navigationBarAppearace.tintColor = UIColor(rgba: "#ffffff")
+        navigationBarAppearace.tintColor = UIColor.blackColor()
         navigationBarAppearace.barTintColor = UIColor(rgba: "#F49E00")
 
-        let nav = UINavigationController(rootViewController: SampleViewController())
-        window!.rootViewController = nav
+        window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()
 
         setupCrittercism()

@@ -10,7 +10,7 @@ import UIKit
 import Halo
 import Alamofire
 
-class SampleViewController: UITableViewController {
+class LeftMenuViewController: UITableViewController {
 
     var modules = [HaloModule]()
 
@@ -18,24 +18,15 @@ class SampleViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "HALO Modules"
 
+        var frame = self.view.frame
+        frame.size.width = 275
+        self.view.frame = frame
+
         self.refreshControl = UIRefreshControl()
         self.refreshControl!.attributedTitle = NSAttributedString(string: "Fetching modules")
         self.refreshControl!.addTarget(self, action: "loadData", forControlEvents: UIControlEvents.ValueChanged)
 
-        // setupNavigation()
         loadData()
-    }
-
-    func setupNavigation() {
-        let items = ["Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
-        let menuView = BTNavigationDropdownMenu(frame:  CGRectMake(0.0, 0.0, 300, 44), title: items.first!, items: items, containerView: self.view)
-        menuView.backgroundColor = UIColor.clearColor()
-        menuView.cellTextLabelFont = UIFont(name: "Lab-Medium", size: 30)
-        self.navigationItem.titleView = menuView
-
-        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
-            print("Clicked \(indexPath)")
-        }
     }
 
     func loadData() {
@@ -48,11 +39,10 @@ class SampleViewController: UITableViewController {
             case .Failure(_, let err):
                 print("Error: \(err.localizedDescription)")
             }
-            
+
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
-        
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -83,7 +73,7 @@ class SampleViewController: UITableViewController {
 
         return finalCell
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
