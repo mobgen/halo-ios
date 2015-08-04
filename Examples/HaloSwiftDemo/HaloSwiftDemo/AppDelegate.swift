@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Lab-Medium", size: 34)!]
         navigationBarAppearace.tintColor = UIColor.blackColor()
-        navigationBarAppearace.barTintColor = UIColor(rgba: "#F49E00")
+        navigationBarAppearace.barTintColor = UIColor.mobgenLightGreen()
 
         window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()

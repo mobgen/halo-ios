@@ -17,7 +17,7 @@ public class Manager: NSObject {
     public static let sharedInstance = Manager()
 
     /// Singleton instance of the networking component
-    private let net = Halo.Networking.sharedInstance
+    private let net = Halo.NetworkManager.instance
 
     private override init() {}
 
@@ -53,21 +53,15 @@ public class Manager: NSObject {
     
     - parameter completionHandler:  Closure to handle the result of the request asynchronously
     */
-    public func getModules(completionHandler handler: (result: Alamofire.Result<[Halo.HaloModule]>) -> Void) -> Void {
-        net.getModules(completionHandler: handler)
-    }
-
-    // MARK: ObjC exposed methods
-
-    /**
-    Get a list of the existing modules (from ObjC code) for the provided client credentials
-
-    - parameter completionHandler:  Closure to handle the result of the request asynchronously
-    */
-    @objc(getModulesWithCompletionHandler:)
-    public func getModulesFromObjC(completionHandler handler: (userData: [HaloModule]?, error: NSError?) -> Void) -> Void {
-        self.getModules { (result) -> Void in
-            handler(userData: result.value, error: result.error)
+    public func getModules(success: ((userData: [Halo.HaloModule]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+        net.getModules { (result) -> Void in
+            switch result {
+            case .Success(let modules):
+                success?(userData: modules)
+            case .Failure(_, let error):
+                failure?(error: error)
+            }
         }
     }
+
 }

@@ -7,14 +7,9 @@
 //
 
 import Foundation
-import Alamofire
 
 public class GeneralContent: NSObject {
 
-    private let net = Networking.sharedInstance
-    
-    public func getModuleInstances(internalId: String, completionHandler handler: (Alamofire.Result<[Dictionary<String,AnyObject>]>) -> Void) -> Void {
-        
-    }
+    private let net = Halo.NetworkManager.instance
     
 }

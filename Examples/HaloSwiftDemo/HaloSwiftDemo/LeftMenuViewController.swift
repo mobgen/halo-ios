@@ -20,10 +20,13 @@ class LeftMenuViewController: UITableViewController {
 
         var frame = self.view.frame
         frame.size.width = 275
-        self.view.frame = frame
+        self.tableView.frame = frame
+        self.tableView.backgroundColor = UIColor.mobgenGreen()
+        self.tableView.separatorStyle = .None
 
         self.refreshControl = UIRefreshControl()
-        self.refreshControl!.attributedTitle = NSAttributedString(string: "Fetching modules")
+        self.refreshControl!.tintColor = UIColor.whiteColor()
+        self.refreshControl!.attributedTitle = NSAttributedString(string: "Fetching modules", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
         self.refreshControl!.addTarget(self, action: "loadData", forControlEvents: UIControlEvents.ValueChanged)
 
         loadData()
@@ -31,18 +34,38 @@ class LeftMenuViewController: UITableViewController {
 
     func loadData() {
         modules.removeAll()
-        
-        Manager.sharedInstance.getModules { (result) -> Void in
-            switch (result) {
-            case .Success(let mod):
-                self.modules.extend(mod)
-            case .Failure(_, let err):
-                print("Error: \(err.localizedDescription)")
-            }
 
+        Halo.Manager.sharedInstance.getModules({ (userData) -> Void in
+            self.modules.extend(userData)
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        }) { (error) -> Void in
+            print("Error: \(error.localizedDescription)")
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
+    }
+
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var frame = tableView.frame
+        frame.size.height = 55
+
+        let label = UILabel(frame: frame)
+        label.textAlignment = .Center
+        label.backgroundColor = UIColor.mobgenGreen()
+
+        let attrs = [
+            NSFontAttributeName : UIFont(name: "Lab-Medium", size: 35)!,
+            NSForegroundColorAttributeName : UIColor.whiteColor()
+        ]
+
+        label.attributedText = NSAttributedString(string: "MODULES", attributes: attrs)
+
+        return label
+    }
+
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 55
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -52,12 +75,16 @@ class LeftMenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return modules.count
     }
-    
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return MenuCell.cellHeight()
+    }
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as? MenuCell
         
         if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cell")
+            cell = MenuCell(style: .Subtitle, reuseIdentifier: "cell")
         }
         
         let finalCell = cell!
@@ -66,9 +93,9 @@ class LeftMenuViewController: UITableViewController {
 
         finalCell.textLabel?.text = module.name
 
-        if let name = module.moduleType?.name {
-            let dateString = NSDateFormatter.localizedStringFromDate(module.lastUpdate!, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
-            finalCell.detailTextLabel?.text = "\(name) | Last updated: \(dateString)"
+        if let date = module.lastUpdate {
+            let dateString = NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+            finalCell.detailTextLabel?.text = "Last updated: \(dateString)"
         }
 
         return finalCell
@@ -78,6 +105,28 @@ class LeftMenuViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+}
+
+class MenuCell: UITableViewCell {
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        self.textLabel?.textColor = UIColor.whiteColor()
+        self.detailTextLabel?.textColor = UIColor.mobgenLightGray()
+        self.backgroundColor = UIColor.mobgenGreen()
+    }
+
+    static func cellHeight() -> CGFloat {
+        return 55
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+
 
 }
 

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "HALO"
-        self.view.backgroundColor = UIColor.blueColor()
+        self.view.backgroundColor = UIColor.mobgenLightGray()
     }
 
 }
