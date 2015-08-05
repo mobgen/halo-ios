@@ -16,6 +16,7 @@
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
+		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; };
 		008E8DE61B683ABE00711DA5 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -63,6 +64,7 @@
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Modules.swift"; sourceTree = "<group>"; };
 		007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+GeneralContent.swift"; sourceTree = "<group>"; };
+		007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentInstance.swift; sourceTree = "<group>"; };
 		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
 		008E8DE31B68305900711DA5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		008E8DE71B683AD100711DA5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				0068D27B1B6778CA00B1E147 /* Token.swift */,
 				0045393A1B67E8170060C30B /* Module.swift */,
 				000827001B6A57A5001E8248 /* ModuleType.swift */,
+				007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */,
 				007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */,
 				007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */,
+				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,

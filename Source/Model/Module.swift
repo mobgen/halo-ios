@@ -9,34 +9,40 @@
 import Foundation
 
 /// Model class representing the different modules available in Halo
-public class HaloModule: NSObject {
+public class Module: NSObject {
 
     /// Unique identifier of the module
-    public var moduleId: NSNumber?
+    public var id: NSNumber?
 
     /// Visual name of the module
     public var name: String?
 
     /// Type of the module
-    public var moduleType: ModuleType?
+    public var type: Halo.ModuleType?
 
     /// Date of the last update performed in this module
     public var lastUpdate: NSDate?
+
+    public var internalId: String?
 
     /**
     Initialise a HaloModule from a dictionary
     
     - parameter dict:   Dictionary containing the information about the module
     */
-    init(dict: Dictionary<String,AnyObject>) {
-        moduleId = dict["id"] as? NSNumber
+    init(_ dict: Dictionary<String,AnyObject>) {
+        id = dict["id"] as? NSNumber
         name = dict["name"] as? String
 
         let moduleTypeDict = dict["moduleType"] as? Dictionary<String, AnyObject> ?? [String: AnyObject]()
-        moduleType = ModuleType(dict: moduleTypeDict)
+        type = ModuleType(moduleTypeDict)
 
         if let updated = dict["updatedAt"] as? NSNumber {
             lastUpdate = NSDate(timeIntervalSince1970: updated.doubleValue/1000)
+        }
+
+        if let intId = dict["internalId"] as? String {
+            internalId = intId
         }
     }
 }

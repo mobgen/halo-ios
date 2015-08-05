@@ -14,12 +14,12 @@ extension UIColor {
         return UIColor(rgba: "#748472")
     }
 
-    public static func mobgenOrange() -> UIColor? {
-        return UIColor(rgba: "#F49E00")
-    }
-
     public static func mobgenLightGreen() -> UIColor? {
         return UIColor(rgba: "#CCCFBD")
+    }
+
+    public static func mobgenOrange() -> UIColor? {
+        return UIColor(rgba: "#F49E00")
     }
 
     public static func mobgenLightGray() -> UIColor? {

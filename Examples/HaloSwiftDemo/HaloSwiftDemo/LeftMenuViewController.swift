@@ -10,9 +10,14 @@ import UIKit
 import Halo
 import Alamofire
 
+protocol LeftMenuDelegate {
+    func didSelectModule(module: Halo.Module) -> Void
+}
+
 class LeftMenuViewController: UITableViewController {
 
-    var modules = [HaloModule]()
+    var modules: [Halo.Module] = []
+    var delegate: LeftMenuDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,9 +106,10 @@ class LeftMenuViewController: UITableViewController {
         return finalCell
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        delegate?.didSelectModule(self.modules[indexPath.row])
+        let container = self.parentViewController as! ContainerViewController
+        container.toggleLeftMenu()
     }
 
 }
@@ -114,6 +120,7 @@ class MenuCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.textLabel?.textColor = UIColor.whiteColor()
+        self.selectionStyle = .None
         self.detailTextLabel?.textColor = UIColor.mobgenLightGray()
         self.backgroundColor = UIColor.mobgenGreen()
     }

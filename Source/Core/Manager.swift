@@ -14,7 +14,10 @@ import Alamofire
 public class Manager: NSObject {
 
     /// Shared instance of the manager (Singleton pattern)
-    public static let sharedInstance = Manager()
+    public static let sharedInstance = Halo.Manager()
+
+    /// General content component
+    public let generalContent = Halo.GeneralContent.sharedInstance
 
     /// Singleton instance of the networking component
     private let net = Halo.NetworkManager.instance
@@ -53,7 +56,7 @@ public class Manager: NSObject {
     
     - parameter completionHandler:  Closure to handle the result of the request asynchronously
     */
-    public func getModules(success: ((userData: [Halo.HaloModule]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+    public func getModules(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
         net.getModules { (result) -> Void in
             switch result {
             case .Success(let modules):

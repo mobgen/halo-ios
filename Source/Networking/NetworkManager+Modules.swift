@@ -16,19 +16,19 @@ extension NetworkManager {
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(completionHandler handler: (result: Alamofire.Result<[Halo.HaloModule]>) -> Void) -> Void {
+    func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module]>) -> Void) -> Void {
 
         self.startRequest(Router.Modules, completionHandler: { [weak self] (req, resp, result) -> Void in
             if let strongSelf = self {
                 switch result {
                 case .Success(let data):
                     let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
-                    handler(result: .Success(arr))
+                    handler(.Success(arr))
                 case .Failure(let data, let error):
-                    handler(result: .Failure(data, error))
+                    handler(.Failure(data, error))
                 }
             }
-            })
+        })
     }
 
     // MARK: Utility functions
@@ -40,12 +40,12 @@ extension NetworkManager {
 
     - returns   The list of the parsed modules
     */
-    private func parseModules(modules: [Dictionary<String,AnyObject>]) -> [HaloModule] {
+    private func parseModules(modules: [Dictionary<String,AnyObject>]) -> [Halo.Module] {
 
-        var modArray = [HaloModule]()
+        var modArray: [Halo.Module] = []
 
         for dict in modules {
-            modArray.append(HaloModule(dict: dict))
+            modArray.append(Module(dict))
         }
         
         return modArray

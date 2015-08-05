@@ -31,6 +31,12 @@ class NetworkManager: Alamofire.Manager {
     /// Queue of pending network tasks to be restarted after a successful authentication
     private var cachedTasks = Array<CachedTask>()
 
+    private init() {}
+
+    required init(configuration: NSURLSessionConfiguration, serverTrustPolicyManager: ServerTrustPolicyManager?) {
+        fatalError("init(configuration:serverTrustPolicyManager:) has not been implemented")
+    }
+
     /**
     Start the request flow handling also a potential 401 response. The token will be obtained/refreshed
     and the request will continue.
@@ -66,6 +72,7 @@ class NetworkManager: Alamofire.Manager {
             if let strongSelf = self {
                 if let resp = response {
                     if resp.statusCode == 401 {
+                        /// If we get a 401, we add the task to the queue and try to get a valid token
                         strongSelf.cachedTasks.append(cachedTask)
                         strongSelf.refreshToken()
                         return
@@ -104,7 +111,7 @@ class NetworkManager: Alamofire.Manager {
             switch result {
             case .Success(let value):
                 let dict = value as! Dictionary<String, AnyObject>
-                Router.token = Token(dict: dict)
+                Router.token = Token(dict)
 
                 /// Restart cached tasks
                 let cachedTaskCopy = self.cachedTasks

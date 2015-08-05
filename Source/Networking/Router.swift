@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-/// Custom implementation of the URLRequestConvertible protocol to handle the HTTP requests nicely
+/// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
 enum Router: URLRequestConvertible {
 
     /// Common base url of all the API endpoints

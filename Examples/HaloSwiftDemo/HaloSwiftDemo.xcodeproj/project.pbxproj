@@ -25,6 +25,7 @@
 		006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFA1B318D600045395A /* AppDelegate.swift */; };
 		006A5FFD1B318D600045395A /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFC1B318D600045395A /* LeftMenuViewController.swift */; };
 		007F78F91B70F934004D1C22 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78F81B70F934004D1C22 /* MainViewController.swift */; };
+		007F79011B7253A8004D1C22 /* KeyValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F79001B7253A7004D1C22 /* KeyValueViewController.swift */; };
 		00930AE11B385B2D002FF4F0 /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00930AE01B385B2D002FF4F0 /* Halo.plist */; };
 		00D1A3681B42738C008DFB71 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1A3671B42738C008DFB71 /* ContainerViewController.swift */; };
 		00D9471D1B71686300138A4F /* UICustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9471C1B71686300138A4F /* UICustomColors.swift */; };
@@ -69,6 +70,7 @@
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006A5FFC1B318D600045395A /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		007F78F81B70F934004D1C22 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		007F79001B7253A7004D1C22 /* KeyValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueViewController.swift; sourceTree = "<group>"; };
 		00930AE01B385B2D002FF4F0 /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
 		00D1A3671B42738C008DFB71 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		00D9471C1B71686300138A4F /* UICustomColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomColors.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				006A5FFC1B318D600045395A /* LeftMenuViewController.swift */,
 				007F78F81B70F934004D1C22 /* MainViewController.swift */,
 				00D1A3671B42738C008DFB71 /* ContainerViewController.swift */,
+				007F79001B7253A7004D1C22 /* KeyValueViewController.swift */,
 				00D9471C1B71686300138A4F /* UICustomColors.swift */,
 				0002FB6C1B616ACE00B06A9C /* Resources */,
 				006A5FF81B318D600045395A /* Supporting Files */,
@@ -279,7 +282,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APP_ID=\"55a613cf63235a0f00ad8efa\"\nAPI_KEY=\"w9l2c9pfMqvrvgeidRirX884RwFzdIpO\"\nsource ${SRCROOT}/HaloSwiftDemo/Frameworks/CrittercismSDK/dsym_upload.sh";
+			shellScript = "APP_ID=\"55a613cf63235a0f00ad8efa\"\nAPI_KEY=\"w9l2c9pfMqvrvgeidRirX884RwFzdIpO\"\nREQUIRE_UPLOAD_SUCCESS=0\nsource ${SRCROOT}/HaloSwiftDemo/Frameworks/CrittercismSDK/dsym_upload.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -292,6 +295,7 @@
 				006A5FFD1B318D600045395A /* LeftMenuViewController.swift in Sources */,
 				000590C21B565C7D00DED5D2 /* Config.swift in Sources */,
 				007F78F91B70F934004D1C22 /* MainViewController.swift in Sources */,
+				007F79011B7253A8004D1C22 /* KeyValueViewController.swift in Sources */,
 				00D9471D1B71686300138A4F /* UICustomColors.swift in Sources */,
 				006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */,
 				00D1A3681B42738C008DFB71 /* ContainerViewController.swift in Sources */,

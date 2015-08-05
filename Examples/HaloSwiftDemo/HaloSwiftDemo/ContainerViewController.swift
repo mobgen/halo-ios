@@ -38,10 +38,18 @@ public class ContainerViewController: UIViewController {
         let vc = MainViewController()
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: "toggleLeftMenu")
 
+        leftMenu.delegate = vc
+
         mainView = UINavigationController(rootViewController: vc)
 
         self.view.addSubview(self.leftMenu.view)
         self.view.addSubview(self.mainView.view)
+
+        self.addChildViewController(self.leftMenu)
+        self.addChildViewController(self.mainView)
+
+        self.leftMenu.didMoveToParentViewController(self)
+        self.mainView.didMoveToParentViewController(self)
 
         mainView.view.layer.shadowOpacity = 0.8
 
@@ -65,9 +73,10 @@ public class ContainerViewController: UIViewController {
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.mainView.view.frame = offFrame
         }) { (done) -> Void in
-            if (done && sign < 0) {
+            if (done && x > 0) {
                 UIApplication.sharedApplication().statusBarHidden = false
-                self.screenshot.removeFromSuperview()
+                /// Weird hack to avoid the view jumping after setting the status bar visible again
+                self.screenshot.performSelector("removeFromSuperview", withObject: nil, afterDelay: 0)
             }
         }
 
