@@ -36,7 +36,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
 
             print("Loading module \(id)")
 
-            halo.generalContent.generalContentInstances(id,
+            halo.generalContent.getInstances(id,
                 completionHandler: { (result) -> Void in
                     switch result {
                     case .Success(let instances):
