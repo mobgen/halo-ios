@@ -13,6 +13,7 @@ import Halo
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let mgr = Halo.Manager.sharedInstance
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -28,10 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()
 
+        setupEnvironment()
         setupCrittercism()
         application.registerForRemoteNotifications()
-        
-        Halo.Manager.sharedInstance.launch()
+
+        mgr.launch()
         
         return true
     }
@@ -60,10 +62,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Custom setup functions
     
-    func setupCrittercism() {
+    private func setupCrittercism() {
         Crittercism.enableWithAppID(Config.crittercismAppId)
     }
-    
+
+    private func setupEnvironment() {
+        #if MG_FEED_QA
+        print("Using QA configuration")
+        mgr.environment = .QA
+        #elseif MG_FEED_INT
+        print("Using INT configuration")
+        mgr.environment = .Int
+        #else
+        print("Using Prod configuration")
+        mgr.environment = .Prod
+        #endif
+    }
+
     // MARK: Push notifications
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

@@ -13,7 +13,7 @@ import Alamofire
 enum Router: URLRequestConvertible {
 
     /// Common base url of all the API endpoints
-    static let baseURL = NSURL(string: "http://halo-qa.mobgen.com:3000")
+    static var baseURL = NSURL(string: "http://halo-qa.mobgen.com:3000")
 
     /// Token to be used for authentication purposes
     static var token:Token?

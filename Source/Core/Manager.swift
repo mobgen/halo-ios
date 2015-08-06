@@ -9,6 +9,12 @@
 import Foundation
 import Alamofire
 
+public enum HaloEnvironment {
+    case Int
+    case QA
+    case Prod
+}
+
 /// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
 public class Manager: NSObject {
@@ -21,6 +27,23 @@ public class Manager: NSObject {
 
     /// Singleton instance of the networking component
     private let net = Halo.NetworkManager.instance
+
+    public var environment: HaloEnvironment {
+        set {
+            switch newValue {
+            case .Int:
+                Router.baseURL = NSURL(string: "http://halo-int.mobgen.com:3000")
+            case .QA:
+                Router.baseURL = NSURL(string: "http://halo-qa.mobgen.com:3000")
+            case .Prod:
+                Router.baseURL = NSURL(string: "http://halo.mobgen.com:3000")
+            }
+        }
+        get {
+            return .Prod
+        }
+
+    }
 
     private override init() {}
 
