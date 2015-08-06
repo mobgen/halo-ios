@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 public class GeneralContent: NSObject {
 
@@ -21,15 +22,30 @@ public class GeneralContent: NSObject {
     /**
     Get the existing instances of a given General Content module
 
+    - parameter moduleId:           Internal id of the module from which we want to retrieve the instances
+    - parameter completionHandler:  Closure to be executed when the request has finished
+    */
+    public func generalContentInstances(moduleId: String,
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance]>) -> Void) -> Void {
+            net.generalContentModule(moduleId, completionHandler: handler)
+    }
+
+    // MARK: ObjC exposed methods
+
+    /**
+    Get the existing instances of a given General Content module from Objective C
+
     - parameter moduleId:   Internal id of the module from which we want to retrieve the instances
     - parameter success:    Closure to be executed when the request has succeeded
     - parameter failure:    Closure to be executed when the request has failed
     */
-    public func generalContentInstances(moduleId: String,
+
+    @objc(generalContentInstances:success:failure:)
+    public func generalContentInstancesFromObjC(moduleId: String,
         success:((userData: [GeneralContentInstance]) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
-            net.generalContentModule(moduleId) { (result) -> Void in
+            self.generalContentInstances(moduleId) { (result) -> Void in
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances)

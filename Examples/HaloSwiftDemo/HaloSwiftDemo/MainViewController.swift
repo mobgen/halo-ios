@@ -14,6 +14,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
     var moduleId: String?
     var instances: [Halo.GeneralContentInstance] = []
     private let cellIdent = "cell"
+    private let halo = Halo.Manager.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,16 +36,18 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
 
             print("Loading module \(id)")
 
-            Halo.Manager.sharedInstance.generalContent.generalContentInstances(id,
-                success: { (userData) -> Void in
-                    self.instances.extend(userData)
+            halo.generalContent.generalContentInstances(id,
+                completionHandler: { (result) -> Void in
+                    switch result {
+                    case .Success(let instances):
+                        self.instances.extend(instances)
+                    case .Failure(_, let err):
+                        print("Error: \(err.localizedDescription)")
+                    }
+
                     self.tableView.reloadData()
                     self.refreshControl?.endRefreshing()
-                }) { (error) -> Void in
-                    print("Error")
-                    self.tableView.reloadData()
-                    self.refreshControl?.endRefreshing()
-            }
+                })
 
         } else {
             self.tableView.reloadData()

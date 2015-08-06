@@ -18,6 +18,7 @@ class LeftMenuViewController: UITableViewController {
 
     var modules: [Halo.Module] = []
     var delegate: LeftMenuDelegate?
+    private let halo = Halo.Manager.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,15 +41,18 @@ class LeftMenuViewController: UITableViewController {
     func loadData() {
         modules.removeAll()
 
-        Halo.Manager.sharedInstance.getModules({ (userData) -> Void in
-            self.modules.extend(userData)
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
-        }) { (error) -> Void in
-            print("Error: \(error.localizedDescription)")
+        halo.getModules { (result) -> Void in
+            switch result {
+            case .Success(let modules):
+                self.modules.extend(modules)
+            case .Failure(_, let err):
+                print("Error retrieving modules: \(err.localizedDescription)")
+            }
+
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
+
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -53,11 +53,25 @@ public class Manager: NSObject {
 
     /**
     Get a list of the existing modules for the provided client credentials
-    
-    - parameter completionHandler:  Closure to handle the result of the request asynchronously
+
+    - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getModules(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
-        net.getModules { (result) -> Void in
+    public func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module]>) -> Void) -> Void {
+        net.getModules(completionHandler: handler)
+    }
+
+    // MARK: ObjC exposed methods
+
+    /**
+    Get a list of the existing modules for the provided client credentials
+
+    - parameter success:  Closure to be executed when the request has succeeded
+    - parameter failure:  Closure to be executed when the request has failed
+    */
+    @objc(getModulesWithSuccess:failure:)
+    public func getModulesFromObjC(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+
+        self.getModules { (result) -> Void in
             switch result {
             case .Success(let modules):
                 success?(userData: modules)
@@ -66,5 +80,6 @@ public class Manager: NSObject {
             }
         }
     }
+
 
 }
