@@ -111,12 +111,27 @@ class NetworkManager: Alamofire.Manager {
             switch result {
             case .Success(let value):
                 let dict = value as! Dictionary<String, AnyObject>
-                Router.token = Token(dict)
+
+                Router.token = nil
+                let res: Alamofire.Result<AnyObject>
+
+                if let response = resp {
+                    if response.statusCode == 200 {
+                        Router.token = Token(dict)
+                        res = result
+                    } else {
+                        res = .Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving token"]))
+                    }
+                } else {
+                    // No response
+                    res = .Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response from server"]))
+                }
 
                 /// Restart cached tasks
                 let cachedTaskCopy = self.cachedTasks
                 self.cachedTasks.removeAll()
-                cachedTaskCopy.map { $0(nil, nil, result) }
+                cachedTaskCopy.map { $0(nil, nil, res) }
+
             case .Failure(_, let error):
                 print("Error refreshing token: \(error.localizedDescription)")
             }

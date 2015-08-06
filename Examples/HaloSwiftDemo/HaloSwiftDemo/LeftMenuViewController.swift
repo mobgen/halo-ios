@@ -42,6 +42,7 @@ class LeftMenuViewController: UITableViewController {
         modules.removeAll()
 
         halo.getModules { (result) -> Void in
+
             switch result {
             case .Success(let modules):
                 self.modules.extend(modules)
@@ -52,7 +53,6 @@ class LeftMenuViewController: UITableViewController {
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
-
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
