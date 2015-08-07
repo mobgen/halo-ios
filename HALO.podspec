@@ -8,11 +8,11 @@ Pod::Spec.new do |s|
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://bitbucket.org/mobgen/momos-sdk-ios"
+  s.homepage         = "https://bitbucket.org/mobgen/halo-sdk-ios"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Borja Santos-Diez" => "borja.santos@mobgen.com" }
-  # s.source           = { :git => "https://bitbucket.org/mobgen/momos-sdk-ios.git" }
+  # s.source           = { :git => "https://bitbucket.org/mobgen/halo-sdk-ios.git" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'
@@ -24,14 +24,5 @@ Pod::Spec.new do |s|
   #s.resource_bundles = {
   #  'test' => ['Pod/Assets/*.png']
   #}
-
-  s.subspec 'Core' do |core|
-  	core.source_files = 'Source/HALOCore/*.{h,swift}'
-  end
-
-  s.subspec 'Networking' do |net|
-  	net.source_files = 'Source/HALONetworking/*.{h,swift}'
-  	net.dependency 'HALOFramework/Core'
-  end
 
 end
