@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 public enum HaloEnvironment {
     case Int
@@ -71,6 +72,21 @@ public class Manager: NSObject {
             print("Using client ID: \(cId) and client secret: \(net.clientSecret!)")
         }
 
+        /// Print default system tags
+        print("----------")
+        print("Platform name: iOS")
+        print("OS version: \(NSProcessInfo.processInfo().operatingSystemVersionString)")
+        if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
+            print("App name: \(appName)")
+        }
+
+        if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
+            print("App version: \(appVersion)")
+        }
+
+        print("Device model: \(UIDevice.currentDevice().modelName)")
+        print("----------")
+
         return true
     }
 
@@ -103,6 +119,4 @@ public class Manager: NSObject {
             }
         }
     }
-
-
 }

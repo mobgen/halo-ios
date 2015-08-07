@@ -20,6 +20,8 @@
 		000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; };
 		000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		000827871B6A6E6E001E8248 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827821B6A6E6E001E8248 /* UIColorExtension.swift */; };
+		002E89B51B74BA7400D25302 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002E89B41B74BA7400D25302 /* Halo.framework */; };
+		002E89B61B74BA8700D25302 /* Halo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 002E89B41B74BA7400D25302 /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFA1B318D600045395A /* AppDelegate.swift */; };
 		006A5FFD1B318D600045395A /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFC1B318D600045395A /* LeftMenuViewController.swift */; };
 		007F78F91B70F934004D1C22 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78F81B70F934004D1C22 /* MainViewController.swift */; };
@@ -36,6 +38,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				002E89B61B74BA8700D25302 /* Halo.framework in Embed Frameworks */,
 				000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -61,6 +64,7 @@
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		000826DD1B690B0D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		000827821B6A6E6E001E8248 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		002E89B41B74BA7400D25302 /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF51B318D600045395A /* Halo Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Halo Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 			files = (
 				0002FB831B616AFC00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */,
 				000590C01B565B7300DED5D2 /* SystemConfiguration.framework in Frameworks */,
+				002E89B51B74BA7400D25302 /* Halo.framework in Frameworks */,
 				000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +182,7 @@
 		00D43B261B31C1EF0014D36F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				002E89B41B74BA7400D25302 /* Halo.framework */,
 				000826DD1B690B0D001E8248 /* Alamofire.framework */,
 				0002FB7B1B616AFC00B06A9C /* CrittercismSDK */,
 				000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */,

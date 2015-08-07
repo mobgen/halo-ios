@@ -137,7 +137,4 @@ class MenuCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-
-
 }
-
