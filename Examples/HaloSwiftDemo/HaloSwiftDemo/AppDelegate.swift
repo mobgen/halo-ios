@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setupEnvironment()
         setupCrittercism()
-        application.registerForRemoteNotifications()
 
         mgr.launch()
         
@@ -82,9 +81,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Push notifications
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        print("Got token data! \(deviceToken)")
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
+        print("Push token: \(deviceToken.description)")
+        mgr.setupPushNotifications()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

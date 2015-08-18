@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>shellappclient</string>
+	<string>halotestappclient</string>
 	<key>CLIENT_SECRET</key>
-	<string>shellapppass</string>
+	<string>halotestapppass</string>
 </dict>
 </plist>

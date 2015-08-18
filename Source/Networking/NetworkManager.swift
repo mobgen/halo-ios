@@ -33,7 +33,7 @@ class NetworkManager: Alamofire.Manager {
 
     private init() {}
 
-    required init(configuration: NSURLSessionConfiguration, serverTrustPolicyManager: ServerTrustPolicyManager?) {
+    required override init(configuration: NSURLSessionConfiguration, serverTrustPolicyManager: ServerTrustPolicyManager?) {
         fatalError("init(configuration:serverTrustPolicyManager:) has not been implemented")
     }
 

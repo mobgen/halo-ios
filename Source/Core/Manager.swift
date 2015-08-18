@@ -48,16 +48,16 @@ public class Manager: NSObject {
 
     private override init() {}
 
+    public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+
+    }
+
     /**
     Perform the initial tasks to properly set up the SDK
 
     - returns Bool describing whether the process has succeeded
     */
     public func launch() -> Bool {
-
-        print("********************************")
-        print("***** Welcome to Halo SDK ******")
-        print("********************************")
 
         let bundle = NSBundle.mainBundle()
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
@@ -71,6 +71,8 @@ public class Manager: NSObject {
         if let cId = net.clientId {
             print("Using client ID: \(cId) and client secret: \(net.clientSecret!)")
         }
+
+        UIApplication.sharedApplication().registerForRemoteNotifications()
 
         /// Print default system tags
         print("----------")
@@ -88,6 +90,15 @@ public class Manager: NSObject {
         print("----------")
 
         return true
+    }
+
+    /**
+    Set up the desired push notifications to be received. To be called after the device has been
+    registered
+    */
+    public func setupPushNotifications() {
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
 
     /**
