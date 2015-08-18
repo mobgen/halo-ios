@@ -17,9 +17,9 @@ extension NetworkManager {
     - parameter moduleId:           Internal id of the module to be requested
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    func generalContentInstances(moduleId: String, completionHandler handler: (Alamofire.Result<[GeneralContentInstance]>) -> Void) -> Void {
+    func generalContentInstances(moduleId: String, includeArchived archived: Bool, completionHandler handler: (Alamofire.Result<[GeneralContentInstance]>) -> Void) -> Void {
 
-        self.startRequest(Router.GeneralContentInstances(["module" : moduleId])) { [weak self] (req, resp, result) -> Void in
+        self.startRequest(Router.GeneralContentInstances(["module" : moduleId, "archived" : archived])) { [weak self] (req, resp, result) -> Void in
 
             if let response = resp {
                 if response.statusCode == 200 {
