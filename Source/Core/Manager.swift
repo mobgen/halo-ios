@@ -95,10 +95,18 @@ public class Manager: NSObject {
     /**
     Set up the desired push notifications to be received. To be called after the device has been
     registered
+    
+    - parameter application: Current application being configured to receive push notifications
+    - parameter deviceToken: Device token returned after registering for push notifications
     */
-    public func setupPushNotifications() {
+    public func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        app.registerUserNotificationSettings(settings)
+
+        var token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+        token = token.stringByReplacingOccurrencesOfString(" ", withString: "")
+
+        print("Push device token: \(token)")
     }
 
     /**

@@ -81,8 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Push notifications
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        print("Push token: \(deviceToken.description)")
-        mgr.setupPushNotifications()
+        mgr.setupPushNotifications(application: application, deviceToken: deviceToken)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -90,11 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
-    }
-    
-    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
-        print("Registered settings \(notificationSettings)")
+        // Handle notification
     }
     
 }
