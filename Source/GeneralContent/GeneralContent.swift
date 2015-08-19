@@ -25,9 +25,9 @@ public class GeneralContent: NSObject {
     - parameter moduleId:           Internal id of the module from which we want to retrieve the instances
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getInstances(moduleId: String, includeArchived archived: Bool = false,
+    public func getInstances(moduleId: String,
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance]>) -> Void) -> Void {
-            net.generalContentInstances(moduleId, includeArchived: archived, completionHandler: handler)
+            net.generalContentInstances(moduleId, completionHandler: handler)
     }
 
     // MARK: ObjC exposed methods
@@ -45,7 +45,7 @@ public class GeneralContent: NSObject {
         success:((userData: [GeneralContentInstance]) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
-            self.getInstances(moduleId, includeArchived: archived) { (result) -> Void in
+            self.getInstances(moduleId) { (result) -> Void in
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances)

@@ -8,11 +8,16 @@
 
 import Quick
 import Nimble
-import Halo
+import OHHTTPStubs
+@testable import Halo
 
 class CoreSpec: QuickSpec {
 
     override func spec() {
+
+        beforeSuite {}
+
+        afterSuite {}
 
         describe("The core manager") {
             it("has been initialised properly") {
