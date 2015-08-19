@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import UIKit
+import CoreBluetooth
 
 public enum HaloEnvironment {
     case Int
@@ -29,9 +30,13 @@ public class Manager: NSObject {
     /// Singleton instance of the networking component
     private let net = Halo.NetworkManager.instance
 
+    /// Bluetooth manager to decide whether the device supports BLE
+    private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
+
+    /// Current environment (QA, Integration or Prod)
     public var environment: HaloEnvironment {
-        set {
-            switch newValue {
+        didSet {
+            switch environment {
             case .Int:
                 Router.baseURL = NSURL(string: "http://halo-int.mobgen.com:3000")
             case .QA:
@@ -40,16 +45,10 @@ public class Manager: NSObject {
                 Router.baseURL = NSURL(string: "http://halo.mobgen.com:3000")
             }
         }
-        get {
-            return .Prod
-        }
-
     }
 
-    private override init() {}
-
-    public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-
+    private override init() {
+        self.environment = .Prod
     }
 
     /**
@@ -76,17 +75,42 @@ public class Manager: NSObject {
 
         /// Print default system tags
         print("----------")
-        print("Platform name: iOS")
-        print("OS version: \(NSProcessInfo.processInfo().operatingSystemVersionString)")
+        print("Platform Name: iOS")
+        let version = NSProcessInfo.processInfo().operatingSystemVersion
+
+        var versionString = "\(version.majorVersion).\(version.minorVersion)"
+
+        if (version.patchVersion > 0) {
+            versionString = versionString.stringByAppendingString(".\(version.patchVersion)")
+        }
+
+        print("Platform Version: \(versionString)")
         if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
-            print("App name: \(appName)")
+            print("Application Name: \(appName)")
         }
 
         if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
-            print("App version: \(appVersion)")
+            print("Application Version: \(appVersion)")
         }
 
-        print("Device model: \(UIDevice.currentDevice().modelName)")
+        print("Device Manufacturer: Apple")
+        print("Device Model: \(UIDevice.currentDevice().modelName)")
+        print("Device Type: \(UIDevice.currentDevice().deviceType)")
+
+        let BLEsupported = (bluetoothManager.state != .Unsupported)
+
+        print("Bluetooth 4 Support: \(BLEsupported)")
+        print("NFC Support: false")
+
+        let screen = UIScreen.mainScreen()
+        let bounds = screen.bounds
+        let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
+
+        print("Device Screen Size: \(Int(width))x\(Int(height))")
+
+        let testing = (self.environment != .Prod)
+
+        print("Test Device: \(testing)")
         print("----------")
 
         return true
