@@ -62,8 +62,8 @@ public class Manager: NSObject {
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
-                net.clientId = data[HaloCoreConstants.clientIdKey] as? String
-                net.clientSecret = data[HaloCoreConstants.clientSecret] as? String
+                net.clientId = data[CoreConstants.clientIdKey] as? String
+                net.clientSecret = data[CoreConstants.clientSecret] as? String
             }
         }
 
@@ -81,45 +81,50 @@ public class Manager: NSObject {
     Add the default system tags that will be potentially used for segmentation
     */
     private func setupDefaultSystemTags() {
-        /// Print default system tags
-        print("----------")
-        print("Platform Name: iOS")
-        let version = NSProcessInfo.processInfo().operatingSystemVersion
 
+        let defaults = NSUserDefaults.standardUserDefaults()
+
+        var userTags = defaults.objectForKey(CoreConstants.userDefaultsTagsKey) as? Dictionary<String,AnyObject> ?? Dictionary<String,AnyObject>()
+
+        userTags[CoreConstants.tagPlatformNameKey] = "iOS"
+
+        let version = NSProcessInfo.processInfo().operatingSystemVersion
         var versionString = "\(version.majorVersion).\(version.minorVersion)"
 
         if (version.patchVersion > 0) {
             versionString = versionString.stringByAppendingString(".\(version.patchVersion)")
         }
 
-        print("Platform Version: \(versionString)")
+        userTags[CoreConstants.tagPlatformVersionKey] = versionString
+
         if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
-            print("Application Name: \(appName)")
+            userTags[CoreConstants.tagApplicationNameKey] = appName
         }
 
         if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
-            print("Application Version: \(appVersion)")
+            userTags[CoreConstants.tagApplicationVersionKey] = appVersion
         }
 
-        print("Device Manufacturer: Apple")
-        print("Device Model: \(UIDevice.currentDevice().modelName)")
-        print("Device Type: \(UIDevice.currentDevice().deviceType)")
+        userTags[CoreConstants.tagDeviceManufacturerKey] = "Apple"
+        userTags[CoreConstants.tagDeviceModelKey] = UIDevice.currentDevice().modelName
+        userTags[CoreConstants.tagDeviceTypeKey] = UIDevice.currentDevice().deviceType
 
         let BLEsupported = (bluetoothManager.state != .Unsupported)
 
-        print("Bluetooth 4 Support: \(BLEsupported)")
-        print("NFC Support: false")
+        userTags[CoreConstants.tagBLESupportKey] = BLEsupported
+        userTags[CoreConstants.tagNFCSupportKey] = false
 
         let screen = UIScreen.mainScreen()
         let bounds = screen.bounds
         let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
 
-        print("Device Screen Size: \(Int(width))x\(Int(height))")
+        userTags[CoreConstants.tagDeviceScreenSizeKey] = "\(Int(width))x\(Int(height))"
+        userTags[CoreConstants.tagTestDeviceKey] = (self.environment != .Prod)
 
-        let testing = (self.environment != .Prod)
-        
-        print("Test Device: \(testing)")
-        print("----------")
+        print(userTags)
+
+        defaults.setObject(userTags, forKey: CoreConstants.userDefaultsTagsKey)
+        defaults.synchronize()
     }
 
     /**

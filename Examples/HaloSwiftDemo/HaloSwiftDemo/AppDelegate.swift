@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navigationBarAppearace = UINavigationBar.appearance()
 
+        // Reset badge number
+        application.applicationIconBadgeNumber = 0;
+
         navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Lab-Medium", size: 34)!]
         navigationBarAppearace.tintColor = UIColor.blackColor()
         navigationBarAppearace.barTintColor = UIColor.mobgenLightGreen()
@@ -87,9 +90,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("Couldn't register: \(error)")
     }
-    
+
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        // Handle push notification
+        application.applicationIconBadgeNumber = 0;
+    }
+
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // Handle notification
+        // Handle silent push notification
     }
     
 }

@@ -18,19 +18,18 @@ enum Router: URLRequestConvertible {
     /// Token to be used for authentication purposes
     static var token:Token?
 
-    /// Request authentication providing the required parameters
     case OAuth([String: AnyObject])
-
-    /// Request the existing modules for a given client
     case Modules
-
-    /// Get the existing instances of a given general content module
     case GeneralContentInstances([String: AnyObject])
+    case SegmentationCreateUser([String: AnyObject])
+    case SegmentationUpdateUser([String: AnyObject])
 
     /// Decide the HTTP method based on the specific request
     var method: Alamofire.Method {
         switch self {
-        case .OAuth(_):
+        case .OAuth(_),
+            .SegmentationCreateUser(_),
+            .SegmentationUpdateUser(_):
             return .POST
         default:
             return .GET
@@ -46,6 +45,10 @@ enum Router: URLRequestConvertible {
             return "/api/authentication/module/list"
         case .GeneralContentInstances(_):
             return "api/generalcontent/instance/list"
+        case .SegmentationCreateUser(_):
+            return "api/segmentation/user/create"
+        case .SegmentationUpdateUser(_):
+            return "api/segmentation/user/update"
         }
     }
 
@@ -61,10 +64,17 @@ enum Router: URLRequestConvertible {
             mutableURLRequest.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")
         }
 
+        /**
+        *  Wow.. really awful. Think of a better way of doing this!
+        */
         switch self {
         case .OAuth(let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+        case .SegmentationUpdateUser(let params):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         case .GeneralContentInstances(let params):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+        case .SegmentationCreateUser(let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         default:
             return mutableURLRequest

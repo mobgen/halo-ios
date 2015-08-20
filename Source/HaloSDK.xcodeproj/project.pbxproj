@@ -17,9 +17,14 @@
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
-		006CB9981B85BBB700EB872E /* capisci.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9841B85BA8000EB872E /* capisci.aif */; };
-		006CB9991B85BBB700EB872E /* fly-by.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9851B85BA8000EB872E /* fly-by.aif */; };
-		006CB99A1B85BBB700EB872E /* frozen-powerlines.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9861B85BA8000EB872E /* frozen-powerlines.aif */; };
+		006CB9AC1B86148900EB872E /* alarm-frenzy.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A51B86148900EB872E /* alarm-frenzy.aif */; };
+		006CB9AD1B86148900EB872E /* and-a-happy-new-year.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A61B86148900EB872E /* and-a-happy-new-year.aif */; };
+		006CB9AE1B86148900EB872E /* jingle-bells.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A71B86148900EB872E /* jingle-bells.aif */; };
+		006CB9AF1B86148900EB872E /* news-bringer.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A81B86148900EB872E /* news-bringer.aif */; };
+		006CB9B01B86148900EB872E /* oh-boy.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A91B86148900EB872E /* oh-boy.aif */; };
+		006CB9B11B86148900EB872E /* the-calling.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9AA1B86148900EB872E /* the-calling.aif */; };
+		006CB9B21B86148900EB872E /* the-little-dwarf.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9AB1B86148900EB872E /* the-little-dwarf.aif */; };
+		006CB9B41B861AA800EB872E /* NetworkManager+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B31B861AA700EB872E /* NetworkManager+Tags.swift */; };
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
@@ -82,11 +87,16 @@
 		006A5FBE1B318CAC0045395A /* CoreSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSpec.swift; sourceTree = "<group>"; };
 		006A5FCE1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
-		006CB9841B85BA8000EB872E /* capisci.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = capisci.aif; sourceTree = "<group>"; };
-		006CB9851B85BA8000EB872E /* fly-by.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fly-by.aif"; sourceTree = "<group>"; };
-		006CB9861B85BA8000EB872E /* frozen-powerlines.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "frozen-powerlines.aif"; sourceTree = "<group>"; };
 		006CB98E1B85BBA100EB872E /* HaloResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		006CB9901B85BBA100EB872E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006CB9A51B86148900EB872E /* alarm-frenzy.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "alarm-frenzy.aif"; sourceTree = "<group>"; };
+		006CB9A61B86148900EB872E /* and-a-happy-new-year.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "and-a-happy-new-year.aif"; sourceTree = "<group>"; };
+		006CB9A71B86148900EB872E /* jingle-bells.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "jingle-bells.aif"; sourceTree = "<group>"; };
+		006CB9A81B86148900EB872E /* news-bringer.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "news-bringer.aif"; sourceTree = "<group>"; };
+		006CB9A91B86148900EB872E /* oh-boy.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "oh-boy.aif"; sourceTree = "<group>"; };
+		006CB9AA1B86148900EB872E /* the-calling.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "the-calling.aif"; sourceTree = "<group>"; };
+		006CB9AB1B86148900EB872E /* the-little-dwarf.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "the-little-dwarf.aif"; sourceTree = "<group>"; };
+		006CB9B31B861AA700EB872E /* NetworkManager+Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Tags.swift"; sourceTree = "<group>"; };
 		007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Modules.swift"; sourceTree = "<group>"; };
 		007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+GeneralContent.swift"; sourceTree = "<group>"; };
 		007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentInstance.swift; sourceTree = "<group>"; };
@@ -212,6 +222,7 @@
 				0094A31F1B70A6A600DED864 /* NetworkManager.swift */,
 				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
 				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
+				006CB9B31B861AA700EB872E /* NetworkManager+Tags.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -228,10 +239,14 @@
 		006CB97D1B85B87200EB872E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				006CB9A51B86148900EB872E /* alarm-frenzy.aif */,
+				006CB9A61B86148900EB872E /* and-a-happy-new-year.aif */,
+				006CB9A71B86148900EB872E /* jingle-bells.aif */,
+				006CB9A81B86148900EB872E /* news-bringer.aif */,
+				006CB9A91B86148900EB872E /* oh-boy.aif */,
+				006CB9AA1B86148900EB872E /* the-calling.aif */,
+				006CB9AB1B86148900EB872E /* the-little-dwarf.aif */,
 				006CB9901B85BBA100EB872E /* Info.plist */,
-				006CB9841B85BA8000EB872E /* capisci.aif */,
-				006CB9851B85BA8000EB872E /* fly-by.aif */,
-				006CB9861B85BA8000EB872E /* frozen-powerlines.aif */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -373,9 +388,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006CB9981B85BBB700EB872E /* capisci.aif in Resources */,
-				006CB9991B85BBB700EB872E /* fly-by.aif in Resources */,
-				006CB99A1B85BBB700EB872E /* frozen-powerlines.aif in Resources */,
+				006CB9B01B86148900EB872E /* oh-boy.aif in Resources */,
+				006CB9B11B86148900EB872E /* the-calling.aif in Resources */,
+				006CB9AC1B86148900EB872E /* alarm-frenzy.aif in Resources */,
+				006CB9AF1B86148900EB872E /* news-bringer.aif in Resources */,
+				006CB9B21B86148900EB872E /* the-little-dwarf.aif in Resources */,
+				006CB9AE1B86148900EB872E /* jingle-bells.aif in Resources */,
+				006CB9AD1B86148900EB872E /* and-a-happy-new-year.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +413,7 @@
 				007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
+				006CB9B41B861AA800EB872E /* NetworkManager+Tags.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
