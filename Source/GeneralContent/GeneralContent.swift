@@ -39,7 +39,7 @@ public class GeneralContent: NSObject {
     - parameter success:    Closure to be executed when the request has succeeded
     - parameter failure:    Closure to be executed when the request has failed
     */
-    @objc(instancesInModule:includingArchived:success:failure:)
+    @objc(instancesInModule:success:failure:)
     public func getInstancesFromObjC(moduleId: String,
         success:((userData: [GeneralContentInstance]) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {

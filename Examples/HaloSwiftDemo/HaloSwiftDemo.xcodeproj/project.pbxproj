@@ -24,6 +24,7 @@
 		002E89B61B74BA8700D25302 /* Halo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 002E89B41B74BA7400D25302 /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFA1B318D600045395A /* AppDelegate.swift */; };
 		006A5FFD1B318D600045395A /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFC1B318D600045395A /* LeftMenuViewController.swift */; };
+		006CB9A01B85C51300EB872E /* HaloResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 006CB99F1B85C51300EB872E /* HaloResources.bundle */; };
 		007F78F91B70F934004D1C22 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78F81B70F934004D1C22 /* MainViewController.swift */; };
 		007F79011B7253A8004D1C22 /* KeyValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F79001B7253A7004D1C22 /* KeyValueViewController.swift */; };
 		00930AE11B385B2D002FF4F0 /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00930AE01B385B2D002FF4F0 /* Halo.plist */; };
@@ -69,6 +70,9 @@
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006A5FFC1B318D600045395A /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		006CB99F1B85C51300EB872E /* HaloResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HaloResources.bundle; path = "../Debug-iphoneos/HaloResources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		006CB9A11B85C5C800EB872E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		006CB9A31B85C68A00EB872E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		007F78F81B70F934004D1C22 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		007F79001B7253A7004D1C22 /* KeyValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueViewController.swift; sourceTree = "<group>"; };
 		00930AE01B385B2D002FF4F0 /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 				0002FB711B616ACE00B06A9C /* Lab-Light.ttf */,
 				0002FB721B616ACE00B06A9C /* Lab-Medium.ttf */,
 				0002FB731B616ACE00B06A9C /* Launch Screen.xib */,
+				006CB99F1B85C51300EB872E /* HaloResources.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -182,6 +187,8 @@
 		00D43B261B31C1EF0014D36F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				006CB9A31B85C68A00EB872E /* AVFoundation.framework */,
+				006CB9A11B85C5C800EB872E /* AudioToolbox.framework */,
 				002E89B41B74BA7400D25302 /* Halo.framework */,
 				000826DD1B690B0D001E8248 /* Alamofire.framework */,
 				0002FB7B1B616AFC00B06A9C /* CrittercismSDK */,
@@ -260,6 +267,7 @@
 				0002FB821B616AFC00B06A9C /* dsym_upload.sh in Resources */,
 				0002FB741B616ACE00B06A9C /* Gotham-Bold.ttf in Resources */,
 				0002FB791B616ACE00B06A9C /* Lab-Medium.ttf in Resources */,
+				006CB9A01B85C51300EB872E /* HaloResources.bundle in Resources */,
 				0002FB781B616ACE00B06A9C /* Lab-Light.ttf in Resources */,
 				0002FB761B616ACE00B06A9C /* Images.xcassets in Resources */,
 				0002FB7A1B616ACE00B06A9C /* Launch Screen.xib in Resources */,
@@ -411,7 +419,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_NAME = "Halo Demo";
+				PRODUCT_NAME = HaloDemo;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
@@ -432,7 +440,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_NAME = "Halo Demo";
+				PRODUCT_NAME = HaloDemo;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
@@ -503,7 +511,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_QA";
-				PRODUCT_NAME = "Halo Demo";
+				PRODUCT_NAME = HaloDemo;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
@@ -574,7 +582,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_INT";
-				PRODUCT_NAME = "Halo Demo";
+				PRODUCT_NAME = HaloDemo;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
@@ -638,7 +646,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_QA";
-				PRODUCT_NAME = "Halo Demo";
+				PRODUCT_NAME = HaloDemo;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
@@ -702,7 +710,7 @@
 					"$(PROJECT_DIR)/HaloSwiftDemo/Frameworks/CrittercismSDK",
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_INT";
-				PRODUCT_NAME = "Halo Demo";
+				PRODUCT_NAME = HaloDemo;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};

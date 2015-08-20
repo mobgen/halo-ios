@@ -17,6 +17,9 @@
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
+		006CB9981B85BBB700EB872E /* capisci.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9841B85BA8000EB872E /* capisci.aif */; };
+		006CB9991B85BBB700EB872E /* fly-by.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9851B85BA8000EB872E /* fly-by.aif */; };
+		006CB99A1B85BBB700EB872E /* frozen-powerlines.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9861B85BA8000EB872E /* frozen-powerlines.aif */; };
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
@@ -33,6 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		006CB99D1B85BC4E00EB872E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 006CB98D1B85BBA100EB872E;
+			remoteInfo = HaloResources;
+		};
 		0091C0141B779CDE0054EA75 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
@@ -72,6 +82,11 @@
 		006A5FBE1B318CAC0045395A /* CoreSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSpec.swift; sourceTree = "<group>"; };
 		006A5FCE1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		006CB9841B85BA8000EB872E /* capisci.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = capisci.aif; sourceTree = "<group>"; };
+		006CB9851B85BA8000EB872E /* fly-by.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fly-by.aif"; sourceTree = "<group>"; };
+		006CB9861B85BA8000EB872E /* frozen-powerlines.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "frozen-powerlines.aif"; sourceTree = "<group>"; };
+		006CB98E1B85BBA100EB872E /* HaloResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		006CB9901B85BBA100EB872E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Modules.swift"; sourceTree = "<group>"; };
 		007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+GeneralContent.swift"; sourceTree = "<group>"; };
 		007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentInstance.swift; sourceTree = "<group>"; };
@@ -101,6 +116,13 @@
 				0090A9291B83793E009B8D28 /* OHHTTPStubs.framework in Frameworks */,
 				008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */,
 				0091C0181B77A0550054EA75 /* Alamofire.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006CB98B1B85BBA100EB872E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +159,7 @@
 				006A5FCC1B318CBC0045395A /* Networking */,
 				00D1A36F1B42CA45008DFB71 /* GeneralContent */,
 				004539391B67E8090060C30B /* Model */,
+				006CB97D1B85B87200EB872E /* Resources */,
 				006A5FBB1B318CAC0045395A /* Tests */,
 				005C577F1B5CE6BF0018839D /* Frameworks */,
 				006A5F8D1B318C6E0045395A /* Products */,
@@ -149,6 +172,7 @@
 			children = (
 				006A5FAD1B318CAC0045395A /* Halo.framework */,
 				006A5FB71B318CAC0045395A /* HaloTests.xctest */,
+				006CB98E1B85BBA100EB872E /* HaloResources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,6 +225,17 @@
 			path = HaloNetworking;
 			sourceTree = "<group>";
 		};
+		006CB97D1B85B87200EB872E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				006CB9901B85BBA100EB872E /* Info.plist */,
+				006CB9841B85BA8000EB872E /* capisci.aif */,
+				006CB9851B85BA8000EB872E /* fly-by.aif */,
+				006CB9861B85BA8000EB872E /* frozen-powerlines.aif */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		00D1A36F1B42CA45008DFB71 /* GeneralContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +269,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				006CB99E1B85BC4E00EB872E /* PBXTargetDependency */,
 			);
 			name = Halo;
 			productName = MoMOSCore;
@@ -259,6 +295,23 @@
 			productReference = 006A5FB71B318CAC0045395A /* HaloTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		006CB98D1B85BBA100EB872E /* HaloResources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 006CB9911B85BBA100EB872E /* Build configuration list for PBXNativeTarget "HaloResources" */;
+			buildPhases = (
+				006CB98A1B85BBA100EB872E /* Sources */,
+				006CB98B1B85BBA100EB872E /* Frameworks */,
+				006CB98C1B85BBA100EB872E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HaloResources;
+			productName = HaloResources;
+			productReference = 006CB98E1B85BBA100EB872E /* HaloResources.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -277,6 +330,9 @@
 					006A5FB61B318CAC0045395A = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
+					006CB98D1B85BBA100EB872E = {
+						CreatedOnToolsVersion = 7.0;
+					};
 				};
 			};
 			buildConfigurationList = 006A5F861B318C6E0045395A /* Build configuration list for PBXProject "HaloSDK" */;
@@ -293,6 +349,7 @@
 			targets = (
 				006A5FAC1B318CAC0045395A /* Halo */,
 				006A5FB61B318CAC0045395A /* HaloTests */,
+				006CB98D1B85BBA100EB872E /* HaloResources */,
 			);
 		};
 /* End PBXProject section */
@@ -309,6 +366,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		006CB98C1B85BBA100EB872E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006CB9981B85BBB700EB872E /* capisci.aif in Resources */,
+				006CB9991B85BBB700EB872E /* fly-by.aif in Resources */,
+				006CB99A1B85BBB700EB872E /* frozen-powerlines.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,9 +409,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		006CB98A1B85BBA100EB872E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		006CB99E1B85BC4E00EB872E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 006CB98D1B85BBA100EB872E /* HaloResources */;
+			targetProxy = 006CB99D1B85BC4E00EB872E /* PBXContainerItemProxy */;
+		};
 		0091C0151B779CDE0054EA75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 006A5FAC1B318CAC0045395A /* Halo */;
@@ -462,7 +541,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -478,7 +557,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -499,6 +578,105 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
+		};
+		006CB9921B85BBA100EB872E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		006CB9931B85BBA100EB872E /* Debug-INT */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = "Debug-INT";
+		};
+		006CB9941B85BBA100EB872E /* Debug-QA */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = "Debug-QA";
+		};
+		006CB9951B85BBA100EB872E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		006CB9961B85BBA100EB872E /* Release-INT */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = "Release-INT";
+		};
+		006CB9971B85BBA100EB872E /* Release-QA */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = "Release-QA";
 		};
 		00E003CD1B737CD6000D96AC /* Debug-QA */ = {
 			isa = XCBuildConfiguration;
@@ -562,7 +740,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -639,7 +817,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -710,7 +888,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -780,7 +958,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -835,6 +1013,18 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		006CB9911B85BBA100EB872E /* Build configuration list for PBXNativeTarget "HaloResources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006CB9921B85BBA100EB872E /* Debug */,
+				006CB9931B85BBA100EB872E /* Debug-INT */,
+				006CB9941B85BBA100EB872E /* Debug-QA */,
+				006CB9951B85BBA100EB872E /* Release */,
+				006CB9961B85BBA100EB872E /* Release-INT */,
+				006CB9971B85BBA100EB872E /* Release-QA */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
