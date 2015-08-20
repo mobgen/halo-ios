@@ -82,7 +82,7 @@ public extension UIDevice {
         return DeviceList[identifier] ?? identifier
     }
 
-    /// Get the current device type (phone or tablet)
+    /// Get the current device type (phone or tablet) as String
     var deviceType: String {
         return (UIDevice.currentDevice().userInterfaceIdiom == .Phone) ? "Phone" : "Tablet"
     }

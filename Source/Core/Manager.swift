@@ -72,7 +72,15 @@ public class Manager: NSObject {
         }
 
         UIApplication.sharedApplication().registerForRemoteNotifications()
+        setupDefaultSystemTags()
 
+        return true
+    }
+
+    /**
+    Add the default system tags that will be potentially used for segmentation
+    */
+    private func setupDefaultSystemTags() {
         /// Print default system tags
         print("----------")
         print("Platform Name: iOS")
@@ -109,11 +117,9 @@ public class Manager: NSObject {
         print("Device Screen Size: \(Int(width))x\(Int(height))")
 
         let testing = (self.environment != .Prod)
-
+        
         print("Test Device: \(testing)")
         print("----------")
-
-        return true
     }
 
     /**
@@ -127,10 +133,7 @@ public class Manager: NSObject {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         app.registerUserNotificationSettings(settings)
 
-        var token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
-        token = token.stringByReplacingOccurrencesOfString(" ", withString: "")
-
-        print("Push device token: \(token)")
+        print("Push device token: \(deviceToken.description)")
     }
 
     /**
