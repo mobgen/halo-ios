@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.tintColor = UIColor.blackColor()
         navigationBarAppearace.barTintColor = UIColor.mobgenLightGreen()
 
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics: .Default)
+
         window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()
 

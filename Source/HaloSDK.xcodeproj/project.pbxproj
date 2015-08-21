@@ -25,6 +25,9 @@
 		006CB9B11B86148900EB872E /* the-calling.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9AA1B86148900EB872E /* the-calling.aif */; };
 		006CB9B21B86148900EB872E /* the-little-dwarf.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9AB1B86148900EB872E /* the-little-dwarf.aif */; };
 		006CB9B41B861AA800EB872E /* NetworkManager+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B31B861AA700EB872E /* NetworkManager+Tags.swift */; };
+		006CB9B61B870FB800EB872E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B51B870FB800EB872E /* User.swift */; };
+		006CB9B81B870FC400EB872E /* UserTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B71B870FC400EB872E /* UserTag.swift */; };
+		006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B91B87116D00EB872E /* UserDevice.swift */; };
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
@@ -97,6 +100,9 @@
 		006CB9AA1B86148900EB872E /* the-calling.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "the-calling.aif"; sourceTree = "<group>"; };
 		006CB9AB1B86148900EB872E /* the-little-dwarf.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "the-little-dwarf.aif"; sourceTree = "<group>"; };
 		006CB9B31B861AA700EB872E /* NetworkManager+Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Tags.swift"; sourceTree = "<group>"; };
+		006CB9B51B870FB800EB872E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		006CB9B71B870FC400EB872E /* UserTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTag.swift; sourceTree = "<group>"; };
+		006CB9B91B87116D00EB872E /* UserDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDevice.swift; sourceTree = "<group>"; };
 		007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Modules.swift"; sourceTree = "<group>"; };
 		007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+GeneralContent.swift"; sourceTree = "<group>"; };
 		007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentInstance.swift; sourceTree = "<group>"; };
@@ -146,6 +152,9 @@
 				0045393A1B67E8170060C30B /* Module.swift */,
 				000827001B6A57A5001E8248 /* ModuleType.swift */,
 				007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */,
+				006CB9B51B870FB800EB872E /* User.swift */,
+				006CB9B71B870FC400EB872E /* UserTag.swift */,
+				006CB9B91B87116D00EB872E /* UserDevice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -409,10 +418,13 @@
 				002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */,
 				00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */,
 				0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */,
+				006CB9B81B870FC400EB872E /* UserTag.swift in Sources */,
 				007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */,
 				007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */,
+				006CB9B61B870FB800EB872E /* User.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
+				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
 				006CB9B41B861AA800EB872E /* NetworkManager+Tags.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,

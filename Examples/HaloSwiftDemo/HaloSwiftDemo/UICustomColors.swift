@@ -10,19 +10,19 @@ import UIKit
 
 extension UIColor {
 
-    public static func mobgenGreen() -> UIColor? {
+    public class func mobgenGreen() -> UIColor? {
         return UIColor(rgba: "#748472")
     }
 
-    public static func mobgenLightGreen() -> UIColor? {
+    public class func mobgenLightGreen() -> UIColor? {
         return UIColor(rgba: "#CCCFBD")
     }
 
-    public static func mobgenOrange() -> UIColor? {
+    public class func mobgenOrange() -> UIColor? {
         return UIColor(rgba: "#F49E00")
     }
 
-    public static func mobgenLightGray() -> UIColor? {
+    public class func mobgenLightGray() -> UIColor? {
         return UIColor(rgba: "#F1F0EF")
     }
 }

@@ -20,11 +20,11 @@ class CoreConstants {
     // MARK: User defaults keys
 
     /// Key which identifies the existing user tags into the user defaults
-    static let userDefaultsTagsKey = "HALO_USER_TAGS"
+    static let userDefaultsUserKey = "HALO_USER"
 
     static let tagPlatformNameKey = "Platform Name"
 
-    static let tagPlatformVersionKey = "Platform Version"
+    static let tagPlatformVersionKey = "iOS Version"
 
     static let tagApplicationNameKey = "Application Name"
 

@@ -66,7 +66,7 @@
 		000826DD1B690B0D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		000827821B6A6E6E001E8248 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		002E89B41B74BA7400D25302 /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		006A5FF51B318D600045395A /* Halo Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Halo Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FF51B318D600045395A /* HaloDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006A5FFC1B318D600045395A /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		006A5FF61B318D600045395A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006A5FF51B318D600045395A /* Halo Demo.app */,
+				006A5FF51B318D600045395A /* HaloDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 			);
 			name = HaloSwiftDemo;
 			productName = MoMOSSwiftDemo;
-			productReference = 006A5FF51B318D600045395A /* Halo Demo.app */;
+			productReference = 006A5FF51B318D600045395A /* HaloDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

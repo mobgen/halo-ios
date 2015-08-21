@@ -47,6 +47,8 @@ public class Manager: NSObject {
         }
     }
 
+    public var user:User?
+
     private override init() {
         self.environment = .Prod
     }
@@ -72,6 +74,10 @@ public class Manager: NSObject {
         }
 
         UIApplication.sharedApplication().registerForRemoteNotifications()
+
+        // Get the stored user
+        self.user = Halo.User.loadUser() ?? Halo.User(id: 0, appId: 0, alias: "haloAlias")
+
         setupDefaultSystemTags()
 
         return true
@@ -82,49 +88,46 @@ public class Manager: NSObject {
     */
     private func setupDefaultSystemTags() {
 
-        let defaults = NSUserDefaults.standardUserDefaults()
+        if let user = self.user {
 
-        var userTags = defaults.objectForKey(CoreConstants.userDefaultsTagsKey) as? Dictionary<String,AnyObject> ?? Dictionary<String,AnyObject>()
+            user.addTag(CoreConstants.tagPlatformNameKey, value: "iOS")
 
-        userTags[CoreConstants.tagPlatformNameKey] = "iOS"
+            let version = NSProcessInfo.processInfo().operatingSystemVersion
+            var versionString = "\(version.majorVersion).\(version.minorVersion)"
 
-        let version = NSProcessInfo.processInfo().operatingSystemVersion
-        var versionString = "\(version.majorVersion).\(version.minorVersion)"
+            if (version.patchVersion > 0) {
+                versionString = versionString.stringByAppendingString(".\(version.patchVersion)")
+            }
 
-        if (version.patchVersion > 0) {
-            versionString = versionString.stringByAppendingString(".\(version.patchVersion)")
+            user.addTag(CoreConstants.tagPlatformVersionKey, value: versionString)
+
+            if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
+                user.addTag(CoreConstants.tagApplicationNameKey, value: appName.description)
+            }
+
+            if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
+                user.addTag(CoreConstants.tagApplicationVersionKey, value: appVersion.description)
+            }
+
+            user.addTag(CoreConstants.tagDeviceManufacturerKey, value: "Apple")
+            user.addTag(CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
+            user.addTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
+
+            let BLEsupported = (bluetoothManager.state != .Unsupported)
+
+            user.addTag(CoreConstants.tagBLESupportKey, value: String(BLEsupported))
+            user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
+
+            let screen = UIScreen.mainScreen()
+            let bounds = screen.bounds
+            let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
+
+            user.addTag(CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
+            user.addTag(CoreConstants.tagTestDeviceKey, value: String(self.environment != .Prod))
+
+            print(user.description)
+            user.storeUser()
         }
-
-        userTags[CoreConstants.tagPlatformVersionKey] = versionString
-
-        if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
-            userTags[CoreConstants.tagApplicationNameKey] = appName
-        }
-
-        if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
-            userTags[CoreConstants.tagApplicationVersionKey] = appVersion
-        }
-
-        userTags[CoreConstants.tagDeviceManufacturerKey] = "Apple"
-        userTags[CoreConstants.tagDeviceModelKey] = UIDevice.currentDevice().modelName
-        userTags[CoreConstants.tagDeviceTypeKey] = UIDevice.currentDevice().deviceType
-
-        let BLEsupported = (bluetoothManager.state != .Unsupported)
-
-        userTags[CoreConstants.tagBLESupportKey] = BLEsupported
-        userTags[CoreConstants.tagNFCSupportKey] = false
-
-        let screen = UIScreen.mainScreen()
-        let bounds = screen.bounds
-        let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
-
-        userTags[CoreConstants.tagDeviceScreenSizeKey] = "\(Int(width))x\(Int(height))"
-        userTags[CoreConstants.tagTestDeviceKey] = (self.environment != .Prod)
-
-        print(userTags)
-
-        defaults.setObject(userTags, forKey: CoreConstants.userDefaultsTagsKey)
-        defaults.synchronize()
     }
 
     /**
@@ -137,6 +140,9 @@ public class Manager: NSObject {
     public func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         app.registerUserNotificationSettings(settings)
+
+        let device = UserDevice(platform: "iOS", token: deviceToken.description)
+        self.user?.devices = [device]
 
         print("Push device token: \(deviceToken.description)")
     }

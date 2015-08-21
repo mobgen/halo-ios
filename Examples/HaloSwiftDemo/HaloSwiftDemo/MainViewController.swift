@@ -59,7 +59,14 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return instances.count
+        switch section {
+        case 0:
+            return instances.count
+        case 1:
+            return halo.user?.tags?.count ?? 0
+        default:
+            return 0
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

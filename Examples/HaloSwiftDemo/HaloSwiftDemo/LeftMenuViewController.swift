@@ -10,6 +10,10 @@ import UIKit
 import Halo
 import Alamofire
 
+enum HaloAddon {
+    case Tags
+}
+
 protocol LeftMenuDelegate {
     func didSelectModule(module: Halo.Module) -> Void
 }
@@ -68,7 +72,14 @@ class LeftMenuViewController: UITableViewController {
             NSForegroundColorAttributeName : UIColor.whiteColor()
         ]
 
-        label.attributedText = NSAttributedString(string: "MODULES", attributes: attrs)
+        switch section {
+        case 0:
+            label.attributedText = NSAttributedString(string: "MODULES", attributes: attrs)
+        case 1:
+            label.attributedText = NSAttributedString(string: "ADD-ONS", attributes: attrs)
+        default: break
+            // Do nothing
+        }
 
         return label
     }
@@ -78,11 +89,17 @@ class LeftMenuViewController: UITableViewController {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return modules.count
+        switch section {
+        case 0:
+            return modules.count
+        default:
+            return 1
+        }
+
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -98,21 +115,47 @@ class LeftMenuViewController: UITableViewController {
         
         let finalCell = cell!
 
-        let module = modules[indexPath.row]
+        switch indexPath.section {
+        case 0:
+            let module = modules[indexPath.row]
+            finalCell.textLabel?.text = module.name
 
-        finalCell.textLabel?.text = module.name
-
-        if let date = module.lastUpdate {
-            let dateString = NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
-            finalCell.detailTextLabel?.text = "Last updated: \(dateString)"
+            if let date = module.lastUpdate {
+                let dateString = NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+                finalCell.detailTextLabel?.text = "Last updated: \(dateString)"
+            }
+        case 1:
+            finalCell.textLabel?.text = "Segmentation Tags"
+        default: break
         }
 
         return finalCell
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        delegate?.didSelectModule(self.modules[indexPath.row])
+
         let container = self.parentViewController as! ContainerViewController
+
+        switch indexPath.section {
+        case 0:
+            delegate?.didSelectModule(self.modules[indexPath.row])
+        case 1:
+            var dict:[String:String] = [:]
+
+            if let tags = halo.user?.tags {
+                for tag in tags {
+                    dict[tag.name] = tag.value
+                }
+            }
+
+            let vc = KeyValueViewController(dict)
+            vc.title = "Segmentation tags"
+
+            container.mainView?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+
         container.toggleLeftMenu()
     }
 
@@ -129,7 +172,7 @@ class MenuCell: UITableViewCell {
         self.backgroundColor = UIColor.mobgenGreen()
     }
 
-    static func cellHeight() -> CGFloat {
+    class func cellHeight() -> CGFloat {
         return 55
     }
 
