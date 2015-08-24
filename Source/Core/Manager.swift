@@ -51,6 +51,9 @@ public class Manager: NSObject {
 
     private override init() {
         self.environment = .Prod
+
+        // Get the stored user
+        self.user = Halo.User.loadUser() ?? Halo.User(id: 0, appId: 0, alias: "defaultAlias")
     }
 
     /**
@@ -74,9 +77,6 @@ public class Manager: NSObject {
         }
 
         UIApplication.sharedApplication().registerForRemoteNotifications()
-
-        // Get the stored user
-        self.user = Halo.User.loadUser() ?? Halo.User(id: 0, appId: 0, alias: "haloAlias")
 
         setupDefaultSystemTags()
 
@@ -172,7 +172,8 @@ public class Manager: NSObject {
             case .Success(let modules):
                 success?(userData: modules)
             case .Failure(_, let error):
-                failure?(error: error)
+                let err = error as NSError
+                failure?(error: err)
             }
         }
     }

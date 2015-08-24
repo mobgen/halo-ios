@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setupEnvironment()
         setupCrittercism()
+        setupUser()
 
         mgr.launch()
         
@@ -81,6 +82,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Using Prod configuration")
         mgr.environment = .Prod
         #endif
+    }
+
+    private func setupUser() {
+        if let user = mgr.user {
+            user.email = "test@mobgen.com"
+            user.alias = "testAlias"
+
+            user.addTag("Custom tag", value: "blah")
+        }
     }
 
     // MARK: Push notifications

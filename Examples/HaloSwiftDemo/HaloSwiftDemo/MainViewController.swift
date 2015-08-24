@@ -40,7 +40,8 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
                     switch result {
                     case .Success(let instances):
                         self.instances.extend(instances)
-                    case .Failure(_, let err):
+                    case .Failure(_, let error):
+                        let err = error as NSError
                         print("Error: \(err.localizedDescription)")
                     }
 

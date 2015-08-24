@@ -20,7 +20,7 @@ public class User: NSObject, NSCoding {
     internal(set) public var updatedAt:NSDate?
 
     public override var description: String {
-        return "id: \(id)\nemail: \(email)\nalias:\(alias)"
+        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n----"
     }
 
     init(id: Int, appId: Int, alias: String) {
@@ -94,7 +94,5 @@ public class User: NSObject, NSCoding {
             return nil
         }
     }
-
-
 
 }

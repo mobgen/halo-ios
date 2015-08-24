@@ -50,7 +50,8 @@ class LeftMenuViewController: UITableViewController {
             switch result {
             case .Success(let modules):
                 self.modules.extend(modules)
-            case .Failure(_, let err):
+            case .Failure(_, let error):
+                let err = error as NSError
                 print("Error retrieving modules: \(err.localizedDescription)")
             }
 

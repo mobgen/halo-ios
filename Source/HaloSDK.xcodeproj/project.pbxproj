@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		000826FF1B6A34DE001E8248 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000826FE1B6A34DE001E8248 /* Router.swift */; };
 		000827011B6A57A5001E8248 /* ModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827001B6A57A5001E8248 /* ModuleType.swift */; };
-		002BDB6C1B8380D4006C9C8A /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0090A9281B83793E009B8D28 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
@@ -34,12 +33,12 @@
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; };
 		008E8DE81B683AD100711DA5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; };
-		0090A9291B83793E009B8D28 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0090A9281B83793E009B8D28 /* OHHTTPStubs.framework */; };
 		0091C0121B7797E50054EA75 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0091C0131B7797E50054EA75 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0091C0171B77A0490054EA75 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0091C0181B77A0550054EA75 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
+		0096188B1B8B1D570002A76B /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0096188A1B8B1D570002A76B /* OHHTTPStubs.framework */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +66,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				002BDB6C1B8380D4006C9C8A /* OHHTTPStubs.framework in CopyFiles */,
 				0091C0171B77A0490054EA75 /* Alamofire.framework in CopyFiles */,
 				0091C0121B7797E50054EA75 /* Nimble.framework in CopyFiles */,
 				0091C0131B7797E50054EA75 /* Quick.framework in CopyFiles */,
@@ -109,8 +107,8 @@
 		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
 		008E8DE31B68305900711DA5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		008E8DE71B683AD100711DA5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
-		0090A9281B83793E009B8D28 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = ../Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		0094A31F1B70A6A600DED864 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0096188A1B8B1D570002A76B /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = ../Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				008E8DE81B683AD100711DA5 /* Nimble.framework in Frameworks */,
-				0090A9291B83793E009B8D28 /* OHHTTPStubs.framework in Frameworks */,
+				0096188B1B8B1D570002A76B /* OHHTTPStubs.framework in Frameworks */,
 				008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */,
 				0091C0181B77A0550054EA75 /* Alamofire.framework in Frameworks */,
 			);
@@ -162,8 +160,8 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0096188A1B8B1D570002A76B /* OHHTTPStubs.framework */,
 				003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */,
-				0090A9281B83793E009B8D28 /* OHHTTPStubs.framework */,
 				008E8DE71B683AD100711DA5 /* Nimble.framework */,
 				008E8DE31B68305900711DA5 /* Quick.framework */,
 				005C578A1B5CEA2D0018839D /* Alamofire.framework */,
@@ -1057,6 +1055,7 @@
 				006CB9971B85BBA100EB872E /* Release-QA */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

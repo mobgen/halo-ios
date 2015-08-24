@@ -49,7 +49,8 @@ public class GeneralContent: NSObject {
                 case .Success(let instances):
                     success?(userData: instances)
                 case .Failure(_, let error):
-                    failure?(error: error)
+                    let err = error as NSError
+                    failure?(error: err)
                 }
             }
     }

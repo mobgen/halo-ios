@@ -15,9 +15,13 @@ class CoreSpec: QuickSpec {
 
     override func spec() {
 
-        beforeSuite {}
+        beforeSuite {
 
-        afterSuite {}
+        }
+
+        afterSuite {
+
+        }
 
         describe("The core manager") {
             it("has been initialised properly") {

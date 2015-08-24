@@ -133,7 +133,8 @@ class NetworkManager: Alamofire.Manager {
                 cachedTaskCopy.map { $0(nil, nil, res) }
 
             case .Failure(_, let error):
-                print("Error refreshing token: \(error.localizedDescription)")
+                let err = error as NSError
+                print("Error refreshing token: \(err.localizedDescription)")
             }
         }
 
