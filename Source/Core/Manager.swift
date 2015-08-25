@@ -28,7 +28,7 @@ public class Manager: NSObject {
     public let generalContent = Halo.GeneralContent.sharedInstance
 
     /// Singleton instance of the networking component
-    private let net = Halo.NetworkManager.instance
+    let net = Halo.NetworkManager.instance
 
     /// Bluetooth manager to decide whether the device supports BLE
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
@@ -63,7 +63,7 @@ public class Manager: NSObject {
     */
     public func launch() -> Bool {
 
-        let bundle = NSBundle.mainBundle()
+        let bundle = NSBundle(forClass: self.dynamicType)
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {

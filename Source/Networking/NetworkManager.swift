@@ -87,7 +87,7 @@ class NetworkManager: Alamofire.Manager {
     /**
     Obtain/refresh an authentication token when needed
     */
-    private func refreshToken() -> Void {
+    func refreshToken(completionHandler: (() -> Void)? = nil) -> Void {
         self.isRefreshing = true
 
         let params: Dictionary<String, AnyObject>
@@ -136,8 +136,9 @@ class NetworkManager: Alamofire.Manager {
                 let err = error as NSError
                 print("Error refreshing token: \(err.localizedDescription)")
             }
-        }
 
-        self.isRefreshing = false
+            self.isRefreshing = false
+            completionHandler?()
+        }
     }
 }

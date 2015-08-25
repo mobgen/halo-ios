@@ -40,3 +40,5 @@ Pods/
 Carthage/
 
 docs/
+vendor
+bin
