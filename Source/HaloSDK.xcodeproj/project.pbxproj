@@ -15,6 +15,7 @@
 		0053907E1B8C620B0036F579 /* oauth_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0053907D1B8C620B0036F579 /* oauth_success.json */; };
 		005390821B8C655C0036F579 /* oauth_failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 005390811B8C655C0036F579 /* oauth_failure.json */; };
 		005390841B8C67B80036F579 /* module_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 005390831B8C67B80036F579 /* module_list_success.json */; };
+		005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+User.swift */; };
 		005822981B5FBBDD005BF8F4 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
@@ -88,6 +89,7 @@
 		0053907D1B8C620B0036F579 /* oauth_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oauth_success.json; sourceTree = "<group>"; };
 		005390811B8C655C0036F579 /* oauth_failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oauth_failure.json; sourceTree = "<group>"; };
 		005390831B8C67B80036F579 /* module_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = module_list_success.json; sourceTree = "<group>"; };
+		005390851B8DB7590036F579 /* NetworkManager+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+User.swift"; sourceTree = "<group>"; };
 		005C578A1B5CEA2D0018839D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0068D27B1B6778CA00B1E147 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +243,7 @@
 				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
 				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
 				006CB9B31B861AA700EB872E /* NetworkManager+Tags.swift */,
+				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
 				006CB9B41B861AA800EB872E /* NetworkManager+Tags.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
+				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,

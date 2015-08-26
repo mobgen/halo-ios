@@ -87,9 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupUser() {
         if let user = mgr.user {
             user.email = "test@mobgen.com"
-            user.alias = "testAlias"
+            user.alias = "iosAlias"
 
-            user.addTag("Custom tag", value: "blah")
+            user.addTag("My custom tag", value: "HELL YEAH!")
         }
     }
 

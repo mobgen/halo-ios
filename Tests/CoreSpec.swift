@@ -17,14 +17,17 @@ class CoreSpec: QuickSpec {
     override func spec() {
 
         let mgr = Halo.Manager.sharedInstance
+        var request: NSURLRequest?
+        var response: NSHTTPURLResponse?
+        var result: Result<AnyObject>?
 
         beforeSuite {
             mgr.launch()
-            mgr.net.clientId = "testclientid"
-            mgr.net.clientSecret = "testclientsecret"
+            mgr.clientId = "testclientid"
+            mgr.clientSecret = "testclientsecret"
         }
 
-        afterSuite {
+        afterEach {
             print("After suite")
             OHHTTPStubs.removeAllStubs()
         }
@@ -39,20 +42,22 @@ class CoreSpec: QuickSpec {
 
             beforeEach {
                 Router.token = nil
+                request = nil
+                response = nil
+                result = nil
             }
 
             context("with the right credentials") {
 
                 beforeEach {
-                    OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest) -> ObjCBool in
-                        return ObjCBool(request.URL!.path! == "/api/oauth/token")
+                    OHHTTPStubs.stubRequestsPassingTest({ ObjCBool($0.URL!.path! == "/api/oauth/token")
                         }, withStubResponse: { _ in
                             let fixture = OHPathForFile("oauth_success.json", self.dynamicType)
                             return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     })
 
                     waitUntil { done in
-                        mgr.net.refreshToken {
+                        mgr.net.refreshToken { (req, resp, res) -> Void in
                             done()
                         }
                     }
@@ -67,8 +72,7 @@ class CoreSpec: QuickSpec {
             context("with the wrong credentials") {
 
                 beforeEach {
-                    OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest) -> ObjCBool in
-                        return ObjCBool(request.URL!.path! == "/api/oauth/token")
+                    OHHTTPStubs.stubRequestsPassingTest({ ObjCBool($0.URL!.path! == "/api/oauth/token")
                         }, withStubResponse: { _ in
                             let fixture = OHPathForFile("oauth_failure.json", self.dynamicType)
                             return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 403, headers: ["Content-Type": "application/json"])
@@ -91,27 +95,27 @@ class CoreSpec: QuickSpec {
 
                 beforeEach {
                     OHHTTPStubs.stubRequestsPassingTest({ ObjCBool($0.URL!.path! == "/api/authentication/module/list")
-                    }, withStubResponse: { _ in
-                        let fixture = OHPathForFile("module_list_success.json", self.dynamicType)
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                        }, withStubResponse: { _ in
+                            let fixture = OHPathForFile("module_list_success.json", self.dynamicType)
+                            return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     })
 
                     waitUntil { done in
                         mgr.getModules { result = $0; done() }
                     }
                 }
-
+                
                 afterEach {
                     result = nil
                 }
-
+                
                 it("succeeds") {
                     expect(result?.error).to(beNil())
                 }
-
+                
             }
-
+            
         }
     }
-
+    
 }

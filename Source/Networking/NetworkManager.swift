@@ -87,7 +87,7 @@ class NetworkManager: Alamofire.Manager {
     /**
     Obtain/refresh an authentication token when needed
     */
-    func refreshToken(completionHandler: (() -> Void)? = nil) -> Void {
+    func refreshToken(completionHandler: CompletionHandler? = nil) -> Void {
         self.isRefreshing = true
 
         let params: Dictionary<String, AnyObject>
@@ -138,7 +138,7 @@ class NetworkManager: Alamofire.Manager {
             }
 
             self.isRefreshing = false
-            completionHandler?()
+            completionHandler?(req, resp, result)
         }
     }
 }

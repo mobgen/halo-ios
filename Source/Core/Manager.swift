@@ -47,13 +47,34 @@ public class Manager: NSObject {
         }
     }
 
+    /// Client id to be used in the API calls
+    public var clientId: String? {
+        get {
+            return net.clientId
+        }
+        set {
+            net.clientId = newValue
+        }
+    }
+
+    /// Client secret to be used in the API calls
+    public var clientSecret: String? {
+        get {
+            return net.clientSecret
+        }
+        set {
+            net.clientSecret = newValue
+        }
+    }
+
+    /// Instance holding all the user-related information
     public var user:User?
 
     private override init() {
         self.environment = .Prod
 
         // Get the stored user
-        self.user = Halo.User.loadUser() ?? Halo.User(id: 0, appId: 0, alias: "defaultAlias")
+        self.user = Halo.User.loadUser() ?? Halo.User(id: nil, appId: nil, alias: "defaultAlias")
     }
 
     /**
@@ -63,7 +84,7 @@ public class Manager: NSObject {
     */
     public func launch() -> Bool {
 
-        let bundle = NSBundle(forClass: self.dynamicType)
+        let bundle = NSBundle.mainBundle()
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
@@ -126,7 +147,20 @@ public class Manager: NSObject {
             user.addTag(CoreConstants.tagTestDeviceKey, value: String(self.environment != .Prod))
 
             print(user.description)
-            user.storeUser()
+            self.user?.storeUser()
+
+            net.createUpdateUser(user, completionHandler: { (result) -> Void in
+                switch result {
+                case .Success(let user):
+                    self.user = user
+                    print(self.user?.description)
+                    self.user?.storeUser()
+                case .Failure(_, let error):
+                    let err = error as NSError
+                    print("Error: \(err.localizedDescription)")
+                }
+            })
+
         }
     }
 

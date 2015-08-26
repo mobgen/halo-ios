@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UserTag: NSObject, NSCoding {
+public final class UserTag: NSObject, NSCoding {
 
     internal(set) public var id: String?
     public var name: String = ""
@@ -32,6 +32,29 @@ public class UserTag: NSObject, NSCoding {
         aCoder.encodeObject(id, forKey: "id")
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(value, forKey: "value")
+    }
+
+    func toDictionary() -> [String: AnyObject] {
+        var dict = [String: AnyObject]()
+
+        if let id = self.id {
+            dict["id"] = id
+        }
+
+        if let val = self.value {
+            dict["value"] = val
+        }
+
+        dict["name"] = self.name
+
+        return dict
+    }
+
+    class func fromDictionary(dict: [String: AnyObject]) -> UserTag {
+        let tag = UserTag(name: dict["name"] as! String, value: dict["value"] as? String)
+        tag.id = dict["id"] as? String
+
+        return tag
     }
 }
 

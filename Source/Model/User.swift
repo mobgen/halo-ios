@@ -8,14 +8,14 @@
 
 import Foundation
 
-public class User: NSObject, NSCoding {
+public final class User: NSObject, NSCoding {
 
-    internal(set) public var id:Int = 0
-    internal(set) public var appId:Int = 0
+    internal(set) public var id:String?
+    internal(set) public var appId:Int?
     public var email:String?
     public var alias:String = ""
     public var devices:[Halo.UserDevice]?
-    public var tags:[Halo.UserTag]?
+    public var tags:Set<Halo.UserTag>?
     internal(set) public var createdAt:NSDate?
     internal(set) public var updatedAt:NSDate?
 
@@ -23,7 +23,7 @@ public class User: NSObject, NSCoding {
         return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n----"
     }
 
-    init(id: Int, appId: Int, alias: String) {
+    init(id: String?, appId: Int?, alias: String) {
         self.id = id
         self.appId = appId
         self.alias = alias
@@ -33,19 +33,19 @@ public class User: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        self.id = aDecoder.decodeIntegerForKey("id")
-        self.appId = aDecoder.decodeIntegerForKey("appId")
+        self.id = aDecoder.decodeObjectForKey("id") as? String
+        self.appId = aDecoder.decodeObjectForKey("appId") as? Int
         self.email = aDecoder.decodeObjectForKey("email") as? String
         self.alias = aDecoder.decodeObjectForKey("alias") as! String
         self.devices = aDecoder.decodeObjectForKey("devices") as? [Halo.UserDevice]
-        self.tags = aDecoder.decodeObjectForKey("tags") as? [Halo.UserTag]
+        self.tags = aDecoder.decodeObjectForKey("tags") as? Set<Halo.UserTag>
         self.createdAt = aDecoder.decodeObjectForKey("createdAt") as? NSDate
         self.updatedAt = aDecoder.decodeObjectForKey("updatedAt") as? NSDate
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInteger(id, forKey: "id")
-        aCoder.encodeInteger(appId, forKey: "appId")
+        aCoder.encodeObject(id, forKey: "id")
+        aCoder.encodeObject(appId, forKey: "appId")
         aCoder.encodeObject(email, forKey: "email")
         aCoder.encodeObject(alias, forKey: "alias")
         aCoder.encodeObject(devices, forKey: "devices")
@@ -68,7 +68,7 @@ public class User: NSObject, NSCoding {
             self.tags = []
         }
 
-        self.tags?.append(tag)
+        self.tags?.insert(tag)
     }
 
     public func addTags(tags: Dictionary<String, String?>) {
@@ -93,6 +93,55 @@ public class User: NSObject, NSCoding {
         } else {
             return nil
         }
+    }
+
+    func toDictionary() -> [String: AnyObject] {
+
+        var dict = [String: AnyObject]()
+
+        dict["id"] = self.id
+        dict["appId"] = self.appId
+
+        if let email = self.email {
+            dict["email"] = email
+        }
+
+        dict["alias"] = self.alias
+        dict["devices"] = self.devices?.map({ (device: UserDevice) -> NSDictionary in
+            return device.toDictionary()
+        })
+        dict["tags"] = self.tags?.map({ (tag: UserTag) -> NSDictionary in
+            return tag.toDictionary()
+        })
+        dict["createdAt"] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
+        dict["updatedAt"] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000
+
+        return dict
+
+    }
+
+    class func fromDictionary(dict: [String: AnyObject]) -> Halo.User {
+
+        var user: Halo.User
+
+        user = User(id: dict["id"] as? String, appId: dict["appId"] as? Int, alias: dict["alias"] as! String)
+
+        user.email = dict["email"] as? String
+        user.devices = (dict["devices"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserDevice in
+            return UserDevice.fromDictionary(dict)
+        })
+
+        if let tags = (dict["tags"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserTag in
+            return UserTag.fromDictionary(dict)
+        }) {
+            user.tags = Set(tags)
+        }
+
+        user.createdAt = NSDate(timeIntervalSince1970: (dict["createdAt"] as! NSTimeInterval)/1000)
+        user.updatedAt = NSDate(timeIntervalSince1970: (dict["updatedAt"] as! NSTimeInterval)/1000)
+
+        return user
+
     }
 
 }

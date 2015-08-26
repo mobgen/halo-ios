@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UserDevice: NSObject, NSCoding {
+public final class UserDevice: NSObject, NSCoding {
 
     public var platform:String = ""
     public var token:String = ""
@@ -29,5 +29,18 @@ public class UserDevice: NSObject, NSCoding {
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(platform, forKey: "platform")
         aCoder.encodeObject(token, forKey: "token")
+    }
+
+    func toDictionary() -> [String: AnyObject] {
+        return [
+            "platform"  : self.platform,
+            "token"     : self.token
+        ]
+    }
+
+    class func fromDictionary(dict: [String: AnyObject]) -> Halo.UserDevice {
+
+        return UserDevice(platform: dict["platform"] as! String, token: dict["token"] as! String)
+
     }
 }

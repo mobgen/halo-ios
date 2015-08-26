@@ -46,9 +46,9 @@ enum Router: URLRequestConvertible {
         case .GeneralContentInstances(_):
             return "api/generalcontent/instance/list"
         case .SegmentationCreateUser(_):
-            return "api/segmentation/user/create"
+            return "api/segmentation/appuser/create"
         case .SegmentationUpdateUser(_):
-            return "api/segmentation/user/update"
+            return "api/segmentation/appuser/update"
         }
     }
 
@@ -70,12 +70,12 @@ enum Router: URLRequestConvertible {
         switch self {
         case .OAuth(let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
-        case .SegmentationUpdateUser(let params):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         case .GeneralContentInstances(let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         case .SegmentationCreateUser(let params):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
+        case .SegmentationUpdateUser(let params):
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
         default:
             return mutableURLRequest
         }

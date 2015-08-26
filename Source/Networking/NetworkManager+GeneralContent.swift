@@ -27,7 +27,7 @@ extension NetworkManager {
                     if let strongSelf = self {
                         switch result {
                         case .Success(let data):
-                            let arr = strongSelf.parseGeneralContentInstances(data as! [Dictionary<String,AnyObject>])
+                            let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]])
                             handler(.Success(arr))
                         case .Failure(let data, let error):
                             handler(.Failure(data, error))
@@ -49,7 +49,7 @@ extension NetworkManager {
 
     - returns Array of parsed General Content instances
     */
-    private func parseGeneralContentInstances(instances: [Dictionary<String, AnyObject>]) -> [GeneralContentInstance] {
+    private func parseGeneralContentInstances(instances: [[String: AnyObject]]) -> [GeneralContentInstance] {
 
         var gcInstances = [GeneralContentInstance]()
 

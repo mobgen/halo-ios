@@ -31,7 +31,8 @@ public class GeneralContentInstance: NSObject {
     /// Most recent date in which the content was updated
     public var updatedAt: NSDate?
 
-    init(_ dict: Dictionary<String, AnyObject>) {
+    init(_ dict: [String: AnyObject]) {
+        
         id = dict["id"] as? String
         moduleId = dict["module"] as? String
         name = dict["name"] as? String
