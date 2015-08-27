@@ -93,6 +93,26 @@ class TagsViewController: UITableViewController {
         
     }
 
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let tag = self.tags[indexPath.row]
+
+            // Remove the tag from the user
+            if let _ = mgr.user?.tags?.removeValueForKey(tag.name) {
+
+                self.mgr.saveUser(completionHandler: { _ in
+                    self.loadTags()
+                    tableView.reloadData()
+                })
+            }
+
+        }
+    }
+
     func showAddTagPopup(sender: AnyObject?) {
         let name = self.alertController.textFields![0] as UITextField
         let value = self.alertController.textFields![1] as UITextField
