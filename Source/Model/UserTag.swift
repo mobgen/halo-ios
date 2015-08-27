@@ -14,7 +14,7 @@ public final class UserTag: NSObject, NSCoding {
     public var name: String = ""
     public var value: String?
 
-    init(name: String, value: String?) {
+    public init(name: String, value: String?) {
         self.name = name
         self.value = value
     }
@@ -56,8 +56,13 @@ public final class UserTag: NSObject, NSCoding {
 
         return tag
     }
-}
 
-func == (left: UserTag, right: UserTag) -> Bool {
-    return left.name == right.name && left.value == right.value
+    public override func isEqual(object: AnyObject?) -> Bool {
+        if object.dynamicType != self.dynamicType {
+            return false
+        } else {
+            let other = object as! UserTag
+            return other.name == self.name
+        }
+    }
 }

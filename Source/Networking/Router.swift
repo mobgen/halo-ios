@@ -65,7 +65,7 @@ enum Router: URLRequestConvertible {
         }
 
         /**
-        *  Wow.. really awful. Think of a better way of doing this!
+        *  My god.. really awful. Think of a better way of doing this!
         */
         switch self {
         case .OAuth(let params):

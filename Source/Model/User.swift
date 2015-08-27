@@ -13,7 +13,7 @@ public final class User: NSObject, NSCoding {
     internal(set) public var id:String?
     internal(set) public var appId:Int?
     public var email:String?
-    public var alias:String = ""
+    public var alias:String?
     public var devices:[Halo.UserDevice]?
     public var tags:Set<Halo.UserTag>?
     internal(set) public var createdAt:NSDate?
@@ -23,20 +23,18 @@ public final class User: NSObject, NSCoding {
         return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n----"
     }
 
-    init(id: String?, appId: Int?, alias: String) {
-        self.id = id
-        self.appId = appId
-        self.alias = alias
-    }
-
     // MARK: NSCoding protocol implementation
+
+    public override init() {
+        super.init()
+    }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
         self.id = aDecoder.decodeObjectForKey("id") as? String
         self.appId = aDecoder.decodeObjectForKey("appId") as? Int
         self.email = aDecoder.decodeObjectForKey("email") as? String
-        self.alias = aDecoder.decodeObjectForKey("alias") as! String
+        self.alias = aDecoder.decodeObjectForKey("alias") as? String
         self.devices = aDecoder.decodeObjectForKey("devices") as? [Halo.UserDevice]
         self.tags = aDecoder.decodeObjectForKey("tags") as? Set<Halo.UserTag>
         self.createdAt = aDecoder.decodeObjectForKey("createdAt") as? NSDate
@@ -106,7 +104,10 @@ public final class User: NSObject, NSCoding {
             dict["email"] = email
         }
 
-        dict["alias"] = self.alias
+        if let alias = self.alias {
+            dict["alias"] = alias
+        }
+
         dict["devices"] = self.devices?.map({ (device: UserDevice) -> NSDictionary in
             return device.toDictionary()
         })
@@ -124,7 +125,19 @@ public final class User: NSObject, NSCoding {
 
         var user: Halo.User
 
-        user = User(id: dict["id"] as? String, appId: dict["appId"] as? Int, alias: dict["alias"] as! String)
+        user = User()
+
+        if let id = dict["id"] as? String {
+            user.id = id
+        }
+
+        if let appId = dict["appId"] as? Int {
+            user.appId = appId
+        }
+
+        if let alias = dict["alias"] as? String {
+            user.alias = alias
+        }
 
         user.email = dict["email"] as? String
         user.devices = (dict["devices"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserDevice in

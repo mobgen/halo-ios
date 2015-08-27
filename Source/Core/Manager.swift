@@ -74,7 +74,7 @@ public class Manager: NSObject {
         self.environment = .Prod
 
         // Get the stored user
-        self.user = Halo.User.loadUser() ?? Halo.User(id: nil, appId: nil, alias: "defaultAlias")
+        self.user = Halo.User.loadUser() ?? Halo.User()
     }
 
     /**
@@ -190,6 +190,17 @@ public class Manager: NSObject {
         net.getModules(completionHandler: handler)
     }
 
+    /**
+    Save the current user. Calling this function will trigger an update of the user in the server
+
+    :param: handler Closure to be executed once the request has finished
+    */
+    public func saveUser(completionHandler handler: (Alamofire.Result<Halo.User> -> Void)? = nil) -> Void {
+        if let user = self.user {
+            self.net.createUpdateUser(user, completionHandler: handler)
+        }
+    }
+
     // MARK: ObjC exposed methods
 
     /**
@@ -206,9 +217,23 @@ public class Manager: NSObject {
             case .Success(let modules):
                 success?(userData: modules)
             case .Failure(_, let error):
-                let err = error as NSError
-                failure?(error: err)
+                failure?(error: error as NSError)
             }
         }
+    }
+
+    @objc(saveUser:failure:)
+    public func saveUserFromObjC(success: ((userData: Halo.User) -> Void)?, failure: ((error: NSError) -> Void)?) {
+
+        self.saveUser { (result) -> Void in
+
+            switch result {
+            case .Success(let user):
+                success?(userData: user)
+            case .Failure(_, let error):
+                failure?(error: error as NSError)
+            }
+        }
+
     }
 }

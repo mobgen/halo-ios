@@ -141,15 +141,7 @@ class LeftMenuViewController: UITableViewController {
         case 0:
             delegate?.didSelectModule(self.modules[indexPath.row])
         case 1:
-            var dict:[String:String] = [:]
-
-            if let tags = halo.user?.tags {
-                for tag in tags {
-                    dict[tag.name] = tag.value
-                }
-            }
-
-            let vc = KeyValueViewController(dict)
+            let vc = TagsViewController()
             vc.title = "Segmentation tags"
 
             container.mainView?.pushViewController(vc, animated: true)
