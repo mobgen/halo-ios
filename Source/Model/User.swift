@@ -15,7 +15,7 @@ public final class User: NSObject, NSCoding {
     public var email:String?
     public var alias:String?
     public var devices:[Halo.UserDevice]?
-    public var tags:Set<Halo.UserTag>?
+    public var tags:[String: Halo.UserTag]?
     internal(set) public var createdAt:NSDate?
     internal(set) public var updatedAt:NSDate?
 
@@ -36,7 +36,7 @@ public final class User: NSObject, NSCoding {
         self.email = aDecoder.decodeObjectForKey("email") as? String
         self.alias = aDecoder.decodeObjectForKey("alias") as? String
         self.devices = aDecoder.decodeObjectForKey("devices") as? [Halo.UserDevice]
-        self.tags = aDecoder.decodeObjectForKey("tags") as? Set<Halo.UserTag>
+        self.tags = aDecoder.decodeObjectForKey("tags") as? [String: Halo.UserTag]
         self.createdAt = aDecoder.decodeObjectForKey("createdAt") as? NSDate
         self.updatedAt = aDecoder.decodeObjectForKey("updatedAt") as? NSDate
     }
@@ -56,17 +56,16 @@ public final class User: NSObject, NSCoding {
 
     public func addTag(name: String, value: String?) {
 
-        let tag = Halo.UserTag(name: name, value: value)
-
         if let tags = self.tags {
-            if tags.contains(tag) {
-                return
+            if let tag = tags[name] {
+                tag.value = value
+            } else {
+                self.tags![name] = Halo.UserTag(name: name, value: value)
             }
         } else {
-            self.tags = []
+            self.tags = [name : Halo.UserTag(name: name, value: value)]
         }
 
-        self.tags?.insert(tag)
     }
 
     public func addTags(tags: Dictionary<String, String?>) {
@@ -108,12 +107,18 @@ public final class User: NSObject, NSCoding {
             dict["alias"] = alias
         }
 
-        dict["devices"] = self.devices?.map({ (device: UserDevice) -> NSDictionary in
-            return device.toDictionary()
-        })
-        dict["tags"] = self.tags?.map({ (tag: UserTag) -> NSDictionary in
-            return tag.toDictionary()
-        })
+        if let devices = self.devices {
+            dict["devices"] = devices.map({ (device: UserDevice) -> NSDictionary in
+                return device.toDictionary()
+            })
+        }
+
+        if let tags = self.tags {
+            dict["tags"] = tags.map({ (key, tag: UserTag) -> NSDictionary in
+                tag.toDictionary()
+            })
+        }
+
         dict["createdAt"] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
         dict["updatedAt"] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000
 
@@ -147,7 +152,10 @@ public final class User: NSObject, NSCoding {
         if let tags = (dict["tags"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserTag in
             return UserTag.fromDictionary(dict)
         }) {
-            user.tags = Set(tags)
+            user.tags = tags.reduce([:], combine: { (var dict, tag: UserTag) -> [String: UserTag] in
+                dict[tag.name] = tag
+                return dict
+            })
         }
 
         user.createdAt = NSDate(timeIntervalSince1970: (dict["createdAt"] as! NSTimeInterval)/1000)

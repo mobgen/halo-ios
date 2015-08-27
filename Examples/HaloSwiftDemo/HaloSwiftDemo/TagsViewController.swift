@@ -36,7 +36,7 @@ class TagsViewController: UITableViewController {
 
             let tag = Halo.UserTag(name: name.text!, value: value.text)
 
-            self.mgr.user?.tags?.insert(tag)
+            self.mgr.user?.tags?[tag.name] = tag
             self.mgr.saveUser(completionHandler: { _ in
 
                 self.loadTags()
@@ -53,7 +53,7 @@ class TagsViewController: UITableViewController {
 
     private func loadTags() {
         if let tags = mgr.user?.tags {
-            self.tags = tags.flatMap({ (tag) -> Halo.UserTag? in
+            self.tags = tags.flatMap({ (key, tag) -> Halo.UserTag? in
                 return tag
             })
         }
@@ -94,6 +94,12 @@ class TagsViewController: UITableViewController {
     }
 
     func showAddTagPopup(sender: AnyObject?) {
+        let name = self.alertController.textFields![0] as UITextField
+        let value = self.alertController.textFields![1] as UITextField
+
+        name.text = nil
+        value.text = nil
+
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 
