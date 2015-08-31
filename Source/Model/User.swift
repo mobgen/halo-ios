@@ -76,6 +76,9 @@ public final class User: NSObject, NSCoding {
 
     // MARK: Management of user storage
 
+    /**
+    Store a serialized version of the current user inside the user preferences
+    */
     func storeUser() -> Void {
         let encodedObject = NSKeyedArchiver.archivedDataWithRootObject(self)
         let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -84,6 +87,7 @@ public final class User: NSObject, NSCoding {
         userDefaults.synchronize()
     }
 
+    /// Retrieve and deserialize a stored user from the user preferences
     class func loadUser() -> Halo.User? {
         if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey(CoreConstants.userDefaultsUserKey) as? NSData {
             return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as? Halo.User
@@ -92,6 +96,11 @@ public final class User: NSObject, NSCoding {
         }
     }
 
+    /**
+    Return a dictionary representation of the user
+
+    :returns: Key-value dictionary containing the user details
+    */
     func toDictionary() -> [String: AnyObject] {
 
         var dict = [String: AnyObject]()
@@ -126,6 +135,7 @@ public final class User: NSObject, NSCoding {
 
     }
 
+    /// Create a user object from a given key-value representation
     class func fromDictionary(dict: [String: AnyObject]) -> Halo.User {
 
         var user: Halo.User
@@ -162,7 +172,6 @@ public final class User: NSObject, NSCoding {
         user.updatedAt = NSDate(timeIntervalSince1970: (dict["updatedAt"] as! NSTimeInterval)/1000)
 
         return user
-
     }
 
 }

@@ -11,6 +11,12 @@ import Alamofire
 
 extension NetworkManager {
 
+    /**
+    Create or update a user in the remote server, containing all the user details (devices, tags, etc)
+
+    :param: user    User object containing all the information to be sent
+    :param: handler Closure to be executed after the request has completed
+    */
     func createUpdateUser(user: Halo.User, completionHandler handler: ((Alamofire.Result<Halo.User>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id

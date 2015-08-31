@@ -34,6 +34,11 @@ public final class UserTag: NSObject, NSCoding {
         aCoder.encodeObject(value, forKey: "value")
     }
 
+    /**
+    Return a key-value representation of this object
+
+    :returns: a dictionary containing the representation of the object
+    */
     func toDictionary() -> [String: AnyObject] {
         var dict = [String: AnyObject]()
 
@@ -50,6 +55,7 @@ public final class UserTag: NSObject, NSCoding {
         return dict
     }
 
+    /// Create a user tag object from a given key-value representation
     class func fromDictionary(dict: [String: AnyObject]) -> UserTag {
         let tag = UserTag(name: dict["name"] as! String, value: dict["value"] as? String)
         tag.id = dict["id"] as? String

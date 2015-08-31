@@ -23,6 +23,7 @@ public class Module: NSObject {
     /// Date of the last update performed in this module
     public var lastUpdate: NSDate?
 
+    /// Internal id of the module
     public var internalId: String?
 
     /**

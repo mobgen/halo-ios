@@ -31,6 +31,11 @@ public final class UserDevice: NSObject, NSCoding {
         aCoder.encodeObject(token, forKey: "token")
     }
 
+    /**
+    Create a key-value representation of this user device object
+
+    :returns: Dictionary containing the representation of the object
+    */
     func toDictionary() -> [String: AnyObject] {
         return [
             "platform"  : self.platform,
@@ -38,9 +43,8 @@ public final class UserDevice: NSObject, NSCoding {
         ]
     }
 
+    /// Create a user device object from a given key-value representation
     class func fromDictionary(dict: [String: AnyObject]) -> Halo.UserDevice {
-
         return UserDevice(platform: dict["platform"] as! String, token: dict["token"] as! String)
-
     }
 }
