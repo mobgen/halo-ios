@@ -38,7 +38,6 @@ class TagsViewController: UITableViewController {
 
             self.mgr.user?.tags?[tag.name] = tag
             self.mgr.saveUser(completionHandler: { _ in
-
                 self.loadTags()
                 self.tableView.reloadData()
             })

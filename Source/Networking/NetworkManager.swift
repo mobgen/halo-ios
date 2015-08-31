@@ -130,7 +130,7 @@ class NetworkManager: Alamofire.Manager {
                 /// Restart cached tasks
                 let cachedTaskCopy = self.cachedTasks
                 self.cachedTasks.removeAll()
-                cachedTaskCopy.map { $0(nil, nil, res) }
+                let _ = cachedTaskCopy.map { $0(nil, nil, res) }
 
             case .Failure(_, let error):
                 let err = error as NSError

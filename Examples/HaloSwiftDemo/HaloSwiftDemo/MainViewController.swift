@@ -39,7 +39,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
                 completionHandler: { (result) -> Void in
                     switch result {
                     case .Success(let instances):
-                        self.instances.extend(instances)
+                        self.instances.appendContentsOf(instances)
                     case .Failure(_, let error):
                         let err = error as NSError
                         print("Error: \(err.localizedDescription)")

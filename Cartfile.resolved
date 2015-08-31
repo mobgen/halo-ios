@@ -1,4 +1,4 @@
-github "Alamofire/Alamofire" "e489c5fece971352b05b6ef185eca53f68bee1bc"
-github "Quick/Nimble" "dbfc4ebd53395361c14eb2c9b13f629fc541bba2"
-github "AliSoftware/OHHTTPStubs" "74e9a0234c03b20954d4ea3e44d5b0ac636c1c8f"
-github "Quick/Quick" "6b8507b28767b6fe54cfdc7112ab554505604c95"
+github "Alamofire/Alamofire" "1bc35abfa7c167ba54af4e87158af7945cc9984e"
+github "Quick/Nimble" "703a7ae786b4dcb00c6eaa65156cc2da9ab4be8f"
+github "AliSoftware/OHHTTPStubs" "c025fc9c2d2c9f15ff45475b041cfef12f8341f6"
+github "Quick/Quick" "e96584ddc96b07b5b6577ac81bf2314aa460ca2b"
