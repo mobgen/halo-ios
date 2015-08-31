@@ -19,7 +19,7 @@ extension NetworkManager {
     */
     func generalContentInstances(moduleId: String, completionHandler handler: (Alamofire.Result<[GeneralContentInstance]>) -> Void) -> Void {
 
-        self.startRequest(Router.GeneralContentInstances(["module" : moduleId, "archived" : false])) { [weak self] (req, resp, result) -> Void in
+        self.startRequest(Router.GeneralContentInstances(["module" : moduleId, "archived" : "false"])) { [weak self] (req, resp, result) -> Void in
 
             if let response = resp {
                 if response.statusCode == 200 {
