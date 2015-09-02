@@ -17,9 +17,9 @@ class CoreSpec: QuickSpec {
     override func spec() {
 
         let mgr = Halo.Manager.sharedInstance
-        var request: NSURLRequest?
-        var response: NSHTTPURLResponse?
-        var result: Result<AnyObject>?
+//        var request: NSURLRequest?
+//        var response: NSHTTPURLResponse?
+//        var result: Result<AnyObject>?
 
         beforeSuite {
             mgr.launch()
@@ -42,15 +42,15 @@ class CoreSpec: QuickSpec {
 
             beforeEach {
                 Router.token = nil
-                request = nil
-                response = nil
-                result = nil
+//                request = nil
+//                response = nil
+//                result = nil
             }
 
             context("with the right credentials") {
 
                 beforeEach {
-                    OHHTTPStubs.stubRequestsPassingTest({ ObjCBool($0.URL!.path! == "/api/oauth/token")
+                    OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/oauth/token"
                         }, withStubResponse: { _ in
                             let fixture = OHPathForFile("oauth_success.json", self.dynamicType)
                             return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
@@ -72,7 +72,7 @@ class CoreSpec: QuickSpec {
             context("with the wrong credentials") {
 
                 beforeEach {
-                    OHHTTPStubs.stubRequestsPassingTest({ ObjCBool($0.URL!.path! == "/api/oauth/token")
+                    OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/oauth/token"
                         }, withStubResponse: { _ in
                             let fixture = OHPathForFile("oauth_failure.json", self.dynamicType)
                             return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 403, headers: ["Content-Type": "application/json"])
@@ -94,7 +94,7 @@ class CoreSpec: QuickSpec {
             context("with a valid response") {
 
                 beforeEach {
-                    OHHTTPStubs.stubRequestsPassingTest({ ObjCBool($0.URL!.path! == "/api/authentication/module/list")
+                    OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/authentication/module/list"
                         }, withStubResponse: { _ in
                             let fixture = OHPathForFile("module_list_success.json", self.dynamicType)
                             return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
