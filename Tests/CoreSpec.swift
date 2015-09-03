@@ -38,6 +38,13 @@ class CoreSpec: QuickSpec {
             }
         }
 
+        describe("The device extension") {
+            it("provides the right model name") {
+                expect(UIDevice.currentDevice().getModelName("iPad3,5") == "iPad 4").to(beTrue())
+                expect(UIDevice.currentDevice().getModelName("Blah") == "Blah").to(beTrue())
+            }
+        }
+
         describe("The oauth process") {
 
             beforeEach {
@@ -67,6 +74,11 @@ class CoreSpec: QuickSpec {
                     expect(Router.token).toNot(beNil())
                 }
 
+                it("retrieves a valid token") {
+                    expect(Router.token?.isValid()).to(beTrue())
+                    expect(Router.token?.isExpired()).to(beFalse())
+                }
+
             }
 
             context("with the wrong credentials") {
@@ -75,8 +87,14 @@ class CoreSpec: QuickSpec {
                     OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/oauth/token"
                         }, withStubResponse: { _ in
                             let fixture = OHPathForFile("oauth_failure.json", self.dynamicType)
-                            return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 403, headers: ["Content-Type": "application/json"])
+                            return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 401, headers: ["Content-Type": "application/json"])
                     })
+
+                    waitUntil { done in
+                        mgr.net.refreshToken { (req, resp, res) -> Void in
+                            done()
+                        }
+                    }
                 }
 
                 it("fails") {
@@ -113,6 +131,29 @@ class CoreSpec: QuickSpec {
                     expect(result?.error).to(beNil())
                 }
                 
+            }
+
+            context("with an invalid response") {
+
+                beforeEach {
+                    OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/authentication/module/list"
+                        }, withStubResponse: { _ in
+//                            let fixture = OHPathForFile("module_list_success.json", self.dynamicType)
+                            return OHHTTPStubsResponse(JSONObject: [:], statusCode: 400, headers: ["Content-Type": "application/json"])
+                    })
+
+                    waitUntil { done in
+                        mgr.getModules { result = $0; done() }
+                    }
+                }
+
+                afterEach {
+                    result = nil
+                }
+
+                it("fails") {
+                    expect(result?.error).toNot(beNil());
+                }
             }
             
         }

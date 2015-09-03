@@ -79,12 +79,20 @@ public extension UIDevice {
             identifier.append(UnicodeScalar(UInt8(child.value as! Int8)))
         }
 
-        return DeviceList[identifier] ?? identifier
+        return getModelName(identifier)
     }
 
     /// Get the current device type (phone or tablet) as String
     var deviceType: String {
-        return (UIDevice.currentDevice().userInterfaceIdiom == .Phone) ? "Phone" : "Tablet"
+        return getDeviceType(UIDevice.currentDevice().userInterfaceIdiom)
+    }
+
+    func getDeviceType(idiom: UIUserInterfaceIdiom) -> String {
+        return (idiom == .Phone) ? "Phone" : "Tablet"
+    }
+
+    func getModelName(identifier: String) -> String {
+        return DeviceList[identifier] ?? identifier
     }
 }
 

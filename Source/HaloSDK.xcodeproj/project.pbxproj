@@ -33,6 +33,7 @@
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
+		0082D9C11B987BE400298AB8 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082D9C01B987BE400298AB8 /* ModelSpec.swift */; settings = {ASSET_TAGS = (); }; };
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		008E8DE41B68305900711DA5 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; };
 		008E8DE81B683AD100711DA5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E8DE71B683AD100711DA5 /* Nimble.framework */; };
@@ -112,6 +113,7 @@
 		007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Modules.swift"; sourceTree = "<group>"; };
 		007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+GeneralContent.swift"; sourceTree = "<group>"; };
 		007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentInstance.swift; sourceTree = "<group>"; };
+		0082D9C01B987BE400298AB8 /* ModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
 		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
 		008E8DE31B68305900711DA5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		008E8DE71B683AD100711DA5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		006A5FBB1B318CAC0045395A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				0082D9C01B987BE400298AB8 /* ModelSpec.swift */,
 				006A5FBE1B318CAC0045395A /* CoreSpec.swift */,
 				006A5FBC1B318CAC0045395A /* Supporting Files */,
 				0053907D1B8C620B0036F579 /* oauth_success.json */,
@@ -449,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0082D9C11B987BE400298AB8 /* ModelSpec.swift in Sources */,
 				006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
