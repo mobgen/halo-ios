@@ -424,7 +424,6 @@
 				);
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = HaloDemo;
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = Debug;
@@ -445,7 +444,6 @@
 				);
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = HaloDemo;
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = Release;
@@ -516,7 +514,6 @@
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_QA";
 				PRODUCT_NAME = HaloDemo;
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = "Debug-QA";
@@ -587,7 +584,6 @@
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_INT";
 				PRODUCT_NAME = HaloDemo;
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = "Debug-INT";
@@ -651,7 +647,6 @@
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_QA";
 				PRODUCT_NAME = HaloDemo;
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = "Release-QA";
@@ -715,7 +710,6 @@
 				);
 				OTHER_SWIFT_FLAGS = "-DMG_FEED_INT";
 				PRODUCT_NAME = HaloDemo;
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HaloSwiftDemo/HaloSwiftDemo-Bridging-Header.h";
 			};
 			name = "Release-INT";
