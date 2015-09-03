@@ -38,13 +38,6 @@ class CoreSpec: QuickSpec {
             }
         }
 
-        describe("The device extension") {
-            it("provides the right model name") {
-                expect(UIDevice.currentDevice().getModelName("iPad3,5") == "iPad 4").to(beTrue())
-                expect(UIDevice.currentDevice().getModelName("Blah") == "Blah").to(beTrue())
-            }
-        }
-
         describe("The oauth process") {
 
             beforeEach {
