@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Quick
+import Nimble
 @testable import Halo
 
 class ModelSpec: QuickSpec {
