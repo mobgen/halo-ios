@@ -38,7 +38,7 @@ class NetworkManager: Alamofire.Manager {
     }
 
     /**
-    Start the request flow handling also a potential 401 response. The token will be obtained/refreshed
+    Start the request flow handling also a potential 401/403 response. The token will be obtained/refreshed
     and the request will continue.
 
     - parameter request:            Request to be performed
@@ -71,8 +71,8 @@ class NetworkManager: Alamofire.Manager {
         request.responseJSON { [weak self] (request, response, result) -> Void in
             if let strongSelf = self {
                 if let resp = response {
-                    if resp.statusCode == 401 {
-                        /// If we get a 401, we add the task to the queue and try to get a valid token
+                    if resp.statusCode == 403 || resp.statusCode == 401 {
+                        /// If we get a 403/401, we add the task to the queue and try to get a valid token
                         strongSelf.cachedTasks.append(cachedTask)
                         strongSelf.refreshToken()
                         return
