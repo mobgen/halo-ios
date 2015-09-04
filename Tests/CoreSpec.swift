@@ -17,9 +17,6 @@ class CoreSpec: QuickSpec {
     override func spec() {
 
         let mgr = Halo.Manager.sharedInstance
-//        var request: NSURLRequest?
-//        var response: NSHTTPURLResponse?
-//        var result: Result<AnyObject>?
 
         beforeSuite {
             mgr.launch()
@@ -42,9 +39,6 @@ class CoreSpec: QuickSpec {
 
             beforeEach {
                 Router.token = nil
-//                request = nil
-//                response = nil
-//                result = nil
             }
 
             context("with the right credentials") {
@@ -131,7 +125,6 @@ class CoreSpec: QuickSpec {
                 beforeEach {
                     OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/authentication/module/list"
                         }, withStubResponse: { _ in
-//                            let fixture = OHPathForFile("module_list_success.json", self.dynamicType)
                             return OHHTTPStubsResponse(JSONObject: [:], statusCode: 400, headers: ["Content-Type": "application/json"])
                     })
 
@@ -187,7 +180,6 @@ class CoreSpec: QuickSpec {
                 beforeEach {
                     OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/generalcontent/instance/list"
                         }, withStubResponse: { _ in
-                            //                            let fixture = OHPathForFile("module_list_success.json", self.dynamicType)
                             return OHHTTPStubsResponse(JSONObject: [:], statusCode: 400, headers: ["Content-Type": "application/json"])
                     })
 
