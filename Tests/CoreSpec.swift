@@ -24,7 +24,7 @@ class CoreSpec: QuickSpec {
             mgr.clientSecret = "testclientsecret"
         }
 
-        afterEach {
+        afterSuite {
             print("After suite")
             OHHTTPStubs.removeAllStubs()
         }
@@ -87,11 +87,45 @@ class CoreSpec: QuickSpec {
                 it("fails") {
                     expect(Router.token).to(beNil())
                 }
-
             }
-
         }
 
+        describe("A full request cycle") {
+            
+            var counter = 0
+            var result: Alamofire.Result<[Module]>?
+            
+            beforeEach {
+                OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/oauth/token"
+                    }, withStubResponse: { _ in
+                        counter++
+                        let fixture = OHPathForFile("oauth_success.json", self.dynamicType)
+                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                })
+                
+                OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/authentication/module/list"
+                    }, withStubResponse: { _ in
+                        let fixture = OHPathForFile("module_list_success.json", self.dynamicType)
+                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: counter > 0 ? 200 : 401, headers: ["Content-Type": "application/json"])
+                })
+                
+                waitUntil(timeout: 5) { done in
+                    mgr.getModules { result = $0; done() }
+                }
+                
+            }
+            
+            afterEach {
+                result = nil
+            }
+            
+            it("works") {
+                expect(result?.error).to(beNil())
+                expect(result?.value).toNot(beNil())
+            }
+            
+        }
+        
         describe("Requesting the module list") {
 
             var result: Alamofire.Result<[Module]>?

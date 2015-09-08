@@ -38,11 +38,11 @@ public class Manager: NSObject {
         didSet {
             switch environment {
             case .Int:
-                Router.baseURL = NSURL(string: "http://halo-int.mobgen.com:3000")
+                Router.baseURL = NSURL(string: "http://halo-int.mobgen.com")
             case .QA:
-                Router.baseURL = NSURL(string: "http://halo-qa.mobgen.com:3000")
+                Router.baseURL = NSURL(string: "http://halo-qa.mobgen.com")
             case .Prod:
-                Router.baseURL = NSURL(string: "http://halo.mobgen.com:3000")
+                Router.baseURL = NSURL(string: "http://halo.mobgen.com")
             }
         }
     }
