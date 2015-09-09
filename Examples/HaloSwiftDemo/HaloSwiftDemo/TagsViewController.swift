@@ -16,7 +16,11 @@ class TagsViewController: UITableViewController {
     let cellIdent = "cellIdent"
     let mgr = Halo.Manager.sharedInstance
     let alertController = UIAlertController(title: "Add tag", message: nil, preferredStyle: .Alert)
-
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
     init() {
         super.init(style: .Plain)
 
