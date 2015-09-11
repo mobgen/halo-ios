@@ -32,13 +32,14 @@ class Store: NSObject, MKAnnotation {
     }
 }
 
-class StoreLocatorViewController : UIViewController, CLLocationManagerDelegate {
+class StoreLocatorViewController : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
  
     var mapView: MKMapView?
     var moduleId: String?
     var annotations: [MKAnnotation]?
     
     let regionRadius: CLLocationDistance = 1000
+    let defaultPin = "pinIdentifier"
     let locationManager = CLLocationManager()
     
     init(module: Halo.Module) {
@@ -57,6 +58,8 @@ class StoreLocatorViewController : UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView = MKMapView(frame: self.view.frame)
+        mapView?.delegate = self
+        
         self.view.addSubview(mapView!)
         
         let mgr = Halo.Manager.sharedInstance
@@ -86,6 +89,17 @@ class StoreLocatorViewController : UIViewController, CLLocationManagerDelegate {
                 print("Error: \((error as NSError).localizedDescription)")
             }
         }
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        var pinView: MKPinAnnotationView? = mapView.dequeueReusableAnnotationViewWithIdentifier(defaultPin) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: defaultPin)
+        }
+        pinView!.animatesDrop = true;
+        
+        return pinView;
     }
     
     func centerMapOnLocation(location: CLLocation) {
