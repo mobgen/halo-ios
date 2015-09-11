@@ -141,13 +141,22 @@ class LeftMenuViewController: UITableViewController {
         case 0:
             let module = self.modules[indexPath.row]
             
-            if module.name?.lowercaseString == "store locator" {
-                let vc = StoreLocatorViewController(module: module)
-                vc.title = module.name
-                container.mainView.pushViewController(vc, animated: true)
-            } else {
-                delegate?.didSelectModule(module)
+            if let name = module.name?.lowercaseString {
+            
+                switch name {
+                case "store locator":
+                    let vc = StoreLocatorViewController(module: module)
+                    vc.title = module.name
+                    container.mainView.pushViewController(vc, animated: true)
+                case "news":
+                    let vc = NewsListViewController(module: module)
+                    vc.title = module.name
+                    container.mainView.pushViewController(vc, animated: true)
+                default:
+                    delegate?.didSelectModule(module)
+                }
             }
+            
         case 1:
             let vc = TagsViewController()
             vc.title = "Segmentation tags"

@@ -111,7 +111,7 @@ public class Manager: NSObject {
 
         if let user = self.user {
 
-            user.addTag(CoreConstants.tagPlatformNameKey, value: "iOS")
+            user.addTag(CoreConstants.tagPlatformNameKey, value: "ios")
 
             let version = NSProcessInfo.processInfo().operatingSystemVersion
             var versionString = "\(version.majorVersion).\(version.minorVersion)"
