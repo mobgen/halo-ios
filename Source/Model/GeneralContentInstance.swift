@@ -20,7 +20,7 @@ public class GeneralContentInstance: NSObject {
     public var name: String?
 
     /// Collection of key-value pairs which make up the information of this instance
-    public var values: Dictionary<String, AnyObject>?
+    public var values: [String: AnyObject]?
 
     /// Name of the creator of the content
     public var createdBy: String?

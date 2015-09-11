@@ -16,6 +16,11 @@ class CoreSpec: QuickSpec {
 
     override func spec() {
 
+        // Swift
+        OHHTTPStubs.onStubActivation() { request, stub in
+            print("\(request.URL!) stubbed by \(stub.name).")
+        }
+        
         let mgr = Halo.Manager.sharedInstance
 
         beforeSuite {
@@ -26,7 +31,7 @@ class CoreSpec: QuickSpec {
 
         afterSuite {
             print("After suite")
-            OHHTTPStubs.removeAllStubs()
+            //OHHTTPStubs.removeAllStubs()
         }
 
         describe("The core manager") {
