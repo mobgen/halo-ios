@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
 enum Router: URLRequestConvertible {
 

@@ -157,9 +157,10 @@ class NewsListViewController: UITableViewController {
             articleCell?.detailTextLabel?.text =  NSDateFormatter.localizedStringFromDate(article.date!, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
             articleCell?.summaryLabel?.text = article.summary
             
-            if let imgData = NSData(contentsOfURL: article.thumbnailURL!) {
-                articleCell?.imageView?.image = UIImage(data: imgData)
+            if let thumbnail = article.thumbnailURL {
+                articleCell?.imageView?.imageFromUrl(thumbnail)
             }
+            
         }
         
         return articleCell!

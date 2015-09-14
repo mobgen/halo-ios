@@ -78,6 +78,8 @@ class LeftMenuViewController: UITableViewController {
             label.attributedText = NSAttributedString(string: "MODULES", attributes: attrs)
         case 1:
             label.attributedText = NSAttributedString(string: "ADD-ONS", attributes: attrs)
+        case 2:
+            label.attributedText = NSAttributedString(string: "SETTINGS", attributes: attrs)
         default: break
             // Do nothing
         }
@@ -127,6 +129,8 @@ class LeftMenuViewController: UITableViewController {
             }
         case 1:
             finalCell.textLabel?.text = "Segmentation Tags"
+        case 2:
+            finalCell.textLabel?.text = "App Settings"
         default: break
         }
 
@@ -161,6 +165,11 @@ class LeftMenuViewController: UITableViewController {
             let vc = TagsViewController()
             vc.title = "Segmentation tags"
 
+            container.mainView?.pushViewController(vc, animated: true)
+        case 2:
+            let vc = SettingsViewController()
+            vc.title = "App settings"
+            
             container.mainView?.pushViewController(vc, animated: true)
         default:
             break

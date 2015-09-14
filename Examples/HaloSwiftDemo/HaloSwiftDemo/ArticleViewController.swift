@@ -79,7 +79,7 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
         
         self.title = article.title
         
-        customView.imageView?.image = UIImage(data: NSData(contentsOfURL: article.imageURL!)!)
+        customView.imageView?.imageFromUrl(article.imageURL!)
         customView.articleTitle?.text = article.title
         
         customView.articleDate?.text = NSDateFormatter.localizedStringFromDate(article.date!, dateStyle: .MediumStyle, timeStyle: .MediumStyle)
