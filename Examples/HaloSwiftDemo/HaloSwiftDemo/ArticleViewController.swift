@@ -14,7 +14,7 @@ class ArticleView: UIView {
     var imageView: UIImageView?
     var articleTitle: UILabel?
     var articleDate: UILabel?
-    var articleBody: UITextView?
+    var articleBody: UIWebView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,11 +22,15 @@ class ArticleView: UIView {
         imageView = UIImageView(frame: CGRectZero)
         articleTitle = UILabel(frame: CGRectZero)
         
-        articleTitle?.font = UIFont(name: "Lab-Medium", size: 20)
+        articleTitle?.font = UIFont(name: "Lab-Medium", size: 25)
         articleTitle?.numberOfLines = 0
+        articleTitle?.lineBreakMode = .ByWordWrapping
         
         articleDate = UILabel(frame: CGRectZero)
-        articleBody = UITextView(frame: CGRectZero)
+        articleDate?.font = UIFont(name: "Lab-Medium", size: 18)
+        
+        articleBody = UIWebView(frame: CGRectZero)
+        articleBody?.backgroundColor = UIColor.whiteColor()
         
         self.addSubview(imageView!)
         self.addSubview(articleTitle!)
@@ -51,20 +55,22 @@ class ArticleView: UIView {
         var rect: CGRect?
         
         if let text = self.articleTitle?.text {
-            rect = (text as NSString).boundingRectWithSize(CGSizeMake(w - 70, CGFloat.max), options: NSStringDrawingOptions.UsesFontLeading, attributes: [NSFontAttributeName: UIFont(name: "Lab-Medium", size: 20)!], context: nil)
+            rect = (text as NSString).boundingRectWithSize(CGSizeMake(w - 40, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: (self.articleTitle?.font)!], context: nil)
         }
         
-        self.articleTitle?.frame = CGRectMake(20, CGRectGetMaxY((self.imageView?.frame)!) + 20, w - 70, rect?.size.height ?? 20)
+        self.articleTitle?.frame = CGRectMake(20, CGRectGetMaxY(self.imageView!.frame) + 20, w - 40, rect?.height ?? 20)
+        self.articleDate?.frame = CGRectMake(20, CGRectGetMaxY(self.articleTitle!.frame) + 5, w - 40, 18)
         
+        let h = CGRectGetHeight(self.frame)
+        let minY = CGRectGetMaxY(self.articleDate!.frame) + 10
         
-        if let text = self.articleBody?.text {
-            rect = (text as NSString).boundingRectWithSize(CGSizeMake(w - 40, CGFloat.max), options: NSStringDrawingOptions.UsesFontLeading, attributes: nil, context: nil)
-        }
+        self.articleBody?.frame = CGRectMake(20, minY, w - 40, h - minY - 10)
+    
     }
 
 }
 
-class ArticleViewController: UIViewController {
+class ArticleViewController: UIViewController, UIWebViewDelegate {
  
     init(article: Article) {
         super.init(nibName: nil, bundle: nil)
@@ -76,7 +82,16 @@ class ArticleViewController: UIViewController {
         customView.imageView?.image = UIImage(data: NSData(contentsOfURL: article.imageURL!)!)
         customView.articleTitle?.text = article.title
         
-        customView.layoutIfNeeded()
+        customView.articleDate?.text = NSDateFormatter.localizedStringFromDate(article.date!, dateStyle: .MediumStyle, timeStyle: .MediumStyle)
+        
+        let htmlstr = "<style>body { font-family:helvetica; font-size: small; margin: 0; text-align: justify; }</style>\(article.content!)"
+        
+        customView.articleBody?.loadHTMLString(htmlstr, baseURL: nil)
+        customView.articleBody?.delegate = self
+        
+        print(htmlstr)
+        
+        customView.setNeedsLayout()
     }
 
     override func loadView() {
@@ -89,5 +104,14 @@ class ArticleViewController: UIViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if navigationType == .LinkClicked {
+            UIApplication.sharedApplication().openURL(request.URL!)
+            return false
+        }
+        
+        return true
     }
 }

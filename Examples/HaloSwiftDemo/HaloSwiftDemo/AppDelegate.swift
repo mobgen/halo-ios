@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Lab-Medium", size: 34)!]
         navigationBarAppearace.tintColor = UIColor.blackColor()
         navigationBarAppearace.barTintColor = UIColor.mobgenLightGreen()
+        navigationBarAppearace.setTitleVerticalPositionAdjustment(5, forBarMetrics: .Default)
 
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics: .Default)
 

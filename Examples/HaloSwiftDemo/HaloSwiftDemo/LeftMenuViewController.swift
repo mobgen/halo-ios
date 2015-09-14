@@ -148,7 +148,7 @@ class LeftMenuViewController: UITableViewController {
                     let vc = StoreLocatorViewController(module: module)
                     vc.title = module.name
                     container.mainView.pushViewController(vc, animated: true)
-                case "news":
+                case "news motorist":
                     let vc = NewsListViewController(module: module)
                     vc.title = module.name
                     container.mainView.pushViewController(vc, animated: true)

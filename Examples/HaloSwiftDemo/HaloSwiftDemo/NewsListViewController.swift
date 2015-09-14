@@ -13,9 +13,9 @@ import Halo
 class Article: NSObject {
     
     var title: String?
+    var summary: String?
     var date: NSDate?
-    var url: String?
-    var body: String?
+    var content: String?
     var thumbnailURL: NSURL?
     var imageURL: NSURL?
     
@@ -23,26 +23,73 @@ class Article: NSObject {
         
         let dict = instance.values!
         
-        self.title = dict["title"] as? String
+        self.title = dict["Title"] as? String
         
-        if let date = dict["date"] as? NSNumber {
+        if let date = dict["Date"] as? NSNumber {
             self.date = NSDate(timeIntervalSince1970: date.doubleValue/1000)
         }
         
-        self.body = dict["article"] as? String
-        self.url = dict["url"] as? String
+        self.summary = dict["Summary"] as? String
+        self.content = dict["ContentHtml"] as? String
 
-        if let image = dict["image"] as? String {
+        if let image = dict["Image"] as? String {
             self.imageURL = NSURL(string: image)
         }
         
-        if let thumb = dict["thumbnail"] as? String {
+        if let thumb = dict["Thumbnail"] as? String {
             self.thumbnailURL = NSURL(string: thumb)
         }
         
         super.init()
         
     }
+}
+
+class ArticleCell: UITableViewCell {
+    
+    var summaryLabel: UILabel?
+
+    init(reuseIdentifier: String?) {
+        
+        super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
+        
+        textLabel?.font = UIFont(name: "Lab-Medium", size: 20)
+        
+        detailTextLabel?.font = UIFont(name: "Lab-Medium", size: 16)
+        
+        summaryLabel = UILabel(frame: CGRectZero)
+        summaryLabel?.numberOfLines = 2
+        summaryLabel?.font = UIFont(name: "Lab-Medium", size: 14)
+        
+        contentView.addSubview(summaryLabel!)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let x = CGRectGetMinX(self.textLabel!.frame)
+        let w = CGRectGetWidth(self.textLabel!.frame)
+        
+        var frame = textLabel?.frame
+        frame?.origin.y = 10
+        
+        textLabel?.frame = frame!
+        
+        frame = detailTextLabel?.frame
+        frame?.origin.y = CGRectGetMaxY(textLabel!.frame)
+        
+        detailTextLabel?.frame = frame!
+        
+        summaryLabel?.frame = CGRectMake(x, CGRectGetMaxY((self.detailTextLabel?.frame)!) + 5, w, 28)
+        
+    }
+    
 }
 
 class NewsListViewController: UITableViewController {
@@ -95,31 +142,40 @@ class NewsListViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdent)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdent)
+        var articleCell: ArticleCell?
         
-        if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdent)
+        if let cell2 = cell as? ArticleCell {
+            articleCell = cell2
+        } else {
+            articleCell = ArticleCell(reuseIdentifier: cellIdent)
         }
         
         if let newsArray = self.news {
             let article = newsArray[indexPath.row]
-            cell?.textLabel?.text = article.title
-            cell?.detailTextLabel?.text =  NSDateFormatter.localizedStringFromDate(article.date!, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+            articleCell?.textLabel?.text = article.title
+            articleCell?.detailTextLabel?.text =  NSDateFormatter.localizedStringFromDate(article.date!, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+            articleCell?.summaryLabel?.text = article.summary
+            
             if let imgData = NSData(contentsOfURL: article.thumbnailURL!) {
-                cell?.imageView?.image = UIImage(data: imgData)
+                articleCell?.imageView?.image = UIImage(data: imgData)
             }
         }
         
-        return cell!
+        return articleCell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let news = self.news {
             let article = news[indexPath.row]
-        
+            
             let vc = ArticleViewController(article: article)
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 88;
     }
     
 }
