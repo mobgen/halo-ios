@@ -9,8 +9,10 @@
 import Foundation
 
 /// Utility class containing some of the constants to be used within the SDK
-class CoreConstants {
+public class CoreConstants {
 
+    public static let environmentKey = "HaloEnvironment"
+    
     /// Key which identifies the client id within the configuration plist
     static let clientIdKey = "CLIENT_ID"
 

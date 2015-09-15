@@ -11,10 +11,13 @@ import Alamofire
 import UIKit
 import CoreBluetooth
 
-public enum HaloEnvironment {
-    case Int
-    case QA
-    case Prod
+public enum HaloEnvironment: String {
+    case Int, QA, Prod
+}
+
+public protocol ManagerDelegate {
+    func setupUser() -> Halo.User
+    func managerDidFinishLaunching() -> Void
 }
 
 /// Core manager of the Framework implemented as a Singleton
@@ -44,6 +47,8 @@ public class Manager: NSObject {
             case .Prod:
                 Router.baseURL = NSURL(string: "http://halo.mobgen.com")
             }
+            
+            NSUserDefaults.standardUserDefaults().setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
         }
     }
 
@@ -66,10 +71,13 @@ public class Manager: NSObject {
             net.clientSecret = newValue
         }
     }
-
+    
     /// Instance holding all the user-related information
     public var user:User?
 
+    
+    public var delegate: ManagerDelegate?
+    
     private override init() {
         self.environment = .Prod
 
@@ -84,6 +92,9 @@ public class Manager: NSObject {
     */
     public func launch() -> Bool {
 
+        self.user = nil
+        Router.token = nil
+        
         let bundle = NSBundle.mainBundle()
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
@@ -97,9 +108,8 @@ public class Manager: NSObject {
             print("Using client ID: \(cId) and client secret: \(net.clientSecret!)")
         }
 
+        self.user = delegate?.setupUser()
         UIApplication.sharedApplication().registerForRemoteNotifications()
-
-        setupDefaultSystemTags()
 
         return true
     }
@@ -159,8 +169,10 @@ public class Manager: NSObject {
                     let err = error as NSError
                     print("Error: \(err.localizedDescription)")
                 }
+              
+                self.delegate?.managerDidFinishLaunching()
+                
             })
-
         }
     }
 
@@ -178,7 +190,10 @@ public class Manager: NSObject {
         let device = UserDevice(platform: "iOS", token: deviceToken.description)
         self.user?.devices = [device]
 
+        self.setupDefaultSystemTags()
+        
         print("Push device token: \(deviceToken.description)")
+
     }
 
     /**

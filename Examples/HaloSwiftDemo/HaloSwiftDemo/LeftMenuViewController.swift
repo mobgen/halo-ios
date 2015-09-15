@@ -18,12 +18,21 @@ protocol LeftMenuDelegate {
     func didSelectModule(module: Halo.Module) -> Void
 }
 
-class LeftMenuViewController: UITableViewController {
+class LeftMenuViewController: UITableViewController, ManagerDelegate {
 
     var modules: [Halo.Module] = []
     var delegate: LeftMenuDelegate?
     private let halo = Halo.Manager.sharedInstance
 
+    init() {
+        super.init(style: .Plain)
+        halo.delegate = self
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "HALO Modules"
@@ -38,10 +47,32 @@ class LeftMenuViewController: UITableViewController {
         self.refreshControl!.tintColor = UIColor.whiteColor()
         self.refreshControl!.attributedTitle = NSAttributedString(string: "Fetching modules", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
         self.refreshControl!.addTarget(self, action: "loadData", forControlEvents: UIControlEvents.ValueChanged)
-
-        loadData()
+        
+        setupCrittercism()
+        setupEnvironment()
+        
+        halo.launch()
+        
     }
 
+    // MARK: Custom setup functions
+    
+    private func setupCrittercism() {
+        Crittercism.enableWithAppID(Config.crittercismAppId)
+    }
+    
+    private func setupEnvironment() {
+        var env = NSUserDefaults.standardUserDefaults().stringForKey(Halo.CoreConstants.environmentKey)
+        
+        if env == nil {
+            env = "QA"
+            NSUserDefaults.standardUserDefaults().setValue(env, forKey: Halo.CoreConstants.environmentKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        
+        halo.environment = HaloEnvironment(rawValue: env!)!
+    }
+    
     func loadData() {
         modules.removeAll()
 
@@ -79,7 +110,7 @@ class LeftMenuViewController: UITableViewController {
         case 1:
             label.attributedText = NSAttributedString(string: "ADD-ONS", attributes: attrs)
         case 2:
-            label.attributedText = NSAttributedString(string: "SETTINGS", attributes: attrs)
+            label.attributedText = NSAttributedString(string: "OTHER", attributes: attrs)
         default: break
             // Do nothing
         }
@@ -92,7 +123,7 @@ class LeftMenuViewController: UITableViewController {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,6 +148,7 @@ class LeftMenuViewController: UITableViewController {
         }
         
         let finalCell = cell!
+        finalCell.detailTextLabel?.text = nil
 
         switch indexPath.section {
         case 0:
@@ -130,7 +162,7 @@ class LeftMenuViewController: UITableViewController {
         case 1:
             finalCell.textLabel?.text = "Segmentation Tags"
         case 2:
-            finalCell.textLabel?.text = "App Settings"
+            finalCell.textLabel?.text = "App info"
         default: break
         }
 
@@ -167,8 +199,8 @@ class LeftMenuViewController: UITableViewController {
 
             container.mainView?.pushViewController(vc, animated: true)
         case 2:
-            let vc = SettingsViewController()
-            vc.title = "App settings"
+            let vc = InfoViewController()
+            vc.title = "App info"
             
             container.mainView?.pushViewController(vc, animated: true)
         default:
@@ -178,6 +210,22 @@ class LeftMenuViewController: UITableViewController {
         container.toggleLeftMenu()
     }
 
+    // MARK: ManagerDelegate methods
+    
+    func setupUser() -> Halo.User {
+        let user: Halo.User = Halo.User()
+        
+        user.email = "test@mobgen.com"
+        user.addTag("My custom tag", value: "HELL YEAH!")
+        
+        return user
+    }
+    
+    func managerDidFinishLaunching() {
+        print("Manager did finish launching")
+        loadData()
+    }
+    
 }
 
 class MenuCell: UITableViewCell {

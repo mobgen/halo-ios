@@ -35,12 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()
 
-        setupEnvironment()
-        setupCrittercism()
-        setupUser()
-
-        mgr.launch()
-        
         return true
     }
 
@@ -64,32 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-    // MARK: Custom setup functions
-    
-    private func setupCrittercism() {
-        Crittercism.enableWithAppID(Config.crittercismAppId)
-    }
-
-    private func setupEnvironment() {
-        #if MG_FEED_QA
-        print("Using QA configuration")
-        mgr.environment = .QA
-        #elseif MG_FEED_INT
-        print("Using INT configuration")
-        mgr.environment = .Int
-        #else
-        print("Using Prod configuration")
-        mgr.environment = .Prod
-        #endif
-    }
-
-    private func setupUser() {
-        if let user = mgr.user {
-            user.email = "test@mobgen.com"
-            user.addTag("My custom tag", value: "HELL YEAH!")
-        }
     }
 
     // MARK: Push notifications
