@@ -49,6 +49,7 @@ public class Manager: NSObject {
             }
             
             NSUserDefaults.standardUserDefaults().setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
+            self.launch()
         }
     }
 

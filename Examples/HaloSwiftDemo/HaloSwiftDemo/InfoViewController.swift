@@ -89,7 +89,6 @@ class InfoViewController: UITableViewController {
 
     func switchEnvironment() {
         self.tableView.reloadData()
-        mgr.launch()
         
         if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
             let vc = window.rootViewController as? ContainerViewController

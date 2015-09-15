@@ -50,9 +50,6 @@ class LeftMenuViewController: UITableViewController, ManagerDelegate {
         
         setupCrittercism()
         setupEnvironment()
-        
-        halo.launch()
-        
     }
 
     // MARK: Custom setup functions
