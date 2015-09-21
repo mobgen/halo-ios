@@ -41,11 +41,11 @@ public class Manager: NSObject {
         didSet {
             switch environment {
             case .Int:
-                Router.baseURL = NSURL(string: "http://halo-int.mobgen.com")
+                Router.baseURL = NSURL(string: "https://halo-int.mobgen.com")
             case .QA:
-                Router.baseURL = NSURL(string: "http://halo-qa.mobgen.com")
+                Router.baseURL = NSURL(string: "https://halo-qa.mobgen.com")
             case .Prod:
-                Router.baseURL = NSURL(string: "http://halo.mobgen.com")
+                Router.baseURL = NSURL(string: "https://halo.mobgen.com")
             }
             
             NSUserDefaults.standardUserDefaults().setValue(environment.rawValue, forKey: CoreConstants.environmentKey)

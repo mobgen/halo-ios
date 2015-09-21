@@ -13,7 +13,7 @@ import Alamofire
 enum Router: URLRequestConvertible {
 
     /// Common base url of all the API endpoints
-    static var baseURL = NSURL(string: "http://halo-qa.mobgen.com")
+    static var baseURL = NSURL(string: "https://halo-qa.mobgen.com")
 
     /// Token to be used for authentication purposes
     static var token:Token?
@@ -28,9 +28,10 @@ enum Router: URLRequestConvertible {
     var method: Alamofire.Method {
         switch self {
         case .OAuth(_),
-            .SegmentationCreateUser(_),
-            .SegmentationUpdateUser(_):
+             .SegmentationCreateUser(_):
             return .POST
+        case .SegmentationUpdateUser(_):
+            return .PUT
         default:
             return .GET
         }
@@ -42,13 +43,12 @@ enum Router: URLRequestConvertible {
         case .OAuth(_):
             return "/api/oauth/token?_1"
         case .Modules:
-            return "/api/authentication/module/list"
+            return "/api/authentication/module/"
         case .GeneralContentInstances(_):
-            return "api/generalcontent/instance/list"
-        case .SegmentationCreateUser(_):
-            return "api/segmentation/appuser/create"
-        case .SegmentationUpdateUser(_):
-            return "api/segmentation/appuser/update"
+            return "api/generalcontent/instance/"
+        case .SegmentationCreateUser(_),
+             .SegmentationUpdateUser(_):
+            return "api/segmentation/appuser/"
         }
     }
 
