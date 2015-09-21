@@ -50,14 +50,7 @@ extension NetworkManager {
     - returns Array of parsed General Content instances
     */
     private func parseGeneralContentInstances(instances: [[String: AnyObject]]) -> [GeneralContentInstance] {
-
-        var gcInstances = [GeneralContentInstance]()
-
-        for dict in instances {
-            gcInstances.append(GeneralContentInstance(dict))
-        }
-
-        return gcInstances
+        return instances.map({ GeneralContentInstance($0) })
     }
 
 }

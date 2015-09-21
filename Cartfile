@@ -1,4 +1,5 @@
-github "Alamofire/Alamofire" "swift-2.0"
+github "Alamofire/Alamofire" "2.0.2"
+github "Alamofire/AlamofireImage" "1.1.0"
 github "Quick/Quick" "swift-2.0"
 github "Quick/Nimble" "swift-2.0"
-github "AliSoftware/OHHTTPStubs" "swift-2.0"
+github "AliSoftware/OHHTTPStubs" "4.3.0"

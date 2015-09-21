@@ -69,9 +69,7 @@ public final class User: NSObject, NSCoding {
     }
 
     public func addTags(tags: Dictionary<String, String?>) {
-        for (name, value) in tags {
-            self.addTag(name, value: value)
-        }
+        let _ = tags.map({ self.addTag($0, value: $1)})
     }
 
     // MARK: Management of user storage

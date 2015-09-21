@@ -52,13 +52,6 @@ extension NetworkManager {
     - returns   The list of the parsed modules
     */
     private func parseModules(modules: [Dictionary<String,AnyObject>]) -> [Halo.Module] {
-
-        var modArray: [Halo.Module] = []
-
-        for dict in modules {
-            modArray.append(Module(dict))
-        }
-        
-        return modArray
+        return modules.map({ Module($0) })
     }
 }
