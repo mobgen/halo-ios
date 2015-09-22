@@ -1,5 +1,5 @@
 github "Alamofire/Alamofire" "2.0.2"
 github "Quick/Nimble" "a87c41424b2b8bc7821cf9e0352f87f53daf5263"
 github "AliSoftware/OHHTTPStubs" "4.3.0"
-github "Quick/Quick" "93408cc119d5b8a65a26ef0382f5790dd5d7dc01"
+github "Quick/Quick" "bfba21156d7b50d250f32424d0280511435206e6"
 github "Alamofire/AlamofireImage" "1.1.0"

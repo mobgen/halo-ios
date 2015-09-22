@@ -18,7 +18,7 @@ protocol LeftMenuDelegate {
     func didSelectModule(module: Halo.Module) -> Void
 }
 
-class LeftMenuViewController: UITableViewController, ManagerDelegate {
+class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
 
     var modules: [Halo.Module] = []
     var delegate: LeftMenuDelegate?
@@ -26,7 +26,6 @@ class LeftMenuViewController: UITableViewController, ManagerDelegate {
 
     init() {
         super.init(style: .Plain)
-        halo.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -35,6 +34,9 @@ class LeftMenuViewController: UITableViewController, ManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.halo.delegate = self
+        
         self.title = "HALO Modules"
 
         var frame = self.view.frame
@@ -67,13 +69,15 @@ class LeftMenuViewController: UITableViewController, ManagerDelegate {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
         
-        halo.environment = HaloEnvironment(rawValue: env!)!
+        self.halo.environment = HaloEnvironment(rawValue: env!)!
     }
     
     func loadData() {
-        modules.removeAll()
+        print("Loading data")
+        
+        self.modules.removeAll()
 
-        halo.getModules { (result) -> Void in
+        self.halo.getModules { (result) -> Void in
 
             switch result {
             case .Success(let modules):
@@ -218,9 +222,9 @@ class LeftMenuViewController: UITableViewController, ManagerDelegate {
         return user
     }
     
-    func managerDidFinishLaunching() {
+    func managerDidFinishLaunching() -> Void {
         print("Manager did finish launching")
-        loadData()
+        self.loadData()
     }
     
 }

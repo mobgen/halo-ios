@@ -28,6 +28,9 @@ public class GeneralContentInstance: NSObject {
     /// Date in which the content was created
     public var createdAt: NSDate?
 
+    /// Date in which the content was (or is going to be) published
+    public var publishedAt: NSDate?
+    
     /// Most recent date in which the content was updated
     public var updatedAt: NSDate?
 
@@ -42,9 +45,13 @@ public class GeneralContentInstance: NSObject {
         if let created = dict["createdAt"] as? Double {
             createdAt = NSDate(timeIntervalSince1970: created/1000)
         }
-
+        
         if let updated = dict["updatedAt"] as? Double {
             updatedAt = NSDate(timeIntervalSince1970: updated/1000)
+        }
+        
+        if let published = dict["publishedAt"] as? Double {
+            publishedAt = NSDate(timeIntervalSince1970: published/1000)
         }
 
     }

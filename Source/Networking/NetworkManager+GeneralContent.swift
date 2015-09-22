@@ -9,6 +9,18 @@
 import Foundation
 import Alamofire
 
+public struct GeneralContentFlag : OptionSetType {
+    
+    public let rawValue: UInt
+    
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+    
+    public static let IncludeArchived = GeneralContentFlag(rawValue: 1)
+    public static let IncludeUnpublished = GeneralContentFlag(rawValue: 2)
+}
+
 extension NetworkManager {
 
     /**
@@ -17,9 +29,17 @@ extension NetworkManager {
     - parameter moduleId:           Internal id of the module to be requested
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    func generalContentInstances(moduleId: String, completionHandler handler: (Alamofire.Result<[GeneralContentInstance]>) -> Void) -> Void {
+    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, completionHandler handler: (Alamofire.Result<[GeneralContentInstance]>) -> Void) -> Void {
 
-        self.startRequest(Router.GeneralContentInstances(["module" : moduleId, "archived" : "false"])) { [weak self] (req, resp, result) -> Void in
+        var params = ["module" : moduleId]
+        
+        if !flags.contains(GeneralContentFlag.IncludeArchived) {
+            params["archived"] = "false"
+        }
+        
+        let unpublished = flags.contains(GeneralContentFlag.IncludeUnpublished)
+        
+        self.startRequest(Router.GeneralContentInstances(params)) { [weak self] (req, resp, result) -> Void in
 
             if let response = resp {
                 if response.statusCode == 200 {
@@ -27,7 +47,7 @@ extension NetworkManager {
                     if let strongSelf = self {
                         switch result {
                         case .Success(let data):
-                            let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]])
+                            let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
                             handler(.Success(arr))
                         case .Failure(let data, let error):
                             handler(.Failure(data, error))
@@ -49,8 +69,22 @@ extension NetworkManager {
 
     - returns Array of parsed General Content instances
     */
-    private func parseGeneralContentInstances(instances: [[String: AnyObject]]) -> [GeneralContentInstance] {
-        return instances.map({ GeneralContentInstance($0) })
+    private func parseGeneralContentInstances(instances: [[String: AnyObject]], includeUnpublished: Bool) -> [GeneralContentInstance] {
+        let inst = instances.map({ GeneralContentInstance($0) })
+        
+        return inst.filter { (instance) -> Bool in
+            
+            if includeUnpublished {
+                return true
+            } else {
+                if let published = instance.publishedAt {
+                    return published < NSDate()
+                } else {
+                    return false
+                }
+            }
+            
+        }
     }
 
 }

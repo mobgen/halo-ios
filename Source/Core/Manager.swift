@@ -37,7 +37,7 @@ public class Manager: NSObject {
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
 
     /// Current environment (QA, Integration or Prod)
-    public var environment: HaloEnvironment {
+    public var environment: HaloEnvironment = .Int {
         didSet {
             switch environment {
             case .Int:
@@ -75,13 +75,10 @@ public class Manager: NSObject {
     
     /// Instance holding all the user-related information
     public var user:User?
-
     
     public var delegate: ManagerDelegate?
     
     private override init() {
-        self.environment = .Prod
-
         // Get the stored user
         self.user = Halo.User.loadUser() ?? Halo.User()
     }
@@ -160,6 +157,8 @@ public class Manager: NSObject {
             print(user.description)
             self.user?.storeUser()
 
+            self.delegate?.managerDidFinishLaunching()
+            
             net.createUpdateUser(user, completionHandler: { (result) -> Void in
                 switch result {
                 case .Success(let user):
@@ -171,8 +170,6 @@ public class Manager: NSObject {
                     print("Error: \(err.localizedDescription)")
                 }
               
-                self.delegate?.managerDidFinishLaunching()
-                
             })
         }
     }

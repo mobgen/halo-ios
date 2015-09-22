@@ -66,12 +66,12 @@ class InfoViewController: UITableViewController {
             
             let intAction = UIAlertAction(title: "Int", style: .Default, handler: { (_) -> Void in
                 self.mgr.environment = .Int
-                self.switchEnvironment()
+                self.tableView.reloadData()
             })
             
             let qaAction = UIAlertAction(title: "QA", style: .Default, handler: { (_) -> Void in
                 self.mgr.environment = .QA
-                self.switchEnvironment()
+                self.tableView.reloadData()
             })
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
@@ -87,13 +87,5 @@ class InfoViewController: UITableViewController {
         
     }
 
-    func switchEnvironment() {
-        self.tableView.reloadData()
-        
-        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
-            let vc = window.rootViewController as? ContainerViewController
-            vc?.leftMenu.loadData()
-        }
-    }
     
 }
