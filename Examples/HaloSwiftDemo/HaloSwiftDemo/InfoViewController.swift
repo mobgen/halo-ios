@@ -61,7 +61,7 @@ class InfoViewController: UITableViewController {
             cell?.detailTextLabel?.text = version
         case 3: // Push token
             cell?.textLabel?.text = "Push token"
-            cell?.detailTextLabel?.text = mgr.user?.devices![0].token
+            cell?.detailTextLabel?.text = mgr.user?.devices?[0].token ?? "-"
         default: break
         }
         
@@ -95,7 +95,7 @@ class InfoViewController: UITableViewController {
             
             self.presentViewController(alert, animated: true, completion: nil)
         case 3: // Push token
-            let alert = UIAlertController(title: "Push token", message: mgr.user?.devices![0].token, preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Push token", message: mgr.user?.devices?[0].token ?? "-", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
