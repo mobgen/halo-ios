@@ -87,8 +87,10 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 print("Error retrieving modules: \(err.localizedDescription)")
             }
 
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            })
         }
     }
 
