@@ -75,13 +75,9 @@ extension NetworkManager {
         return inst.filter { (instance) -> Bool in
             
             if includeUnpublished {
-                return true
+                return !instance.isRemoved()
             } else {
-                if let published = instance.publishedAt {
-                    return published < NSDate()
-                } else {
-                    return false
-                }
+                return instance.isPublished() && !instance.isRemoved()
             }
             
         }

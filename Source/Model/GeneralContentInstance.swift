@@ -31,6 +31,9 @@ public class GeneralContentInstance: NSObject {
     /// Date in which the content was (or is going to be) published
     public var publishedAt: NSDate?
     
+    /// Date in which the content was (or is going to be) removed
+    public var removedAt: NSDate?
+    
     /// Most recent date in which the content was updated
     public var updatedAt: NSDate?
 
@@ -54,6 +57,26 @@ public class GeneralContentInstance: NSObject {
             publishedAt = NSDate(timeIntervalSince1970: published/1000)
         }
 
+        if let removed = dict["removedAt"] as? Double {
+            removedAt = NSDate(timeIntervalSince1970: removed/1000)
+        }
+        
+    }
+    
+    public func isRemoved() -> Bool {
+        if let removed = self.removedAt {
+            return removed < NSDate()
+        }
+        
+        return false
     }
 
+    public func isPublished() -> Bool {
+        if let published = self.publishedAt {
+            return published < NSDate()
+        }
+        
+        return false
+    }
+    
 }
