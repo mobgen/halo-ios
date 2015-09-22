@@ -32,7 +32,7 @@ class InfoViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 4
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -49,6 +49,19 @@ class InfoViewController: UITableViewController {
             
             let backend = NSUserDefaults.standardUserDefaults().stringForKey(Halo.CoreConstants.environmentKey)
             cell?.detailTextLabel?.text = backend
+        case 1: // Version
+            cell?.textLabel?.text = "App version"
+            
+            let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
+            cell?.detailTextLabel?.text = version
+        case 2: // Build
+            cell?.textLabel?.text = "Build number"
+            
+            let version = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
+            cell?.detailTextLabel?.text = version
+        case 3: // Push token
+            cell?.textLabel?.text = "Push token"
+            cell?.detailTextLabel?.text = mgr.user?.devices![0].token
         default: break
         }
         
@@ -81,7 +94,11 @@ class InfoViewController: UITableViewController {
             alert.addAction(cancelAction)
             
             self.presentViewController(alert, animated: true, completion: nil)
+        case 3: // Push token
+            let alert = UIAlertController(title: "Push token", message: mgr.user?.devices![0].token, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
             
+            self.presentViewController(alert, animated: true, completion: nil)
         default: break
         }
         
