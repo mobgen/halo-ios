@@ -125,17 +125,16 @@ class NetworkManager: Alamofire.Manager {
                     print("No response from server")
                 }
 
-                self.isRefreshing = false
-                
-                /// Restart cached tasks
-                let cachedTaskCopy = self.cachedTasks
-                self.cachedTasks.removeAll()
-                let _ = cachedTaskCopy.map { self.startRequest($0.request, completionHandler: $0.handler) }
-
             case .Failure(let error):
                 print("Error refreshing token: \(error.localizedDescription)")
-                self.isRefreshing = false
             }
+            
+            self.isRefreshing = false
+            
+            /// Restart cached tasks
+            let cachedTaskCopy = self.cachedTasks
+            self.cachedTasks.removeAll()
+            let _ = cachedTaskCopy.map { self.startRequest($0.request, completionHandler: $0.handler) }
 
             completionHandler?(response.request, response.response, response.result)
         }
