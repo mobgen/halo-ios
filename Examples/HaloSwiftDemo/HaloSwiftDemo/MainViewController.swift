@@ -40,9 +40,8 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
                     switch result {
                     case .Success(let instances):
                         self.instances.appendContentsOf(instances)
-                    case .Failure(_, let error):
-                        let err = error as NSError
-                        print("Error: \(err.localizedDescription)")
+                    case .Failure(let error):
+                        print("Error: \(error.localizedDescription)")
                     }
 
                     self.tableView.reloadData()

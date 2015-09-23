@@ -26,6 +26,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
 
     init() {
         super.init(style: .Plain)
+        self.halo.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -34,8 +35,6 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.halo.delegate = self
         
         self.title = "HALO Modules"
 
@@ -77,20 +76,21 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         
         self.modules.removeAll()
 
-        self.halo.getModules { (result) -> Void in
+        self.halo.getModules { [weak self] (result) -> Void in
 
-            switch result {
-            case .Success(let modules):
-                self.modules.appendContentsOf(modules)
-            case .Failure(_, let error):
-                let err = error as NSError
-                print("Error retrieving modules: \(err.localizedDescription)")
+            if let strongSelf = self {
+                
+                switch result {
+                case .Success(let modules):
+                    strongSelf.modules.appendContentsOf(modules)
+                    print("Modules loaded: \(strongSelf.modules)")
+                case .Failure(let error):
+                    print("Error retrieving modules: \(error.localizedDescription)")
+                }
+                
+                strongSelf.tableView.reloadData()
+                strongSelf.refreshControl?.endRefreshing()
             }
-
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
-            })
         }
     }
 

@@ -17,7 +17,7 @@ extension NetworkManager {
     :param: user    User object containing all the information to be sent
     :param: handler Closure to be executed after the request has completed
     */
-    func createUpdateUser(user: Halo.User, completionHandler handler: ((Alamofire.Result<Halo.User>) -> Void)? = nil) -> Void {
+    func createUpdateUser(user: Halo.User, completionHandler handler: ((Alamofire.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
         let request = user.id == nil ? Router.SegmentationCreateUser(user.toDictionary()) : Router.SegmentationUpdateUser(user.toDictionary())
@@ -32,15 +32,15 @@ extension NetworkManager {
                     case .Success(let data):
                         let user = User.fromDictionary(data as! [String: AnyObject])
                         handler?(.Success(user))
-                    case .Failure(let data, let error):
-                        handler?(.Failure(data, error))
+                    case .Failure(let error):
+                        handler?(.Failure(error))
                     }
 
                 } else {
-                    handler?(.Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error creating user"])))
+                    handler?(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error creating user"])))
                 }
             } else {
-                handler?(.Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                handler?(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
             }
         }
     }

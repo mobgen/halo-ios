@@ -9,6 +9,21 @@
 import Foundation
 import Alamofire
 
+//typealias CompletionHandler = (Alamofire.Response) -> Void
+typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Result<AnyObject, NSError>) -> Void
+
+private struct CachedTask {
+    
+    var request: URLRequestConvertible!
+    var handler: CompletionHandler!
+    
+    init(request: URLRequestConvertible, handler: CompletionHandler) {
+        self.request = request
+        self.handler = handler
+    }
+    
+}
+
 /// Custom network manager implementation that handles authentication failures automatically,
 /// queuing the pending network operations to be re-issued after authentication
 class NetworkManager: Alamofire.Manager {
@@ -22,19 +37,14 @@ class NetworkManager: Alamofire.Manager {
     /// Corresponding client secret to be provided for the API calls
     var clientSecret: String?
 
-    typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Result<AnyObject>) -> Void
-    private typealias CachedTask = (NSURLRequest?, NSHTTPURLResponse?, Result<AnyObject>) -> Void
-
     /// Variable that flags whether the manager is currently refreshing the auth token
     private var isRefreshing = false
 
     /// Queue of pending network tasks to be restarted after a successful authentication
     private var cachedTasks = Array<CachedTask>()
 
-    private init() {}
-
-    required override init(configuration: NSURLSessionConfiguration, serverTrustPolicyManager: ServerTrustPolicyManager?) {
-        fatalError("init(configuration:serverTrustPolicyManager:) has not been implemented")
+    private init() {
+        super.init()
     }
 
     /**
@@ -46,17 +56,7 @@ class NetworkManager: Alamofire.Manager {
     */
     func startRequest(request: URLRequestConvertible, completionHandler handler: CompletionHandler) -> Void {
 
-        let cachedTask: CachedTask = { [weak self] urlRequest, urlResponse, result in
-            if let strongSelf = self {
-                switch result {
-                case .Success(_):
-                    strongSelf.startRequest(request, completionHandler: handler)
-                case .Failure(_, _):
-                    handler(urlRequest, urlResponse, result)
-                }
-
-            }
-        }
+        let cachedTask = CachedTask(request: request, handler: handler)
 
         if (self.isRefreshing) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
@@ -68,9 +68,9 @@ class NetworkManager: Alamofire.Manager {
 
         print(request)
 
-        request.responseJSON { [weak self] (request, response, result) -> Void in
+        request.responseJSON { [weak self] response in
             if let strongSelf = self {
-                if let resp = response {
+                if let resp = response.response {
                     if resp.statusCode == 403 || resp.statusCode == 401 {
                         /// If we get a 403/401, we add the task to the queue and try to get a valid token
                         strongSelf.cachedTasks.append(cachedTask)
@@ -80,7 +80,7 @@ class NetworkManager: Alamofire.Manager {
                 }
             }
 
-            handler(request, response, result)
+            handler(response.request, response.response, response.result)
         }
     }
 
@@ -107,38 +107,37 @@ class NetworkManager: Alamofire.Manager {
             ]
         }
 
-        self.request(Router.OAuth(params)).responseJSON { (req, resp, result) -> Void in
-            switch result {
+        self.request(Router.OAuth(params)).responseJSON { response in
+            switch response.result {
             case .Success(let value):
                 let dict = value as! Dictionary<String, AnyObject>
 
                 Router.token = nil
-                let res: Alamofire.Result<AnyObject>
 
-                if let response = resp {
-                    if response.statusCode == 200 {
+                if let resp = response.response {
+                    if resp.statusCode == 200 {
                         Router.token = Token(dict)
-                        res = result
                     } else {
-                        res = .Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving token"]))
+                        print("Error retrieving token")
                     }
                 } else {
                     // No response
-                    res = .Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response from server"]))
+                    print("No response from server")
                 }
 
+                self.isRefreshing = false
+                
                 /// Restart cached tasks
                 let cachedTaskCopy = self.cachedTasks
                 self.cachedTasks.removeAll()
-                let _ = cachedTaskCopy.map { $0(nil, nil, res) }
+                let _ = cachedTaskCopy.map { self.startRequest($0.request, completionHandler: $0.handler) }
 
-            case .Failure(_, let error):
-                let err = error as NSError
-                print("Error refreshing token: \(err.localizedDescription)")
+            case .Failure(let error):
+                print("Error refreshing token: \(error.localizedDescription)")
+                self.isRefreshing = false
             }
 
-            self.isRefreshing = false
-            completionHandler?(req, resp, result)
+            completionHandler?(response.request, response.response, response.result)
         }
     }
 }

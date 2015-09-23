@@ -26,7 +26,7 @@ public class GeneralContent: NSObject {
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
     public func getInstances(moduleId: String,
-        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance]>) -> Void) -> Void {
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
             net.generalContentInstances(moduleId, flags: [], completionHandler: handler)
     }
 
@@ -48,9 +48,8 @@ public class GeneralContent: NSObject {
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances)
-                case .Failure(_, let error):
-                    let err = error as NSError
-                    failure?(error: err)
+                case .Failure(let error):
+                    failure?(error: error)
                 }
             }
     }

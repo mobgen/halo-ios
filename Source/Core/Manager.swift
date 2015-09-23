@@ -76,6 +76,7 @@ public class Manager: NSObject {
     /// Instance holding all the user-related information
     public var user:User?
     
+    /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
     private override init() {
@@ -157,19 +158,21 @@ public class Manager: NSObject {
             print(user.description)
             self.user?.storeUser()
 
-            self.delegate?.managerDidFinishLaunching()
-            
-            net.createUpdateUser(user, completionHandler: { (result) -> Void in
-                switch result {
-                case .Success(let user):
-                    self.user = user
-                    print(self.user?.description)
-                    self.user?.storeUser()
-                case .Failure(_, let error):
-                    let err = error as NSError
-                    print("Error: \(err.localizedDescription)")
+            self.net.createUpdateUser(user, completionHandler: { [weak self] (result) -> Void in
+                
+                if let strongSelf = self {
+                    switch result {
+                    case .Success(let user):
+                        strongSelf.user = user
+                        print(strongSelf.user?.description)
+                        strongSelf.user?.storeUser()
+                    case .Failure(let error):
+                        print("Error: \(error.localizedDescription)")
+                    }
+                
+                    strongSelf.delegate?.managerDidFinishLaunching()
+                
                 }
-              
             })
         }
     }
@@ -188,10 +191,10 @@ public class Manager: NSObject {
         let device = UserDevice(platform: "iOS", token: deviceToken.description)
         self.user?.devices = [device]
 
+        print("Push device token: \(deviceToken.description)")
+        
         self.setupDefaultSystemTags()
         
-        print("Push device token: \(deviceToken.description)")
-
     }
 
     /**
@@ -199,7 +202,7 @@ public class Manager: NSObject {
 
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module]>) -> Void) -> Void {
+    public func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
         net.getModules(completionHandler: handler)
     }
 
@@ -208,7 +211,7 @@ public class Manager: NSObject {
 
     :param: handler Closure to be executed once the request has finished
     */
-    public func saveUser(completionHandler handler: (Alamofire.Result<Halo.User> -> Void)? = nil) -> Void {
+    public func saveUser(completionHandler handler: (Alamofire.Result<Halo.User, NSError> -> Void)? = nil) -> Void {
         if let user = self.user {
             self.net.createUpdateUser(user, completionHandler: handler)
         }
@@ -229,8 +232,8 @@ public class Manager: NSObject {
             switch result {
             case .Success(let modules):
                 success?(userData: modules)
-            case .Failure(_, let error):
-                failure?(error: error as NSError)
+            case .Failure(let error):
+                failure?(error: error)
             }
         }
     }
@@ -243,8 +246,8 @@ public class Manager: NSObject {
             switch result {
             case .Success(let user):
                 success?(userData: user)
-            case .Failure(_, let error):
-                failure?(error: error as NSError)
+            case .Failure(let error):
+                failure?(error: error)
             }
         }
 

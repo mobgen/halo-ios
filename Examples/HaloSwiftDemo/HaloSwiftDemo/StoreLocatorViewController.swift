@@ -85,8 +85,8 @@ class StoreLocatorViewController : UIViewController, MKMapViewDelegate, CLLocati
                 
                 self.loadData()
                 
-            case .Failure(_, let error):
-                print("Error: \((error as NSError).localizedDescription)")
+            case .Failure(let error):
+                print("Error: \(error.localizedDescription)")
             }
         }
     }

@@ -122,9 +122,8 @@ class NewsListViewController: UITableViewController {
                     self.news?.append(Article(instance: inst))
                 }
                 self.tableView.reloadData()
-            case .Failure(_, let error):
-                let err = error as NSError
-                print("Error: \(err.localizedDescription)")
+            case .Failure(let error):
+                print("Error: \(error.localizedDescription)")
             }
         }
         

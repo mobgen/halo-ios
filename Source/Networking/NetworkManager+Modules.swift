@@ -16,28 +16,28 @@ extension NetworkManager {
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module]>) -> Void) -> Void {
+    func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
 
-        self.startRequest(Router.Modules, completionHandler: { [weak self] (req, resp, result) -> Void in
+        self.startRequest(Router.Modules, completionHandler: { [weak self] (request, response, result) in
 
-            if let response = resp {
+            if let resp = response {
 
-                if (response.statusCode == 200) {
+                if (resp.statusCode == 200) {
 
                     if let strongSelf = self {
                         switch result {
                         case .Success(let data):
                             let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
                             handler(.Success(arr))
-                        case .Failure(let data, let error):
-                            handler(.Failure(data, error))
+                        case .Failure(let error):
+                            handler(.Failure(error))
                         }
                     }
                 } else {
-                    handler(.Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving modules"])))
+                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving modules"])))
                 }
             } else {
-                handler(.Failure(nil, NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
             }
         })
     }
