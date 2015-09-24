@@ -72,12 +72,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        // Handle push notification
-        application.applicationIconBadgeNumber = 0;
+        
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // Handle silent push notification
+        // Handle push notification
+        application.applicationIconBadgeNumber = 0;
+        
+        if (application.applicationState == .Active) {
+            
+            if let aps = userInfo["aps"], message = aps["alert"] as? Dictionary<String, String> {
+                let alert = UIAlertController(title: "Push notification", message: message["body"], preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                
+                alert.addAction(okAction)
+                
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
     }
     
 }
