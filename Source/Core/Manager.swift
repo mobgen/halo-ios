@@ -81,7 +81,7 @@ public class Manager: NSObject {
     
     private override init() {
         // Get the stored user
-        self.user = Halo.User.loadUser() ?? Halo.User()
+        self.user = Halo.User.loadUser()
     }
 
     /**
@@ -91,7 +91,6 @@ public class Manager: NSObject {
     */
     public func launch() -> Bool {
 
-        self.user = nil
         Router.token = nil
         
         let bundle = NSBundle.mainBundle()
@@ -107,9 +106,23 @@ public class Manager: NSObject {
             print("Using client ID: \(cId) and client secret: \(net.clientSecret!)")
         }
 
-        self.user = delegate?.setupUser()
-        UIApplication.sharedApplication().registerForRemoteNotifications()
-
+        if let user = self.user {
+            // Update the user
+            net.getUser(user) { (result) -> Void in
+                switch result {
+                case .Success(let user):
+                    self.user = user
+                    UIApplication.sharedApplication().registerForRemoteNotifications()
+                case .Failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+            
+        } else {
+            self.user = delegate?.setupUser()
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+        }
+        
         return true
     }
 
@@ -188,7 +201,9 @@ public class Manager: NSObject {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         app.registerUserNotificationSettings(settings)
 
-        let device = UserDevice(platform: "iOS", token: deviceToken.description)
+        let token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
+        
+        let device = UserDevice(platform: "ios", token: token)
         self.user?.devices = [device]
 
         print("Push device token: \(deviceToken.description)")

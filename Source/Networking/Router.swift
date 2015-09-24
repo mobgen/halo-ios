@@ -21,6 +21,7 @@ enum Router: URLRequestConvertible {
     case OAuth([String: AnyObject])
     case Modules
     case GeneralContentInstances([String: AnyObject])
+    case SegmentationGetUser(String)
     case SegmentationCreateUser([String: AnyObject])
     case SegmentationUpdateUser([String: AnyObject])
 
@@ -49,6 +50,8 @@ enum Router: URLRequestConvertible {
         case .SegmentationCreateUser(_),
              .SegmentationUpdateUser(_):
             return "api/segmentation/appuser/"
+        case .SegmentationGetUser(let id):
+            return "api/segmentation/appuser/\(id)"
         }
     }
 
