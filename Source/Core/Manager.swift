@@ -47,8 +47,12 @@ public class Manager: NSObject {
             case .Prod:
                 Router.baseURL = NSURL(string: "https://halo.mobgen.com")
             }
-            
-            NSUserDefaults.standardUserDefaults().setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
+
+            let defaults = NSUserDefaults.standardUserDefaults()
+
+            defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
+            defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
+            self.user = Halo.User.loadUser()
             self.launch()
         }
     }
@@ -80,8 +84,6 @@ public class Manager: NSObject {
     public var delegate: ManagerDelegate?
     
     private override init() {
-        // Get the stored user
-        self.user = Halo.User.loadUser()
     }
 
     /**
