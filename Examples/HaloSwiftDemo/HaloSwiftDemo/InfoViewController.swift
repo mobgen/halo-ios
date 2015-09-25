@@ -75,7 +75,7 @@ class InfoViewController: UITableViewController {
         
         switch indexPath.row {
         case 0: // Environment
-            let alert = UIAlertController(title: "Select environment", message: "Choose the environment", preferredStyle: .ActionSheet)
+            let alert = UIAlertController(title: "Select environment", message: "Choose the environment", preferredStyle: .Alert)
             
             let intAction = UIAlertAction(title: "Int", style: .Default, handler: { (_) -> Void in
                 self.mgr.environment = .Int
