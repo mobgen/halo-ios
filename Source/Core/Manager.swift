@@ -104,8 +104,8 @@ public class Manager: NSObject {
             }
         }
 
-        if let cId = net.clientId {
-            print("Using client ID: \(cId) and client secret: \(net.clientSecret!)")
+        if let cId = net.clientId, let secret = net.clientSecret {
+            print("Using client ID: \(cId) and client secret: \(secret)")
         }
 
         if let user = self.user {

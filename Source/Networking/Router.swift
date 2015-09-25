@@ -23,7 +23,7 @@ enum Router: URLRequestConvertible {
     case GeneralContentInstances([String: AnyObject])
     case SegmentationGetUser(String)
     case SegmentationCreateUser([String: AnyObject])
-    case SegmentationUpdateUser([String: AnyObject])
+    case SegmentationUpdateUser(String, [String: AnyObject])
 
     /// Decide the HTTP method based on the specific request
     var method: Alamofire.Method {
@@ -47,10 +47,11 @@ enum Router: URLRequestConvertible {
             return "/api/authentication/module/"
         case .GeneralContentInstances(_):
             return "api/generalcontent/instance/"
-        case .SegmentationCreateUser(_),
-             .SegmentationUpdateUser(_):
+        case .SegmentationCreateUser(_):
             return "api/segmentation/appuser/"
         case .SegmentationGetUser(let id):
+            return "api/segmentation/appuser/\(id)"
+        case .SegmentationUpdateUser(let id, _):
             return "api/segmentation/appuser/\(id)"
         }
     }
@@ -77,7 +78,7 @@ enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         case .SegmentationCreateUser(let params):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
-        case .SegmentationUpdateUser(let params):
+        case .SegmentationUpdateUser(_, let params):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
         default:
             return mutableURLRequest

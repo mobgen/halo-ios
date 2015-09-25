@@ -46,7 +46,13 @@ extension NetworkManager {
     func createUpdateUser(user: Halo.User, completionHandler handler: ((Alamofire.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
-        let request = user.id == nil ? Router.SegmentationCreateUser(user.toDictionary()) : Router.SegmentationUpdateUser(user.toDictionary())
+        let request: URLRequestConvertible;
+        
+        if let id = user.id {
+            request = Router.SegmentationUpdateUser(id, user.toDictionary())
+        } else {
+            request = Router.SegmentationCreateUser(user.toDictionary())
+        }
         
         self.startRequest(request) { (req, resp, result) -> Void in
 
