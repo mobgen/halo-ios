@@ -29,6 +29,10 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         self.halo.delegate = self
     }
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -188,8 +192,9 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                     vc.title = module.name
                     container.mainView.pushViewController(vc, animated: true)
                 case "news motorist":
-                    let vc = NewsListViewController(module: module)
+                    let vc = NewsListViewController()
                     vc.title = module.name
+                    vc.moduleId = module.internalId
                     container.mainView.pushViewController(vc, animated: true)
                 default:
                     delegate?.didSelectModule(module)

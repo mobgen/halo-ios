@@ -99,8 +99,7 @@ class NewsListViewController: UITableViewController {
     var moduleId: String?
     var news: [Article]?
     
-    init(module: Halo.Module) {
-        self.moduleId = module.internalId
+    init() {
         super.init(style: .Plain)
     }
 
@@ -114,16 +113,18 @@ class NewsListViewController: UITableViewController {
     
     override func viewDidLoad() {
         
-        halo.generalContent.getInstances(self.moduleId!) { (result) -> Void in
-            switch result {
-            case .Success(let instances):
-                self.news = []
-                for inst in instances {
-                    self.news?.append(Article(instance: inst))
+        if let id = self.moduleId {
+            halo.generalContent.getInstances(id) { (result) -> Void in
+                switch result {
+                case .Success(let instances):
+                    self.news = []
+                    for inst in instances {
+                        self.news?.append(Article(instance: inst))
+                    }
+                    self.tableView.reloadData()
+                case .Failure(let error):
+                    print("Error: \(error.localizedDescription)")
                 }
-                self.tableView.reloadData()
-            case .Failure(let error):
-                print("Error: \(error.localizedDescription)")
             }
         }
         
