@@ -52,7 +52,7 @@ public class Manager: NSObject {
 
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
-            self.user = Halo.User.loadUser()
+            self.user = Halo.User.loadUser(environment)
             self.launch()
         }
     }
@@ -171,7 +171,7 @@ public class Manager: NSObject {
             user.addTag(CoreConstants.tagTestDeviceKey, value: String(self.environment != .Prod))
 
             print(user.description)
-            self.user?.storeUser()
+            self.user?.storeUser(self.environment)
 
             self.net.createUpdateUser(user, completionHandler: { [weak self] (result) -> Void in
                 
@@ -180,7 +180,7 @@ public class Manager: NSObject {
                     case .Success(let user):
                         strongSelf.user = user
                         print(strongSelf.user?.description)
-                        strongSelf.user?.storeUser()
+                        strongSelf.user?.storeUser(strongSelf.environment)
                     case .Failure(let error):
                         print("Error: \(error.localizedDescription)")
                     }
