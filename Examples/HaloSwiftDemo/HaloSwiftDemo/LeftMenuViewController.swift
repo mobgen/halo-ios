@@ -76,7 +76,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     }
     
     func loadData() {
-        print("Loading data")
+        NSLog("Loading data")
         
         self.modules.removeAll()
 
@@ -87,9 +87,9 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 switch result {
                 case .Success(let modules):
                     strongSelf.modules.appendContentsOf(modules)
-                    print("Modules loaded: \(strongSelf.modules)")
+                    NSLog("Modules loaded: \(strongSelf.modules)")
                 case .Failure(let error):
-                    print("Error retrieving modules: \(error.localizedDescription)")
+                    NSLog("Error retrieving modules: \(error.localizedDescription)")
                 }
                 
                 strongSelf.tableView.reloadData()
@@ -230,7 +230,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     }
     
     func managerDidFinishLaunching() -> Void {
-        print("Manager did finish launching")
+        NSLog("Manager did finish launching")
         self.loadData()
     }
     

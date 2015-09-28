@@ -33,7 +33,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
 
         if let id = moduleId {
 
-            print("Loading module \(id)")
+            NSLog("Loading module \(id)")
 
             halo.generalContent.getInstances(id,
                 completionHandler: { (result) -> Void in
@@ -41,7 +41,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
                     case .Success(let instances):
                         self.instances.appendContentsOf(instances)
                     case .Failure(let error):
-                        print("Error: \(error.localizedDescription)")
+                        NSLog("Error: \(error.localizedDescription)")
                     }
 
                     self.tableView.reloadData()
@@ -111,7 +111,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
             case .GeneralContentModule:
                 moduleId = module.internalId
             default:
-                print("Other module type")
+                NSLog("Other module type")
             }
         }
 

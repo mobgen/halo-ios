@@ -30,6 +30,12 @@ public class GeneralContent: NSObject {
             net.generalContentInstances(moduleId, flags: [], completionHandler: handler)
     }
 
+    public func getInstance(instanceId: String,
+        completionHandler handler: (Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void) -> Void {
+            net.generalContentInstance(instanceId, completionHandler: handler)
+    }
+        
+    
     // MARK: ObjC exposed methods
 
     /**

@@ -105,7 +105,7 @@ public class Manager: NSObject {
         }
 
         if let cId = net.clientId, let secret = net.clientSecret {
-            print("Using client ID: \(cId) and client secret: \(secret)")
+            NSLog("Using client ID: \(cId) and client secret: \(secret)")
         }
 
         if let user = self.user {
@@ -116,7 +116,7 @@ public class Manager: NSObject {
                     self.user = user
                     UIApplication.sharedApplication().registerForRemoteNotifications()
                 case .Failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    NSLog("Error: \(error.localizedDescription)")
                 }
             }
             
@@ -170,7 +170,7 @@ public class Manager: NSObject {
             user.addTag(CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
             user.addTag(CoreConstants.tagTestDeviceKey, value: String(self.environment != .Prod))
 
-            print(user.description)
+            NSLog(user.description)
             self.user?.storeUser(self.environment)
 
             self.net.createUpdateUser(user, completionHandler: { [weak self] (result) -> Void in
@@ -179,10 +179,10 @@ public class Manager: NSObject {
                     switch result {
                     case .Success(let user):
                         strongSelf.user = user
-                        print(strongSelf.user?.description)
+                        NSLog((strongSelf.user?.description)!)
                         strongSelf.user?.storeUser(strongSelf.environment)
                     case .Failure(let error):
-                        print("Error: \(error.localizedDescription)")
+                        NSLog("Error: \(error.localizedDescription)")
                     }
                 
                     strongSelf.delegate?.managerDidFinishLaunching()
@@ -208,7 +208,7 @@ public class Manager: NSObject {
         let device = UserDevice(platform: "ios", token: token)
         self.user?.devices = [device]
 
-        print("Push device token: \(deviceToken.description)")
+        NSLog("Push device token: \(deviceToken.description)")
         
         self.setupDefaultSystemTags()
         

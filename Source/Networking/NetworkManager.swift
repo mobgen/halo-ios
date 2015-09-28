@@ -42,11 +42,27 @@ class NetworkManager: Alamofire.Manager {
 
     /// Queue of pending network tasks to be restarted after a successful authentication
     private var cachedTasks = Array<CachedTask>()
-
+    
     private init() {
-        super.init()
+        let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
+            certificates: ServerTrustPolicy.certificatesInBundle(),
+            validateCertificateChain: true,
+            validateHost: true)
+        
+        let trustManager = ServerTrustPolicyManager(policies:
+            ["halo-int.mobgen.com" : serverTrustPolicy,
+             "halo-qa.mobgen.com" : serverTrustPolicy])
+        
+        let sessionDelegate = Alamofire.Manager.SessionDelegate()
+    
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
+        
+        super.init(configuration: configuration,
+            delegate: sessionDelegate,
+            serverTrustPolicyManager: trustManager)
     }
-
+    
     /**
     Start the request flow handling also a potential 401/403 response. The token will be obtained/refreshed
     and the request will continue.
@@ -66,7 +82,7 @@ class NetworkManager: Alamofire.Manager {
 
         let request = self.request(request)
 
-        print(request)
+        NSLog("\(request)")
 
         request.responseJSON { [weak self] response in
             if let strongSelf = self {
@@ -118,15 +134,15 @@ class NetworkManager: Alamofire.Manager {
                     if resp.statusCode == 200 {
                         Router.token = Token(dict)
                     } else {
-                        print("Error retrieving token")
+                        NSLog("Error retrieving token")
                     }
                 } else {
                     // No response
-                    print("No response from server")
+                    NSLog("No response from server")
                 }
 
             case .Failure(let error):
-                print("Error refreshing token: \(error.localizedDescription)")
+                NSLog("Error refreshing token: \(error.localizedDescription)")
             }
             
             self.isRefreshing = false

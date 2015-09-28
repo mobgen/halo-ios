@@ -20,6 +20,7 @@
 		000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; };
 		000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		000827871B6A6E6E001E8248 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827821B6A6E6E001E8248 /* UIColorExtension.swift */; };
+		0024136B1BB42F8C00619E5D /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 002413691BB42F8C00619E5D /* halo.cer */; settings = {ASSET_TAGS = (); }; };
 		002E89B51B74BA7400D25302 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002E89B41B74BA7400D25302 /* Halo.framework */; };
 		002E89B61B74BA8700D25302 /* Halo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 002E89B41B74BA7400D25302 /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		005390881B8F0C560036F579 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390871B8F0C560036F579 /* TagsViewController.swift */; };
@@ -72,23 +73,24 @@
 		000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		000826DD1B690B0D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		000827821B6A6E6E001E8248 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		000827821B6A6E6E001E8248 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIColorExtension.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		002413691BB42F8C00619E5D /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.cer; sourceTree = "<group>"; };
 		002E89B41B74BA7400D25302 /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		005390871B8F0C560036F579 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		006A5FF51B318D600045395A /* HaloDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FF91B318D600045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		006A5FFC1B318D600045395A /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		006A5FFA1B318D600045395A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		006A5FFC1B318D600045395A /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LeftMenuViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		006CB9A11B85C5C800EB872E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		006CB9A31B85C68A00EB872E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		007F78F81B70F934004D1C22 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		007F78F81B70F934004D1C22 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		007F79001B7253A7004D1C22 /* KeyValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueViewController.swift; sourceTree = "<group>"; };
 		00930AE01B385B2D002FF4F0 /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
-		00BD1D531BA1D1A20002C472 /* StoreLocatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreLocatorViewController.swift; sourceTree = "<group>"; };
+		00BD1D531BA1D1A20002C472 /* StoreLocatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StoreLocatorViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		00BD1D551BA1D1D00002C472 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		00BD1D571BA1EE820002C472 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		00BD1D591BA2D6870002C472 /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
-		00BD1D5B1BA2D6980002C472 /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		00BD1D591BA2D6870002C472 /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NewsListViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		00BD1D5B1BA2D6980002C472 /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ArticleViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		00BD1D5D1BA6FA950002C472 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		00BD1D611BA7092A0002C472 /* UIImageView+Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Request.swift"; sourceTree = "<group>"; };
 		00D1A3671B42738C008DFB71 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		0002FB6C1B616ACE00B06A9C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				002413691BB42F8C00619E5D /* halo.cer */,
 				00DC52A11B9F3A89005BD4B9 /* HaloResources.bundle */,
 				0002FB6D1B616ACE00B06A9C /* Gotham-Bold.ttf */,
 				0002FB6E1B616ACE00B06A9C /* Gotham-Book.ttf */,
@@ -236,6 +239,7 @@
 				006A5FF31B318D600045395A /* Resources */,
 				000590C31B565E7C00DED5D2 /* ShellScript */,
 				000826EB1B690B3A001E8248 /* Embed Frameworks */,
+				0000582E1BB9310400D91D58 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -294,6 +298,7 @@
 				0002FB741B616ACE00B06A9C /* Gotham-Bold.ttf in Resources */,
 				0002FB791B616ACE00B06A9C /* Lab-Medium.ttf in Resources */,
 				00DC52A21B9F3A89005BD4B9 /* HaloResources.bundle in Resources */,
+				0024136B1BB42F8C00619E5D /* halo.cer in Resources */,
 				0002FB781B616ACE00B06A9C /* Lab-Light.ttf in Resources */,
 				0002FB761B616ACE00B06A9C /* Images.xcassets in Resources */,
 				0002FB7A1B616ACE00B06A9C /* Launch Screen.xib in Resources */,
@@ -305,6 +310,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0000582E1BB9310400D91D58 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../../Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		000590C31B565E7C00DED5D2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../../Carthage/Build/iOS",
@@ -460,6 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/../../Carthage/Build/iOS",

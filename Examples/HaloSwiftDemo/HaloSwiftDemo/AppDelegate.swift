@@ -67,15 +67,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        print("Couldn't register: \(error)")
+        NSLog("Couldn't register: \(error)")
         mgr.setupPushNotifications(application: application, deviceToken: "<testToken>".dataUsingEncoding(NSUTF8StringEncoding)!)
     }
 
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        
-    }
+//    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+//        
+//    }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        if let silent = userInfo["content_available"] as? Int {
+            if silent == 1 {
+                handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+            } else {
+                handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+            }
+        }
+        
+    }
+    
+    private func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         // Handle push notification
         application.applicationIconBadgeNumber = 0;
         
@@ -90,6 +102,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
         }
+        
+        completionHandler(.NoData)
+        
+    }
+    
+    private func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        NSLog("Silent push!!")
+        
+        if let extra = userInfo["extra"] as? [NSObject:AnyObject] {
+            NSNotificationCenter.defaultCenter().postNotificationName("generalcontent", object: self, userInfo: extra)
+        }
+        
+        
+        completionHandler(.NewData)
     }
     
 }

@@ -12,6 +12,8 @@ import Halo
 
 class Article: NSObject {
     
+    var moduleId: String?
+    var instanceId: String?
     var title: String?
     var summary: String?
     var date: NSDate?
@@ -22,6 +24,9 @@ class Article: NSObject {
     init(instance: Halo.GeneralContentInstance) {
         
         let dict = instance.values!
+        
+        self.moduleId = instance.moduleId
+        self.instanceId = instance.id
         
         self.title = dict["Title"] as? String
         
@@ -113,6 +118,8 @@ class NewsListViewController: UITableViewController {
     
     override func viewDidLoad() {
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSilentNotification:", name: "generalcontent", object: nil)
+        
         if let id = self.moduleId {
             halo.generalContent.getInstances(id) { (result) -> Void in
                 switch result {
@@ -123,7 +130,20 @@ class NewsListViewController: UITableViewController {
                     }
                     self.tableView.reloadData()
                 case .Failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    NSLog("Error: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+    }
+    
+    func handleSilentNotification(notification: NSNotification) {
+        
+        if let info = notification.userInfo {
+            if let module = info["module"] as? String, moduleId = info["moduleId"] as? String, ownModuleId = self.moduleId {
+                if module == "generalcontent" && moduleId == ownModuleId {
+                    NSLog("Reloading!!")
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -170,7 +190,7 @@ class NewsListViewController: UITableViewController {
         if let news = self.news {
             let article = news[indexPath.row]
             
-            let vc = ArticleViewController(article: article)
+            let vc = ArticleViewController(articleId: article.instanceId!)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

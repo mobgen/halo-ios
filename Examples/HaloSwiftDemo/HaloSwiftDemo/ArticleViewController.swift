@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Halo
 
 class ArticleView: UIView {
 
@@ -72,26 +73,35 @@ class ArticleView: UIView {
 
 class ArticleViewController: UIViewController, UIWebViewDelegate {
  
-    init(article: Article) {
+    var articleId: String
+    
+    var article: Article? {
+        didSet {
+            let customView: ArticleView = self.view as! ArticleView
+            
+            self.title = article!.title
+            
+            customView.imageView?.imageFromUrl(article!.imageURL!)
+            customView.articleTitle?.text = article!.title
+            
+            customView.articleDate?.text = NSDateFormatter.localizedStringFromDate(article!.date!, dateStyle: .MediumStyle, timeStyle: .MediumStyle)
+            
+            let htmlstr = "<style>body { font-family:helvetica; font-size: small; margin: 0; text-align: justify; }</style>\(article!.content!)"
+            
+            customView.articleBody?.loadHTMLString(htmlstr, baseURL: nil)
+            customView.articleBody?.delegate = self
+            
+            NSLog(htmlstr)
+            
+            customView.setNeedsLayout()
+        }
+    }
+    
+    let halo = Halo.Manager.sharedInstance
+    
+    init(articleId: String) {
+        self.articleId = articleId
         super.init(nibName: nil, bundle: nil)
-        
-        let customView: ArticleView = self.view as! ArticleView
-        
-        self.title = article.title
-        
-        customView.imageView?.imageFromUrl(article.imageURL!)
-        customView.articleTitle?.text = article.title
-        
-        customView.articleDate?.text = NSDateFormatter.localizedStringFromDate(article.date!, dateStyle: .MediumStyle, timeStyle: .MediumStyle)
-        
-        let htmlstr = "<style>body { font-family:helvetica; font-size: small; margin: 0; text-align: justify; }</style>\(article.content!)"
-        
-        customView.articleBody?.loadHTMLString(htmlstr, baseURL: nil)
-        customView.articleBody?.delegate = self
-        
-        print(htmlstr)
-        
-        customView.setNeedsLayout()
     }
 
     override func loadView() {
@@ -103,7 +113,27 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        self.articleId = ""
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSilentNotification:", name: "generalcontent", object: nil)
+        
+        loadData()
+    }
+    
+    func loadData() {
+        
+        halo.generalContent.getInstance(self.articleId) { (result) -> Void in
+            switch result {
+            case .Success(let instance):
+                self.article = Article(instance: instance)
+            case .Failure(let error):
+                NSLog("Error: \(error.localizedDescription)")
+            }
+        }
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
@@ -113,5 +143,18 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
         }
         
         return true
+    }
+    
+    func handleSilentNotification(notification: NSNotification) {
+        
+        if let info = notification.userInfo, article = self.article {
+            if let module = info["module"] as? String, moduleId = info["moduleId"] as? String, instanceId = info["instanceId"] as? String, ownModuleId = article.moduleId, ownInstanceId = article.instanceId {
+                if module == "generalcontent" && moduleId == ownModuleId && instanceId == ownInstanceId {
+                    NSLog("Reloading!!")
+                    loadData()
+                }
+            }
+        }
+        
     }
 }
