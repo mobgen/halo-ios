@@ -145,6 +145,8 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         
         self.tableView.backgroundColor = menuColor
         self.view.backgroundColor = menuColor
+
+        self.tableView.reloadData()
         
     }
     
@@ -154,7 +156,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
 
         let label = UILabel(frame: frame)
         label.textAlignment = .Center
-        label.backgroundColor = UIColor.clearColor()
+        label.backgroundColor = tableView.backgroundColor
 
         let attrs = [
             NSFontAttributeName : UIFont(name: "Lab-Medium", size: 35)!,
