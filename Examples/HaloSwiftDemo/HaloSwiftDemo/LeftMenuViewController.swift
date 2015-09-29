@@ -88,6 +88,9 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
 
             if let strongSelf = self {
                 
+                strongSelf.barColor = nil
+                strongSelf.menuColor = nil
+                
                 switch result {
                 case .Success(let modules):
                     strongSelf.modules.appendContentsOf(modules)
@@ -128,21 +131,21 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
 
     func setupApp() {
         
-        if let barColor = self.barColor, menuColor = self.menuColor {
-            let navigationBarAppearace = UINavigationBar.appearance()
-            
-            navigationBarAppearace.barTintColor = barColor
-            
-            if let container = self.view.window?.rootViewController as? ContainerViewController {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    container.mainView.navigationBar.barTintColor = barColor
-                })
-            }
-            
-            self.tableView.backgroundColor = menuColor
-            self.view.backgroundColor = menuColor
-            
+        let navigationBarAppearace = UINavigationBar.appearance()
+        let barColor = self.barColor ?? UIColor.mobgenLightGreen()
+        let menuColor = self.menuColor ?? UIColor.mobgenGreen()
+        
+        navigationBarAppearace.barTintColor = barColor
+        
+        if let container = self.view.window?.rootViewController as? ContainerViewController {
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                container.mainView.navigationBar.barTintColor = barColor
+            })
         }
+        
+        self.tableView.backgroundColor = menuColor
+        self.view.backgroundColor = menuColor
+        
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

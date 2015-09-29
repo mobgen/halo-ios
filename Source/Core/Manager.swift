@@ -12,7 +12,7 @@ import UIKit
 import CoreBluetooth
 
 public enum HaloEnvironment: String {
-    case Int, QA, Prod
+    case Int, QA, Stage, Prod
 }
 
 public protocol ManagerDelegate {
@@ -44,6 +44,8 @@ public class Manager: NSObject {
                 Router.baseURL = NSURL(string: "https://halo-int.mobgen.com")
             case .QA:
                 Router.baseURL = NSURL(string: "https://halo-qa.mobgen.com")
+            case .Stage:
+                Router.baseURL = NSURL(string: "https://halo-stage.mobgen.com")
             case .Prod:
                 Router.baseURL = NSURL(string: "https://halo.mobgen.com")
             }

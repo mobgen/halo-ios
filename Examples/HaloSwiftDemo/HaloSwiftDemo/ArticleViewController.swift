@@ -91,8 +91,6 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
             customView.articleBody?.loadHTMLString(htmlstr, baseURL: nil)
             customView.articleBody?.delegate = self
             
-            NSLog(htmlstr)
-            
             customView.setNeedsLayout()
         }
     }

@@ -87,10 +87,16 @@ class InfoViewController: UITableViewController {
                 self.tableView.reloadData()
             })
             
+            let stageAction = UIAlertAction(title: "Stage", style: .Default, handler: { (_) -> Void in
+                self.mgr.environment = .Stage
+                self.tableView.reloadData()
+            })
+            
             let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive, handler: nil)
             
             alert.addAction(intAction)
             alert.addAction(qaAction)
+            alert.addAction(stageAction)
             alert.addAction(cancelAction)
             
             self.presentViewController(alert, animated: true, completion: nil)

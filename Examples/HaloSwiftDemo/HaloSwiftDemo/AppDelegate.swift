@@ -72,13 +72,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
+        NSLog("Content: \(userInfo)")
+        
         if let silent = userInfo["content_available"] as? Int {
             if silent == 1 {
                 handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
             } else {
                 handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
             }
+        } else {
+            handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
         }
+        
+        completionHandler(.NoData)
         
     }
     
@@ -98,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        completionHandler(.NoData)
+        completionHandler(.NewData)
         
     }
     
@@ -111,7 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if body.lowercaseString == "configuration" {
                 (window?.rootViewController as! ContainerViewController).leftMenu.loadData()
             }
-        } else if let extra = userInfo["extra"] as? [NSObject:AnyObject] {
+        }
+        
+        if let extra = userInfo["extra"] as? [NSObject:AnyObject] {
             NSNotificationCenter.defaultCenter().postNotificationName("generalcontent", object: self, userInfo: extra)
         }
         
