@@ -20,6 +20,9 @@ protocol LeftMenuDelegate {
 
 class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
 
+    var barColor: UIColor?
+    var menuColor: UIColor?
+    
     var modules: [Halo.Module] = []
     var delegate: LeftMenuDelegate?
     private let halo = Halo.Manager.sharedInstance
@@ -27,6 +30,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     init() {
         super.init(style: .Plain)
         self.halo.delegate = self
+        
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -42,7 +46,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         
         self.title = "HALO Modules"
 
-        var frame = self.view.frame
+        var frame = UIScreen.mainScreen().bounds
         frame.size.width = 275
         self.tableView.frame = frame
         self.tableView.backgroundColor = UIColor.mobgenGreen()
@@ -87,6 +91,30 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 switch result {
                 case .Success(let modules):
                     strongSelf.modules.appendContentsOf(modules)
+                    
+                    // Get the color configuration
+                    
+                    let mods = modules.filter({ (module: Halo.Module) -> Bool in
+                        return module.name == "ColorConfiguration"
+                    })
+                    
+                    if let module = mods.first, moduleId = module.internalId {
+                        // Get the only instance
+                        strongSelf.halo.generalContent.getInstances(moduleId, completionHandler: { (instanceResult) -> Void in
+                            switch instanceResult {
+                            case .Success(let instance):
+                                
+                                let dict = instance.first!.values
+                                
+                                strongSelf.barColor = UIColor(rgba: dict!["ToolbarColor"] as! String)
+                                strongSelf.menuColor = UIColor(rgba: dict!["MenuColor"] as! String)
+                                strongSelf.setupApp()
+                            case .Failure(let error):
+                                NSLog("Error: \(error.localizedDescription)")
+                            }
+                        })
+                    }
+                    
                     NSLog("Modules loaded: \(strongSelf.modules)")
                 case .Failure(let error):
                     NSLog("Error retrieving modules: \(error.localizedDescription)")
@@ -98,13 +126,32 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         }
     }
 
+    func setupApp() {
+        
+        if let barColor = self.barColor, menuColor = self.menuColor {
+            let navigationBarAppearace = UINavigationBar.appearance()
+            
+            navigationBarAppearace.barTintColor = barColor
+            
+            if let container = self.view.window?.rootViewController as? ContainerViewController {
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    container.mainView.navigationBar.barTintColor = barColor
+                })
+            }
+            
+            self.tableView.backgroundColor = menuColor
+            self.view.backgroundColor = menuColor
+            
+        }
+    }
+    
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var frame = tableView.frame
         frame.size.height = 55
 
         let label = UILabel(frame: frame)
         label.textAlignment = .Center
-        label.backgroundColor = UIColor.mobgenGreen()
+        label.backgroundColor = UIColor.clearColor()
 
         let attrs = [
             NSFontAttributeName : UIFont(name: "Lab-Medium", size: 35)!,
@@ -244,7 +291,7 @@ class MenuCell: UITableViewCell {
         self.textLabel?.textColor = UIColor.whiteColor()
         self.selectionStyle = .None
         self.detailTextLabel?.textColor = UIColor.mobgenLightGray()
-        self.backgroundColor = UIColor.mobgenGreen()
+        self.backgroundColor = UIColor.clearColor()
     }
 
     class func cellHeight() -> CGFloat {

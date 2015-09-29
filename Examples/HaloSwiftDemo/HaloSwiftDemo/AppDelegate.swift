@@ -17,27 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-
+        
         let navigationBarAppearace = UINavigationBar.appearance()
-
+        
         // Reset badge number
         application.applicationIconBadgeNumber = 0;
-
+        
         navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Lab-Medium", size: 34)!]
         navigationBarAppearace.tintColor = UIColor.blackColor()
-        navigationBarAppearace.barTintColor = UIColor.mobgenLightGreen()
+        navigationBarAppearace.barTintColor =  UIColor.mobgenLightGreen()
         navigationBarAppearace.setTitleVerticalPositionAdjustment(5, forBarMetrics: .Default)
-
+        
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics: .Default)
-
+        
         window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()
-
+        
         return true
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -70,10 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSLog("Couldn't register: \(error)")
         mgr.setupPushNotifications(application: application, deviceToken: "<testToken>".dataUsingEncoding(NSUTF8StringEncoding)!)
     }
-
-//    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-//        
-//    }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
@@ -110,10 +105,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         NSLog("Silent push!!")
         
-        if let extra = userInfo["extra"] as? [NSObject:AnyObject] {
+        let alert = userInfo["aps"]!["alert"] as! [NSObject: AnyObject]
+        
+        if let body = alert["body"] as? String {
+            if body.lowercaseString == "configuration" {
+                (window?.rootViewController as! ContainerViewController).leftMenu.loadData()
+            }
+        } else if let extra = userInfo["extra"] as? [NSObject:AnyObject] {
             NSNotificationCenter.defaultCenter().postNotificationName("generalcontent", object: self, userInfo: extra)
         }
-        
         
         completionHandler(.NewData)
     }

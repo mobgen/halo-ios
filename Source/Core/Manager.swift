@@ -99,12 +99,12 @@ public class Manager: NSObject {
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
-                net.clientId = data[CoreConstants.clientIdKey] as? String
-                net.clientSecret = data[CoreConstants.clientSecret] as? String
+                self.net.clientId = data[CoreConstants.clientIdKey] as? String
+                self.net.clientSecret = data[CoreConstants.clientSecret] as? String
             }
         }
 
-        if let cId = net.clientId, let secret = net.clientSecret {
+        if let cId = self.net.clientId, let secret = self.net.clientSecret {
             NSLog("Using client ID: \(cId) and client secret: \(secret)")
         }
 

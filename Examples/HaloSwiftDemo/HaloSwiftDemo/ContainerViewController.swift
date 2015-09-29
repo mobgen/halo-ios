@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Halo
 
 public class ContainerViewController: UIViewController {
 
+    let halo = Halo.Manager.sharedInstance
     var leftMenu: LeftMenuViewController!
     var mainView: UINavigationController!
     var screenshot: UIView!
-
+    
     let menuWidth: CGFloat = 275
 
     required public init?(coder aDecoder: NSCoder) {
@@ -30,31 +32,28 @@ public class ContainerViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         leftMenu = LeftMenuViewController()
-
-        self.view.backgroundColor = UIColor.mobgenGreen()
-
+        
         let vc = MainViewController()
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: "toggleLeftMenu")
-
+        
         leftMenu.delegate = vc
-
+        
         mainView = UINavigationController(rootViewController: vc)
-
+        
         self.view.addSubview(self.leftMenu.view)
         self.view.addSubview(self.mainView.view)
-
+        
         self.addChildViewController(self.leftMenu)
         self.addChildViewController(self.mainView)
-
+        
         self.leftMenu.didMoveToParentViewController(self)
         self.mainView.didMoveToParentViewController(self)
-
+        
         mainView.view.layer.shadowOpacity = 0.8
-
     }
-
+    
     func toggleLeftMenu() -> Void {
         let x = CGRectGetMinX(self.mainView.view.frame)
         let sign: CGFloat = x < menuWidth ? 1 : -1

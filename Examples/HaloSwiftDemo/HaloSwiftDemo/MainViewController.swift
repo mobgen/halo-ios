@@ -25,6 +25,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching instances")
         self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
+        
     }
 
     func loadData() -> Void {

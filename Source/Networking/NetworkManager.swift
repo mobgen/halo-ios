@@ -111,15 +111,15 @@ class NetworkManager: Alamofire.Manager {
         if let token = Router.token {
             params = [
                 "grant_type" : "refresh_token",
-                "client_id" : clientId!,
-                "client_secret" : clientSecret!,
+                "client_id" : self.clientId!,
+                "client_secret" : self.clientSecret!,
                 "refresh_token" : token.refreshToken!
             ]
         } else {
             params = [
                 "grant_type" : "client_credentials",
-                "client_id" : clientId!,
-                "client_secret" : clientSecret!
+                "client_id" : self.clientId!,
+                "client_secret" : self.clientSecret!
             ]
         }
 
