@@ -158,7 +158,7 @@ public class ContainerViewController: UIViewController {
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.mainView.view.frame = frame
                 }, completion: { (done) -> Void in
-                    if done && CGRectGetMinX(self.mainView.view.frame) > 0 {
+                    if done && CGRectGetMinX(self.mainView.view.frame) == 0 {
                         UIApplication.sharedApplication().statusBarHidden = false
                         /// Weird hack to avoid the view jumping after setting the status bar visible again
                         self.screenshot.performSelector("removeFromSuperview", withObject: nil, afterDelay: 0)
