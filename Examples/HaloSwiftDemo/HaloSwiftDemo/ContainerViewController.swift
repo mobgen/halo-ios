@@ -58,15 +58,10 @@ public class ContainerViewController: UIViewController {
     public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let leftEdgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "showMenu:")
-        leftEdgeGesture.edges = .Left
+        let panGesture = UIPanGestureRecognizer(target: self, action: "moveMenu:")
+        panGesture.cancelsTouchesInView = false
 
-        let rightEdgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "hideMenu:")
-        rightEdgeGesture.edges = .Right
-
-        self.view.window?.addGestureRecognizer(rightEdgeGesture)
-        self.view.window?.addGestureRecognizer(leftEdgeGesture)
-
+        self.view.window?.addGestureRecognizer(panGesture)
     }
     
     func toggleLeftMenu() -> Void {
@@ -78,7 +73,7 @@ public class ContainerViewController: UIViewController {
         if (x == 0) {
             // Create the screenshot
             self.screenshot = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(false)
-            //self.screenshot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toggleLeftMenu"))
+            self.screenshot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toggleLeftMenu"))
             self.mainView.view.addSubview(self.screenshot)
             self.mainView.view.bringSubviewToFront(self.screenshot)
             UIApplication.sharedApplication().statusBarHidden = true
@@ -96,77 +91,57 @@ public class ContainerViewController: UIViewController {
 
     }
     
-    func showMenu(recognizer: UIScreenEdgePanGestureRecognizer) {
-        let x = recognizer.translationInView(self.view).x
-
-        if (recognizer.state == .Began) {
+    func moveMenu(recognizer: UIPanGestureRecognizer) {
+        
+        let x = CGRectGetMinX(self.mainView.view.frame)
+        var newX = recognizer.translationInView(self.view).x
+        
+        if (x == 0) {
             // Create the screenshot
             self.screenshot = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(false)
-            self.screenshot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toggleLeftMenu"))
+            //self.screenshot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toggleLeftMenu"))
             self.mainView.view.addSubview(self.screenshot)
             self.mainView.view.bringSubviewToFront(self.screenshot)
             UIApplication.sharedApplication().statusBarHidden = true
         }
-
-        if x >= 0 && x <= menuWidth {
-
-            var frame = self.mainView.view.frame
-            frame.origin.x = x
-
-            self.mainView.view.frame = frame
-
+        
+        if newX >= 0 {
+            newX = min(newX, menuWidth)
+        } else if x > 1 {
+            newX += menuWidth
+            newX = max(newX, 0)
+        } else {
+            newX = 0
         }
-
+        
+        if (newX < menuWidth) {
+            var frame = self.mainView.view.frame
+            frame.origin.x = newX
+            
+            self.mainView.view.frame = frame
+        }
+        
         if (recognizer.state == .Ended) {
             var frame = self.mainView.view.frame
-
+            
             if x > menuWidth/2 {
                 frame.origin.x = menuWidth
             } else {
                 frame.origin.x = 0
             }
-
+            
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.mainView.view.frame = frame
-            })
-        }
-    }
-
-
-    func hideMenu(recognizer: UIScreenEdgePanGestureRecognizer) {
-
-        let x = CGRectGetMinX(self.mainView.view.frame)
-        let newOrigin = CGRectGetMaxX(self.view.frame) + recognizer.translationInView(self.view).x
-
-        if (recognizer.state == .Began || recognizer.state == .Changed) && x > 0 && newOrigin < menuWidth {
-
-            var frame = self.mainView.view.frame
-            frame.origin.x = newOrigin > 0 ? newOrigin : 0
-
-            self.mainView.view.frame = frame
-        }
-
-        if (recognizer.state == .Ended) {
-            var frame = self.mainView.view.frame
-
-            if newOrigin > menuWidth/2 {
-                frame.origin.x = menuWidth
-            } else {
-                frame.origin.x = 0
-            }
-
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.mainView.view.frame = frame
-                }, completion: { (done) -> Void in
-                    if done && CGRectGetMinX(self.mainView.view.frame) == 0 {
+                }, completion: { (done) in
+                    if done && CGRectGetMinX(frame) == 0 {
                         UIApplication.sharedApplication().statusBarHidden = false
                         /// Weird hack to avoid the view jumping after setting the status bar visible again
                         self.screenshot.performSelector("removeFromSuperview", withObject: nil, afterDelay: 0)
                     }
+            
             })
-
         }
-
+        
     }
 
 }
