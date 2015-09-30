@@ -22,13 +22,6 @@
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
-		006CB9AC1B86148900EB872E /* alarm-frenzy.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A51B86148900EB872E /* alarm-frenzy.aif */; };
-		006CB9AD1B86148900EB872E /* and-a-happy-new-year.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A61B86148900EB872E /* and-a-happy-new-year.aif */; };
-		006CB9AE1B86148900EB872E /* jingle-bells.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A71B86148900EB872E /* jingle-bells.aif */; };
-		006CB9AF1B86148900EB872E /* news-bringer.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A81B86148900EB872E /* news-bringer.aif */; };
-		006CB9B01B86148900EB872E /* oh-boy.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9A91B86148900EB872E /* oh-boy.aif */; };
-		006CB9B11B86148900EB872E /* the-calling.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9AA1B86148900EB872E /* the-calling.aif */; };
-		006CB9B21B86148900EB872E /* the-little-dwarf.aif in Resources */ = {isa = PBXBuildFile; fileRef = 006CB9AB1B86148900EB872E /* the-little-dwarf.aif */; };
 		006CB9B61B870FB800EB872E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B51B870FB800EB872E /* User.swift */; };
 		006CB9B81B870FC400EB872E /* UserTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B71B870FC400EB872E /* UserTag.swift */; };
 		006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B91B87116D00EB872E /* UserDevice.swift */; };
@@ -44,6 +37,46 @@
 		0091C0131B7797E50054EA75 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E8DE31B68305900711DA5 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0091C0171B77A0490054EA75 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0091C0181B77A0550054EA75 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
+		00921B941BBBD2CE00B79B50 /* adara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6C1BBBD2CE00B79B50 /* adara.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B951BBBD2CE00B79B50 /* alya.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6D1BBBD2CE00B79B50 /* alya.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B961BBBD2CE00B79B50 /* antimony.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6E1BBBD2CE00B79B50 /* antimony.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B971BBBD2CE00B79B50 /* argon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6F1BBBD2CE00B79B50 /* argon.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B981BBBD2CE00B79B50 /* ariel.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B701BBBD2CE00B79B50 /* ariel.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B991BBBD2CE00B79B50 /* beryllium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B711BBBD2CE00B79B50 /* beryllium.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B9A1BBBD2CE00B79B50 /* blip.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B721BBBD2CE00B79B50 /* blip.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B9B1BBBD2CE00B79B50 /* carme.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B731BBBD2CE00B79B50 /* carme.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B9C1BBBD2CE00B79B50 /* castor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B741BBBD2CE00B79B50 /* castor.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B9D1BBBD2CE00B79B50 /* ceres.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B751BBBD2CE00B79B50 /* ceres.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B9E1BBBD2CE00B79B50 /* chime.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B761BBBD2CE00B79B50 /* chime.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921B9F1BBBD2CE00B79B50 /* cobalt.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B771BBBD2CE00B79B50 /* cobalt.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA01BBBD2CE00B79B50 /* cyanmessage.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B781BBBD2CE00B79B50 /* cyanmessage.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA11BBBD2CE00B79B50 /* dontpanic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B791BBBD2CE00B79B50 /* dontpanic.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA21BBBD2CE00B79B50 /* elara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7A1BBBD2CE00B79B50 /* elara.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA31BBBD2CE00B79B50 /* element.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7B1BBBD2CE00B79B50 /* element.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA41BBBD2CE00B79B50 /* europa.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7C1BBBD2CE00B79B50 /* europa.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA51BBBD2CE00B79B50 /* f1_missedcall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7D1BBBD2CE00B79B50 /* f1_missedcall.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA61BBBD2CE00B79B50 /* f1_new_sms.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7E1BBBD2CE00B79B50 /* f1_new_sms.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA71BBBD2CE00B79B50 /* fluorine.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7F1BBBD2CE00B79B50 /* fluorine.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA81BBBD2CE00B79B50 /* hello.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B801BBBD2CE00B79B50 /* hello.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BA91BBBD2CE00B79B50 /* hojus.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B811BBBD2CE00B79B50 /* hojus.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BAA1BBBD2CE00B79B50 /* ivory.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B821BBBD2CE00B79B50 /* ivory.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BAB1BBBD2CE00B79B50 /* mira.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B831BBBD2CE00B79B50 /* mira.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BAC1BBBD2CE00B79B50 /* modular.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B841BBBD2CE00B79B50 /* modular.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BAD1BBBD2CE00B79B50 /* moto.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B851BBBD2CE00B79B50 /* moto.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BAE1BBBD2CE00B79B50 /* natural.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B861BBBD2CE00B79B50 /* natural.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BAF1BBBD2CE00B79B50 /* organic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B871BBBD2CE00B79B50 /* organic.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB01BBBD2CE00B79B50 /* ping.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B881BBBD2CE00B79B50 /* ping.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB11BBBD2CE00B79B50 /* pixiedust.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B891BBBD2CE00B79B50 /* pixiedust.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB21BBBD2CE00B79B50 /* pizzicato.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8A1BBBD2CE00B79B50 /* pizzicato.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB31BBBD2CE00B79B50 /* proxima.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8B1BBBD2CE00B79B50 /* proxima.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB41BBBD2CE00B79B50 /* radon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8C1BBBD2CE00B79B50 /* radon.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB51BBBD2CE00B79B50 /* rhea.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8D1BBBD2CE00B79B50 /* rhea.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB61BBBD2CE00B79B50 /* selenium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8E1BBBD2CE00B79B50 /* selenium.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB71BBBD2CE00B79B50 /* sirius.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8F1BBBD2CE00B79B50 /* sirius.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB81BBBD2CE00B79B50 /* tada.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B901BBBD2CE00B79B50 /* tada.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BB91BBBD2CE00B79B50 /* tethys.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B911BBBD2CE00B79B50 /* tethys.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BBA1BBBD2CE00B79B50 /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B921BBBD2CE00B79B50 /* upsilon.aiff */; settings = {ASSET_TAGS = (); }; };
+		00921BBB1BBBD2CE00B79B50 /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B931BBBD2CE00B79B50 /* voila.aiff */; settings = {ASSET_TAGS = (); }; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
 		0096188E1B8B379B0002A76B /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0096188A1B8B1D570002A76B /* OHHTTPStubs.framework */; };
 		009618901B8B3AAE0002A76B /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0096188A1B8B1D570002A76B /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -105,13 +138,6 @@
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		006CB98E1B85BBA100EB872E /* HaloResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		006CB9901B85BBA100EB872E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		006CB9A51B86148900EB872E /* alarm-frenzy.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "alarm-frenzy.aif"; sourceTree = "<group>"; };
-		006CB9A61B86148900EB872E /* and-a-happy-new-year.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "and-a-happy-new-year.aif"; sourceTree = "<group>"; };
-		006CB9A71B86148900EB872E /* jingle-bells.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "jingle-bells.aif"; sourceTree = "<group>"; };
-		006CB9A81B86148900EB872E /* news-bringer.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "news-bringer.aif"; sourceTree = "<group>"; };
-		006CB9A91B86148900EB872E /* oh-boy.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "oh-boy.aif"; sourceTree = "<group>"; };
-		006CB9AA1B86148900EB872E /* the-calling.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "the-calling.aif"; sourceTree = "<group>"; };
-		006CB9AB1B86148900EB872E /* the-little-dwarf.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "the-little-dwarf.aif"; sourceTree = "<group>"; };
 		006CB9B51B870FB800EB872E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		006CB9B71B870FC400EB872E /* UserTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTag.swift; sourceTree = "<group>"; };
 		006CB9B91B87116D00EB872E /* UserDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDevice.swift; sourceTree = "<group>"; };
@@ -123,6 +149,46 @@
 		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
 		008E8DE31B68305900711DA5 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		008E8DE71B683AD100711DA5 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		00921B6C1BBBD2CE00B79B50 /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
+		00921B6D1BBBD2CE00B79B50 /* alya.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alya.aiff; sourceTree = "<group>"; };
+		00921B6E1BBBD2CE00B79B50 /* antimony.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = antimony.aiff; sourceTree = "<group>"; };
+		00921B6F1BBBD2CE00B79B50 /* argon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = argon.aiff; sourceTree = "<group>"; };
+		00921B701BBBD2CE00B79B50 /* ariel.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ariel.aiff; sourceTree = "<group>"; };
+		00921B711BBBD2CE00B79B50 /* beryllium.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = beryllium.aiff; sourceTree = "<group>"; };
+		00921B721BBBD2CE00B79B50 /* blip.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = blip.aiff; sourceTree = "<group>"; };
+		00921B731BBBD2CE00B79B50 /* carme.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = carme.aiff; sourceTree = "<group>"; };
+		00921B741BBBD2CE00B79B50 /* castor.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = castor.aiff; sourceTree = "<group>"; };
+		00921B751BBBD2CE00B79B50 /* ceres.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ceres.aiff; sourceTree = "<group>"; };
+		00921B761BBBD2CE00B79B50 /* chime.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = chime.aiff; sourceTree = "<group>"; };
+		00921B771BBBD2CE00B79B50 /* cobalt.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = cobalt.aiff; sourceTree = "<group>"; };
+		00921B781BBBD2CE00B79B50 /* cyanmessage.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = cyanmessage.aiff; sourceTree = "<group>"; };
+		00921B791BBBD2CE00B79B50 /* dontpanic.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = dontpanic.aiff; sourceTree = "<group>"; };
+		00921B7A1BBBD2CE00B79B50 /* elara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = elara.aiff; sourceTree = "<group>"; };
+		00921B7B1BBBD2CE00B79B50 /* element.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = element.aiff; sourceTree = "<group>"; };
+		00921B7C1BBBD2CE00B79B50 /* europa.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = europa.aiff; sourceTree = "<group>"; };
+		00921B7D1BBBD2CE00B79B50 /* f1_missedcall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = f1_missedcall.aiff; sourceTree = "<group>"; };
+		00921B7E1BBBD2CE00B79B50 /* f1_new_sms.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = f1_new_sms.aiff; sourceTree = "<group>"; };
+		00921B7F1BBBD2CE00B79B50 /* fluorine.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = fluorine.aiff; sourceTree = "<group>"; };
+		00921B801BBBD2CE00B79B50 /* hello.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = hello.aiff; sourceTree = "<group>"; };
+		00921B811BBBD2CE00B79B50 /* hojus.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = hojus.aiff; sourceTree = "<group>"; };
+		00921B821BBBD2CE00B79B50 /* ivory.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ivory.aiff; sourceTree = "<group>"; };
+		00921B831BBBD2CE00B79B50 /* mira.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = mira.aiff; sourceTree = "<group>"; };
+		00921B841BBBD2CE00B79B50 /* modular.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = modular.aiff; sourceTree = "<group>"; };
+		00921B851BBBD2CE00B79B50 /* moto.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = moto.aiff; sourceTree = "<group>"; };
+		00921B861BBBD2CE00B79B50 /* natural.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = natural.aiff; sourceTree = "<group>"; };
+		00921B871BBBD2CE00B79B50 /* organic.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = organic.aiff; sourceTree = "<group>"; };
+		00921B881BBBD2CE00B79B50 /* ping.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ping.aiff; sourceTree = "<group>"; };
+		00921B891BBBD2CE00B79B50 /* pixiedust.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = pixiedust.aiff; sourceTree = "<group>"; };
+		00921B8A1BBBD2CE00B79B50 /* pizzicato.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = pizzicato.aiff; sourceTree = "<group>"; };
+		00921B8B1BBBD2CE00B79B50 /* proxima.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = proxima.aiff; sourceTree = "<group>"; };
+		00921B8C1BBBD2CE00B79B50 /* radon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = radon.aiff; sourceTree = "<group>"; };
+		00921B8D1BBBD2CE00B79B50 /* rhea.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = rhea.aiff; sourceTree = "<group>"; };
+		00921B8E1BBBD2CE00B79B50 /* selenium.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = selenium.aiff; sourceTree = "<group>"; };
+		00921B8F1BBBD2CE00B79B50 /* sirius.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = sirius.aiff; sourceTree = "<group>"; };
+		00921B901BBBD2CE00B79B50 /* tada.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = tada.aiff; sourceTree = "<group>"; };
+		00921B911BBBD2CE00B79B50 /* tethys.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = tethys.aiff; sourceTree = "<group>"; };
+		00921B921BBBD2CE00B79B50 /* upsilon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = upsilon.aiff; sourceTree = "<group>"; };
+		00921B931BBBD2CE00B79B50 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 		0094A31F1B70A6A600DED864 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NetworkManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0096188A1B8B1D570002A76B /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = ../Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
@@ -277,13 +343,46 @@
 		006CB97D1B85B87200EB872E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				006CB9A51B86148900EB872E /* alarm-frenzy.aif */,
-				006CB9A61B86148900EB872E /* and-a-happy-new-year.aif */,
-				006CB9A71B86148900EB872E /* jingle-bells.aif */,
-				006CB9A81B86148900EB872E /* news-bringer.aif */,
-				006CB9A91B86148900EB872E /* oh-boy.aif */,
-				006CB9AA1B86148900EB872E /* the-calling.aif */,
-				006CB9AB1B86148900EB872E /* the-little-dwarf.aif */,
+				00921B6C1BBBD2CE00B79B50 /* adara.aiff */,
+				00921B6D1BBBD2CE00B79B50 /* alya.aiff */,
+				00921B6E1BBBD2CE00B79B50 /* antimony.aiff */,
+				00921B6F1BBBD2CE00B79B50 /* argon.aiff */,
+				00921B701BBBD2CE00B79B50 /* ariel.aiff */,
+				00921B711BBBD2CE00B79B50 /* beryllium.aiff */,
+				00921B721BBBD2CE00B79B50 /* blip.aiff */,
+				00921B731BBBD2CE00B79B50 /* carme.aiff */,
+				00921B741BBBD2CE00B79B50 /* castor.aiff */,
+				00921B751BBBD2CE00B79B50 /* ceres.aiff */,
+				00921B761BBBD2CE00B79B50 /* chime.aiff */,
+				00921B771BBBD2CE00B79B50 /* cobalt.aiff */,
+				00921B781BBBD2CE00B79B50 /* cyanmessage.aiff */,
+				00921B791BBBD2CE00B79B50 /* dontpanic.aiff */,
+				00921B7A1BBBD2CE00B79B50 /* elara.aiff */,
+				00921B7B1BBBD2CE00B79B50 /* element.aiff */,
+				00921B7C1BBBD2CE00B79B50 /* europa.aiff */,
+				00921B7D1BBBD2CE00B79B50 /* f1_missedcall.aiff */,
+				00921B7E1BBBD2CE00B79B50 /* f1_new_sms.aiff */,
+				00921B7F1BBBD2CE00B79B50 /* fluorine.aiff */,
+				00921B801BBBD2CE00B79B50 /* hello.aiff */,
+				00921B811BBBD2CE00B79B50 /* hojus.aiff */,
+				00921B821BBBD2CE00B79B50 /* ivory.aiff */,
+				00921B831BBBD2CE00B79B50 /* mira.aiff */,
+				00921B841BBBD2CE00B79B50 /* modular.aiff */,
+				00921B851BBBD2CE00B79B50 /* moto.aiff */,
+				00921B861BBBD2CE00B79B50 /* natural.aiff */,
+				00921B871BBBD2CE00B79B50 /* organic.aiff */,
+				00921B881BBBD2CE00B79B50 /* ping.aiff */,
+				00921B891BBBD2CE00B79B50 /* pixiedust.aiff */,
+				00921B8A1BBBD2CE00B79B50 /* pizzicato.aiff */,
+				00921B8B1BBBD2CE00B79B50 /* proxima.aiff */,
+				00921B8C1BBBD2CE00B79B50 /* radon.aiff */,
+				00921B8D1BBBD2CE00B79B50 /* rhea.aiff */,
+				00921B8E1BBBD2CE00B79B50 /* selenium.aiff */,
+				00921B8F1BBBD2CE00B79B50 /* sirius.aiff */,
+				00921B901BBBD2CE00B79B50 /* tada.aiff */,
+				00921B911BBBD2CE00B79B50 /* tethys.aiff */,
+				00921B921BBBD2CE00B79B50 /* upsilon.aiff */,
+				00921B931BBBD2CE00B79B50 /* voila.aiff */,
 				006CB9901B85BBA100EB872E /* Info.plist */,
 			);
 			path = Resources;
@@ -430,13 +529,46 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006CB9B01B86148900EB872E /* oh-boy.aif in Resources */,
-				006CB9B11B86148900EB872E /* the-calling.aif in Resources */,
-				006CB9AC1B86148900EB872E /* alarm-frenzy.aif in Resources */,
-				006CB9AF1B86148900EB872E /* news-bringer.aif in Resources */,
-				006CB9B21B86148900EB872E /* the-little-dwarf.aif in Resources */,
-				006CB9AE1B86148900EB872E /* jingle-bells.aif in Resources */,
-				006CB9AD1B86148900EB872E /* and-a-happy-new-year.aif in Resources */,
+				00921B951BBBD2CE00B79B50 /* alya.aiff in Resources */,
+				00921B9E1BBBD2CE00B79B50 /* chime.aiff in Resources */,
+				00921BB41BBBD2CE00B79B50 /* radon.aiff in Resources */,
+				00921BA81BBBD2CE00B79B50 /* hello.aiff in Resources */,
+				00921BAA1BBBD2CE00B79B50 /* ivory.aiff in Resources */,
+				00921B981BBBD2CE00B79B50 /* ariel.aiff in Resources */,
+				00921B971BBBD2CE00B79B50 /* argon.aiff in Resources */,
+				00921BB61BBBD2CE00B79B50 /* selenium.aiff in Resources */,
+				00921BA91BBBD2CE00B79B50 /* hojus.aiff in Resources */,
+				00921BA21BBBD2CE00B79B50 /* elara.aiff in Resources */,
+				00921BA61BBBD2CE00B79B50 /* f1_new_sms.aiff in Resources */,
+				00921BB81BBBD2CE00B79B50 /* tada.aiff in Resources */,
+				00921BA51BBBD2CE00B79B50 /* f1_missedcall.aiff in Resources */,
+				00921B941BBBD2CE00B79B50 /* adara.aiff in Resources */,
+				00921B9C1BBBD2CE00B79B50 /* castor.aiff in Resources */,
+				00921BA01BBBD2CE00B79B50 /* cyanmessage.aiff in Resources */,
+				00921B9A1BBBD2CE00B79B50 /* blip.aiff in Resources */,
+				00921BB01BBBD2CE00B79B50 /* ping.aiff in Resources */,
+				00921BB21BBBD2CE00B79B50 /* pizzicato.aiff in Resources */,
+				00921BB31BBBD2CE00B79B50 /* proxima.aiff in Resources */,
+				00921BB11BBBD2CE00B79B50 /* pixiedust.aiff in Resources */,
+				00921BAB1BBBD2CE00B79B50 /* mira.aiff in Resources */,
+				00921B961BBBD2CE00B79B50 /* antimony.aiff in Resources */,
+				00921BA31BBBD2CE00B79B50 /* element.aiff in Resources */,
+				00921BB91BBBD2CE00B79B50 /* tethys.aiff in Resources */,
+				00921BBB1BBBD2CE00B79B50 /* voila.aiff in Resources */,
+				00921B9F1BBBD2CE00B79B50 /* cobalt.aiff in Resources */,
+				00921BA11BBBD2CE00B79B50 /* dontpanic.aiff in Resources */,
+				00921B9B1BBBD2CE00B79B50 /* carme.aiff in Resources */,
+				00921B9D1BBBD2CE00B79B50 /* ceres.aiff in Resources */,
+				00921BAE1BBBD2CE00B79B50 /* natural.aiff in Resources */,
+				00921BA71BBBD2CE00B79B50 /* fluorine.aiff in Resources */,
+				00921BAF1BBBD2CE00B79B50 /* organic.aiff in Resources */,
+				00921B991BBBD2CE00B79B50 /* beryllium.aiff in Resources */,
+				00921BBA1BBBD2CE00B79B50 /* upsilon.aiff in Resources */,
+				00921BA41BBBD2CE00B79B50 /* europa.aiff in Resources */,
+				00921BB51BBBD2CE00B79B50 /* rhea.aiff in Resources */,
+				00921BAD1BBBD2CE00B79B50 /* moto.aiff in Resources */,
+				00921BB71BBBD2CE00B79B50 /* sirius.aiff in Resources */,
+				00921BAC1BBBD2CE00B79B50 /* modular.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
