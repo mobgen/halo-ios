@@ -14,6 +14,7 @@ public protocol HaloDelegate {
     func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
 }
 
+
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
     let mgr = Halo.Manager.sharedInstance

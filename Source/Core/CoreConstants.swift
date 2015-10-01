@@ -19,6 +19,9 @@ public class CoreConstants {
     /// Key which identifies the client secret within the configuration plist
     static let clientSecret = "CLIENT_SECRET"
 
+    /// Key which identifies the option to enable push notifications within the configuration plist
+    static let enablePush = "ENABLE_PUSH"
+
     // MARK: User defaults keys
 
     /// Key which identifies the existing user tags into the user defaults

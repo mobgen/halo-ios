@@ -78,7 +78,10 @@ public class Manager: NSObject {
             net.clientSecret = newValue
         }
     }
-    
+
+    /// Variable to decide whether to enable push notifications or not
+    public var enablePush: Bool = false
+
     /// Instance holding all the user-related information
     public var user:User?
     
@@ -103,6 +106,7 @@ public class Manager: NSObject {
             if let data = NSDictionary(contentsOfFile: path) {
                 self.net.clientId = data[CoreConstants.clientIdKey] as? String
                 self.net.clientSecret = data[CoreConstants.clientSecret] as? String
+                self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
             }
         }
 
@@ -116,7 +120,12 @@ public class Manager: NSObject {
                 switch result {
                 case .Success(let user):
                     self.user = user
-                    UIApplication.sharedApplication().registerForRemoteNotifications()
+
+                    if self.enablePush {
+                        UIApplication.sharedApplication().registerForRemoteNotifications()
+                    } else {
+                        self.setupDefaultSystemTags()
+                    }
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
                 }
@@ -124,7 +133,12 @@ public class Manager: NSObject {
             
         } else {
             self.user = delegate?.setupUser()
-            UIApplication.sharedApplication().registerForRemoteNotifications()
+
+            if self.enablePush {
+                UIApplication.sharedApplication().registerForRemoteNotifications()
+            } else {
+                self.setupDefaultSystemTags()
+            }
         }
         
         if let alias = self.user!.alias {
