@@ -20,8 +20,7 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
         super.viewDidLoad()
 
         self.title = "HALO"
-        self.tableView.backgroundColor = UIColor.mobgenLightGray()
-
+        
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching instances")
         self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
@@ -76,7 +75,6 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
 
         if (cell == nil) {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdent)
-            cell?.contentView.backgroundColor = UIColor.mobgenLightGray()
             cell?.selectionStyle = .None
         }
 

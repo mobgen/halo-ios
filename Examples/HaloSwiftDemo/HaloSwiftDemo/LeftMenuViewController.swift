@@ -25,6 +25,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     
     var modules: [Halo.Module] = []
     var delegate: LeftMenuDelegate?
+
     private let halo = Halo.Manager.sharedInstance
 
     init() {
@@ -81,7 +82,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     
     func loadData() {
         NSLog("Loading data")
-        
+
         self.modules.removeAll()
 
         self.halo.getModules { [weak self] (result) -> Void in
@@ -94,7 +95,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 switch result {
                 case .Success(let modules):
                     strongSelf.modules.appendContentsOf(modules)
-                    
+
                     // Get the color configuration
                     
                     let mods = modules.filter({ (module: Halo.Module) -> Bool in
@@ -231,6 +232,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         let container = self.parentViewController as! ContainerViewController
+        var vc: UIViewController?
 
         switch indexPath.section {
         case 0:
@@ -240,32 +242,33 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
             
                 switch name {
                 case "store locator":
-                    let vc = StoreLocatorViewController(module: module)
-                    vc.title = module.name
-                    container.mainView.pushViewController(vc, animated: true)
+                    vc = StoreLocatorViewController(module: module)
+                    vc!.title = module.name
                 case "news motorist":
-                    let vc = NewsListViewController()
-                    vc.title = module.name
-                    vc.moduleId = module.internalId
-                    container.mainView.pushViewController(vc, animated: true)
+                    vc = NewsListViewController()
+                    vc!.title = module.name
+                    (vc as! NewsListViewController).moduleId = module.internalId
                 default:
-                    delegate?.didSelectModule(module)
+                    vc = MainViewController()
+                    (vc as! MainViewController).didSelectModule(module)
                 }
             }
             
         case 1:
-            let vc = TagsViewController()
-            vc.title = "Segmentation tags"
-
-            container.mainView?.pushViewController(vc, animated: true)
+            vc = TagsViewController()
+            vc!.title = "Segmentation tags"
         case 2:
-            let vc = InfoViewController()
-            vc.title = "App info"
-            
-            container.mainView?.pushViewController(vc, animated: true)
+            vc = InfoViewController()
+            vc!.title = "App info"
         default:
             break
         }
+
+        if let controller = vc {
+            controller.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: container, action: "toggleLeftMenu")
+            container.mainView?.setViewControllers([controller], animated: true)
+        }
+
 
         container.toggleLeftMenu()
     }

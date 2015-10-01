@@ -58,10 +58,10 @@ public class ContainerViewController: UIViewController {
     public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: "moveMenu:")
-        panGesture.cancelsTouchesInView = false
+        //let panGesture = UIPanGestureRecognizer(target: self, action: "moveMenu:")
+        //panGesture.cancelsTouchesInView = false
 
-        self.view.window?.addGestureRecognizer(panGesture)
+        //self.view.window?.addGestureRecognizer(panGesture)
     }
     
     func toggleLeftMenu() -> Void {
