@@ -17,6 +17,8 @@ enum Router: URLRequestConvertible {
 
     /// Token to be used for authentication purposes
     static var token:Token?
+    
+    static var userAlias: String?
 
     case OAuth([String: AnyObject])
     case Modules
@@ -47,7 +49,7 @@ enum Router: URLRequestConvertible {
         case .Modules:
             return "/api/authentication/module/"
         case .GeneralContentInstances(_):
-            return "api/generalcontent/instance/"
+            return "api/authentication/instance/"
         case .GeneralContentInstance(let id):
             return "api/generalcontent/instance/\(id)"
         case .SegmentationCreateUser(_):
@@ -71,6 +73,10 @@ enum Router: URLRequestConvertible {
             mutableURLRequest.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")
         }
 
+        if let alias = Router.userAlias {
+            mutableURLRequest.setValue(alias, forHTTPHeaderField: "X-AppUser-Alias")
+        }
+        
         /**
         *  My god.. really awful. Think of a better way of doing this!
         */

@@ -85,8 +85,7 @@ public class Manager: NSObject {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
-    private override init() {
-    }
+    private override init() {}
 
     /**
     Perform the initial tasks to properly set up the SDK
@@ -96,6 +95,7 @@ public class Manager: NSObject {
     public func launch() -> Bool {
 
         Router.token = nil
+        Router.userAlias = nil
         
         let bundle = NSBundle.mainBundle()
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
@@ -125,6 +125,10 @@ public class Manager: NSObject {
         } else {
             self.user = delegate?.setupUser()
             UIApplication.sharedApplication().registerForRemoteNotifications()
+        }
+        
+        if let alias = self.user!.alias {
+            Router.userAlias = alias
         }
         
         return true

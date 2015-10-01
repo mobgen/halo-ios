@@ -36,7 +36,7 @@ class NetworkManager: Alamofire.Manager {
 
     /// Corresponding client secret to be provided for the API calls
     var clientSecret: String?
-
+    
     /// Variable that flags whether the manager is currently refreshing the auth token
     private var isRefreshing = false
 
