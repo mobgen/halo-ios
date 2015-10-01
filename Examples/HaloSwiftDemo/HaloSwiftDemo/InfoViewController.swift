@@ -61,7 +61,10 @@ class InfoViewController: UITableViewController {
             cell?.detailTextLabel?.text = version
         case 3: // Push token
             cell?.textLabel?.text = "Push token"
-            cell?.detailTextLabel?.text = mgr.user?.devices?[0].token ?? "-"
+            cell?.detailTextLabel?.text = "-"
+            if let devices = mgr.user?.devices {
+                cell?.detailTextLabel?.text = devices.count > 0 ? devices[0].token : "-"
+            }
         default: break
         }
         
