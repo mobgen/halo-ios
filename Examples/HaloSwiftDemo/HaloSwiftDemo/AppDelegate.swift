@@ -10,7 +10,7 @@ import UIKit
 import Halo
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: HaloAppDelegate, HaloDelegate {
 
     var window: UIWindow?
     private let mgr = Halo.Manager.sharedInstance
@@ -59,71 +59,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    // MARK: Push notifications
-    
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        mgr.setupPushNotifications(application: application, deviceToken: deviceToken)
-    }
-    
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        NSLog("Couldn't register: \(error)")
-        mgr.setupPushNotifications(application: application, deviceToken: "<testToken>".dataUsingEncoding(NSUTF8StringEncoding)!)
-    }
+    // MARK: HaloDelegate methods
 
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
-        NSLog("Content: \(userInfo)")
-        
-        if let silent = userInfo["content_available"] as? Int {
-            if silent == 1 {
-                handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-            } else {
-                handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-            }
-        } else {
-            handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-        }
-        
-        completionHandler(.NoData)
-        
-    }
-    
-    private func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         // Handle push notification
         application.applicationIconBadgeNumber = 0;
-        
+
         if (application.applicationState == .Active) {
-            
+
             if let aps = userInfo["aps"], message = aps["alert"] as? Dictionary<String, String> {
                 let alert = UIAlertController(title: "Push notification", message: message["body"], preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                
+
                 alert.addAction(okAction)
-                
+
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
         }
-        
+
         completionHandler(.NewData)
-        
+
     }
-    
-    private func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+
+    func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         NSLog("Silent push!!")
-        
+
         let alert = userInfo["aps"]!["alert"] as! [NSObject: AnyObject]
-        
+
         if let body = alert["body"] as? String {
             if body.lowercaseString == "configuration" {
                 (window?.rootViewController as! ContainerViewController).leftMenu.loadData()
             }
         }
-        
+
         if let extra = userInfo["extra"] as? [NSObject:AnyObject] {
             NSNotificationCenter.defaultCenter().postNotificationName("generalcontent", object: self, userInfo: extra)
         }
         
         completionHandler(.NewData)
     }
+    
     
 }
