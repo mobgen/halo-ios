@@ -34,6 +34,8 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
         window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()
         
+        self.delegate = self
+        
         return true
     }
     
