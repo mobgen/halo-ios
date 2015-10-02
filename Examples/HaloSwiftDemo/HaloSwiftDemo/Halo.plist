@@ -7,6 +7,6 @@
 	<key>CLIENT_SECRET</key>
 	<string>halotestapppass</string>
 	<key>ENABLE_PUSH</key>
-	<false/>
+	<true/>
 </dict>
 </plist>

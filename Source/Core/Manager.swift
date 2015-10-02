@@ -141,10 +141,6 @@ public class Manager: NSObject {
             }
         }
         
-        if let alias = self.user!.alias {
-            Router.userAlias = alias
-        }
-        
         return true
     }
 
@@ -205,6 +201,10 @@ public class Manager: NSObject {
                         NSLog("Error: \(error.localizedDescription)")
                     }
                 
+                    if let alias = strongSelf.user!.alias {
+                        Router.userAlias = alias
+                    }
+                    
                     strongSelf.delegate?.managerDidFinishLaunching()
                 
                 }
