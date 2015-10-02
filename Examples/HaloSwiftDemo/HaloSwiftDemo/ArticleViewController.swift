@@ -81,7 +81,13 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
             
             self.title = article!.title
             
-            customView.imageView?.imageFromUrl(article!.imageURL!)
+            if let qr = article?.QRURL {
+                customView.imageView?.imageFromUrl(qr)
+                customView.imageView?.contentMode = .ScaleAspectFit
+            } else {
+                customView.imageView?.imageFromUrl(article!.imageURL!)
+            }
+            
             customView.articleTitle?.text = article!.title
             
             customView.articleDate?.text = NSDateFormatter.localizedStringFromDate(article!.date!, dateStyle: .MediumStyle, timeStyle: .MediumStyle)

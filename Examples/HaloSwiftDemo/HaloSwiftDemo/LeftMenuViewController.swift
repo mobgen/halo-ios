@@ -244,7 +244,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 case "store locator":
                     vc = StoreLocatorViewController(module: module)
                     vc!.title = module.name
-                case "news motorist":
+                case "news motorist", "qroffer":
                     vc = NewsListViewController(moduleId: module.internalId)
                     vc!.title = module.name
                 default:

@@ -20,6 +20,7 @@ class Article: NSObject {
     var content: String?
     var thumbnailURL: NSURL?
     var imageURL: NSURL?
+    var QRURL: NSURL?
     
     init(instance: Halo.GeneralContentInstance) {
         
@@ -45,6 +46,10 @@ class Article: NSObject {
             self.thumbnailURL = NSURL(string: thumb)
         }
         
+        if let qr = dict["QRImage"] as? String {
+            self.QRURL = NSURL(string: qr)
+        }
+        
         super.init()
     }
 }
@@ -58,6 +63,9 @@ class ArticleCell: UITableViewCell {
         super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
         
         textLabel?.font = UIFont(name: "Lab-Medium", size: 20)
+        
+        imageView?.clipsToBounds = true
+        imageView?.autoresizingMask = .None
         
         detailTextLabel?.font = UIFont(name: "Lab-Medium", size: 16)
         
