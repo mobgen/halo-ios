@@ -11,7 +11,6 @@
 		000827011B6A57A5001E8248 /* ModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827001B6A57A5001E8248 /* ModuleType.swift */; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
-		003D4A611BBDD4400063E949 /* HaloAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D4A601BBDD4400063E949 /* HaloAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		004ADDEB1BB1456B00FDDFE8 /* NSDate+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004ADDEA1BB1456B00FDDFE8 /* NSDate+Utils.swift */; settings = {ASSET_TAGS = (); }; };
 		0053907E1B8C620B0036F579 /* oauth_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0053907D1B8C620B0036F579 /* oauth_success.json */; };
@@ -122,7 +121,6 @@
 		000827001B6A57A5001E8248 /* ModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
 		002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		003D4A601BBDD4400063E949 /* HaloAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloAppDelegate.swift; sourceTree = "<group>"; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		004ADDEA1BB1456B00FDDFE8 /* NSDate+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Utils.swift"; sourceTree = "<group>"; };
 		0053907D1B8C620B0036F579 /* oauth_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oauth_success.json; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 				006A60211B318DCC0045395A /* Manager.swift */,
 				00FF95611B4547D200E751E3 /* CoreConstants.swift */,
 				002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */,
-				003D4A601BBDD4400063E949 /* HaloAppDelegate.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -582,7 +579,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				003D4A611BBDD4400063E949 /* HaloAppDelegate.swift in Sources */,
 				0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */,
 				002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */,
 				004ADDEB1BB1456B00FDDFE8 /* NSDate+Utils.swift in Sources */,

@@ -46,7 +46,6 @@ class Article: NSObject {
         }
         
         super.init()
-        
     }
 }
 
@@ -104,8 +103,14 @@ class NewsListViewController: UITableViewController {
     var moduleId: String?
     var news: [Article]?
     
-    init() {
+    init(moduleId: String?) {
         super.init(style: .Plain)
+    
+        self.moduleId = moduleId
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching news")
+        self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -119,7 +124,13 @@ class NewsListViewController: UITableViewController {
     override func viewDidLoad() {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSilentNotification:", name: "generalcontent", object: nil)
+        self.edgesForExtendedLayout = .None
+        tableView.contentInset = UIEdgeInsetsMake(22, 0, 0, 0)
+        self.loadData()
         
+    }
+    
+    func loadData() {
         if let id = self.moduleId {
             halo.generalContent.getInstances(id) { (result) -> Void in
                 switch result {
@@ -129,12 +140,12 @@ class NewsListViewController: UITableViewController {
                         self.news?.append(Article(instance: inst))
                     }
                     self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
                 }
             }
         }
-        
     }
     
     func handleSilentNotification(notification: NSNotification) {

@@ -21,6 +21,9 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
 
         self.title = "HALO"
         
+        self.edgesForExtendedLayout = .None
+        tableView.contentInset = UIEdgeInsetsMake(22, 0, 0, 0)
+        
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching instances")
         self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
