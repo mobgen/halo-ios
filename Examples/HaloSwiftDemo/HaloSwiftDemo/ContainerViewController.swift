@@ -35,10 +35,10 @@ public class ContainerViewController: UIViewController {
         
         leftMenu = LeftMenuViewController()
         
-        let vc = MainViewController()
+        let vc = HomeViewController()
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: "toggleLeftMenu")
         
-        leftMenu.delegate = vc
+        //leftMenu.delegate = vc
         
         mainView = UINavigationController(rootViewController: vc)
         

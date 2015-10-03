@@ -67,8 +67,7 @@ class ArticleCell: UITableViewCell {
         
         imageView?.clipsToBounds = true
         imageView?.autoresizingMask = .None
-        imageView?.contentMode = .ScaleAspectFill
-
+        
         detailTextLabel?.font = UIFont(name: "Lab-Medium", size: 16)
         
         summaryLabel = UILabel(frame: CGRectZero)

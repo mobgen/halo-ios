@@ -31,6 +31,7 @@
 		00930AE11B385B2D002FF4F0 /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00930AE01B385B2D002FF4F0 /* Halo.plist */; };
 		00AD9FE91BC0845600BCF287 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD9FE71BC082A000BCF287 /* AlamofireImage.framework */; };
 		00AD9FEA1BC0845600BCF287 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD9FE71BC082A000BCF287 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		00AD9FEC1BC088EB00BCF287 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD9FEB1BC088EB00BCF287 /* HomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		00BD1D541BA1D1A20002C472 /* StoreLocatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD1D531BA1D1A20002C472 /* StoreLocatorViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		00BD1D561BA1D1D00002C472 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BD1D551BA1D1D00002C472 /* MapKit.framework */; };
 		00BD1D581BA1EE820002C472 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BD1D571BA1EE820002C472 /* CoreLocation.framework */; };
@@ -89,6 +90,7 @@
 		007F79001B7253A7004D1C22 /* KeyValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueViewController.swift; sourceTree = "<group>"; };
 		00930AE01B385B2D002FF4F0 /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
 		00AD9FE71BC082A000BCF287 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
+		00AD9FEB1BC088EB00BCF287 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		00BD1D531BA1D1A20002C472 /* StoreLocatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StoreLocatorViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		00BD1D551BA1D1D00002C472 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		00BD1D571BA1EE820002C472 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -197,6 +199,7 @@
 				00BD1D591BA2D6870002C472 /* NewsListViewController.swift */,
 				00BD1D5B1BA2D6980002C472 /* ArticleViewController.swift */,
 				00BD1D5D1BA6FA950002C472 /* InfoViewController.swift */,
+				00AD9FEB1BC088EB00BCF287 /* HomeViewController.swift */,
 				0002FB6C1B616ACE00B06A9C /* Resources */,
 				006A5FF81B318D600045395A /* Supporting Files */,
 			);
@@ -352,6 +355,7 @@
 				000827871B6A6E6E001E8248 /* UIColorExtension.swift in Sources */,
 				006A5FFD1B318D600045395A /* LeftMenuViewController.swift in Sources */,
 				000590C21B565C7D00DED5D2 /* Config.swift in Sources */,
+				00AD9FEC1BC088EB00BCF287 /* HomeViewController.swift in Sources */,
 				007F78F91B70F934004D1C22 /* MainViewController.swift in Sources */,
 				007F79011B7253A8004D1C22 /* KeyValueViewController.swift in Sources */,
 				00BD1D5A1BA2D6870002C472 /* NewsListViewController.swift in Sources */,
