@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Halo
+import AlamofireImage
 
 class Article: NSObject {
     
@@ -66,7 +67,8 @@ class ArticleCell: UITableViewCell {
         
         imageView?.clipsToBounds = true
         imageView?.autoresizingMask = .None
-        
+        imageView?.contentMode = .ScaleAspectFill
+
         detailTextLabel?.font = UIFont(name: "Lab-Medium", size: 16)
         
         summaryLabel = UILabel(frame: CGRectZero)
@@ -197,7 +199,7 @@ class NewsListViewController: UITableViewController {
             articleCell?.summaryLabel?.text = article.summary
             
             if let thumbnail = article.thumbnailURL {
-                articleCell?.imageView?.imageFromUrl(thumbnail)
+                articleCell?.imageView?.af_setImageWithURL(thumbnail, placeholderImage: UIImage(named: "placeholder"))
             }
             
         }

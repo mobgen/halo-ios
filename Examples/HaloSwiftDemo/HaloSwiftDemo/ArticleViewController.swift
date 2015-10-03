@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AlamofireImage
 import Halo
 
 class ArticleView: UIView {
@@ -82,10 +83,10 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
             self.title = article!.title
             
             if let qr = article?.QRURL {
-                customView.imageView?.imageFromUrl(qr)
+                customView.imageView?.af_setImageWithURL(qr, placeholderImage: UIImage(named: "placeholder"))
                 customView.imageView?.contentMode = .ScaleAspectFit
             } else {
-                customView.imageView?.imageFromUrl(article!.imageURL!)
+                customView.imageView?.af_setImageWithURL(article!.imageURL!, placeholderImage: UIImage(named: "placeholder"))
             }
             
             customView.articleTitle?.text = article!.title

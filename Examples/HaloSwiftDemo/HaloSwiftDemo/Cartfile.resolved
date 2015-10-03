@@ -1,1 +1,2 @@
-github "yeahdongcn/UIColor-Hex-Swift" "fec8df609c31b0108b6e6dfe2c2d24b16868a275"
+github "Alamofire/Alamofire" "3.0.0-beta.3"
+github "Alamofire/AlamofireImage" "2.0.0-beta.1"
