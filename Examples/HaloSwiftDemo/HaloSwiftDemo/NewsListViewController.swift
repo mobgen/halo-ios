@@ -142,6 +142,9 @@ class NewsListViewController: UITableViewController {
     }
     
     func loadData() {
+
+        self.refreshControl?.beginRefreshing()
+
         if let id = self.moduleId {
             halo.generalContent.getInstances(id) { (result) -> Void in
                 switch result {
@@ -156,6 +159,8 @@ class NewsListViewController: UITableViewController {
                     NSLog("Error: \(error.localizedDescription)")
                 }
             }
+        } else {
+            self.refreshControl?.endRefreshing()
         }
     }
     

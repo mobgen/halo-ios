@@ -41,6 +41,7 @@ class MainViewController: UITableViewController {
     func loadData() -> Void {
 
         instances.removeAll()
+        self.refreshControl?.beginRefreshing()
 
         if let id = moduleId {
 
