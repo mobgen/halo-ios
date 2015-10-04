@@ -260,6 +260,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         }
 
         if let controller = vc {
+            container.mainView.popToRootViewControllerAnimated(false)
             container.mainView?.pushViewController(controller, animated: true)
         }
 
