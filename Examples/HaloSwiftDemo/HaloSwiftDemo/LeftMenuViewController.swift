@@ -14,9 +14,6 @@ enum HaloAddon {
     case Tags
 }
 
-protocol LeftMenuDelegate {
-    func didSelectModule(module: Halo.Module) -> Void
-}
 
 class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
 
@@ -24,7 +21,6 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     var menuColor: UIColor?
     
     var modules: [Halo.Module] = []
-    var delegate: LeftMenuDelegate?
 
     private let halo = Halo.Manager.sharedInstance
 
@@ -243,14 +239,14 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 switch name {
                 case "store locator":
                     vc = StoreLocatorViewController(module: module)
-                    vc!.title = module.name
                 case "news motorist", "qroffer":
                     vc = NewsListViewController(moduleId: module.internalId)
-                    vc!.title = module.name
                 default:
-                    vc = MainViewController()
-                    (vc as! MainViewController).didSelectModule(module)
+                    vc = MainViewController(moduleId: module.internalId)
+
                 }
+
+                vc!.title = name
             }
             
         case 1:
@@ -264,10 +260,8 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         }
 
         if let controller = vc {
-            controller.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: container, action: "toggleLeftMenu")
-            container.mainView?.setViewControllers([controller], animated: true)
+            container.mainView?.pushViewController(controller, animated: true)
         }
-
 
         container.toggleLeftMenu()
     }

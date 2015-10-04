@@ -99,7 +99,6 @@ public class ContainerViewController: UIViewController {
         if (x == 0) {
             // Create the screenshot
             self.screenshot = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(false)
-            //self.screenshot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toggleLeftMenu"))
             self.mainView.view.addSubview(self.screenshot)
             self.mainView.view.bringSubviewToFront(self.screenshot)
             UIApplication.sharedApplication().statusBarHidden = true

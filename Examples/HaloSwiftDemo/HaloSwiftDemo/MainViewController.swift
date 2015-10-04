@@ -9,25 +9,33 @@
 import UIKit
 import Halo
 
-class MainViewController: UITableViewController, LeftMenuDelegate {
+class MainViewController: UITableViewController {
 
     var moduleId: String?
     var instances: [Halo.GeneralContentInstance] = []
     private let cellIdent = "cell"
     private let halo = Halo.Manager.sharedInstance
 
+    init(moduleId: String?) {
+        super.init(style: .Plain)
+        self.moduleId = moduleId
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "HALO"
-        
         self.edgesForExtendedLayout = .None
         tableView.contentInset = UIEdgeInsetsMake(22, 0, 0, 0)
-        
+
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching instances")
         self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
-        
+
+        loadData()
     }
 
     func loadData() -> Void {
@@ -99,25 +107,6 @@ class MainViewController: UITableViewController, LeftMenuDelegate {
 
         self.navigationController?.pushViewController(vc, animated: true)
 
-    }
-
-    // MARK: Left menu delegate method
-
-    func didSelectModule(module: Halo.Module) {
-
-        self.title = module.name!
-        moduleId = nil
-
-        if let cat = module.type?.category {
-            switch cat {
-            case .GeneralContentModule:
-                moduleId = module.internalId
-            default:
-                NSLog("Other module type")
-            }
-        }
-
-        loadData()
     }
 
 }
