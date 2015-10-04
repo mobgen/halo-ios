@@ -116,10 +116,6 @@ class NewsListViewController: UITableViewController {
         super.init(style: .Plain)
     
         self.moduleId = moduleId
-        
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching news")
-        self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -133,8 +129,14 @@ class NewsListViewController: UITableViewController {
     override func viewDidLoad() {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSilentNotification:", name: "generalcontent", object: nil)
-        self.edgesForExtendedLayout = .None
-        tableView.contentInset = UIEdgeInsetsMake(22, 0, 0, 0)
+
+        self.automaticallyAdjustsScrollViewInsets = false
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching news")
+        self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
+
         self.loadData()
         
     }

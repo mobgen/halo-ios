@@ -28,8 +28,8 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.edgesForExtendedLayout = .None
-        tableView.contentInset = UIEdgeInsetsMake(22, 0, 0, 0)
+        self.automaticallyAdjustsScrollViewInsets = false
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
 
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching instances")
@@ -73,8 +73,6 @@ class MainViewController: UITableViewController {
         switch section {
         case 0:
             return instances.count
-        case 1:
-            return halo.user?.tags?.count ?? 0
         default:
             return 0
         }
