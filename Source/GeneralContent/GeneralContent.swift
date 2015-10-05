@@ -60,4 +60,27 @@ public class GeneralContent: NSObject {
             }
     }
 
+    /**
+    Get a specific general content instance given its id from Objective C
+
+    - parameter instanceId: Internal id of the instance to be retrieved
+    - parameter success:    Closure to be executed when the request has succeeded
+    - parameter failure:    Closure to be executed when the request has failed
+    */
+    @objc(instance:success:failure:)
+    public func getInstanceFromObjC(instanceId: String,
+        success:((userData: GeneralContentInstance) -> Void)?,
+        failure:((error: NSError) -> Void)?) -> Void {
+
+            self.getInstance(instanceId) { (result) -> Void in
+                switch result {
+                case .Success(let instance):
+                    success?(userData: instance)
+                case .Failure(let error):
+                    failure?(error: error)
+                }
+            }
+
+    }
+
 }
