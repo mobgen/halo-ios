@@ -132,7 +132,7 @@ class KeyValueViewController: UITableViewController {
                 cell = ColorCell(color: UIColor(rgba: value), reuseIdentifier: "colorCell")
             }
 
-        } else if value.containsString("www.") {
+        } else if value.hasPrefix("http") {
 
             cell = tableView.dequeueReusableCellWithIdentifier("imageCell")
 
