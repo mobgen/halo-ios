@@ -114,7 +114,6 @@ class NewsListViewController: UITableViewController {
     
     init(moduleId: String?) {
         super.init(style: .Plain)
-    
         self.moduleId = moduleId
     }
 

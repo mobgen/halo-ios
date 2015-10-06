@@ -38,8 +38,6 @@ public class ContainerViewController: UIViewController {
         let vc = HomeViewController()
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: "toggleLeftMenu")
         
-        //leftMenu.delegate = vc
-        
         mainView = UINavigationController(rootViewController: vc)
         
         self.view.addSubview(self.leftMenu.view)
@@ -57,7 +55,7 @@ public class ContainerViewController: UIViewController {
     
     public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         //let panGesture = UIPanGestureRecognizer(target: self, action: "moveMenu:")
         //panGesture.cancelsTouchesInView = false
 

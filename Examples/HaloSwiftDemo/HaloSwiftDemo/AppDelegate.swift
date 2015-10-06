@@ -13,7 +13,14 @@ import Halo
 class AppDelegate: HaloAppDelegate, HaloDelegate {
 
     var window: UIWindow?
+    var container: ContainerViewController?
     private let mgr = Halo.Manager.sharedInstance
+
+    private let kNewsIdInt = "560539b8e81e3b0100ef6cbe"
+    private let kNewsIdStage = "56052f08d646230100e9f247"
+
+    private var deeplinkModuleId: String?
+    private var deeplinkInstanceId: String?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -30,8 +37,10 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
         navigationBarAppearace.setTitleVerticalPositionAdjustment(5, forBarMetrics: .Default)
         
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics: .Default)
-        
-        window!.rootViewController = ContainerViewController()
+
+        self.container = ContainerViewController()
+
+        window!.rootViewController = self.container
         window!.makeKeyAndVisible()
         
         self.delegate = self
@@ -61,21 +70,65 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func showDeeplink() {
+
+        if let moduleId = self.deeplinkModuleId, instanceId = self.deeplinkInstanceId {
+            let newsController = NewsListViewController(moduleId: moduleId)
+            let articleController = ArticleViewController(articleId: instanceId)
+
+            self.container?.mainView.popToRootViewControllerAnimated(false)
+            self.container?.mainView.pushViewController(newsController, animated: false)
+            self.container?.mainView.pushViewController(articleController, animated: true)
+        }
+
+        self.deeplinkModuleId = nil
+        self.deeplinkInstanceId = nil
+
+    }
+
     // MARK: HaloDelegate methods
 
     func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+
         // Handle push notification
         application.applicationIconBadgeNumber = 0;
 
+        var isDeeplink = false
+
+        if let extra = userInfo["extra"] as? [NSObject: AnyObject] {
+
+            if let moduleId = extra["moduleId"] as? String {
+                if moduleId == kNewsIdInt || moduleId == kNewsIdStage {
+                    // Deeplink
+                    self.deeplinkModuleId = moduleId
+                    self.deeplinkInstanceId = extra["instanceId"] as? String
+                    isDeeplink = true
+                }
+            }
+        }
+
         if (application.applicationState == .Active) {
-
-            if let aps = userInfo["aps"], message = aps["alert"] as? Dictionary<String, String> {
+            // Show alert
+            if let aps = userInfo["aps"], message = aps["alert"] as? [String: String] {
                 let alert = UIAlertController(title: "Push notification", message: message["body"], preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
 
-                alert.addAction(okAction)
+                let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+
+                if isDeeplink {
+                    let showAction = UIAlertAction(title: "Show", style: .Default, handler: { (action) -> Void in
+                        self.showDeeplink()
+                    })
+                    alert.addAction(showAction)
+                }
+
+                alert.addAction(dismissAction)
 
                 self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            }
+
+        } else {
+            if isDeeplink {
+                self.performSelector("showDeeplink", withObject: nil, afterDelay: 0)
             }
         }
 
@@ -94,7 +147,7 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
             }
         }
 
-        if let extra = userInfo["extra"] as? [NSObject:AnyObject] {
+        if let extra = userInfo["extra"] as? [NSObject: AnyObject] {
             NSNotificationCenter.defaultCenter().postNotificationName("generalcontent", object: self, userInfo: extra)
         }
         
