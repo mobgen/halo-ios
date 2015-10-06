@@ -32,7 +32,7 @@ class ColorCell: UITableViewCell {
 
         let w = CGRectGetWidth(self.frame)
 
-        self.square.frame = CGRectMake(w - 55, 7, 40, 40)
+        self.square.frame = CGRectMake(w - 45, 7, 40, 40)
     }
 }
 
@@ -47,11 +47,11 @@ class ImageCell: UITableViewCell {
 
         var url: NSURL
 
-        let regex = try! NSRegularExpression(pattern: "(?<=v(=|/))([-a-zA-Z0-9_]+)|(?<=youtu.be/)([-a-zA-Z0-9_]+)", options: .CaseInsensitive)
+        let regex = try! NSRegularExpression(pattern: "v=(.+?)(?=$|&)", options: .CaseInsensitive)
 
         /// Check for a match against Youtube-like urls
-        if let match = regex.firstMatchInString(imageUrl, options: .Anchored, range: NSMakeRange(0, imageUrl.characters.count)) {
-            let videoId = (imageUrl as NSString).substringWithRange(match.rangeAtIndex(0))
+        if let match = regex.firstMatchInString(imageUrl, options: .WithoutAnchoringBounds, range: NSMakeRange(0, imageUrl.characters.count)) {
+            let videoId = (imageUrl as NSString).substringWithRange(match.rangeAtIndex(1))
             url = NSURL(string: "http://img.youtube.com/vi/\(videoId)/default.jpg")!
         } else {
             url = NSURL(string: imageUrl)!
@@ -74,7 +74,7 @@ class ImageCell: UITableViewCell {
         let w = CGRectGetWidth(self.frame)
         let h = CGRectGetHeight(self.frame)
 
-        self.imagePreview.frame = CGRectMake(w - 115, 0, 100, h)
+        self.imagePreview.frame = CGRectMake(w - 105, 0, 100, h)
     }
 
 
