@@ -8,5 +8,9 @@
 	<string>halotestapppass</string>
 	<key>ENABLE_PUSH</key>
 	<true/>
+	<key>CLIENT_ID_DEV</key>
+	<string>HaloDev/3/client</string>
+	<key>CLIENT_SECRET_DEV</key>
+	<string>039e77d9f2c2229246a9bc9ed13758ed</string>
 </dict>
 </plist>

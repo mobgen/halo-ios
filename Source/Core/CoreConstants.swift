@@ -17,7 +17,13 @@ public class CoreConstants {
     static let clientIdKey = "CLIENT_ID"
 
     /// Key which identifies the client secret within the configuration plist
-    static let clientSecret = "CLIENT_SECRET"
+    static let clientSecretKey = "CLIENT_SECRET"
+
+    /// Key which identifies the client id within the configuration plist
+    static let clientIdDevKey = "CLIENT_ID_DEV"
+
+    /// Key which identifies the client secret within the configuration plist
+    static let clientSecretDevKey = "CLIENT_SECRET_DEV"
 
     /// Key which identifies the option to enable push notifications within the configuration plist
     static let enablePush = "ENABLE_PUSH"
