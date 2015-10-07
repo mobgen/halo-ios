@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Halo
 
 class ColorCell: UITableViewCell {
 
@@ -82,18 +83,14 @@ class ImageCell: UITableViewCell {
 
 class KeyValueViewController: UITableViewController {
 
+    let halo = Halo.Manager.sharedInstance
     var values: [(String, String?)] = []
     private let cellIdent = "cellId"
+    private var instanceId: String = ""
 
-    init(_ valueDict: Dictionary<String, AnyObject>?) {
+    init(instanceId: String) {
+        self.instanceId = instanceId
         super.init(style: .Plain)
-
-        if let dict = valueDict {
-            for (k, v) in dict {
-                values.append((k, String(v)))
-            }
-        }
-
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -102,6 +99,36 @@ class KeyValueViewController: UITableViewController {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func loadData() -> Void {
+
+        self.refreshControl?.beginRefreshing()
+        self.values.removeAll()
+
+        halo.generalContent.getInstance(self.instanceId) { (result) -> Void in
+            switch result {
+            case .Success(let instance):
+                for (k, v) in instance.values! {
+                    self.values.append((k, String(v)))
+                }
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            case .Failure(let error):
+                NSLog("Error: \(error.localizedDescription)")
+            }
+        }
+
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Fetching values")
+        self.refreshControl?.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
+
+        loadData()
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -151,6 +178,7 @@ class KeyValueViewController: UITableViewController {
         }
 
         cell?.textLabel?.text = title
+        cell?.selectionStyle = .None
 
         return cell!
 

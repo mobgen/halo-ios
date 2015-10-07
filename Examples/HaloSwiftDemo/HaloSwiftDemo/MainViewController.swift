@@ -101,7 +101,7 @@ class MainViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         let instance = instances[indexPath.row]
-        let vc = KeyValueViewController(instance.values)
+        let vc = KeyValueViewController(instanceId: instance.id!)
         vc.title = instance.name
 
         self.navigationController?.pushViewController(vc, animated: true)

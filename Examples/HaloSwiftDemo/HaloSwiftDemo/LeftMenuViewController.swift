@@ -104,11 +104,19 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                             switch instanceResult {
                             case .Success(let instance):
                                 
-                                let dict = instance.first!.values
-                                
-                                strongSelf.barColor = UIColor(rgba: dict!["ToolbarColor"] as! String)
-                                strongSelf.menuColor = UIColor(rgba: dict!["MenuColor"] as! String)
+                                if let dict = instance.first?.values {
+
+                                    if let toolbar = dict["ToolbarColor"] as? String {
+                                        strongSelf.barColor = UIColor(rgba: toolbar)
+                                    }
+
+                                    if let menu = dict["MenuColor"] as? String {
+                                        strongSelf.menuColor = UIColor(rgba: menu)
+                                    }
+
                                 strongSelf.setupApp()
+                                    
+                                }
                             case .Failure(let error):
                                 NSLog("Error: \(error.localizedDescription)")
                             }

@@ -70,15 +70,25 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func showDeeplink() {
+    func showDeeplink(defaultModule: Bool = true) {
 
         if let moduleId = self.deeplinkModuleId, instanceId = self.deeplinkInstanceId {
-            let newsController = NewsListViewController(moduleId: moduleId)
-            let articleController = ArticleViewController(articleId: instanceId)
+
+            var firstController: UIViewController
+            var secondController: UIViewController
+
+            if defaultModule {
+                firstController = MainViewController(moduleId: moduleId)
+                secondController = KeyValueViewController(instanceId: instanceId)
+            } else {
+                firstController = NewsListViewController(moduleId: moduleId)
+                secondController = ArticleViewController(articleId: instanceId)
+            }
 
             self.container?.mainView.popToRootViewControllerAnimated(false)
-            self.container?.mainView.pushViewController(newsController, animated: false)
-            self.container?.mainView.pushViewController(articleController, animated: true)
+            self.container?.mainView.pushViewController(firstController, animated: false)
+            self.container?.mainView.pushViewController(secondController, animated: true)
+
         }
 
         self.deeplinkModuleId = nil
@@ -93,17 +103,16 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
         // Handle push notification
         application.applicationIconBadgeNumber = 0;
 
+        var isNews = false
         var isDeeplink = false
 
         if let extra = userInfo["extra"] as? [NSObject: AnyObject] {
 
             if let moduleId = extra["moduleId"] as? String {
-                if moduleId == kNewsIdInt || moduleId == kNewsIdStage {
-                    // Deeplink
-                    self.deeplinkModuleId = moduleId
-                    self.deeplinkInstanceId = extra["instanceId"] as? String
-                    isDeeplink = true
-                }
+                isNews = (moduleId == kNewsIdInt || moduleId == kNewsIdStage)
+                isDeeplink = true
+                self.deeplinkModuleId = moduleId
+                self.deeplinkInstanceId = extra["instanceId"] as? String
             }
         }
 
@@ -116,7 +125,7 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
 
                 if isDeeplink {
                     let showAction = UIAlertAction(title: "Show", style: .Default, handler: { (action) -> Void in
-                        self.showDeeplink()
+                        self.showDeeplink(!isNews)
                     })
                     alert.addAction(showAction)
                 }
@@ -128,7 +137,7 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
 
         } else {
             if isDeeplink {
-                self.performSelector("showDeeplink", withObject: nil, afterDelay: 0)
+                self.performSelector("showDeeplink", withObject: !isNews, afterDelay: 0)
             }
         }
 
