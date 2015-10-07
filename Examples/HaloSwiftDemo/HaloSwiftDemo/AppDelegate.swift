@@ -137,7 +137,7 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
 
         } else {
             if isDeeplink {
-                self.performSelector("showDeeplink", withObject: !isNews, afterDelay: 0)
+                self.performSelector("showDeeplink:", withObject: !isNews, afterDelay: 0)
             }
         }
 
