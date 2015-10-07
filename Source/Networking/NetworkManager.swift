@@ -48,11 +48,13 @@ class NetworkManager: Alamofire.Manager {
             certificates: ServerTrustPolicy.certificatesInBundle(),
             validateCertificateChain: true,
             validateHost: true)
-        
-        let trustManager = ServerTrustPolicyManager(policies:
-            ["halo-int.mobgen.com" : serverTrustPolicy,
-             "halo-qa.mobgen.com" : serverTrustPolicy])
-        
+
+        let trustManager = ServerTrustPolicyManager(policies: [
+            "halo-int.mobgen.com" : serverTrustPolicy,
+            "halo-qa.mobgen.com" : serverTrustPolicy,
+            "halo-stage.mobgen.com" : serverTrustPolicy
+        ])
+
         let sessionDelegate = Alamofire.Manager.SessionDelegate()
     
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
