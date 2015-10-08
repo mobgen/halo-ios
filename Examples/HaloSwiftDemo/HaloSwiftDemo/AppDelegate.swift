@@ -17,7 +17,7 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
     private let mgr = Halo.Manager.sharedInstance
 
     private let kNewsIdInt = "560539b8e81e3b0100ef6cbe"
-    private let kNewsIdStage = "56052f08d646230100e9f247"
+    private let kNewsIdStage = "56161a166947b516009db5b8"
 
     private var deeplinkModuleId: String?
     private var deeplinkInstanceId: String?
