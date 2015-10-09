@@ -38,8 +38,8 @@ The final configuration step is to provide the client id and secret for the app,
 
 The Halo Manager is the main class that will provide most of the functionalities. In order to access it, you will access the *sharedInstance* property (Singleton) and from there you will be able to use it.
 
-At the moment the Halo SDK supports using several environments (Int, QA, Stage), so setting any of those (it's a Manager's property) will trigger the launch process, that will register the device for push notifications (if enabled) and a series of other configuration operations.
-
+In order to start the configuration and launching process (once the client id and secret are set or provided via the plist file), you will only need to call the *launch* method from the Manager to start it.
+ 
 Some more detailed information about the available API can be found in the link provided in the next section.
 
 ## API documentation
