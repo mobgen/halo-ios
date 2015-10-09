@@ -10,7 +10,7 @@
 
 In order to start using the Halo SDK you will need to integrate the *Halo.framework* and the *HaloResources.bundle* into your project.
 
-You can find a downloadable ZIP file in the *Downloads* section that will provide you with the framework and bundle files.
+You can find a downloadable ZIP file in the [Downloads section](https://bitbucket.org/mobgen/halo-sdk-ios/downloads) that will provide you with the framework and bundle files.
 
 Those need to be added in two separate places. In the Build Phases section:
 
