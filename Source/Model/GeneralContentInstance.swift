@@ -62,7 +62,12 @@ public class GeneralContentInstance: NSObject {
         }
         
     }
-    
+
+    /**
+    Provides information about whether the general content instance is removed or not
+
+    - returns: Boolean determining if the instance is removed
+    */
     public func isRemoved() -> Bool {
         if let removed = self.removedAt {
             return removed < NSDate()
@@ -71,6 +76,11 @@ public class GeneralContentInstance: NSObject {
         return false
     }
 
+    /**
+    Provides information about whether the general content instance is published or not
+
+    - returns: Boolean determining if the instance is published
+    */
     public func isPublished() -> Bool {
         if let published = self.publishedAt {
             return published < NSDate()

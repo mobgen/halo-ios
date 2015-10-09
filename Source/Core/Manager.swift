@@ -11,8 +11,19 @@ import Alamofire
 import UIKit
 import CoreBluetooth
 
+/**
+Enumeration holding the different environment options available
+
+- Int:   Integration environment
+- QA:    QA environment
+- Stage: Stage environment
+- Prod:  Production environment
+*/
 public enum HaloEnvironment: String {
-    case Int, QA, Stage, Prod
+    case Int
+    case QA
+    case Stage
+    case Prod
 }
 
 public protocol ManagerDelegate {
@@ -93,7 +104,7 @@ public class Manager: NSObject {
     /**
     Perform the initial tasks to properly set up the SDK
 
-    - returns Bool describing whether the process has succeeded
+    - returns: Bool describing whether the process has succeeded
     */
     public func launch() -> Bool {
 
@@ -254,7 +265,7 @@ public class Manager: NSObject {
     /**
     Save the current user. Calling this function will trigger an update of the user in the server
 
-    :param: handler Closure to be executed once the request has finished
+    - parameter completionHandler: Closure to be executed once the request has finished
     */
     public func saveUser(completionHandler handler: (Alamofire.Result<Halo.User, NSError> -> Void)? = nil) -> Void {
         if let user = self.user {
@@ -283,6 +294,12 @@ public class Manager: NSObject {
         }
     }
 
+    /**
+    Save the user against the server
+
+    - parameter success: Closure to be executed when the request has succeeded
+    - parameter failure: Closure to be executed when the request has failed
+    */
     @objc(saveUser:failure:)
     public func saveUserFromObjC(success: ((userData: Halo.User) -> Void)?, failure: ((error: NSError) -> Void)?) {
 

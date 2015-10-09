@@ -23,11 +23,11 @@ public final class User: NSObject, NSCoding {
         return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n----"
     }
 
-    // MARK: NSCoding protocol implementation
-
     public override init() {
         super.init()
     }
+
+    // MARK: NSCoding protocol implementation
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
@@ -54,7 +54,13 @@ public final class User: NSObject, NSCoding {
 
     // MARK: User tags management
 
-    public func addTag(name: String, value: String?) {
+    /**
+    Add a custom tag to the user
+
+    - parameter name:  Name of the tag to be added
+    - parameter value: Value of the tag to be added
+    */
+    public func addTag(name: String, value: AnyObject?) {
 
         if let tags = self.tags {
             if let tag = tags[name] {
@@ -68,7 +74,12 @@ public final class User: NSObject, NSCoding {
 
     }
 
-    public func addTags(tags: Dictionary<String, String?>) {
+    /**
+    Add a collection of custom tags to the user
+
+    - parameter tags: collection of tags
+    */
+    public func addTags(tags: [String: AnyObject?]) {
         let _ = tags.map({ self.addTag($0, value: $1)})
     }
 
@@ -98,7 +109,7 @@ public final class User: NSObject, NSCoding {
     /**
     Return a dictionary representation of the user
 
-    :returns: Key-value dictionary containing the user details
+    - returns: Key-value dictionary containing the user details
     */
     func toDictionary() -> [String: AnyObject] {
 
@@ -134,7 +145,13 @@ public final class User: NSObject, NSCoding {
 
     }
 
-    /// Create a user object from a given key-value representation
+    /**
+    Create a user object from a given key-value representation
+
+    - parameter dict: Dictionary containing the key-value representation of the user
+
+    - returns: The newly created user instance
+    */
     class func fromDictionary(dict: [String: AnyObject]) -> Halo.User {
 
         var user: Halo.User

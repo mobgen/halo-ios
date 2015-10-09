@@ -41,7 +41,7 @@ public class Token: NSObject {
     /**
     Utility function to check whether the current token has expired or not
 
-    - returns Boolean determining whether the token has expired or not
+    - returns: Boolean determining whether the token has expired or not
     */
     public func isExpired() -> Bool {
         return expirationDate?.timeIntervalSinceDate(NSDate()) < 0
@@ -50,7 +50,7 @@ public class Token: NSObject {
     /**
     Utility function to check whether the current token is still valid or not
 
-    - returns Boolean determining whether the token is still valid or not
+    - returns: Boolean determining whether the token is still valid or not
     */
     public func isValid() -> Bool {
         return !isExpired()

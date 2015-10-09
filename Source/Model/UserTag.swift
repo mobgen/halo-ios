@@ -10,11 +10,16 @@ import Foundation
 
 public final class UserTag: NSObject, NSCoding {
 
+    /// Id of the user tag instance
     internal(set) public var id: String?
-    public var name: String = ""
-    public var value: String?
 
-    public init(name: String, value: String?) {
+    /// Name of the tag
+    public var name: String = ""
+
+    /// Value given to the tag
+    public var value: AnyObject?
+
+    public init(name: String, value: AnyObject?) {
         self.name = name
         self.value = value
     }
@@ -25,7 +30,7 @@ public final class UserTag: NSObject, NSCoding {
         super.init()
         id = aDecoder.decodeObjectForKey("id") as? String
         name = aDecoder.decodeObjectForKey("name") as! String
-        value = aDecoder.decodeObjectForKey("value") as? String
+        value = aDecoder.decodeObjectForKey("value")
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
@@ -37,7 +42,7 @@ public final class UserTag: NSObject, NSCoding {
     /**
     Return a key-value representation of this object
 
-    :returns: a dictionary containing the representation of the object
+    - returns: A dictionary containing the representation of the object
     */
     func toDictionary() -> [String: AnyObject] {
         var dict = [String: AnyObject]()
@@ -55,8 +60,14 @@ public final class UserTag: NSObject, NSCoding {
         return dict
     }
 
-    /// Create a user tag object from a given key-value representation
-    class func fromDictionary(dict: [String: AnyObject]) -> UserTag {
+    /**
+    Create a user tag object from a given key-value representation
+
+    - parameter dict: The dictionary containing the key-value representation
+
+    - returns: The newly created user tag
+    */
+    class func fromDictionary(dict: [String: AnyObject]) -> Halo.UserTag {
         let tag = UserTag(name: dict["name"] as! String, value: dict["value"] as? String)
         tag.id = dict["id"] as? String
 

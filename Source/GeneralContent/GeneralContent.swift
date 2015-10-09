@@ -30,6 +30,12 @@ public class GeneralContent: NSObject {
             net.generalContentInstances(moduleId, flags: [], completionHandler: handler)
     }
 
+    /**
+    Get a specific general content instance by id
+
+    - parameter instanceId: Id of the instance to be retrieved
+    - parameter handler:    Closure to be executed after the completion of the request
+    */
     public func getInstance(instanceId: String,
         completionHandler handler: (Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void) -> Void {
             net.generalContentInstance(instanceId, completionHandler: handler)
