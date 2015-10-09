@@ -28,7 +28,7 @@ The initial step would be to set up your AppDelegate, that will inherit from the
 
 ![](images/appdelegate.png)
 
-You will also have to implement the HaloDelegate if you are thinking of enabling push notifications, that will provide some methods to be implemented in order to handle them easier.
+You will also have to implement the HaloDelegate if you are thinking of enabling push notifications, that will provide some methods to be implemented in order to handle them easily.
 
 The final configuration step is to provide the client id and secret for the app, as well as whether it will be using push notifications or not. That can be done through code, but it's probably easier to set up a Halo.plist file inside the main bundle of the app, containing the following keys
 
@@ -40,7 +40,7 @@ The Halo Manager is the main class that will provide most of the functionalities
 
 At the moment the Halo SDK supports using several environments (Int, QA, Stage), so setting any of those (it's a Manager's property) will trigger the launch process, that will register the device for push notifications (if enabled) and a series of other configuration operations.
 
-Some more detailed information about the API can be found in the link provided in the next section.
+Some more detailed information about the available API can be found in the link provided in the next section.
 
 ## API documentation
 
