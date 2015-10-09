@@ -8,9 +8,9 @@
 
 ### Initial setup
 
-In order to start using the Halo SDK you will need to integrate the Halo.framework and the HaloResources.bundle into your project.
+In order to start using the Halo SDK you will need to integrate the *Halo.framework* and the *HaloResources.bundle* into your project.
 
-At the moment it will need to be built from source code, until a better distribution mechanism is arranged. So in order to do that, you will need to build a couple of targets (the Halo one and the HaloResources), and that will provide you with the two files you need to integrate: Halo.framework and HaloResources.bundle.
+At the moment it will need to be built from source code, until a better distribution mechanism is arranged. So in order to do that, you will need to build a couple of targets (the Halo one and the HaloResources), and that will provide you with the two files you need to integrate: *Halo.framework* and *HaloResources.bundle*.
 
 Those need to be added in two separate places. In the Build Phases section:
 
