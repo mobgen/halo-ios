@@ -30,7 +30,7 @@ The initial step would be to set up your AppDelegate, that will inherit from the
 
 You will also have to implement the HaloDelegate if you are thinking of enabling push notifications, that will provide some methods to be implemented in order to handle them easily.
 
-The final configuration step is to provide the client id and secret for the app, as well as whether it will be using push notifications or not. That can be done through code, but it's probably easier to set up a Halo.plist file inside the main bundle of the app, containing the following keys
+The final configuration step is to provide the client id and secret for the app, as well as whether it will be using push notifications or not. That can be done through code, but it's probably easier to set up a *Halo.plist* file inside the main bundle of the app, containing the following keys
 
 ![](images/plist.png)
 
