@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc(HaloUserTag)
 public final class UserTag: NSObject, NSCoding {
 
     /// Id of the user tag instance

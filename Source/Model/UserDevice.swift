@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc(HaloUserDevice)
 public final class UserDevice: NSObject, NSCoding {
 
     /// Platform of the device

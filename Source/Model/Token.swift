@@ -9,6 +9,7 @@
 import Foundation
 
 /// Class holding all the information related to the authentication token
+@objc(HaloToken)
 public class Token: NSObject {
 
     /// Access token

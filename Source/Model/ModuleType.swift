@@ -14,6 +14,7 @@ public enum ModuleTypeCategory: Int {
 }
 
 /// Model class representing an existing module type within Halo
+@objc(HaloModuleType)
 public class ModuleType: NSObject {
 
     /// Unique identifier of the module type

@@ -9,6 +9,7 @@
 import Foundation
 
 /// Model class representing the different modules available in Halo
+@objc(HaloModule)
 public class Module: NSObject {
 
     /// Unique identifier of the module

@@ -26,7 +26,7 @@ public enum HaloEnvironment: String {
     case Prod
 }
 
-public protocol ManagerDelegate {
+@objc(HaloManagerDelegate) public protocol ManagerDelegate {
     func setupUser() -> Halo.User
     func managerDidFinishLaunching() -> Void
 }
@@ -38,6 +38,8 @@ public class Manager: NSObject {
     /// Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Halo.Manager()
 
+    public var pushDelegate: HaloPushDelegate?
+    
     /// General content component
     public let generalContent = Halo.GeneralContent.sharedInstance
 

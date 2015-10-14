@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc(HaloUser)
 public final class User: NSObject, NSCoding {
 
     internal(set) public var id:String?

@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc(HaloGeneralContentInstance)
 public class GeneralContentInstance: NSObject {
 
     /// Unique identifier of this General Content instance

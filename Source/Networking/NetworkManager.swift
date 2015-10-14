@@ -44,21 +44,27 @@ class NetworkManager: Alamofire.Manager {
     private var cachedTasks = Array<CachedTask>()
     
     private init() {
-        let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
-            certificates: ServerTrustPolicy.certificatesInBundle(),
-            validateCertificateChain: true,
-            validateHost: true)
-
-        let trustManager = ServerTrustPolicyManager(policies: [
-            "halo-int.mobgen.com" : serverTrustPolicy,
-            "halo-qa.mobgen.com" : serverTrustPolicy,
-            "halo-stage.mobgen.com" : serverTrustPolicy
-        ])
-
+        
         let sessionDelegate = Alamofire.Manager.SessionDelegate()
-    
+        
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
+        
+        var trustManager: ServerTrustPolicyManager?
+        
+        if let bundle = NSBundle(identifier: "HaloResources") {
+            
+            let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
+                certificates: ServerTrustPolicy.certificatesInBundle(bundle),
+                validateCertificateChain: true,
+                validateHost: true)
+            
+            trustManager = ServerTrustPolicyManager(policies: [
+                "halo-int.mobgen.com" : serverTrustPolicy,
+                "halo-qa.mobgen.com" : serverTrustPolicy,
+                "halo-stage.mobgen.com" : serverTrustPolicy
+                ])
+        }
         
         super.init(configuration: configuration,
             delegate: sessionDelegate,

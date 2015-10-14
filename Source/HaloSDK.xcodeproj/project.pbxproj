@@ -19,6 +19,7 @@
 		005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+User.swift */; };
 		005822981B5FBBDD005BF8F4 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005C578A1B5CEA2D0018839D /* Alamofire.framework */; };
 		005DF3121B998BB500149B40 /* GeneralContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005DF3111B998BB500149B40 /* GeneralContentSpec.swift */; settings = {ASSET_TAGS = (); }; };
+		006238271BCE5E6200E614B3 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; settings = {ASSET_TAGS = (); }; };
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
@@ -130,6 +131,7 @@
 		005390851B8DB7590036F579 /* NetworkManager+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+User.swift"; sourceTree = "<group>"; };
 		005C578A1B5CEA2D0018839D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		005DF3111B998BB500149B40 /* GeneralContentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentSpec.swift; sourceTree = "<group>"; };
+		006238251BCE5B8900E614B3 /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = halo.cer; path = Resources/halo.cer; sourceTree = "<group>"; };
 		0068D27B1B6778CA00B1E147 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB71B318CAC0045395A /* HaloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -338,9 +340,9 @@
 			isa = PBXGroup;
 			children = (
 				006A5FCE1B318CBC0045395A /* Info.plist */,
+				006238251BCE5B8900E614B3 /* halo.cer */,
 			);
 			name = "Supporting Files";
-			path = HaloNetworking;
 			sourceTree = "<group>";
 		};
 		006CB97D1B85B87200EB872E /* Resources */ = {
@@ -552,6 +554,7 @@
 				00921BB01BBBD2CE00B79B50 /* ping.aiff in Resources */,
 				00921BB21BBBD2CE00B79B50 /* pizzicato.aiff in Resources */,
 				00921BB31BBBD2CE00B79B50 /* proxima.aiff in Resources */,
+				006238271BCE5E6200E614B3 /* halo.cer in Resources */,
 				00921BB11BBBD2CE00B79B50 /* pixiedust.aiff in Resources */,
 				00921BAB1BBBD2CE00B79B50 /* mira.aiff in Resources */,
 				00921B961BBBD2CE00B79B50 /* antimony.aiff in Resources */,
@@ -679,11 +682,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -731,6 +735,7 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

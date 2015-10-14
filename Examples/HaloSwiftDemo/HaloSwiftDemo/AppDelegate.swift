@@ -10,7 +10,7 @@ import UIKit
 import Halo
 
 @UIApplicationMain
-class AppDelegate: HaloAppDelegate, HaloDelegate {
+class AppDelegate: HaloAppDelegate, HaloPushDelegate {
 
     var window: UIWindow?
     var container: ContainerViewController?
@@ -43,7 +43,7 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
         window!.rootViewController = self.container
         window!.makeKeyAndVisible()
         
-        self.delegate = self
+        mgr.pushDelegate = self
         
         return true
     }
@@ -146,7 +146,7 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
     }
 
     func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        NSLog("Silent push!!")
+        NSLog("Silent push!!\n \(userInfo)")
 
         let alert = userInfo["aps"]!["alert"] as! [NSObject: AnyObject]
 
@@ -162,6 +162,5 @@ class AppDelegate: HaloAppDelegate, HaloDelegate {
         
         completionHandler(.NewData)
     }
-    
-    
+
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Delegate to be implemented to handle several events coming from the Halo SDK
-public protocol HaloDelegate {
+@objc public protocol HaloPushDelegate {
     /**
     This handler will be called when a push notification is received
 
@@ -30,40 +30,34 @@ public protocol HaloDelegate {
     func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
 }
 
-/// Helper class intended to be used as superclass by any AppDelegate
+/// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
-
-    let mgr = Halo.Manager.sharedInstance
-
-    /// Instance implementing the HaloDelegate protocol
-    public var delegate: HaloDelegate?
 
     // MARK: Push notifications
 
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        mgr.setupPushNotifications(application: application, deviceToken: deviceToken)
+        Halo.Manager.sharedInstance.setupPushNotifications(application: application, deviceToken: deviceToken)
     }
 
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         NSLog("Couldn't register: \(error)")
-        mgr.setupPushNotifications(application: application, deviceToken: "<testToken>".dataUsingEncoding(NSUTF8StringEncoding)!)
+        Halo.Manager.sharedInstance.setupPushNotifications(application: application, deviceToken: "<testToken>".dataUsingEncoding(NSUTF8StringEncoding)!)
     }
 
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
+        let halo = Halo.Manager.sharedInstance
         NSLog("Content: \(userInfo)")
 
         if let silent = userInfo["content_available"] as? Int {
             if silent == 1 {
-                delegate?.handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+                halo.pushDelegate?.handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
             } else {
-                delegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+                halo.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
             }
         } else {
-            delegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+            halo.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
         }
-
-        completionHandler(.NoData)
 
     }
 
