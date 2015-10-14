@@ -148,7 +148,7 @@ class AppDelegate: HaloAppDelegate, HaloPushDelegate {
     func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         NSLog("Silent push!!\n \(userInfo)")
 
-        let alert = userInfo["aps"]!["alert"] as! [NSObject: AnyObject]
+        let alert = userInfo["alert"] as! [NSObject: AnyObject]
 
         if let body = alert["body"] as? String {
             if body.lowercaseString == "configuration" {
