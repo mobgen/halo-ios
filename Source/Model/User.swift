@@ -185,8 +185,13 @@ public final class User: NSObject, NSCoding {
             })
         }
 
-        user.createdAt = NSDate(timeIntervalSince1970: (dict["createdAt"] as! NSTimeInterval)/1000)
-        user.updatedAt = NSDate(timeIntervalSince1970: (dict["updatedAt"] as! NSTimeInterval)/1000)
+        if let created = dict["createdAt"] as? NSTimeInterval {
+            user.createdAt = NSDate(timeIntervalSince1970:created/1000)
+        }
+        
+        if let updated = dict["updatedAt"] as? NSTimeInterval {
+            user.updatedAt = NSDate(timeIntervalSince1970:updated/1000)
+        }
 
         return user
     }
