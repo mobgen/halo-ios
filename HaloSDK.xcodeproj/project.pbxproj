@@ -22,7 +22,6 @@
 		005390841B8C67B80036F579 /* module_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 005390831B8C67B80036F579 /* module_list_success.json */; };
 		005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+User.swift */; };
 		005DF3121B998BB500149B40 /* GeneralContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005DF3111B998BB500149B40 /* GeneralContentSpec.swift */; settings = {ASSET_TAGS = (); }; };
-		006238271BCE5E6200E614B3 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; settings = {ASSET_TAGS = (); }; };
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
@@ -36,58 +35,52 @@
 		0082D9C11B987BE400298AB8 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082D9C01B987BE400298AB8 /* ModelSpec.swift */; settings = {ASSET_TAGS = (); }; };
 		0082D9C31B98911200298AB8 /* instance_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0082D9C21B98911200298AB8 /* instance_list_success.json */; settings = {ASSET_TAGS = (); }; };
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
-		00921B941BBBD2CE00B79B50 /* adara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6C1BBBD2CE00B79B50 /* adara.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B951BBBD2CE00B79B50 /* alya.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6D1BBBD2CE00B79B50 /* alya.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B961BBBD2CE00B79B50 /* antimony.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6E1BBBD2CE00B79B50 /* antimony.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B971BBBD2CE00B79B50 /* argon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6F1BBBD2CE00B79B50 /* argon.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B981BBBD2CE00B79B50 /* ariel.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B701BBBD2CE00B79B50 /* ariel.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B991BBBD2CE00B79B50 /* beryllium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B711BBBD2CE00B79B50 /* beryllium.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B9A1BBBD2CE00B79B50 /* blip.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B721BBBD2CE00B79B50 /* blip.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B9B1BBBD2CE00B79B50 /* carme.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B731BBBD2CE00B79B50 /* carme.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B9C1BBBD2CE00B79B50 /* castor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B741BBBD2CE00B79B50 /* castor.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B9D1BBBD2CE00B79B50 /* ceres.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B751BBBD2CE00B79B50 /* ceres.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B9E1BBBD2CE00B79B50 /* chime.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B761BBBD2CE00B79B50 /* chime.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921B9F1BBBD2CE00B79B50 /* cobalt.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B771BBBD2CE00B79B50 /* cobalt.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA01BBBD2CE00B79B50 /* cyanmessage.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B781BBBD2CE00B79B50 /* cyanmessage.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA11BBBD2CE00B79B50 /* dontpanic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B791BBBD2CE00B79B50 /* dontpanic.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA21BBBD2CE00B79B50 /* elara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7A1BBBD2CE00B79B50 /* elara.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA31BBBD2CE00B79B50 /* element.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7B1BBBD2CE00B79B50 /* element.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA41BBBD2CE00B79B50 /* europa.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7C1BBBD2CE00B79B50 /* europa.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA51BBBD2CE00B79B50 /* f1_missedcall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7D1BBBD2CE00B79B50 /* f1_missedcall.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA61BBBD2CE00B79B50 /* f1_new_sms.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7E1BBBD2CE00B79B50 /* f1_new_sms.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA71BBBD2CE00B79B50 /* fluorine.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7F1BBBD2CE00B79B50 /* fluorine.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA81BBBD2CE00B79B50 /* hello.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B801BBBD2CE00B79B50 /* hello.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BA91BBBD2CE00B79B50 /* hojus.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B811BBBD2CE00B79B50 /* hojus.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BAA1BBBD2CE00B79B50 /* ivory.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B821BBBD2CE00B79B50 /* ivory.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BAB1BBBD2CE00B79B50 /* mira.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B831BBBD2CE00B79B50 /* mira.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BAC1BBBD2CE00B79B50 /* modular.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B841BBBD2CE00B79B50 /* modular.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BAD1BBBD2CE00B79B50 /* moto.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B851BBBD2CE00B79B50 /* moto.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BAE1BBBD2CE00B79B50 /* natural.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B861BBBD2CE00B79B50 /* natural.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BAF1BBBD2CE00B79B50 /* organic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B871BBBD2CE00B79B50 /* organic.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB01BBBD2CE00B79B50 /* ping.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B881BBBD2CE00B79B50 /* ping.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB11BBBD2CE00B79B50 /* pixiedust.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B891BBBD2CE00B79B50 /* pixiedust.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB21BBBD2CE00B79B50 /* pizzicato.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8A1BBBD2CE00B79B50 /* pizzicato.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB31BBBD2CE00B79B50 /* proxima.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8B1BBBD2CE00B79B50 /* proxima.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB41BBBD2CE00B79B50 /* radon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8C1BBBD2CE00B79B50 /* radon.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB51BBBD2CE00B79B50 /* rhea.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8D1BBBD2CE00B79B50 /* rhea.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB61BBBD2CE00B79B50 /* selenium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8E1BBBD2CE00B79B50 /* selenium.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB71BBBD2CE00B79B50 /* sirius.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8F1BBBD2CE00B79B50 /* sirius.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB81BBBD2CE00B79B50 /* tada.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B901BBBD2CE00B79B50 /* tada.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BB91BBBD2CE00B79B50 /* tethys.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B911BBBD2CE00B79B50 /* tethys.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BBA1BBBD2CE00B79B50 /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B921BBBD2CE00B79B50 /* upsilon.aiff */; settings = {ASSET_TAGS = (); }; };
-		00921BBB1BBBD2CE00B79B50 /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B931BBBD2CE00B79B50 /* voila.aiff */; settings = {ASSET_TAGS = (); }; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
+		00DD969A1BD02EED00AF65CA /* adara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6C1BBBD2CE00B79B50 /* adara.aiff */; };
+		00DD969B1BD02EED00AF65CA /* alya.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6D1BBBD2CE00B79B50 /* alya.aiff */; };
+		00DD969C1BD02EED00AF65CA /* antimony.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6E1BBBD2CE00B79B50 /* antimony.aiff */; };
+		00DD969D1BD02EED00AF65CA /* argon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B6F1BBBD2CE00B79B50 /* argon.aiff */; };
+		00DD969E1BD02EED00AF65CA /* ariel.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B701BBBD2CE00B79B50 /* ariel.aiff */; };
+		00DD969F1BD02EED00AF65CA /* beryllium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B711BBBD2CE00B79B50 /* beryllium.aiff */; };
+		00DD96A01BD02EED00AF65CA /* blip.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B721BBBD2CE00B79B50 /* blip.aiff */; };
+		00DD96A11BD02EED00AF65CA /* carme.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B731BBBD2CE00B79B50 /* carme.aiff */; };
+		00DD96A21BD02EED00AF65CA /* castor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B741BBBD2CE00B79B50 /* castor.aiff */; };
+		00DD96A31BD02EED00AF65CA /* ceres.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B751BBBD2CE00B79B50 /* ceres.aiff */; };
+		00DD96A41BD02EED00AF65CA /* chime.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B761BBBD2CE00B79B50 /* chime.aiff */; };
+		00DD96A51BD02EED00AF65CA /* cobalt.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B771BBBD2CE00B79B50 /* cobalt.aiff */; };
+		00DD96A61BD02EED00AF65CA /* cyanmessage.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B781BBBD2CE00B79B50 /* cyanmessage.aiff */; };
+		00DD96A71BD02EED00AF65CA /* dontpanic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B791BBBD2CE00B79B50 /* dontpanic.aiff */; };
+		00DD96A81BD02EED00AF65CA /* elara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7A1BBBD2CE00B79B50 /* elara.aiff */; };
+		00DD96A91BD02EED00AF65CA /* element.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7B1BBBD2CE00B79B50 /* element.aiff */; };
+		00DD96AA1BD02EED00AF65CA /* europa.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7C1BBBD2CE00B79B50 /* europa.aiff */; };
+		00DD96AB1BD02EED00AF65CA /* f1_missedcall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7D1BBBD2CE00B79B50 /* f1_missedcall.aiff */; };
+		00DD96AC1BD02EED00AF65CA /* f1_new_sms.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7E1BBBD2CE00B79B50 /* f1_new_sms.aiff */; };
+		00DD96AD1BD02EED00AF65CA /* fluorine.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B7F1BBBD2CE00B79B50 /* fluorine.aiff */; };
+		00DD96AE1BD02EED00AF65CA /* hello.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B801BBBD2CE00B79B50 /* hello.aiff */; };
+		00DD96AF1BD02EED00AF65CA /* hojus.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B811BBBD2CE00B79B50 /* hojus.aiff */; };
+		00DD96B01BD02EED00AF65CA /* ivory.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B821BBBD2CE00B79B50 /* ivory.aiff */; };
+		00DD96B11BD02EED00AF65CA /* mira.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B831BBBD2CE00B79B50 /* mira.aiff */; };
+		00DD96B21BD02EED00AF65CA /* modular.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B841BBBD2CE00B79B50 /* modular.aiff */; };
+		00DD96B31BD02EED00AF65CA /* moto.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B851BBBD2CE00B79B50 /* moto.aiff */; };
+		00DD96B41BD02EED00AF65CA /* natural.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B861BBBD2CE00B79B50 /* natural.aiff */; };
+		00DD96B51BD02EED00AF65CA /* organic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B871BBBD2CE00B79B50 /* organic.aiff */; };
+		00DD96B61BD02EED00AF65CA /* ping.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B881BBBD2CE00B79B50 /* ping.aiff */; };
+		00DD96B71BD02EED00AF65CA /* pixiedust.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B891BBBD2CE00B79B50 /* pixiedust.aiff */; };
+		00DD96B81BD02EED00AF65CA /* pizzicato.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8A1BBBD2CE00B79B50 /* pizzicato.aiff */; };
+		00DD96B91BD02EED00AF65CA /* proxima.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8B1BBBD2CE00B79B50 /* proxima.aiff */; };
+		00DD96BA1BD02EED00AF65CA /* radon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8C1BBBD2CE00B79B50 /* radon.aiff */; };
+		00DD96BB1BD02EED00AF65CA /* rhea.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8D1BBBD2CE00B79B50 /* rhea.aiff */; };
+		00DD96BC1BD02EED00AF65CA /* selenium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8E1BBBD2CE00B79B50 /* selenium.aiff */; };
+		00DD96BD1BD02EED00AF65CA /* sirius.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B8F1BBBD2CE00B79B50 /* sirius.aiff */; };
+		00DD96BE1BD02EED00AF65CA /* tada.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B901BBBD2CE00B79B50 /* tada.aiff */; };
+		00DD96BF1BD02EED00AF65CA /* tethys.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B911BBBD2CE00B79B50 /* tethys.aiff */; };
+		00DD96C01BD02EED00AF65CA /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B921BBBD2CE00B79B50 /* upsilon.aiff */; };
+		00DD96C11BD02EED00AF65CA /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B931BBBD2CE00B79B50 /* voila.aiff */; };
+		00DD96C21BD02F0200AF65CA /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		006CB99D1B85BC4E00EB872E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 006CB98D1B85BBA100EB872E;
-			remoteInfo = HaloResources;
-		};
 		0091C0141B779CDE0054EA75 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
@@ -133,7 +126,6 @@
 		006A5FBE1B318CAC0045395A /* CoreSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSpec.swift; sourceTree = "<group>"; };
 		006A5FCE1B318CBC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
-		006CB98E1B85BBA100EB872E /* HaloResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		006CB9901B85BBA100EB872E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006CB9B51B870FB800EB872E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		006CB9B71B870FC400EB872E /* UserTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTag.swift; sourceTree = "<group>"; };
@@ -209,13 +201,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		006CB98B1B85BBA100EB872E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -276,7 +261,6 @@
 			children = (
 				006A5FAD1B318CAC0045395A /* Halo.framework */,
 				006A5FB71B318CAC0045395A /* HaloTests.xctest */,
-				006CB98E1B85BBA100EB872E /* HaloResources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -422,7 +406,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				006CB99E1B85BC4E00EB872E /* PBXTargetDependency */,
 			);
 			name = Halo;
 			productName = MoMOSCore;
@@ -448,23 +431,6 @@
 			productReference = 006A5FB71B318CAC0045395A /* HaloTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		006CB98D1B85BBA100EB872E /* HaloResources */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 006CB9911B85BBA100EB872E /* Build configuration list for PBXNativeTarget "HaloResources" */;
-			buildPhases = (
-				006CB98A1B85BBA100EB872E /* Sources */,
-				006CB98B1B85BBA100EB872E /* Frameworks */,
-				006CB98C1B85BBA100EB872E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = HaloResources;
-			productName = HaloResources;
-			productReference = 006CB98E1B85BBA100EB872E /* HaloResources.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -483,9 +449,6 @@
 					006A5FB61B318CAC0045395A = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
-					006CB98D1B85BBA100EB872E = {
-						CreatedOnToolsVersion = 7.0;
-					};
 				};
 			};
 			buildConfigurationList = 006A5F861B318C6E0045395A /* Build configuration list for PBXProject "HaloSDK" */;
@@ -502,7 +465,6 @@
 			targets = (
 				006A5FAC1B318CAC0045395A /* Halo */,
 				006A5FB61B318CAC0045395A /* HaloTests */,
-				006CB98D1B85BBA100EB872E /* HaloResources */,
 			);
 		};
 /* End PBXProject section */
@@ -512,6 +474,47 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00DD96C21BD02F0200AF65CA /* halo.cer in Resources */,
+				00DD969A1BD02EED00AF65CA /* adara.aiff in Resources */,
+				00DD969B1BD02EED00AF65CA /* alya.aiff in Resources */,
+				00DD969C1BD02EED00AF65CA /* antimony.aiff in Resources */,
+				00DD969D1BD02EED00AF65CA /* argon.aiff in Resources */,
+				00DD969E1BD02EED00AF65CA /* ariel.aiff in Resources */,
+				00DD969F1BD02EED00AF65CA /* beryllium.aiff in Resources */,
+				00DD96A01BD02EED00AF65CA /* blip.aiff in Resources */,
+				00DD96A11BD02EED00AF65CA /* carme.aiff in Resources */,
+				00DD96A21BD02EED00AF65CA /* castor.aiff in Resources */,
+				00DD96A31BD02EED00AF65CA /* ceres.aiff in Resources */,
+				00DD96A41BD02EED00AF65CA /* chime.aiff in Resources */,
+				00DD96A51BD02EED00AF65CA /* cobalt.aiff in Resources */,
+				00DD96A61BD02EED00AF65CA /* cyanmessage.aiff in Resources */,
+				00DD96A71BD02EED00AF65CA /* dontpanic.aiff in Resources */,
+				00DD96A81BD02EED00AF65CA /* elara.aiff in Resources */,
+				00DD96A91BD02EED00AF65CA /* element.aiff in Resources */,
+				00DD96AA1BD02EED00AF65CA /* europa.aiff in Resources */,
+				00DD96AB1BD02EED00AF65CA /* f1_missedcall.aiff in Resources */,
+				00DD96AC1BD02EED00AF65CA /* f1_new_sms.aiff in Resources */,
+				00DD96AD1BD02EED00AF65CA /* fluorine.aiff in Resources */,
+				00DD96AE1BD02EED00AF65CA /* hello.aiff in Resources */,
+				00DD96AF1BD02EED00AF65CA /* hojus.aiff in Resources */,
+				00DD96B01BD02EED00AF65CA /* ivory.aiff in Resources */,
+				00DD96B11BD02EED00AF65CA /* mira.aiff in Resources */,
+				00DD96B21BD02EED00AF65CA /* modular.aiff in Resources */,
+				00DD96B31BD02EED00AF65CA /* moto.aiff in Resources */,
+				00DD96B41BD02EED00AF65CA /* natural.aiff in Resources */,
+				00DD96B51BD02EED00AF65CA /* organic.aiff in Resources */,
+				00DD96B61BD02EED00AF65CA /* ping.aiff in Resources */,
+				00DD96B71BD02EED00AF65CA /* pixiedust.aiff in Resources */,
+				00DD96B81BD02EED00AF65CA /* pizzicato.aiff in Resources */,
+				00DD96B91BD02EED00AF65CA /* proxima.aiff in Resources */,
+				00DD96BA1BD02EED00AF65CA /* radon.aiff in Resources */,
+				00DD96BB1BD02EED00AF65CA /* rhea.aiff in Resources */,
+				00DD96BC1BD02EED00AF65CA /* selenium.aiff in Resources */,
+				00DD96BD1BD02EED00AF65CA /* sirius.aiff in Resources */,
+				00DD96BE1BD02EED00AF65CA /* tada.aiff in Resources */,
+				00DD96BF1BD02EED00AF65CA /* tethys.aiff in Resources */,
+				00DD96C01BD02EED00AF65CA /* upsilon.aiff in Resources */,
+				00DD96C11BD02EED00AF65CA /* voila.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,54 +526,6 @@
 				0053907E1B8C620B0036F579 /* oauth_success.json in Resources */,
 				0082D9C31B98911200298AB8 /* instance_list_success.json in Resources */,
 				005390821B8C655C0036F579 /* oauth_failure.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		006CB98C1B85BBA100EB872E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00921B951BBBD2CE00B79B50 /* alya.aiff in Resources */,
-				00921B9E1BBBD2CE00B79B50 /* chime.aiff in Resources */,
-				00921BB41BBBD2CE00B79B50 /* radon.aiff in Resources */,
-				00921BA81BBBD2CE00B79B50 /* hello.aiff in Resources */,
-				00921BAA1BBBD2CE00B79B50 /* ivory.aiff in Resources */,
-				00921B981BBBD2CE00B79B50 /* ariel.aiff in Resources */,
-				00921B971BBBD2CE00B79B50 /* argon.aiff in Resources */,
-				00921BB61BBBD2CE00B79B50 /* selenium.aiff in Resources */,
-				00921BA91BBBD2CE00B79B50 /* hojus.aiff in Resources */,
-				00921BA21BBBD2CE00B79B50 /* elara.aiff in Resources */,
-				00921BA61BBBD2CE00B79B50 /* f1_new_sms.aiff in Resources */,
-				00921BB81BBBD2CE00B79B50 /* tada.aiff in Resources */,
-				00921BA51BBBD2CE00B79B50 /* f1_missedcall.aiff in Resources */,
-				00921B941BBBD2CE00B79B50 /* adara.aiff in Resources */,
-				00921B9C1BBBD2CE00B79B50 /* castor.aiff in Resources */,
-				00921BA01BBBD2CE00B79B50 /* cyanmessage.aiff in Resources */,
-				00921B9A1BBBD2CE00B79B50 /* blip.aiff in Resources */,
-				00921BB01BBBD2CE00B79B50 /* ping.aiff in Resources */,
-				00921BB21BBBD2CE00B79B50 /* pizzicato.aiff in Resources */,
-				00921BB31BBBD2CE00B79B50 /* proxima.aiff in Resources */,
-				006238271BCE5E6200E614B3 /* halo.cer in Resources */,
-				00921BB11BBBD2CE00B79B50 /* pixiedust.aiff in Resources */,
-				00921BAB1BBBD2CE00B79B50 /* mira.aiff in Resources */,
-				00921B961BBBD2CE00B79B50 /* antimony.aiff in Resources */,
-				00921BA31BBBD2CE00B79B50 /* element.aiff in Resources */,
-				00921BB91BBBD2CE00B79B50 /* tethys.aiff in Resources */,
-				00921BBB1BBBD2CE00B79B50 /* voila.aiff in Resources */,
-				00921B9F1BBBD2CE00B79B50 /* cobalt.aiff in Resources */,
-				00921BA11BBBD2CE00B79B50 /* dontpanic.aiff in Resources */,
-				00921B9B1BBBD2CE00B79B50 /* carme.aiff in Resources */,
-				00921B9D1BBBD2CE00B79B50 /* ceres.aiff in Resources */,
-				00921BAE1BBBD2CE00B79B50 /* natural.aiff in Resources */,
-				00921BA71BBBD2CE00B79B50 /* fluorine.aiff in Resources */,
-				00921BAF1BBBD2CE00B79B50 /* organic.aiff in Resources */,
-				00921B991BBBD2CE00B79B50 /* beryllium.aiff in Resources */,
-				00921BBA1BBBD2CE00B79B50 /* upsilon.aiff in Resources */,
-				00921BA41BBBD2CE00B79B50 /* europa.aiff in Resources */,
-				00921BB51BBBD2CE00B79B50 /* rhea.aiff in Resources */,
-				00921BAD1BBBD2CE00B79B50 /* moto.aiff in Resources */,
-				00921BB71BBBD2CE00B79B50 /* sirius.aiff in Resources */,
-				00921BAC1BBBD2CE00B79B50 /* modular.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,21 +567,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		006CB98A1B85BBA100EB872E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		006CB99E1B85BC4E00EB872E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 006CB98D1B85BBA100EB872E /* HaloResources */;
-			targetProxy = 006CB99D1B85BC4E00EB872E /* PBXContainerItemProxy */;
-		};
 		0091C0151B779CDE0054EA75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 006A5FAC1B318CAC0045395A /* Halo */;
@@ -789,39 +732,6 @@
 			};
 			name = Release;
 		};
-		006CB9921B85BBA100EB872E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		006CB9951B85BBA100EB872E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -848,15 +758,6 @@
 			buildConfigurations = (
 				006A5FC41B318CAC0045395A /* Debug */,
 				006A5FC51B318CAC0045395A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		006CB9911B85BBA100EB872E /* Build configuration list for PBXNativeTarget "HaloResources" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				006CB9921B85BBA100EB872E /* Debug */,
-				006CB9951B85BBA100EB872E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
