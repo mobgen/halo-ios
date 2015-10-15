@@ -5,28 +5,21 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "ED5ABB80638FDFA66EEBAF4FC7183817E815CA3B" : 0,
-    "AB0A48DD995E26A187DED71E830FA3DB4DD771C9" : 0,
     "67620B5EFA902936DF04070AF595B76AB0333747" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "241D2E25-3166-4B9F-B287-6831466C2DDA",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "ED5ABB80638FDFA66EEBAF4FC7183817E815CA3B" : "momos-sdk-ios",
-    "AB0A48DD995E26A187DED71E830FA3DB4DD771C9" : "Carthage\/",
     "67620B5EFA902936DF04070AF595B76AB0333747" : "momos-sdk-iosAlamofire"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "HALO",
-  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HALO.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Alamofire\/Alamofire.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "67620B5EFA902936DF04070AF595B76AB0333747"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Carthage\/Carthage.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AB0A48DD995E26A187DED71E830FA3DB4DD771C9"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/mobgen\/momos-sdk-ios.git",
