@@ -14,20 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
-               BuildableName = "Halo.framework"
-               BlueprintName = "Halo"
-               ReferencedContainer = "container:HaloSDK.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "004FEC781BD0DCE8004216EE"
                BuildableName = "HaloResources.bundle"
                BlueprintName = "HaloResources"
@@ -40,29 +26,9 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "006A5FB61B318CAC0045395A"
-               BuildableName = "HaloTests.xctest"
-               BlueprintName = "HaloTests"
-               ReferencedContainer = "container:HaloSDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
-            BuildableName = "Halo.framework"
-            BlueprintName = "Halo"
-            ReferencedContainer = "container:HaloSDK.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -79,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
-            BuildableName = "Halo.framework"
-            BlueprintName = "Halo"
+            BlueprintIdentifier = "004FEC781BD0DCE8004216EE"
+            BuildableName = "HaloResources.bundle"
+            BlueprintName = "HaloResources"
             ReferencedContainer = "container:HaloSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -97,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
-            BuildableName = "Halo.framework"
-            BlueprintName = "Halo"
+            BlueprintIdentifier = "004FEC781BD0DCE8004216EE"
+            BuildableName = "HaloResources.bundle"
+            BlueprintName = "HaloResources"
             ReferencedContainer = "container:HaloSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
