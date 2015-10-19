@@ -8,9 +8,5 @@
 	<string>halotestapppass</string>
 	<key>ENABLE_PUSH</key>
 	<true/>
-	<key>CLIENT_ID_DEV</key>
-	<string>halotestappclient</string>
-	<key>CLIENT_SECRET_DEV</key>
-	<string>halotestapppass</string>
 </dict>
 </plist>

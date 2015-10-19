@@ -117,14 +117,9 @@ public class Manager: NSObject {
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
-                #if DEBUG
-                    let clientIdKey = CoreConstants.clientIdDevKey
-                    let clientSecretKey = CoreConstants.clientSecretDevKey
-                #else
-                    let clientIdKey = CoreConstants.clientIdKey
-                    let clientSecretKey = CoreConstants.clientSecretKey
-                #endif
-
+                let clientIdKey = CoreConstants.clientIdKey
+                let clientSecretKey = CoreConstants.clientSecretKey
+                
                 self.net.clientId = data[clientIdKey] as? String
                 self.net.clientSecret = data[clientSecretKey] as? String
                 self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
