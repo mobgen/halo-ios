@@ -15,6 +15,8 @@ private let DeviceList = [
     "iPad4,9"		: "iPad Mini 3",
     "iPad4,8"		: "iPad Mini 3",
     "iPad4,7"		: "iPad Mini 3",
+    "iPhone8,1"     : "iPhone 6s",
+    "iPhone8,2"     : "iPhone 6s Plus",
     "iPhone7,2"		: "iPhone 6",
     "iPhone7,1"		: "iPhone 6 Plus",
     "iPad4,6"		: "iPad Mini 2",
