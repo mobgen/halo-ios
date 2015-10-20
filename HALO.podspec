@@ -18,6 +18,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
+  s.dependency 'Alamofire', '~> 3.0'
+
   s.source_files = 'Source/**/*.{h,swift}'
   s.public_header_files = 'Source/**/*.h'
   s.frameworks = 'Foundation'
