@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = "HALOFramework"
+  s.name             = "Halo SDK"
   s.version          = "0.1.0"
   s.summary          = "A short description of test."
   s.description      = <<-DESC
@@ -21,8 +21,8 @@ Pod::Spec.new do |s|
   s.source_files = 'Source/**/*.{h,swift}'
   s.public_header_files = 'Source/**/*.h'
   s.frameworks = 'Foundation'
-  #s.resource_bundles = {
-  #  'test' => ['Pod/Assets/*.png']
-  #}
+  s.resource_bundles = {
+    'HaloResources' => ['Source/Resources/*.aiff']
+  }
 
 end
