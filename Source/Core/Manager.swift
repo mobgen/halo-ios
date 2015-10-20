@@ -191,16 +191,22 @@ public class Manager: NSObject {
             user.addTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
 
             let BLEsupported = (bluetoothManager.state != .Unsupported)
-
-            user.addTag(CoreConstants.tagBLESupportKey, value: String(BLEsupported))
-            user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
+            
+            if BLEsupported {
+                user.addTag(CoreConstants.tagBLESupportKey, value: nil)
+            }
+            
+            //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
 
             let screen = UIScreen.mainScreen()
             let bounds = screen.bounds
             let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
 
             user.addTag(CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
-            user.addTag(CoreConstants.tagTestDeviceKey, value: String(self.environment != .Prod))
+            
+            if (self.environment != .Prod) {
+                user.addTag(CoreConstants.tagTestDeviceKey, value: nil)
+            }
 
             NSLog(user.description)
             self.user?.storeUser(self.environment)
