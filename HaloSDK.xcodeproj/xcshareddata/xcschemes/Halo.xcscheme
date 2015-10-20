@@ -20,20 +20,6 @@
                ReferencedContainer = "container:HaloSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "004FEC781BD0DCE8004216EE"
-               BuildableName = "HaloResources.bundle"
-               BlueprintName = "HaloResources"
-               ReferencedContainer = "container:HaloSDK.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

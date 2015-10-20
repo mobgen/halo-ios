@@ -81,6 +81,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		005BF7B31BD61A66002CE33A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 004FEC781BD0DCE8004216EE;
+			remoteInfo = HaloResources;
+		};
 		0091C0141B779CDE0054EA75 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
@@ -432,6 +439,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				005BF7B41BD61A66002CE33A /* PBXTargetDependency */,
 			);
 			name = Halo;
 			productName = MoMOSCore;
@@ -614,6 +622,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		005BF7B41BD61A66002CE33A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 004FEC781BD0DCE8004216EE /* HaloResources */;
+			targetProxy = 005BF7B31BD61A66002CE33A /* PBXContainerItemProxy */;
+		};
 		0091C0151B779CDE0054EA75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 006A5FAC1B318CAC0045395A /* Halo */;
@@ -821,6 +834,7 @@
 				004FEC7D1BD0DCE8004216EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		006A5F861B318C6E0045395A /* Build configuration list for PBXProject "HaloSDK" */ = {
 			isa = XCConfigurationList;

@@ -222,7 +222,6 @@ public class Manager: NSObject {
                     }
                     
                     strongSelf.delegate?.managerDidFinishLaunching()
-                
                 }
             })
         }
