@@ -6,45 +6,11 @@
 
 ## Getting started
 
-### Initial setup
-
-In order to start using the Halo SDK you will need to integrate the *Halo.framework* and the *HaloResources.bundle* into your project.
-
-You can find a downloadable ZIP file in the [Downloads section](https://bitbucket.org/mobgen/halo-sdk-ios/downloads) that will provide you with the framework and bundle files.
-
-Those need to be added in two separate places. In the Build Phases section:
-
-The framework one needs to be added as embedded framework as seen in the image.
-
-![](images/embedded.png)
-
-The resources bundle has to be added in the Copy Bundle Resources phase
-
-![](images/resources.png)
-
-After that, you can start developing using the Halo SDK.
-
-The initial step would be to set up your AppDelegate, that will inherit from the provided one in the SDK.
-
-![](images/appdelegate.png)
-
-You will also have to implement the HaloDelegate if you are thinking of enabling push notifications, that will provide some methods to be implemented in order to handle them easily.
-
-The final configuration step is to provide the client id and secret for the app, as well as whether it will be using push notifications or not. That can be done through code, but it's probably easier to set up a *Halo.plist* file inside the main bundle of the app, containing the following keys
-
-![](images/plist.png)
-
-### The Halo Manager
-
-The Halo Manager is the main class that will provide most of the functionalities. In order to access it, you will access the *sharedInstance* property (Singleton) and from there you will be able to use it.
-
-In order to start the configuration and launching process (once the client id and secret are set or provided via the plist file), you will only need to call the *launch* method from the Manager to start it.
- 
-Some more detailed information about the available API can be found in the link provided in the next section.
+A getting started guide and some other information related to integrating and setting up the SDK can be found in the [wiki](https://bitbucket.org/mobgen/halo-sdk-ios/wiki/Home).
 
 ## API documentation
 
-The latest API documentation can be checked [here](http://borjasantos.bitbucket.org/docs/ios/halo-sdk/).
+The latest API documentation (Swift oriented) can be checked [here](http://borjasantos.bitbucket.org/docs/ios/halo-sdk/).
 
 ## Contribute
 
