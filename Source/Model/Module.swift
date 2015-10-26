@@ -21,6 +21,9 @@ public class Module: NSObject {
     /// Type of the module
     public var type: Halo.ModuleType?
 
+    /// Identifies the module as single item module
+    public var isSingle: Bool
+    
     /// Date of the last update performed in this module
     public var lastUpdate: NSDate?
 
@@ -35,7 +38,8 @@ public class Module: NSObject {
     init(_ dict: Dictionary<String,AnyObject>) {
         id = dict["id"] as? NSNumber
         name = dict["name"] as? String
-
+        isSingle = dict["isSingle"] as? Bool ?? false
+        
         let moduleTypeDict = dict["moduleType"] as? Dictionary<String, AnyObject> ?? [String: AnyObject]()
         type = ModuleType(moduleTypeDict)
 

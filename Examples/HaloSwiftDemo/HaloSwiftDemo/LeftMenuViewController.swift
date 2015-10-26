@@ -250,11 +250,33 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 case "news motorist", "qroffer":
                     vc = NewsListViewController(moduleId: module.internalId)
                 default:
-                    vc = MainViewController(moduleId: module.internalId)
-
+                    
+                    if module.isSingle {
+                        halo.generalContent.getInstances(module.internalId!, completionHandler: { (result) -> Void in
+                            switch result {
+                            case .Success(let instances):
+                                if let instance = instances.first {
+                                    vc = KeyValueViewController(instanceId: instance.id!)
+                                    
+                                    vc?.title = name
+                                    
+                                    container.mainView.popToRootViewControllerAnimated(false)
+                                    container.mainView?.pushViewController(vc!, animated: true)
+                                    
+                                    container.toggleLeftMenu()
+                                }
+                            case .Failure(let error):
+                                NSLog("Error \(error.localizedDescription)")
+                            }
+                        })
+                    } else {
+                        vc = MainViewController(moduleId: module.internalId)
+                    }
                 }
 
-                vc!.title = name
+                if let controller = vc {
+                    controller.title = name
+                }
             }
             
         case 1:
@@ -270,9 +292,9 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         if let controller = vc {
             container.mainView.popToRootViewControllerAnimated(false)
             container.mainView?.pushViewController(controller, animated: true)
+            
+            container.toggleLeftMenu()
         }
-
-        container.toggleLeftMenu()
     }
 
     // MARK: ManagerDelegate methods
