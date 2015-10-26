@@ -12,7 +12,7 @@ import Halo
 
 class TagsViewController: UITableViewController {
 
-    var tags: [Halo.UserTag] = []
+    var tags: [Halo.Tag] = []
     let cellIdent = "cellIdent"
     let mgr = Halo.Manager.sharedInstance
     let alertController = UIAlertController(title: "Add tag", message: nil, preferredStyle: .Alert)
@@ -38,7 +38,7 @@ class TagsViewController: UITableViewController {
             let name = self.alertController.textFields![0] as UITextField
             let value = self.alertController.textFields![1] as UITextField
 
-            let tag = Halo.UserTag(name: name.text!, value: value.text)
+            let tag = Halo.Tag(name: name.text!, value: value.text)
 
             self.mgr.user?.tags?[tag.name] = tag
             self.mgr.saveUser(completionHandler: { _ in
@@ -56,7 +56,7 @@ class TagsViewController: UITableViewController {
 
     private func loadTags() {
         if let tags = mgr.user?.tags {
-            self.tags = tags.flatMap({ (key, tag) -> Halo.UserTag? in
+            self.tags = tags.flatMap({ (key, tag) -> Halo.Tag? in
                 return tag
             })
         }

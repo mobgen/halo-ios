@@ -96,7 +96,7 @@ class AppDelegate: HaloAppDelegate, HaloPushDelegate {
 
     }
 
-    // MARK: HaloDelegate methods
+    // MARK: HaloPushDelegate methods
 
     func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 

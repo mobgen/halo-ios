@@ -38,6 +38,9 @@ public class GeneralContentInstance: NSObject {
     /// Most recent date in which the content was updated
     public var updatedAt: NSDate?
 
+    /// List of tags associated to this general content instance
+    public var tags: [Halo.Tag]
+    
     init(_ dict: [String: AnyObject]) {
         
         id = dict["id"] as? String
@@ -45,6 +48,13 @@ public class GeneralContentInstance: NSObject {
         name = dict["name"] as? String
         values = dict["values"] as? Dictionary<String, AnyObject>
         createdBy = dict["createdBy"] as? String
+        tags = []
+        
+        if let tagsList = dict["tags"] as? [[String: AnyObject]] {
+            for tag in tagsList {
+                tags.append(Halo.Tag(name: tag["name"] as! String, value: tag["value"]))
+            }
+        }
 
         if let created = dict["createdAt"] as? Double {
             createdAt = NSDate(timeIntervalSince1970: created/1000)

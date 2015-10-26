@@ -48,9 +48,9 @@ public class Module: NSObject {
         enabled = dict["enabled"] as? Bool ?? false
         tags = []
         
-        if let tagsList = dict["tags"] as? [[String: String]] {
+        if let tagsList = dict["tags"] as? [[String: AnyObject]] {
             for tag in tagsList {
-                tags.append(Halo.Tag(name: tag["name"]!, value: tag["value"]))
+                tags.append(Halo.Tag(name: tag["name"] as! String, value: tag["value"]))
             }
         }
         
