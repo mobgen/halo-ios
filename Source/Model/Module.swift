@@ -21,6 +21,9 @@ public class Module: NSObject {
     /// Type of the module
     public var type: Halo.ModuleType?
 
+    /// Identifies the module as enabled or not
+    public var enabled: Bool
+    
     /// Identifies the module as single item module
     public var isSingle: Bool
     
@@ -29,6 +32,9 @@ public class Module: NSObject {
 
     /// Internal id of the module
     public var internalId: String?
+    
+    /// List of tags associated to this module
+    public var tags: [Halo.Tag]
 
     /**
     Initialise a HaloModule from a dictionary
@@ -39,6 +45,14 @@ public class Module: NSObject {
         id = dict["id"] as? NSNumber
         name = dict["name"] as? String
         isSingle = dict["isSingle"] as? Bool ?? false
+        enabled = dict["enabled"] as? Bool ?? false
+        tags = []
+        
+        if let tagsList = dict["tags"] as? [[String: String]] {
+            for tag in tagsList {
+                tags.append(Halo.Tag(name: tag["name"]!, value: tag["value"]))
+            }
+        }
         
         let moduleTypeDict = dict["moduleType"] as? Dictionary<String, AnyObject> ?? [String: AnyObject]()
         type = ModuleType(moduleTypeDict)

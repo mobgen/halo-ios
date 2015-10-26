@@ -8,8 +8,8 @@
 
 import Foundation
 
-@objc(HaloUserTag)
-public final class UserTag: NSObject, NSCoding {
+@objc(HaloTag)
+public final class Tag: NSObject, NSCoding {
 
     /// Id of the user tag instance
     internal(set) public var id: String?
@@ -68,8 +68,8 @@ public final class UserTag: NSObject, NSCoding {
 
     - returns: The newly created user tag
     */
-    class func fromDictionary(dict: [String: AnyObject]) -> Halo.UserTag {
-        let tag = UserTag(name: dict["name"] as! String, value: dict["value"] as? String)
+    class func fromDictionary(dict: [String: AnyObject]) -> Halo.Tag {
+        let tag = Tag(name: dict["name"] as! String, value: dict["value"] as? String)
         tag.id = dict["id"] as? String
 
         return tag
@@ -79,7 +79,7 @@ public final class UserTag: NSObject, NSCoding {
         if object.dynamicType != self.dynamicType {
             return false
         } else {
-            let other = object as! UserTag
+            let other = object as! Halo.Tag
             return other.name == self.name
         }
     }

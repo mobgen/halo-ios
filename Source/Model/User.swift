@@ -16,7 +16,7 @@ public final class User: NSObject, NSCoding {
     public var email:String?
     public var alias:String?
     public var devices:[Halo.UserDevice]?
-    public var tags:[String: Halo.UserTag]?
+    public var tags:[String: Halo.Tag]?
     internal(set) public var createdAt:NSDate?
     internal(set) public var updatedAt:NSDate?
 
@@ -37,7 +37,7 @@ public final class User: NSObject, NSCoding {
         self.email = aDecoder.decodeObjectForKey("email") as? String
         self.alias = aDecoder.decodeObjectForKey("alias") as? String
         self.devices = aDecoder.decodeObjectForKey("devices") as? [Halo.UserDevice]
-        self.tags = aDecoder.decodeObjectForKey("tags") as? [String: Halo.UserTag]
+        self.tags = aDecoder.decodeObjectForKey("tags") as? [String: Halo.Tag]
         self.createdAt = aDecoder.decodeObjectForKey("createdAt") as? NSDate
         self.updatedAt = aDecoder.decodeObjectForKey("updatedAt") as? NSDate
     }
@@ -67,10 +67,10 @@ public final class User: NSObject, NSCoding {
             if let tag = tags[name] {
                 tag.value = value
             } else {
-                self.tags![name] = Halo.UserTag(name: name, value: value)
+                self.tags![name] = Halo.Tag(name: name, value: value)
             }
         } else {
-            self.tags = [name : Halo.UserTag(name: name, value: value)]
+            self.tags = [name : Halo.Tag(name: name, value: value)]
         }
 
     }
@@ -134,7 +134,7 @@ public final class User: NSObject, NSCoding {
         }
 
         if let tags = self.tags {
-            dict["tags"] = tags.map({ (key, tag: UserTag) -> NSDictionary in
+            dict["tags"] = tags.map({ (key, tag: Halo.Tag) -> NSDictionary in
                 tag.toDictionary()
             })
         }
@@ -176,10 +176,10 @@ public final class User: NSObject, NSCoding {
             return UserDevice.fromDictionary(dict)
         })
 
-        if let tags = (dict["tags"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserTag in
-            return UserTag.fromDictionary(dict)
+        if let tags = (dict["tags"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
+            return Halo.Tag.fromDictionary(dict)
         }) {
-            user.tags = tags.reduce([:], combine: { (var dict, tag: UserTag) -> [String: UserTag] in
+            user.tags = tags.reduce([:], combine: { (var dict, tag: Halo.Tag) -> [String: Halo.Tag] in
                 dict[tag.name] = tag
                 return dict
             })
