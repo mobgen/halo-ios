@@ -39,7 +39,7 @@ public class GeneralContentInstance: NSObject {
     public var updatedAt: NSDate?
 
     /// List of tags associated to this general content instance
-    public var tags: [Halo.Tag]
+    public var tags: [String: Halo.Tag]
     
     init(_ dict: [String: AnyObject]) {
         
@@ -48,12 +48,15 @@ public class GeneralContentInstance: NSObject {
         name = dict["name"] as? String
         values = dict["values"] as? Dictionary<String, AnyObject>
         createdBy = dict["createdBy"] as? String
-        tags = []
+        tags = [:]
         
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
-            for tag in tagsList {
-                tags.append(Halo.Tag(name: tag["name"] as! String, value: tag["value"]))
-            }
+            tags = tagsList.map({ (dict) -> Halo.Tag in
+                return Halo.Tag.fromDictionary(dict)
+            }).reduce([:], combine: { (var dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                dict[tag.name] = tag
+                return dict
+            })
         }
 
         if let created = dict["createdAt"] as? Double {

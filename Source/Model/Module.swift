@@ -34,7 +34,7 @@ public class Module: NSObject {
     public var internalId: String?
     
     /// List of tags associated to this module
-    public var tags: [Halo.Tag]
+    public var tags: [String: Halo.Tag]
 
     /**
     Initialise a HaloModule from a dictionary
@@ -46,12 +46,15 @@ public class Module: NSObject {
         name = dict["name"] as? String
         isSingle = dict["isSingle"] as? Bool ?? false
         enabled = dict["enabled"] as? Bool ?? false
-        tags = []
+        tags = [:]
         
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
-            for tag in tagsList {
-                tags.append(Halo.Tag(name: tag["name"] as! String, value: tag["value"]))
-            }
+            tags = tagsList.map({ (dict) -> Halo.Tag in
+                return Halo.Tag.fromDictionary(dict)
+            }).reduce([:], combine: { (var dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                dict[tag.name] = tag
+                return dict
+            })
         }
         
         let moduleTypeDict = dict["moduleType"] as? Dictionary<String, AnyObject> ?? [String: AnyObject]()
