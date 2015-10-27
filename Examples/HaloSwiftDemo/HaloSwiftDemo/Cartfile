@@ -1,1 +1,2 @@
-github "Alamofire/AlamofireImage" "2.0.0-beta.1"
+github "Alamofire/AlamofireImage" ~> 2.1.0
+github "yeahdongcn/UIColor-Hex-Swift" ~> 1.5
