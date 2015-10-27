@@ -33,7 +33,7 @@ public class Module: NSObject {
     /// Internal id of the module
     public var internalId: String?
     
-    /// List of tags associated to this module
+    /// Dictionary of tags associated to this module
     public var tags: [String: Halo.Tag]
 
     /**

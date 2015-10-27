@@ -38,7 +38,7 @@ public class GeneralContentInstance: NSObject {
     /// Most recent date in which the content was updated
     public var updatedAt: NSDate?
 
-    /// List of tags associated to this general content instance
+    /// Dictionary of tags associated to this general content instance
     public var tags: [String: Halo.Tag]
     
     init(_ dict: [String: AnyObject]) {
