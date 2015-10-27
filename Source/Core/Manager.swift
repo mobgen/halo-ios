@@ -166,7 +166,7 @@ public class Manager: NSObject {
     /**
     Add the default system tags that will be potentially used for segmentation
     */
-    public func setupDefaultSystemTags() {
+    private func setupDefaultSystemTags() {
 
         if let user = self.user {
 
@@ -243,7 +243,7 @@ public class Manager: NSObject {
     - parameter application: Current application being configured to receive push notifications
     - parameter deviceToken: Device token returned after registering for push notifications
     */
-    public func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
+    private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         app.registerUserNotificationSettings(settings)
 
@@ -256,6 +256,14 @@ public class Manager: NSObject {
         
         self.setupDefaultSystemTags()
         
+    }
+
+    public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        self.setupPushNotifications(application: application, deviceToken: deviceToken)
+    }
+
+    public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        self.setupDefaultSystemTags()
     }
 
     /**

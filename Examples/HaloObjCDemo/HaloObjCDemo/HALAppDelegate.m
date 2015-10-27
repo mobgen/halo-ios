@@ -35,11 +35,11 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [[HaloManager sharedInstance] setupPushNotificationsWithApplication:application deviceToken:deviceToken];
+    [[HaloManager sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    [[HaloManager sharedInstance] setupDefaultSystemTags];
+    [[HaloManager sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 - (HaloUser *)setupUser {

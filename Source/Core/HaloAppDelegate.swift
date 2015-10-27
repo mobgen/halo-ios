@@ -36,12 +36,11 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Push notifications
 
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        Halo.Manager.sharedInstance.setupPushNotifications(application: application, deviceToken: deviceToken)
+        Halo.Manager.sharedInstance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        NSLog("Couldn't register: \(error)")
-        Halo.Manager.sharedInstance.setupDefaultSystemTags()
+        Halo.Manager.sharedInstance.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
