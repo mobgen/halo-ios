@@ -41,7 +41,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         NSLog("Couldn't register: \(error)")
-        Halo.Manager.sharedInstance.setupPushNotifications(application: application, deviceToken: "<testToken>".dataUsingEncoding(NSUTF8StringEncoding)!)
+        Halo.Manager.sharedInstance.setupDefaultSystemTags()
     }
 
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {

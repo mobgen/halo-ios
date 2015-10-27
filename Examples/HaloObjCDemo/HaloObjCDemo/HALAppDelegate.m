@@ -10,12 +10,11 @@
 #import "HALMainViewController.h"
 #import <Halo/Halo-Swift.h>
 
-@interface HALAppDelegate ()
+@interface HALAppDelegate () <HaloManagerDelegate>
 
 @end
 
 @implementation HALAppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -27,9 +26,31 @@
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     
-    [HaloManager.sharedInstance launch];
+    HaloManager *mgr = [HaloManager sharedInstance];
+    mgr.delegate = self;
+    
+    [mgr launch];
     
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[HaloManager sharedInstance] setupPushNotificationsWithApplication:application deviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    [[HaloManager sharedInstance] setupDefaultSystemTags];
+}
+
+- (HaloUser *)setupUser {
+    HaloUser *user = [HaloUser new];
+    user.email = @"test@mobgen.com";
+    
+    return user;
+}
+
+- (void)managerDidFinishLaunching {
+    NSLog(@"Finished!");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -11,8 +11,6 @@
 
 @interface HALMainViewController ()
 
-- (void) submitAction:(id)sender;
-
 @end
 
 @implementation HALMainViewController
@@ -27,8 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.view.button addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,10 +33,7 @@
 }
 
 - (void)submitAction:(id)sender {
-
-    [[HaloManager sharedInstance] ]
-
-    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 @end

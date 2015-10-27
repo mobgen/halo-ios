@@ -67,7 +67,6 @@ public class Manager: NSObject {
 
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
-            self.user = Halo.User.loadUser(environment)
             self.launch()
         }
     }
@@ -124,12 +123,16 @@ public class Manager: NSObject {
                 self.net.clientSecret = data[clientSecretKey] as? String
                 self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
             }
+        } else {
+            NSLog("No .plist found")
         }
 
         if let cId = self.net.clientId, let secret = self.net.clientSecret {
             NSLog("Using client ID: \(cId) and client secret: \(secret)")
         }
 
+        self.user = Halo.User.loadUser(self.environment)
+        
         if let user = self.user {
             // Update the user
             net.getUser(user) { (result) -> Void in
@@ -148,7 +151,7 @@ public class Manager: NSObject {
             }
             
         } else {
-            self.user = delegate?.setupUser()
+            self.user = self.delegate?.setupUser()
 
             if self.enablePush {
                 UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -163,7 +166,7 @@ public class Manager: NSObject {
     /**
     Add the default system tags that will be potentially used for segmentation
     */
-    private func setupDefaultSystemTags() {
+    public func setupDefaultSystemTags() {
 
         if let user = self.user {
 

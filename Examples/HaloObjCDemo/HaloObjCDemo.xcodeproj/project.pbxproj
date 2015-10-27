@@ -21,13 +21,12 @@
 		0002FB9D1B616B8B00B06A9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */; };
 		000826F41B690C60001E8248 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F01B690C4D001E8248 /* Alamofire.framework */; };
 		000826F51B690C60001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F01B690C4D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		000826F61B690C60001E8248 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F11B690C4D001E8248 /* Result.framework */; };
-		000826F71B690C60001E8248 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826F11B690C4D001E8248 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		002219461B6105F700D0F27A /* HALMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 002219451B6105F700D0F27A /* HALMainView.m */; };
 		005AAFA31B399DE400146A6C /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005AAFA21B399DE400146A6C /* Halo.plist */; };
 		006A60641B31BBD80045395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60631B31BBD80045395A /* main.m */; };
 		006A60671B31BBD80045395A /* HALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60661B31BBD80045395A /* HALAppDelegate.m */; };
 		006A606A1B31BBD80045395A /* HALMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006A60691B31BBD80045395A /* HALMainViewController.m */; };
+		00A34E881BDFB9F70080DD93 /* HaloResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 00A34E871BDFB9F70080DD93 /* HaloResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				000826F71B690C60001E8248 /* Result.framework in Embed Frameworks */,
 				0002FB691B6169F100B06A9C /* Halo.framework in Embed Frameworks */,
 				000826F51B690C60001E8248 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -62,8 +60,7 @@
 		0002FB931B616B6B00B06A9C /* Lab-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lab-Medium.ttf"; sourceTree = "<group>"; };
 		0002FB941B616B6B00B06A9C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		000826F01B690C4D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Examples/HaloSwiftDemo/HaloSwiftDemo/../../../Carthage/Build/iOS/Alamofire.framework"; sourceTree = "<absolute>"; };
-		000826F11B690C4D001E8248 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Examples/HaloSwiftDemo/HaloSwiftDemo/../../../Carthage/Build/iOS/Result.framework"; sourceTree = "<absolute>"; };
+		000826F01B690C4D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		002219441B6105F700D0F27A /* HALMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HALMainView.h; sourceTree = "<group>"; };
 		002219451B6105F700D0F27A /* HALMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HALMainView.m; sourceTree = "<group>"; };
 		005AAFA21B399DE400146A6C /* Halo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Halo.plist; sourceTree = "<group>"; };
@@ -74,6 +71,7 @@
 		006A60661B31BBD80045395A /* HALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HALAppDelegate.m; sourceTree = "<group>"; };
 		006A60681B31BBD80045395A /* HALMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HALMainViewController.h; sourceTree = "<group>"; };
 		006A60691B31BBD80045395A /* HALMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HALMainViewController.m; sourceTree = "<group>"; };
+		00A34E871BDFB9F70080DD93 /* HaloResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HaloResources.bundle; path = ../../HaloResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +81,6 @@
 			files = (
 				0002FB9D1B616B8B00B06A9C /* SystemConfiguration.framework in Frameworks */,
 				0002FB8C1B616B4C00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */,
-				000826F61B690C60001E8248 /* Result.framework in Frameworks */,
 				0002FB681B6169F100B06A9C /* Halo.framework in Frameworks */,
 				000826F41B690C60001E8248 /* Alamofire.framework in Frameworks */,
 			);
@@ -109,6 +106,7 @@
 		0002FB8D1B616B6B00B06A9C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				00A34E871BDFB9F70080DD93 /* HaloResources.bundle */,
 				0002FB8E1B616B6B00B06A9C /* Gotham-Bold.ttf */,
 				0002FB8F1B616B6B00B06A9C /* Gotham-Book.ttf */,
 				0002FB901B616B6B00B06A9C /* Images.xcassets */,
@@ -166,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				000826F01B690C4D001E8248 /* Alamofire.framework */,
-				000826F11B690C4D001E8248 /* Result.framework */,
 				0002FB9C1B616B8B00B06A9C /* SystemConfiguration.framework */,
 				0002FB841B616B4C00B06A9C /* CrittercismSDK */,
 				0002FB671B6169F100B06A9C /* Halo.framework */,
@@ -216,7 +213,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 006A60591B31BBD80045395A /* Build configuration list for PBXProject "HaloObjCDemo" */;
+			buildConfigurationList = 006A60591B31BBD80045395A /* Build configuration list for PBXProject "HALOObjCDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -239,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A34E881BDFB9F70080DD93 /* HaloResources.bundle in Resources */,
 				0002FB8B1B616B4C00B06A9C /* dsym_upload.sh in Resources */,
 				0002FB951B616B6B00B06A9C /* Gotham-Bold.ttf in Resources */,
 				0002FB9A1B616B6B00B06A9C /* Lab-Medium.ttf in Resources */,
@@ -394,7 +392,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		006A60591B31BBD80045395A /* Build configuration list for PBXProject "HaloObjCDemo" */ = {
+		006A60591B31BBD80045395A /* Build configuration list for PBXProject "HALOObjCDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A607F1B31BBD80045395A /* Debug */,
