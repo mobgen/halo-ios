@@ -311,16 +311,6 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     func managerDidFinishLaunching() -> Void {
         NSLog("Manager did finish launching")
         self.loadData()
-    
-        halo.generalContent.getInstances(instanceIds: ["000000000000000000000004","000000000000000000000009"]) { (result) -> Void in
-            switch result {
-            case .Success(let data):
-                NSLog("\(data)")
-            case .Failure(let error):
-                NSLog("\(error)")
-            }
-        }
-
     }
     
 }
