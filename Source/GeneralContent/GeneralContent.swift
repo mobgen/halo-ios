@@ -80,6 +80,26 @@ public class GeneralContent: NSObject {
                 }
             }
     }
+    
+    /**
+     Get a set of instances given the collection of their ids from Objective C
+     
+     - parameter instancesWithIds: Array of instance ids
+     */
+    @objc(instancesWithIds:success:failure:)
+    public func getInstancesFromObjC(instanceIds instanceIds: [String],
+        success:((userData: [GeneralContentInstance]) -> Void)?,
+        failure: ((error: NSError) -> Void)?) -> Void {
+            
+            self.getInstances(instanceIds: instanceIds) { (result) -> Void in
+                switch result {
+                case .Success(let instances):
+                    success?(userData: instances)
+                case .Failure(let error):
+                    failure?(error: error)
+                }
+            }
+    }
 
     /**
     Get a specific general content instance given its id from Objective C
