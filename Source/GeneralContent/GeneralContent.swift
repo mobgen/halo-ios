@@ -9,6 +9,11 @@
 import Foundation
 import Alamofire
 
+
+/**
+ Access point to the General Content. This class will provide methods to obtain the data stored as general content.
+ */
+@objc(HaloGeneralContent)
 public class GeneralContent: NSObject {
 
     /// Shortcut for the shared instance of the network manager
@@ -25,7 +30,7 @@ public class GeneralContent: NSObject {
     - parameter moduleId:           Internal id of the module from which we want to retrieve the instances
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getInstances(moduleId: String,
+    public func getInstances(moduleId moduleId: String,
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
             net.generalContentInstances(moduleId, flags: [], completionHandler: handler)
     }
@@ -36,11 +41,21 @@ public class GeneralContent: NSObject {
     - parameter instanceId: Id of the instance to be retrieved
     - parameter handler:    Closure to be executed after the completion of the request
     */
-    public func getInstance(instanceId: String,
+    public func getInstance(instanceId instanceId: String,
         completionHandler handler: (Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void) -> Void {
-            net.generalContentInstance(instanceId, completionHandler: handler)
+        net.generalContentInstance(instanceId, completionHandler: handler)
     }
         
+    /**
+    Get a set of general content instances by specifying their ids
+     
+     - parameter instanceIds: Ids of the instances to be retrieved
+     - parameter handler:     Closure to be executed after the completion of the request
+     */
+    public func getInstances(instanceIds instanceIds: [String],
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+        net.generalContentInstances(instanceIds, completionHandler: handler)
+    }
     
     // MARK: ObjC exposed methods
 
@@ -52,11 +67,11 @@ public class GeneralContent: NSObject {
     - parameter failure:    Closure to be executed when the request has failed
     */
     @objc(instancesInModule:success:failure:)
-    public func getInstancesFromObjC(moduleId: String,
+    public func getInstancesFromObjC(moduleId moduleId: String,
         success:((userData: [GeneralContentInstance]) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
-            self.getInstances(moduleId) { (result) -> Void in
+            self.getInstances(moduleId: moduleId) { (result) -> Void in
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances)
@@ -74,11 +89,11 @@ public class GeneralContent: NSObject {
     - parameter failure:    Closure to be executed when the request has failed
     */
     @objc(instance:success:failure:)
-    public func getInstanceFromObjC(instanceId: String,
+    public func getInstanceFromObjC(instanceId instanceId: String,
         success:((userData: GeneralContentInstance) -> Void)?,
         failure:((error: NSError) -> Void)?) -> Void {
 
-            self.getInstance(instanceId) { (result) -> Void in
+            self.getInstance(instanceId: instanceId) { (result) -> Void in
                 switch result {
                 case .Success(let instance):
                     success?(userData: instance)

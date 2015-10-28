@@ -89,10 +89,24 @@ public extension UIDevice {
         return getDeviceType(UIDevice.currentDevice().userInterfaceIdiom)
     }
 
+    /**
+     Get the device type based on the user interface idiom
+     
+     - parameter idiom: User interface idiom of the device
+     
+     - returns: Device type
+     */
     func getDeviceType(idiom: UIUserInterfaceIdiom) -> String {
         return (idiom == .Phone) ? "Phone" : "Tablet"
     }
 
+    /**
+     Get the model name of the current device from the not-so-descriptive identifier
+     
+     - parameter identifier: Device identifier
+     
+     - returns: More readable model name
+     */
     func getModelName(identifier: String) -> String {
         return DeviceList[identifier] ?? identifier
     }

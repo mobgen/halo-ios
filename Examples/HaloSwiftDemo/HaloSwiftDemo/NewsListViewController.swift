@@ -145,7 +145,7 @@ class NewsListViewController: UITableViewController {
         self.refreshControl?.beginRefreshing()
 
         if let id = self.moduleId {
-            halo.generalContent.getInstances(id) { (result) -> Void in
+            halo.generalContent.getInstances(moduleId: id) { (result) -> Void in
                 switch result {
                 case .Success(let instances):
                     self.news = []

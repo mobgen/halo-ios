@@ -26,8 +26,25 @@ public enum HaloEnvironment: String {
     case Prod
 }
 
-@objc(HaloManagerDelegate) public protocol ManagerDelegate {
+/**
+This delegate will provide methods that will act as interception points in the setup process of the SDK
+within the application
+ */
+@objc(HaloManagerDelegate)
+public protocol ManagerDelegate {
+
+    /**
+     This delegate method provides full freedom to create the user that will be registered by the application.
+     
+     - returns: The newly created user
+     */
     func setupUser() -> Halo.User
+    
+    /**
+     This delegate method will be called after the whole setup process has finished. Once it is safe
+     to perform any operation involving the SDK.
+     
+     */
     func managerDidFinishLaunching() -> Void
 }
 
@@ -258,10 +275,22 @@ public class Manager: NSObject {
         
     }
 
+    /**
+     Pass through the push notifications setup. To be called within the method in the app delegate.
+     
+     - parameter application: Application being configured
+     - parameter deviceToken: Token obtained for the current device
+     */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         self.setupPushNotifications(application: application, deviceToken: deviceToken)
     }
 
+    /**
+     Pass through the push notifications setup. To be called within the method in the app delegate.
+     
+     - parameter application: Application being configured
+     - parameter error:       Error thrown during the process
+     */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         self.setupDefaultSystemTags()
     }

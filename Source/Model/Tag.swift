@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+Model representing the tags that can be created an associated within the system, both to
+users and content.
+ */
 @objc(HaloTag)
 public final class Tag: NSObject, NSCoding {
 

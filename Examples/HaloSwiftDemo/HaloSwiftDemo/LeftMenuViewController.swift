@@ -100,7 +100,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                     
                     if let module = mods.first, moduleId = module.internalId {
                         // Get the only instance
-                        strongSelf.halo.generalContent.getInstances(moduleId, completionHandler: { (instanceResult) -> Void in
+                        strongSelf.halo.generalContent.getInstances(moduleId: moduleId, completionHandler: { (instanceResult) -> Void in
                             switch instanceResult {
                             case .Success(let instance):
                                 
@@ -252,7 +252,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
                 default:
                     
                     if module.isSingle {
-                        halo.generalContent.getInstances(module.internalId!, completionHandler: { (result) -> Void in
+                        halo.generalContent.getInstances(moduleId: module.internalId!, completionHandler: { (result) -> Void in
                             switch result {
                             case .Success(let instances):
                                 if let instance = instances.first {
@@ -311,6 +311,16 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
     func managerDidFinishLaunching() -> Void {
         NSLog("Manager did finish launching")
         self.loadData()
+    
+        halo.generalContent.getInstances(instanceIds: ["000000000000000000000004","000000000000000000000009"]) { (result) -> Void in
+            switch result {
+            case .Success(let data):
+                NSLog("\(data)")
+            case .Failure(let error):
+                NSLog("\(error)")
+            }
+        }
+
     }
     
 }

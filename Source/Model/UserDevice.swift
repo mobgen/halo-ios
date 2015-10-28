@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+Representation of a user's device, containing information such as the platform
+or the push notifications token.
+ */
 @objc(HaloUserDevice)
 public final class UserDevice: NSObject, NSCoding {
 

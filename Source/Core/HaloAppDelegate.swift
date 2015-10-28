@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-/// Delegate to be implemented to handle several events coming from the Halo SDK
+/// Delegate to be implemented to handle push notifications easily
 @objc public protocol HaloPushDelegate {
     /**
     This handler will be called when a push notification is received
@@ -35,14 +35,33 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Push notifications
 
+    /**
+    Just pass through the configuration of the push notifications to the manager.
+    
+    - parameter application: Application being configured
+    - parameter deviceToken: Device token obtained in previous steps
+    */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         Halo.Manager.sharedInstance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
+    /**
+     Just pass through the configuration of the push notifications to the manager.
+     
+     - parameter application: Application being configured
+     - parameter error:       Error thrown during the process
+     */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         Halo.Manager.sharedInstance.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
+    /**
+     Handle push notifications
+     
+     - parameter application:       Application receiving the push notification
+     - parameter userInfo:          Dictionary containing all the information about the notification
+     - parameter completionHandler: Handler to be executed once the fetch has finished
+     */
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
         let halo = Halo.Manager.sharedInstance

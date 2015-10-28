@@ -106,7 +106,7 @@ class KeyValueViewController: UITableViewController {
         self.refreshControl?.beginRefreshing()
         self.values.removeAll()
 
-        halo.generalContent.getInstance(self.instanceId) { (result) -> Void in
+        halo.generalContent.getInstance(instanceId: self.instanceId) { (result) -> Void in
             switch result {
             case .Success(let instance):
                 for (k, v) in instance.values! {

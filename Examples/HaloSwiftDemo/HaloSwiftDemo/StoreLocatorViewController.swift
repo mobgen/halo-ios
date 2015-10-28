@@ -64,7 +64,7 @@ class StoreLocatorViewController : UIViewController, MKMapViewDelegate, CLLocati
         
         let mgr = Halo.Manager.sharedInstance
         
-        mgr.generalContent.getInstances(self.moduleId!) { (result) -> Void in
+        mgr.generalContent.getInstances(moduleId: self.moduleId!) { (result) -> Void in
             
             switch result {
             case .Success(let instances):

@@ -51,7 +51,7 @@ class MainViewController: UITableViewController {
 
             NSLog("Loading module \(id)")
 
-            halo.generalContent.getInstances(id,
+            halo.generalContent.getInstances(moduleId: id,
                 completionHandler: { (result) -> Void in
                     switch result {
                     case .Success(let instances):

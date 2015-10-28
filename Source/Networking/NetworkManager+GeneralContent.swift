@@ -86,6 +86,34 @@ extension NetworkManager {
         }
     }
     
+    func generalContentInstances(instanceIds: [String], completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+        
+        let params = ["id" : instanceIds]
+        
+        self.startRequest(Router.GeneralContentInstances(params)) { (request, response, result) in
+            
+            if let resp = response {
+                if resp.statusCode == 200 {
+                    
+                    switch result {
+                    case .Success(let data):
+                        let instances = data as! [[String: AnyObject]]
+                        handler(.Success(instances.map({ (dict) -> GeneralContentInstance in
+                            return GeneralContentInstance(dict)
+                        })))
+                    case .Failure(let error):
+                        handler(.Failure(error))
+                    }
+                    
+                } else {
+                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving instances by ids"])))
+                }
+            } else {
+                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+            }
+        }
+    }
+    
     /**
     Utility function to parse the JSON coming from the request into an array of General Content instances
 

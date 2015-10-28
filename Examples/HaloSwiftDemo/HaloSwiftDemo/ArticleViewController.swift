@@ -131,7 +131,7 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
     
     func loadData() {
         
-        halo.generalContent.getInstance(self.articleId) { (result) -> Void in
+        halo.generalContent.getInstance(instanceId: self.articleId) { (result) -> Void in
             switch result {
             case .Success(let instance):
                 self.article = Article(instance: instance)

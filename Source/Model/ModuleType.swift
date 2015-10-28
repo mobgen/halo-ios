@@ -13,7 +13,9 @@ public enum ModuleTypeCategory: Int {
     case GeneralContentModule = 1
 }
 
-/// Model class representing an existing module type within Halo
+/**
+Model class representing an existing module type within Halo
+*/
 @objc(HaloModuleType)
 public class ModuleType: NSObject {
 

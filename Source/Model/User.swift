@@ -8,16 +8,34 @@
 
 import Foundation
 
+/**
+Model representing a user within the Halo environment
+ */
 @objc(HaloUser)
 public final class User: NSObject, NSCoding {
 
+    /// Unique identifier of the user
     internal(set) public var id:String?
+    
+    /// Application id which this user is associated to
     internal(set) public var appId:Int?
+    
+    /// Email of this user
     public var email:String?
+    
+    /// An alias that also identifies the user
     public var alias:String?
+    
+    /// List of devices linked to this user
     public var devices:[Halo.UserDevice]?
+    
+    /// List of tags associated to this user
     public var tags:[String: Halo.Tag]?
+    
+    /// Date of creation of this user
     internal(set) public var createdAt:NSDate?
+    
+    /// Date of the last update
     internal(set) public var updatedAt:NSDate?
 
     public override var description: String {

@@ -90,8 +90,6 @@ class NetworkManager: Alamofire.Manager {
 
         let request = self.request(request)
 
-        NSLog("\(request)")
-
         request.responseJSON { [weak self] response in
             if let strongSelf = self {
                 if let resp = response.response {
