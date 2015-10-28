@@ -315,6 +315,19 @@ public class Manager: NSObject {
         }
     }
 
+    /**
+     Use this method to create custom requests so that you can query your custom modules within Halo
+     
+     - parameter method:  Method to be used for the request (GET, POST, etc)
+     - parameter url:     Custom url endpoint
+     - parameter params:  Provided params provided
+     - parameter handler: Closure to be executed after the request has finished
+     */
+    public func getHaloRequest(method method: Alamofire.Method, url: String, params: [String: AnyObject]?,
+        completionHandler handler: (Alamofire.Result<AnyObject, NSError>) -> Void) -> Void {
+            net.haloRequest(method, url: url, params: params, completionHandler: handler)
+    }
+    
     // MARK: ObjC exposed methods
 
     /**
@@ -355,5 +368,29 @@ public class Manager: NSObject {
             }
         }
 
+    }
+    
+    /**
+    Perform a custom request from Objective-C
+    
+    - parameter method:  Method of the request (GET, POST, PUT, etc)
+    - parameter url:     Custom endpoint to be accessed
+    - parameter params:  Parameters provided for the current request
+    - parameter success: Closure to be executed after the request has successfully finished
+    - parameter failure: Closure to be executed after the request has failed
+    */
+    @objc(haloRequestWithMethod:url:params:success:failure:)
+    public func getHaloRequestFromObjC(method: String, url: String, params: [String: AnyObject]?,
+        success: ((userData: AnyObject) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+   
+            self.getHaloRequest(method: Alamofire.Method(rawValue: method.uppercaseString)!,
+                url: url, params: params) { (result) -> Void in
+                    switch result {
+                    case .Success(let data):
+                        success?(userData: data)
+                    case .Failure(let error):
+                        failure?(error: error)
+                    }
+            }
     }
 }

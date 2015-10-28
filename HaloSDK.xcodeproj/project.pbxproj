@@ -74,6 +74,7 @@
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
 		0082D9C11B987BE400298AB8 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082D9C01B987BE400298AB8 /* ModelSpec.swift */; };
 		0082D9C31B98911200298AB8 /* instance_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0082D9C21B98911200298AB8 /* instance_list_success.json */; };
+		0084E6E21BE0D945004C69A2 /* NetworkManager+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */; };
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
 		00DD96C21BD02F0200AF65CA /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
@@ -144,6 +145,7 @@
 		007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentInstance.swift; sourceTree = "<group>"; };
 		0082D9C01B987BE400298AB8 /* ModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
 		0082D9C21B98911200298AB8 /* instance_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = instance_list_success.json; sourceTree = "<group>"; };
+		0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Custom.swift"; sourceTree = "<group>"; };
 		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
 		00921B6C1BBBD2CE00B79B50 /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
 		00921B6D1BBBD2CE00B79B50 /* alya.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alya.aiff; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
 				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
 				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
+				0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */,
 			);
 			name = Networking;
 			path = Source/Networking;
@@ -609,6 +612,7 @@
 				0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */,
 				002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */,
 				004ADDEB1BB1456B00FDDFE8 /* NSDate+Utils.swift in Sources */,
+				0084E6E21BE0D945004C69A2 /* NetworkManager+Custom.swift in Sources */,
 				00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */,
 				0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */,
 				006CB9B81B870FC400EB872E /* Tag.swift in Sources */,
