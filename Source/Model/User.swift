@@ -102,6 +102,22 @@ public final class User: NSObject, NSCoding {
         let _ = tags.map({ self.addTag($0, value: $1)})
     }
 
+    /**
+     Remove a tag by providing its name
+     
+     - parameter name: Name of the tag to be removed
+     
+     - returns: Returns the removed tag or nil if no tag was found and removed
+     */
+    public func removeTag(name: String) -> Halo.Tag? {
+        
+        if var tags = self.tags {
+            return tags.removeValueForKey(name)
+        } else {
+            return nil
+        }
+    }
+    
     // MARK: Management of user storage
 
     /**

@@ -355,7 +355,7 @@ public class Manager: NSObject {
     - parameter success: Closure to be executed when the request has succeeded
     - parameter failure: Closure to be executed when the request has failed
     */
-    @objc(saveUser:failure:)
+    @objc(saveUserWithSuccess:failure:)
     public func saveUserFromObjC(success: ((userData: Halo.User) -> Void)?, failure: ((error: NSError) -> Void)?) {
 
         self.saveUser { (result) -> Void in
