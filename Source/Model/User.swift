@@ -29,7 +29,7 @@ public final class User: NSObject, NSCoding {
     /// List of devices linked to this user
     public var devices:[Halo.UserDevice]?
     
-    /// List of tags associated to this user
+    /// Dictionary of tags associated to this user
     public var tags:[String: Halo.Tag]?
     
     /// Date of creation of this user

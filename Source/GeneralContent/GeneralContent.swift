@@ -36,6 +36,17 @@ public class GeneralContent: NSObject {
     }
 
     /**
+     Get a set of general content instances by specifying their ids
+     
+     - parameter instanceIds: Ids of the instances to be retrieved
+     - parameter handler:     Closure to be executed after the completion of the request
+     */
+    public func getInstances(instanceIds instanceIds: [String],
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+            net.generalContentInstances(instanceIds, completionHandler: handler)
+    }
+    
+    /**
     Get a specific general content instance by id
 
     - parameter instanceId: Id of the instance to be retrieved
@@ -44,17 +55,6 @@ public class GeneralContent: NSObject {
     public func getInstance(instanceId instanceId: String,
         completionHandler handler: (Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void) -> Void {
         net.generalContentInstance(instanceId, completionHandler: handler)
-    }
-        
-    /**
-    Get a set of general content instances by specifying their ids
-     
-     - parameter instanceIds: Ids of the instances to be retrieved
-     - parameter handler:     Closure to be executed after the completion of the request
-     */
-    public func getInstances(instanceIds instanceIds: [String],
-        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
-        net.generalContentInstances(instanceIds, completionHandler: handler)
     }
     
     // MARK: ObjC exposed methods
