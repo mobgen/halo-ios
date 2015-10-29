@@ -68,7 +68,7 @@ class LeftMenuViewController: UITableViewController, Halo.ManagerDelegate {
         var env = NSUserDefaults.standardUserDefaults().stringForKey(Halo.CoreConstants.environmentKey)
         
         if env == nil {
-            env = "QA"
+            env = "Prod"
             NSUserDefaults.standardUserDefaults().setValue(env, forKey: Halo.CoreConstants.environmentKey)
             NSUserDefaults.standardUserDefaults().synchronize()
         }

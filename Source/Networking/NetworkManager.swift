@@ -62,7 +62,8 @@ class NetworkManager: Alamofire.Manager {
             trustManager = ServerTrustPolicyManager(policies: [
                 "halo-int.mobgen.com" : serverTrustPolicy,
                 "halo-qa.mobgen.com" : serverTrustPolicy,
-                "halo-stage.mobgen.com" : serverTrustPolicy
+                "halo-stage.mobgen.com" : serverTrustPolicy,
+                "halo.mobgen.com" : serverTrustPolicy
                 ])
         }
         

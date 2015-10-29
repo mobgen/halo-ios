@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>halotestappclient</string>
+	<string>be19474fdf50b0bebc5d939eb24b4f3b</string>
 	<key>CLIENT_SECRET</key>
-	<string>halotestapppass</string>
+	<string>93d81e2c6eacfc16c640f5330ee6ddf2</string>
 	<key>ENABLE_PUSH</key>
 	<true/>
 </dict>

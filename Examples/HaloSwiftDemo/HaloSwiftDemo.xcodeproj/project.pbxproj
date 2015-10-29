@@ -28,7 +28,6 @@
 		007F78F91B70F934004D1C22 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78F81B70F934004D1C22 /* MainViewController.swift */; };
 		007F79011B7253A8004D1C22 /* KeyValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F79001B7253A7004D1C22 /* KeyValueViewController.swift */; };
 		00930AE11B385B2D002FF4F0 /* Halo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00930AE01B385B2D002FF4F0 /* Halo.plist */; };
-		00A34E771BDF7C280080DD93 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A34E641BDF7C280080DD93 /* Info.plist */; };
 		00A34E781BDF7C280080DD93 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A34E651BDF7C280080DD93 /* UIColorExtension.swift */; };
 		00AD9FE91BC0845600BCF287 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD9FE71BC082A000BCF287 /* AlamofireImage.framework */; };
 		00AD9FEA1BC0845600BCF287 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00AD9FE71BC082A000BCF287 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -314,7 +313,6 @@
 				0002FB741B616ACE00B06A9C /* Gotham-Bold.ttf in Resources */,
 				0002FB791B616ACE00B06A9C /* Lab-Medium.ttf in Resources */,
 				004FECA81BD10861004216EE /* HaloResources.bundle in Resources */,
-				00A34E771BDF7C280080DD93 /* Info.plist in Resources */,
 				0002FB781B616ACE00B06A9C /* Lab-Light.ttf in Resources */,
 				0002FB761B616ACE00B06A9C /* Images.xcassets in Resources */,
 				0002FB7A1B616ACE00B06A9C /* Launch Screen.xib in Resources */,
