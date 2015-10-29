@@ -67,7 +67,7 @@ public class Manager: NSObject {
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
 
     /// Current environment (QA, Integration or Prod)
-    public var environment: HaloEnvironment = .Stage {
+    public var environment: HaloEnvironment = .Prod {
         didSet {
             switch environment {
             case .Int:
