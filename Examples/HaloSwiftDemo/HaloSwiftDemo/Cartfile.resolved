@@ -1,3 +1,4 @@
-github "Alamofire/Alamofire" "3.1.0"
+github "Alamofire/Alamofire" "3.1.1"
 github "yeahdongcn/UIColor-Hex-Swift" "1.5"
 github "Alamofire/AlamofireImage" "2.1.0"
+git "https://borjasantos@bitbucket.org/mobgen/halo-sdk-ios.git" "a22ada660c2caab3e2fdfc5ffe46e48069185fd5"

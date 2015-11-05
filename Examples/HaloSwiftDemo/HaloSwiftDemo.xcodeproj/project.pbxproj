@@ -19,8 +19,8 @@
 		000590C21B565C7D00DED5D2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000590C11B565C7D00DED5D2 /* Config.swift */; };
 		000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; };
 		000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		002E89B51B74BA7400D25302 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002E89B41B74BA7400D25302 /* Halo.framework */; };
-		002E89B61B74BA8700D25302 /* Halo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 002E89B41B74BA7400D25302 /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0016802B1BEB81EA00003045 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680291BEB81EA00003045 /* RealmSwift.framework */; };
+		0016802C1BEB81FD00003045 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680281BEB81EA00003045 /* Realm.framework */; };
 		004FECA81BD10861004216EE /* HaloResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 004FECA71BD10861004216EE /* HaloResources.bundle */; };
 		005390881B8F0C560036F579 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390871B8F0C560036F579 /* TagsViewController.swift */; };
 		006A5FFB1B318D600045395A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FFA1B318D600045395A /* AppDelegate.swift */; };
@@ -50,7 +50,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				00AD9FEA1BC0845600BCF287 /* AlamofireImage.framework in Embed Frameworks */,
-				002E89B61B74BA8700D25302 /* Halo.framework in Embed Frameworks */,
 				000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -75,7 +74,8 @@
 		000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		000826DD1B690B0D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		002E89B41B74BA7400D25302 /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		001680281BEB81EA00003045 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS/Realm.framework"; sourceTree = "<absolute>"; };
+		001680291BEB81EA00003045 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS/RealmSwift.framework"; sourceTree = "<absolute>"; };
 		004FECA71BD10861004216EE /* HaloResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HaloResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		005390871B8F0C560036F579 /* TagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		006A5FF51B318D600045395A /* HaloDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,9 +109,10 @@
 			files = (
 				00BD1D581BA1EE820002C472 /* CoreLocation.framework in Frameworks */,
 				00BD1D561BA1D1D00002C472 /* MapKit.framework in Frameworks */,
+				0016802B1BEB81EA00003045 /* RealmSwift.framework in Frameworks */,
 				0002FB831B616AFC00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */,
+				0016802C1BEB81FD00003045 /* Realm.framework in Frameworks */,
 				000590C01B565B7300DED5D2 /* SystemConfiguration.framework in Frameworks */,
-				002E89B51B74BA7400D25302 /* Halo.framework in Frameworks */,
 				000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */,
 				00AD9FE91BC0845600BCF287 /* AlamofireImage.framework in Frameworks */,
 			);
@@ -233,7 +234,6 @@
 				00BD1D551BA1D1D00002C472 /* MapKit.framework */,
 				006CB9A31B85C68A00EB872E /* AVFoundation.framework */,
 				006CB9A11B85C5C800EB872E /* AudioToolbox.framework */,
-				002E89B41B74BA7400D25302 /* Halo.framework */,
 				000826DD1B690B0D001E8248 /* Alamofire.framework */,
 				0002FB7B1B616AFC00B06A9C /* CrittercismSDK */,
 				000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */,
@@ -421,7 +421,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
-				PROVISIONING_PROFILE = "fe31a773-63c1-4d41-b147-78a60f153e13";
+				PROVISIONING_PROFILE = "5eef37a5-2092-452a-917d-a130c9536415";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -464,7 +464,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.halo.demo;
-				PROVISIONING_PROFILE = "e2c0587c-d3ab-4f4f-9c7b-dd828a17f5e5";
+				PROVISIONING_PROFILE = "a757261f-a18e-4006-8b39-00d8fc293bf3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

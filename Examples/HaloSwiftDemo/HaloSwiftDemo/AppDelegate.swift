@@ -118,7 +118,7 @@ class AppDelegate: HaloAppDelegate, HaloPushDelegate {
 
         if (application.applicationState == .Active) {
             // Show alert
-            if let aps = userInfo["aps"], message = aps["alert"] as? [String: String] {
+            if let aps = userInfo["aps"] as? [String: AnyObject], message = aps["alert"] as? [String: String] {
                 let alert = UIAlertController(title: "Push notification", message: message["body"], preferredStyle: UIAlertControllerStyle.Alert)
 
                 let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)

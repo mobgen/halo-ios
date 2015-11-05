@@ -301,7 +301,15 @@ public class Manager: NSObject {
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
     public func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        net.getModules(completionHandler: handler)
+        net.getModules { (result) -> Void in
+            switch result {
+            case .Success(_):
+                handler(result)
+            case .Failure(let error):
+                NSLog("Error: \(error.localizedDescription)")
+                handler(result)
+            }
+        }
     }
 
     /**
