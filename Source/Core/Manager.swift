@@ -91,6 +91,11 @@ public class Manager: NSObject {
 
             let defaults = NSUserDefaults.standardUserDefaults()
 
+            // Delete all objects from the realm
+            try! realm.write {
+                realm.deleteAll()
+            }
+            
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
             self.launch()
