@@ -12,37 +12,36 @@ import RealmSwift
 class PersistentModule: Object {
     
     /// Unique identifier of the module
-    let id: RealmOptional<Double>
+    dynamic var id: Int = 0
     
     /// Visual name of the module
-    var name: String?
+    dynamic var name: String? = nil
     
     /// Type of the module
-    var type: Halo.PersistentModuleType?
+    dynamic var type: Halo.PersistentModuleType? = nil
     
     /// Identifies the module as enabled or not
-    var enabled: Bool = false
+    dynamic var enabled: Bool = false
     
     /// Identifies the module as single item module
-    var isSingle: Bool = false
+    dynamic var isSingle: Bool = false
     
     /// Date of the last update performed in this module
-    var lastUpdate: NSDate?
+    dynamic var lastUpdate: NSDate? = nil
     
     /// Internal id of the module
-    var internalId: String?
+    dynamic var internalId: String? = nil
     
     /// Dictionary of tags associated to this module
-    var tags: [String: Halo.PersistentTag] = [:]
+    let tags: [PersistentTag] = []
 
     override static func primaryKey() -> String? {
         return "id"
     }
     
-    init(module: Halo.Module) {
-        id = RealmOptional<Double>()
-        super.init()
-        self.id.value = module.id?.doubleValue
+    convenience required init(module: Halo.Module) {
+        self.init()
+        self.id = (module.id?.integerValue)!
         self.name = module.name
         self.type = PersistentModuleType(type: module.type!)
         self.enabled = module.enabled
@@ -51,8 +50,18 @@ class PersistentModule: Object {
         self.internalId = module.internalId
     }
 
-    required init() {
-        id = RealmOptional<Double>()
-        super.init()
+    func getModule() -> Halo.Module {
+        
+        let module = Halo.Module()
+        
+        module.id = self.id
+        module.name = self.name
+        
+        module.enabled = self.enabled
+        module.isSingle = self.isSingle
+        module.lastUpdate = self.lastUpdate
+        module.internalId = self.internalId
+        
+        return module
     }
 }

@@ -79,7 +79,7 @@ public final class User: NSObject, NSCoding {
     - parameter name:  Name of the tag to be added
     - parameter value: Value of the tag to be added
     */
-    public func addTag(name: String, value: AnyObject?) {
+    public func addTag(name: String, value: String?) {
 
         if let tags = self.tags {
             if let tag = tags[name] {
@@ -98,7 +98,7 @@ public final class User: NSObject, NSCoding {
 
     - parameter tags: collection of tags
     */
-    public func addTags(tags: [String: AnyObject?]) {
+    public func addTags(tags: [String: String?]) {
         let _ = tags.map({ self.addTag($0, value: $1)})
     }
 

@@ -12,33 +12,43 @@ import RealmSwift
 class PersistentModuleType: Object {
     
     /// Unique identifier of the module type
-    var category: RealmOptional<Int>
+    dynamic var category: Int = 0
     
     /// Flag determining whether the module type is enabled or not
-    var enabled: Bool = false
+    dynamic var enabled: Bool = false
     
     /// Visual name of the module type
-    var name: String?
+    dynamic var name: String? = nil
     
     /// Url of the module type
-    var typeUrl: String?
+    dynamic var typeUrl: String? = nil
 
     override static func primaryKey() -> String? {
         return "category"
     }
  
     init(type: Halo.ModuleType) {
-        category = RealmOptional<Int>()
         super.init()
-        self.category.value = type.category?.rawValue
+        self.category = (type.category?.rawValue)!
         self.enabled = type.enabled
         self.name = type.name
         self.typeUrl = type.typeUrl
     }
     
     required init() {
-        category = RealmOptional<Int>()
         super.init()
     }
 
+    func getModuleType() -> Halo.ModuleType {
+        
+        let type = Halo.ModuleType()
+
+        type.category = Halo.ModuleTypeCategory(rawValue: self.category)
+        type.enabled = self.enabled
+        type.name = self.name
+        type.typeUrl = self.typeUrl
+        
+        return type
+    }
+    
 }

@@ -20,25 +20,36 @@ extension NetworkManager {
 
         self.startRequest(Router.Modules, completionHandler: { [weak self] (request, response, result) in
 
-            if let resp = response {
-
-                if (resp.statusCode == 200) {
-
-                    if let strongSelf = self {
-                        switch result {
-                        case .Success(let data):
-                            let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
-                            handler(.Success(arr))
-                        case .Failure(let error):
-                            handler(.Failure(error))
-                        }
-                    }
-                } else {
-                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving modules"])))
+            if let strongSelf = self {
+                switch result {
+                case .Success(let data):
+                    let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
+                    handler(.Success(arr))
+                case .Failure(let error):
+                    handler(.Failure(error))
                 }
-            } else {
-                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
             }
+            
+            
+//            if let resp = response {
+//
+//                if (resp.statusCode == 200) {
+//
+//                    if let strongSelf = self {
+//                        switch result {
+//                        case .Success(let data):
+//                            let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
+//                            handler(.Success(arr))
+//                        case .Failure(let error):
+//                            handler(.Failure(error))
+//                        }
+//                    }
+//                } else {
+//                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving modules"])))
+//                }
+//            } else {
+//                handler(result.error!)
+//            }
         })
     }
 

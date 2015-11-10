@@ -90,7 +90,7 @@ class TagsViewController: UITableViewController {
         let tag = tags[indexPath.row]
 
         cell?.textLabel?.text = tag.name
-        cell?.detailTextLabel?.text = tag.value as? String
+        cell?.detailTextLabel?.text = tag.value
         
         return cell!
         

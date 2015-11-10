@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import UIKit
 import CoreBluetooth
+import RealmSwift
 
 /**
 Enumeration holding the different environment options available
@@ -24,6 +25,12 @@ public enum HaloEnvironment: String {
     case QA
     case Stage
     case Prod
+}
+
+public enum OfflinePolicy: Int {
+    case ReloadIgnoringLocalData
+    case ReturnLocalDataElseLoad
+    case ReturnLocalDataDontLoad
 }
 
 /**
@@ -66,6 +73,8 @@ public class Manager: NSObject {
     /// Bluetooth manager to decide whether the device supports BLE
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
 
+    private let realm = try! Realm()
+    
     /// Current environment (QA, Integration or Prod)
     public var environment: HaloEnvironment = .Prod {
         didSet {
@@ -300,18 +309,52 @@ public class Manager: NSObject {
 
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        net.getModules { (result) -> Void in
-            switch result {
-            case .Success(_):
-                handler(result)
-            case .Failure(let error):
-                NSLog("Error: \(error.localizedDescription)")
-                handler(result)
-            }
+    public func getModules(offlinePolicy: OfflinePolicy = .ReloadIgnoringLocalData, completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+        
+        switch offlinePolicy {
+        case .ReloadIgnoringLocalData:
+            getModulesIgnoringLocalData(completionHandler: handler)
+        case .ReturnLocalDataElseLoad:
+            getModulesLocalDataElseLoad(completionHandler: handler)
+        case .ReturnLocalDataDontLoad:
+            getModulesLocalDataDontLoad(completionHandler: handler)
         }
     }
 
+    private func getModulesIgnoringLocalData(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+        net.getModules { (result) -> Void in
+            switch result {
+            case .Success(let modules):
+                try! self.realm.write({ () -> Void in
+                    for module in modules {
+                        self.realm.add(PersistentModule(module: module), update: true)
+                    }
+                })
+                handler(.Success(modules))
+            case .Failure(let error):
+                if error.code == -1009 {
+                    self.getModulesLocalDataDontLoad(completionHandler: handler)
+                } else {
+                    handler(.Failure(error))
+                }
+            }
+        }
+    }
+    
+    private func getModulesLocalDataElseLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+        
+    }
+    
+    private func getModulesLocalDataDontLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+        let modules = realm.objects(PersistentModule)
+        
+        let result = modules.map { (persistentModule) -> Halo.Module in
+            return persistentModule.getModule()
+        }
+        
+        handler(.Success(result))
+    }
+    
     /**
     Save the current user. Calling this function will trigger an update of the user in the server
 

@@ -22,9 +22,13 @@ public final class Tag: NSObject, NSCoding {
     public var name: String = ""
 
     /// Value given to the tag
-    public var value: AnyObject?
+    public var value: String?
 
-    public init(name: String, value: AnyObject?) {
+    override init() {
+        super.init()
+    }
+
+    public init(name: String, value: String?) {
         self.name = name
         self.value = value
     }
@@ -35,7 +39,7 @@ public final class Tag: NSObject, NSCoding {
         super.init()
         id = aDecoder.decodeObjectForKey("id") as? String
         name = aDecoder.decodeObjectForKey("name") as! String
-        value = aDecoder.decodeObjectForKey("value")
+        value = aDecoder.decodeObjectForKey("value") as? String
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
