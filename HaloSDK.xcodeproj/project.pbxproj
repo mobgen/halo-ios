@@ -13,6 +13,7 @@
 		000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */; };
 		000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */; };
 		000EEB4F1BEB66E900C1435D /* PersistentModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */; };
+		00121E8F1BF33B5C00FD656F /* Manager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */; };
 		001680271BEB81B300003045 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680261BEB81B300003045 /* Realm.framework */; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
@@ -122,6 +123,7 @@
 		000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModule.swift; sourceTree = "<group>"; };
 		000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTag.swift; sourceTree = "<group>"; };
 		000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModuleType.swift; sourceTree = "<group>"; };
+		00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Manager+Modules.swift"; sourceTree = "<group>"; };
 		001680261BEB81B300003045 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -236,12 +238,12 @@
 		004539391B67E8090060C30B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0068D27B1B6778CA00B1E147 /* Token.swift */,
+				007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */,
 				0045393A1B67E8170060C30B /* Module.swift */,
 				000827001B6A57A5001E8248 /* ModuleType.swift */,
-				007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */,
-				006CB9B51B870FB800EB872E /* User.swift */,
 				006CB9B71B870FC400EB872E /* Tag.swift */,
+				0068D27B1B6778CA00B1E147 /* Token.swift */,
+				006CB9B51B870FB800EB872E /* User.swift */,
 				006CB9B91B87116D00EB872E /* UserDevice.swift */,
 			);
 			name = Model;
@@ -301,10 +303,11 @@
 		006A5FAE1B318CAC0045395A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				006A60211B318DCC0045395A /* Manager.swift */,
 				00FF95611B4547D200E751E3 /* CoreConstants.swift */,
-				002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */,
 				0073E6571BBE804400365DBD /* HaloAppDelegate.swift */,
+				006A60211B318DCC0045395A /* Manager.swift */,
+				00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */,
+				002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */,
 			);
 			name = Core;
 			path = Source/Core;
@@ -336,12 +339,12 @@
 		006A5FCC1B318CBC0045395A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				000826FE1B6A34DE001E8248 /* Router.swift */,
 				0094A31F1B70A6A600DED864 /* NetworkManager.swift */,
-				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
-				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
-				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
 				0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */,
+				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
+				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
+				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
+				000826FE1B6A34DE001E8248 /* Router.swift */,
 			);
 			name = Networking;
 			path = Source/Networking;
@@ -419,8 +422,8 @@
 			isa = PBXGroup;
 			children = (
 				000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */,
-				000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */,
 				000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */,
+				000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */,
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,
 				000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */,
+				00121E8F1BF33B5C00FD656F /* Manager+Modules.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
