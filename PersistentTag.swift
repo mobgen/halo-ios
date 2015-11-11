@@ -24,17 +24,13 @@ class PersistentTag: Object {
         return "id"
     }
     
-    init(tag: Halo.Tag) {
-        super.init()
+    convenience required init(_ tag: Halo.Tag) {
+        self.init()
         self.id = tag.id!
         self.name = tag.name
         self.value = tag.value
     }
-    
-    required init() {
-        super.init()
-    }
-    
+        
     func getTag() -> Halo.Tag {
         
         let tag = Halo.Tag()

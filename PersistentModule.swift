@@ -33,13 +33,13 @@ class PersistentModule: Object {
     dynamic var internalId: String? = nil
     
     /// Dictionary of tags associated to this module
-    let tags: [PersistentTag] = []
+    let tags: List<PersistentTag> = List<PersistentTag>()
 
     override static func primaryKey() -> String? {
         return "id"
     }
     
-    convenience required init(module: Halo.Module) {
+    convenience required init(_ module: Halo.Module) {
         self.init()
         self.id = (module.id?.integerValue)!
         self.name = module.name
@@ -48,6 +48,10 @@ class PersistentModule: Object {
         self.isSingle = module.isSingle
         self.lastUpdate = module.lastUpdate
         self.internalId = module.internalId
+        
+        for (_, tag) in module.tags {
+            tags.append(PersistentTag(tag))
+        }
     }
 
     func getModule() -> Halo.Module {
@@ -61,6 +65,12 @@ class PersistentModule: Object {
         module.isSingle = self.isSingle
         module.lastUpdate = self.lastUpdate
         module.internalId = self.internalId
+        
+        module.tags = [:]
+        
+        for tag in self.tags {
+            module.tags[tag.name] = Tag(name: tag.name, value: tag.value)
+        }
         
         return module
     }

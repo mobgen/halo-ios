@@ -330,12 +330,18 @@ public class Manager: NSObject {
         net.getModules { (result) -> Void in
             switch result {
             case .Success(let modules):
+                handler(.Success(modules))
+                
                 try! self.realm.write({ () -> Void in
+                    
+                    // Delete the existing ones. Temporary solution?
+                    self.realm.delete(self.realm.objects(PersistentModule))
+                    
                     for module in modules {
-                        self.realm.add(PersistentModule(module: module), update: true)
+                        self.realm.add(PersistentModule(module), update: true)
                     }
                 })
-                handler(.Success(modules))
+                
             case .Failure(let error):
                 if error.code == -1009 {
                     self.getModulesLocalDataDontLoad(completionHandler: handler)
