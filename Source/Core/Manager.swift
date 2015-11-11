@@ -28,7 +28,8 @@ public enum HaloEnvironment: String {
 }
 
 public enum OfflinePolicy: Int {
-    case ReloadIgnoringLocalData
+    case None
+    case LoadAndStoreLocalData
     case ReturnLocalDataElseLoad
     case ReturnLocalDataDontLoad
 }
@@ -314,20 +315,29 @@ public class Manager: NSObject {
 
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getModules(offlinePolicy: OfflinePolicy = .ReloadIgnoringLocalData, completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+    public func getModules(offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData, completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
         
         switch offlinePolicy {
-        case .ReloadIgnoringLocalData:
-            getModulesIgnoringLocalData(completionHandler: handler)
+        case .None:
+            getModulesNoCache(completionHandler: handler)
+        case .LoadAndStoreLocalData:
+            getModulesLoadAndStoreLocalData(completionHandler: handler)
         case .ReturnLocalDataElseLoad:
             getModulesLocalDataElseLoad(completionHandler: handler)
         case .ReturnLocalDataDontLoad:
             getModulesLocalDataDontLoad(completionHandler: handler)
+            
         }
     }
 
-    private func getModulesIgnoringLocalData(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        net.getModules { (result) -> Void in
+    private func getModulesNoCache(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+        net.getModules { result in
+            handler(result)
+        }
+    }
+    
+    private func getModulesLoadAndStoreLocalData(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+        net.getModules { result in
             switch result {
             case .Success(let modules):
                 handler(.Success(modules))
@@ -353,6 +363,18 @@ public class Manager: NSObject {
     }
     
     private func getModulesLocalDataElseLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+        
+        let modules = realm.objects(PersistentModule)
+        
+        let result = modules.map { (persistentModule) -> Halo.Module in
+            return persistentModule.getModule()
+        }
+        
+        if result.count > 0 {
+            handler(.Success(result))
+        } else {
+            self.getModulesLoadAndStoreLocalData(completionHandler: handler)
+        }
         
     }
     
