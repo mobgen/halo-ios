@@ -32,12 +32,23 @@ extension Manager {
         }
     }
     
+    /**
+     Only load the data from the network, without even using any local storage
+     
+     - parameter handler: Closure to be executed after the request has finished
+     */
     private func getModulesNoCache(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
         net.getModules { result in
             handler(result)
         }
     }
     
+    /**
+     Get the latest information from the server and store it locally, in order to keep providing data in case
+     there is no internet connection.
+     
+     - parameter handler: Closure to be executed after the request has finished
+     */
     private func getModulesLoadAndStoreLocalData(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
         net.getModules { result in
             switch result {
@@ -64,6 +75,12 @@ extension Manager {
         }
     }
     
+    /**
+     Get the modules from the local storage. If there are no results from there, try to load from network,
+     storing the new results
+     
+     - parameter handler: Closure to be executed after the request has finished
+     */
     private func getModulesLocalDataElseLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
         
         let modules = realm.objects(PersistentModule)
@@ -80,6 +97,11 @@ extension Manager {
         
     }
     
+    /**
+     Get the modules only from the local storage, not even trying to load any data from the network
+     
+     - parameter handler: Closure to be executed after the request has finished
+     */
     private func getModulesLocalDataDontLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
         let modules = realm.objects(PersistentModule)
         
