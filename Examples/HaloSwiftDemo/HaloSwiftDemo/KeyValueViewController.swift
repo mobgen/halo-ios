@@ -109,7 +109,7 @@ class KeyValueViewController: UITableViewController {
         halo.generalContent.getInstance(instanceId: self.instanceId) { (result) -> Void in
             switch result {
             case .Success(let instance):
-                for (k, v) in instance.values! {
+                for (k, v) in instance.values {
                     self.values.append((k, String(v)))
                 }
                 self.tableView.reloadData()

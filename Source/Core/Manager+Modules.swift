@@ -38,9 +38,7 @@ extension Manager {
      - parameter handler: Closure to be executed after the request has finished
      */
     private func getModulesNoCache(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        net.getModules { result in
-            handler(result)
-        }
+        net.getModules(completionHandler: handler)
     }
     
     /**

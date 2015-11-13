@@ -24,17 +24,51 @@ public class GeneralContent: NSObject {
 
     private override init() {}
 
+    // MARK: Get instances
+    
     /**
     Get the existing instances of a given General Content module
 
     - parameter moduleId:           Internal id of the module from which we want to retrieve the instances
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getInstances(moduleId moduleId: String,
+    public func getInstances(moduleId moduleId: String, offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
-            net.generalContentInstances(moduleId, flags: [], completionHandler: handler)
+            
+            switch offlinePolicy {
+            case .None:
+                getInstancesNoCache(moduleId, completionHandler: handler)
+            case .LoadAndStoreLocalData:
+                break
+            case .ReturnLocalDataElseLoad:
+                break
+            case .ReturnLocalDataDontLoad:
+                break
+            }
     }
 
+    private func getInstancesNoCache(moduleId: String,
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+            
+            net.generalContentInstances(moduleId, flags: [], completionHandler: handler)
+    }
+    
+    private func getInstancesLoadAndStoreLocalData(moduleId: String,
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+            
+            
+    }
+    
+    private func getInstancesReturnLocalDataElseLoad(moduleId: String,
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+            
+    }
+    
+    private func getInstancesReturnLocalDataDontLoad(moduleId: String,
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+            
+    }
+    
     /**
      Get a set of general content instances by specifying their ids
      
@@ -45,6 +79,8 @@ public class GeneralContent: NSObject {
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
             net.generalContentInstances(instanceIds, completionHandler: handler)
     }
+    
+    // MARK: Get a single instance
     
     /**
     Get a specific general content instance by id

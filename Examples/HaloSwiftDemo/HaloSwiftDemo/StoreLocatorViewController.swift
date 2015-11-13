@@ -19,7 +19,7 @@ class Store: NSObject, MKAnnotation {
     
     init(instance: Halo.GeneralContentInstance) {
         
-        let dict = instance.values!
+        let dict = instance.values
         
         self.title = dict["Name"] as? String
         

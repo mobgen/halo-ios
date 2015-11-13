@@ -25,7 +25,7 @@ class Article: NSObject {
     
     init(instance: Halo.GeneralContentInstance) {
         
-        let dict = instance.values!
+        let dict = instance.values
         
         self.moduleId = instance.moduleId
         self.instanceId = instance.id
