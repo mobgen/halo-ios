@@ -27,6 +27,7 @@ public enum HaloEnvironment: String {
     case Prod
 }
 
+@objc
 public enum OfflinePolicy: Int {
     case None
     case LoadAndStoreLocalData

@@ -19,12 +19,12 @@ extension GeneralContent {
     - parameter success:    Closure to be executed when the request has succeeded
     - parameter failure:    Closure to be executed when the request has failed
     */
-    @objc(instancesInModule:success:failure:)
-    public func getInstancesFromObjC(moduleId moduleId: String,
+    @objc(instancesInModule:offlinePolicy:success:failure:)
+    public func getInstancesFromObjC(moduleId moduleId: String, offlinePolicy: OfflinePolicy,
         success:((userData: [GeneralContentInstance]) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
             
-            self.getInstances(moduleId: moduleId) { (result) -> Void in
+            self.getInstances(moduleId: moduleId, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances)
@@ -39,12 +39,12 @@ extension GeneralContent {
      
      - parameter instancesWithIds: Array of instance ids
      */
-    @objc(instancesWithIds:success:failure:)
-    public func getInstancesFromObjC(instanceIds instanceIds: [String],
+    @objc(instancesWithIds:offlinePolicy:success:failure:)
+    public func getInstancesFromObjC(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy,
         success:((userData: [GeneralContentInstance]) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
             
-            self.getInstances(instanceIds: instanceIds) { (result) -> Void in
+            self.getInstances(instanceIds: instanceIds, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances)
@@ -61,12 +61,12 @@ extension GeneralContent {
      - parameter success:    Closure to be executed when the request has succeeded
      - parameter failure:    Closure to be executed when the request has failed
      */
-    @objc(instance:success:failure:)
-    public func getInstanceFromObjC(instanceId instanceId: String,
+    @objc(instance:offlinePolicy:success:failure:)
+    public func getInstanceFromObjC(instanceId instanceId: String, offlinePolicy: OfflinePolicy,
         success:((userData: GeneralContentInstance) -> Void)?,
         failure:((error: NSError) -> Void)?) -> Void {
             
-            self.getInstance(instanceId: instanceId) { (result) -> Void in
+            self.getInstance(instanceId: instanceId, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
                 case .Success(let instance):
                     success?(userData: instance)
