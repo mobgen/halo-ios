@@ -91,7 +91,9 @@ class ArticleViewController: UIViewController, UIWebViewDelegate {
             
             customView.articleTitle?.text = article!.title
             
-            customView.articleDate?.text = NSDateFormatter.localizedStringFromDate(article!.date!, dateStyle: .MediumStyle, timeStyle: .MediumStyle)
+            if let art = article, date = art.date {
+                customView.articleDate?.text = NSDateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .MediumStyle)
+            }
             
             let htmlstr = "<style>body { font-family:helvetica; font-size: small; margin: 0; text-align: justify; }</style>\(article!.content!)"
             

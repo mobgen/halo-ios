@@ -16,7 +16,7 @@ extension NetworkManager {
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+    func getModules(completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
 
         self.startRequest(Router.Modules, completionHandler: { [weak self] (request, response, result) in
 
@@ -24,32 +24,11 @@ extension NetworkManager {
                 switch result {
                 case .Success(let data):
                     let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
-                    handler(.Success(arr))
+                    handler?(.Success(arr))
                 case .Failure(let error):
-                    handler(.Failure(error))
+                    handler?(.Failure(error))
                 }
             }
-            
-            
-//            if let resp = response {
-//
-//                if (resp.statusCode == 200) {
-//
-//                    if let strongSelf = self {
-//                        switch result {
-//                        case .Success(let data):
-//                            let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
-//                            handler(.Success(arr))
-//                        case .Failure(let error):
-//                            handler(.Failure(error))
-//                        }
-//                    }
-//                } else {
-//                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving modules"])))
-//                }
-//            } else {
-//                handler(result.error!)
-//            }
         })
     }
 

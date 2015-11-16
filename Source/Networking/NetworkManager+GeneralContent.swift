@@ -29,7 +29,7 @@ extension NetworkManager {
     - parameter moduleId:           Internal id of the module to be requested
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, completionHandler handler: (Alamofire.Result<[GeneralContentInstance], NSError>) -> Void) -> Void {
+    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
 
         var params = ["module" : moduleId]
         
@@ -45,81 +45,42 @@ extension NetworkManager {
                 switch result {
                 case .Success(let data):
                     let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
-                    handler(.Success(arr))
+                    handler?(.Success(arr))
                 case .Failure(let error):
-                    handler(.Failure(error))
+                    handler?(.Failure(error))
                 }
             }
-            
-//            if let resp = response {
-//                if resp.statusCode == 200 {
-//
-//                    if let strongSelf = self {
-//                        switch result {
-//                        case .Success(let data):
-//                            let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
-//                            handler(.Success(arr))
-//                        case .Failure(let error):
-//                            handler(.Failure(error))
-//                        }
-//                    }
-//                } else {
-//                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving module instances"])))
-//                }
-//            } else {
-//                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
-//            }
         }
     }
 
-    func generalContentInstance(instanceId: String, completionHandler handler: (Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void) -> Void {
+    func generalContentInstance(instanceId: String, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)? = nil) -> Void {
         
         self.startRequest(Router.GeneralContentInstance(instanceId)) { (request, response, result) in
             
-            if let resp = response {
-                if resp.statusCode == 200 {
-                    
-                    switch result {
-                    case .Success(let data):
-                        let dict = data as! [String:AnyObject]
-                        handler(.Success(GeneralContentInstance(dict)))
-                    case .Failure(let error):
-                        handler(.Failure(error))
-                    }
-                    
-                } else {
-                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving module instances"])))
-                }
-            } else {
-                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+            switch result {
+            case .Success(let data):
+                let dict = data as! [String:AnyObject]
+                handler?(.Success(GeneralContentInstance(dict)))
+            case .Failure(let error):
+                handler?(.Failure(error))
             }
         }
     }
     
-    func generalContentInstances(instanceIds: [String], completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+    func generalContentInstances(instanceIds: [String], completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
         
         let params = ["id" : instanceIds]
         
         self.startRequest(Router.GeneralContentInstances(params)) { (request, response, result) in
             
-            if let resp = response {
-                if resp.statusCode == 200 {
-                    
-                    switch result {
-                    case .Success(let data):
-                        let instances = data as! [[String: AnyObject]]
-                        handler(.Success(instances.map({ (dict) -> GeneralContentInstance in
-                            return GeneralContentInstance(dict)
-                        })))
-                    case .Failure(let error):
-                        handler(.Failure(error))
-                    }
-                    
-                } else {
-                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving instances by ids"])))
-                }
-            } else {
-                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+            switch result {
+            case .Success(let data):
+                let instances = data as! [[String: AnyObject]]
+                handler?(.Success(instances.map({ (dict) -> GeneralContentInstance in
+                    return GeneralContentInstance(dict)
+                })))
+            case .Failure(let error):
+                handler?(.Failure(error))
             }
         }
     }

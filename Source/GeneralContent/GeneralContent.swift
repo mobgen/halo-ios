@@ -65,8 +65,7 @@ public class GeneralContent: NSObject {
                     
                     try! self.realm.write({ () -> Void in
                         
-                        // Delete the existing ones. Temporary solution?
-                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance))
+                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId = '\(moduleId)'"))
                         
                         for instance in instances {
                             self.realm.add(PersistentGeneralContentInstance(instance), update: true)
@@ -112,15 +111,90 @@ public class GeneralContent: NSObject {
             handler(.Success(result))
     }
     
+    // MARK: Get instances by array of ids
+    
     /**
      Get a set of general content instances by specifying their ids
      
      - parameter instanceIds: Ids of the instances to be retrieved
      - parameter handler:     Closure to be executed after the completion of the request
      */
-    public func getInstances(instanceIds instanceIds: [String],
-        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+    public func getInstances(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
+        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+           
+            switch offlinePolicy {
+            case .None:
+                getInstancesNoCache(instanceIds, completionHandler: handler)
+            case .LoadAndStoreLocalData:
+                getInstancesLoadAndStoreLocalData(instanceIds, completionHandler: handler)
+            case .ReturnLocalDataElseLoad:
+                getInstancesReturnLocalDataElseLoad(instanceIds, completionHandler: handler)
+            case .ReturnLocalDataDontLoad:
+                getInstancesReturnLocalDataDontLoad(instanceIds, completionHandler: handler)
+            }
+    }
+    
+    private func getInstancesNoCache(instanceIds: [String],
+        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+        
             net.generalContentInstances(instanceIds, completionHandler: handler)
+    }
+    
+    private func getInstancesLoadAndStoreLocalData(instanceIds: [String],
+        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+        
+            net.generalContentInstances(instanceIds) { (result) -> Void in
+                switch result {
+                case .Success(let instances):
+                    
+                    handler?(.Success(instances))
+                    
+                    try! self.realm.write({ () -> Void in
+                        
+                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("id IN \(instanceIds)"))
+                        
+                        for instance in instances {
+                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+                        }
+                    })
+                    
+                case .Failure(let error):
+                    if error.code == -1009 {
+                        self.getInstancesReturnLocalDataDontLoad(instanceIds, completionHandler: handler)
+                    } else {
+                        handler?(.Failure(error))
+                    }
+                }
+            }
+    }
+    
+    private func getInstancesReturnLocalDataElseLoad(instanceIds: [String],
+        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+     
+            self.getInstancesReturnLocalDataDontLoad(instanceIds) { (result) -> Void in
+                switch result {
+                case .Success(let instances):
+                    if instances.count > 0 {
+                        handler?(.Success(instances))
+                    } else {
+                        self.getInstancesLoadAndStoreLocalData(instanceIds, completionHandler: handler)
+                    }
+                case .Failure(let error):
+                    handler?(.Failure(error))
+                }
+            }
+    }
+    
+    private func getInstancesReturnLocalDataDontLoad(instanceIds: [String],
+        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+            
+            let instances = realm.objects(PersistentGeneralContentInstance).filter("id IN \(instanceIds)")
+            
+            let result = instances.map { (persistentInstance) -> Halo.GeneralContentInstance in
+                return persistentInstance.getInstance()
+            }
+            
+            handler?(.Success(result))
     }
     
     // MARK: Get a single instance
@@ -131,76 +205,75 @@ public class GeneralContent: NSObject {
     - parameter instanceId: Id of the instance to be retrieved
     - parameter handler:    Closure to be executed after the completion of the request
     */
-    public func getInstance(instanceId instanceId: String,
-        completionHandler handler: (Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void) -> Void {
-        net.generalContentInstance(instanceId, completionHandler: handler)
-    }
-    
-    // MARK: ObjC exposed methods
-
-    /**
-    Get the existing instances of a given General Content module from Objective C
-
-    - parameter moduleId:   Internal id of the module from which we want to retrieve the instances
-    - parameter success:    Closure to be executed when the request has succeeded
-    - parameter failure:    Closure to be executed when the request has failed
-    */
-    @objc(instancesInModule:success:failure:)
-    public func getInstancesFromObjC(moduleId moduleId: String,
-        success:((userData: [GeneralContentInstance]) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
-
-            self.getInstances(moduleId: moduleId) { (result) -> Void in
-                switch result {
-                case .Success(let instances):
-                    success?(userData: instances)
-                case .Failure(let error):
-                    failure?(error: error)
-                }
+    public func getInstance(instanceId instanceId: String, offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
+        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
+        
+            switch offlinePolicy {
+            case .None:
+                getInstanceNoCache(instanceId, completionHandler: handler)
+            case .LoadAndStoreLocalData:
+                getInstanceLoadAndStoreLocalData(instanceId, completionHandler: handler)
+            case .ReturnLocalDataElseLoad:
+                getInstanceReturnLocalDataElseLoad(instanceId, completionHandler: handler)
+            case .ReturnLocalDataDontLoad:
+                getInstanceReturnLocalDataDontLoad(instanceId, completionHandler: handler)
             }
     }
     
-    /**
-     Get a set of instances given the collection of their ids from Objective C
-     
-     - parameter instancesWithIds: Array of instance ids
-     */
-    @objc(instancesWithIds:success:failure:)
-    public func getInstancesFromObjC(instanceIds instanceIds: [String],
-        success:((userData: [GeneralContentInstance]) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
+    private func getInstanceNoCache(instanceId: String,
+        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
+            net.generalContentInstance(instanceId, completionHandler: handler)
+    }
+    
+    
+    private func getInstanceLoadAndStoreLocalData(instanceId: String,
+        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
             
-            self.getInstances(instanceIds: instanceIds) { (result) -> Void in
-                switch result {
-                case .Success(let instances):
-                    success?(userData: instances)
-                case .Failure(let error):
-                    failure?(error: error)
-                }
-            }
-    }
-
-    /**
-    Get a specific general content instance given its id from Objective C
-
-    - parameter instanceId: Internal id of the instance to be retrieved
-    - parameter success:    Closure to be executed when the request has succeeded
-    - parameter failure:    Closure to be executed when the request has failed
-    */
-    @objc(instance:success:failure:)
-    public func getInstanceFromObjC(instanceId instanceId: String,
-        success:((userData: GeneralContentInstance) -> Void)?,
-        failure:((error: NSError) -> Void)?) -> Void {
-
-            self.getInstance(instanceId: instanceId) { (result) -> Void in
+            net.generalContentInstance(instanceId) { (result) -> Void in
                 switch result {
                 case .Success(let instance):
-                    success?(userData: instance)
+                    handler?(.Success(instance))
+                    
+                    try! self.realm.write({ () -> Void in
+                        self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+                    })
+                    
                 case .Failure(let error):
-                    failure?(error: error)
+                    if error.code == -1009 {
+                        self.getInstanceReturnLocalDataDontLoad(instanceId, completionHandler: handler)
+                    } else {
+                        handler?(.Failure(error))
+                    }
                 }
             }
-
+            
+    }
+    
+    private func getInstanceReturnLocalDataElseLoad(instanceId: String,
+        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
+            
+            self.getInstanceReturnLocalDataDontLoad(instanceId) { (result) -> Void in
+                switch result {
+                case .Success(let instance):
+                    handler?(.Success(instance))
+                case .Failure(let error):
+                    if error.domain == "com.mobgen" {
+                        self.getInstanceLoadAndStoreLocalData(instanceId, completionHandler: handler)
+                    } else {
+                        handler?(.Failure(error))
+                    }
+                }
+            }
+    }
+    
+    private func getInstanceReturnLocalDataDontLoad(instanceId: String,
+        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
+            
+            if let instance = realm.objectForPrimaryKey(PersistentGeneralContentInstance.self, key: instanceId) {
+                handler?(.Success(instance.getInstance()))
+            } else {
+                handler?(.Failure(NSError(domain: "com.mobgen", code: 0, userInfo: nil)))
+            }
     }
 
 }
