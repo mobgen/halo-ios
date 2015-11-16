@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-
+import RealmSwift
 
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
@@ -24,6 +24,8 @@ public class GeneralContent: NSObject {
 
     private override init() {}
 
+    private let realm = try! Realm()
+    
     // MARK: Get instances
     
     /**
@@ -39,11 +41,11 @@ public class GeneralContent: NSObject {
             case .None:
                 getInstancesNoCache(moduleId, completionHandler: handler)
             case .LoadAndStoreLocalData:
-                break
+                getInstancesLoadAndStoreLocalData(moduleId, completionHandler: handler)
             case .ReturnLocalDataElseLoad:
-                break
+                getInstancesReturnLocalDataElseLoad(moduleId, completionHandler: handler)
             case .ReturnLocalDataDontLoad:
-                break
+                getInstancesReturnLocalDataDontLoad(moduleId, completionHandler: handler)
             }
     }
 
@@ -56,17 +58,58 @@ public class GeneralContent: NSObject {
     private func getInstancesLoadAndStoreLocalData(moduleId: String,
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
             
-            
+            net.generalContentInstances(moduleId, flags: []) { (result) -> Void in
+                switch result {
+                case .Success(let instances):
+                    handler(.Success(instances))
+                    
+                    try! self.realm.write({ () -> Void in
+                        
+                        // Delete the existing ones. Temporary solution?
+                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance))
+                        
+                        for instance in instances {
+                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+                        }
+                    })
+                case .Failure(let error):
+                    if error.code == -1009 {
+                        self.getInstancesReturnLocalDataDontLoad(moduleId, completionHandler: handler)
+                    } else {
+                        handler(.Failure(error))
+                    }
+                }
+            }
     }
     
     private func getInstancesReturnLocalDataElseLoad(moduleId: String,
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+            
+        self.getInstancesReturnLocalDataDontLoad(moduleId) { (result) -> Void in
+            switch result {
+            case .Success(let instances):
+                if instances.count > 0 {
+                    handler(.Success(instances))
+                } else {
+                    self.getInstancesLoadAndStoreLocalData(moduleId, completionHandler: handler)
+                }
+            case .Failure(let error):
+                handler(.Failure(error))
+            }
+        }
             
     }
     
     private func getInstancesReturnLocalDataDontLoad(moduleId: String,
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
             
+            let instances = realm.objects(PersistentGeneralContentInstance).filter("moduleId = '\(moduleId)'")
+            
+            let result = instances.map { (persistentInstance) -> Halo.GeneralContentInstance in
+                return persistentInstance.getInstance()
+            }
+            
+            handler(.Success(result))
     }
     
     /**

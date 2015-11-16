@@ -81,18 +81,19 @@ extension Manager {
      */
     private func getModulesLocalDataElseLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
         
-        let modules = realm.objects(PersistentModule)
         
-        let result = modules.map { (persistentModule) -> Halo.Module in
-            return persistentModule.getModule()
+        self.getModulesLocalDataDontLoad { (result) -> Void in
+            switch result {
+            case .Success(let modules):
+                if modules.count > 0 {
+                    handler(.Success(modules))
+                } else {
+                    self.getModulesLoadAndStoreLocalData(completionHandler: handler)
+                }
+            case .Failure(let error):
+                handler(.Failure(error))
+            }
         }
-        
-        if result.count > 0 {
-            handler(.Success(result))
-        } else {
-            self.getModulesLoadAndStoreLocalData(completionHandler: handler)
-        }
-        
     }
     
     /**

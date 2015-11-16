@@ -41,8 +41,7 @@ class PersistentGeneralContentInstance: Object {
     /// Dictionary of tags associated to this general content instance
     let tags: List<PersistentTag> = List<PersistentTag>()
     
-    
-    convenience required init(instance: Halo.GeneralContentInstance) {
+    convenience required init(_ instance: Halo.GeneralContentInstance) {
     
         self.init()
         self.id = instance.id!
@@ -62,6 +61,10 @@ class PersistentGeneralContentInstance: Object {
         for (_, tag) in instance.tags {
             self.tags.append(PersistentTag(tag))
         }
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
     
     func getInstance() -> Halo.GeneralContentInstance {

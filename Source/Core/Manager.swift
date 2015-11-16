@@ -94,7 +94,7 @@ public class Manager: NSObject {
 
             // Delete all objects from the realm
             try! realm.write {
-                realm.deleteAll()
+                self.realm.deleteAll()
             }
             
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)

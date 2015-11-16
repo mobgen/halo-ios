@@ -13,7 +13,7 @@ class PersistentValue: Object {
     
     dynamic var key: String = ""
     
-    dynamic var value: Object?
+    dynamic var value: String? = nil
     
     convenience required init(key: String, value: AnyObject?) {
         
@@ -21,7 +21,7 @@ class PersistentValue: Object {
         self.key = key
         
         if let val = value {
-            self.value = Object(value: val)
+            self.value = val.description
         }
         
     }

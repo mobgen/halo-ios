@@ -200,7 +200,11 @@ class NewsListViewController: UITableViewController {
         if let newsArray = self.news {
             let article = newsArray[indexPath.row]
             articleCell?.textLabel?.text = article.title
-            articleCell?.detailTextLabel?.text =  NSDateFormatter.localizedStringFromDate(article.date!, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+            
+            if let date = article.date {
+                articleCell?.detailTextLabel?.text =  NSDateFormatter.localizedStringFromDate(date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+            }
+            
             articleCell?.summaryLabel?.text = article.summary
             
             if let thumbnail = article.thumbnailURL {

@@ -41,24 +41,34 @@ extension NetworkManager {
         
         self.startRequest(Router.GeneralContentInstances(params)) { [weak self] (request, response, result) in
 
-            if let resp = response {
-                if resp.statusCode == 200 {
-
-                    if let strongSelf = self {
-                        switch result {
-                        case .Success(let data):
-                            let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
-                            handler(.Success(arr))
-                        case .Failure(let error):
-                            handler(.Failure(error))
-                        }
-                    }
-                } else {
-                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving module instances"])))
+            if let strongSelf = self {
+                switch result {
+                case .Success(let data):
+                    let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
+                    handler(.Success(arr))
+                case .Failure(let error):
+                    handler(.Failure(error))
                 }
-            } else {
-                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
             }
+            
+//            if let resp = response {
+//                if resp.statusCode == 200 {
+//
+//                    if let strongSelf = self {
+//                        switch result {
+//                        case .Success(let data):
+//                            let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
+//                            handler(.Success(arr))
+//                        case .Failure(let error):
+//                            handler(.Failure(error))
+//                        }
+//                    }
+//                } else {
+//                    handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error retrieving module instances"])))
+//                }
+//            } else {
+//                handler(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+//            }
         }
     }
 

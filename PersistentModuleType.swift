@@ -29,7 +29,11 @@ class PersistentModuleType: Object {
  
     init(type: Halo.ModuleType) {
         super.init()
-        self.category = (type.category?.rawValue)!
+        
+        if let cat = type.category {
+            self.category = cat.rawValue
+        }
+        
         self.enabled = type.enabled
         self.name = type.name
         self.typeUrl = type.typeUrl
