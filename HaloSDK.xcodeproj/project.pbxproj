@@ -428,10 +428,10 @@
 		00E6E0021BEB5CAC00151356 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */,
 				000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */,
 				000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */,
 				000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */,
-				00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */,
 				00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */,
 			);
 			name = Persistence;
