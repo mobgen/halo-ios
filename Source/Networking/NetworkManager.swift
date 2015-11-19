@@ -64,7 +64,7 @@ class NetworkManager: Alamofire.Manager {
                 "halo-qa.mobgen.com" : serverTrustPolicy,
                 "halo-stage.mobgen.com" : serverTrustPolicy,
                 "halo.mobgen.com" : serverTrustPolicy
-                ])
+            ])
         }
         
         super.init(configuration: configuration,

@@ -37,34 +37,62 @@ class ColorCell: UITableViewCell {
     }
 }
 
-class ImageCell: UITableViewCell {
+class UrlCell: UITableViewCell {
 
     var imagePreview: UIImageView
+    var urlString: String = ""
 
-    init(imageUrl: String, reuseIdentifier: String) {
-
+    init(urlString: String, reuseIdentifier: String) {
         imagePreview = UIImageView(frame: CGRectZero)
-        imagePreview.contentMode = .ScaleAspectFit
+        
+        super.init(style: .Value1, reuseIdentifier: reuseIdentifier)
+        
+        self.urlString = urlString
+        self.contentView.addSubview(imagePreview)
+        self.imagePreview.contentMode = .ScaleAspectFit
 
-        var url: NSURL
-
-        let regex = try! NSRegularExpression(pattern: "v=(.+?)(?=$|&)", options: .CaseInsensitive)
-
-        /// Check for a match against Youtube-like urls
-        if let match = regex.firstMatchInString(imageUrl, options: .WithoutAnchoringBounds, range: NSMakeRange(0, imageUrl.characters.count)) {
-            let videoId = (imageUrl as NSString).substringWithRange(match.rangeAtIndex(1))
-            url = NSURL(string: "http://img.youtube.com/vi/\(videoId)/default.jpg")!
+        var url: NSURL?
+        
+        let range = NSMakeRange(0, urlString.characters.count)
+        var regex = try! NSRegularExpression(pattern: "youtube\\.com|youtu\\.be", options: .CaseInsensitive)
+        
+        if let _ = regex.firstMatchInString(urlString, options: .WithoutAnchoringBounds, range: range) {
+            // It's a youtube link
+            
+            regex = try! NSRegularExpression(pattern: "youtu\\.be/(.+)|v=(.+?)(?=$|&)", options: .CaseInsensitive)
+            
+            /// Check for a match against Youtube-like urls
+            if let match = regex.firstMatchInString(urlString, options: .WithoutAnchoringBounds, range: range) {
+                let videoId = (urlString as NSString).substringWithRange(match.rangeAtIndex(1))
+                url = NSURL(string: "http://img.youtube.com/vi/\(videoId)/default.jpg")!
+                
+                let recognizer = UITapGestureRecognizer(target: self, action: "showYoutube")
+                recognizer.numberOfTapsRequired = 1
+                self.imagePreview.userInteractionEnabled = true
+                self.imagePreview.addGestureRecognizer(recognizer)
+                
+            }
         } else {
-            url = NSURL(string: imageUrl)!
+            // Check if it's an image
+            regex = try! NSRegularExpression(pattern: "jpg|jpeg|png|gif", options: .CaseInsensitive)
+            
+            if let _ = regex.firstMatchInString(urlString, options: .WithoutAnchoringBounds, range: range) {
+                url = NSURL(string: urlString)!
+            }
         }
 
-        imagePreview.af_setImageWithURL(url)
-
-        super.init(style: .Default, reuseIdentifier: reuseIdentifier)
-
-        self.contentView.addSubview(imagePreview)
+        if let imageUrl = url {
+            self.imagePreview.af_setImageWithURL(imageUrl)
+        } else {
+            self.imagePreview.hidden = true
+            self.detailTextLabel?.text = urlString
+        }
     }
 
+    func showYoutube() -> Void {
+        UIApplication.sharedApplication().openURL(NSURL(string: self.urlString)!)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -77,8 +105,6 @@ class ImageCell: UITableViewCell {
 
         self.imagePreview.frame = CGRectMake(w - 105, 0, 100, h)
     }
-
-
 }
 
 class KeyValueViewController: UITableViewController {
@@ -89,8 +115,8 @@ class KeyValueViewController: UITableViewController {
     private var instanceId: String = ""
 
     init(instanceId: String) {
-        self.instanceId = instanceId
         super.init(style: .Plain)
+        self.instanceId = instanceId
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -164,7 +190,7 @@ class KeyValueViewController: UITableViewController {
             cell = tableView.dequeueReusableCellWithIdentifier("imageCell")
 
             if cell == nil {
-                cell = ImageCell(imageUrl: value, reuseIdentifier: "imageCell")
+                cell = UrlCell(urlString: value, reuseIdentifier: "imageCell")
             }
 
         } else {
