@@ -19,8 +19,6 @@
 		000590C21B565C7D00DED5D2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000590C11B565C7D00DED5D2 /* Config.swift */; };
 		000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; };
 		000826E81B690B39001E8248 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 000826DD1B690B0D001E8248 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0016802B1BEB81EA00003045 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680291BEB81EA00003045 /* RealmSwift.framework */; };
-		0016802C1BEB81FD00003045 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680281BEB81EA00003045 /* Realm.framework */; };
 		001680321BEB8EDF00003045 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680301BEB8EDF00003045 /* Realm.framework */; };
 		001680331BEB8EDF00003045 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680311BEB8EDF00003045 /* RealmSwift.framework */; };
 		001680341BEB8EE800003045 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680301BEB8EDF00003045 /* Realm.framework */; };
@@ -85,8 +83,6 @@
 		000590BF1B565B7300DED5D2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		000590C11B565C7D00DED5D2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		000826DD1B690B0D001E8248 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		001680281BEB81EA00003045 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS/Realm.framework"; sourceTree = "<absolute>"; };
-		001680291BEB81EA00003045 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "/Users/borja/Documents/git/halo-sdk-ios/Carthage/Build/iOS/RealmSwift.framework"; sourceTree = "<absolute>"; };
 		001680301BEB8EDF00003045 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		001680311BEB8EDF00003045 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		0016803A1BEB8F2200003045 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,10 +121,8 @@
 				00BD1D581BA1EE820002C472 /* CoreLocation.framework in Frameworks */,
 				001680361BEB8EE800003045 /* RealmSwift.framework in Frameworks */,
 				00BD1D561BA1D1D00002C472 /* MapKit.framework in Frameworks */,
-				0016802B1BEB81EA00003045 /* RealmSwift.framework in Frameworks */,
 				0016803B1BEB8F2200003045 /* Halo.framework in Frameworks */,
 				0002FB831B616AFC00B06A9C /* libCrittercism_v5_2_0.a in Frameworks */,
-				0016802C1BEB81FD00003045 /* Realm.framework in Frameworks */,
 				001680331BEB8EDF00003045 /* RealmSwift.framework in Frameworks */,
 				000590C01B565B7300DED5D2 /* SystemConfiguration.framework in Frameworks */,
 				000826E71B690B39001E8248 /* Alamofire.framework in Frameworks */,
