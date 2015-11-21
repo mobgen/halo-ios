@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		000826FF1B6A34DE001E8248 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000826FE1B6A34DE001E8248 /* Router.swift */; };
 		000827011B6A57A5001E8248 /* ModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827001B6A57A5001E8248 /* ModuleType.swift */; };
-		000EEB491BEB52F800C1435D /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000EEB481BEB52F800C1435D /* RealmSwift.framework */; };
 		000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */; };
 		000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */; };
 		000EEB4F1BEB66E900C1435D /* PersistentModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */; };
 		00121E8F1BF33B5C00FD656F /* Manager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */; };
-		001680271BEB81B300003045 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001680261BEB81B300003045 /* Realm.framework */; };
+		0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
+		0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
@@ -122,12 +122,12 @@
 /* Begin PBXFileReference section */
 		000826FE1B6A34DE001E8248 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		000827001B6A57A5001E8248 /* ModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
-		000EEB481BEB52F800C1435D /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModule.swift; sourceTree = "<group>"; };
 		000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTag.swift; sourceTree = "<group>"; };
 		000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModuleType.swift; sourceTree = "<group>"; };
 		00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Manager+Modules.swift"; sourceTree = "<group>"; };
-		001680261BEB81B300003045 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		0024964B1C00892C00F6F734 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		0024964C1C00892C00F6F734 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
@@ -221,10 +221,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				001680271BEB81B300003045 /* Realm.framework in Frameworks */,
+				0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */,
 				004FEC6E1BCFB762004216EE /* Alamofire.framework in Frameworks */,
+				0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */,
 				003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */,
-				000EEB491BEB52F800C1435D /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,8 +268,8 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				001680261BEB81B300003045 /* Realm.framework */,
-				000EEB481BEB52F800C1435D /* RealmSwift.framework */,
+				0024964B1C00892C00F6F734 /* Realm.framework */,
+				0024964C1C00892C00F6F734 /* RealmSwift.framework */,
 				004FEC6F1BCFB788004216EE /* Nimble.framework */,
 				004FEC701BCFB788004216EE /* OHHTTPStubs.framework */,
 				004FEC711BCFB788004216EE /* Quick.framework */,

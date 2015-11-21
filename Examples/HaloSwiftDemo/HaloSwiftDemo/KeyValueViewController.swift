@@ -54,19 +54,19 @@ class UrlCell: UITableViewCell {
         var url: NSURL?
         
         let range = NSMakeRange(0, urlString.characters.count)
-        var regex = try! NSRegularExpression(pattern: "youtube\\.com|youtu\\.be", options: .CaseInsensitive)
+        var regex = try! NSRegularExpression(pattern: "(youtube\\.com|youtu\\.be)", options: .CaseInsensitive)
         
         if let _ = regex.firstMatchInString(urlString, options: .WithoutAnchoringBounds, range: range) {
             // It's a youtube link
             
-            regex = try! NSRegularExpression(pattern: "youtu\\.be/(.+)|v=(.+?)(?=$|&)", options: .CaseInsensitive)
+            regex = try! NSRegularExpression(pattern: "(?<=v(=|/))([-a-zA-Z0-9_]+)|(?<=youtu.be/)([-a-zA-Z0-9_]+)", options: .CaseInsensitive)
             
             /// Check for a match against Youtube-like urls
             if let match = regex.firstMatchInString(urlString, options: .WithoutAnchoringBounds, range: range) {
-                let videoId = (urlString as NSString).substringWithRange(match.rangeAtIndex(1))
+                let videoId = (urlString as NSString).substringWithRange(match.rangeAtIndex(0))
                 url = NSURL(string: "http://img.youtube.com/vi/\(videoId)/default.jpg")!
                 
-                let recognizer = UITapGestureRecognizer(target: self, action: "showYoutube")
+                let recognizer = UITapGestureRecognizer(target: self, action: "openUrl")
                 recognizer.numberOfTapsRequired = 1
                 self.imagePreview.userInteractionEnabled = true
                 self.imagePreview.addGestureRecognizer(recognizer)
@@ -86,10 +86,16 @@ class UrlCell: UITableViewCell {
         } else {
             self.imagePreview.hidden = true
             self.detailTextLabel?.text = urlString
+
+            let recognizer = UITapGestureRecognizer(target: self, action: "openUrl")
+            recognizer.numberOfTapsRequired = 1
+            self.detailTextLabel?.userInteractionEnabled = true
+            self.detailTextLabel?.addGestureRecognizer(recognizer)
+
         }
     }
 
-    func showYoutube() -> Void {
+    func openUrl() -> Void {
         UIApplication.sharedApplication().openURL(NSURL(string: self.urlString)!)
     }
     
