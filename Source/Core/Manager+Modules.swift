@@ -24,8 +24,6 @@ extension Manager {
             getModulesNoCache(completionHandler: handler)
         case .LoadAndStoreLocalData:
             getModulesLoadAndStoreLocalData(completionHandler: handler)
-        case .ReturnLocalDataElseLoad:
-            getModulesLocalDataElseLoad(completionHandler: handler)
         case .ReturnLocalDataDontLoad:
             getModulesLocalDataDontLoad(completionHandler: handler)
             
@@ -69,29 +67,6 @@ extension Manager {
                 } else {
                     handler(.Failure(error))
                 }
-            }
-        }
-    }
-    
-    /**
-     Get the modules from the local storage. If there are no results from there, try to load from network,
-     storing the new results
-     
-     - parameter handler: Closure to be executed after the request has finished
-     */
-    private func getModulesLocalDataElseLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        
-        
-        self.getModulesLocalDataDontLoad { (result) -> Void in
-            switch result {
-            case .Success(let modules):
-                if modules.count > 0 {
-                    handler(.Success(modules))
-                } else {
-                    self.getModulesLoadAndStoreLocalData(completionHandler: handler)
-                }
-            case .Failure(let error):
-                handler(.Failure(error))
             }
         }
     }

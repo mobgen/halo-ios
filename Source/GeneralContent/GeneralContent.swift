@@ -42,8 +42,6 @@ public class GeneralContent: NSObject {
                 getInstancesNoCache(moduleId, completionHandler: handler)
             case .LoadAndStoreLocalData:
                 getInstancesLoadAndStoreLocalData(moduleId, completionHandler: handler)
-            case .ReturnLocalDataElseLoad:
-                getInstancesReturnLocalDataElseLoad(moduleId, completionHandler: handler)
             case .ReturnLocalDataDontLoad:
                 getInstancesReturnLocalDataDontLoad(moduleId, completionHandler: handler)
             }
@@ -81,24 +79,6 @@ public class GeneralContent: NSObject {
             }
     }
     
-    private func getInstancesReturnLocalDataElseLoad(moduleId: String,
-        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
-            
-        self.getInstancesReturnLocalDataDontLoad(moduleId) { (result) -> Void in
-            switch result {
-            case .Success(let instances):
-                if instances.count > 0 {
-                    handler(.Success(instances))
-                } else {
-                    self.getInstancesLoadAndStoreLocalData(moduleId, completionHandler: handler)
-                }
-            case .Failure(let error):
-                handler(.Failure(error))
-            }
-        }
-            
-    }
-    
     private func getInstancesReturnLocalDataDontLoad(moduleId: String,
         completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
             
@@ -127,8 +107,6 @@ public class GeneralContent: NSObject {
                 getInstancesNoCache(instanceIds, completionHandler: handler)
             case .LoadAndStoreLocalData:
                 getInstancesLoadAndStoreLocalData(instanceIds, completionHandler: handler)
-            case .ReturnLocalDataElseLoad:
-                getInstancesReturnLocalDataElseLoad(instanceIds, completionHandler: handler)
             case .ReturnLocalDataDontLoad:
                 getInstancesReturnLocalDataDontLoad(instanceIds, completionHandler: handler)
             }
@@ -168,23 +146,6 @@ public class GeneralContent: NSObject {
             }
     }
     
-    private func getInstancesReturnLocalDataElseLoad(instanceIds: [String],
-        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
-     
-            self.getInstancesReturnLocalDataDontLoad(instanceIds) { (result) -> Void in
-                switch result {
-                case .Success(let instances):
-                    if instances.count > 0 {
-                        handler?(.Success(instances))
-                    } else {
-                        self.getInstancesLoadAndStoreLocalData(instanceIds, completionHandler: handler)
-                    }
-                case .Failure(let error):
-                    handler?(.Failure(error))
-                }
-            }
-    }
-    
     private func getInstancesReturnLocalDataDontLoad(instanceIds: [String],
         completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
             
@@ -213,8 +174,6 @@ public class GeneralContent: NSObject {
                 getInstanceNoCache(instanceId, completionHandler: handler)
             case .LoadAndStoreLocalData:
                 getInstanceLoadAndStoreLocalData(instanceId, completionHandler: handler)
-            case .ReturnLocalDataElseLoad:
-                getInstanceReturnLocalDataElseLoad(instanceId, completionHandler: handler)
             case .ReturnLocalDataDontLoad:
                 getInstanceReturnLocalDataDontLoad(instanceId, completionHandler: handler)
             }
@@ -241,24 +200,6 @@ public class GeneralContent: NSObject {
                 case .Failure(let error):
                     if error.code == -1009 {
                         self.getInstanceReturnLocalDataDontLoad(instanceId, completionHandler: handler)
-                    } else {
-                        handler?(.Failure(error))
-                    }
-                }
-            }
-            
-    }
-    
-    private func getInstanceReturnLocalDataElseLoad(instanceId: String,
-        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
-            
-            self.getInstanceReturnLocalDataDontLoad(instanceId) { (result) -> Void in
-                switch result {
-                case .Success(let instance):
-                    handler?(.Success(instance))
-                case .Failure(let error):
-                    if error.domain == "com.mobgen" {
-                        self.getInstanceLoadAndStoreLocalData(instanceId, completionHandler: handler)
                     } else {
                         handler?(.Failure(error))
                     }

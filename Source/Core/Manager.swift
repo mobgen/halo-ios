@@ -31,7 +31,6 @@ public enum HaloEnvironment: String {
 public enum OfflinePolicy: Int {
     case None
     case LoadAndStoreLocalData
-    case ReturnLocalDataElseLoad
     case ReturnLocalDataDontLoad
 }
 
