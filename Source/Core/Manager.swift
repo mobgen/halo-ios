@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 import UIKit
 import CoreBluetooth
-import RealmSwift
 
 /**
 Enumeration holding the different environment options available
@@ -70,12 +69,12 @@ public class Manager: NSObject {
 
     /// Singleton instance of the networking component
     let net = Halo.NetworkManager.instance
+    
+    let persist = Halo.PersistenceManager.sharedInstance
 
     /// Bluetooth manager to decide whether the device supports BLE
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
 
-    internal let realm = try! Realm()
-    
     /// Current environment (QA, Integration or Prod)
     public var environment: HaloEnvironment = .Prod {
         didSet {
@@ -92,10 +91,8 @@ public class Manager: NSObject {
 
             let defaults = NSUserDefaults.standardUserDefaults()
 
-            // Delete all objects from the realm
-            try! realm.write {
-                self.realm.deleteAll()
-            }
+            // Delete all cached data
+            persist.clearDatabase()
             
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)

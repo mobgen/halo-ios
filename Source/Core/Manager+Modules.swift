@@ -21,69 +21,12 @@ extension Manager {
         
         switch offlinePolicy {
         case .None:
-            getModulesNoCache(completionHandler: handler)
+            self.net.getModules(fetchFromNetwork: true, completionHandler: handler)
         case .LoadAndStoreLocalData:
-            getModulesLoadAndStoreLocalData(completionHandler: handler)
+            self.persist.getModules(fetchFromNetwork: true, completionHandler: handler)
         case .ReturnLocalDataDontLoad:
-            getModulesLocalDataDontLoad(completionHandler: handler)
-            
+            self.persist.getModules(fetchFromNetwork: false, completionHandler: handler)
         }
-    }
-    
-    /**
-     Only load the data from the network, without even using any local storage
-     
-     - parameter handler: Closure to be executed after the request has finished
-     */
-    private func getModulesNoCache(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        net.getModules(completionHandler: handler)
-    }
-    
-    /**
-     Get the latest information from the server and store it locally, in order to keep providing data in case
-     there is no internet connection.
-     
-     - parameter handler: Closure to be executed after the request has finished
-     */
-    private func getModulesLoadAndStoreLocalData(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        net.getModules { result in
-            switch result {
-            case .Success(let modules):
-                handler(.Success(modules))
-                
-                try! self.realm.write({ () -> Void in
-                    
-                    // Delete the existing ones. Temporary solution?
-                    self.realm.delete(self.realm.objects(PersistentModule))
-                    
-                    for module in modules {
-                        self.realm.add(PersistentModule(module), update: true)
-                    }
-                })
-                
-            case .Failure(let error):
-                if error.code == -1009 {
-                    self.getModulesLocalDataDontLoad(completionHandler: handler)
-                } else {
-                    handler(.Failure(error))
-                }
-            }
-        }
-    }
-    
-    /**
-     Get the modules only from the local storage, not even trying to load any data from the network
-     
-     - parameter handler: Closure to be executed after the request has finished
-     */
-    private func getModulesLocalDataDontLoad(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        let modules = realm.objects(PersistentModule)
-        
-        let result = modules.map { (persistentModule) -> Halo.Module in
-            return persistentModule.getModule()
-        }
-        
-        handler(.Success(result))
     }
     
 }

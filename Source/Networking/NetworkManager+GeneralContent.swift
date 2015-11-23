@@ -21,7 +21,7 @@ public struct GeneralContentFlag : OptionSetType {
     public static let IncludeUnpublished = GeneralContentFlag(rawValue: 2)
 }
 
-extension NetworkManager {
+extension NetworkManager: GeneralContentManager {
 
     /**
     Obtain the existing instances for a given General Content module
@@ -29,7 +29,7 @@ extension NetworkManager {
     - parameter moduleId:           Internal id of the module to be requested
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
+    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, fetchFromNetwork network: Bool = true, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
 
         var params = ["module" : moduleId]
         
@@ -53,7 +53,7 @@ extension NetworkManager {
         }
     }
 
-    func generalContentInstance(instanceId: String, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)? = nil) -> Void {
+    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool = true, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)? = nil) -> Void {
         
         self.startRequest(Router.GeneralContentInstance(instanceId)) { (request, response, result) in
             
@@ -67,7 +67,7 @@ extension NetworkManager {
         }
     }
     
-    func generalContentInstances(instanceIds: [String], completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
+    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool = true, completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
         
         let params = ["id" : instanceIds]
         

@@ -9,14 +9,14 @@
 import Foundation
 import Alamofire
 
-extension NetworkManager {
+extension NetworkManager: ModulesManager {
 
     /**
     Get the list of available modules for a given client id/client secret pair
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
+    func getModules(fetchFromNetwork network: Bool = true, completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
 
         self.startRequest(Router.Modules, completionHandler: { [weak self] (request, response, result) in
 
