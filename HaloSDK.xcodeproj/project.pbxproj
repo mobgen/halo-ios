@@ -424,7 +424,7 @@
 			path = Source/Resources;
 			sourceTree = "<group>";
 		};
-		00C2BCEF1C0338E6006473B8 /* DAOs */ = {
+		00C2BCEF1C0338E6006473B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */,
@@ -433,7 +433,7 @@
 				000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */,
 				00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */,
 			);
-			name = DAOs;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		00D1A36F1B42CA45008DFB71 /* GeneralContent */ = {
@@ -449,7 +449,7 @@
 		00E6E0021BEB5CAC00151356 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				00C2BCEF1C0338E6006473B8 /* DAOs */,
+				00C2BCEF1C0338E6006473B8 /* Model */,
 				00C2BCF01C033905006473B8 /* PersistenceManager.swift */,
 				00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */,
 				00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */,
