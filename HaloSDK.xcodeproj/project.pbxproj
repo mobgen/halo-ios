@@ -83,6 +83,7 @@
 		0084E6E21BE0D945004C69A2 /* NetworkManager+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */; };
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
+		009961571C318DF200EC72F9 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
 		00B1BD3E1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1BD3D1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift */; };
 		00C4DEB41BF5E8C300993B9D /* PersistentGeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */; };
 		00C4DEB61BF5E9EF00993B9D /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */; };
@@ -552,6 +553,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009961571C318DF200EC72F9 /* halo.cer in Resources */,
 				004FEC7F1BD0DCF6004216EE /* adara.aiff in Resources */,
 				004FEC801BD0DCF6004216EE /* alya.aiff in Resources */,
 				004FEC811BD0DCF6004216EE /* antimony.aiff in Resources */,
