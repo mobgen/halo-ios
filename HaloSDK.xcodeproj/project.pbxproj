@@ -87,8 +87,6 @@
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0099615B1C32A31000EC72F9 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
-		0099615C1C32A31600EC72F9 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -126,7 +124,6 @@
 				0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */,
 				0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */,
 				0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */,
-				0099615C1C32A31600EC72F9 /* Halo.framework in CopyFiles */,
 				009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */,
 				009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */,
 				0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */,
@@ -248,7 +245,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0099615B1C32A31000EC72F9 /* Halo.framework in Frameworks */,
 				004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */,
 				004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */,
 				004FEC741BCFB788004216EE /* Quick.framework in Frameworks */,
