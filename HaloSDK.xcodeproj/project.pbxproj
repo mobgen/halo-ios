@@ -84,6 +84,14 @@
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
 		009961571C318DF200EC72F9 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
+		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615B1C32A31000EC72F9 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
+		0099615C1C32A31600EC72F9 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00B1BD3E1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1BD3D1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift */; };
 		00C4DEB41BF5E8C300993B9D /* PersistentGeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */; };
 		00C4DEB61BF5E9EF00993B9D /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */; };
@@ -115,6 +123,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */,
+				0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */,
+				0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */,
+				0099615C1C32A31600EC72F9 /* Halo.framework in CopyFiles */,
+				009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */,
+				009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */,
+				0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0099615B1C32A31000EC72F9 /* Halo.framework in Frameworks */,
 				004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */,
 				004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */,
 				004FEC741BCFB788004216EE /* Quick.framework in Frameworks */,
