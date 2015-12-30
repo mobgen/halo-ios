@@ -11,17 +11,19 @@ import Alamofire
 
 extension PersistenceManager: ModulesManager {
     
-    func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>) -> Void)?) -> Void {
+    func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>, Bool) -> Void)?) -> Void {
         
         if !network {
-            self.getModulesLocalDataDontLoad(completionHandler: handler)
+            self.getModulesLocalDataDontLoad(completionHandler: { (result) -> Void in
+                handler?(result, true)
+            })
             return
         }
         
-        net.getModules { result in
+        net.getModules { (result, _) in
             switch result {
             case .Success(let modules):
-                handler?(.Success(modules))
+                handler?(.Success(modules), false)
                 
                 try! self.realm.write({ () -> Void in
                     
@@ -35,9 +37,11 @@ extension PersistenceManager: ModulesManager {
                 
             case .Failure(let error):
                 if error.code == -1009 {
-                    self.getModulesLocalDataDontLoad(completionHandler: handler)
+                    self.getModulesLocalDataDontLoad(completionHandler: { (result) -> Void in
+                        handler?(result, true)
+                    })
                 } else {
-                    handler?(.Failure(error))
+                    handler?(.Failure(error), false)
                 }
             }
         }

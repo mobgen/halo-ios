@@ -35,7 +35,7 @@ public class GeneralContent: NSObject {
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
     public func getInstances(moduleId moduleId: String, offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
-        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void) -> Void {
+        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void) -> Void {
             
             switch offlinePolicy {
             case .None:
@@ -54,13 +54,15 @@ public class GeneralContent: NSObject {
      - parameter handler:     Closure to be executed after the completion of the request
      */
     public func getInstances(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
-        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
            
             switch offlinePolicy {
             case .None:
                 self.net.generalContentInstances(instanceIds, fetchFromNetwork: true, completionHandler: handler)
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                self.persistence.generalContentInstances(instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+                self.persistence.generalContentInstances(instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: { (result, _) -> Void in
+                    handler?(result, (offlinePolicy == .ReturnLocalDataDontLoad))
+                })
             }
     }
     
@@ -73,7 +75,7 @@ public class GeneralContent: NSObject {
     - parameter handler:    Closure to be executed after the completion of the request
     */
     public func getInstance(instanceId instanceId: String, offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
-        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
+        completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)?) -> Void {
         
             switch offlinePolicy {
             case .None:

@@ -342,7 +342,7 @@ public class Manager: NSObject {
     @objc(getModulesWithSuccess:failure:)
     public func getModulesFromObjC(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
 
-        self.getModules { (result) -> Void in
+        self.getModules { (result, cached) -> Void in
             switch result {
             case .Success(let modules):
                 success?(userData: modules)

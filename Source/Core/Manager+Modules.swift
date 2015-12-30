@@ -17,7 +17,7 @@ extension Manager {
      
      - parameter completionHandler:  Closure to be executed when the request has finished
      */
-    public func getModules(offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData, completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
+    public func getModules(offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData, completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>, Bool) -> Void) -> Void {
         
         switch offlinePolicy {
         case .None:
