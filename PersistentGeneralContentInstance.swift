@@ -76,7 +76,7 @@ class PersistentGeneralContentInstance: Object {
         instance.name = self.name
         
         for value in self.values {
-            instance.values[value.key] = value.value
+            instance.values[value.key] = (value.stringValue ?? value.doubleValue.value) ?? value.floatValue.value
         }
         
         instance.createdBy = self.createdBy
