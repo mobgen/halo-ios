@@ -12,18 +12,12 @@ import RealmSwift
 class PersistentValue: Object {
     
     dynamic var key: String = ""
+    dynamic var value: AnyObject = ""
     
-    dynamic var value: String? = nil
-    
-    convenience required init(key: String, value: AnyObject?) {
-        
+    convenience required init(key: String, value: AnyObject) {
         self.init()
         self.key = key
-        
-        if let val = value {
-            self.value = val.description
-        }
-        
+        self.value = value
     }
     
 }
