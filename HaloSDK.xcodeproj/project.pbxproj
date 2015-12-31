@@ -75,6 +75,9 @@
 		006CB9B81B870FC400EB872E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B71B870FC400EB872E /* Tag.swift */; };
 		006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B91B87116D00EB872E /* UserDevice.swift */; };
 		0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0073E6571BBE804400365DBD /* HaloAppDelegate.swift */; };
+		0078163F1C3528C500BCBF84 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
+		007816401C3528C500BCBF84 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
+		007816411C3528C500BCBF84 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; };
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
@@ -256,6 +259,9 @@
 				004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */,
 				004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */,
 				004FEC741BCFB788004216EE /* Quick.framework in Frameworks */,
+				0078163F1C3528C500BCBF84 /* Realm.framework in Frameworks */,
+				007816401C3528C500BCBF84 /* RealmSwift.framework in Frameworks */,
+				007816411C3528C500BCBF84 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,7 +755,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -766,7 +771,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -917,7 +921,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -927,7 +934,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
