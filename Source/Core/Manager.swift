@@ -91,8 +91,8 @@ public class Manager: NSObject {
 
             let defaults = NSUserDefaults.standardUserDefaults()
 
-            // Delete all cached data
-            persist.clearDatabase()
+            // Setup the right realm
+            persist.setupRealm(environment)
             
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
