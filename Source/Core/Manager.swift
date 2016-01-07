@@ -171,12 +171,12 @@ public class Manager: NSObject {
 
                     if self.enablePush {
                         UIApplication.sharedApplication().registerForRemoteNotifications()
-                    } else {
-                        self.setupDefaultSystemTags()
                     }
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
                 }
+                
+                self.setupDefaultSystemTags()
             }
             
         } else {
