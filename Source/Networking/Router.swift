@@ -94,7 +94,7 @@ enum Router: URLRequestConvertible {
             if cred.type == .User {
                 let string = "\(cred.username):\(cred.password)"
                 if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
-                    let base64string = data.base64EncodedDataWithOptions([])
+                    let base64string = data.base64EncodedStringWithOptions([])
                     mutableURLRequest.setValue("Basic \(base64string)", forHTTPHeaderField: "Authorization")
                 }
             }
