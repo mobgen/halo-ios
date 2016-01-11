@@ -24,8 +24,7 @@ class CoreSpec: QuickSpec {
         let mgr = Halo.Manager.sharedInstance
 
         beforeSuite {
-            mgr.clientId = "halotestappclient"
-            mgr.clientSecret = "halotestapppass"
+            mgr.credentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
             mgr.environment = .Stage
         }
 

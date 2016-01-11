@@ -101,6 +101,7 @@
 		00C4DEB41BF5E8C300993B9D /* PersistentGeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */; };
 		00C4DEB61BF5E9EF00993B9D /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */; };
 		00DD96C21BD02F0200AF65CA /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
+		00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EC9D361C43F72F00A3291D /* Credentials.swift */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -230,6 +231,7 @@
 		00C2BCF61C036AE1006473B8 /* ManagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerProtocols.swift; sourceTree = "<group>"; };
 		00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentGeneralContentInstance.swift; sourceTree = "<group>"; };
 		00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentValue.swift; sourceTree = "<group>"; };
+		00EC9D361C43F72F00A3291D /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -342,6 +344,7 @@
 				00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */,
 				002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */,
 				00C2BCF61C036AE1006473B8 /* ManagerProtocols.swift */,
+				00EC9D361C43F72F00A3291D /* Credentials.swift */,
 			);
 			name = Core;
 			path = Source/Core;
@@ -708,6 +711,7 @@
 				00C2BCF31C03398E006473B8 /* PersistenceManager+Modules.swift in Sources */,
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
 				000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */,
+				00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,

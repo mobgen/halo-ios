@@ -100,26 +100,15 @@ public class Manager: NSObject {
         }
     }
 
-    /// Client id to be used in the API calls
-    public var clientId: String? {
+    public var credentials: Credentials? {
         get {
-            return net.clientId
+            return net.credentials
         }
         set {
-            net.clientId = newValue
+            net.credentials = newValue
         }
     }
-
-    /// Client secret to be used in the API calls
-    public var clientSecret: String? {
-        get {
-            return net.clientSecret
-        }
-        set {
-            net.clientSecret = newValue
-        }
-    }
-
+    
     /// Variable to decide whether to enable push notifications or not
     public var enablePush: Bool = false
 
@@ -147,17 +136,23 @@ public class Manager: NSObject {
             if let data = NSDictionary(contentsOfFile: path) {
                 let clientIdKey = CoreConstants.clientIdKey
                 let clientSecretKey = CoreConstants.clientSecretKey
+                let usernameKey = CoreConstants.usernameKey
+                let passwordKey = CoreConstants.passwordKey
                 
-                self.net.clientId = data[clientIdKey] as? String
-                self.net.clientSecret = data[clientSecretKey] as? String
+                if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
+                    self.credentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                } else if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
+                    self.credentials = Credentials(username: username, password: password)
+                }
+                
                 self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
             }
         } else {
             NSLog("No .plist found")
         }
 
-        if let cId = self.net.clientId, let secret = self.net.clientSecret {
-            NSLog("Using client ID: \(cId) and client secret: \(secret)")
+        if let cred = self.net.credentials {
+            NSLog("Using client ID: \(cred.username) and client secret: \(cred.password)")
         }
 
         self.user = Halo.User.loadUser(self.environment)
