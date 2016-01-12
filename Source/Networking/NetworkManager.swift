@@ -147,8 +147,6 @@ class NetworkManager: Alamofire.Manager {
                 }
             }
             
-            NSLog("Params: \(params)")
-            
             self.request(Router.OAuth(cred, params)).responseJSON { response in
                 switch response.result {
                 case .Success(let value):
