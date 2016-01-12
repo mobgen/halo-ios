@@ -158,7 +158,7 @@ class NetworkManager: Alamofire.Manager {
                         if resp.statusCode == 200 {
                             Router.token = Token(dict)
                         } else {
-                            NSLog("Error retrieving token")
+                            NSLog("Error retrieving token (\(resp))")
                         }
                     } else {
                         // No response

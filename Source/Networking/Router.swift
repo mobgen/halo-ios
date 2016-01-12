@@ -96,6 +96,7 @@ enum Router: URLRequestConvertible {
                 if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
                     let base64string = data.base64EncodedStringWithOptions([])
                     mutableURLRequest.setValue("Basic \(base64string)", forHTTPHeaderField: "Authorization")
+                    NSLog("Using Authorization header: Basic \(base64string)")
                 }
             }
             
