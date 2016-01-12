@@ -20,14 +20,14 @@ public class Credentials: NSObject {
     var password: String = ""
     var type: CredentialType = .App
     
-    init(username: String, password: String) {
+    public init(username: String, password: String) {
         super.init()
         self.type = .User
         self.username = username
         self.password = password
     }
     
-    init(clientId: String, clientSecret: String) {
+    public init(clientId: String, clientSecret: String) {
         super.init()
         self.type = .App
         self.username = clientId
