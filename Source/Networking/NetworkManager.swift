@@ -31,7 +31,11 @@ class NetworkManager: Alamofire.Manager {
     /// Singleton instance of the custom network manager
     static let instance = NetworkManager()
 
-    var credentials: Credentials?
+    var credentials: Credentials? {
+        didSet {
+            Router.token = nil
+        }
+    }
     
     /// Variable that flags whether the manager is currently refreshing the auth token
     private var isRefreshing = false
