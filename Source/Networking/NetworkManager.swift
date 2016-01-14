@@ -34,6 +34,7 @@ class NetworkManager: Alamofire.Manager {
     var credentials: Credentials? {
         didSet {
             Router.token = nil
+            self.refreshToken()
         }
     }
     
