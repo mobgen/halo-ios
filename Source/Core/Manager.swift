@@ -109,6 +109,12 @@ public class Manager: NSObject {
         }
     }
     
+    public var token: Token? {
+        get {
+            return Router.token
+        }
+    }
+    
     /// Variable to decide whether to enable push notifications or not
     public var enablePush: Bool = false
 
@@ -131,6 +137,7 @@ public class Manager: NSObject {
         Router.userAlias = nil
         
         let bundle = NSBundle.mainBundle()
+        
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
@@ -152,7 +159,7 @@ public class Manager: NSObject {
         }
 
         if let cred = self.net.credentials {
-            NSLog("Using client ID: \(cred.username) and client secret: \(cred.password)")
+            NSLog("Using credentials: \(cred.username) / \(cred.password)")
         }
 
         self.user = Halo.User.loadUser(self.environment)
@@ -166,12 +173,13 @@ public class Manager: NSObject {
 
                     if self.enablePush {
                         UIApplication.sharedApplication().registerForRemoteNotifications()
+                    } else {
+                        self.setupDefaultSystemTags()
                     }
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
+                    self.setupDefaultSystemTags()
                 }
-                
-                self.setupDefaultSystemTags()
             }
             
         } else {
