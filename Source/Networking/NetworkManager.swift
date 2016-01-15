@@ -58,6 +58,7 @@ class NetworkManager: Alamofire.Manager {
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
+        configuration.URLCache = nil
         
         var trustManager: ServerTrustPolicyManager?
         
