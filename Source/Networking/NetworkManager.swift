@@ -37,11 +37,12 @@ private struct CachedTask {
 class NetworkManager: Alamofire.Manager {
 
     /// Singleton instance of the custom network manager
-    static let instance = NetworkManager()
+    static var instance = NetworkManager()
 
     var credentials: Credentials? {
         didSet {
             Router.token = nil
+            NetworkManager.instance = NetworkManager()
             self.refreshToken()
         }
     }
