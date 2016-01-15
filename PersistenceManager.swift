@@ -24,7 +24,7 @@ class PersistenceManager {
     func setupRealm(environment: HaloEnvironment) {
         var config = Realm.Configuration()
         
-        // Use the default directory, but replace the filename with the username
+        // Use the default directory, but replace the filename with the environment name
         config.path = NSURL.fileURLWithPath(config.path!)
             .URLByDeletingLastPathComponent?
             .URLByAppendingPathComponent("\(environment.rawValue).realm")

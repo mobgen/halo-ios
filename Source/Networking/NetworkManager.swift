@@ -12,9 +12,7 @@ import Alamofire
 // Add an extension to print a debug log of the requests
 extension Request {
     public func debugLog() -> Self {
-        #if DEBUG
-            debugPrint(self)
-        #endif
+        debugPrint(self)
         return self
     }
 }
