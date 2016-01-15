@@ -85,6 +85,8 @@ enum Router: URLRequestConvertible {
             mutableURLRequest.setValue(alias, forHTTPHeaderField: "X-AppUser-Alias")
         }
         
+        mutableURLRequest.setValue("close", forHTTPHeaderField: "Connection")
+        
         /**
         *  My god.. really awful. Think of a better way of doing this!
         */
