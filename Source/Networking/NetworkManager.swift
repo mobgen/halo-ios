@@ -51,20 +51,20 @@ class NetworkManager: Alamofire.Manager {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
 
-        var sslPinning = false
+        var disableSSLpinning = false
 
         let bundle = NSBundle.mainBundle()
 
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
-                sslPinning = data[CoreConstants.enableSSLpinning] as? Bool ?? false
+                disableSSLpinning = data[CoreConstants.disableSSLpinning] as? Bool ?? false
             }
         }
 
         var trustManager: ServerTrustPolicyManager?
 
-        if sslPinning {
+        if !disableSSLpinning {
             if let bundle = NSBundle(identifier: "com.mobgen.HaloSDK") {
 
                 let serverTrustPolicy = ServerTrustPolicy.PinCertificates(

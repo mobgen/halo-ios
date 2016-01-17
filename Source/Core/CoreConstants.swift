@@ -29,7 +29,7 @@ public class CoreConstants {
     /// Key which identifies the option to enable push notifications within the configuration plist
     static let enablePush = "ENABLE_PUSH"
 
-    static let enableSSLpinning = "ENABLE_SSL_PINNING"
+    static let disableSSLpinning = "DISABLE_SSL_PINNING"
 
     // MARK: User defaults keys
 
