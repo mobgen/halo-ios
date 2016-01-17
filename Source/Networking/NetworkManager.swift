@@ -106,7 +106,7 @@ class NetworkManager: Alamofire.Manager {
 
         let request = self.request(request)
 
-        request.debugLog().responseJSON { [weak self] response in
+        request.responseJSON { [weak self] response in
             if let strongSelf = self {
                 if let resp = response.response {
                     if resp.statusCode == 403 || resp.statusCode == 401 {
