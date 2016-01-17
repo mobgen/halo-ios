@@ -37,6 +37,8 @@ enum Router: URLRequestConvertible {
             return .POST
         case .SegmentationUpdateUser(_):
             return .PUT
+        case .CustomRequest(let method, _, _):
+            return method
         default:
             return .GET
         }
