@@ -9,14 +9,6 @@
 import Foundation
 import Alamofire
 
-// Add an extension to print a debug log of the requests
-extension Request {
-    public func debugLog() -> Self {
-        debugPrint(self)
-        return self
-    }
-}
-
 //typealias CompletionHandler = (Alamofire.Response) -> Void
 typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Result<AnyObject, NSError>) -> Void
 
@@ -58,30 +50,43 @@ class NetworkManager: Alamofire.Manager {
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
-        configuration.URLCache = nil
-        
-        var trustManager: ServerTrustPolicyManager?
-        
-        if let bundle = NSBundle(identifier: "com.mobgen.HaloSDK") {
-            
-            let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
-                certificates: ServerTrustPolicy.certificatesInBundle(bundle),
-                validateCertificateChain: true,
-                validateHost: true)
-            
-            trustManager = ServerTrustPolicyManager(policies: [
-                "halo-int.mobgen.com" : serverTrustPolicy,
-                "halo-qa.mobgen.com" : serverTrustPolicy,
-                "halo-stage.mobgen.com" : serverTrustPolicy,
-                "halo.mobgen.com" : serverTrustPolicy
-            ])
+
+        var sslPinning = false
+
+        let bundle = NSBundle.mainBundle()
+
+        if let path = bundle.pathForResource("Halo", ofType: "plist") {
+
+            if let data = NSDictionary(contentsOfFile: path) {
+                sslPinning = data[CoreConstants.enableSSLpinning] as? Bool ?? false
+            }
         }
-        
+
+        var trustManager: ServerTrustPolicyManager?
+
+        if sslPinning {
+            if let bundle = NSBundle(identifier: "com.mobgen.HaloSDK") {
+
+                let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
+                    certificates: ServerTrustPolicy.certificatesInBundle(bundle),
+                    validateCertificateChain: true,
+                    validateHost: true)
+
+                trustManager = ServerTrustPolicyManager(policies: [
+                    "halo-int.mobgen.com" : serverTrustPolicy,
+                    "halo-qa.mobgen.com" : serverTrustPolicy,
+                    "halo-stage.mobgen.com" : serverTrustPolicy,
+                    "halo.mobgen.com" : serverTrustPolicy
+                    ])
+            }
+        }
+
         super.init(configuration: configuration,
             delegate: sessionDelegate,
             serverTrustPolicyManager: trustManager)
+
     }
-    
+
     /**
     Start the request flow handling also a potential 401/403 response. The token will be obtained/refreshed
     and the request will continue.
