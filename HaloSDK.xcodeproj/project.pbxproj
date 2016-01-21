@@ -133,7 +133,7 @@
 		008E2AFC1C5111D500FACAB2 /* libGTMStackTrace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */; };
 		008E2B031C51320C00FACAB2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B021C51320C00FACAB2 /* libsqlite3.tbd */; };
 		008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */; };
-		008E2B0A1C51374600FACAB2 /* Halo-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */; };
+		008E2B0A1C51374600FACAB2 /* Halo-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
