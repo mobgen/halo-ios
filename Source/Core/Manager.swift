@@ -57,7 +57,7 @@ public protocol ManagerDelegate {
 
 /// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
-public class Manager: NSObject {
+public class Manager: NSObject, GGLInstanceIDDelegate {
 
     /// Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Halo.Manager()
@@ -75,6 +75,10 @@ public class Manager: NSObject {
     /// Bluetooth manager to decide whether the device supports BLE
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
 
+    private var gcmSenderId: String?
+    
+    private var deviceToken: NSData?
+    
     /// Current environment (QA, Integration or Prod)
     public var environment: HaloEnvironment = .Prod {
         didSet {
@@ -124,7 +128,16 @@ public class Manager: NSObject {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
-    private override init() {}
+    private override init() {
+    
+        if let path = NSBundle.mainBundle().pathForResource("GoogleService-Info", ofType: "plist") {
+            
+            if let dict = NSDictionary(contentsOfFile: path) {
+                self.gcmSenderId = dict["GCM_SENDER_ID"] as? String
+            }
+        }
+    
+    }
 
     /**
     Perform the initial tasks to properly set up the SDK
@@ -276,20 +289,70 @@ public class Manager: NSObject {
     - parameter deviceToken: Device token returned after registering for push notifications
     */
     private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
+        
+        self.deviceToken = deviceToken
+        
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         app.registerUserNotificationSettings(settings)
 
-        let token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
-        
-        let device = UserDevice(platform: "ios", token: token)
-        self.user?.devices = [device]
+        //let token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
 
-        NSLog("Push device token: \(deviceToken.description)")
+        // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
         
-        self.setupDefaultSystemTags()
+        let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
+        instanceIDConfig.delegate = self
         
+        if let senderId = self.gcmSenderId {
+            
+            // Start the GGLInstanceID shared instance with that config and request a registration
+            // token to enable reception of notifications
+            let instance = GGLInstanceID.sharedInstance()
+            
+            instance.startWithConfig(instanceIDConfig)
+            
+            let registrationOptions = [
+                kGGLInstanceIDRegisterAPNSOption: deviceToken,
+                kGGLInstanceIDAPNSServerTypeSandboxOption: true
+            ]
+            
+            instance.tokenWithAuthorizedEntity(senderId, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
+                let device = UserDevice(platform: "ios", token: token)
+                self.user?.devices = [device]
+                
+                NSLog("Push device token: \(token)")
+                
+                self.setupDefaultSystemTags()
+            })
+        } else {
+            self.setupDefaultSystemTags()
+        }
     }
 
+    // GGLInstanceIDDelegate methods
+    
+    public func onTokenRefresh() {
+        // A rotation of the registration tokens is happening, so the app needs to request a new token.
+        print("The GCM registration token needs to be changed.")
+        
+        if let senderId = self.gcmSenderId, devToken = self.deviceToken {
+            
+            let registrationOptions = [
+                kGGLInstanceIDRegisterAPNSOption: devToken,
+                kGGLInstanceIDAPNSServerTypeSandboxOption: true
+            ]
+            
+            GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(senderId,
+                scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
+                    let device = UserDevice(platform: "ios", token: token)
+                    self.user?.devices = [device]
+                    
+                    if let currentUser = self.user {
+                        self.net.createUpdateUser(currentUser)
+                    }
+            })
+        }
+    }
+    
     /**
      Pass through the push notifications setup. To be called within the method in the app delegate.
      

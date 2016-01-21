@@ -85,6 +85,53 @@
 		0082D9C31B98911200298AB8 /* instance_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0082D9C21B98911200298AB8 /* instance_list_success.json */; };
 		0084E6E21BE0D945004C69A2 /* NetworkManager+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */; };
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
+		008E2ACE1C5111D500FACAB2 /* GGLInstanceID.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A851C5111D500FACAB2 /* GGLInstanceID.h */; };
+		008E2ACF1C5111D500FACAB2 /* GGLInstanceIDConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A861C5111D500FACAB2 /* GGLInstanceIDConfig.h */; };
+		008E2AD01C5111D500FACAB2 /* GGLInstanceIDDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A871C5111D500FACAB2 /* GGLInstanceIDDelegate.h */; };
+		008E2AD11C5111D500FACAB2 /* GGLInstanceIDHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A881C5111D500FACAB2 /* GGLInstanceIDHeaders.h */; };
+		008E2AD21C5111D500FACAB2 /* libGGLInstanceIDLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2A8B1C5111D500FACAB2 /* libGGLInstanceIDLib.a */; };
+		008E2AD31C5111D500FACAB2 /* CloudMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A8E1C5111D500FACAB2 /* CloudMessaging.h */; };
+		008E2AD41C5111D500FACAB2 /* GGLContext+CloudMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A8F1C5111D500FACAB2 /* GGLContext+CloudMessaging.h */; };
+		008E2AD51C5111D500FACAB2 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A921C5111D500FACAB2 /* Core.h */; };
+		008E2AD61C5111D500FACAB2 /* GGLConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A931C5111D500FACAB2 /* GGLConfiguration.h */; };
+		008E2AD71C5111D500FACAB2 /* GGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A941C5111D500FACAB2 /* GGLContext.h */; };
+		008E2AD81C5111D500FACAB2 /* GGLErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A951C5111D500FACAB2 /* GGLErrorCode.h */; };
+		008E2AD91C5111D500FACAB2 /* AdMob-Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A991C5111D500FACAB2 /* AdMob-Module.h */; };
+		008E2ADA1C5111D500FACAB2 /* Analytics-Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A9A1C5111D500FACAB2 /* Analytics-Module.h */; };
+		008E2ADB1C5111D500FACAB2 /* AppInvite-Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A9B1C5111D500FACAB2 /* AppInvite-Module.h */; };
+		008E2ADC1C5111D500FACAB2 /* CloudMessaging-Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A9C1C5111D500FACAB2 /* CloudMessaging-Module.h */; };
+		008E2ADD1C5111D500FACAB2 /* Core-Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A9D1C5111D500FACAB2 /* Core-Module.h */; };
+		008E2ADE1C5111D500FACAB2 /* SignIn-Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A9E1C5111D500FACAB2 /* SignIn-Module.h */; };
+		008E2ADF1C5111D500FACAB2 /* libGGLCloudMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AA11C5111D500FACAB2 /* libGGLCloudMessaging.a */; };
+		008E2AE01C5111D500FACAB2 /* libGGLCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AA21C5111D500FACAB2 /* libGGLCore.a */; };
+		008E2AE11C5111D500FACAB2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 008E2AA41C5111D500FACAB2 /* README.md */; };
+		008E2AE21C5111D500FACAB2 /* GCMConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AA61C5111D500FACAB2 /* GCMConfig.h */; };
+		008E2AE31C5111D500FACAB2 /* GCMPubSub.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AA71C5111D500FACAB2 /* GCMPubSub.h */; };
+		008E2AE41C5111D500FACAB2 /* GCMReceiverDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AA81C5111D500FACAB2 /* GCMReceiverDelegate.h */; };
+		008E2AE51C5111D500FACAB2 /* GCMService.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AA91C5111D500FACAB2 /* GCMService.h */; };
+		008E2AE61C5111D500FACAB2 /* GoogleCloudMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AAA1C5111D500FACAB2 /* GoogleCloudMessaging.h */; };
+		008E2AE71C5111D500FACAB2 /* libGcmLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AAD1C5111D500FACAB2 /* libGcmLib.a */; };
+		008E2AE81C5111D500FACAB2 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AB01C5111D500FACAB2 /* libProtocolBuffers.a */; };
+		008E2AE91C5111D500FACAB2 /* libGTMSessionFetcher_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AB31C5111D500FACAB2 /* libGTMSessionFetcher_core.a */; };
+		008E2AEA1C5111D500FACAB2 /* libGTMSessionFetcher_full.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AB41C5111D500FACAB2 /* libGTMSessionFetcher_full.a */; };
+		008E2AEB1C5111D500FACAB2 /* libGSDK_Overload.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AB71C5111D500FACAB2 /* libGSDK_Overload.a */; };
+		008E2AEC1C5111D500FACAB2 /* libGTM_AddressBook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ABA1C5111D500FACAB2 /* libGTM_AddressBook.a */; };
+		008E2AED1C5111D500FACAB2 /* libGTM_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ABB1C5111D500FACAB2 /* libGTM_core.a */; };
+		008E2AEE1C5111D500FACAB2 /* libGTM_DebugUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ABC1C5111D500FACAB2 /* libGTM_DebugUtils.a */; };
+		008E2AEF1C5111D500FACAB2 /* libGTM_GTMURLBuilder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ABD1C5111D500FACAB2 /* libGTM_GTMURLBuilder.a */; };
+		008E2AF01C5111D500FACAB2 /* libGTM_iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ABE1C5111D500FACAB2 /* libGTM_iPhone.a */; };
+		008E2AF11C5111D500FACAB2 /* libGTM_KVO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ABF1C5111D500FACAB2 /* libGTM_KVO.a */; };
+		008E2AF21C5111D500FACAB2 /* libGTM_NSData+zlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC01C5111D500FACAB2 /* libGTM_NSData+zlib.a */; };
+		008E2AF31C5111D500FACAB2 /* libGTM_NSDictionary+URLArguments.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC11C5111D500FACAB2 /* libGTM_NSDictionary+URLArguments.a */; };
+		008E2AF41C5111D500FACAB2 /* libGTM_NSScannerJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC21C5111D500FACAB2 /* libGTM_NSScannerJSON.a */; };
+		008E2AF51C5111D500FACAB2 /* libGTM_NSStringHTML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC31C5111D500FACAB2 /* libGTM_NSStringHTML.a */; };
+		008E2AF61C5111D500FACAB2 /* libGTM_NSStringXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC41C5111D500FACAB2 /* libGTM_NSStringXML.a */; };
+		008E2AF71C5111D500FACAB2 /* libGTM_Regex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC51C5111D500FACAB2 /* libGTM_Regex.a */; };
+		008E2AF81C5111D500FACAB2 /* libGTM_RoundedRectPath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC61C5111D500FACAB2 /* libGTM_RoundedRectPath.a */; };
+		008E2AF91C5111D500FACAB2 /* libGTM_StringEncoding.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC71C5111D500FACAB2 /* libGTM_StringEncoding.a */; };
+		008E2AFA1C5111D500FACAB2 /* libGTM_SystemVersion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC81C5111D500FACAB2 /* libGTM_SystemVersion.a */; };
+		008E2AFB1C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC91C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a */; };
+		008E2AFC1C5111D500FACAB2 /* libGTMStackTrace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -182,6 +229,55 @@
 		0082D9C21B98911200298AB8 /* instance_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = instance_list_success.json; sourceTree = "<group>"; };
 		0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Custom.swift"; sourceTree = "<group>"; };
 		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
+		008E2A851C5111D500FACAB2 /* GGLInstanceID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceID.h; sourceTree = "<group>"; };
+		008E2A861C5111D500FACAB2 /* GGLInstanceIDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceIDConfig.h; sourceTree = "<group>"; };
+		008E2A871C5111D500FACAB2 /* GGLInstanceIDDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceIDDelegate.h; sourceTree = "<group>"; };
+		008E2A881C5111D500FACAB2 /* GGLInstanceIDHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceIDHeaders.h; sourceTree = "<group>"; };
+		008E2A8B1C5111D500FACAB2 /* libGGLInstanceIDLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGGLInstanceIDLib.a; sourceTree = "<group>"; };
+		008E2A8E1C5111D500FACAB2 /* CloudMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudMessaging.h; sourceTree = "<group>"; };
+		008E2A8F1C5111D500FACAB2 /* GGLContext+CloudMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GGLContext+CloudMessaging.h"; sourceTree = "<group>"; };
+		008E2A921C5111D500FACAB2 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
+		008E2A931C5111D500FACAB2 /* GGLConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLConfiguration.h; sourceTree = "<group>"; };
+		008E2A941C5111D500FACAB2 /* GGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLContext.h; sourceTree = "<group>"; };
+		008E2A951C5111D500FACAB2 /* GGLErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLErrorCode.h; sourceTree = "<group>"; };
+		008E2A981C5111D500FACAB2 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		008E2A991C5111D500FACAB2 /* AdMob-Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AdMob-Module.h"; sourceTree = "<group>"; };
+		008E2A9A1C5111D500FACAB2 /* Analytics-Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Analytics-Module.h"; sourceTree = "<group>"; };
+		008E2A9B1C5111D500FACAB2 /* AppInvite-Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppInvite-Module.h"; sourceTree = "<group>"; };
+		008E2A9C1C5111D500FACAB2 /* CloudMessaging-Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CloudMessaging-Module.h"; sourceTree = "<group>"; };
+		008E2A9D1C5111D500FACAB2 /* Core-Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Core-Module.h"; sourceTree = "<group>"; };
+		008E2A9E1C5111D500FACAB2 /* SignIn-Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SignIn-Module.h"; sourceTree = "<group>"; };
+		008E2AA11C5111D500FACAB2 /* libGGLCloudMessaging.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGGLCloudMessaging.a; sourceTree = "<group>"; };
+		008E2AA21C5111D500FACAB2 /* libGGLCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGGLCore.a; sourceTree = "<group>"; };
+		008E2AA41C5111D500FACAB2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		008E2AA61C5111D500FACAB2 /* GCMConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCMConfig.h; sourceTree = "<group>"; };
+		008E2AA71C5111D500FACAB2 /* GCMPubSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCMPubSub.h; sourceTree = "<group>"; };
+		008E2AA81C5111D500FACAB2 /* GCMReceiverDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCMReceiverDelegate.h; sourceTree = "<group>"; };
+		008E2AA91C5111D500FACAB2 /* GCMService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCMService.h; sourceTree = "<group>"; };
+		008E2AAA1C5111D500FACAB2 /* GoogleCloudMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleCloudMessaging.h; sourceTree = "<group>"; };
+		008E2AAD1C5111D500FACAB2 /* libGcmLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGcmLib.a; sourceTree = "<group>"; };
+		008E2AB01C5111D500FACAB2 /* libProtocolBuffers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libProtocolBuffers.a; sourceTree = "<group>"; };
+		008E2AB31C5111D500FACAB2 /* libGTMSessionFetcher_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTMSessionFetcher_core.a; sourceTree = "<group>"; };
+		008E2AB41C5111D500FACAB2 /* libGTMSessionFetcher_full.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTMSessionFetcher_full.a; sourceTree = "<group>"; };
+		008E2AB71C5111D500FACAB2 /* libGSDK_Overload.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGSDK_Overload.a; sourceTree = "<group>"; };
+		008E2ABA1C5111D500FACAB2 /* libGTM_AddressBook.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_AddressBook.a; sourceTree = "<group>"; };
+		008E2ABB1C5111D500FACAB2 /* libGTM_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_core.a; sourceTree = "<group>"; };
+		008E2ABC1C5111D500FACAB2 /* libGTM_DebugUtils.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_DebugUtils.a; sourceTree = "<group>"; };
+		008E2ABD1C5111D500FACAB2 /* libGTM_GTMURLBuilder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_GTMURLBuilder.a; sourceTree = "<group>"; };
+		008E2ABE1C5111D500FACAB2 /* libGTM_iPhone.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_iPhone.a; sourceTree = "<group>"; };
+		008E2ABF1C5111D500FACAB2 /* libGTM_KVO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_KVO.a; sourceTree = "<group>"; };
+		008E2AC01C5111D500FACAB2 /* libGTM_NSData+zlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGTM_NSData+zlib.a"; sourceTree = "<group>"; };
+		008E2AC11C5111D500FACAB2 /* libGTM_NSDictionary+URLArguments.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGTM_NSDictionary+URLArguments.a"; sourceTree = "<group>"; };
+		008E2AC21C5111D500FACAB2 /* libGTM_NSScannerJSON.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_NSScannerJSON.a; sourceTree = "<group>"; };
+		008E2AC31C5111D500FACAB2 /* libGTM_NSStringHTML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_NSStringHTML.a; sourceTree = "<group>"; };
+		008E2AC41C5111D500FACAB2 /* libGTM_NSStringXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_NSStringXML.a; sourceTree = "<group>"; };
+		008E2AC51C5111D500FACAB2 /* libGTM_Regex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_Regex.a; sourceTree = "<group>"; };
+		008E2AC61C5111D500FACAB2 /* libGTM_RoundedRectPath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_RoundedRectPath.a; sourceTree = "<group>"; };
+		008E2AC71C5111D500FACAB2 /* libGTM_StringEncoding.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_StringEncoding.a; sourceTree = "<group>"; };
+		008E2AC81C5111D500FACAB2 /* libGTM_SystemVersion.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTM_SystemVersion.a; sourceTree = "<group>"; };
+		008E2AC91C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGTM_UIFont+LineHeight.a"; sourceTree = "<group>"; };
+		008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTMStackTrace.a; sourceTree = "<group>"; };
+		008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Halo-Bridging-Header.h"; sourceTree = "<group>"; };
 		00921B6C1BBBD2CE00B79B50 /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
 		00921B6D1BBBD2CE00B79B50 /* alya.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alya.aiff; sourceTree = "<group>"; };
 		00921B6E1BBBD2CE00B79B50 /* antimony.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = antimony.aiff; sourceTree = "<group>"; };
@@ -246,10 +342,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008E2AF81C5111D500FACAB2 /* libGTM_RoundedRectPath.a in Frameworks */,
+				008E2AF41C5111D500FACAB2 /* libGTM_NSScannerJSON.a in Frameworks */,
+				008E2AD21C5111D500FACAB2 /* libGGLInstanceIDLib.a in Frameworks */,
+				008E2AF21C5111D500FACAB2 /* libGTM_NSData+zlib.a in Frameworks */,
+				008E2AFB1C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a in Frameworks */,
+				008E2AFA1C5111D500FACAB2 /* libGTM_SystemVersion.a in Frameworks */,
+				008E2AF31C5111D500FACAB2 /* libGTM_NSDictionary+URLArguments.a in Frameworks */,
+				008E2AED1C5111D500FACAB2 /* libGTM_core.a in Frameworks */,
+				008E2ADF1C5111D500FACAB2 /* libGGLCloudMessaging.a in Frameworks */,
+				008E2AF71C5111D500FACAB2 /* libGTM_Regex.a in Frameworks */,
+				008E2AF11C5111D500FACAB2 /* libGTM_KVO.a in Frameworks */,
 				0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */,
+				008E2AF91C5111D500FACAB2 /* libGTM_StringEncoding.a in Frameworks */,
+				008E2AEA1C5111D500FACAB2 /* libGTMSessionFetcher_full.a in Frameworks */,
+				008E2AF61C5111D500FACAB2 /* libGTM_NSStringXML.a in Frameworks */,
+				008E2AF51C5111D500FACAB2 /* libGTM_NSStringHTML.a in Frameworks */,
+				008E2AEF1C5111D500FACAB2 /* libGTM_GTMURLBuilder.a in Frameworks */,
 				004FEC6E1BCFB762004216EE /* Alamofire.framework in Frameworks */,
+				008E2AE01C5111D500FACAB2 /* libGGLCore.a in Frameworks */,
 				0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */,
+				008E2AE91C5111D500FACAB2 /* libGTMSessionFetcher_core.a in Frameworks */,
+				008E2AEB1C5111D500FACAB2 /* libGSDK_Overload.a in Frameworks */,
 				003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */,
+				008E2AEE1C5111D500FACAB2 /* libGTM_DebugUtils.a in Frameworks */,
+				008E2AF01C5111D500FACAB2 /* libGTM_iPhone.a in Frameworks */,
+				008E2AEC1C5111D500FACAB2 /* libGTM_AddressBook.a in Frameworks */,
+				008E2AFC1C5111D500FACAB2 /* libGTMStackTrace.a in Frameworks */,
+				008E2AE81C5111D500FACAB2 /* libProtocolBuffers.a in Frameworks */,
+				008E2AE71C5111D500FACAB2 /* libGcmLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +441,7 @@
 				006A5FBB1B318CAC0045395A /* Tests */,
 				005C577F1B5CE6BF0018839D /* Frameworks */,
 				006A5F8D1B318C6E0045395A /* Products */,
+				008E2ACD1C5111D500FACAB2 /* Libraries */,
 				006A5FCD1B318CBC0045395A /* Supporting Files */,
 			);
 			sourceTree = "<group>";
@@ -391,6 +513,7 @@
 			children = (
 				006A5FCE1B318CBC0045395A /* Info.plist */,
 				006238251BCE5B8900E614B3 /* halo.cer */,
+				008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			path = Source;
@@ -445,6 +568,253 @@
 			path = Source/Resources;
 			sourceTree = "<group>";
 		};
+		008E2A891C5111D500FACAB2 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A851C5111D500FACAB2 /* GGLInstanceID.h */,
+				008E2A861C5111D500FACAB2 /* GGLInstanceIDConfig.h */,
+				008E2A871C5111D500FACAB2 /* GGLInstanceIDDelegate.h */,
+				008E2A881C5111D500FACAB2 /* GGLInstanceIDHeaders.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		008E2A8A1C5111D500FACAB2 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A891C5111D500FACAB2 /* Public */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		008E2A8C1C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A8B1C5111D500FACAB2 /* libGGLInstanceIDLib.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		008E2A8D1C5111D500FACAB2 /* GGLInstanceID */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A8A1C5111D500FACAB2 /* Headers */,
+				008E2A8C1C5111D500FACAB2 /* Libraries */,
+			);
+			path = GGLInstanceID;
+			sourceTree = "<group>";
+		};
+		008E2A901C5111D500FACAB2 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A8E1C5111D500FACAB2 /* CloudMessaging.h */,
+				008E2A8F1C5111D500FACAB2 /* GGLContext+CloudMessaging.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		008E2A911C5111D500FACAB2 /* GGLCloudMessaging */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A901C5111D500FACAB2 /* Public */,
+			);
+			path = GGLCloudMessaging;
+			sourceTree = "<group>";
+		};
+		008E2A961C5111D500FACAB2 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A921C5111D500FACAB2 /* Core.h */,
+				008E2A931C5111D500FACAB2 /* GGLConfiguration.h */,
+				008E2A941C5111D500FACAB2 /* GGLContext.h */,
+				008E2A951C5111D500FACAB2 /* GGLErrorCode.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		008E2A971C5111D500FACAB2 /* GGLCore */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A961C5111D500FACAB2 /* Public */,
+			);
+			path = GGLCore;
+			sourceTree = "<group>";
+		};
+		008E2A9F1C5111D500FACAB2 /* ModuleHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A991C5111D500FACAB2 /* AdMob-Module.h */,
+				008E2A9A1C5111D500FACAB2 /* Analytics-Module.h */,
+				008E2A9B1C5111D500FACAB2 /* AppInvite-Module.h */,
+				008E2A9C1C5111D500FACAB2 /* CloudMessaging-Module.h */,
+				008E2A9D1C5111D500FACAB2 /* Core-Module.h */,
+				008E2A9E1C5111D500FACAB2 /* SignIn-Module.h */,
+			);
+			path = ModuleHeaders;
+			sourceTree = "<group>";
+		};
+		008E2AA01C5111D500FACAB2 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A911C5111D500FACAB2 /* GGLCloudMessaging */,
+				008E2A971C5111D500FACAB2 /* GGLCore */,
+				008E2A981C5111D500FACAB2 /* module.modulemap */,
+				008E2A9F1C5111D500FACAB2 /* ModuleHeaders */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		008E2AA31C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AA11C5111D500FACAB2 /* libGGLCloudMessaging.a */,
+				008E2AA21C5111D500FACAB2 /* libGGLCore.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		008E2AA51C5111D500FACAB2 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AA01C5111D500FACAB2 /* Headers */,
+				008E2AA31C5111D500FACAB2 /* Libraries */,
+				008E2AA41C5111D500FACAB2 /* README.md */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
+		008E2AAB1C5111D500FACAB2 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AA61C5111D500FACAB2 /* GCMConfig.h */,
+				008E2AA71C5111D500FACAB2 /* GCMPubSub.h */,
+				008E2AA81C5111D500FACAB2 /* GCMReceiverDelegate.h */,
+				008E2AA91C5111D500FACAB2 /* GCMService.h */,
+				008E2AAA1C5111D500FACAB2 /* GoogleCloudMessaging.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		008E2AAC1C5111D500FACAB2 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AAB1C5111D500FACAB2 /* Public */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		008E2AAE1C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AAD1C5111D500FACAB2 /* libGcmLib.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		008E2AAF1C5111D500FACAB2 /* GoogleCloudMessaging */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AAC1C5111D500FACAB2 /* Headers */,
+				008E2AAE1C5111D500FACAB2 /* Libraries */,
+			);
+			path = GoogleCloudMessaging;
+			sourceTree = "<group>";
+		};
+		008E2AB11C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AB01C5111D500FACAB2 /* libProtocolBuffers.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		008E2AB21C5111D500FACAB2 /* GoogleInterchangeUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AB11C5111D500FACAB2 /* Libraries */,
+			);
+			path = GoogleInterchangeUtilities;
+			sourceTree = "<group>";
+		};
+		008E2AB51C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AB31C5111D500FACAB2 /* libGTMSessionFetcher_core.a */,
+				008E2AB41C5111D500FACAB2 /* libGTMSessionFetcher_full.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		008E2AB61C5111D500FACAB2 /* GoogleNetworkingUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AB51C5111D500FACAB2 /* Libraries */,
+			);
+			path = GoogleNetworkingUtilities;
+			sourceTree = "<group>";
+		};
+		008E2AB81C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AB71C5111D500FACAB2 /* libGSDK_Overload.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		008E2AB91C5111D500FACAB2 /* GoogleSymbolUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				008E2AB81C5111D500FACAB2 /* Libraries */,
+			);
+			path = GoogleSymbolUtilities;
+			sourceTree = "<group>";
+		};
+		008E2ACB1C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2ABA1C5111D500FACAB2 /* libGTM_AddressBook.a */,
+				008E2ABB1C5111D500FACAB2 /* libGTM_core.a */,
+				008E2ABC1C5111D500FACAB2 /* libGTM_DebugUtils.a */,
+				008E2ABD1C5111D500FACAB2 /* libGTM_GTMURLBuilder.a */,
+				008E2ABE1C5111D500FACAB2 /* libGTM_iPhone.a */,
+				008E2ABF1C5111D500FACAB2 /* libGTM_KVO.a */,
+				008E2AC01C5111D500FACAB2 /* libGTM_NSData+zlib.a */,
+				008E2AC11C5111D500FACAB2 /* libGTM_NSDictionary+URLArguments.a */,
+				008E2AC21C5111D500FACAB2 /* libGTM_NSScannerJSON.a */,
+				008E2AC31C5111D500FACAB2 /* libGTM_NSStringHTML.a */,
+				008E2AC41C5111D500FACAB2 /* libGTM_NSStringXML.a */,
+				008E2AC51C5111D500FACAB2 /* libGTM_Regex.a */,
+				008E2AC61C5111D500FACAB2 /* libGTM_RoundedRectPath.a */,
+				008E2AC71C5111D500FACAB2 /* libGTM_StringEncoding.a */,
+				008E2AC81C5111D500FACAB2 /* libGTM_SystemVersion.a */,
+				008E2AC91C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a */,
+				008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		008E2ACC1C5111D500FACAB2 /* GoogleUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				008E2ACB1C5111D500FACAB2 /* Libraries */,
+			);
+			path = GoogleUtilities;
+			sourceTree = "<group>";
+		};
+		008E2ACD1C5111D500FACAB2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				008E2A8D1C5111D500FACAB2 /* GGLInstanceID */,
+				008E2AA51C5111D500FACAB2 /* Google */,
+				008E2AAF1C5111D500FACAB2 /* GoogleCloudMessaging */,
+				008E2AB21C5111D500FACAB2 /* GoogleInterchangeUtilities */,
+				008E2AB61C5111D500FACAB2 /* GoogleNetworkingUtilities */,
+				008E2AB91C5111D500FACAB2 /* GoogleSymbolUtilities */,
+				008E2ACC1C5111D500FACAB2 /* GoogleUtilities */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
 		00C2BCEF1C0338E6006473B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +855,27 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008E2ADE1C5111D500FACAB2 /* SignIn-Module.h in Headers */,
+				008E2AD11C5111D500FACAB2 /* GGLInstanceIDHeaders.h in Headers */,
+				008E2AD81C5111D500FACAB2 /* GGLErrorCode.h in Headers */,
+				008E2AE61C5111D500FACAB2 /* GoogleCloudMessaging.h in Headers */,
+				008E2ACE1C5111D500FACAB2 /* GGLInstanceID.h in Headers */,
+				008E2AE21C5111D500FACAB2 /* GCMConfig.h in Headers */,
+				008E2AD61C5111D500FACAB2 /* GGLConfiguration.h in Headers */,
+				008E2AE41C5111D500FACAB2 /* GCMReceiverDelegate.h in Headers */,
+				008E2ADD1C5111D500FACAB2 /* Core-Module.h in Headers */,
+				008E2AD41C5111D500FACAB2 /* GGLContext+CloudMessaging.h in Headers */,
+				008E2AD51C5111D500FACAB2 /* Core.h in Headers */,
+				008E2ACF1C5111D500FACAB2 /* GGLInstanceIDConfig.h in Headers */,
+				008E2AD91C5111D500FACAB2 /* AdMob-Module.h in Headers */,
+				008E2AD71C5111D500FACAB2 /* GGLContext.h in Headers */,
+				008E2AD01C5111D500FACAB2 /* GGLInstanceIDDelegate.h in Headers */,
+				008E2AE51C5111D500FACAB2 /* GCMService.h in Headers */,
+				008E2ADB1C5111D500FACAB2 /* AppInvite-Module.h in Headers */,
+				008E2ADC1C5111D500FACAB2 /* CloudMessaging-Module.h in Headers */,
+				008E2AE31C5111D500FACAB2 /* GCMPubSub.h in Headers */,
+				008E2AD31C5111D500FACAB2 /* CloudMessaging.h in Headers */,
+				008E2ADA1C5111D500FACAB2 /* Analytics-Module.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,6 +1098,7 @@
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				00C2BCF31C03398E006473B8 /* PersistenceManager+Modules.swift in Sources */,
+				008E2AE11C5111D500FACAB2 /* README.md in Sources */,
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
 				000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */,
 				00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */,
@@ -823,6 +1215,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Halo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
@@ -870,6 +1263,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Halo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
@@ -892,6 +1286,16 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries/GGLInstanceID/Libraries",
+					"$(PROJECT_DIR)/Libraries/Google/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleCloudMessaging/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleInterchangeUtilities/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleNetworkingUtilities/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleSymbolUtilities/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleUtilities/Libraries",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloSDK;
@@ -914,6 +1318,16 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries/GGLInstanceID/Libraries",
+					"$(PROJECT_DIR)/Libraries/Google/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleCloudMessaging/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleInterchangeUtilities/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleNetworkingUtilities/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleSymbolUtilities/Libraries",
+					"$(PROJECT_DIR)/Libraries/GoogleUtilities/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

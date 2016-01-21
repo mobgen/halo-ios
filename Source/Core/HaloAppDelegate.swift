@@ -55,6 +55,22 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         Halo.Manager.sharedInstance.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
+    public func applicationDidBecomeActive(application: UIApplication) {
+        // Connect to the GCM server to receive non-APNS notifications
+        GCMService.sharedInstance().connectWithHandler({
+            (NSError error) -> Void in
+            if error != nil {
+                print("Could not connect to GCM: \(error.localizedDescription)")
+            } else {
+                print("Connected to GCM")
+            }
+        })
+    }
+    
+    public func applicationDidEnterBackground(application: UIApplication) {
+        GCMService.sharedInstance().disconnect()
+    }
+    
     /**
      Handle push notifications
      
@@ -64,6 +80,9 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      */
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
+        // This works only if the app started the GCM service
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+        
         let halo = Halo.Manager.sharedInstance
         NSLog("Content: \(userInfo)")
 
