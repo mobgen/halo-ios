@@ -104,7 +104,6 @@
 		008E2ADE1C5111D500FACAB2 /* SignIn-Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A9E1C5111D500FACAB2 /* SignIn-Module.h */; };
 		008E2ADF1C5111D500FACAB2 /* libGGLCloudMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AA11C5111D500FACAB2 /* libGGLCloudMessaging.a */; };
 		008E2AE01C5111D500FACAB2 /* libGGLCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AA21C5111D500FACAB2 /* libGGLCore.a */; };
-		008E2AE11C5111D500FACAB2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 008E2AA41C5111D500FACAB2 /* README.md */; };
 		008E2AE21C5111D500FACAB2 /* GCMConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AA61C5111D500FACAB2 /* GCMConfig.h */; };
 		008E2AE31C5111D500FACAB2 /* GCMPubSub.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AA71C5111D500FACAB2 /* GCMPubSub.h */; };
 		008E2AE41C5111D500FACAB2 /* GCMReceiverDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2AA81C5111D500FACAB2 /* GCMReceiverDelegate.h */; };
@@ -132,6 +131,8 @@
 		008E2AFA1C5111D500FACAB2 /* libGTM_SystemVersion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC81C5111D500FACAB2 /* libGTM_SystemVersion.a */; };
 		008E2AFB1C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2AC91C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a */; };
 		008E2AFC1C5111D500FACAB2 /* libGTMStackTrace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */; };
+		008E2B031C51320C00FACAB2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B021C51320C00FACAB2 /* libsqlite3.tbd */; };
+		008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -278,6 +279,9 @@
 		008E2AC91C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGTM_UIFont+LineHeight.a"; sourceTree = "<group>"; };
 		008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTMStackTrace.a; sourceTree = "<group>"; };
 		008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Halo-Bridging-Header.h"; sourceTree = "<group>"; };
+		008E2B021C51320C00FACAB2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		008E2B041C5132B900FACAB2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		00921B6C1BBBD2CE00B79B50 /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
 		00921B6D1BBBD2CE00B79B50 /* alya.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alya.aiff; sourceTree = "<group>"; };
 		00921B6E1BBBD2CE00B79B50 /* antimony.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = antimony.aiff; sourceTree = "<group>"; };
@@ -342,6 +346,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */,
+				008E2B031C51320C00FACAB2 /* libsqlite3.tbd in Frameworks */,
 				008E2AF81C5111D500FACAB2 /* libGTM_RoundedRectPath.a in Frameworks */,
 				008E2AF41C5111D500FACAB2 /* libGTM_NSScannerJSON.a in Frameworks */,
 				008E2AD21C5111D500FACAB2 /* libGGLInstanceIDLib.a in Frameworks */,
@@ -417,6 +423,9 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */,
+				008E2B041C5132B900FACAB2 /* CFNetwork.framework */,
+				008E2B021C51320C00FACAB2 /* libsqlite3.tbd */,
 				0024964B1C00892C00F6F734 /* Realm.framework */,
 				0024964C1C00892C00F6F734 /* RealmSwift.framework */,
 				004FEC6F1BCFB788004216EE /* Nimble.framework */,
@@ -1098,7 +1107,6 @@
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				00C2BCF31C03398E006473B8 /* PersistenceManager+Modules.swift in Sources */,
-				008E2AE11C5111D500FACAB2 /* README.md in Sources */,
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
 				000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */,
 				00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */,
@@ -1209,7 +1217,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1257,7 +1265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
