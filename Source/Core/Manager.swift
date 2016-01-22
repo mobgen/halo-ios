@@ -299,16 +299,11 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
 
         // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
         
-        let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
-        instanceIDConfig.delegate = self
-        
         if let senderId = self.gcmSenderId {
             
             // Start the GGLInstanceID shared instance with that config and request a registration
             // token to enable reception of notifications
             let gcm = GGLInstanceID.sharedInstance()
-            
-            gcm.startWithConfig(instanceIDConfig)
             
             let registrationOptions = [
                 kGGLInstanceIDRegisterAPNSOption: deviceToken,

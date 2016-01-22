@@ -35,6 +35,16 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Push notifications
 
+    public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        
+        let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
+        instanceIDConfig.delegate = Manager.sharedInstance
+        
+        GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
+        
+        return true
+    }
+    
     /**
     Just pass through the configuration of the push notifications to the manager.
     
@@ -55,10 +65,10 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         Halo.Manager.sharedInstance.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
-    public func applicationDidBecomeActive(application: UIApplication) {
+    public final func applicationDidBecomeActive(application: UIApplication) {
         // Connect to the GCM server to receive non-APNS notifications
         GCMService.sharedInstance().connectWithHandler({
-            (NSError error) -> Void in
+            (error) -> Void in
             if error != nil {
                 print("Could not connect to GCM: \(error.localizedDescription)")
             } else {
@@ -67,7 +77,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
     
-    public func applicationDidEnterBackground(application: UIApplication) {
+    public final func applicationDidEnterBackground(application: UIApplication) {
         GCMService.sharedInstance().disconnect()
     }
     
