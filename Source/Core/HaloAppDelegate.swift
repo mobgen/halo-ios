@@ -73,7 +73,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         Halo.Manager.sharedInstance.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
-    public final func applicationDidBecomeActive(application: UIApplication) {
+    public func applicationDidBecomeActive(application: UIApplication) {
         // Connect to the GCM server to receive non-APNS notifications
         GCMService.sharedInstance().connectWithHandler({
             (error) -> Void in
@@ -85,7 +85,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
     
-    public final func applicationDidEnterBackground(application: UIApplication) {
+    public func applicationDidEnterBackground(application: UIApplication) {
         GCMService.sharedInstance().disconnect()
     }
     
