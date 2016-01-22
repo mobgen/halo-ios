@@ -1368,6 +1368,7 @@
 					"$(PROJECT_DIR)/Libraries/GoogleUtilities/Libraries",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1401,6 +1402,7 @@
 					"$(PROJECT_DIR)/Libraries/GoogleSymbolUtilities/Libraries",
 					"$(PROJECT_DIR)/Libraries/GoogleUtilities/Libraries",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Halo-Bridging-Header.h";
