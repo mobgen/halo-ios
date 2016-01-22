@@ -89,6 +89,10 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         GCMService.sharedInstance().disconnect()
     }
     
+    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { (fetchResult) -> Void in })
+    }
+    
     /**
      Handle push notifications
      
@@ -102,8 +106,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         GCMService.sharedInstance().appDidReceiveMessage(userInfo);
         
         let halo = Halo.Manager.sharedInstance
-        NSLog("Content: \(userInfo)")
-
+        
         if let silent = userInfo["content_available"] as? Int {
             if silent == 1 {
                 halo.pushDelegate?.handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
