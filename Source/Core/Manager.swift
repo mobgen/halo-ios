@@ -57,7 +57,7 @@ public protocol ManagerDelegate {
 
 /// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
-public class Manager: NSObject, GGLInstanceIDDelegate {
+public class Manager: NSObject, GGLInstanceIDDelegate, GCMReceiverDelegate {
 
     /// Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Halo.Manager()
@@ -75,7 +75,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
     /// Bluetooth manager to decide whether the device supports BLE
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
 
-    private var gcmSenderId: String?
+    var gcmSenderId: String?
     
     private var deviceToken: NSData?
     
@@ -128,16 +128,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
-    private override init() {
-    
-        if let path = NSBundle.mainBundle().pathForResource("GoogleService-Info", ofType: "plist") {
-            
-            if let dict = NSDictionary(contentsOfFile: path) {
-                self.gcmSenderId = dict["GCM_SENDER_ID"] as? String
-            }
-        }
-    
-    }
+    private override init() {}
 
     /**
     Perform the initial tasks to properly set up the SDK
@@ -292,9 +283,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
         
         self.deviceToken = deviceToken
         
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        app.registerUserNotificationSettings(settings)
-
         //let token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
 
         // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
@@ -304,6 +292,12 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
             // Start the GGLInstanceID shared instance with that config and request a registration
             // token to enable reception of notifications
             let gcm = GGLInstanceID.sharedInstance()
+            
+            let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
+            instanceIDConfig.delegate = self
+            // Start the GGLInstanceID shared instance with that config and request a registration
+            // token to enable reception of notifications
+            gcm.startWithConfig(instanceIDConfig)
             
             let registrationOptions = [
                 kGGLInstanceIDRegisterAPNSOption: deviceToken,
@@ -346,6 +340,18 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                     }
             })
         }
+    }
+    
+    public func didSendDataMessageWithID(messageID: String!) {
+        
+    }
+    
+    public func willSendDataMessageWithID(messageID: String!, error: NSError!) {
+        
+    }
+    
+    public func didDeleteMessagesOnServer() {
+        
     }
     
     /**

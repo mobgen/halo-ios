@@ -37,10 +37,18 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
     public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         
-        let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
-        instanceIDConfig.delegate = Manager.sharedInstance
+        var configureError:NSError?
         
-        GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        Manager.sharedInstance.gcmSenderId = GGLContext.sharedInstance().configuration.gcmSenderID
+        
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        
+        let gcmConfig = GCMConfig.defaultConfig()
+        gcmConfig.receiverDelegate = Manager.sharedInstance
+        GCMService.sharedInstance().startWithConfig(gcmConfig)
         
         return true
     }
