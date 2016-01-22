@@ -306,16 +306,16 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
             
             // Start the GGLInstanceID shared instance with that config and request a registration
             // token to enable reception of notifications
-            let instance = GGLInstanceID.sharedInstance()
+            let gcm = GGLInstanceID.sharedInstance()
             
-            instance.startWithConfig(instanceIDConfig)
+            gcm.startWithConfig(instanceIDConfig)
             
             let registrationOptions = [
                 kGGLInstanceIDRegisterAPNSOption: deviceToken,
                 kGGLInstanceIDAPNSServerTypeSandboxOption: true
             ]
             
-            instance.tokenWithAuthorizedEntity(senderId, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
+            gcm.tokenWithAuthorizedEntity(senderId, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
                 let device = UserDevice(platform: "ios", token: token)
                 self.user?.devices = [device]
                 
