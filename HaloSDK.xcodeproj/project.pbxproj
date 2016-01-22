@@ -134,6 +134,31 @@
 		008E2B031C51320C00FACAB2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B021C51320C00FACAB2 /* libsqlite3.tbd */; };
 		008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */; };
 		008E2B0A1C51374600FACAB2 /* Halo-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		008E2B0D1C521D9900FACAB2 /* libGGLInstanceIDLib.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2A8B1C5111D500FACAB2 /* libGGLInstanceIDLib.a */; };
+		008E2B0E1C521D9900FACAB2 /* libGGLCloudMessaging.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AA11C5111D500FACAB2 /* libGGLCloudMessaging.a */; };
+		008E2B0F1C521D9900FACAB2 /* libGGLCore.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AA21C5111D500FACAB2 /* libGGLCore.a */; };
+		008E2B101C521D9900FACAB2 /* libGcmLib.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AAD1C5111D500FACAB2 /* libGcmLib.a */; };
+		008E2B111C521D9900FACAB2 /* libProtocolBuffers.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AB01C5111D500FACAB2 /* libProtocolBuffers.a */; };
+		008E2B121C521D9900FACAB2 /* libGTMSessionFetcher_core.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AB31C5111D500FACAB2 /* libGTMSessionFetcher_core.a */; };
+		008E2B131C521D9900FACAB2 /* libGTMSessionFetcher_full.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AB41C5111D500FACAB2 /* libGTMSessionFetcher_full.a */; };
+		008E2B141C521D9900FACAB2 /* libGSDK_Overload.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AB71C5111D500FACAB2 /* libGSDK_Overload.a */; };
+		008E2B151C521D9900FACAB2 /* libGTM_AddressBook.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2ABA1C5111D500FACAB2 /* libGTM_AddressBook.a */; };
+		008E2B161C521D9900FACAB2 /* libGTM_core.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2ABB1C5111D500FACAB2 /* libGTM_core.a */; };
+		008E2B171C521D9900FACAB2 /* libGTM_DebugUtils.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2ABC1C5111D500FACAB2 /* libGTM_DebugUtils.a */; };
+		008E2B181C521D9900FACAB2 /* libGTM_GTMURLBuilder.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2ABD1C5111D500FACAB2 /* libGTM_GTMURLBuilder.a */; };
+		008E2B191C521D9900FACAB2 /* libGTM_iPhone.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2ABE1C5111D500FACAB2 /* libGTM_iPhone.a */; };
+		008E2B1A1C521D9900FACAB2 /* libGTM_KVO.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2ABF1C5111D500FACAB2 /* libGTM_KVO.a */; };
+		008E2B1B1C521D9900FACAB2 /* libGTM_NSData+zlib.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC01C5111D500FACAB2 /* libGTM_NSData+zlib.a */; };
+		008E2B1C1C521D9900FACAB2 /* libGTM_NSDictionary+URLArguments.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC11C5111D500FACAB2 /* libGTM_NSDictionary+URLArguments.a */; };
+		008E2B1D1C521D9900FACAB2 /* libGTM_NSScannerJSON.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC21C5111D500FACAB2 /* libGTM_NSScannerJSON.a */; };
+		008E2B1E1C521D9900FACAB2 /* libGTM_NSStringHTML.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC31C5111D500FACAB2 /* libGTM_NSStringHTML.a */; };
+		008E2B1F1C521D9900FACAB2 /* libGTM_NSStringXML.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC41C5111D500FACAB2 /* libGTM_NSStringXML.a */; };
+		008E2B201C521D9900FACAB2 /* libGTM_Regex.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC51C5111D500FACAB2 /* libGTM_Regex.a */; };
+		008E2B211C521D9900FACAB2 /* libGTM_RoundedRectPath.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC61C5111D500FACAB2 /* libGTM_RoundedRectPath.a */; };
+		008E2B221C521D9900FACAB2 /* libGTM_StringEncoding.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC71C5111D500FACAB2 /* libGTM_StringEncoding.a */; };
+		008E2B231C521D9900FACAB2 /* libGTM_SystemVersion.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC81C5111D500FACAB2 /* libGTM_SystemVersion.a */; };
+		008E2B241C521D9900FACAB2 /* libGTM_UIFont+LineHeight.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2AC91C5111D500FACAB2 /* libGTM_UIFont+LineHeight.a */; };
+		008E2B251C521D9900FACAB2 /* libGTMStackTrace.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -171,6 +196,40 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		008E2B0C1C521D6100FACAB2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				008E2B0D1C521D9900FACAB2 /* libGGLInstanceIDLib.a in CopyFiles */,
+				008E2B0E1C521D9900FACAB2 /* libGGLCloudMessaging.a in CopyFiles */,
+				008E2B0F1C521D9900FACAB2 /* libGGLCore.a in CopyFiles */,
+				008E2B101C521D9900FACAB2 /* libGcmLib.a in CopyFiles */,
+				008E2B111C521D9900FACAB2 /* libProtocolBuffers.a in CopyFiles */,
+				008E2B121C521D9900FACAB2 /* libGTMSessionFetcher_core.a in CopyFiles */,
+				008E2B131C521D9900FACAB2 /* libGTMSessionFetcher_full.a in CopyFiles */,
+				008E2B141C521D9900FACAB2 /* libGSDK_Overload.a in CopyFiles */,
+				008E2B151C521D9900FACAB2 /* libGTM_AddressBook.a in CopyFiles */,
+				008E2B161C521D9900FACAB2 /* libGTM_core.a in CopyFiles */,
+				008E2B171C521D9900FACAB2 /* libGTM_DebugUtils.a in CopyFiles */,
+				008E2B181C521D9900FACAB2 /* libGTM_GTMURLBuilder.a in CopyFiles */,
+				008E2B191C521D9900FACAB2 /* libGTM_iPhone.a in CopyFiles */,
+				008E2B1A1C521D9900FACAB2 /* libGTM_KVO.a in CopyFiles */,
+				008E2B1B1C521D9900FACAB2 /* libGTM_NSData+zlib.a in CopyFiles */,
+				008E2B1C1C521D9900FACAB2 /* libGTM_NSDictionary+URLArguments.a in CopyFiles */,
+				008E2B1D1C521D9900FACAB2 /* libGTM_NSScannerJSON.a in CopyFiles */,
+				008E2B1E1C521D9900FACAB2 /* libGTM_NSStringHTML.a in CopyFiles */,
+				008E2B1F1C521D9900FACAB2 /* libGTM_NSStringXML.a in CopyFiles */,
+				008E2B201C521D9900FACAB2 /* libGTM_Regex.a in CopyFiles */,
+				008E2B211C521D9900FACAB2 /* libGTM_RoundedRectPath.a in CopyFiles */,
+				008E2B221C521D9900FACAB2 /* libGTM_StringEncoding.a in CopyFiles */,
+				008E2B231C521D9900FACAB2 /* libGTM_SystemVersion.a in CopyFiles */,
+				008E2B241C521D9900FACAB2 /* libGTM_UIFont+LineHeight.a in CopyFiles */,
+				008E2B251C521D9900FACAB2 /* libGTMStackTrace.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0091C0111B7797DC0054EA75 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -919,6 +978,7 @@
 				006A5FAA1B318CAC0045395A /* Headers */,
 				006A5FAB1B318CAC0045395A /* Resources */,
 				00A34E861BDF9F9E0080DD93 /* ShellScript */,
+				008E2B0C1C521D6100FACAB2 /* CopyFiles */,
 			);
 			buildRules = (
 			);
