@@ -9,6 +9,6 @@
 #ifndef Halo_Bridging_Header_h
 #define Halo_Bridging_Header_h
 
-#import "CloudMessaging.h"
+#import <Halo/CloudMessaging.h>
 
 #endif /* Halo_Bridging_Header_h */
