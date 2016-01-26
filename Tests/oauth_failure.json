@@ -1,0 +1,9 @@
+{
+    "error": {
+        "code": 403,
+        "message": "Client not found",
+        "extra": {
+            "expose": true
+        }
+    }
+}
