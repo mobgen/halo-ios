@@ -65,7 +65,7 @@ enum Router: URLRequestConvertible {
         case .SegmentationGetUser(let id):
             return "api/segmentation/appuser/\(id)"
         case .SegmentationUpdateUser(let id, _):
-            return "api/segmentation/appuser/\(id)"
+            return "api/segmentation/appuser/\(id)?replaceTokens=true"
         case .CustomRequest(_, let url, _):
             return "api/\(url)"
         }
