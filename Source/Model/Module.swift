@@ -24,10 +24,10 @@ public class Module: NSObject {
     public var type: Halo.ModuleType?
 
     /// Identifies the module as enabled or not
-    public var enabled: Bool
+    public var enabled: Bool = true
     
     /// Identifies the module as single item module
-    public var isSingle: Bool
+    public var isSingle: Bool = false
     
     /// Date of the last update performed in this module
     public var lastUpdate: NSDate?
@@ -36,8 +36,12 @@ public class Module: NSObject {
     public var internalId: String?
     
     /// Dictionary of tags associated to this module
-    public var tags: [String: Halo.Tag]
-
+    public var tags: [String: Halo.Tag] = [:]
+    
+    override init() {
+        super.init()
+    }
+    
     /**
     Initialise a HaloModule from a dictionary
     

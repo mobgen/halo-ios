@@ -42,3 +42,4 @@ Carthage/
 docs/
 vendor
 bin
+node_modules

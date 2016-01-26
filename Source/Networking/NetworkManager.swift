@@ -31,11 +31,12 @@ class NetworkManager: Alamofire.Manager {
     /// Singleton instance of the custom network manager
     static let instance = NetworkManager()
 
-    /// Client id that identifies the client in the requests agains the API endpoints
-    var clientId: String?
-
-    /// Corresponding client secret to be provided for the API calls
-    var clientSecret: String?
+    var credentials: Credentials? {
+        didSet {
+            Router.token = nil
+            self.refreshToken()
+        }
+    }
     
     /// Variable that flags whether the manager is currently refreshing the auth token
     private var isRefreshing = false
@@ -49,29 +50,43 @@ class NetworkManager: Alamofire.Manager {
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
-        
-        var trustManager: ServerTrustPolicyManager?
-        
-        if let bundle = NSBundle(identifier: "com.mobgen.HaloSDK") {
-            
-            let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
-                certificates: ServerTrustPolicy.certificatesInBundle(bundle),
-                validateCertificateChain: true,
-                validateHost: true)
-            
-            trustManager = ServerTrustPolicyManager(policies: [
-                "halo-int.mobgen.com" : serverTrustPolicy,
-                "halo-qa.mobgen.com" : serverTrustPolicy,
-                "halo-stage.mobgen.com" : serverTrustPolicy,
-                "halo.mobgen.com" : serverTrustPolicy
-                ])
+
+        var disableSSLpinning = false
+
+        let bundle = NSBundle.mainBundle()
+
+        if let path = bundle.pathForResource("Halo", ofType: "plist") {
+
+            if let data = NSDictionary(contentsOfFile: path) {
+                disableSSLpinning = data[CoreConstants.disableSSLpinning] as? Bool ?? false
+            }
         }
-        
+
+        var trustManager: ServerTrustPolicyManager?
+
+        if !disableSSLpinning {
+            if let bundle = NSBundle(identifier: "com.mobgen.HaloSDK") {
+
+                let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
+                    certificates: ServerTrustPolicy.certificatesInBundle(bundle),
+                    validateCertificateChain: true,
+                    validateHost: true)
+
+                trustManager = ServerTrustPolicyManager(policies: [
+                    "halo-int.mobgen.com" : serverTrustPolicy,
+                    "halo-qa.mobgen.com" : serverTrustPolicy,
+                    "halo-stage.mobgen.com" : serverTrustPolicy,
+                    "halo.mobgen.com" : serverTrustPolicy
+                    ])
+            }
+        }
+
         super.init(configuration: configuration,
             delegate: sessionDelegate,
             serverTrustPolicyManager: trustManager)
+
     }
-    
+
     /**
     Start the request flow handling also a potential 401/403 response. The token will be obtained/refreshed
     and the request will continue.
@@ -113,53 +128,75 @@ class NetworkManager: Alamofire.Manager {
     func refreshToken(completionHandler: CompletionHandler? = nil) -> Void {
         self.isRefreshing = true
 
-        let params: Dictionary<String, AnyObject>
-
-        if let token = Router.token {
-            params = [
-                "grant_type" : "refresh_token",
-                "client_id" : self.clientId!,
-                "client_secret" : self.clientSecret!,
-                "refresh_token" : token.refreshToken!
-            ]
-        } else {
-            params = [
-                "grant_type" : "client_credentials",
-                "client_id" : self.clientId!,
-                "client_secret" : self.clientSecret!
-            ]
-        }
-
-        self.request(Router.OAuth(params)).responseJSON { response in
-            switch response.result {
-            case .Success(let value):
-                let dict = value as! Dictionary<String, AnyObject>
-
-                Router.token = nil
-
-                if let resp = response.response {
-                    if resp.statusCode == 200 {
-                        Router.token = Token(dict)
-                    } else {
-                        NSLog("Error retrieving token")
-                    }
-                } else {
-                    // No response
-                    NSLog("No response from server")
+        var params: [String: AnyObject]
+        
+        if let cred = self.credentials {
+            
+            if let token = Router.token {
+                
+                params = [
+                    "grant_type"    : "refresh_token",
+                    "refresh_token" : token.refreshToken!
+                ]
+                
+                switch cred.type {
+                case .App:
+                    params["client_id"] = cred.username
+                    params["client_secret"] = cred.password
+                case .User:
+                    params["username"] = cred.username
+                    params["password"] = cred.password
                 }
-
-            case .Failure(let error):
-                NSLog("Error refreshing token: \(error.localizedDescription)")
+                
+            } else {
+                
+                switch cred.type {
+                case .App:
+                    params = [
+                        "grant_type" : "client_credentials",
+                        "client_id" : cred.username,
+                        "client_secret" : cred.password
+                    ]
+                case .User:
+                    params = [
+                        "grant_type" : "password",
+                        "username" : cred.username,
+                        "password" : cred.password
+                    ]
+                }
             }
             
-            self.isRefreshing = false
-            
-            /// Restart cached tasks
-            let cachedTaskCopy = self.cachedTasks
-            self.cachedTasks.removeAll()
-            let _ = cachedTaskCopy.map { self.startRequest($0.request, completionHandler: $0.handler) }
-
-            completionHandler?(response.request, response.response, response.result)
+            self.request(Router.OAuth(cred, params)).responseJSON { response in
+                switch response.result {
+                case .Success(let value):
+                    let dict = value as! Dictionary<String, AnyObject>
+                    
+                    Router.token = nil
+                    
+                    if let resp = response.response {
+                        if resp.statusCode == 200 {
+                            Router.token = Token(dict)
+                        } else {
+                            NSLog("Error retrieving token")
+                        }
+                    } else {
+                        // No response
+                        NSLog("No response from server")
+                    }
+                    
+                case .Failure(let error):
+                    NSLog("Error refreshing token: \(error.localizedDescription)")
+                }
+                
+                self.isRefreshing = false
+                
+                /// Restart cached tasks
+                let cachedTaskCopy = self.cachedTasks
+                self.cachedTasks.removeAll()
+                let _ = cachedTaskCopy.map { self.startRequest($0.request, completionHandler: $0.handler) }
+                
+                completionHandler?(response.request, response.response, response.result)
+            }
         }
     }
 }

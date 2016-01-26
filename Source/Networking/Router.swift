@@ -20,7 +20,7 @@ enum Router: URLRequestConvertible {
     
     static var userAlias: String?
 
-    case OAuth([String: AnyObject])
+    case OAuth(Credentials, [String: AnyObject])
     case Modules
     case GeneralContentInstances([String: AnyObject])
     case GeneralContentInstance(String)
@@ -32,11 +32,13 @@ enum Router: URLRequestConvertible {
     /// Decide the HTTP method based on the specific request
     var method: Alamofire.Method {
         switch self {
-        case .OAuth(_),
+        case .OAuth(_, _),
              .SegmentationCreateUser(_):
             return .POST
         case .SegmentationUpdateUser(_):
             return .PUT
+        case .CustomRequest(let method, _, _):
+            return method
         default:
             return .GET
         }
@@ -45,8 +47,13 @@ enum Router: URLRequestConvertible {
     /// Decide the URL based on the specific request
     var path: String {
         switch self {
-        case .OAuth(_):
-            return "/api/oauth/token?_1"
+        case .OAuth(let cred, _):
+            switch cred.type {
+            case .App:
+                return "/api/oauth/token?_1"
+            case .User:
+                return "/api/oauth/token?_2"
+            }
         case .Modules:
             return "/api/authentication/module/"
         case .GeneralContentInstances(_):
@@ -58,7 +65,7 @@ enum Router: URLRequestConvertible {
         case .SegmentationGetUser(let id):
             return "api/segmentation/appuser/\(id)"
         case .SegmentationUpdateUser(let id, _):
-            return "api/segmentation/appuser/\(id)"
+            return "api/segmentation/appuser/\(id)?replaceTokens=true"
         case .CustomRequest(_, let url, _):
             return "api/\(url)"
         }
@@ -84,7 +91,17 @@ enum Router: URLRequestConvertible {
         *  My god.. really awful. Think of a better way of doing this!
         */
         switch self {
-        case .OAuth(let params):
+        case .OAuth(let cred, let params):
+            
+            if cred.type == .User {
+                let string = "\(cred.username):\(cred.password)"
+                if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
+                    let base64string = data.base64EncodedStringWithOptions([])
+                    mutableURLRequest.setValue("Basic \(base64string)", forHTTPHeaderField: "Authorization")
+                    NSLog("Using Authorization header: Basic \(base64string)")
+                }
+            }
+            
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         case .GeneralContentInstances(let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0

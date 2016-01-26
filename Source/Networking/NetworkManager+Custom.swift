@@ -12,10 +12,10 @@ import Alamofire
 extension NetworkManager {
     
     func haloRequest(method: Alamofire.Method, url: String, params: [String: AnyObject]?,
-        completionHandler handler: (Alamofire.Result<AnyObject, NSError>) -> Void) -> Void {
+        completionHandler handler: ((Alamofire.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
         
         self.startRequest(Router.CustomRequest(method, url, params)) { (request, response, result) in
-            handler(result)
+            handler?(result)
         }
         
     }

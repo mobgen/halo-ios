@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		000826FF1B6A34DE001E8248 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000826FE1B6A34DE001E8248 /* Router.swift */; };
 		000827011B6A57A5001E8248 /* ModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827001B6A57A5001E8248 /* ModuleType.swift */; };
+		000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */; };
+		000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */; };
+		000EEB4F1BEB66E900C1435D /* PersistentModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */; };
+		00121E8F1BF33B5C00FD656F /* Manager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */; };
+		0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
+		0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
@@ -69,6 +75,9 @@
 		006CB9B81B870FC400EB872E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B71B870FC400EB872E /* Tag.swift */; };
 		006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B91B87116D00EB872E /* UserDevice.swift */; };
 		0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0073E6571BBE804400365DBD /* HaloAppDelegate.swift */; };
+		0078163F1C3528C500BCBF84 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
+		007816401C3528C500BCBF84 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
+		007816411C3528C500BCBF84 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; };
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
@@ -77,7 +86,21 @@
 		0084E6E21BE0D945004C69A2 /* NetworkManager+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */; };
 		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
+		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		00B1BD3E1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1BD3D1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift */; };
+		00C2BCF11C033905006473B8 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF01C033905006473B8 /* PersistenceManager.swift */; };
+		00C2BCF31C03398E006473B8 /* PersistenceManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */; };
+		00C2BCF51C03399A006473B8 /* PersistenceManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */; };
+		00C2BCF71C036AE1006473B8 /* ManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF61C036AE1006473B8 /* ManagerProtocols.swift */; };
+		00C4DEB41BF5E8C300993B9D /* PersistentGeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */; };
+		00C4DEB61BF5E9EF00993B9D /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */; };
 		00DD96C21BD02F0200AF65CA /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
+		00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EC9D361C43F72F00A3291D /* Credentials.swift */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +128,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */,
+				0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */,
+				0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */,
+				009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */,
+				009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */,
+				0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +142,12 @@
 /* Begin PBXFileReference section */
 		000826FE1B6A34DE001E8248 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		000827001B6A57A5001E8248 /* ModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
+		000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModule.swift; sourceTree = "<group>"; };
+		000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTag.swift; sourceTree = "<group>"; };
+		000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModuleType.swift; sourceTree = "<group>"; };
+		00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Manager+Modules.swift"; sourceTree = "<group>"; };
+		0024964B1C00892C00F6F734 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		0024964C1C00892C00F6F734 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
@@ -188,6 +223,14 @@
 		00921B921BBBD2CE00B79B50 /* upsilon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = upsilon.aiff; sourceTree = "<group>"; };
 		00921B931BBBD2CE00B79B50 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 		0094A31F1B70A6A600DED864 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NetworkManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		00B1BD3D1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneralContent+ObjC.swift"; sourceTree = "<group>"; };
+		00C2BCF01C033905006473B8 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+Modules.swift"; sourceTree = "<group>"; };
+		00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+GeneralContent.swift"; sourceTree = "<group>"; };
+		00C2BCF61C036AE1006473B8 /* ManagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerProtocols.swift; sourceTree = "<group>"; };
+		00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentGeneralContentInstance.swift; sourceTree = "<group>"; };
+		00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentValue.swift; sourceTree = "<group>"; };
+		00EC9D361C43F72F00A3291D /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,7 +246,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */,
 				004FEC6E1BCFB762004216EE /* Alamofire.framework in Frameworks */,
+				0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */,
 				003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +260,9 @@
 				004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */,
 				004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */,
 				004FEC741BCFB788004216EE /* Quick.framework in Frameworks */,
+				0078163F1C3528C500BCBF84 /* Realm.framework in Frameworks */,
+				007816401C3528C500BCBF84 /* RealmSwift.framework in Frameworks */,
+				007816411C3528C500BCBF84 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,12 +272,12 @@
 		004539391B67E8090060C30B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0068D27B1B6778CA00B1E147 /* Token.swift */,
+				007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */,
 				0045393A1B67E8170060C30B /* Module.swift */,
 				000827001B6A57A5001E8248 /* ModuleType.swift */,
-				007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */,
-				006CB9B51B870FB800EB872E /* User.swift */,
 				006CB9B71B870FC400EB872E /* Tag.swift */,
+				0068D27B1B6778CA00B1E147 /* Token.swift */,
+				006CB9B51B870FB800EB872E /* User.swift */,
 				006CB9B91B87116D00EB872E /* UserDevice.swift */,
 			);
 			name = Model;
@@ -248,6 +296,8 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0024964B1C00892C00F6F734 /* Realm.framework */,
+				0024964C1C00892C00F6F734 /* RealmSwift.framework */,
 				004FEC6F1BCFB788004216EE /* Nimble.framework */,
 				004FEC701BCFB788004216EE /* OHHTTPStubs.framework */,
 				004FEC711BCFB788004216EE /* Quick.framework */,
@@ -264,6 +314,7 @@
 				006A5FCC1B318CBC0045395A /* Networking */,
 				00D1A36F1B42CA45008DFB71 /* GeneralContent */,
 				004539391B67E8090060C30B /* Model */,
+				00E6E0021BEB5CAC00151356 /* Persistence */,
 				004ADDE91BB1455600FDDFE8 /* Extensions */,
 				006CB97D1B85B87200EB872E /* Resources */,
 				006A5FBB1B318CAC0045395A /* Tests */,
@@ -286,10 +337,13 @@
 		006A5FAE1B318CAC0045395A /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				006A60211B318DCC0045395A /* Manager.swift */,
 				00FF95611B4547D200E751E3 /* CoreConstants.swift */,
-				002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */,
 				0073E6571BBE804400365DBD /* HaloAppDelegate.swift */,
+				006A60211B318DCC0045395A /* Manager.swift */,
+				00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */,
+				002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */,
+				00C2BCF61C036AE1006473B8 /* ManagerProtocols.swift */,
+				00EC9D361C43F72F00A3291D /* Credentials.swift */,
 			);
 			name = Core;
 			path = Source/Core;
@@ -321,12 +375,12 @@
 		006A5FCC1B318CBC0045395A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				000826FE1B6A34DE001E8248 /* Router.swift */,
 				0094A31F1B70A6A600DED864 /* NetworkManager.swift */,
-				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
-				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
-				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
 				0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */,
+				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
+				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
+				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
+				000826FE1B6A34DE001E8248 /* Router.swift */,
 			);
 			name = Networking;
 			path = Source/Networking;
@@ -391,13 +445,37 @@
 			path = Source/Resources;
 			sourceTree = "<group>";
 		};
+		00C2BCEF1C0338E6006473B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */,
+				000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */,
+				000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */,
+				000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */,
+				00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		00D1A36F1B42CA45008DFB71 /* GeneralContent */ = {
 			isa = PBXGroup;
 			children = (
 				0086F52D1B6C20C2001F70DE /* GeneralContent.swift */,
+				00B1BD3D1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift */,
 			);
 			name = GeneralContent;
 			path = Source/GeneralContent;
+			sourceTree = "<group>";
+		};
+		00E6E0021BEB5CAC00151356 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				00C2BCEF1C0338E6006473B8 /* Model */,
+				00C2BCF01C033905006473B8 /* PersistenceManager.swift */,
+				00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */,
+				00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */,
+			);
+			name = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,23 +687,35 @@
 			files = (
 				0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */,
 				0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */,
+				000EEB4F1BEB66E900C1435D /* PersistentModuleType.swift in Sources */,
+				00C2BCF71C036AE1006473B8 /* ManagerProtocols.swift in Sources */,
 				002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */,
 				004ADDEB1BB1456B00FDDFE8 /* NSDate+Utils.swift in Sources */,
 				0084E6E21BE0D945004C69A2 /* NetworkManager+Custom.swift in Sources */,
 				00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */,
 				0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */,
+				00C4DEB41BF5E8C300993B9D /* PersistentGeneralContentInstance.swift in Sources */,
 				006CB9B81B870FC400EB872E /* Tag.swift in Sources */,
 				007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */,
 				007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */,
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,
+				000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */,
+				00B1BD3E1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift in Sources */,
+				00121E8F1BF33B5C00FD656F /* Manager+Modules.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
+				00C2BCF31C03398E006473B8 /* PersistenceManager+Modules.swift in Sources */,
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
+				000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */,
+				00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,
+				00C4DEB61BF5E9EF00993B9D /* PersistentValue.swift in Sources */,
+				00C2BCF11C033905006473B8 /* PersistenceManager.swift in Sources */,
+				00C2BCF51C03399A006473B8 /* PersistenceManager+GeneralContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,7 +757,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -684,7 +773,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloResources;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -707,7 +795,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -761,7 +848,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -801,7 +887,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -815,12 +904,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -831,7 +923,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -841,7 +936,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -26,6 +26,13 @@ public enum HaloEnvironment: String {
     case Prod
 }
 
+@objc
+public enum OfflinePolicy: Int {
+    case None
+    case LoadAndStoreLocalData
+    case ReturnLocalDataDontLoad
+}
+
 /**
 This delegate will provide methods that will act as interception points in the setup process of the SDK
 within the application
@@ -62,6 +69,8 @@ public class Manager: NSObject {
 
     /// Singleton instance of the networking component
     let net = Halo.NetworkManager.instance
+    
+    let persist = Halo.PersistenceManager.sharedInstance
 
     /// Bluetooth manager to decide whether the device supports BLE
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
@@ -82,32 +91,30 @@ public class Manager: NSObject {
 
             let defaults = NSUserDefaults.standardUserDefaults()
 
+            // Setup the right realm
+            persist.setupRealm(environment)
+            
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
             self.launch()
         }
     }
 
-    /// Client id to be used in the API calls
-    public var clientId: String? {
+    public var credentials: Credentials? {
         get {
-            return net.clientId
+            return net.credentials
         }
         set {
-            net.clientId = newValue
+            net.credentials = newValue
         }
     }
-
-    /// Client secret to be used in the API calls
-    public var clientSecret: String? {
+    
+    public var token: Token? {
         get {
-            return net.clientSecret
-        }
-        set {
-            net.clientSecret = newValue
+            return Router.token
         }
     }
-
+    
     /// Variable to decide whether to enable push notifications or not
     public var enablePush: Bool = false
 
@@ -130,22 +137,29 @@ public class Manager: NSObject {
         Router.userAlias = nil
         
         let bundle = NSBundle.mainBundle()
+        
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
                 let clientIdKey = CoreConstants.clientIdKey
                 let clientSecretKey = CoreConstants.clientSecretKey
+                let usernameKey = CoreConstants.usernameKey
+                let passwordKey = CoreConstants.passwordKey
                 
-                self.net.clientId = data[clientIdKey] as? String
-                self.net.clientSecret = data[clientSecretKey] as? String
+                if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
+                    self.credentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                } else if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
+                    self.credentials = Credentials(username: username, password: password)
+                }
+                
                 self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
             }
         } else {
             NSLog("No .plist found")
         }
 
-        if let cId = self.net.clientId, let secret = self.net.clientSecret {
-            NSLog("Using client ID: \(cId) and client secret: \(secret)")
+        if let cred = self.net.credentials {
+            NSLog("Using credentials: \(cred.username) / \(cred.password)")
         }
 
         self.user = Halo.User.loadUser(self.environment)
@@ -164,6 +178,7 @@ public class Manager: NSObject {
                     }
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
+                    self.setupDefaultSystemTags()
                 }
             }
             
@@ -296,15 +311,6 @@ public class Manager: NSObject {
     }
 
     /**
-    Get a list of the existing modules for the provided client credentials
-
-    - parameter completionHandler:  Closure to be executed when the request has finished
-    */
-    public func getModules(completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>) -> Void) -> Void {
-        net.getModules(completionHandler: handler)
-    }
-
-    /**
     Save the current user. Calling this function will trigger an update of the user in the server
 
     - parameter completionHandler: Closure to be executed once the request has finished
@@ -339,7 +345,7 @@ public class Manager: NSObject {
     @objc(getModulesWithSuccess:failure:)
     public func getModulesFromObjC(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
 
-        self.getModules { (result) -> Void in
+        self.getModules { (result, cached) -> Void in
             switch result {
             case .Success(let modules):
                 success?(userData: modules)

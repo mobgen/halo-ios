@@ -24,7 +24,7 @@ public class GeneralContentInstance: NSObject {
     public var name: String?
 
     /// Collection of key-value pairs which make up the information of this instance
-    public var values: [String: AnyObject]?
+    public var values: [String: AnyObject] = [:]
 
     /// Name of the creator of the content
     public var createdBy: String?
@@ -42,16 +42,19 @@ public class GeneralContentInstance: NSObject {
     public var updatedAt: NSDate?
 
     /// Dictionary of tags associated to this general content instance
-    public var tags: [String: Halo.Tag]
+    public var tags: [String: Halo.Tag] = [:]
+    
+    override init() {
+        super.init()
+    }
     
     init(_ dict: [String: AnyObject]) {
         
         id = dict["id"] as? String
         moduleId = dict["module"] as? String
         name = dict["name"] as? String
-        values = dict["values"] as? Dictionary<String, AnyObject>
+        values = dict["values"] as! Dictionary<String, AnyObject>
         createdBy = dict["createdBy"] as? String
-        tags = [:]
         
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
             tags = tagsList.map({ (dict) -> Halo.Tag in

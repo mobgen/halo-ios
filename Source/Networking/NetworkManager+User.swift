@@ -17,17 +17,12 @@ extension NetworkManager {
             
             self.startRequest(Router.SegmentationGetUser(id)) { (request, response, result) in
                 
-                if let resp = response {
-                    
-                    if (resp.statusCode == 200) {
-                        switch result {
-                        case .Success(let data):
-                            let user = User.fromDictionary(data as! [String: AnyObject])
-                            handler?(.Success(user))
-                        case .Failure(let error):
-                            handler?(.Failure(error))
-                        }
-                    }
+                switch result {
+                case .Success(let data):
+                    let user = User.fromDictionary(data as! [String: AnyObject])
+                    handler?(.Success(user))
+                case .Failure(let error):
+                    handler?(.Failure(error))
                 }
             }
             
@@ -40,8 +35,8 @@ extension NetworkManager {
     /**
     Create or update a user in the remote server, containing all the user details (devices, tags, etc)
 
-    :param: user    User object containing all the information to be sent
-    :param: handler Closure to be executed after the request has completed
+    - parameter user:    User object containing all the information to be sent
+    - parameter handler: Closure to be executed after the request has completed
     */
     func createUpdateUser(user: Halo.User, completionHandler handler: ((Alamofire.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
 
@@ -56,23 +51,12 @@ extension NetworkManager {
         
         self.startRequest(request) { (req, resp, result) -> Void in
 
-            if let response = resp {
-
-                if (response.statusCode == 200) {
-
-                    switch result {
-                    case .Success(let data):
-                        let user = User.fromDictionary(data as! [String: AnyObject])
-                        handler?(.Success(user))
-                    case .Failure(let error):
-                        handler?(.Failure(error))
-                    }
-                    
-                } else {
-                    handler?(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "Error creating user"])))
-                }
-            } else {
-                handler?(.Failure(NSError(domain: "com.mobgen.halo", code: 0, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+            switch result {
+            case .Success(let data):
+                let user = User.fromDictionary(data as! [String: AnyObject])
+                handler?(.Success(user))
+            case .Failure(let error):
+                handler?(.Failure(error))
             }
         }
     }

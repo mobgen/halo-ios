@@ -20,8 +20,16 @@ public class CoreConstants {
     /// Key which identifies the client secret within the configuration plist
     static let clientSecretKey = "CLIENT_SECRET"
 
+    /// Key which identifies the username within the configuration plist
+    static let usernameKey = "USERNAME"
+    
+    /// Key which identifies the user password within the configuration plist
+    static let passwordKey = "PASSWORD"
+    
     /// Key which identifies the option to enable push notifications within the configuration plist
     static let enablePush = "ENABLE_PUSH"
+
+    static let disableSSLpinning = "DISABLE_SSL_PINNING"
 
     // MARK: User defaults keys
 

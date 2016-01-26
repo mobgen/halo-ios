@@ -10,6 +10,7 @@ import Foundation
 
 public enum ModuleTypeCategory: Int {
     case OffersModule = 3
+    case PushNotifications = 2
     case GeneralContentModule = 1
 }
 
@@ -31,6 +32,10 @@ public class ModuleType: NSObject {
     /// Url of the module type
     public var typeUrl: String?
 
+    override init() {
+        super.init()
+    }
+    
     /**
     Initialise the module type from a dictionary
     
