@@ -31,6 +31,8 @@ class NetworkManager: Alamofire.Manager {
     /// Singleton instance of the custom network manager
     static let instance = NetworkManager()
 
+    var debug: Bool = false
+    
     var credentials: Credentials? {
         didSet {
             Router.token = nil
@@ -105,7 +107,11 @@ class NetworkManager: Alamofire.Manager {
         }
 
         let request = self.request(request)
-
+        
+        if self.debug {
+            debugPrint(request)
+        }
+        
         request.responseJSON { [weak self] response in
             if let strongSelf = self {
                 if let resp = response.response {

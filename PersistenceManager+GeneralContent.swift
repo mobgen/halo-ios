@@ -112,7 +112,7 @@ extension PersistenceManager: GeneralContentManager {
                 
                 try! self.realm.write({ () -> Void in
                     
-                    self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("id IN \(instanceIds)"))
+                    self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("id IN %@", instanceIds))
                     
                     for instance in instances {
                         self.realm.add(PersistentGeneralContentInstance(instance), update: true)
@@ -133,7 +133,7 @@ extension PersistenceManager: GeneralContentManager {
     
     private func getInstancesByIdsLocalDataDontLoad(instanceIds: [String], completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
     
-        let instances = realm.objects(PersistentGeneralContentInstance).filter("id IN \(instanceIds)")
+        let instances = realm.objects(PersistentGeneralContentInstance).filter("id IN %@", instanceIds)
         
         let result = instances.map { (persistentInstance) -> Halo.GeneralContentInstance in
             return persistentInstance.getInstance()
