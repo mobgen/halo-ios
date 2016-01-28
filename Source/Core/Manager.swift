@@ -119,6 +119,15 @@ public class Manager: NSObject, GGLInstanceIDDelegate, GCMReceiverDelegate {
         }
     }
     
+    public var debug: Bool {
+        get {
+            return net.debug
+        }
+        set {
+            net.debug = newValue
+        }
+    }
+    
     /// Variable to decide whether to enable push notifications or not
     public var enablePush: Bool = false
 
