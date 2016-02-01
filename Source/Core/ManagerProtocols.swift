@@ -17,8 +17,8 @@ protocol ModulesManager {
 
 protocol GeneralContentManager {
     
-    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void
-    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)?) -> Void
-    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void
+    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void
+    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)?) -> Void
+    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void
     
 }

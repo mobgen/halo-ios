@@ -34,14 +34,14 @@ public class GeneralContent: NSObject {
     - parameter moduleId:           Internal id of the module from which we want to retrieve the instances
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getInstances(moduleId moduleId: String, offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
-        completionHandler handler: (Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void) -> Void {
+    public func getInstances(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData, populate: Bool? = false,
+        completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
             
             switch offlinePolicy {
             case .None:
-                net.generalContentInstances(moduleId, flags: [], completionHandler: handler)
+                net.generalContentInstances(moduleIds, flags: [], populate: populate, completionHandler: handler)
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                persistence.generalContentInstances(moduleId, flags: [], fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+                persistence.generalContentInstances(moduleIds, flags: [], fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), populate: populate, completionHandler: handler)
             }
     }
 
