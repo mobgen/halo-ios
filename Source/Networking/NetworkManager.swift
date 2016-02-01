@@ -79,7 +79,7 @@ class NetworkManager: Alamofire.Manager {
                     "halo-qa.mobgen.com" : serverTrustPolicy,
                     "halo-stage.mobgen.com" : serverTrustPolicy,
                     "halo.mobgen.com" : serverTrustPolicy
-                    ])
+                ])
             }
         }
 
@@ -122,8 +122,12 @@ class NetworkManager: Alamofire.Manager {
                         return
                     }
                 }
+                
+                if strongSelf.debug {
+                    debugPrint(response.result)
+                }
             }
-
+            
             handler(response.request, response.response, response.result)
         }
     }
