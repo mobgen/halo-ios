@@ -29,9 +29,9 @@ extension NetworkManager: GeneralContentManager {
     - parameter moduleId:           Internal id of the module to be requested
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, fetchFromNetwork network: Bool = true, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)? = nil) -> Void {
+    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool = true, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)? = nil) -> Void {
 
-        var params = ["module" : moduleId]
+        var params: [String: AnyObject] = ["module" : moduleIds]
         
         if !flags.contains(GeneralContentFlag.IncludeArchived) {
             params["archived"] = "false"
