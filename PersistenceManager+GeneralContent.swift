@@ -13,7 +13,7 @@ extension PersistenceManager: GeneralContentManager {
     
     // MARK: Get instances in a module
     
-    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
+    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, populate: Bool? = false, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
         
         if !network {
             self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
@@ -58,7 +58,7 @@ extension PersistenceManager: GeneralContentManager {
     
     // MARK: Get a specific instance
     
-    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)?) -> Void {
+    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool, populate: Bool? = false, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)?) -> Void {
         
         if !network {
             self.getInstanceLocalDataDontLoad(instanceId, completionHandler: handler)
@@ -97,7 +97,7 @@ extension PersistenceManager: GeneralContentManager {
     
     // MARK: Get instances by ids
     
-    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
+    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool, populate: Bool? = false, completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
         
         if !network {
             self.getInstancesByIdsLocalDataDontLoad(instanceIds, completionHandler: handler)
@@ -127,8 +127,6 @@ extension PersistenceManager: GeneralContentManager {
                 }
             }
         }
-        
-        
     }
     
     private func getInstancesByIdsLocalDataDontLoad(instanceIds: [String], completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {

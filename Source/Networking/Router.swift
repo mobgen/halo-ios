@@ -23,7 +23,7 @@ enum Router: URLRequestConvertible {
     case OAuth(Credentials, [String: AnyObject])
     case Modules
     case GeneralContentInstances([String: AnyObject])
-    case GeneralContentInstance(String)
+    case GeneralContentInstance(String, [String: AnyObject])
     case SegmentationGetUser(String)
     case SegmentationCreateUser([String: AnyObject])
     case SegmentationUpdateUser(String, [String: AnyObject])
@@ -58,7 +58,7 @@ enum Router: URLRequestConvertible {
             return "/api/authentication/module/"
         case .GeneralContentInstances(_):
             return "api/authentication/instance/"
-        case .GeneralContentInstance(let id):
+        case .GeneralContentInstance(let id, _):
             return "api/generalcontent/instance/\(id)"
         case .SegmentationCreateUser(_):
             return "api/segmentation/appuser/"
@@ -102,6 +102,8 @@ enum Router: URLRequestConvertible {
                 }
             }
             
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+        case .GeneralContentInstance(_, let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
         case .GeneralContentInstances(let params):
             return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
