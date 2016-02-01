@@ -13,21 +13,21 @@ extension PersistenceManager: GeneralContentManager {
     
     // MARK: Get instances in a module
     
-    func generalContentInstances(moduleId: String, flags: GeneralContentFlag, fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
+    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
         
         if !network {
-            self.getInstancesLocalDataDontLoad(moduleId, completionHandler: handler)
+            self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
             return
         }
         
-        net.generalContentInstances(moduleId, flags: []) { (result, _) -> Void in
+        net.generalContentInstances(moduleIds, flags: []) { (result, _) -> Void in
             switch result {
             case .Success(let instances):
                 handler?(.Success(instances), false)
                 
                 try! self.realm.write({ () -> Void in
                     
-                    self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId = '\(moduleId)'"))
+                    self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds))
                     
                     for instance in instances {
                         self.realm.add(PersistentGeneralContentInstance(instance), update: true)
@@ -35,7 +35,7 @@ extension PersistenceManager: GeneralContentManager {
                 })
             case .Failure(let error):
                 if error.code == -1009 {
-                    self.getInstancesLocalDataDontLoad(moduleId, completionHandler: handler)
+                    self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
                 } else {
                     handler?(.Failure(error), false)
                 }
@@ -44,9 +44,9 @@ extension PersistenceManager: GeneralContentManager {
         
     }
     
-    private func getInstancesLocalDataDontLoad(moduleId: String, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
+    private func getInstancesLocalDataDontLoad(moduleIds: [String], completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
         
-        let instances = realm.objects(PersistentGeneralContentInstance).filter("moduleId = '\(moduleId)'")
+        let instances = realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds)
         
         let result = instances.map { (persistentInstance) -> Halo.GeneralContentInstance in
             return persistentInstance.getInstance()

@@ -19,12 +19,12 @@ extension GeneralContent {
     - parameter success:    Closure to be executed when the request has succeeded
     - parameter failure:    Closure to be executed when the request has failed
     */
-    @objc(instancesInModule:offlinePolicy:success:failure:)
-    public func getInstancesFromObjC(moduleId moduleId: String, offlinePolicy: OfflinePolicy,
+    @objc(instancesInModules:offlinePolicy:success:failure:)
+    public func getInstancesFromObjC(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy,
         success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
             
-            self.getInstances(moduleId: moduleId, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
+            self.getInstances(moduleIds: moduleIds, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances, cached: cached)
