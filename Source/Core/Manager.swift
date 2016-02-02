@@ -67,6 +67,8 @@ public class Manager: NSObject {
     /// General content component
     public let generalContent = Halo.GeneralContent.sharedInstance
 
+    public var defaultOfflinePolicy: OfflinePolicy = .LoadAndStoreLocalData
+    
     /// Singleton instance of the networking component
     let net = Halo.NetworkManager.instance
     
@@ -338,31 +340,12 @@ public class Manager: NSObject {
      - parameter params:  Provided params provided
      - parameter handler: Closure to be executed after the request has finished
      */
-    public func getHaloRequest(method method: Alamofire.Method, url: String, params: [String: AnyObject]?,
+    public func customRequest(method method: Alamofire.Method, url: String, params: [String: AnyObject]?,
         completionHandler handler: (Alamofire.Result<AnyObject, NSError>) -> Void) -> Void {
             net.haloRequest(method, url: url, params: params, completionHandler: handler)
     }
     
     // MARK: ObjC exposed methods
-
-    /**
-    Get a list of the existing modules for the provided client credentials
-
-    - parameter success:  Closure to be executed when the request has succeeded
-    - parameter failure:  Closure to be executed when the request has failed
-    */
-    @objc(getModulesWithSuccess:failure:)
-    public func getModulesFromObjC(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
-
-        self.getModules { (result, cached) -> Void in
-            switch result {
-            case .Success(let modules):
-                success?(userData: modules)
-            case .Failure(let error):
-                failure?(error: error)
-            }
-        }
-    }
 
     /**
     Save the user against the server
@@ -394,11 +377,11 @@ public class Manager: NSObject {
     - parameter success: Closure to be executed after the request has successfully finished
     - parameter failure: Closure to be executed after the request has failed
     */
-    @objc(haloRequestWithMethod:url:params:success:failure:)
-    public func getHaloRequestFromObjC(method: String, url: String, params: [String: AnyObject]?,
+    @objc(customRequestWithMethod:url:params:success:failure:)
+    public func customRequestFromObjC(method: String, url: String, params: [String: AnyObject]?,
         success: ((userData: AnyObject) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
    
-            self.getHaloRequest(method: Alamofire.Method(rawValue: method.uppercaseString)!,
+            self.customRequest(method: Alamofire.Method(rawValue: method.uppercaseString)!,
                 url: url, params: params) { (result) -> Void in
                     switch result {
                     case .Success(let data):

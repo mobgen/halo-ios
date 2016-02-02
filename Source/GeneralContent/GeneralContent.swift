@@ -31,13 +31,14 @@ public class GeneralContent: NSObject {
     /**
     Get the existing instances of a given General Content module
 
-    - parameter moduleId:           Internal id of the module from which we want to retrieve the instances
+    - parameter moduleIds:          Internal ids of the modules from which we want to retrieve the instances
+    - parameter offlinePolicy:      Offline policy to be considered when retrieving data
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getInstances(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData, populate: Bool? = false,
+    public func getInstances(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy, populate: Bool? = false,
         completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
             
-            switch offlinePolicy {
+            switch offlinePolicy! {
             case .None:
                 net.generalContentInstances(moduleIds, flags: [], populate: populate, completionHandler: handler)
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
@@ -50,13 +51,14 @@ public class GeneralContent: NSObject {
     /**
      Get a set of general content instances by specifying their ids
      
-     - parameter instanceIds: Ids of the instances to be retrieved
-     - parameter handler:     Closure to be executed after the completion of the request
+     - parameter instanceIds:   Ids of the instances to be retrieved
+     - parameter offlinePolicy: Offline policy to be considered when retrieving data
+     - parameter handler:       Closure to be executed after the completion of the request
      */
-    public func getInstances(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
+    public func getInstances(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
         completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
            
-            switch offlinePolicy {
+            switch offlinePolicy! {
             case .None:
                 self.net.generalContentInstances(instanceIds, fetchFromNetwork: true, completionHandler: handler)
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
@@ -71,13 +73,14 @@ public class GeneralContent: NSObject {
     /**
     Get a specific general content instance by id
 
-    - parameter instanceId: Id of the instance to be retrieved
-    - parameter handler:    Closure to be executed after the completion of the request
+    - parameter instanceId:     Id of the instance to be retrieved
+    - parameter offlinePolicy:  Offline policy to be considered when retrieving data
+    - parameter handler:        Closure to be executed after the completion of the request
     */
-    public func getInstance(instanceId instanceId: String, offlinePolicy: OfflinePolicy = .LoadAndStoreLocalData,
+    public func getInstance(instanceId instanceId: String, offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
         completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)?) -> Void {
         
-            switch offlinePolicy {
+            switch offlinePolicy! {
             case .None:
                 self.net.generalContentInstance(instanceId, fetchFromNetwork: true, completionHandler: handler)
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
