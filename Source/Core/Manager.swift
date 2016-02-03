@@ -57,12 +57,12 @@ public protocol ManagerDelegate {
 
 /// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
-public class Manager: NSObject, GGLInstanceIDDelegate, GCMReceiverDelegate {
+public class Manager: NSObject, GGLInstanceIDDelegate {
 
     /// Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Halo.Manager()
 
-    public var pushDelegate: HaloPushDelegate?
+    public var pushDelegate: PushDelegate?
     
     /// General content component
     public let generalContent = Halo.GeneralContent.sharedInstance
@@ -141,6 +141,52 @@ public class Manager: NSObject, GGLInstanceIDDelegate, GCMReceiverDelegate {
     
     private override init() {}
 
+    /**
+     Extra setup steps to be called from the corresponding method in the app delegate
+     
+     - parameter application: Application being configured
+     */
+    public func applicationDidFinishLaunching(application: UIApplication) {
+        
+        var configureError:NSError?
+        
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        Manager.sharedInstance.gcmSenderId = GGLContext.sharedInstance().configuration.gcmSenderID
+        
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        
+        let gcmConfig = GCMConfig.defaultConfig()
+        GCMService.sharedInstance().startWithConfig(gcmConfig)
+    }
+    
+    /**
+     Extra setup steps to be called from the corresponding method in the app delegate
+     
+     - parameter application: Application being configured
+     */
+    public func applicationDidBecomeActive(application: UIApplication) {
+        // Connect to the GCM server to receive non-APNS notifications
+        GCMService.sharedInstance().connectWithHandler({
+            (error) -> Void in
+            if error != nil {
+                print("Could not connect to GCM: \(error.localizedDescription)")
+            } else {
+                print("Connected to GCM")
+            }
+        })
+    }
+    
+    /**
+     Extra setup steps to be called from the corresponding method in the app delegate
+     
+     - parameter application: Application being configured
+     */
+    public func applicationDidEnterBackground(application: UIApplication) {
+        GCMService.sharedInstance().disconnect()
+    }
+    
     /**
     Perform the initial tasks to properly set up the SDK
 
@@ -328,6 +374,38 @@ public class Manager: NSObject, GGLInstanceIDDelegate, GCMReceiverDelegate {
         }
     }
 
+    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { (fetchResult) -> Void in })
+    }
+    
+    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        // This works only if the app started the GCM service
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+        
+        if let silent = userInfo["content_available"] as? Int {
+            if silent == 1 {
+                self.pushDelegate?.handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+            } else {
+                let notif = UILocalNotification()
+                notif.alertBody = userInfo["body"] as? String
+                notif.soundName = userInfo["sound"] as? String
+                notif.userInfo = userInfo
+                
+                application.presentLocalNotificationNow(notif)
+            }
+        } else {
+            self.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        }
+    }
+    
+    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        
+        if let userInfo = notification.userInfo {
+            self.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: nil)
+        }
+    }
+    
     // GGLInstanceIDDelegate methods
     
     public func onTokenRefresh() {
@@ -351,18 +429,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate, GCMReceiverDelegate {
                     }
             })
         }
-    }
-    
-    public func didSendDataMessageWithID(messageID: String!) {
-        
-    }
-    
-    public func willSendDataMessageWithID(messageID: String!, error: NSError!) {
-        
-    }
-    
-    public func didDeleteMessagesOnServer() {
-        
     }
     
     /**
@@ -429,7 +495,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate, GCMReceiverDelegate {
                 failure?(error: error)
             }
         }
-
     }
     
     /**

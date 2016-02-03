@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 /// Delegate to be implemented to handle push notifications easily
-@objc public protocol HaloPushDelegate {
+@objc(HaloPushDelegate)
+public protocol PushDelegate {
     /**
     This handler will be called when a push notification is received
 
@@ -18,7 +19,7 @@ import UIKit
     - parameter userInfo:          Dictionary containing information about the push notification
     - parameter completionHandler: Closure to be called after completion
     */
-    func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
+    func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 
     /**
     This handler will be called when a push notification is received
@@ -27,29 +28,18 @@ import UIKit
     - parameter userInfo:          Dictionary containing information about the push notification
     - parameter completionHandler: Closure to be called after completion
     */
-    func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
+    func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 }
 
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
+    private let haloMgr = Halo.Manager.sharedInstance
+    
     // MARK: Push notifications
 
     public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        
-        var configureError:NSError?
-        
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        Manager.sharedInstance.gcmSenderId = GGLContext.sharedInstance().configuration.gcmSenderID
-        
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        
-        let gcmConfig = GCMConfig.defaultConfig()
-        gcmConfig.receiverDelegate = Manager.sharedInstance
-        GCMService.sharedInstance().startWithConfig(gcmConfig)
-        
+        haloMgr.applicationDidFinishLaunching(application)
         return true
     }
     
@@ -60,7 +50,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     - parameter deviceToken: Device token obtained in previous steps
     */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        Halo.Manager.sharedInstance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        haloMgr.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
     /**
@@ -70,27 +60,19 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter error:       Error thrown during the process
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        Halo.Manager.sharedInstance.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
+        haloMgr.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
     public func applicationDidBecomeActive(application: UIApplication) {
-        // Connect to the GCM server to receive non-APNS notifications
-        GCMService.sharedInstance().connectWithHandler({
-            (error) -> Void in
-            if error != nil {
-                print("Could not connect to GCM: \(error.localizedDescription)")
-            } else {
-                print("Connected to GCM")
-            }
-        })
+        haloMgr.applicationDidBecomeActive(application)
     }
     
     public func applicationDidEnterBackground(application: UIApplication) {
-        GCMService.sharedInstance().disconnect()
+        haloMgr.applicationDidEnterBackground(application)
     }
     
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { (fetchResult) -> Void in })
+        haloMgr.application(application, didReceiveRemoteNotification: userInfo)
     }
     
     /**
@@ -101,22 +83,10 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter completionHandler: Handler to be executed once the fetch has finished
      */
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-
-        // This works only if the app started the GCM service
-        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
-        
-        let halo = Halo.Manager.sharedInstance
-        
-        if let silent = userInfo["content_available"] as? Int {
-            if silent == 1 {
-                halo.pushDelegate?.handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-            } else {
-                halo.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-            }
-        } else {
-            halo.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-        }
-
+        haloMgr.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
-
+    
+    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        haloMgr.application(application, didReceiveLocalNotification: notification)
+    }
 }
