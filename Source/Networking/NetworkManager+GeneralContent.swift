@@ -42,7 +42,7 @@ extension NetworkManager: GeneralContentManager {
         
         let unpublished = flags.contains(GeneralContentFlag.IncludeUnpublished)
         
-        self.startRequest(Router.GeneralContentInstances(params)) { [weak self] (request, response, result) in
+        self.startRequest(request: Router.GeneralContentInstances(params)) { [weak self] (request, response, result) in
 
             if let strongSelf = self {
                 switch result {
@@ -60,7 +60,7 @@ extension NetworkManager: GeneralContentManager {
         
         let params: [String: AnyObject] = ["populate" : populate!]
         
-        self.startRequest(Router.GeneralContentInstance(instanceId, params)) { (request, response, result) in
+        self.startRequest(request: Router.GeneralContentInstance(instanceId, params)) { (request, response, result) in
             
             switch result {
             case .Success(let data):
@@ -79,7 +79,7 @@ extension NetworkManager: GeneralContentManager {
             "populate" : populate!
         ]
         
-        self.startRequest(Router.GeneralContentInstances(params)) { (request, response, result) in
+        self.startRequest(request: Router.GeneralContentInstances(params)) { (request, response, result) in
             
             switch result {
             case .Success(let data):

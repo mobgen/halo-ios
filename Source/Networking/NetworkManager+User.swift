@@ -15,7 +15,7 @@ extension NetworkManager {
         
         if let id = user.id {
             
-            self.startRequest(Router.SegmentationGetUser(id)) { (request, response, result) in
+            self.startRequest(request: Router.SegmentationGetUser(id)) { (request, response, result) in
                 
                 switch result {
                 case .Success(let data):
@@ -49,7 +49,7 @@ extension NetworkManager {
             request = Router.SegmentationCreateUser(user.toDictionary())
         }
         
-        self.startRequest(request) { (req, resp, result) -> Void in
+        self.startRequest(request: request) { (req, resp, result) -> Void in
 
             switch result {
             case .Success(let data):

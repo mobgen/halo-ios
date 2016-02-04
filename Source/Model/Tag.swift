@@ -53,7 +53,7 @@ public final class Tag: NSObject, NSCoding {
 
     - returns: A dictionary containing the representation of the object
     */
-    func toDictionary() -> [String: AnyObject] {
+    public func toDictionary() -> [String: AnyObject] {
         var dict = [String: AnyObject]()
 
         if let id = self.id {

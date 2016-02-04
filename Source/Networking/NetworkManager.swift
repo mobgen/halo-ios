@@ -40,6 +40,8 @@ class NetworkManager: Alamofire.Manager {
         }
     }
     
+    var numberOfRetries = 0
+    
     /// Variable that flags whether the manager is currently refreshing the auth token
     private var isRefreshing = false
 
@@ -96,9 +98,9 @@ class NetworkManager: Alamofire.Manager {
     - parameter request:            Request to be performed
     - parameter completionHandler:  Closure to be executed after the request has succeeded
     */
-    func startRequest(request: URLRequestConvertible, completionHandler handler: CompletionHandler) -> Void {
+    func startRequest(request urlRequest: URLRequestConvertible, numberOfRetries: Int, completionHandler handler: CompletionHandler) -> Void {
 
-        let cachedTask = CachedTask(request: request, handler: handler)
+        let cachedTask = CachedTask(request: urlRequest, handler: handler)
 
         if (self.isRefreshing) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
@@ -106,25 +108,37 @@ class NetworkManager: Alamofire.Manager {
             return
         }
 
-        let request = self.request(request)
+        let request = self.request(urlRequest)
         
         if self.debug {
             debugPrint(request)
         }
         
         request.responseJSON { [weak self] response in
+            
             if let strongSelf = self {
-                if let resp = response.response {
-                    if resp.statusCode == 403 || resp.statusCode == 401 {
-                        /// If we get a 403/401, we add the task to the queue and try to get a valid token
-                        strongSelf.cachedTasks.append(cachedTask)
-                        strongSelf.refreshToken()
+                
+                switch response.result {
+                case .Success(let data):
+                    if let resp = response.response {
+                        if resp.statusCode == 403 || resp.statusCode == 401 {
+                            /// If we get a 403/401, we add the task to the queue and try to get a valid token
+                            strongSelf.cachedTasks.append(cachedTask)
+                            strongSelf.refreshToken()
+                            return
+                        }
+                    }
+                    
+                    if strongSelf.debug {
+                        debugPrint(data)
+                    }
+                case .Failure(let error):
+                    NSLog("Error performing request: \(error.localizedDescription)")
+                    
+                    if numberOfRetries > 0 {
+                        strongSelf.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1, completionHandler: handler)
                         return
                     }
-                }
-                
-                if strongSelf.debug {
-                    debugPrint(response.result)
                 }
             }
             
@@ -132,6 +146,10 @@ class NetworkManager: Alamofire.Manager {
         }
     }
 
+    func startRequest(request urlRequest: URLRequestConvertible, completionHandler handler: CompletionHandler) -> Void {
+        self.startRequest(request: urlRequest, numberOfRetries: self.numberOfRetries, completionHandler: handler)
+    }
+    
     /**
     Obtain/refresh an authentication token when needed
     */
@@ -203,7 +221,7 @@ class NetworkManager: Alamofire.Manager {
                 /// Restart cached tasks
                 let cachedTaskCopy = self.cachedTasks
                 self.cachedTasks.removeAll()
-                let _ = cachedTaskCopy.map { self.startRequest($0.request, completionHandler: $0.handler) }
+                let _ = cachedTaskCopy.map { self.startRequest(request: $0.request, numberOfRetries: self.numberOfRetries, completionHandler: $0.handler) }
                 
                 completionHandler?(response.request, response.response, response.result)
             }

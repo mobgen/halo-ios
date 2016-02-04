@@ -18,7 +18,7 @@ extension NetworkManager: ModulesManager {
     */
     func getModules(fetchFromNetwork network: Bool = true, completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>, Bool) -> Void)? = nil) -> Void {
 
-        self.startRequest(Router.Modules, completionHandler: { [weak self] (request, response, result) in
+        self.startRequest(request: Router.Modules, completionHandler: { [weak self] (request, response, result) in
 
             if let strongSelf = self {
                 switch result {

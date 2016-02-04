@@ -20,7 +20,7 @@ extension NetworkManager {
                 params = ["populate" : populate!]
             }
             
-            self.startRequest(Router.CustomRequest(method, url, params)) { (request, response, result) in
+            self.startRequest(request: Router.CustomRequest(method, url, params)) { (request, response, result) in
                 handler?(result)
             }
     }

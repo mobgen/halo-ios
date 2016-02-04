@@ -45,7 +45,7 @@ public protocol ManagerDelegate {
      
      - returns: The newly created user
      */
-    func setupUser() -> Halo.User
+    optional func setupUser(user: Halo.User) -> Void
     
     /**
      This delegate method will be called after the whole setup process has finished. Once it is safe
@@ -68,6 +68,15 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
     public let generalContent = Halo.GeneralContent.sharedInstance
 
     public var defaultOfflinePolicy: OfflinePolicy = .LoadAndStoreLocalData
+    
+    public var numberOfRetries: Int {
+        get {
+            return self.net.numberOfRetries
+        }
+        set {
+            self.net.numberOfRetries = newValue
+        }
+    }
     
     /// Singleton instance of the networking component
     let net = Halo.NetworkManager.instance
@@ -192,7 +201,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
 
     - returns: Bool describing whether the process has succeeded
     */
-    public func launch() -> Bool {
+    public func launch() -> Void {
 
         Router.token = nil
         Router.userAlias = nil
@@ -244,7 +253,11 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
             }
             
         } else {
-            self.user = self.delegate?.setupUser()
+            self.user = Halo.User()
+            
+            if let user = self.user {
+                self.delegate?.setupUser?(user)
+            }
 
             if self.enablePush {
                 UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -252,8 +265,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                 self.setupDefaultSystemTags()
             }
         }
-        
-        return true
     }
 
     /**
