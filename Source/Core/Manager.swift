@@ -115,11 +115,18 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
         }
     }
 
+    public var frameworkVersion: String {
+        get {
+            return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        }
+    }
+    
     public var credentials: Credentials? {
         get {
             return net.credentials
         }
         set {
+            self.flushSession()
             net.credentials = newValue
         }
     }
@@ -150,6 +157,11 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
     
     private override init() {}
 
+    public func flushSession() {
+        Router.token = nil
+        Router.userAlias = nil
+    }
+    
     /**
      Extra setup steps to be called from the corresponding method in the app delegate
      
@@ -394,9 +406,11 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
         // This works only if the app started the GCM service
         GCMService.sharedInstance().appDidReceiveMessage(userInfo);
         
+        self.pushDelegate?.application?(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        
         if let silent = userInfo["content_available"] as? Int {
             if silent == 1 {
-                self.pushDelegate?.handleSilentPush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+                self.pushDelegate?.application(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
             } else {
                 let notif = UILocalNotification()
                 notif.alertBody = userInfo["body"] as? String
@@ -406,14 +420,14 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                 application.presentLocalNotificationNow(notif)
             }
         } else {
-            self.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+            self.pushDelegate?.application(application, didReceiveNotification: userInfo, fetchCompletionHandler: completionHandler)
         }
     }
     
     public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         
         if let userInfo = notification.userInfo {
-            self.pushDelegate?.handlePush(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: nil)
+            self.pushDelegate?.application(application, didReceiveNotification: userInfo, fetchCompletionHandler: nil)
         }
     }
     

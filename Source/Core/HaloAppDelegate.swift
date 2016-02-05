@@ -13,22 +13,31 @@ import UIKit
 @objc(HaloPushDelegate)
 public protocol PushDelegate {
     /**
-    This handler will be called when a push notification is received
+    This handler will be called when any push notification is received (silent or not)
 
     - parameter application:       Application receiving the push notification
     - parameter userInfo:          Dictionary containing information about the push notification
     - parameter completionHandler: Closure to be called after completion
     */
-    func handlePush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    optional func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 
     /**
-    This handler will be called when a push notification is received
+    This handler will be called when a silent push notification is received
 
     - parameter application:       Application receiving the silent push notification
     - parameter userInfo:          Dictionary containing information about the push notification
     - parameter completionHandler: Closure to be called after completion
     */
-    func handleSilentPush(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    func application(application: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    
+    /**
+     This handler will be called when a push notification is received
+     
+     - parameter application:       Application receiving the silent push notification
+     - parameter userInfo:          Dictionary containing information about the push notification
+     - parameter completionHandler: Closure to be called after completion
+     */
+    func application(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 }
 
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)

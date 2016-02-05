@@ -94,7 +94,7 @@ extension GeneralContent {
         success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
      
-            self.getInstances(instanceIds: instanceIds, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
+            self.getInstances(moduleIds: instanceIds, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
                 switch result {
                 case .Success(let instances):
                     success?(userData: instances, cached: cached)
@@ -142,7 +142,7 @@ extension GeneralContent {
         success:((userData: GeneralContentInstance, cached: Bool) -> Void)?,
         failure:((error: NSError) -> Void)?) -> Void {
      
-            self.getInstance(instanceId: instanceId, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
+            self.getSingleInstance(instanceId: instanceId, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
                 switch result {
                 case .Success(let instance):
                     success?(userData: instance, cached: cached)

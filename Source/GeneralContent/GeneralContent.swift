@@ -55,7 +55,7 @@ public class GeneralContent: NSObject {
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      - parameter handler:       Closure to be executed after the completion of the request
      */
-    public func getInstances(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
+    public func getInstancesByIds(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
         completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)?) -> Void {
            
             switch offlinePolicy! {
@@ -77,7 +77,7 @@ public class GeneralContent: NSObject {
     - parameter offlinePolicy:  Offline policy to be considered when retrieving data
     - parameter handler:        Closure to be executed after the completion of the request
     */
-    public func getInstance(instanceId instanceId: String, offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
+    public func getSingleInstance(instanceId instanceId: String, offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
         completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)?) -> Void {
         
             switch offlinePolicy! {

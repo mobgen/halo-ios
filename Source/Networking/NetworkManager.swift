@@ -33,12 +33,7 @@ class NetworkManager: Alamofire.Manager {
 
     var debug: Bool = false
     
-    var credentials: Credentials? {
-        didSet {
-            Router.token = nil
-            self.refreshToken()
-        }
-    }
+    var credentials: Credentials?
     
     var numberOfRetries = 0
     
