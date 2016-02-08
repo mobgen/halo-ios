@@ -406,11 +406,11 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
         // This works only if the app started the GCM service
         GCMService.sharedInstance().appDidReceiveMessage(userInfo);
         
-        self.pushDelegate?.application?(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        self.pushDelegate?.haloApplication?(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
         
         if let silent = userInfo["content_available"] as? Int {
             if silent == 1 {
-                self.pushDelegate?.application(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
+                self.pushDelegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
             } else {
                 let notif = UILocalNotification()
                 notif.alertBody = userInfo["body"] as? String
@@ -420,14 +420,14 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                 application.presentLocalNotificationNow(notif)
             }
         } else {
-            self.pushDelegate?.application(application, didReceiveNotification: userInfo, fetchCompletionHandler: completionHandler)
+            self.pushDelegate?.haloApplication(application, didReceiveNotification: userInfo, fetchCompletionHandler: completionHandler)
         }
     }
     
     public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         
         if let userInfo = notification.userInfo {
-            self.pushDelegate?.application(application, didReceiveNotification: userInfo, fetchCompletionHandler: nil)
+            self.pushDelegate?.haloApplication(application, didReceiveNotification: userInfo, fetchCompletionHandler: nil)
         }
     }
     
