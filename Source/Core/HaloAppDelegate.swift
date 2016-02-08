@@ -19,7 +19,7 @@ public protocol PushDelegate {
     - parameter userInfo:          Dictionary containing information about the push notification
     - parameter completionHandler: Closure to be called after completion
     */
-    optional func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    optional func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 
     /**
     This handler will be called when a silent push notification is received
@@ -28,7 +28,7 @@ public protocol PushDelegate {
     - parameter userInfo:          Dictionary containing information about the push notification
     - parameter completionHandler: Closure to be called after completion
     */
-    func application(application: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    func haloApplication(application: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
     
     /**
      This handler will be called when a push notification is received
@@ -37,7 +37,7 @@ public protocol PushDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter completionHandler: Closure to be called after completion
      */
-    func application(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 }
 
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
