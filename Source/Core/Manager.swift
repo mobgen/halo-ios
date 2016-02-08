@@ -168,18 +168,42 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
      - parameter application: Application being configured
      */
     public func applicationDidFinishLaunching(application: UIApplication) {
-        
-        var configureError:NSError?
-        
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        Manager.sharedInstance.gcmSenderId = GGLContext.sharedInstance().configuration.gcmSenderID
-        
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        
-        let gcmConfig = GCMConfig.defaultConfig()
-        GCMService.sharedInstance().startWithConfig(gcmConfig)
+
+        let bundle = NSBundle.mainBundle()
+
+        if let path = bundle.pathForResource("Halo", ofType: "plist") {
+
+            if let data = NSDictionary(contentsOfFile: path) {
+                let clientIdKey = CoreConstants.clientIdKey
+                let clientSecretKey = CoreConstants.clientSecretKey
+                let usernameKey = CoreConstants.usernameKey
+                let passwordKey = CoreConstants.passwordKey
+
+                if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
+                    self.credentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                } else if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
+                    self.credentials = Credentials(username: username, password: password)
+                }
+
+                self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
+            }
+        } else {
+            NSLog("No .plist found")
+        }
+
+        if self.enablePush {
+            var configureError:NSError?
+
+            GGLContext.sharedInstance().configureWithError(&configureError)
+            assert(configureError == nil, "Error configuring Google services: \(configureError)")
+            Manager.sharedInstance.gcmSenderId = GGLContext.sharedInstance().configuration.gcmSenderID
+
+            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+
+            let gcmConfig = GCMConfig.defaultConfig()
+            GCMService.sharedInstance().startWithConfig(gcmConfig)
+        }
     }
     
     /**
@@ -189,14 +213,16 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
      */
     public func applicationDidBecomeActive(application: UIApplication) {
         // Connect to the GCM server to receive non-APNS notifications
-        GCMService.sharedInstance().connectWithHandler({
-            (error) -> Void in
-            if error != nil {
-                print("Could not connect to GCM: \(error.localizedDescription)")
-            } else {
-                print("Connected to GCM")
-            }
-        })
+        if self.enablePush {
+            GCMService.sharedInstance().connectWithHandler({
+                (error) -> Void in
+                if error != nil {
+                    print("Could not connect to GCM: \(error.localizedDescription)")
+                } else {
+                    print("Connected to GCM")
+                }
+            })
+        }
     }
     
     /**
@@ -205,7 +231,9 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
      - parameter application: Application being configured
      */
     public func applicationDidEnterBackground(application: UIApplication) {
-        GCMService.sharedInstance().disconnect()
+        if self.enablePush {
+            GCMService.sharedInstance().disconnect()
+        }
     }
     
     /**
@@ -218,28 +246,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
         Router.token = nil
         Router.userAlias = nil
         
-        let bundle = NSBundle.mainBundle()
-        
-        if let path = bundle.pathForResource("Halo", ofType: "plist") {
-
-            if let data = NSDictionary(contentsOfFile: path) {
-                let clientIdKey = CoreConstants.clientIdKey
-                let clientSecretKey = CoreConstants.clientSecretKey
-                let usernameKey = CoreConstants.usernameKey
-                let passwordKey = CoreConstants.passwordKey
-                
-                if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
-                    self.credentials = Credentials(clientId: clientId, clientSecret: clientSecret)
-                } else if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
-                    self.credentials = Credentials(username: username, password: password)
-                }
-                
-                self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
-            }
-        } else {
-            NSLog("No .plist found")
-        }
-
         if let cred = self.net.credentials {
             NSLog("Using credentials: \(cred.username) / \(cred.password)")
         }
