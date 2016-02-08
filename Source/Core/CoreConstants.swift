@@ -20,6 +20,8 @@ public class CoreConstants {
     /// Key which identifies the client secret within the configuration plist
     static let clientSecretKey = "CLIENT_SECRET"
 
+    static let environmentSettingKey = "ENVIRONMENT"
+
     /// Key which identifies the username within the configuration plist
     static let usernameKey = "USERNAME"
     

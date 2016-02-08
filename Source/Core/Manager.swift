@@ -111,7 +111,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
             
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
-            self.launch()
         }
     }
 
@@ -178,11 +177,16 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                 let clientSecretKey = CoreConstants.clientSecretKey
                 let usernameKey = CoreConstants.usernameKey
                 let passwordKey = CoreConstants.passwordKey
+                let environmentKey = CoreConstants.environmentSettingKey
 
                 if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
                     self.credentials = Credentials(clientId: clientId, clientSecret: clientSecret)
                 } else if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
                     self.credentials = Credentials(username: username, password: password)
+                }
+
+                if let env = data[environmentKey] as? String {
+                    self.environment = HaloEnvironment(rawValue: env)!
                 }
 
                 self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
