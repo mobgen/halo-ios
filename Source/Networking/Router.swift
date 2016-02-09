@@ -27,10 +27,10 @@ enum Router: URLRequestConvertible {
     case SegmentationGetUser(String)
     case SegmentationCreateUser([String: AnyObject])
     case SegmentationUpdateUser(String, [String: AnyObject])
-    case CustomRequest(Alamofire.Method, String, [String: AnyObject]?)
+    case CustomRequest(Halo.Method, String, [String: AnyObject]?)
 
     /// Decide the HTTP method based on the specific request
-    var method: Alamofire.Method {
+    var method: Halo.Method {
         switch self {
         case .OAuth(_, _),
              .SegmentationCreateUser(_):
@@ -77,7 +77,7 @@ enum Router: URLRequestConvertible {
     var URLRequest: NSMutableURLRequest {
         let url = NSURL(string: path, relativeToURL: Router.baseURL)
         let mutableURLRequest = NSMutableURLRequest(URL: url!)
-        mutableURLRequest.HTTPMethod = method.rawValue
+        mutableURLRequest.HTTPMethod = method.toAlamofire().rawValue
 
         if let token = Router.token {
             mutableURLRequest.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")

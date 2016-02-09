@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 //typealias CompletionHandler = (Alamofire.Response) -> Void
-typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Result<AnyObject, NSError>) -> Void
+typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void
 
 private struct CachedTask {
     
@@ -123,10 +123,13 @@ class NetworkManager: Alamofire.Manager {
                             return
                         }
                     }
-                    
+
                     if strongSelf.debug {
                         debugPrint(data)
                     }
+
+                    handler(response.request, response.response, .Success(data, false))
+
                 case .Failure(let error):
                     NSLog("Error performing request: \(error.localizedDescription)")
                     
@@ -134,10 +137,10 @@ class NetworkManager: Alamofire.Manager {
                         strongSelf.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1, completionHandler: handler)
                         return
                     }
+
+                    handler(response.request, response.response, .Failure(error))
                 }
             }
-            
-            handler(response.request, response.response, response.result)
         }
     }
 
@@ -206,9 +209,13 @@ class NetworkManager: Alamofire.Manager {
                         // No response
                         NSLog("No response from server")
                     }
+
+                    completionHandler?(response.request, response.response, .Success(value, false))
                     
                 case .Failure(let error):
                     NSLog("Error refreshing token: \(error.localizedDescription)")
+
+                    completionHandler?(response.request, response.response, .Failure(error))
                 }
                 
                 self.isRefreshing = false
@@ -218,7 +225,7 @@ class NetworkManager: Alamofire.Manager {
                 self.cachedTasks.removeAll()
                 let _ = cachedTaskCopy.map { self.startRequest(request: $0.request, numberOfRetries: self.numberOfRetries, completionHandler: $0.handler) }
                 
-                completionHandler?(response.request, response.response, response.result)
+
             }
         }
     }

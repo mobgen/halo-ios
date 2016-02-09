@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 import RealmSwift
 
 extension Manager {
@@ -18,7 +17,7 @@ extension Manager {
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      - parameter completionHandler:  Closure to be executed when the request has finished
      */
-    public func getModules(offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy, completionHandler handler: (Alamofire.Result<[Halo.Module], NSError>, Bool) -> Void) -> Void {
+    public func getModules(offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy, completionHandler handler: (Halo.Result<[Halo.Module], NSError>) -> Void) -> Void {
         
         switch offlinePolicy! {
         case .None:
@@ -36,7 +35,7 @@ extension Manager {
      - parameter failure:       Closure to be executed when the request has failed
      */
     @objc(modulesWithOfflinePolicy:success:failure:)
-    public func getModulesOfflinePolicyFromObjC(offlinePolicy: OfflinePolicy, success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+    public func getModulesOfflinePolicyFromObjC(offlinePolicy: OfflinePolicy, success: ((userData: [Halo.Module], cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
         
         self.privateGetModules(offlinePolicy, success: success, failure: failure)
         
@@ -49,18 +48,18 @@ extension Manager {
      - parameter failure:  Closure to be executed when the request has failed
      */
     @objc(modulesWithSuccess:failure:)
-    public func getModulesFromObjC(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+    public func getModulesFromObjC(success: ((userData: [Halo.Module], cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
         
         self.privateGetModules(nil, success: success, failure: failure)
     
     }
     
-    private func privateGetModules(offlinePolicy: OfflinePolicy?, success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+    private func privateGetModules(offlinePolicy: OfflinePolicy?, success: ((userData: [Halo.Module], cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
         
-        self.getModules(offlinePolicy) { (result, cached) -> Void in
+        self.getModules(offlinePolicy) { (result) -> Void in
             switch result {
-            case .Success(let modules):
-                success?(userData: modules)
+            case .Success(let modules, let cached):
+                success?(userData: modules, cached: cached)
             case .Failure(let error):
                 failure?(error: error)
             }

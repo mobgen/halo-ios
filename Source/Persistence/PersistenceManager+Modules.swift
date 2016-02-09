@@ -7,23 +7,22 @@
 //
 
 import Foundation
-import Alamofire
 
 extension PersistenceManager: ModulesManager {
     
-    func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>, Bool) -> Void)?) -> Void {
+    func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void {
         
         if !network {
             self.getModulesLocalDataDontLoad(completionHandler: { (result) -> Void in
-                handler?(result, true)
+                handler?(result)
             })
             return
         }
         
-        net.getModules { (result, _) in
+        net.getModules { (result) in
             switch result {
-            case .Success(let modules):
-                handler?(.Success(modules), false)
+            case .Success(let modules, _):
+                handler?(result)
                 
                 try! self.realm.write({ () -> Void in
                     
@@ -38,17 +37,17 @@ extension PersistenceManager: ModulesManager {
             case .Failure(let error):
                 if error.code == -1009 {
                     self.getModulesLocalDataDontLoad(completionHandler: { (result) -> Void in
-                        handler?(result, true)
+                        handler?(result)
                     })
                 } else {
-                    handler?(.Failure(error), false)
+                    handler?(result)
                 }
             }
         }
     }
     
  
-    private func getModulesLocalDataDontLoad(completionHandler handler: ((Alamofire.Result<[Halo.Module], NSError>) -> Void)?) -> Void {
+    private func getModulesLocalDataDontLoad(completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void {
         
         let modules = realm.objects(PersistentModule)
         
@@ -56,7 +55,7 @@ extension PersistenceManager: ModulesManager {
             return persistentModule.getModule()
         }
         
-        handler?(.Success(result))
+        handler?(.Success(result, true))
         
     }
     

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 import UIKit
 import CoreBluetooth
 
@@ -260,7 +259,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
             // Update the user
             net.getUser(user) { (result) -> Void in
                 switch result {
-                case .Success(let user):
+                case .Success(let user, _):
                     self.user = user
 
                     if self.enablePush {
@@ -344,7 +343,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                 
                 if let strongSelf = self {
                     switch result {
-                    case .Success(let user):
+                    case .Success(let user, _):
                         strongSelf.user = user
                         NSLog((strongSelf.user?.description)!)
                         strongSelf.user?.storeUser(strongSelf.environment)
@@ -491,7 +490,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
 
     - parameter completionHandler: Closure to be executed once the request has finished
     */
-    public func saveUser(completionHandler handler: (Alamofire.Result<Halo.User, NSError> -> Void)? = nil) -> Void {
+    public func saveUser(completionHandler handler: (Halo.Result<Halo.User, NSError> -> Void)? = nil) -> Void {
         if let user = self.user {
             self.net.createUpdateUser(user, completionHandler: handler)
         }
@@ -505,8 +504,8 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
      - parameter params:  Provided params provided
      - parameter handler: Closure to be executed after the request has finished
      */
-    public func customRequest(method method: Alamofire.Method, url: String, params: [String: AnyObject]?,
-        completionHandler handler: (Alamofire.Result<AnyObject, NSError>) -> Void) -> Void {
+    public func customRequest(method method: Halo.Method, url: String, params: [String: AnyObject]?,
+        completionHandler handler: (Halo.Result<AnyObject, NSError>) -> Void) -> Void {
             net.haloRequest(method, url: url, params: params, completionHandler: handler)
     }
     
@@ -524,7 +523,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
         self.saveUser { (result) -> Void in
 
             switch result {
-            case .Success(let user):
+            case .Success(let user, _):
                 success?(userData: user)
             case .Failure(let error):
                 failure?(error: error)
@@ -542,14 +541,14 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
     - parameter failure: Closure to be executed after the request has failed
     */
     @objc(customRequestWithMethod:url:params:success:failure:)
-    public func customRequestFromObjC(method: String, url: String, params: [String: AnyObject]?,
-        success: ((userData: AnyObject) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+    public func customRequestFromObjC(method: Halo.Method, url: String, params: [String: AnyObject]?,
+        success: ((userData: AnyObject, cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
    
-            self.customRequest(method: Alamofire.Method(rawValue: method.uppercaseString)!,
+            self.customRequest(method: method,
                 url: url, params: params) { (result) -> Void in
                     switch result {
-                    case .Success(let data):
-                        success?(userData: data)
+                    case .Success(let data, let cached):
+                        success?(userData: data, cached: cached)
                     case .Failure(let error):
                         failure?(error: error)
                     }

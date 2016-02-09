@@ -11,8 +11,8 @@ import Alamofire
 
 extension NetworkManager {
     
-    func haloRequest(method: Alamofire.Method, url: String, var params: [String: AnyObject]?, populate: Bool? = false,
-        completionHandler handler: ((Alamofire.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
+    func haloRequest(method: Halo.Method, url: String, var params: [String: AnyObject]?, populate: Bool? = false,
+        completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
             
             if var p = params {
                 p["populate"] = populate

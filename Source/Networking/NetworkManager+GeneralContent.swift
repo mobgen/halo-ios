@@ -29,7 +29,7 @@ extension NetworkManager: GeneralContentManager {
     - parameter moduleId:           Internal id of the module to be requested
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Alamofire.Result<[GeneralContentInstance], NSError>, Bool) -> Void)? = nil) -> Void {
+    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Halo.Result<[GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
 
         var params: [String: AnyObject] = [
             "module" : moduleIds,
@@ -46,33 +46,33 @@ extension NetworkManager: GeneralContentManager {
 
             if let strongSelf = self {
                 switch result {
-                case .Success(let data):
+                case .Success(let data, let cached):
                     let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
-                    handler?(.Success(arr), false)
+                    handler?(.Success(arr, cached))
                 case .Failure(let error):
-                    handler?(.Failure(error), false)
+                    handler?(.Failure(error))
                 }
             }
         }
     }
 
-    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Alamofire.Result<Halo.GeneralContentInstance, NSError>, Bool) -> Void)? = nil) -> Void {
+    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)? = nil) -> Void {
         
         let params: [String: AnyObject] = ["populate" : populate!]
         
         self.startRequest(request: Router.GeneralContentInstance(instanceId, params)) { (request, response, result) in
             
             switch result {
-            case .Success(let data):
+            case .Success(let data, let cached):
                 let dict = data as! [String:AnyObject]
-                handler?(.Success(GeneralContentInstance(dict)), false)
+                handler?(.Success(GeneralContentInstance(dict), cached))
             case .Failure(let error):
-                handler?(.Failure(error), false)
+                handler?(.Failure(error))
             }
         }
     }
     
-    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Alamofire.Result<[Halo.GeneralContentInstance], NSError>, Bool) -> Void)? = nil) -> Void {
+    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
         
         let params: [String: AnyObject] = [
             "id" : instanceIds,
@@ -82,13 +82,13 @@ extension NetworkManager: GeneralContentManager {
         self.startRequest(request: Router.GeneralContentInstances(params)) { (request, response, result) in
             
             switch result {
-            case .Success(let data):
+            case .Success(let data, let cached):
                 let instances = data as! [[String: AnyObject]]
                 handler?(.Success(instances.map({ (dict) -> GeneralContentInstance in
                     return GeneralContentInstance(dict)
-                })), false)
+                }), cached))
             case .Failure(let error):
-                handler?(.Failure(error), false)
+                handler?(.Failure(error))
             }
         }
     }

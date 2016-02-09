@@ -48,9 +48,9 @@ extension GeneralContent {
         success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
             
-            self.getInstances(moduleIds: moduleIds, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
+            self.getInstances(moduleIds: moduleIds, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
-                case .Success(let instances):
+                case .Success(let instances, let cached):
                     success?(userData: instances, cached: cached)
                 case .Failure(let error):
                     failure?(error: error)
@@ -94,9 +94,9 @@ extension GeneralContent {
         success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
      
-            self.getInstances(moduleIds: instanceIds, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
+            self.getInstances(moduleIds: instanceIds, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
-                case .Success(let instances):
+                case .Success(let instances, let cached):
                     success?(userData: instances, cached: cached)
                 case .Failure(let error):
                     failure?(error: error)
@@ -142,9 +142,9 @@ extension GeneralContent {
         success:((userData: GeneralContentInstance, cached: Bool) -> Void)?,
         failure:((error: NSError) -> Void)?) -> Void {
      
-            self.getSingleInstance(instanceId: instanceId, offlinePolicy: offlinePolicy) { (result, cached) -> Void in
+            self.getSingleInstance(instanceId: instanceId, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
-                case .Success(let instance):
+                case .Success(let instance, let cached):
                     success?(userData: instance, cached: cached)
                 case .Failure(let error):
                     failure?(error: error)
