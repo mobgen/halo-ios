@@ -67,7 +67,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
     /// General content component
     public let generalContent = Halo.GeneralContent.sharedInstance
 
-    public var defaultOfflinePolicy: OfflinePolicy = .LoadAndStoreLocalData
+    public var defaultOfflinePolicy: OfflinePolicy = .None
     
     public var numberOfRetries: Int {
         get {

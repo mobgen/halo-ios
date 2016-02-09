@@ -193,9 +193,9 @@
 /* Begin PBXFileReference section */
 		000826FE1B6A34DE001E8248 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		000827001B6A57A5001E8248 /* ModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
-		000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModule.swift; sourceTree = "<group>"; };
-		000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTag.swift; sourceTree = "<group>"; };
-		000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModuleType.swift; sourceTree = "<group>"; };
+		000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentModule.swift; path = Source/Persistence/PersistentModule.swift; sourceTree = "<group>"; };
+		000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentTag.swift; path = Source/Persistence/PersistentTag.swift; sourceTree = "<group>"; };
+		000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentModuleType.swift; path = Source/Persistence/PersistentModuleType.swift; sourceTree = "<group>"; };
 		00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Manager+Modules.swift"; sourceTree = "<group>"; };
 		0024964B1C00892C00F6F734 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		0024964C1C00892C00F6F734 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -329,12 +329,12 @@
 		00921B931BBBD2CE00B79B50 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 		0094A31F1B70A6A600DED864 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NetworkManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		00B1BD3D1BF9E8CE00E60C1B /* GeneralContent+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeneralContent+ObjC.swift"; sourceTree = "<group>"; };
-		00C2BCF01C033905006473B8 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
-		00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+Modules.swift"; sourceTree = "<group>"; };
-		00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+GeneralContent.swift"; sourceTree = "<group>"; };
+		00C2BCF01C033905006473B8 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceManager.swift; path = Source/Persistence/PersistenceManager.swift; sourceTree = "<group>"; };
+		00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PersistenceManager+Modules.swift"; path = "Source/Persistence/PersistenceManager+Modules.swift"; sourceTree = "<group>"; };
+		00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PersistenceManager+GeneralContent.swift"; path = "Source/Persistence/PersistenceManager+GeneralContent.swift"; sourceTree = "<group>"; };
 		00C2BCF61C036AE1006473B8 /* ManagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerProtocols.swift; sourceTree = "<group>"; };
-		00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentGeneralContentInstance.swift; sourceTree = "<group>"; };
-		00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentValue.swift; sourceTree = "<group>"; };
+		00C4DEB31BF5E8C300993B9D /* PersistentGeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentGeneralContentInstance.swift; path = Source/Persistence/PersistentGeneralContentInstance.swift; sourceTree = "<group>"; };
+		00C4DEB51BF5E9EF00993B9D /* PersistentValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentValue.swift; path = Source/Persistence/PersistentValue.swift; sourceTree = "<group>"; };
 		00EC9D361C43F72F00A3291D /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -926,7 +926,7 @@
 				006A5FA91B318CAC0045395A /* Frameworks */,
 				006A5FAA1B318CAC0045395A /* Headers */,
 				006A5FAB1B318CAC0045395A /* Resources */,
-				00A34E861BDF9F9E0080DD93 /* ShellScript */,
+				00A34E861BDF9F9E0080DD93 /* Documentation */,
 			);
 			buildRules = (
 			);
@@ -1068,18 +1068,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00A34E861BDF9F9E0080DD93 /* ShellScript */ = {
+		00A34E861BDF9F9E0080DD93 /* Documentation */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Documentation;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#cd ${PROJECT_DIR}/Source;jazzy -m 'Halo SDK' -a 'MOBGEN Technology' -c -o ${PROJECT_DIR}/docs -x '-workspace,../HALO.xcworkspace,-scheme,Halo' --swift-version 2.1 --hide-documentation-coverage";
+			shellScript = "#cd ${PROJECT_DIR}/Source;jazzy -m 'Halo SDK' -a 'MOBGEN Technology' -c -o ${PROJECT_DIR}/docs -x '-workspace,../HALO.xcworkspace,-scheme,Halo' --hide-documentation-coverage";
 		};
 /* End PBXShellScriptBuildPhase section */
 
