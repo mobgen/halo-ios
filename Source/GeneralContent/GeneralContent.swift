@@ -62,7 +62,7 @@ public class GeneralContent: NSObject {
                 self.net.generalContentInstances(instanceIds, fetchFromNetwork: true, completionHandler: handler)
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
                 self.persistence.generalContentInstances(instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: { (result) -> Void in
-                    handler?(result)
+                    //handler?(result)
                 })
             }
     }
@@ -99,7 +99,7 @@ public class GeneralContent: NSObject {
     */
     @objc(instancesInModules:offlinePolicy:success:failure:)
     public func getInstancesWithOfflinePolicyFromObjC(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
+        success:((instances: [GeneralContentInstance], paginationInfo: HaloPaginationInfo?, cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
             self.privateGetInstancesFromObjC(moduleIds: moduleIds, offlinePolicy: offlinePolicy, success: success, failure: failure)
@@ -114,7 +114,7 @@ public class GeneralContent: NSObject {
      */
     @objc(instancesInModules:success:failure:)
     public func getInstancesFromObjC(moduleIds moduleIds: [String],
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
+        success:((userData: [GeneralContentInstance], paginationInfo: HaloPaginationInfo?, cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
             self.privateGetInstancesFromObjC(moduleIds: moduleIds, offlinePolicy: nil, success: success, failure: failure)
@@ -122,13 +122,13 @@ public class GeneralContent: NSObject {
 
 
     private func privateGetInstancesFromObjC(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy?,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
+        success:((instances: [GeneralContentInstance], paginationInfo: HaloPaginationInfo?, cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
             self.getInstances(moduleIds: moduleIds, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
-                case .Success(let instances, let cached):
-                    success?(userData: instances, cached: cached)
+                case .Success(let data, let cached):
+                    success?(instances: data, paginationInfo: nil, cached: cached)
                 case .Failure(let error):
                     failure?(error: error)
                 }
@@ -145,7 +145,7 @@ public class GeneralContent: NSObject {
      */
     @objc(instancesWithIds:offlinePolicy:success:failure:)
     public func getInstancesWithOfflinePolicyFromObjC(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
+        success:((instances: [GeneralContentInstance], paginationInfo: HaloPaginationInfo?, cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
             self.privateGetInstancesFromObjC(moduleIds: instanceIds, offlinePolicy: offlinePolicy, success: success, failure: failure)
@@ -161,20 +161,20 @@ public class GeneralContent: NSObject {
      */
     @objc(instancesWithIds:success:failure:)
     public func getInstancesFromObjC(instanceIds instanceIds: [String],
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
+        success:((instances: [GeneralContentInstance], paginationInfo: HaloPaginationInfo?, cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
             self.privateGetInstancesFromObjC(moduleIds: instanceIds, offlinePolicy: nil, success: success, failure: failure)
     }
 
     private func privateGetInstancesFromObjC(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy?,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
+        success:((instances: [GeneralContentInstance], paginationInfo: HaloPaginationInfo?, cached: Bool) -> Void)?,
         failure: ((error: NSError) -> Void)?) -> Void {
 
             self.getInstances(moduleIds: instanceIds, offlinePolicy: offlinePolicy) { (result) -> Void in
                 switch result {
-                case .Success(let instances, let cached):
-                    success?(userData: instances, cached: cached)
+                case .Success(let data, let cached):
+                    success?(instances: data, paginationInfo: nil, cached: cached)
                 case .Failure(let error):
                     failure?(error: error)
                 }

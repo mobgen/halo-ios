@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension PersistenceManager: GeneralContentManager {
+extension PersistenceManager {
     
     // MARK: Get instances in a module
     
-    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, populate: Bool? = false, completionHandler handler: ((Halo.Result<[GeneralContentInstance], NSError>) -> Void)?) -> Void {
+    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, populate: Bool? = false, completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
         
         if !network {
             self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
@@ -43,14 +43,14 @@ extension PersistenceManager: GeneralContentManager {
         
     }
     
-    private func getInstancesLocalDataDontLoad(moduleIds: [String], completionHandler handler: ((Halo.Result<[GeneralContentInstance], NSError>) -> Void)?) -> Void {
+    private func getInstancesLocalDataDontLoad(moduleIds: [String], completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
         
         let instances = realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds)
         
         let result = instances.map { (persistentInstance) -> Halo.GeneralContentInstance in
             return persistentInstance.getInstance()
         }
-        
+
         handler?(.Success(result, true))
         
     }

@@ -15,20 +15,22 @@ extension NetworkManager: ModulesManager {
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(fetchFromNetwork network: Bool = true, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
+    func getModules() -> Halo.Request<[Halo.Module]> { //fetchFromNetwork network: Bool = true, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
 
-        self.startRequest(request: Router.Modules, completionHandler: { [weak self] (request, response, result) in
+        return Halo.Request<[Halo.Module]>(router: Router.Modules)
 
-            if let strongSelf = self {
-                switch result {
-                case .Success(let data, let cached):
-                    let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
-                    handler?(.Success(arr, cached))
-                case .Failure(let error):
-                    handler?(.Failure(error))
-                }
-            }
-        })
+//        self.startRequest(request: Router.Modules, completionHandler: { [weak self] (request, response, result) in
+//
+//            if let strongSelf = self {
+//                switch result {
+//                case .Success(let data, let cached):
+//                    let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
+//                    handler?(.Success(arr, cached))
+//                case .Failure(let error):
+//                    handler?(.Failure(error))
+//                }
+//            }
+//        })
     }
 
     // MARK: Utility functions

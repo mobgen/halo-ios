@@ -9,8 +9,12 @@
 import Foundation
 import Alamofire
 
+public enum ParameterEncoding: Int {
+    case JSON, URL
+}
+
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
-enum Router: URLRequestConvertible {
+enum Router {
 
     /// Common base url of all the API endpoints
     static var baseURL = NSURL(string: "https://halo.mobgen.com")
@@ -71,55 +75,59 @@ enum Router: URLRequestConvertible {
         }
     }
 
-    // MARK: URLRequestConvertible
-
-    /// Get the right URL request with the right headers
-    var URLRequest: NSMutableURLRequest {
-        let url = NSURL(string: path, relativeToURL: Router.baseURL)
-        let mutableURLRequest = NSMutableURLRequest(URL: url!)
-        mutableURLRequest.HTTPMethod = method.toAlamofire().rawValue
+    var headers: [String: String] {
+        var h: [String: String] = [:]
 
         if let token = Router.token {
-            mutableURLRequest.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")
+            h["Authorization"] = "\(token.tokenType!) \(token.token!)"
         }
 
         if let alias = Router.userAlias {
-            mutableURLRequest.setValue(alias, forHTTPHeaderField: "X-AppUser-Alias")
+            h["X-AppUser-Alias"] = alias
         }
-        
-        /**
-        *  My god.. really awful. Think of a better way of doing this!
-        */
+
         switch self {
-        case .OAuth(let cred, let params):
-            
+        case .OAuth(let cred, _):
             if cred.type == .User {
                 let string = "\(cred.username):\(cred.password)"
                 if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
                     let base64string = data.base64EncodedStringWithOptions([])
-                    mutableURLRequest.setValue("Basic \(base64string)", forHTTPHeaderField: "Authorization")
-                    NSLog("Using Authorization header: Basic \(base64string)")
+                    h["Authorization"] = "Basic \(base64string)"
                 }
             }
-            
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
-        case .GeneralContentInstance(_, let params):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
-        case .GeneralContentInstances(let params):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
-        case .SegmentationCreateUser(let params):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
-        case .SegmentationUpdateUser(_, let params):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
-        case .CustomRequest(let method, _, let params):
+        default:
+            break
+        }
+
+        return h
+    }
+
+    var parameterEncoding: Halo.ParameterEncoding {
+        switch self {
+        case .SegmentationCreateUser(_), .SegmentationUpdateUser(_, _):
+            return .JSON
+        case .CustomRequest(let method, _, _):
             switch method {
-            case .POST:
-                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
-            default:
-                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+            case .POST: return .JSON
+            default: return .URL
             }
         default:
-            return mutableURLRequest
+            return .URL
         }
     }
+
+    var params: [String: AnyObject]? {
+
+        switch self {
+        case .OAuth(_, let params): return params
+        case .GeneralContentInstances(let params): return params
+        case .GeneralContentInstance(_, let params): return params
+        case .SegmentationCreateUser(let params): return params
+        case .SegmentationUpdateUser(_, let params): return params
+        case .CustomRequest(_, _, let params): return params
+        default: return nil
+        }
+
+    }
+
 }

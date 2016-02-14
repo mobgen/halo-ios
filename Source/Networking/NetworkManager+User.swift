@@ -14,17 +14,17 @@ extension NetworkManager {
     func getUser(user: Halo.User, completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
         
         if let id = user.id {
-            
-            self.startRequest(request: Router.SegmentationGetUser(id)) { (request, response, result) in
+
+            Halo.Request<[String:AnyObject]>(router: Router.SegmentationGetUser(id)).response(completionHandler: { (request, response, result) in
                 
                 switch result {
                 case .Success(let data, let cached):
-                    let user = User.fromDictionary(data as! [String: AnyObject])
+                    let user = User.fromDictionary(data)
                     handler?(.Success(user, cached))
                 case .Failure(let error):
                     handler?(.Failure(error))
                 }
-            }
+            })
             
         } else {
             handler?(.Success(user, false))
@@ -41,19 +41,19 @@ extension NetworkManager {
     func createUpdateUser(user: Halo.User, completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
-        let request: URLRequestConvertible;
+        let request: Halo.Request<[String: AnyObject]>
         
         if let id = user.id {
-            request = Router.SegmentationUpdateUser(id, user.toDictionary())
+            request = Halo.Request<[String: AnyObject]>(router: Router.SegmentationUpdateUser(id, user.toDictionary()))
         } else {
-            request = Router.SegmentationCreateUser(user.toDictionary())
+            request = Halo.Request<[String: AnyObject]>(router: Router.SegmentationCreateUser(user.toDictionary()))
         }
         
         self.startRequest(request: request) { (req, resp, result) -> Void in
 
             switch result {
             case .Success(let data, let cached):
-                let user = User.fromDictionary(data as! [String: AnyObject])
+                let user = User.fromDictionary(data)
                 handler?(.Success(user, cached))
             case .Failure(let error):
                 handler?(.Failure(error))

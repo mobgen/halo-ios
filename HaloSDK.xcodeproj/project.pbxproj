@@ -69,6 +69,9 @@
 		005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+User.swift */; };
 		005DF3121B998BB500149B40 /* GeneralContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005DF3111B998BB500149B40 /* GeneralContentSpec.swift */; };
 		005E1ED61C69FFE800ED8763 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED51C69FFE800ED8763 /* Result.swift */; };
+		005E1ED81C6A2C2000ED8763 /* PaginatedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED71C6A2C2000ED8763 /* PaginatedResult.swift */; };
+		005E1EDA1C6A344200ED8763 /* HaloPaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED91C6A344200ED8763 /* HaloPaginationInfo.swift */; };
+		005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1EFE1C6BEE2500ED8763 /* Request.swift */; };
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
@@ -214,6 +217,9 @@
 		005390851B8DB7590036F579 /* NetworkManager+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+User.swift"; sourceTree = "<group>"; };
 		005DF3111B998BB500149B40 /* GeneralContentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentSpec.swift; sourceTree = "<group>"; };
 		005E1ED51C69FFE800ED8763 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		005E1ED71C6A2C2000ED8763 /* PaginatedResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedResult.swift; sourceTree = "<group>"; };
+		005E1ED91C6A344200ED8763 /* HaloPaginationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloPaginationInfo.swift; sourceTree = "<group>"; };
+		005E1EFE1C6BEE2500ED8763 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		006238251BCE5B8900E614B3 /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = halo.cer; path = Resources/halo.cer; sourceTree = "<group>"; };
 		0068D27B1B6778CA00B1E147 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -413,6 +419,8 @@
 				0068D27B1B6778CA00B1E147 /* Token.swift */,
 				006CB9B51B870FB800EB872E /* User.swift */,
 				006CB9B91B87116D00EB872E /* UserDevice.swift */,
+				005E1ED71C6A2C2000ED8763 /* PaginatedResult.swift */,
+				005E1ED91C6A344200ED8763 /* HaloPaginationInfo.swift */,
 			);
 			name = Model;
 			path = Source/Model;
@@ -522,6 +530,7 @@
 				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
 				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
 				000826FE1B6A34DE001E8248 /* Router.swift */,
+				005E1EFE1C6BEE2500ED8763 /* Request.swift */,
 			);
 			name = Networking;
 			path = Source/Networking;
@@ -1097,6 +1106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */,
+				005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */,
 				0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */,
 				000EEB4F1BEB66E900C1435D /* PersistentModuleType.swift in Sources */,
 				00C2BCF71C036AE1006473B8 /* ManagerProtocols.swift in Sources */,
@@ -1125,8 +1135,10 @@
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,
 				00C4DEB61BF5E9EF00993B9D /* PersistentValue.swift in Sources */,
+				005E1EDA1C6A344200ED8763 /* HaloPaginationInfo.swift in Sources */,
 				00C2BCF11C033905006473B8 /* PersistenceManager.swift in Sources */,
 				00C2BCF51C03399A006473B8 /* PersistenceManager+GeneralContent.swift in Sources */,
+				005E1ED81C6A2C2000ED8763 /* PaginatedResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

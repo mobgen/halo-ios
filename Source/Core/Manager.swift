@@ -51,7 +51,7 @@ public protocol ManagerDelegate {
      to perform any operation involving the SDK.
      
      */
-    func managerDidFinishLaunching() -> Void
+    func managerDidFinishLaunching(success: Bool) -> Void
 }
 
 /// Core manager of the Framework implemented as a Singleton
@@ -340,13 +340,16 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
             self.user?.storeUser(self.environment)
 
             self.net.createUpdateUser(user, completionHandler: { [weak self] (result) -> Void in
-                
+
+                var success = false
+
                 if let strongSelf = self {
                     switch result {
                     case .Success(let user, _):
                         strongSelf.user = user
                         NSLog((strongSelf.user?.description)!)
                         strongSelf.user?.storeUser(strongSelf.environment)
+                        success = true
                     case .Failure(let error):
                         NSLog("Error: \(error.localizedDescription)")
                     }
@@ -355,7 +358,7 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                         Router.userAlias = alias
                     }
                     
-                    strongSelf.delegate?.managerDidFinishLaunching()
+                    strongSelf.delegate?.managerDidFinishLaunching(success)
                 }
             })
         }

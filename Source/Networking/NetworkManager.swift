@@ -9,15 +9,14 @@
 import Foundation
 import Alamofire
 
-//typealias CompletionHandler = (Alamofire.Response) -> Void
-typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void
+//typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void
 
-private struct CachedTask {
+private struct CachedTask<T> {
     
-    var request: URLRequestConvertible!
-    var handler: CompletionHandler!
+    var request: Halo.Request<T>!
+    var handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void)!
     
-    init(request: URLRequestConvertible, handler: CompletionHandler) {
+    init(request: Halo.Request<T>, handler: (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void) {
         self.request = request
         self.handler = handler
     }
@@ -41,7 +40,7 @@ class NetworkManager: Alamofire.Manager {
     private var isRefreshing = false
 
     /// Queue of pending network tasks to be restarted after a successful authentication
-    private var cachedTasks = Array<CachedTask>()
+    private var cachedTasks: [Any] = []
     
     private init() {
         
@@ -93,9 +92,11 @@ class NetworkManager: Alamofire.Manager {
     - parameter request:            Request to be performed
     - parameter completionHandler:  Closure to be executed after the request has succeeded
     */
-    func startRequest(request urlRequest: URLRequestConvertible, numberOfRetries: Int, completionHandler handler: CompletionHandler) -> Void {
+    func startRequest<T>(request urlRequest: Halo.Request<T>,
+        numberOfRetries: Int,
+        completionHandler handler: (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void) -> Void {
 
-        let cachedTask = CachedTask(request: urlRequest, handler: handler)
+        let cachedTask = CachedTask<T>(request: urlRequest, handler: handler)
 
         if (self.isRefreshing) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
@@ -112,23 +113,24 @@ class NetworkManager: Alamofire.Manager {
         request.responseJSON { [weak self] response in
             
             if let strongSelf = self {
-                
+
+                if let resp = response.response {
+                    if resp.statusCode == 403 || resp.statusCode == 401 {
+                        /// If we get a 403/401, we add the task to the queue and try to get a valid token
+                        strongSelf.cachedTasks.append(cachedTask)
+                        strongSelf.refreshToken()
+                        return
+                    }
+                }
+
                 switch response.result {
                 case .Success(let data):
-                    if let resp = response.response {
-                        if resp.statusCode == 403 || resp.statusCode == 401 {
-                            /// If we get a 403/401, we add the task to the queue and try to get a valid token
-                            strongSelf.cachedTasks.append(cachedTask)
-                            strongSelf.refreshToken()
-                            return
-                        }
-                    }
 
                     if strongSelf.debug {
                         debugPrint(data)
                     }
 
-                    handler(response.request, response.response, .Success(data, false))
+                    handler(response.request, response.response, .Success(data as! T, false))
 
                 case .Failure(let error):
                     NSLog("Error performing request: \(error.localizedDescription)")
@@ -144,14 +146,17 @@ class NetworkManager: Alamofire.Manager {
         }
     }
 
-    func startRequest(request urlRequest: URLRequestConvertible, completionHandler handler: CompletionHandler) -> Void {
-        self.startRequest(request: urlRequest, numberOfRetries: self.numberOfRetries, completionHandler: handler)
+    func startRequest<T>(request urlRequest: Halo.Request<T>,
+        completionHandler handler: (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void) -> Void {
+
+            self.startRequest(request: urlRequest, numberOfRetries: self.numberOfRetries, completionHandler: handler)
+
     }
     
     /**
     Obtain/refresh an authentication token when needed
     */
-    func refreshToken(completionHandler: CompletionHandler? = nil) -> Void {
+    func refreshToken(completionHandler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<[String: AnyObject], NSError>) -> Void)? = nil) -> Void {
         self.isRefreshing = true
 
         var params: [String: AnyObject]
@@ -191,17 +196,16 @@ class NetworkManager: Alamofire.Manager {
                     ]
                 }
             }
-            
-            self.request(Router.OAuth(cred, params)).responseJSON { response in
-                switch response.result {
-                case .Success(let value):
-                    let dict = value as! Dictionary<String, AnyObject>
-                    
+
+            Halo.Request<[String: AnyObject]>(router: Router.OAuth(cred, params)).response(completionHandler: { (request, response, result) -> Void in
+                switch result {
+                case .Success(let value, let cached):
+
                     Router.token = nil
-                    
-                    if let resp = response.response {
+
+                    if let resp = response {
                         if resp.statusCode == 200 {
-                            Router.token = Token(dict)
+                            Router.token = Token(value)
                         } else {
                             NSLog("Error retrieving token")
                         }
@@ -210,23 +214,62 @@ class NetworkManager: Alamofire.Manager {
                         NSLog("No response from server")
                     }
 
-                    completionHandler?(response.request, response.response, .Success(value, false))
-                    
+                    completionHandler?(request, response, .Success(value, cached))
+
                 case .Failure(let error):
                     NSLog("Error refreshing token: \(error.localizedDescription)")
 
-                    completionHandler?(response.request, response.response, .Failure(error))
+                    completionHandler?(request, response, .Failure(error))
                 }
-                
-                self.isRefreshing = false
-                
-                /// Restart cached tasks
-                let cachedTaskCopy = self.cachedTasks
-                self.cachedTasks.removeAll()
-                let _ = cachedTaskCopy.map { self.startRequest(request: $0.request, numberOfRetries: self.numberOfRetries, completionHandler: $0.handler) }
-                
 
-            }
+                self.isRefreshing = false
+
+                /// Restart cached tasks
+                let cachedTasksCopy = self.cachedTasks
+                self.cachedTasks.removeAll()
+                let _ = cachedTasksCopy.map({ (t) -> Void in
+                    let task = t as! CachedTask<Any>
+                    self.startRequest(request: task.request, numberOfRetries: self.numberOfRetries, completionHandler: task.handler)
+                })
+            })
+
+//            self.request(Halo.Request<[String: AnyObject]>(router: Router.OAuth(cred, params))).responseJSON { response in
+//                switch response.result {
+//                case .Success(let value):
+//                    let dict = value as! Dictionary<String, AnyObject>
+//                    
+//                    Router.token = nil
+//                    
+//                    if let resp = response.response {
+//                        if resp.statusCode == 200 {
+//                            Router.token = Token(dict)
+//                        } else {
+//                            NSLog("Error retrieving token")
+//                        }
+//                    } else {
+//                        // No response
+//                        NSLog("No response from server")
+//                    }
+//
+//                    completionHandler?(response.request, response.response, .Success(value as! [String: AnyObject], false))
+//                    
+//                case .Failure(let error):
+//                    NSLog("Error refreshing token: \(error.localizedDescription)")
+//
+//                    completionHandler?(response.request, response.response, .Failure(error))
+//                }
+//                
+//                self.isRefreshing = false
+//                
+//                /// Restart cached tasks
+//                let cachedTasksCopy = self.cachedTasks
+//                self.cachedTasks.removeAll()
+//                let _ = cachedTasksCopy.map({ (task) -> Void in
+//                    self.startRequest(request: task.request, numberOfRetries: self.numberOfRetries, completionHandler: task.handler)
+//                })
+//                
+//
+//            }
         }
     }
 }

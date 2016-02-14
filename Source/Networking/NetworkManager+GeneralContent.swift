@@ -21,7 +21,7 @@ public struct GeneralContentFlag : OptionSetType {
     public static let IncludeUnpublished = GeneralContentFlag(rawValue: 2)
 }
 
-extension NetworkManager: GeneralContentManager {
+extension NetworkManager {
 
     /**
     Obtain the existing instances for a given General Content module
@@ -29,7 +29,7 @@ extension NetworkManager: GeneralContentManager {
     - parameter moduleId:           Internal id of the module to be requested
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Halo.Result<[GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
+    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool = true, populate: Bool? = false, completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
 
         var params: [String: AnyObject] = [
             "module" : moduleIds,
@@ -42,12 +42,12 @@ extension NetworkManager: GeneralContentManager {
         
         let unpublished = flags.contains(GeneralContentFlag.IncludeUnpublished)
         
-        self.startRequest(request: Router.GeneralContentInstances(params)) { [weak self] (request, response, result) in
+        self.startRequest(request: Halo.Request<[[String: AnyObject]]>(router: Router.GeneralContentInstances(params))) { [weak self] (request, response, result) in
 
             if let strongSelf = self {
                 switch result {
                 case .Success(let data, let cached):
-                    let arr = strongSelf.parseGeneralContentInstances(data as! [[String: AnyObject]], includeUnpublished: unpublished)
+                    let arr = strongSelf.parseGeneralContentInstances(data, includeUnpublished: unpublished)
                     handler?(.Success(arr, cached))
                 case .Failure(let error):
                     handler?(.Failure(error))
@@ -60,12 +60,11 @@ extension NetworkManager: GeneralContentManager {
         
         let params: [String: AnyObject] = ["populate" : populate!]
         
-        self.startRequest(request: Router.GeneralContentInstance(instanceId, params)) { (request, response, result) in
+        self.startRequest(request: Halo.Request<[String: AnyObject]>(router: Router.GeneralContentInstance(instanceId, params))) { (request, response, result) in
             
             switch result {
             case .Success(let data, let cached):
-                let dict = data as! [String:AnyObject]
-                handler?(.Success(GeneralContentInstance(dict), cached))
+                handler?(.Success(GeneralContentInstance(data), cached))
             case .Failure(let error):
                 handler?(.Failure(error))
             }
@@ -79,14 +78,19 @@ extension NetworkManager: GeneralContentManager {
             "populate" : populate!
         ]
         
-        self.startRequest(request: Router.GeneralContentInstances(params)) { (request, response, result) in
+        self.startRequest(request: Halo.Request<[GeneralContentInstance]>(router: Router.GeneralContentInstances(params))) { (request, response, result) in
             
             switch result {
             case .Success(let data, let cached):
-                let instances = data as! [[String: AnyObject]]
-                handler?(.Success(instances.map({ (dict) -> GeneralContentInstance in
-                    return GeneralContentInstance(dict)
-                }), cached))
+
+//                var items = []
+//
+//                // Create the paginated result
+//                if let i = data["items"] as? [[String: AnyObject]] {
+//                    items = i.map({ GeneralContentInstance($0) })
+//                }
+
+                handler?(.Success(data, cached))
             case .Failure(let error):
                 handler?(.Failure(error))
             }

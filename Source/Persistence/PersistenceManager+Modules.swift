@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension PersistenceManager: ModulesManager {
+extension PersistenceManager {
     
     func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void {
         
@@ -18,22 +18,22 @@ extension PersistenceManager: ModulesManager {
             })
             return
         }
-        
-        net.getModules { (result) in
+
+        net.getModules().response { (request, response, result) -> Void in
             switch result {
             case .Success(let modules, _):
                 handler?(result)
-                
+
                 try! self.realm.write({ () -> Void in
-                    
+
                     // Delete the existing ones. Temporary solution?
                     self.realm.delete(self.realm.objects(PersistentModule))
-                    
+
                     for module in modules {
                         self.realm.add(PersistentModule(module), update: true)
                     }
                 })
-                
+
             case .Failure(let error):
                 if error.code == -1009 {
                     self.getModulesLocalDataDontLoad(completionHandler: { (result) -> Void in
