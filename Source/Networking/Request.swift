@@ -33,6 +33,11 @@ public class Request<T>: URLRequestConvertible {
             self.params!["include"] = true
         }
 
+        if let page = self.page, limit = self.limit {
+            self.params!["page"] = page
+            self.params!["limit"] = limit
+        }
+
         switch self.parameterEncoding {
         case .URL:
             req = Alamofire.ParameterEncoding.URL.encode(req, parameters: self.params).0

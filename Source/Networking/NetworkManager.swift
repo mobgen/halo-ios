@@ -156,7 +156,7 @@ class NetworkManager: Alamofire.Manager {
     /**
     Obtain/refresh an authentication token when needed
     */
-    func refreshToken(completionHandler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<[String: AnyObject], NSError>) -> Void)? = nil) -> Void {
+    func refreshToken(completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<[String: AnyObject], NSError>) -> Void)? = nil) -> Void {
         self.isRefreshing = true
 
         var params: [String: AnyObject]
@@ -214,12 +214,12 @@ class NetworkManager: Alamofire.Manager {
                         NSLog("No response from server")
                     }
 
-                    completionHandler?(request, response, .Success(value, cached))
+                    handler?(request, response, .Success(value, cached))
 
                 case .Failure(let error):
                     NSLog("Error refreshing token: \(error.localizedDescription)")
 
-                    completionHandler?(request, response, .Failure(error))
+                    handler?(request, response, .Failure(error))
                 }
 
                 self.isRefreshing = false
@@ -233,43 +233,6 @@ class NetworkManager: Alamofire.Manager {
                 })
             })
 
-//            self.request(Halo.Request<[String: AnyObject]>(router: Router.OAuth(cred, params))).responseJSON { response in
-//                switch response.result {
-//                case .Success(let value):
-//                    let dict = value as! Dictionary<String, AnyObject>
-//                    
-//                    Router.token = nil
-//                    
-//                    if let resp = response.response {
-//                        if resp.statusCode == 200 {
-//                            Router.token = Token(dict)
-//                        } else {
-//                            NSLog("Error retrieving token")
-//                        }
-//                    } else {
-//                        // No response
-//                        NSLog("No response from server")
-//                    }
-//
-//                    completionHandler?(response.request, response.response, .Success(value as! [String: AnyObject], false))
-//                    
-//                case .Failure(let error):
-//                    NSLog("Error refreshing token: \(error.localizedDescription)")
-//
-//                    completionHandler?(response.request, response.response, .Failure(error))
-//                }
-//                
-//                self.isRefreshing = false
-//                
-//                /// Restart cached tasks
-//                let cachedTasksCopy = self.cachedTasks
-//                self.cachedTasks.removeAll()
-//                let _ = cachedTasksCopy.map({ (task) -> Void in
-//                    self.startRequest(request: task.request, numberOfRetries: self.numberOfRetries, completionHandler: task.handler)
-//                })
-//                
-//
-//            }
         }
     }
 }
