@@ -16,7 +16,6 @@ extension NetworkManager {
         if let id = user.id {
 
             Halo.Request<[String:AnyObject]>(router: Router.SegmentationGetUser(id)).response(completionHandler: { (request, response, result) in
-                
                 switch result {
                 case .Success(let data, let cached):
                     let user = User.fromDictionary(data)
@@ -41,12 +40,12 @@ extension NetworkManager {
     func createUpdateUser(user: Halo.User, completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
-        let request: Halo.Request<[String: AnyObject]>
+        let request: Halo.Request<[String:AnyObject]>
         
         if let id = user.id {
-            request = Halo.Request<[String: AnyObject]>(router: Router.SegmentationUpdateUser(id, user.toDictionary()))
+            request = Halo.Request<[String:AnyObject]>(router: Router.SegmentationUpdateUser(id, user.toDictionary()))
         } else {
-            request = Halo.Request<[String: AnyObject]>(router: Router.SegmentationCreateUser(user.toDictionary()))
+            request = Halo.Request<[String:AnyObject]>(router: Router.SegmentationCreateUser(user.toDictionary()))
         }
 
         request.response { (request, response, result) -> Void in
@@ -58,7 +57,5 @@ extension NetworkManager {
                 handler?(.Failure(error))
             }
         }
-
     }
-
 }

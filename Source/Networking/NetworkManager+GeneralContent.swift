@@ -42,7 +42,7 @@ extension NetworkManager {
         
         let unpublished = flags.contains(GeneralContentFlag.IncludeUnpublished)
         
-        self.startRequest(request: Halo.Request<[[String: AnyObject]]>(router: Router.GeneralContentInstances(params))) { [weak self] (request, response, result) in
+        Halo.Request<[[String: AnyObject]]>(router: Router.GeneralContentInstances(params)).response { [weak self] (request, response, result) in
 
             if let strongSelf = self {
                 switch result {

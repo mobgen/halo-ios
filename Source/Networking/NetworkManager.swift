@@ -112,6 +112,8 @@ class NetworkManager: Alamofire.Manager {
         
         request.responseJSON { [weak self] response in
             
+            debugPrint(response)
+            
             if let strongSelf = self {
 
                 if let resp = response.response {
@@ -156,10 +158,10 @@ class NetworkManager: Alamofire.Manager {
     /**
     Obtain/refresh an authentication token when needed
     */
-    func refreshToken(completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<[String: AnyObject], NSError>) -> Void)? = nil) -> Void {
+    func refreshToken(completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
+        
         self.isRefreshing = true
-
-        var params: [String: AnyObject]
+        var params: [String:AnyObject]
         
         if let cred = self.credentials {
             
@@ -197,15 +199,18 @@ class NetworkManager: Alamofire.Manager {
                 }
             }
 
-            Halo.Request<[String: AnyObject]>(router: Router.OAuth(cred, params)).response(completionHandler: { (request, response, result) -> Void in
-                switch result {
-                case .Success(let value, let cached):
-
+            let req = self.request(Halo.Request<[String:AnyObject]>(router: Router.OAuth(cred, params)))
+            
+            req.responseJSON(completionHandler: { (resp) -> Void in
+                switch resp.result {
+                case .Success(let data):
+                    
                     Router.token = nil
-
-                    if let resp = response {
+                    
+                    if let resp = resp.response {
                         if resp.statusCode == 200 {
-                            Router.token = Token(value)
+                            Router.token = Token(data as! [String:AnyObject])
+                            NSLog("New token retrieved")
                         } else {
                             NSLog("Error retrieving token")
                         }
@@ -213,17 +218,15 @@ class NetworkManager: Alamofire.Manager {
                         // No response
                         NSLog("No response from server")
                     }
-
-                    handler?(request, response, .Success(value, cached))
-
+                    handler?(resp.request, resp.response, .Success(data, false))
+                    
                 case .Failure(let error):
                     NSLog("Error refreshing token: \(error.localizedDescription)")
-
-                    handler?(request, response, .Failure(error))
+                    handler?(resp.request, resp.response, .Failure(error))
                 }
-
+                
                 self.isRefreshing = false
-
+                
                 /// Restart cached tasks
                 let cachedTasksCopy = self.cachedTasks
                 self.cachedTasks.removeAll()
@@ -232,7 +235,9 @@ class NetworkManager: Alamofire.Manager {
                     self.startRequest(request: task.request, numberOfRetries: self.numberOfRetries, completionHandler: task.handler)
                 })
             })
-
+            
+        } else {
+            NSLog("No credentials found")
         }
     }
 }
