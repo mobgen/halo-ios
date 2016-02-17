@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import then
 
 //typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void
 
