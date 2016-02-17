@@ -78,14 +78,6 @@ enum Router {
     var headers: [String: String] {
         var h: [String: String] = [:]
 
-        if let token = Router.token {
-            h["Authorization"] = "\(token.tokenType!) \(token.token!)"
-        }
-
-        if let alias = Router.userAlias {
-            h["X-AppUser-Alias"] = alias
-        }
-
         switch self {
         case .OAuth(let cred, _):
             if cred.type == .User {

@@ -69,8 +69,6 @@
 		005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+User.swift */; };
 		005DF3121B998BB500149B40 /* GeneralContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005DF3111B998BB500149B40 /* GeneralContentSpec.swift */; };
 		005E1ED61C69FFE800ED8763 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED51C69FFE800ED8763 /* Result.swift */; };
-		005E1ED81C6A2C2000ED8763 /* PaginatedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED71C6A2C2000ED8763 /* PaginatedResult.swift */; };
-		005E1EDA1C6A344200ED8763 /* HaloPaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED91C6A344200ED8763 /* HaloPaginationInfo.swift */; };
 		005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1EFE1C6BEE2500ED8763 /* Request.swift */; };
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
@@ -217,8 +215,6 @@
 		005390851B8DB7590036F579 /* NetworkManager+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+User.swift"; sourceTree = "<group>"; };
 		005DF3111B998BB500149B40 /* GeneralContentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentSpec.swift; sourceTree = "<group>"; };
 		005E1ED51C69FFE800ED8763 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		005E1ED71C6A2C2000ED8763 /* PaginatedResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedResult.swift; sourceTree = "<group>"; };
-		005E1ED91C6A344200ED8763 /* HaloPaginationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloPaginationInfo.swift; sourceTree = "<group>"; };
 		005E1EFE1C6BEE2500ED8763 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		006238251BCE5B8900E614B3 /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = halo.cer; path = Resources/halo.cer; sourceTree = "<group>"; };
 		0068D27B1B6778CA00B1E147 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -419,8 +415,6 @@
 				0068D27B1B6778CA00B1E147 /* Token.swift */,
 				006CB9B51B870FB800EB872E /* User.swift */,
 				006CB9B91B87116D00EB872E /* UserDevice.swift */,
-				005E1ED71C6A2C2000ED8763 /* PaginatedResult.swift */,
-				005E1ED91C6A344200ED8763 /* HaloPaginationInfo.swift */,
 			);
 			name = Model;
 			path = Source/Model;
@@ -439,10 +433,10 @@
 			isa = PBXGroup;
 			children = (
 				008E2B5A1C524DAB00FACAB2 /* libz.tbd */,
+				008E2B021C51320C00FACAB2 /* libsqlite3.tbd */,
 				008E2B581C524D7F00FACAB2 /* AddressBook.framework */,
 				008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */,
 				008E2B041C5132B900FACAB2 /* CFNetwork.framework */,
-				008E2B021C51320C00FACAB2 /* libsqlite3.tbd */,
 				0024964B1C00892C00F6F734 /* Realm.framework */,
 				0024964C1C00892C00F6F734 /* RealmSwift.framework */,
 				004FEC6F1BCFB788004216EE /* Nimble.framework */,
@@ -524,13 +518,13 @@
 		006A5FCC1B318CBC0045395A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				00EA22851C74A7FD00EFDB62 /* Requests */,
 				0094A31F1B70A6A600DED864 /* NetworkManager.swift */,
 				0084E6E11BE0D945004C69A2 /* NetworkManager+Custom.swift */,
 				007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */,
 				007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */,
 				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
 				000826FE1B6A34DE001E8248 /* Router.swift */,
-				005E1EFE1C6BEE2500ED8763 /* Request.swift */,
 			);
 			name = Networking;
 			path = Source/Networking;
@@ -875,6 +869,14 @@
 			name = Persistence;
 			sourceTree = "<group>";
 		};
+		00EA22851C74A7FD00EFDB62 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				005E1EFE1C6BEE2500ED8763 /* Request.swift */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1135,10 +1137,8 @@
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,
 				00C4DEB61BF5E9EF00993B9D /* PersistentValue.swift in Sources */,
-				005E1EDA1C6A344200ED8763 /* HaloPaginationInfo.swift in Sources */,
 				00C2BCF11C033905006473B8 /* PersistenceManager.swift in Sources */,
 				00C2BCF51C03399A006473B8 /* PersistenceManager+GeneralContent.swift in Sources */,
-				005E1ED81C6A2C2000ED8763 /* PaginatedResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,15 +15,18 @@ extension NetworkManager {
         
         if let id = user.id {
 
-            Halo.Request<[String:AnyObject]>(router: Router.SegmentationGetUser(id)).response(completionHandler: { (request, response, result) in
+            let request = Halo.Request(router: Router.SegmentationGetUser(id))
+            
+            request.response { result in
                 switch result {
-                case .Success(let data, let cached):
-                    let user = User.fromDictionary(data)
-                    handler?(.Success(user, cached))
+                case .Success(let data as [String: AnyObject], let cached):
+                    handler?(.Success(User.fromDictionary(data), cached))
                 case .Failure(let error):
                     handler?(.Failure(error))
+                default:
+                    handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                 }
-            })
+            }
             
         } else {
             handler?(.Success(user, false))
@@ -40,21 +43,23 @@ extension NetworkManager {
     func createUpdateUser(user: Halo.User, completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
-        let request: Halo.Request<[String:AnyObject]>
+        let request: Halo.Request
         
         if let id = user.id {
-            request = Halo.Request<[String:AnyObject]>(router: Router.SegmentationUpdateUser(id, user.toDictionary()))
+            request = Halo.Request(router: Router.SegmentationUpdateUser(id, user.toDictionary()))
         } else {
-            request = Halo.Request<[String:AnyObject]>(router: Router.SegmentationCreateUser(user.toDictionary()))
+            request = Halo.Request(router: Router.SegmentationCreateUser(user.toDictionary()))
         }
 
-        request.response { (request, response, result) -> Void in
+        request.response { result in
+            
             switch result {
-            case .Success(let data, let cached):
-                let user = User.fromDictionary(data)
-                handler?(.Success(user, cached))
+            case .Success(let data as [String: AnyObject], let cached):
+                handler?(.Success(User.fromDictionary(data), cached))
             case .Failure(let error):
                 handler?(.Failure(error))
+            default:
+                handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
             }
         }
     }

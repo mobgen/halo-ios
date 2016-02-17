@@ -35,6 +35,8 @@ class PersistentModule: Object {
     /// Dictionary of tags associated to this module
     let tags: List<PersistentTag> = List<PersistentTag>()
 
+    dynamic var ttl: NSDate = NSDate(timeIntervalSinceNow: 86400)
+    
     override static func primaryKey() -> String? {
         return "id"
     }

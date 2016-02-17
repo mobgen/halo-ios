@@ -9,12 +9,20 @@
 import Foundation
 import Alamofire
 
-public enum Result<Value, Error : ErrorType> {
+public enum Result<Value, Error: ErrorType> {
 
     case Success(Value, Bool)
     case Failure(Error)
 
 }
+
+public enum PaginatedResult<Value, Error: ErrorType> {
+    
+    case Success(Value, Int, Int, Int, Bool)
+    case Failure(Error)
+    
+}
+
 
 @objc
 public enum Method: Int {

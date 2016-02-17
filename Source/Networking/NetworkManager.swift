@@ -8,16 +8,19 @@
 
 import Foundation
 import Alamofire
+import then
 
 //typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void
 
-private struct CachedTask<T> {
+private struct CachedTask {
     
-    var request: Halo.Request<T>!
-    var handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void)!
+    var request: Halo.Request!
+    var numberOfRetries: Int
+    var handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)?
     
-    init(request: Halo.Request<T>, handler: (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void) {
+    init(request: Halo.Request, retries: Int, handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)?) {
         self.request = request
+        self.numberOfRetries = retries
         self.handler = handler
     }
     
@@ -40,7 +43,7 @@ class NetworkManager: Alamofire.Manager {
     private var isRefreshing = false
 
     /// Queue of pending network tasks to be restarted after a successful authentication
-    private var cachedTasks: [Any] = []
+    private var cachedTasks: [CachedTask] = []
     
     private init() {
         
@@ -49,20 +52,21 @@ class NetworkManager: Alamofire.Manager {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
 
-        var disableSSLpinning = false
+        var enableSSLpinning = false
 
         let bundle = NSBundle.mainBundle()
 
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
-                disableSSLpinning = data[CoreConstants.disableSSLpinning] as? Bool ?? false
+                let disable = data[CoreConstants.disableSSLpinning] as? Bool ?? true
+                enableSSLpinning = !disable
             }
         }
 
         var trustManager: ServerTrustPolicyManager?
 
-        if !disableSSLpinning {
+        if enableSSLpinning {
             if let bundle = NSBundle(identifier: "com.mobgen.HaloSDK") {
 
                 let serverTrustPolicy = ServerTrustPolicy.PinCertificates(
@@ -92,11 +96,11 @@ class NetworkManager: Alamofire.Manager {
     - parameter request:            Request to be performed
     - parameter completionHandler:  Closure to be executed after the request has succeeded
     */
-    func startRequest<T>(request urlRequest: Halo.Request<T>,
+    func startRequest(request urlRequest: Halo.Request,
         numberOfRetries: Int,
-        completionHandler handler: (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void) -> Void {
+        completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
 
-        let cachedTask = CachedTask<T>(request: urlRequest, handler: handler)
+        let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
 
         if (self.isRefreshing) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
@@ -111,8 +115,6 @@ class NetworkManager: Alamofire.Manager {
         }
         
         request.responseJSON { [weak self] response in
-            
-            debugPrint(response)
             
             if let strongSelf = self {
 
@@ -132,7 +134,7 @@ class NetworkManager: Alamofire.Manager {
                         debugPrint(data)
                     }
 
-                    handler(response.request, response.response, .Success(data as! T, false))
+                    handler?(response.request, response.response, .Success(data, false))
 
                 case .Failure(let error):
                     NSLog("Error performing request: \(error.localizedDescription)")
@@ -142,14 +144,14 @@ class NetworkManager: Alamofire.Manager {
                         return
                     }
 
-                    handler(response.request, response.response, .Failure(error))
+                    handler?(response.request, response.response, .Failure(error))
                 }
             }
         }
     }
 
-    func startRequest<T>(request urlRequest: Halo.Request<T>,
-        completionHandler handler: (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void) -> Void {
+    func startRequest(request urlRequest: Halo.Request,
+        completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
 
             self.startRequest(request: urlRequest, numberOfRetries: self.numberOfRetries, completionHandler: handler)
 
@@ -158,7 +160,7 @@ class NetworkManager: Alamofire.Manager {
     /**
     Obtain/refresh an authentication token when needed
     */
-    func refreshToken(completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
+    private func refreshToken(completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         
         self.isRefreshing = true
         var params: [String:AnyObject]
@@ -199,30 +201,34 @@ class NetworkManager: Alamofire.Manager {
                 }
             }
 
-            let req = self.request(Halo.Request<[String:AnyObject]>(router: Router.OAuth(cred, params)))
+            let req = self.request(Halo.Request(router: Router.OAuth(cred, params)))
             
             req.responseJSON(completionHandler: { (resp) -> Void in
                 switch resp.result {
-                case .Success(let data):
+                case .Success(let data as [String:AnyObject]):
                     
                     Router.token = nil
                     
-                    if let resp = resp.response {
-                        if resp.statusCode == 200 {
-                            Router.token = Token(data as! [String:AnyObject])
+                    if let r = resp.response {
+                        if r.statusCode == 200 {
                             NSLog("New token retrieved")
+                            Router.token = Token(data)
+                            handler?(resp.request, resp.response, .Success(Router.token!, false))
                         } else {
                             NSLog("Error retrieving token")
+                            handler?(resp.request, resp.response, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                         }
                     } else {
                         // No response
                         NSLog("No response from server")
+                        handler?(resp.request, resp.response, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                     }
-                    handler?(resp.request, resp.response, .Success(data, false))
                     
                 case .Failure(let error):
                     NSLog("Error refreshing token: \(error.localizedDescription)")
                     handler?(resp.request, resp.response, .Failure(error))
+                default:
+                    break
                 }
                 
                 self.isRefreshing = false
@@ -230,9 +236,8 @@ class NetworkManager: Alamofire.Manager {
                 /// Restart cached tasks
                 let cachedTasksCopy = self.cachedTasks
                 self.cachedTasks.removeAll()
-                let _ = cachedTasksCopy.map({ (t) -> Void in
-                    let task = t as! CachedTask<Any>
-                    self.startRequest(request: task.request, numberOfRetries: self.numberOfRetries, completionHandler: task.handler)
+                let _ = cachedTasksCopy.map({ (task) -> Void in
+                    self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
                 })
             })
             

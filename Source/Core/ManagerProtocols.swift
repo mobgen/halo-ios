@@ -10,8 +10,7 @@ import Foundation
 
 protocol ModulesManager {
 
-    func getModules() -> Halo.Request<[Halo.Module]>
-    //func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void
+    func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void
     
 }
 

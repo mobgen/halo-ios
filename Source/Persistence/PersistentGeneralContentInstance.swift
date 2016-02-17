@@ -38,6 +38,8 @@ class PersistentGeneralContentInstance: Object {
     /// Most recent date in which the content was updated
     dynamic var updatedAt: NSDate?
     
+    dynamic var ttl: NSDate = NSDate(timeIntervalSinceNow: 86400)
+    
     /// Dictionary of tags associated to this general content instance
     let tags: List<PersistentTag> = List<PersistentTag>()
     

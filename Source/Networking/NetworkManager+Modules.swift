@@ -8,31 +8,39 @@
 
 import Foundation
 
-extension NetworkManager: ModulesManager {
+extension NetworkManager {
 
     /**
     Get the list of available modules for a given client id/client secret pair
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules() -> Halo.Request<[Halo.Module]> { //fetchFromNetwork network: Bool = true, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
+    func getModules(page page: Int? = nil, limit: Int? = nil, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
 
-        return Halo.Request<[Halo.Module]>(router: Router.Modules)
-
-//        self.startRequest(request: Router.Modules, completionHandler: { [weak self] (request, response, result) in
-//
-//            if let strongSelf = self {
-//                switch result {
-//                case .Success(let data, let cached):
-//                    let arr = strongSelf.parseModules(data as! [Dictionary<String,AnyObject>])
-//                    handler?(.Success(arr, cached))
-//                case .Failure(let error):
-//                    handler?(.Failure(error))
-//                }
-//            }
-//        })
+        let req = Halo.Request(router: Router.Modules)
+        
+        if let p = page, l = limit {
+            req.paginate(page: p, limit: l)
+        }
+        
+        req.response { result in
+            switch result {
+            case .Success(let data as [[String: AnyObject]], let cached):
+                let modules = self.parseModules(data)
+                handler?(.Success(modules, cached))
+            case .Success(let data as [String: AnyObject], let cached):
+                // Paginated response
+                let modules = self.parseModules(data["items"] as! [[String: AnyObject]])
+                handler?(.Success(modules, cached))
+            case .Failure(let error):
+                handler?(.Failure(error))
+            default:
+                handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+            }
+        }
+        
     }
-
+    
     // MARK: Utility functions
 
     /**
@@ -42,7 +50,7 @@ extension NetworkManager: ModulesManager {
 
     - returns   The list of the parsed modules
     */
-    private func parseModules(modules: [Dictionary<String,AnyObject>]) -> [Halo.Module] {
+    private func parseModules(modules: [[String:AnyObject]]) -> [Halo.Module] {
         return modules.map({ Module($0) })
     }
 }

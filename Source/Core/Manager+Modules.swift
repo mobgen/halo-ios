@@ -21,9 +21,7 @@ extension Manager {
         
         switch offlinePolicy! {
         case .None:
-            self.net.getModules().response(completionHandler: { (request, response, result) -> Void in
-                handler(result)
-            })
+            self.net.getModules(completionHandler: handler)
         case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
             self.persist.getModules(fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
         }
