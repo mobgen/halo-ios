@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 MOBGEN Technology. All rights reserved.
 //
 
-import Foundation
-
 /// Utility class containing some of the constants to be used within the SDK
 public class CoreConstants {
 

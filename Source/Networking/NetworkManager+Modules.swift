@@ -15,30 +15,23 @@ extension NetworkManager {
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(page page: Int? = nil, limit: Int? = nil, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)? = nil) -> Void {
+    func getModules(page page: Int? = nil, limit: Int? = nil) -> Halo.Request<[Halo.Module]> {
 
-        let req = Halo.Request(router: Router.Modules)
+        let req = Halo.Request<[Halo.Module]>(router: Router.Modules)
         
-        if let p = page, l = limit {
-            req.paginate(page: p, limit: l)
-        }
-        
-        req.response { result in
-            switch result {
-            case .Success(let data as [[String: AnyObject]], let cached):
-                let modules = self.parseModules(data)
-                handler?(.Success(modules, cached))
-            case .Success(let data as [String: AnyObject], let cached):
-                // Paginated response
-                let modules = self.parseModules(data["items"] as! [[String: AnyObject]])
-                handler?(.Success(modules, cached))
-            case .Failure(let error):
-                handler?(.Failure(error))
+        req.responseParser { data in
+            switch data {
+            case let d as [[String : AnyObject]]:
+                return self.parseModules(d)
+            case let d as [String: AnyObject]:
+                return self.parseModules(d["items"] as! [[String: AnyObject]])
             default:
-                handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                return []
             }
         }
-        
+
+        return req
+
     }
     
     // MARK: Utility functions
@@ -50,7 +43,7 @@ extension NetworkManager {
 
     - returns   The list of the parsed modules
     */
-    private func parseModules(modules: [[String:AnyObject]]) -> [Halo.Module] {
+    private func parseModules(modules: [[String : AnyObject]]) -> [Halo.Module] {
         return modules.map({ Module($0) })
     }
 }

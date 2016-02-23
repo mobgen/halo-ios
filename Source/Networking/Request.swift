@@ -6,20 +6,18 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
-public class Request: URLRequestConvertible {
+public class Request<T>: URLRequestConvertible {
 
     private var url: NSURL?
-    private var page: Int?
-    private var limit: Int?
     private var include = false
     private var method: Halo.Method = .GET
-    private var params: [String: AnyObject]? = [:]
     private var parameterEncoding: Halo.ParameterEncoding = .URL
     private var headers: [String: String] = [:]
-    
+    internal var parser: ((AnyObject) -> T?) = { $0 as? T }
+    internal var params: [String: AnyObject]? = [:]
+
     public var URLRequest: NSMutableURLRequest {
 
         var req = NSMutableURLRequest(URL: self.url!)
@@ -29,21 +27,12 @@ public class Request: URLRequestConvertible {
             req.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         
-        if let alias = Router.userAlias {
-            req.setValue(alias, forHTTPHeaderField: "X-AppUser-Alias")
-        }
-        
         for (key, value) in self.headers {
             req.setValue(value, forHTTPHeaderField: key)
         }
 
         if self.include {
             self.params!["include"] = true
-        }
-
-        if let page = self.page, limit = self.limit {
-            self.params!["page"] = page
-            self.params!["limit"] = limit
         }
 
         switch self.parameterEncoding {
@@ -68,51 +57,49 @@ public class Request: URLRequestConvertible {
         self.params = router.params
     }
 
-    public func method(method: Halo.Method) -> Halo.Request {
+    public func method(method: Halo.Method) -> Halo.Request<T> {
         self.method = method
         return self
     }
 
-    public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request {
+    public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
         self.parameterEncoding = encoding
         return self
     }
 
-    public func addHeader(field field: String, value: String) -> Halo.Request {
+    public func addHeader(field field: String, value: String) -> Halo.Request<T> {
         self.headers[field] = value
         return self
     }
 
-    public func addHeaders(headers: [String: String]) -> Halo.Request {
+    public func addHeaders(headers: [String : String]) -> Halo.Request<T> {
         let _ = headers.map { (key, value) -> Void in
             let _ = self.addHeader(field: key, value: value)
         }
         return self
     }
 
-    public func params(params: [String: AnyObject]) -> Halo.Request {
+    public func params(params: [String : AnyObject]) -> Halo.Request<T> {
         self.params = params
         return self
     }
 
-    public func includeAll() -> Halo.Request {
+    public func includeAll() -> Halo.Request<T> {
         self.include = true
         return self
     }
 
-    public func paginate(page page: Int, limit: Int) -> Halo.Request {
-        self.page = page
-        self.limit = limit
+    public func responseParser(parser: (AnyObject) -> T?) -> Halo.Request<T> {
+        self.parser = parser
         return self
     }
 
-    
-    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)?) -> Void {
-        
-        NetworkManager.instance.startRequest(request: self) { (request, response, result) -> Void in
+    public func response(completionHandler handler: ((Halo.Result<T, NSError>) -> Void)?) -> Void {
+        let net = NetworkManager.instance
+
+        net.startRequest(request: self) { (req, resp, result) in
             handler?(result)
         }
-        
     }
 
 }

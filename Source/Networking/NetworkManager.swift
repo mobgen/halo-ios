@@ -11,13 +11,13 @@ import Alamofire
 
 //typealias CompletionHandler = (NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void
 
-private struct CachedTask {
+private struct CachedTask<T: Any> {
     
-    var request: Halo.Request!
+    var request: Halo.Request<T>
     var numberOfRetries: Int
-    var handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)?
+    var handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void)?
     
-    init(request: Halo.Request, retries: Int, handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)?) {
+    init(request: Halo.Request<T>, retries: Int, handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void)?) {
         self.request = request
         self.numberOfRetries = retries
         self.handler = handler
@@ -42,7 +42,7 @@ class NetworkManager: Alamofire.Manager {
     private var isRefreshing = false
 
     /// Queue of pending network tasks to be restarted after a successful authentication
-    private var cachedTasks: [CachedTask] = []
+    private var cachedTasks: [Any] = []
     
     private init() {
         
@@ -95,9 +95,9 @@ class NetworkManager: Alamofire.Manager {
     - parameter request:            Request to be performed
     - parameter completionHandler:  Closure to be executed after the request has succeeded
     */
-    func startRequest(request urlRequest: Halo.Request,
+    func startRequest<T>(request urlRequest: Halo.Request<T>,
         numberOfRetries: Int,
-        completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
+        completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void)? = nil) -> Void {
 
         let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
 
@@ -133,7 +133,11 @@ class NetworkManager: Alamofire.Manager {
                         debugPrint(data)
                     }
 
-                    handler?(response.request, response.response, .Success(data, false))
+                    if let parsedData = urlRequest.parser(data) {
+                        handler?(response.request, response.response, .Success(parsedData, false))
+                    } else {
+                        handler?(response.request, response.response, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                    }
 
                 case .Failure(let error):
                     NSLog("Error performing request: \(error.localizedDescription)")
@@ -149,8 +153,8 @@ class NetworkManager: Alamofire.Manager {
         }
     }
 
-    func startRequest(request urlRequest: Halo.Request,
-        completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
+    func startRequest<T>(request urlRequest: Halo.Request<T>,
+        completionHandler handler: ((NSURLRequest?, NSHTTPURLResponse?, Halo.Result<T, NSError>) -> Void)? = nil) -> Void {
 
             self.startRequest(request: urlRequest, numberOfRetries: self.numberOfRetries, completionHandler: handler)
 
@@ -200,7 +204,7 @@ class NetworkManager: Alamofire.Manager {
                 }
             }
 
-            let req = self.request(Halo.Request(router: Router.OAuth(cred, params)))
+            let req = self.request(Halo.Request<[String : AnyObject]>(router: Router.OAuth(cred, params)))
             
             req.responseJSON(completionHandler: { (resp) -> Void in
                 switch resp.result {
@@ -235,7 +239,8 @@ class NetworkManager: Alamofire.Manager {
                 /// Restart cached tasks
                 let cachedTasksCopy = self.cachedTasks
                 self.cachedTasks.removeAll()
-                let _ = cachedTasksCopy.map({ (task) -> Void in
+                let _ = cachedTasksCopy.map({ (t) -> Void in
+                    let task = t as! CachedTask<AnyObject>
                     self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
                 })
             })

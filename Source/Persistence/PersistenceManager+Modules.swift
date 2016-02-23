@@ -19,7 +19,7 @@ extension PersistenceManager {
             return
         }
 
-        net.getModules { (result) -> Void in
+        net.getModules().response { (result) -> Void in
             switch result {
             case .Success(let modules, _):
                 handler?(result)

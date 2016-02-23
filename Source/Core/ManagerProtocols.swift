@@ -6,8 +6,6 @@
 //  Copyright © 2015 MOBGEN Technology. All rights reserved.
 //
 
-import Foundation
-
 protocol ModulesManager {
 
     func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void

@@ -21,8 +21,6 @@ enum Router {
 
     /// Token to be used for authentication purposes
     static var token:Token?
-    
-    static var userAlias: String?
 
     case OAuth(Credentials, [String: AnyObject])
     case Modules
@@ -100,7 +98,7 @@ enum Router {
             return .JSON
         case .CustomRequest(let method, _, _):
             switch method {
-            case .POST: return .JSON
+            case .POST, .PUT: return .JSON
             default: return .URL
             }
         default:

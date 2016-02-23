@@ -36,15 +36,15 @@ public class GeneralContent: NSObject {
     */
     public func getInstances(moduleIds moduleIds: [String],
         var offlinePolicy: OfflinePolicy? = nil,
-        populate: Bool? = false,
-        flags: GeneralContentFlag? = [],
+        populate: Bool = false,
+        flags: GeneralContentFlag = [],
         completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
-            
+
             offlinePolicy = offlinePolicy ?? Manager.sharedInstance.defaultOfflinePolicy
             
             switch offlinePolicy! {
             case .None:
-                net.generalContentInstances(moduleIds: moduleIds, flags: flags, populate: populate, completionHandler: handler)
+                net.generalContentInstances(moduleIds: moduleIds, flags: flags).response(completionHandler: handler)
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
                 persistence.generalContentInstances(moduleIds: moduleIds, flags: flags, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), populate: populate, completionHandler: handler)
             }
@@ -64,12 +64,12 @@ public class GeneralContent: NSObject {
         flags: GeneralContentFlag? = [],
         completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
            
-            switch offlinePolicy! {
-            case .None:
-                self.net.generalContentInstances(instanceIds: instanceIds, flags: flags, completionHandler: handler)
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                self.persistence.generalContentInstances(instanceIds: instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
-            }
+//            switch offlinePolicy! {
+//            case .None:
+//                self.net.generalContentInstances(instanceIds: instanceIds, flags: flags, completionHandler: handler)
+//            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
+//                self.persistence.generalContentInstances(instanceIds: instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+//            }
     }
     
     // MARK: Get a single instance
@@ -85,12 +85,12 @@ public class GeneralContent: NSObject {
         offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
         completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
         
-            switch offlinePolicy! {
-            case .None:
-                self.net.generalContentInstance(instanceId, completionHandler: handler)
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                self.persistence.generalContentInstance(instanceId, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
-            }
+//            switch offlinePolicy! {
+//            case .None:
+//                self.net.generalContentInstance(instanceId, completionHandler: handler)
+//            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
+//                self.persistence.generalContentInstance(instanceId, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+//            }
     }
 
     // MARK: ObjC exposed methods

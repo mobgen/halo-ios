@@ -157,7 +157,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
 
     public func flushSession() {
         Router.token = nil
-        Router.userAlias = nil
     }
     
     /**
@@ -247,7 +246,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
     public func launch() -> Void {
 
         Router.token = nil
-        Router.userAlias = nil
         
         if let cred = self.net.credentials {
             NSLog("Using credentials: \(cred.username) / \(cred.password)")
@@ -352,10 +350,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
                         success = true
                     case .Failure(let error):
                         NSLog("Error: \(error.localizedDescription)")
-                    }
-                
-                    if let alias = strongSelf.user!.alias {
-                        Router.userAlias = alias
                     }
                     
                     strongSelf.delegate?.managerDidFinishLaunching(success)
@@ -498,19 +492,6 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
             self.net.createUpdateUser(user, completionHandler: handler)
         }
     }
-
-    /**
-     Use this method to create custom requests so that you can query your custom modules within Halo
-     
-     - parameter method:  Method to be used for the request (GET, POST, etc)
-     - parameter url:     Custom url endpoint
-     - parameter params:  Provided params provided
-     - parameter handler: Closure to be executed after the request has finished
-     */
-    public func customRequest(method method: Halo.Method, url: String, params: [String: AnyObject]?,
-        completionHandler handler: (Halo.Result<AnyObject, NSError>) -> Void) -> Void {
-            net.haloRequest(method, url: url, params: params, completionHandler: handler)
-    }
     
     // MARK: ObjC exposed methods
 
@@ -534,27 +515,4 @@ public class Manager: NSObject, GGLInstanceIDDelegate {
         }
     }
     
-    /**
-    Perform a custom request from Objective-C
-    
-    - parameter method:  Method of the request (GET, POST, PUT, etc)
-    - parameter url:     Custom endpoint to be accessed
-    - parameter params:  Parameters provided for the current request
-    - parameter success: Closure to be executed after the request has successfully finished
-    - parameter failure: Closure to be executed after the request has failed
-    */
-    @objc(customRequestWithMethod:url:params:success:failure:)
-    public func customRequestFromObjC(method: Halo.Method, url: String, params: [String: AnyObject]?,
-        success: ((userData: AnyObject, cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
-   
-            self.customRequest(method: method,
-                url: url, params: params) { (result) -> Void in
-                    switch result {
-                    case .Success(let data, let cached):
-                        success?(userData: data, cached: cached)
-                    case .Failure(let error):
-                        failure?(error: error)
-                    }
-            }
-    }
 }

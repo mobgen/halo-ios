@@ -23,6 +23,39 @@ public struct GeneralContentFlag : OptionSetType {
 
 extension NetworkManager {
 
+    func generalContentInstances(moduleIds moduleIds: [String],
+        flags: GeneralContentFlag) -> Halo.Request<[Halo.GeneralContentInstance]> {
+
+        let request = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags)
+
+        request.responseParser { data in
+            switch data {
+            case let data as [[String : AnyObject]]:
+                // Non paginated result
+                return self.parseGeneralContentInstances(data, flags: flags)
+            case let data as [String:AnyObject]:
+                // Paginated result
+                var instances: [GeneralContentInstance] = []
+
+                if let items = data["items"] as? [[String : AnyObject]] {
+                    instances = self.parseGeneralContentInstances(items, flags: flags)
+                }
+
+//                if let pagination = data["pagination"] as? [String:AnyObject] {
+//                    page = pagination["page"] as! Int
+//                    limit = pagination["limit"] as! Int
+//                    count = pagination["count"] as! Int
+//                }
+
+                return instances
+            default:
+                return nil
+            }
+        }
+
+        return request
+    }
+
     /**
     Obtain the existing instances for a given General Content module
 
@@ -30,137 +63,74 @@ extension NetworkManager {
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
     func generalContentInstances(moduleIds moduleIds: [String],
-        flags: GeneralContentFlag? = [],
-        populate: Bool? = false,
-        completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
+        flags: GeneralContentFlag? = []) -> Halo.Request<[Halo.GeneralContentInstance]> {
             
-            let unpublished = flags!.contains(GeneralContentFlag.IncludeUnpublished)
+            let req = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags)
             
-            let req = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags, populate: populate, page: nil, limit: nil)
-            
-            req.response { result in
-                switch result {
-                case .Success(let data as [[String:AnyObject]], let cached):
-                    let arr = self.parseGeneralContentInstances(data, includeUnpublished: unpublished)
-                    handler?(.Success(arr, cached))
-                case .Failure(let error):
-                    handler?(.Failure(error))
-                default:
-                    handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
-                }
-            }
-    }
-
-    func generalContentInstances(moduleIds moduleIds: [String],
-        flags: GeneralContentFlag? = [],
-        populate: Bool? = false,
-        page: Int,
-        limit: Int,
-        completionHandler handler: ((Halo.PaginatedResult<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
-            
-            let unpublished = flags!.contains(GeneralContentFlag.IncludeUnpublished)
-            
-            let req = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags, populate: populate, page: page, limit: limit)
-            
-            req.response { result in
-                switch result {
-                case .Success(let data as [String:AnyObject], let cached):
+            req.responseParser { data in
+                switch data {
+                case let data as [String : AnyObject]:
                     // Paginated result
-                    let arr = self.parseGeneralContentInstances(data["items"] as! [[String:AnyObject]], includeUnpublished: unpublished)
+                    return self.parseGeneralContentInstances(data["items"] as! [[String:AnyObject]], flags: flags ?? [])
                     
                     // Get pagination info
-                    let paginationInfo = data["pagination"] as! [String: AnyObject]
-                    let count = paginationInfo["count"] as! Int
-                    
-                    handler?(.Success(arr, page, limit, count, cached))
-                case .Failure(let error):
-                    handler?(.Failure(error))
+                    //let paginationInfo = data["pagination"] as! [String: AnyObject]
+                    //let count = paginationInfo["count"] as! Int
+                case let data as [[String : AnyObject]]:
+                    return self.parseGeneralContentInstances(data, flags: flags ?? [])
                 default:
-                    break
+                    return nil
                 }
             }
+
+            return req
     }
     
     func generalContentInstance(instanceId: String,
-        populate: Bool? = false,
-        completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)? = nil) -> Void {
+        populate: Bool? = false) -> Halo.Request<Halo.GeneralContentInstance> {
         
         let params: [String: AnyObject] = ["populate" : populate!]
         
-        let req = Halo.Request(router: Router.GeneralContentInstance(instanceId, params))
+        let req = Halo.Request<Halo.GeneralContentInstance>(router: Router.GeneralContentInstance(instanceId, params))
             
-        req.response { result in
-            switch result {
-            case .Success(let data as [String:AnyObject], let cached):
-                handler?(.Success(GeneralContentInstance(data), cached))
-            case .Failure(let error):
-                handler?(.Failure(error))
+        req.responseParser { data in
+            switch data {
+            case let data as [String:AnyObject]:
+                return GeneralContentInstance(data)
             default:
-                handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                return nil
             }
         }
+
+        return req
             
     }
     
     func generalContentInstances(instanceIds instanceIds: [String],
         flags: GeneralContentFlag? = [],
-        populate: Bool? = false,
-        completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
+        populate: Bool? = false) -> Halo.Request<[Halo.GeneralContentInstance]> {
             
-            let req = self.generalContentInstancesRequest(moduleIds: nil, instanceIds: instanceIds, flags: flags, populate: populate, page: nil, limit: nil)
+            let req = self.generalContentInstancesRequest(moduleIds: nil, instanceIds: instanceIds, flags: flags)
             
-            req.response { result in
+            req.responseParser { data in
                 
-                switch result {
-                case .Success(let data as [[String: AnyObject]], let cached):
-                    let items = data.map({ GeneralContentInstance($0) })
-                    handler?(.Success(items, cached))
-                case .Failure(let error):
-                    handler?(.Failure(error))
+                switch data {
+                case let data as [[String: AnyObject]]:
+                    return self.parseGeneralContentInstances(data, flags: flags ?? [])
                 default:
-                    break
+                    return nil
                 }
             }
+
+            return req
     }
-    
-    func generalContentInstances(instanceIds instanceIds: [String],
-        flags: GeneralContentFlag? = [],
-        populate: Bool? = false,
-        page: Int,
-        limit: Int,
-        completionHandler handler: ((Halo.PaginatedResult<[Halo.GeneralContentInstance], NSError>) -> Void)? = nil) -> Void {
-     
-            let req = self.generalContentInstancesRequest(moduleIds: nil, instanceIds: instanceIds, flags: flags, populate: populate, page: page, limit: limit)
-            
-            req.response { result in
-                switch result {
-                case .Success(let data as [String: AnyObject], let cached):
-                    // Paginated response
-                    let items = self.parseGeneralContentInstances(data["items"] as! [[String: AnyObject]], includeUnpublished: true)
-                    
-                    let paginationInfo = data["pagination"] as! [String: AnyObject]
-                    let count = paginationInfo["count"] as! Int
-                    
-                    handler?(.Success(items, page, limit, count, cached))
-                case .Failure(let error):
-                    handler?(.Failure(error))
-                default:
-                    break
-                }
-            }
-    }
-    
+
     private func generalContentInstancesRequest(moduleIds moduleIds: [String]?,
         instanceIds: [String]?,
-        flags: GeneralContentFlag? = [],
-        populate: Bool? = false,
-        page: Int? = nil,
-        limit: Int? = nil) -> Halo.Request {
-            
-            var params: [String: AnyObject] = [
-                "populate" : populate ?? false
-            ]
-            
+        flags: GeneralContentFlag? = []) -> Halo.Request<[Halo.GeneralContentInstance]> {
+
+            var params: [String : AnyObject] = [:]
+
             if let ids = moduleIds {
                 params["module"] = ids
             }
@@ -168,18 +138,11 @@ extension NetworkManager {
             if let ids = instanceIds {
                 params["id"] = ids
             }
-            
+
             if !flags!.contains(GeneralContentFlag.IncludeArchived) {
                 params["archived"] = "false"
             }
-            
-            if let p = page, l = limit {
-                params["page"] = p
-                params["limit"] = l
-            } else {
-                params["skip"] = "true"
-            }
-            
+
             return Halo.Request(router: Router.GeneralContentInstances(params))
             
     }
@@ -191,12 +154,13 @@ extension NetworkManager {
 
     - returns Array of parsed General Content instances
     */
-    private func parseGeneralContentInstances(instances: [[String: AnyObject]], includeUnpublished: Bool) -> [GeneralContentInstance] {
+    private func parseGeneralContentInstances(instances: [[String: AnyObject]], flags: GeneralContentFlag) -> [GeneralContentInstance] {
+
         let inst = instances.map({ GeneralContentInstance($0) })
         
         return inst.filter { (instance) -> Bool in
             
-            if includeUnpublished {
+            if flags.contains(.IncludeUnpublished) {
                 return !instance.isRemoved()
             } else {
                 return instance.isPublished() && !instance.isRemoved()
