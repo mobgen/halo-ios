@@ -11,13 +11,17 @@ import Alamofire
 
 extension NetworkManager {
     
-    func haloRequest(method: Alamofire.Method, url: String, params: [String: AnyObject]?,
-        completionHandler handler: ((Alamofire.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
-        
-        self.startRequest(Router.CustomRequest(method, url, params)) { (request, response, result) in
-            handler?(result)
-        }
-        
+    func haloRequest(method: Halo.Method, url: String, var params: [String: AnyObject]?, populate: Bool? = false,
+        completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Void {
+            
+            if var p = params {
+                p["populate"] = populate
+            } else {
+                params = ["populate" : populate!]
+            }
+            
+            self.startRequest(request: Router.CustomRequest(method, url, params)) { (request, response, result) in
+                handler?(result)
+            }
     }
-    
 }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 import UIKit
 import CoreBluetooth
 
@@ -45,7 +44,7 @@ public protocol ManagerDelegate {
      
      - returns: The newly created user
      */
-    func setupUser() -> Halo.User
+    optional func setupUser(user: Halo.User) -> Void
     
     /**
      This delegate method will be called after the whole setup process has finished. Once it is safe
@@ -57,16 +56,27 @@ public protocol ManagerDelegate {
 
 /// Core manager of the Framework implemented as a Singleton
 @objc(HaloManager)
-public class Manager: NSObject {
+public class Manager: NSObject, GGLInstanceIDDelegate {
 
     /// Shared instance of the manager (Singleton pattern)
     public static let sharedInstance = Halo.Manager()
 
-    public var pushDelegate: HaloPushDelegate?
+    public var pushDelegate: PushDelegate?
     
     /// General content component
     public let generalContent = Halo.GeneralContent.sharedInstance
 
+    public var defaultOfflinePolicy: OfflinePolicy = .None
+    
+    public var numberOfRetries: Int {
+        get {
+            return self.net.numberOfRetries
+        }
+        set {
+            self.net.numberOfRetries = newValue
+        }
+    }
+    
     /// Singleton instance of the networking component
     let net = Halo.NetworkManager.instance
     
@@ -75,6 +85,10 @@ public class Manager: NSObject {
     /// Bluetooth manager to decide whether the device supports BLE
     private let bluetoothManager:CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
 
+    var gcmSenderId: String?
+    
+    private var deviceToken: NSData?
+    
     /// Current environment (QA, Integration or Prod)
     public var environment: HaloEnvironment = .Prod {
         didSet {
@@ -96,15 +110,21 @@ public class Manager: NSObject {
             
             defaults.setValue(environment.rawValue, forKey: CoreConstants.environmentKey)
             defaults.removeObjectForKey(CoreConstants.userDefaultsUserKey)
-            self.launch()
         }
     }
 
+    public var frameworkVersion: String {
+        get {
+            return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        }
+    }
+    
     public var credentials: Credentials? {
         get {
             return net.credentials
         }
         set {
+            self.flushSession()
             net.credentials = newValue
         }
     }
@@ -135,18 +155,20 @@ public class Manager: NSObject {
     
     private override init() {}
 
-    /**
-    Perform the initial tasks to properly set up the SDK
-
-    - returns: Bool describing whether the process has succeeded
-    */
-    public func launch() -> Bool {
-
+    public func flushSession() {
         Router.token = nil
         Router.userAlias = nil
-        
+    }
+    
+    /**
+     Extra setup steps to be called from the corresponding method in the app delegate
+     
+     - parameter application: Application being configured
+     */
+    public func applicationDidFinishLaunching(application: UIApplication) {
+
         let bundle = NSBundle.mainBundle()
-        
+
         if let path = bundle.pathForResource("Halo", ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
@@ -154,19 +176,79 @@ public class Manager: NSObject {
                 let clientSecretKey = CoreConstants.clientSecretKey
                 let usernameKey = CoreConstants.usernameKey
                 let passwordKey = CoreConstants.passwordKey
-                
+                let environmentKey = CoreConstants.environmentSettingKey
+
                 if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
                     self.credentials = Credentials(clientId: clientId, clientSecret: clientSecret)
                 } else if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
                     self.credentials = Credentials(username: username, password: password)
                 }
-                
+
+                if let env = data[environmentKey] as? String {
+                    self.environment = HaloEnvironment(rawValue: env)!
+                }
+
                 self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
             }
         } else {
             NSLog("No .plist found")
         }
 
+        if self.enablePush {
+            var configureError:NSError?
+
+            GGLContext.sharedInstance().configureWithError(&configureError)
+            assert(configureError == nil, "Error configuring Google services: \(configureError)")
+            Manager.sharedInstance.gcmSenderId = GGLContext.sharedInstance().configuration.gcmSenderID
+
+            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+
+            let gcmConfig = GCMConfig.defaultConfig()
+            GCMService.sharedInstance().startWithConfig(gcmConfig)
+        }
+    }
+    
+    /**
+     Extra setup steps to be called from the corresponding method in the app delegate
+     
+     - parameter application: Application being configured
+     */
+    public func applicationDidBecomeActive(application: UIApplication) {
+        // Connect to the GCM server to receive non-APNS notifications
+        if self.enablePush {
+            GCMService.sharedInstance().connectWithHandler({
+                (error) -> Void in
+                if error != nil {
+                    print("Could not connect to GCM: \(error.localizedDescription)")
+                } else {
+                    print("Connected to GCM")
+                }
+            })
+        }
+    }
+    
+    /**
+     Extra setup steps to be called from the corresponding method in the app delegate
+     
+     - parameter application: Application being configured
+     */
+    public func applicationDidEnterBackground(application: UIApplication) {
+        if self.enablePush {
+            GCMService.sharedInstance().disconnect()
+        }
+    }
+    
+    /**
+    Perform the initial tasks to properly set up the SDK
+
+    - returns: Bool describing whether the process has succeeded
+    */
+    public func launch() -> Void {
+
+        Router.token = nil
+        Router.userAlias = nil
+        
         if let cred = self.net.credentials {
             NSLog("Using credentials: \(cred.username) / \(cred.password)")
         }
@@ -177,7 +259,7 @@ public class Manager: NSObject {
             // Update the user
             net.getUser(user) { (result) -> Void in
                 switch result {
-                case .Success(let user):
+                case .Success(let user, _):
                     self.user = user
 
                     if self.enablePush {
@@ -192,7 +274,11 @@ public class Manager: NSObject {
             }
             
         } else {
-            self.user = self.delegate?.setupUser()
+            self.user = Halo.User()
+            
+            if let user = self.user {
+                self.delegate?.setupUser?(user)
+            }
 
             if self.enablePush {
                 UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -200,8 +286,6 @@ public class Manager: NSObject {
                 self.setupDefaultSystemTags()
             }
         }
-        
-        return true
     }
 
     /**
@@ -259,7 +343,7 @@ public class Manager: NSObject {
                 
                 if let strongSelf = self {
                     switch result {
-                    case .Success(let user):
+                    case .Success(let user, _):
                         strongSelf.user = user
                         NSLog((strongSelf.user?.description)!)
                         strongSelf.user?.storeUser(strongSelf.environment)
@@ -285,20 +369,102 @@ public class Manager: NSObject {
     - parameter deviceToken: Device token returned after registering for push notifications
     */
     private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        app.registerUserNotificationSettings(settings)
+        
+        self.deviceToken = deviceToken
+        
+        //let token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
 
-        let token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>")).stringByReplacingOccurrencesOfString(" ", withString: "")
+        // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
         
-        let device = UserDevice(platform: "ios", token: token)
-        self.user?.devices = [device]
-
-        NSLog("Push device token: \(deviceToken.description)")
-        
-        self.setupDefaultSystemTags()
-        
+        if let senderId = self.gcmSenderId {
+            
+            // Start the GGLInstanceID shared instance with that config and request a registration
+            // token to enable reception of notifications
+            let gcm = GGLInstanceID.sharedInstance()
+            
+            let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
+            instanceIDConfig.delegate = self
+            // Start the GGLInstanceID shared instance with that config and request a registration
+            // token to enable reception of notifications
+            gcm.startWithConfig(instanceIDConfig)
+            
+            let registrationOptions = [
+                kGGLInstanceIDRegisterAPNSOption: deviceToken,
+                kGGLInstanceIDAPNSServerTypeSandboxOption: true
+            ]
+            
+            gcm.tokenWithAuthorizedEntity(senderId, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
+                let device = UserDevice(platform: "ios", token: token)
+                self.user?.devices = [device]
+                
+                NSLog("Push device token: \(token)")
+                
+                self.setupDefaultSystemTags()
+            })
+        } else {
+            self.setupDefaultSystemTags()
+        }
     }
 
+    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { (fetchResult) -> Void in })
+    }
+    
+    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        // This works only if the app started the GCM service
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+        
+        self.pushDelegate?.haloApplication?(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        
+        if let silent = userInfo["content_available"] as? Int {
+            if silent == 1 {
+                self.pushDelegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
+            } else {
+                let notif = UILocalNotification()
+                notif.alertBody = userInfo["body"] as? String
+                notif.soundName = userInfo["sound"] as? String
+                notif.userInfo = userInfo
+                
+                application.presentLocalNotificationNow(notif)
+            }
+        } else {
+            self.pushDelegate?.haloApplication(application, didReceiveNotification: userInfo, fetchCompletionHandler: completionHandler)
+        }
+    }
+    
+    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        
+        if let userInfo = notification.userInfo {
+            self.pushDelegate?.haloApplication(application, didReceiveNotification: userInfo, fetchCompletionHandler: nil)
+        }
+    }
+    
+    // GGLInstanceIDDelegate methods
+    
+    public func onTokenRefresh() {
+        // A rotation of the registration tokens is happening, so the app needs to request a new token.
+        print("The GCM registration token needs to be changed.")
+        
+        if let senderId = self.gcmSenderId, devToken = self.deviceToken {
+            
+            let registrationOptions = [
+                kGGLInstanceIDRegisterAPNSOption: devToken,
+                kGGLInstanceIDAPNSServerTypeSandboxOption: true
+            ]
+            
+            GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(senderId,
+                scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
+                    let device = UserDevice(platform: "ios", token: token)
+                    self.user?.devices = [device]
+                    
+                    if let currentUser = self.user {
+                        self.net.createUpdateUser(currentUser)
+                    }
+            })
+        }
+    }
+    
     /**
      Pass through the push notifications setup. To be called within the method in the app delegate.
      
@@ -324,7 +490,7 @@ public class Manager: NSObject {
 
     - parameter completionHandler: Closure to be executed once the request has finished
     */
-    public func saveUser(completionHandler handler: (Alamofire.Result<Halo.User, NSError> -> Void)? = nil) -> Void {
+    public func saveUser(completionHandler handler: (Halo.Result<Halo.User, NSError> -> Void)? = nil) -> Void {
         if let user = self.user {
             self.net.createUpdateUser(user, completionHandler: handler)
         }
@@ -338,31 +504,12 @@ public class Manager: NSObject {
      - parameter params:  Provided params provided
      - parameter handler: Closure to be executed after the request has finished
      */
-    public func getHaloRequest(method method: Alamofire.Method, url: String, params: [String: AnyObject]?,
-        completionHandler handler: (Alamofire.Result<AnyObject, NSError>) -> Void) -> Void {
+    public func customRequest(method method: Halo.Method, url: String, params: [String: AnyObject]?,
+        completionHandler handler: (Halo.Result<AnyObject, NSError>) -> Void) -> Void {
             net.haloRequest(method, url: url, params: params, completionHandler: handler)
     }
     
     // MARK: ObjC exposed methods
-
-    /**
-    Get a list of the existing modules for the provided client credentials
-
-    - parameter success:  Closure to be executed when the request has succeeded
-    - parameter failure:  Closure to be executed when the request has failed
-    */
-    @objc(getModulesWithSuccess:failure:)
-    public func getModulesFromObjC(success: ((userData: [Halo.Module]) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
-
-        self.getModules { (result, cached) -> Void in
-            switch result {
-            case .Success(let modules):
-                success?(userData: modules)
-            case .Failure(let error):
-                failure?(error: error)
-            }
-        }
-    }
 
     /**
     Save the user against the server
@@ -376,13 +523,12 @@ public class Manager: NSObject {
         self.saveUser { (result) -> Void in
 
             switch result {
-            case .Success(let user):
+            case .Success(let user, _):
                 success?(userData: user)
             case .Failure(let error):
                 failure?(error: error)
             }
         }
-
     }
     
     /**
@@ -394,15 +540,15 @@ public class Manager: NSObject {
     - parameter success: Closure to be executed after the request has successfully finished
     - parameter failure: Closure to be executed after the request has failed
     */
-    @objc(haloRequestWithMethod:url:params:success:failure:)
-    public func getHaloRequestFromObjC(method: String, url: String, params: [String: AnyObject]?,
-        success: ((userData: AnyObject) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
+    @objc(customRequestWithMethod:url:params:success:failure:)
+    public func customRequestFromObjC(method: Halo.Method, url: String, params: [String: AnyObject]?,
+        success: ((userData: AnyObject, cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
    
-            self.getHaloRequest(method: Alamofire.Method(rawValue: method.uppercaseString)!,
+            self.customRequest(method: method,
                 url: url, params: params) { (result) -> Void in
                     switch result {
-                    case .Success(let data):
-                        success?(userData: data)
+                    case .Success(let data, let cached):
+                        success?(userData: data, cached: cached)
                     case .Failure(let error):
                         failure?(error: error)
                     }
