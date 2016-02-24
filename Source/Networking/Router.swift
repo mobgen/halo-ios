@@ -113,7 +113,7 @@ enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
         case .CustomRequest(let method, _, let params):
             switch method {
-            case .POST:
+            case .POST, .PUT:
                 return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
             default:
                 return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
