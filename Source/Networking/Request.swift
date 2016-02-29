@@ -8,14 +8,13 @@
 
 import Alamofire
 
-public class Request<T>: URLRequestConvertible {
+public class Request: URLRequestConvertible {
 
     private var url: NSURL?
     private var include = false
     private var method: Halo.Method = .GET
     private var parameterEncoding: Halo.ParameterEncoding = .URL
     private var headers: [String: String] = [:]
-    internal var parser: ((AnyObject) -> T?) = { $0 as? T }
     internal var params: [String: AnyObject]? = [:]
 
     public var URLRequest: NSMutableURLRequest {
@@ -57,49 +56,48 @@ public class Request<T>: URLRequestConvertible {
         self.params = router.params
     }
 
-    public func method(method: Halo.Method) -> Halo.Request<T> {
+    public func method(method: Halo.Method) -> Halo.Request {
         self.method = method
         return self
     }
 
-    public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
+    public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request {
         self.parameterEncoding = encoding
         return self
     }
 
-    public func addHeader(field field: String, value: String) -> Halo.Request<T> {
+    public func addHeader(field field: String, value: String) -> Halo.Request {
         self.headers[field] = value
         return self
     }
 
-    public func addHeaders(headers: [String : String]) -> Halo.Request<T> {
+    public func addHeaders(headers: [String : String]) -> Halo.Request {
         let _ = headers.map { (key, value) -> Void in
             let _ = self.addHeader(field: key, value: value)
         }
         return self
     }
 
-    public func params(params: [String : AnyObject]) -> Halo.Request<T> {
+    public func params(params: [String : AnyObject]) -> Halo.Request {
         self.params = params
         return self
     }
 
-    public func includeAll() -> Halo.Request<T> {
+    public func includeAll() -> Halo.Request {
         self.include = true
         return self
     }
 
-    public func responseParser(parser: (AnyObject) -> T?) -> Halo.Request<T> {
-        self.parser = parser
-        return self
+    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)?) -> Void {
+        
     }
-
-    public func response(completionHandler handler: ((Halo.Result<T, NSError>) -> Void)?) -> Void {
-        let net = NetworkManager.instance
-
-        net.startRequest(request: self) { (req, resp, result) in
+    
+    public func responseData(completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
+        Manager.network.startRequest(request: self) { (req, resp, result) in
             handler?(result)
         }
     }
+
+
 
 }

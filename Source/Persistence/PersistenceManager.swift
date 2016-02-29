@@ -9,36 +9,46 @@
 import Foundation
 import RealmSwift
 
-class PersistenceManager {
+struct PersistenceManager: HaloManager {
     
-    static let sharedInstance = PersistenceManager()
+    init() {}
     
-    let realm = try! Realm.init()
-    
-    let net = NetworkManager.instance
-    
-    private init() {
+    func startup(completionHandler handler: (Bool) -> Void) {
         
-    }
-    
-    func setupRealm(environment: HaloEnvironment) {
-        var config = Realm.Configuration()
-        
-        // Use the default directory, but replace the filename with the environment name
-        config.path = NSURL.fileURLWithPath(config.path!)
-            .URLByDeletingLastPathComponent?
-            .URLByAppendingPathComponent("\(environment.rawValue).realm")
-            .path
-        
-        // Set this as the configuration used for the default Realm
-        Realm.Configuration.defaultConfiguration = config
-        
-    }
-    
-    func clearDatabase() {
-        try! self.realm.write { () -> Void in
-            self.realm.deleteAll()
-        }
     }
     
 }
+
+//class PersistenceManager {
+//    
+//    static let sharedInstance = PersistenceManager()
+//    
+//    let realm = try! Realm.init()
+//    
+//    let net = NetworkManager.instance
+//    
+//    private init() {
+//        
+//    }
+//    
+//    func setupRealm(environment: HaloEnvironment) {
+//        var config = Realm.Configuration()
+//        
+//        // Use the default directory, but replace the filename with the environment name
+//        config.path = NSURL.fileURLWithPath(config.path!)
+//            .URLByDeletingLastPathComponent?
+//            .URLByAppendingPathComponent("\(environment.rawValue).realm")
+//            .path
+//        
+//        // Set this as the configuration used for the default Realm
+//        Realm.Configuration.defaultConfiguration = config
+//        
+//    }
+//    
+//    func clearDatabase() {
+//        try! self.realm.write { () -> Void in
+//            self.realm.deleteAll()
+//        }
+//    }
+//    
+//}

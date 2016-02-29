@@ -43,7 +43,7 @@ public protocol PushDelegate {
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
-    private let haloMgr = Halo.Manager.sharedInstance
+    private let haloMgr = Manager.core
     
     // MARK: Push notifications
 
