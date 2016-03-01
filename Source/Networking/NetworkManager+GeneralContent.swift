@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 public struct GeneralContentFlag : OptionSetType {
     
@@ -23,39 +22,6 @@ public struct GeneralContentFlag : OptionSetType {
 
 extension NetworkManager {
 
-    func generalContentInstances(moduleIds moduleIds: [String],
-        flags: GeneralContentFlag) -> Halo.Request {
-
-        let request = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags)
-
-        request.response { data in
-            switch data {
-            case let data as [[String : AnyObject]]:
-                // Non paginated result
-                return self.parseGeneralContentInstances(data, flags: flags)
-            case let data as [String:AnyObject]:
-                // Paginated result
-                var instances: [GeneralContentInstance] = []
-
-                if let items = data["items"] as? [[String : AnyObject]] {
-                    instances = self.parseGeneralContentInstances(items, flags: flags)
-                }
-
-//                if let pagination = data["pagination"] as? [String:AnyObject] {
-//                    page = pagination["page"] as! Int
-//                    limit = pagination["limit"] as! Int
-//                    count = pagination["count"] as! Int
-//                }
-
-                return instances
-            default:
-                return nil
-            }
-        }
-
-        return request
-    }
-
     /**
     Obtain the existing instances for a given General Content module
 
@@ -67,21 +33,21 @@ extension NetworkManager {
             
             let req = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags)
             
-            req.responseParser { data in
-                switch data {
-                case let data as [String : AnyObject]:
-                    // Paginated result
-                    return self.parseGeneralContentInstances(data["items"] as! [[String:AnyObject]], flags: flags ?? [])
-                    
-                    // Get pagination info
-                    //let paginationInfo = data["pagination"] as! [String: AnyObject]
-                    //let count = paginationInfo["count"] as! Int
-                case let data as [[String : AnyObject]]:
-                    return self.parseGeneralContentInstances(data, flags: flags ?? [])
-                default:
-                    return nil
-                }
-            }
+//            req.responseParser { data in
+//                switch data {
+//                case let data as [String : AnyObject]:
+//                    // Paginated result
+//                    return self.parseGeneralContentInstances(data["items"] as! [[String:AnyObject]], flags: flags ?? [])
+//                    
+//                    // Get pagination info
+//                    //let paginationInfo = data["pagination"] as! [String: AnyObject]
+//                    //let count = paginationInfo["count"] as! Int
+//                case let data as [[String : AnyObject]]:
+//                    return self.parseGeneralContentInstances(data, flags: flags ?? [])
+//                default:
+//                    return []
+//                }
+//            }
 
             return req
     }
@@ -91,16 +57,17 @@ extension NetworkManager {
         
         let params: [String: AnyObject] = ["populate" : populate!]
         
-        let req = Halo.Request<Halo.GeneralContentInstance>(router: Router.GeneralContentInstance(instanceId, params))
+        let req = Halo.Request(router: Router.GeneralContentInstance(instanceId, params))
             
-        req.responseParser { data in
-            switch data {
-            case let data as [String:AnyObject]:
-                return GeneralContentInstance(data)
-            default:
-                return nil
-            }
-        }
+//        req.responseParser { data in
+//            switch data {
+//            case let data as [String:AnyObject]:
+//                return GeneralContentInstance(data)
+//            default:
+//                // TODO: Change it!
+//                return GeneralContentInstance([:])
+//            }
+//        }
 
         return req
             
@@ -112,15 +79,15 @@ extension NetworkManager {
             
             let req = self.generalContentInstancesRequest(moduleIds: nil, instanceIds: instanceIds, flags: flags)
             
-            req.responseParser { data in
-                
-                switch data {
-                case let data as [[String: AnyObject]]:
-                    return self.parseGeneralContentInstances(data, flags: flags ?? [])
-                default:
-                    return nil
-                }
-            }
+//            req.responseParser { data in
+//                
+//                switch data {
+//                case let data as [[String: AnyObject]]:
+//                    return self.parseGeneralContentInstances(data, flags: flags ?? [])
+//                default:
+//                    return []
+//                }
+//            }
 
             return req
     }
@@ -144,7 +111,6 @@ extension NetworkManager {
             }
 
             return Halo.Request(router: Router.GeneralContentInstances(params))
-            
     }
     
     /**

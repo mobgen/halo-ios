@@ -15,21 +15,22 @@ extension NetworkManager {
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(page page: Int? = nil, limit: Int? = nil) -> Halo.Request {
+    func getModules() -> Halo.Request {
 
         let req = Halo.Request(router: Router.Modules)
         
-        req.responseParser { data in
-            switch data {
-            case let d as [[String : AnyObject]]:
-                return self.parseModules(d)
-            case let d as [String: AnyObject]:
-                return self.parseModules(d["items"] as! [[String: AnyObject]])
-            default:
-                return []
-            }
-        }
-
+//        req.responseParser { (obj) -> [Module] in
+//            switch obj {
+//            case let d as [[String:AnyObject]]:
+//                return self.parseModules(d)
+//            case let d as [String:AnyObject]:
+//                let items = d["items"] as! [[String : AnyObject]]
+//                return self.parseModules(items)
+//            default:
+//                return []
+//            }
+//        }
+        
         return req
 
     }

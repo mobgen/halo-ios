@@ -6,9 +6,9 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-import Alamofire
+import Foundation
 
-public class Request: URLRequestConvertible {
+public class Request {
 
     private var url: NSURL?
     private var include = false
@@ -18,10 +18,10 @@ public class Request: URLRequestConvertible {
     internal var params: [String: AnyObject]? = [:]
 
     public var URLRequest: NSMutableURLRequest {
-
-        var req = NSMutableURLRequest(URL: self.url!)
-        req.HTTPMethod = self.method.toAlamofire().rawValue
-
+        let req = NSMutableURLRequest(URL: self.url!)
+        
+        req.HTTPMethod = self.method.rawValue
+        
         if let token = Router.token {
             req.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")
         }
@@ -29,26 +29,35 @@ public class Request: URLRequestConvertible {
         for (key, value) in self.headers {
             req.setValue(value, forHTTPHeaderField: key)
         }
-
+        
         if self.include {
             self.params!["include"] = true
         }
-
+        
         switch self.parameterEncoding {
         case .URL:
-            req = Alamofire.ParameterEncoding.URL.encode(req, parameters: self.params).0
+            if let url = NSURLComponents(URL: self.url!, resolvingAgainstBaseURL: true) {
+                url.queryItems = self.params?.flatMap({ (key, value) -> NSURLQueryItem? in
+                    return NSURLQueryItem(name: key, value: String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()))
+                })
+                req.URL = url.URL
+            }
         case .JSON:
-            req = Alamofire.ParameterEncoding.JSON.encode(req, parameters: self.params).0
+            req.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            if let params = self.params {
+                req.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+            }
         }
-
+        
         return req
+        
     }
 
-    init(path: String, relativeToURL: NSURL? = Router.baseURL) {
+    public init(path: String, relativeToURL: NSURL? = Router.baseURL) {
         self.url = NSURL(string: path, relativeToURL: relativeToURL)
     }
 
-    internal init(router: Router) {
+    init(router: Router) {
         self.url = NSURL(string: router.path, relativeToURL: Router.baseURL)
         self.method = router.method
         self.parameterEncoding = router.parameterEncoding
@@ -88,16 +97,30 @@ public class Request: URLRequestConvertible {
         return self
     }
 
-    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)?) -> Void {
+    public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
         
-    }
-    
-    public func responseData(completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
         Manager.network.startRequest(request: self) { (resp, result) in
             handler?(result)
         }
+        
+        return self
     }
-
-
-
+    
+    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Halo.Request {
+        
+        self.responseData { (result) -> Void in
+            switch result {
+            case .Success(let data, _):
+                if let successHandler = handler {
+                    let json = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
+                    successHandler(.Success(json, false))
+                }
+            case .Failure(let error):
+                handler?(.Failure(error))
+            }
+        }
+        return self
+    }
+    
+    
 }

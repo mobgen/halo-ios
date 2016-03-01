@@ -16,7 +16,7 @@ public struct GeneralContentManager: HaloManager {
 
     init() {}
 
-    func startup(completionHandler handler: (Bool) -> Void) {
+    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
     }
 
@@ -30,26 +30,31 @@ public struct GeneralContentManager: HaloManager {
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
     public func getInstances(moduleIds moduleIds: [String],
-        var offlinePolicy: OfflinePolicy? = nil,
+        offlinePolicy: OfflinePolicy? = nil,
         populate: Bool = false,
         flags: GeneralContentFlag = [],
         completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
 
-            offlinePolicy = offlinePolicy ?? Manager.core.defaultOfflinePolicy
+            let offline = offlinePolicy ?? Manager.core.defaultOfflinePolicy
             
-            switch offlinePolicy! {
+            switch offline {
             case .None:
-                Manager.network.generalContentInstances(moduleIds: moduleIds, flags: flags).response(completionHandler: { (result) -> Void in
+                let request = Manager.network.generalContentInstances(moduleIds: moduleIds, flags: flags)
+                
+                request.response(completionHandler: { (result) -> Void in
                     switch result {
+                    case .Success(let data as [String : AnyObject], let cached):
+                        let items = data["items"] as! [[String : AnyObject]]
+                        handler?(.Success(items.map({ GeneralContentInstance($0) }), cached))
                     case .Success(let data as [[String : AnyObject]], let cached):
-                        let instances = data.map({ Halo.GeneralContentInstance($0) })
-                        handler?(.Success(instances, cached))
+                        handler?(.Success(data.map({ GeneralContentInstance($0) }), cached))
                     case .Failure(let error):
                         handler?(.Failure(error))
                     default:
                         break
                     }
                 })
+    
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
                 Manager.persistence.generalContentInstances(moduleIds: moduleIds, flags: flags, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), populate: populate, completionHandler: handler)
             }

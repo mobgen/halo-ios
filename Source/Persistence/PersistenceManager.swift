@@ -15,7 +15,7 @@ struct PersistenceManager: HaloManager {
 
     init() {}
     
-    func startup(completionHandler handler: (Bool) -> Void) {
+    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
     }
     

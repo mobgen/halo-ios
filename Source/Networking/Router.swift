@@ -6,9 +6,6 @@
 //  Copyright © 2015 MOBGEN Technology. All rights reserved.
 //
 
-import Foundation
-import Alamofire
-
 public enum ParameterEncoding: Int {
     case JSON, URL
 }

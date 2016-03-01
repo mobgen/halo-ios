@@ -42,13 +42,6 @@ public protocol PushDelegate {
 
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
-
-    // MARK: Push notifications
-
-    public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        Manager.core.applicationDidFinishLaunching(application)
-        return true
-    }
     
     /**
     Just pass through the configuration of the push notifications to the manager.

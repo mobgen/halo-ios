@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 private struct CachedTask {
     
@@ -43,7 +42,7 @@ struct NetworkManager: HaloManager {
     
     init() {}
     
-    mutating func startup(completionHandler handler: (Bool) -> Void) {
+    mutating func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         let bundle = NSBundle.mainBundle()
         
@@ -55,6 +54,7 @@ struct NetworkManager: HaloManager {
             }
         }
         
+        handler?(true)
     }
     
     mutating func startRequest(request urlRequest: Halo.Request,
@@ -74,7 +74,9 @@ struct NetworkManager: HaloManager {
                 if let resp = response as? NSHTTPURLResponse {
                     
                     if self.responseCodes.contains(resp.statusCode) {
-                        
+                        self.cachedTasks.append(cachedTask)
+                        self.refreshToken()
+                        return
                     }
                     
                     if let e = error {
@@ -92,8 +94,6 @@ struct NetworkManager: HaloManager {
                     
                 }
             }
-            
-            
             
             if self.debug {
                 debugPrint(urlRequest.URLRequest)
@@ -165,7 +165,7 @@ struct NetworkManager: HaloManager {
                         
                     } else if let d = data {
                         
-                        let json = try! NSJSONSerialization.JSONObjectWithData(d, options: [.AllowFragments]) as! [String : AnyObject]
+                        let json = try! NSJSONSerialization.JSONObjectWithData(d, options: []) as! [String : AnyObject]
                         let token = Token(json)
                         
                         Router.token = token

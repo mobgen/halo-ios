@@ -12,14 +12,13 @@
 		000EEB4B1BEB5E5E00C1435D /* PersistentModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */; };
 		000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */; };
 		000EEB4F1BEB66E900C1435D /* PersistentModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */; };
-		00121E8F1BF33B5C00FD656F /* Manager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */; };
+		00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00121E8E1BF33B5B00FD656F /* CoreManager+Modules.swift */; };
 		0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
 		0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		004ADDEB1BB1456B00FDDFE8 /* NSDate+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004ADDEA1BB1456B00FDDFE8 /* NSDate+Utils.swift */; };
-		004FEC6E1BCFB762004216EE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; };
 		004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; };
 		004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; };
 		004FEC741BCFB788004216EE /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; };
@@ -79,7 +78,6 @@
 		0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0073E6571BBE804400365DBD /* HaloAppDelegate.swift */; };
 		0078163F1C3528C500BCBF84 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
 		007816401C3528C500BCBF84 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
-		007816411C3528C500BCBF84 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; };
 		007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FA1B71F4EF004D1C22 /* NetworkManager+Modules.swift */; };
 		007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FC1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift */; };
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
@@ -143,7 +141,6 @@
 		0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6D1BCFB762004216EE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00C2BCF11C033905006473B8 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF01C033905006473B8 /* PersistenceManager.swift */; };
 		00C2BCF31C03398E006473B8 /* PersistenceManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */; };
 		00C2BCF51C03399A006473B8 /* PersistenceManager+GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */; };
@@ -183,7 +180,6 @@
 			files = (
 				0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */,
 				0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */,
-				0099615F1C32A33700EC72F9 /* Alamofire.framework in CopyFiles */,
 				009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */,
 				009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */,
 				0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */,
@@ -198,14 +194,13 @@
 		000EEB4A1BEB5E5E00C1435D /* PersistentModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentModule.swift; path = Source/Persistence/PersistentModule.swift; sourceTree = "<group>"; };
 		000EEB4C1BEB5EA800C1435D /* PersistentTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentTag.swift; path = Source/Persistence/PersistentTag.swift; sourceTree = "<group>"; };
 		000EEB4E1BEB66E900C1435D /* PersistentModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentModuleType.swift; path = Source/Persistence/PersistentModuleType.swift; sourceTree = "<group>"; };
-		00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Manager+Modules.swift"; sourceTree = "<group>"; };
+		00121E8E1BF33B5B00FD656F /* CoreManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+Modules.swift"; sourceTree = "<group>"; };
 		0024964B1C00892C00F6F734 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		0024964C1C00892C00F6F734 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		004ADDEA1BB1456B00FDDFE8 /* NSDate+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Utils.swift"; sourceTree = "<group>"; };
-		004FEC6D1BCFB762004216EE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		004FEC6F1BCFB788004216EE /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		004FEC701BCFB788004216EE /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		004FEC711BCFB788004216EE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -286,7 +281,6 @@
 		008E2ACA1C5111D500FACAB2 /* libGTMStackTrace.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTMStackTrace.a; sourceTree = "<group>"; };
 		008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Halo-Bridging-Header.h"; path = "../Halo-Bridging-Header.h"; sourceTree = "<group>"; };
 		008E2B021C51320C00FACAB2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		008E2B041C5132B900FACAB2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		008E2B581C524D7F00FACAB2 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -376,7 +370,6 @@
 				008E2AF61C5111D500FACAB2 /* libGTM_NSStringXML.a in Frameworks */,
 				008E2AF51C5111D500FACAB2 /* libGTM_NSStringHTML.a in Frameworks */,
 				008E2AEF1C5111D500FACAB2 /* libGTM_GTMURLBuilder.a in Frameworks */,
-				004FEC6E1BCFB762004216EE /* Alamofire.framework in Frameworks */,
 				008E2AE01C5111D500FACAB2 /* libGGLCore.a in Frameworks */,
 				0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */,
 				008E2AE91C5111D500FACAB2 /* libGTMSessionFetcher_core.a in Frameworks */,
@@ -400,7 +393,6 @@
 				004FEC741BCFB788004216EE /* Quick.framework in Frameworks */,
 				0078163F1C3528C500BCBF84 /* Realm.framework in Frameworks */,
 				007816401C3528C500BCBF84 /* RealmSwift.framework in Frameworks */,
-				007816411C3528C500BCBF84 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,13 +430,11 @@
 				008E2B021C51320C00FACAB2 /* libsqlite3.tbd */,
 				008E2B581C524D7F00FACAB2 /* AddressBook.framework */,
 				008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */,
-				008E2B041C5132B900FACAB2 /* CFNetwork.framework */,
 				0024964B1C00892C00F6F734 /* Realm.framework */,
 				0024964C1C00892C00F6F734 /* RealmSwift.framework */,
 				004FEC6F1BCFB788004216EE /* Nimble.framework */,
 				004FEC701BCFB788004216EE /* OHHTTPStubs.framework */,
 				004FEC711BCFB788004216EE /* Quick.framework */,
-				004FEC6D1BCFB762004216EE /* Alamofire.framework */,
 				003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
@@ -483,11 +473,11 @@
 			children = (
 				00FF95611B4547D200E751E3 /* CoreConstants.swift */,
 				00E043CE1C848723008270DE /* CoreManager.swift */,
+				00121E8E1BF33B5B00FD656F /* CoreManager+Modules.swift */,
 				00EC9D361C43F72F00A3291D /* Credentials.swift */,
 				00E043D01C849CA8008270DE /* GCMManager.swift */,
 				0073E6571BBE804400365DBD /* HaloAppDelegate.swift */,
 				006A60211B318DCC0045395A /* Manager.swift */,
-				00121E8E1BF33B5B00FD656F /* Manager+Modules.swift */,
 				00C2BCF61C036AE1006473B8 /* ManagerProtocols.swift */,
 				005E1ED51C69FFE800ED8763 /* Result.swift */,
 				002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */,
@@ -1119,7 +1109,7 @@
 				007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */,
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,
 				000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */,
-				00121E8F1BF33B5C00FD656F /* Manager+Modules.swift in Sources */,
+				00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,

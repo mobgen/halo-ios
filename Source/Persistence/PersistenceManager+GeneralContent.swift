@@ -23,27 +23,27 @@ extension PersistenceManager {
                 return
             }
             
-            Manager.network.generalContentInstances(moduleIds: moduleIds).response { (result) -> Void in
-                switch result {
-                case .Success(let instances, _):
-                    handler?(result)
-                    
-                    try! self.realm.write({ () -> Void in
-                        
-                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds))
-                        
-                        for instance in instances {
-                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
-                        }
-                    })
-                case .Failure(let error):
-                    if error.code == -1009 {
-                        self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
-                    } else {
-                        handler?(result)
-                    }
-                }
-            }
+//            Manager.network.generalContentInstances(moduleIds: moduleIds).response { (result) -> Void in
+//                switch result {
+//                case .Success(let instances, _):
+//                    //handler?(result)
+//                    
+//                    try! self.realm.write({ () -> Void in
+//                        
+//                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds))
+//                        
+////                        for instance in instances {
+////                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+////                        }
+//                    })
+//                case .Failure(let error):
+//                    if error.code == -1009 {
+//                        self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
+//                    } else {
+//                        //handler?(result)
+//                    }
+//                }
+//            }
             
     }
     
@@ -72,23 +72,22 @@ extension PersistenceManager {
             return
         }
         
-        Manager.network.generalContentInstance(instanceId).response { (result) -> Void in
-            switch result {
-            case .Success(let instance, _):
-                handler?(result)
+//        Manager.network.generalContentInstance(instanceId).response { (result) -> Void in
+//            switch result {
+//            case .Success(let instance, _):
+                //handler?(result)
                 
-                try! self.realm.write({ () -> Void in
-                    self.realm.add(PersistentGeneralContentInstance(instance), update: true)
-                })
-                
-            case .Failure(let error):
-                if error.code == -1009 {
-                    self.getInstanceLocalDataDontLoad(instanceId, completionHandler: handler)
-                } else {
-                    handler?(result)
-                }
-            }
-        }
+//                try! self.realm.write({ () -> Void in
+//                    self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+//                })
+//            case .Failure(let error):
+//                if error.code == -1009 {
+//                    self.getInstanceLocalDataDontLoad(instanceId, completionHandler: handler)
+//                } else {
+//                    //handler?(result)
+//                }
+//            }
+//        }
         
     }
     
@@ -115,29 +114,29 @@ extension PersistenceManager {
                 return
             }
             
-            Manager.network.generalContentInstances(instanceIds: instanceIds, flags: flags).response { (result) -> Void in
-                switch result {
-                case .Success(let instances, _):
-                    
-                    handler?(result)
-                    
-                    try! self.realm.write({ () -> Void in
-                        
-                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("id IN %@", instanceIds))
-                        
-                        for instance in instances {
-                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
-                        }
-                    })
-                    
-                case .Failure(let error):
-                    if error.code == -1009 {
-                        self.getInstancesByIdsLocalDataDontLoad(instanceIds, completionHandler: handler)
-                    } else {
-                        handler?(result)
-                    }
-                }
-            }
+//            Manager.network.generalContentInstances(instanceIds: instanceIds, flags: flags).response { (result) -> Void in
+//                switch result {
+//                case .Success(let instances, _):
+//                    
+//                    handler?(result)
+//                    
+//                    try! self.realm.write({ () -> Void in
+//                        
+//                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("id IN %@", instanceIds))
+//                        
+//                        for instance in instances {
+//                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+//                        }
+//                    })
+//                    
+//                case .Failure(let error):
+//                    if error.code == -1009 {
+//                        self.getInstancesByIdsLocalDataDontLoad(instanceIds, completionHandler: handler)
+//                    } else {
+//                        handler?(result)
+//                    }
+//                }
+//            }
     }
     
     private func getInstancesByIdsLocalDataDontLoad(instanceIds: [String], completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {

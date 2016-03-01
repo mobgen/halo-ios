@@ -19,31 +19,31 @@ extension PersistenceManager {
             return
         }
 
-        Manager.network.getModules().response { (result) -> Void in
-            switch result {
-            case .Success(let modules as [[String : AnyObject]], _):
-                handler?(result)
-
-                try! self.realm.write({ () -> Void in
-
-                    // Delete the existing ones. Temporary solution?
-                    self.realm.delete(self.realm.objects(PersistentModule))
-
-                    for module in modules {
-                        self.realm.add(PersistentModule(module), update: true)
-                    }
-                })
-
-            case .Failure(let error):
-                if error.code == -1009 {
-                    self.getModulesLocalDataDontLoad(completionHandler: { (result) -> Void in
-                        handler?(result)
-                    })
-                } else {
-                    handler?(result)
-                }
-            }
-        }
+//        Manager.core.getModules().response { (result) -> Void in
+//            switch result {
+//            case .Success(let modules, _):
+//                //handler?(result)
+//
+//                try! self.realm.write({ () -> Void in
+//
+//                    // Delete the existing ones. Temporary solution?
+//                    self.realm.delete(self.realm.objects(PersistentModule))
+//
+////                    for module in modules {
+////                        self.realm.add(PersistentModule(module), update: true)
+////                    }
+//                })
+//
+//            case .Failure(let error):
+//                if error.code == -1009 {
+//                    self.getModulesLocalDataDontLoad(completionHandler: { (result) -> Void in
+//                        handler?(result)
+//                    })
+//                } else {
+////                    handler?(result)
+//                }
+//            }
+//        }
     }
     
  
