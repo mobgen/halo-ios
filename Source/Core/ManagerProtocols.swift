@@ -6,16 +6,16 @@
 //  Copyright © 2015 MOBGEN Technology. All rights reserved.
 //
 
-protocol ModulesManager {
-
-    func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void
-    
-}
-
-protocol GeneralContentManager {
-    
-    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void
-    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void
-    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void
-    
-}
+//protocol ModulesManager {
+//
+//    func getModules(fetchFromNetwork network: Bool, completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void
+//    
+//}
+//
+//protocol GeneralContentManager {
+//    
+//    func generalContentInstances(moduleIds: [String], flags: GeneralContentFlag, fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void
+//    func generalContentInstance(instanceId: String, fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void
+//    func generalContentInstances(instanceIds: [String], fetchFromNetwork network: Bool, populate: Bool?, completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void
+//    
+//}

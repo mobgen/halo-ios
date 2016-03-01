@@ -43,12 +43,10 @@ public protocol PushDelegate {
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
-    private let haloMgr = Manager.core
-    
     // MARK: Push notifications
 
     public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        haloMgr.applicationDidFinishLaunching(application)
+        Manager.core.applicationDidFinishLaunching(application)
         return true
     }
     
@@ -59,7 +57,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     - parameter deviceToken: Device token obtained in previous steps
     */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        haloMgr.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        Manager.core.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
     /**
@@ -69,19 +67,19 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter error:       Error thrown during the process
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        haloMgr.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
+        Manager.core.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
     public func applicationDidBecomeActive(application: UIApplication) {
-        haloMgr.applicationDidBecomeActive(application)
+        Manager.core.applicationDidBecomeActive(application)
     }
     
     public func applicationDidEnterBackground(application: UIApplication) {
-        haloMgr.applicationDidEnterBackground(application)
+        Manager.core.applicationDidEnterBackground(application)
     }
     
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        haloMgr.application(application, didReceiveRemoteNotification: userInfo)
+        Manager.core.application(application, didReceiveRemoteNotification: userInfo)
     }
     
     /**
@@ -92,10 +90,10 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter completionHandler: Handler to be executed once the fetch has finished
      */
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        haloMgr.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        Manager.core.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
     
     public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        haloMgr.application(application, didReceiveLocalNotification: notification)
+        Manager.core.application(application, didReceiveLocalNotification: notification)
     }
 }

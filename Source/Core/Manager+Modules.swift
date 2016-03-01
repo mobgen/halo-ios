@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-extension Manager {
+extension CoreManager {
  
     /**
      Get a list of the existing modules for the provided client credentials
@@ -17,52 +17,25 @@ extension Manager {
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      - parameter completionHandler:  Closure to be executed when the request has finished
      */
-    public func getModules(offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy, completionHandler handler: (Halo.Result<[Halo.Module], NSError>) -> Void) -> Void {
+    public func getModules(offlinePolicy: OfflinePolicy? = Manager.core.defaultOfflinePolicy,
+        completionHandler handler: ((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void {
         
         switch offlinePolicy! {
         case .None:
-            self.net.getModules().response(completionHandler: handler)
+            Manager.network.getModules().response(completionHandler: { (result) -> Void in
+                switch result {
+                case .Success(let data as [[String : AnyObject]], let cached):
+                    let modules = data.map({ Halo.Module($0) })
+                    handler?(.Success(modules, cached))
+                case .Failure(let error):
+                    handler?(.Failure(error))
+                default:
+                    break
+                }
+            })
         case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-            self.persist.getModules(fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+            Manager.persistence.getModules(fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
         }
     }
-    
-    /**
-     Get a list of the existing modules for the provided client credentials
-     
-     - parameter offlinePolicy: Offline policy to be considered when retrieving data
-     - parameter success:       Closure to be executed when the request has succeeded
-     - parameter failure:       Closure to be executed when the request has failed
-     */
-    @objc(modulesWithOfflinePolicy:success:failure:)
-    public func getModulesOfflinePolicyFromObjC(offlinePolicy: OfflinePolicy, success: ((userData: [Halo.Module], cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
-        
-        self.privateGetModules(offlinePolicy, success: success, failure: failure)
-        
-    }
-    
-    /**
-     Get a list of the existing modules for the provided client credentials
-     
-     - parameter success:  Closure to be executed when the request has succeeded
-     - parameter failure:  Closure to be executed when the request has failed
-     */
-    @objc(modulesWithSuccess:failure:)
-    public func getModulesFromObjC(success: ((userData: [Halo.Module], cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
-        
-        self.privateGetModules(nil, success: success, failure: failure)
-    
-    }
-    
-    private func privateGetModules(offlinePolicy: OfflinePolicy?, success: ((userData: [Halo.Module], cached: Bool) -> Void)?, failure: ((error: NSError) -> Void)?) -> Void {
-        
-        self.getModules(offlinePolicy) { (result) -> Void in
-            switch result {
-            case .Success(let modules, let cached):
-                success?(userData: modules, cached: cached)
-            case .Failure(let error):
-                failure?(error: error)
-            }
-        }
-    }
+
 }

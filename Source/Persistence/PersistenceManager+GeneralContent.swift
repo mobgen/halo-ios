@@ -23,7 +23,7 @@ extension PersistenceManager {
                 return
             }
             
-            net.generalContentInstances(moduleIds: moduleIds).response { (result) -> Void in
+            Manager.network.generalContentInstances(moduleIds: moduleIds).response { (result) -> Void in
                 switch result {
                 case .Success(let instances, _):
                     handler?(result)
@@ -72,7 +72,7 @@ extension PersistenceManager {
             return
         }
         
-        net.generalContentInstance(instanceId).response { (result) -> Void in
+        Manager.network.generalContentInstance(instanceId).response { (result) -> Void in
             switch result {
             case .Success(let instance, _):
                 handler?(result)
@@ -115,7 +115,7 @@ extension PersistenceManager {
                 return
             }
             
-            net.generalContentInstances(instanceIds: instanceIds, flags: flags).response { (result) -> Void in
+            Manager.network.generalContentInstances(instanceIds: instanceIds, flags: flags).response { (result) -> Void in
                 switch result {
                 case .Success(let instances, _):
                     

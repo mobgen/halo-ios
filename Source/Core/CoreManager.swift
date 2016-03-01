@@ -256,7 +256,27 @@ public struct CoreManager: HaloManager {
         }
         
     }
-    
+
+    /**
+     Pass through the push notifications setup. To be called within the method in the app delegate.
+
+     - parameter application: Application being configured
+     - parameter deviceToken: Token obtained for the current device
+     */
+    public mutating func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        self.setupPushNotifications(application: application, deviceToken: deviceToken)
+    }
+
+    /**
+     Pass through the push notifications setup. To be called within the method in the app delegate.
+
+     - parameter application: Application being configured
+     - parameter error:       Error thrown during the process
+     */
+    public mutating func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        self.setupDefaultSystemTags()
+    }
+
     /**
      Extra setup steps to be called from the corresponding method in the app delegate
      

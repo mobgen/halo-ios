@@ -127,14 +127,14 @@ public final class User: NSObject, NSCoding {
         let encodedObject = NSKeyedArchiver.archivedDataWithRootObject(self)
         let userDefaults = NSUserDefaults.standardUserDefaults()
 
-        userDefaults.setObject(encodedObject, forKey: "\(CoreConstants.userDefaultsUserKey)-\(env.rawValue)")
+        userDefaults.setObject(encodedObject, forKey: "\(CoreConstants.userDefaultsUserKey)-\(env.description)")
         userDefaults.synchronize()
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
     class func loadUser(env: HaloEnvironment) -> Halo.User? {
         
-        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsUserKey)-\(env.rawValue)") as? NSData {
+        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsUserKey)-\(env.description)") as? NSData {
             return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as? Halo.User
         } else {
             return nil

@@ -24,11 +24,11 @@ public struct GeneralContentFlag : OptionSetType {
 extension NetworkManager {
 
     func generalContentInstances(moduleIds moduleIds: [String],
-        flags: GeneralContentFlag) -> Halo.Request<[Halo.GeneralContentInstance]> {
+        flags: GeneralContentFlag) -> Halo.Request {
 
         let request = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags)
 
-        request.responseParser { data in
+        request.response { data in
             switch data {
             case let data as [[String : AnyObject]]:
                 // Non paginated result
@@ -63,7 +63,7 @@ extension NetworkManager {
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
     func generalContentInstances(moduleIds moduleIds: [String],
-        flags: GeneralContentFlag? = []) -> Halo.Request<[Halo.GeneralContentInstance]> {
+        flags: GeneralContentFlag? = []) -> Halo.Request {
             
             let req = self.generalContentInstancesRequest(moduleIds: moduleIds, instanceIds: nil, flags: flags)
             
@@ -87,7 +87,7 @@ extension NetworkManager {
     }
     
     func generalContentInstance(instanceId: String,
-        populate: Bool? = false) -> Halo.Request<Halo.GeneralContentInstance> {
+        populate: Bool? = false) -> Halo.Request {
         
         let params: [String: AnyObject] = ["populate" : populate!]
         
@@ -108,7 +108,7 @@ extension NetworkManager {
     
     func generalContentInstances(instanceIds instanceIds: [String],
         flags: GeneralContentFlag? = [],
-        populate: Bool? = false) -> Halo.Request<[Halo.GeneralContentInstance]> {
+        populate: Bool? = false) -> Halo.Request {
             
             let req = self.generalContentInstancesRequest(moduleIds: nil, instanceIds: instanceIds, flags: flags)
             
@@ -127,7 +127,7 @@ extension NetworkManager {
 
     private func generalContentInstancesRequest(moduleIds moduleIds: [String]?,
         instanceIds: [String]?,
-        flags: GeneralContentFlag? = []) -> Halo.Request<[Halo.GeneralContentInstance]> {
+        flags: GeneralContentFlag? = []) -> Halo.Request {
 
             var params: [String : AnyObject] = [:]
 

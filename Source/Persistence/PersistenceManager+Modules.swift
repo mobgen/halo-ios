@@ -19,9 +19,9 @@ extension PersistenceManager {
             return
         }
 
-        net.getModules().response { (result) -> Void in
+        Manager.network.getModules().response { (result) -> Void in
             switch result {
-            case .Success(let modules, _):
+            case .Success(let modules as [[String : AnyObject]], _):
                 handler?(result)
 
                 try! self.realm.write({ () -> Void in

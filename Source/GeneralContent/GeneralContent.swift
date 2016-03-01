@@ -15,7 +15,11 @@ import RealmSwift
 public struct GeneralContentManager: HaloManager {
 
     init() {}
-    
+
+    func startup(completionHandler handler: (Bool) -> Void) {
+
+    }
+
     // MARK: Get instances
     
     /**
@@ -35,7 +39,17 @@ public struct GeneralContentManager: HaloManager {
             
             switch offlinePolicy! {
             case .None:
-                Manager.network.generalContentInstances(moduleIds: moduleIds, flags: flags).response(completionHandler: handler)
+                Manager.network.generalContentInstances(moduleIds: moduleIds, flags: flags).response(completionHandler: { (result) -> Void in
+                    switch result {
+                    case .Success(let data as [[String : AnyObject]], let cached):
+                        let instances = data.map({ Halo.GeneralContentInstance($0) })
+                        handler?(.Success(instances, cached))
+                    case .Failure(let error):
+                        handler?(.Failure(error))
+                    default:
+                        break
+                    }
+                })
             case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
                 Manager.persistence.generalContentInstances(moduleIds: moduleIds, flags: flags, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), populate: populate, completionHandler: handler)
             }

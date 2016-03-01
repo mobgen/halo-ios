@@ -10,7 +10,9 @@ import Foundation
 import RealmSwift
 
 struct PersistenceManager: HaloManager {
-    
+
+    let realm = try! Realm.init()
+
     init() {}
     
     func startup(completionHandler handler: (Bool) -> Void) {

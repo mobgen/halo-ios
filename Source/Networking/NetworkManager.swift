@@ -101,7 +101,14 @@ struct NetworkManager: HaloManager {
             
             dataTask.resume()
     }
-    
+
+    mutating func startRequest(request urlRequest: Halo.Request,
+        completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
+
+            self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
+
+    }
+
     /**
      Obtain/refresh an authentication token when needed
      */

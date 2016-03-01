@@ -16,7 +16,6 @@
 		0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
 		0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
-		003B0BDB1C80707700C8D9DD /* PersistentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B0BDA1C80707700C8D9DD /* PersistentRequest.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		004ADDEB1BB1456B00FDDFE8 /* NSDate+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004ADDEA1BB1456B00FDDFE8 /* NSDate+Utils.swift */; };
@@ -203,7 +202,6 @@
 		0024964B1C00892C00F6F734 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		0024964C1C00892C00F6F734 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
-		003B0BDA1C80707700C8D9DD /* PersistentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRequest.swift; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		004ADDEA1BB1456B00FDDFE8 /* NSDate+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Utils.swift"; sourceTree = "<group>"; };
@@ -870,7 +868,6 @@
 				00C2BCF01C033905006473B8 /* PersistenceManager.swift */,
 				00C2BCF21C03398D006473B8 /* PersistenceManager+Modules.swift */,
 				00C2BCF41C03399A006473B8 /* PersistenceManager+GeneralContent.swift */,
-				003B0BDA1C80707700C8D9DD /* PersistentRequest.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -1118,7 +1115,6 @@
 				0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */,
 				00C4DEB41BF5E8C300993B9D /* PersistentGeneralContentInstance.swift in Sources */,
 				006CB9B81B870FC400EB872E /* Tag.swift in Sources */,
-				003B0BDB1C80707700C8D9DD /* PersistentRequest.swift in Sources */,
 				007F78FD1B71F53B004D1C22 /* NetworkManager+GeneralContent.swift in Sources */,
 				007F78FB1B71F4EF004D1C22 /* NetworkManager+Modules.swift in Sources */,
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,

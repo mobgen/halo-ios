@@ -15,9 +15,9 @@ extension NetworkManager {
 
     - parameter completionHandler:  Closure to be executed once the request has finished
     */
-    func getModules(page page: Int? = nil, limit: Int? = nil) -> Halo.Request<[Halo.Module]> {
+    func getModules(page page: Int? = nil, limit: Int? = nil) -> Halo.Request {
 
-        let req = Halo.Request<[Halo.Module]>(router: Router.Modules)
+        let req = Halo.Request(router: Router.Modules)
         
         req.responseParser { data in
             switch data {

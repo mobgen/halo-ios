@@ -93,7 +93,7 @@ public class Request: URLRequestConvertible {
     }
     
     public func responseData(completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
-        Manager.network.startRequest(request: self) { (req, resp, result) in
+        Manager.network.startRequest(request: self) { (resp, result) in
             handler?(result)
         }
     }
