@@ -38,7 +38,7 @@ struct NetworkManager: HaloManager {
     
     private let session = NSURLSession.sharedSession()
     
-    private let responseCodes = [401,403]
+    private let responseCodes = [401, 403]
     
     init() {}
     

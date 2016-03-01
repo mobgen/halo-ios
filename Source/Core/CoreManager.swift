@@ -125,17 +125,6 @@ public struct CoreManager: HaloManager {
                 NSLog("No .plist found")
             }
             
-            if self.enablePush {
-                self.gcmManager.configure()
-                
-                let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-                UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-                
-                let gcmConfig = GCMConfig.defaultConfig()
-                GCMService.sharedInstance().startWithConfig(gcmConfig)
-            }
-            
-            
             if let user = self.user {
                 // Update the user
                 Manager.network.getUser(user) { (result) -> Void in
@@ -144,7 +133,8 @@ public struct CoreManager: HaloManager {
                         self.user = user
                         
                         if self.enablePush {
-                            UIApplication.sharedApplication().registerForRemoteNotifications()
+                            self.configurePush()
+                            
                         } else {
                             self.setupDefaultSystemTags()
                         }
@@ -162,13 +152,25 @@ public struct CoreManager: HaloManager {
                 }
                 
                 if self.enablePush {
-                    UIApplication.sharedApplication().registerForRemoteNotifications()
+                    self.configurePush()
                 } else {
                     self.setupDefaultSystemTags()
                 }
             }
         }
         
+    }
+    
+    private func configurePush() {
+        self.gcmManager.configure()
+        
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        let gcmConfig = GCMConfig.defaultConfig()
+        GCMService.sharedInstance().startWithConfig(gcmConfig)
+        
+        UIApplication.sharedApplication().registerForRemoteNotifications()
     }
     
     private mutating func setupDefaultSystemTags() {
