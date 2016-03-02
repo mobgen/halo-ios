@@ -47,6 +47,14 @@ public class Request: CustomDebugStringConvertible {
             if let params = self.params {
                 req.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
             }
+        case .FORM:
+            req.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
+            let queryString = self.params?.flatMap({ (key, value) -> String? in
+                return "\(key)=\(String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)"
+            }).joinWithSeparator("&")
+
+            req.HTTPBody = queryString?.dataUsingEncoding(NSUTF8StringEncoding)
         }
         
         return req
@@ -54,7 +62,7 @@ public class Request: CustomDebugStringConvertible {
     }
 
     public var debugDescription: String {
-        return self.URLRequest.curlRequest
+        return self.URLRequest.curlRequest + "\n"
     }
 
     public init(path: String, relativeToURL: NSURL? = Router.baseURL) {

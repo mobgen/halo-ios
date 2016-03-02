@@ -9,7 +9,6 @@
 import Quick
 import Nimble
 import OHHTTPStubs
-import Alamofire
 @testable import Halo
 
 class GeneralContentSpec : QuickSpec {

@@ -26,7 +26,11 @@ class NetworkManager: HaloManager {
 
     var debug: Bool = false
     
-    var credentials: Credentials?
+    var credentials: Credentials? {
+        didSet {
+            Router.token = nil
+        }
+    }
     
     var numberOfRetries = 0
     
@@ -153,9 +157,13 @@ class NetworkManager: HaloManager {
                 }
             }
             
-            let req = Halo.Request(router: Router.OAuth(cred, params)).URLRequest
-            
-            self.session.dataTaskWithRequest(req, completionHandler: { (data, response, error) -> Void in
+            let req = Halo.Request(router: Router.OAuth(cred, params))
+
+            if self.debug {
+                debugPrint(req)
+            }
+
+            self.session.dataTaskWithRequest(req.URLRequest, completionHandler: { (data, response, error) -> Void in
             
                 if let resp = response as? NSHTTPURLResponse {
                     
@@ -181,7 +189,7 @@ class NetworkManager: HaloManager {
                         self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
                     })
                 }
-            })
+            }).resume()
             
         } else {
             NSLog("No credentials found")

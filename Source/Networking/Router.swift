@@ -7,7 +7,7 @@
 //
 
 public enum ParameterEncoding: Int {
-    case JSON, URL
+    case JSON, URL, FORM
 }
 
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
@@ -49,9 +49,9 @@ enum Router {
         case .OAuth(let cred, _):
             switch cred.type {
             case .App:
-                return "api/oauth/token?_1"
+                return "api/oauth/token?_app"
             case .User:
-                return "api/oauth/token?_2"
+                return "api/oauth/token?_user"
             }
         case .Modules:
             return "api/authentication/module/"
@@ -91,6 +91,8 @@ enum Router {
 
     var parameterEncoding: Halo.ParameterEncoding {
         switch self {
+        case .OAuth(_, _):
+            return .FORM
         case .SegmentationCreateUser(_), .SegmentationUpdateUser(_, _):
             return .JSON
         case .CustomRequest(let method, _, _):

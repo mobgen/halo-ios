@@ -20,7 +20,7 @@ extension NSURLRequest {
 
         if let bodyData = self.HTTPBody {
             if let bodyDataString = String(data: bodyData, encoding: NSUTF8StringEncoding) {
-                curlString.appendString(" -d \(self.escapeQuotesInString(bodyDataString))")
+                curlString.appendString(" -d \"\(self.escapeQuotesInString(bodyDataString))\"")
             }
         }
 
