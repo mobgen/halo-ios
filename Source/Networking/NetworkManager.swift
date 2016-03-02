@@ -22,7 +22,7 @@ private struct CachedTask {
     
 }
 
-struct NetworkManager: HaloManager {
+class NetworkManager: HaloManager {
 
     var debug: Bool = false
     
@@ -42,7 +42,7 @@ struct NetworkManager: HaloManager {
     
     init() {}
     
-    mutating func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         let bundle = NSBundle.mainBundle()
         
@@ -57,7 +57,7 @@ struct NetworkManager: HaloManager {
         handler?(true)
     }
     
-    mutating func startRequest(request urlRequest: Halo.Request,
+    func startRequest(request urlRequest: Halo.Request,
         numberOfRetries: Int,
         completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
             
@@ -102,7 +102,7 @@ struct NetworkManager: HaloManager {
             dataTask.resume()
     }
 
-    mutating func startRequest(request urlRequest: Halo.Request,
+    func startRequest(request urlRequest: Halo.Request,
         completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
 
             self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
@@ -112,7 +112,7 @@ struct NetworkManager: HaloManager {
     /**
      Obtain/refresh an authentication token when needed
      */
-    private mutating func refreshToken(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    private func refreshToken(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         
         self.isRefreshing = true
         var params: [String : AnyObject]

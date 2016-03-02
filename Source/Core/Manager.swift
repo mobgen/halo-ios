@@ -64,7 +64,7 @@ public enum OfflinePolicy {
 
 protocol HaloManager {
     
-    mutating func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
+    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
     
 }
 

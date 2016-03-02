@@ -23,7 +23,7 @@ public protocol ManagerDelegate {
     
 }
 
-public struct CoreManager: HaloManager {
+public class CoreManager: HaloManager {
     
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
@@ -79,7 +79,7 @@ public struct CoreManager: HaloManager {
     
     init() {}
     
-    public mutating func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         self.completionHandler = handler
         Router.token = nil
@@ -173,7 +173,7 @@ public struct CoreManager: HaloManager {
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
     
-    private mutating func setupDefaultSystemTags() {
+    private func setupDefaultSystemTags() {
         
         if let user = self.user {
             
@@ -250,7 +250,7 @@ public struct CoreManager: HaloManager {
      - parameter application: Current application being configured to receive push notifications
      - parameter deviceToken: Device token returned after registering for push notifications
      */
-    private mutating func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
+    private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
         
         self.gcmManager.setupPushNotifications(deviceToken) { () -> Void in
             self.setupDefaultSystemTags()
@@ -264,7 +264,7 @@ public struct CoreManager: HaloManager {
      - parameter application: Application being configured
      - parameter deviceToken: Token obtained for the current device
      */
-    public mutating func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         self.setupPushNotifications(application: application, deviceToken: deviceToken)
     }
 
@@ -274,7 +274,7 @@ public struct CoreManager: HaloManager {
      - parameter application: Application being configured
      - parameter error:       Error thrown during the process
      */
-    public mutating func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         self.setupDefaultSystemTags()
     }
 

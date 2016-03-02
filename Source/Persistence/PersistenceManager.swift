@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-struct PersistenceManager: HaloManager {
+class PersistenceManager: HaloManager {
 
     let realm = try! Realm.init()
 
