@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Request {
+public class Request: CustomDebugStringConvertible {
 
     private var url: NSURL?
     private var include = false
@@ -51,6 +51,10 @@ public class Request {
         
         return req
         
+    }
+
+    public var debugDescription: String {
+        return self.URLRequest.curlRequest
     }
 
     public init(path: String, relativeToURL: NSURL? = Router.baseURL) {

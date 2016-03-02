@@ -96,7 +96,7 @@ class NetworkManager: HaloManager {
             }
             
             if self.debug {
-                debugPrint(urlRequest.URLRequest)
+                debugPrint(urlRequest)
             }
             
             dataTask.resume()

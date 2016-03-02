@@ -49,12 +49,12 @@ enum Router {
         case .OAuth(let cred, _):
             switch cred.type {
             case .App:
-                return "/api/oauth/token?_1"
+                return "api/oauth/token?_1"
             case .User:
-                return "/api/oauth/token?_2"
+                return "api/oauth/token?_2"
             }
         case .Modules:
-            return "/api/authentication/module/"
+            return "api/authentication/module/"
         case .GeneralContentInstances(_):
             return "api/authentication/instance/"
         case .GeneralContentInstance(let id, _):

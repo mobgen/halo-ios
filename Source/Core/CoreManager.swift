@@ -30,7 +30,14 @@ public class CoreManager: HaloManager {
     
     public var pushDelegate: PushDelegate?
     
-    public var debug = false
+    public var debug: Bool {
+        get {
+            return Manager.network.debug
+        }
+        set {
+            Manager.network.debug = newValue
+        }
+    }
     
     public var environment: HaloEnvironment = .Prod {
         didSet {

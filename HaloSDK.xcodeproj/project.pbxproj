@@ -151,6 +151,7 @@
 		00E043CF1C848723008270DE /* CoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E043CE1C848723008270DE /* CoreManager.swift */; };
 		00E043D11C849CA8008270DE /* GCMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E043D01C849CA8008270DE /* GCMManager.swift */; };
 		00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EC9D361C43F72F00A3291D /* Credentials.swift */; };
+		00EF266E1C86D55600A7BAC0 /* NSURLRequest+cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EF266D1C86D55600A7BAC0 /* NSURLRequest+cURL.swift */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -334,6 +335,7 @@
 		00E043CE1C848723008270DE /* CoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreManager.swift; sourceTree = "<group>"; };
 		00E043D01C849CA8008270DE /* GCMManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCMManager.swift; sourceTree = "<group>"; };
 		00EC9D361C43F72F00A3291D /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		00EF266D1C86D55600A7BAC0 /* NSURLRequest+cURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLRequest+cURL.swift"; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -418,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				004ADDEA1BB1456B00FDDFE8 /* NSDate+Utils.swift */,
+				00EF266D1C86D55600A7BAC0 /* NSURLRequest+cURL.swift */,
 			);
 			name = Extensions;
 			path = Source;
@@ -1110,6 +1113,7 @@
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,
 				000EEB4D1BEB5EA800C1435D /* PersistentTag.swift in Sources */,
 				00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */,
+				00EF266E1C86D55600A7BAC0 /* NSURLRequest+cURL.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
