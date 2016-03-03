@@ -22,15 +22,32 @@ private struct CachedTask {
     
 }
 
+public enum AuthenticationMode {
+    case App, User
+}
+
 class NetworkManager: HaloManager {
 
     var debug: Bool = false
-    
-    var credentials: Credentials? {
+
+    var authenticationMode: AuthenticationMode = .App {
         didSet {
             Router.token = nil
         }
     }
+
+    var credentials: Credentials? {
+        get {
+            switch self.authenticationMode {
+            case .App: return self.appCredentials
+            case .User: return self.userCredentials
+            }
+        }
+    }
+
+    var appCredentials: Credentials?
+
+    var userCredentials: Credentials?
     
     var numberOfRetries = 0
     

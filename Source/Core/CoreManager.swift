@@ -55,13 +55,37 @@ public class CoreManager: HaloManager {
             Manager.network.numberOfRetries = newValue
         }
     }
-    
+
+    public var authenticationMode: AuthenticationMode {
+        get {
+            return Manager.network.authenticationMode
+        }
+        set {
+            Manager.network.authenticationMode = newValue
+        }
+    }
+
     public var credentials: Credentials? {
         get {
             return Manager.network.credentials
         }
+    }
+
+    public var appCredentials: Credentials? {
+        get {
+            return Manager.network.appCredentials
+        }
         set {
-            Manager.network.credentials = newValue
+            Manager.network.appCredentials = newValue
+        }
+    }
+
+    public var userCredentials: Credentials? {
+        get {
+            return Manager.network.userCredentials
+        }
+        set {
+            Manager.network.userCredentials = newValue
         }
     }
     
@@ -111,9 +135,11 @@ public class CoreManager: HaloManager {
                     let environmentKey = CoreConstants.environmentSettingKey
                     
                     if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
-                        self.credentials = Credentials(clientId: clientId, clientSecret: clientSecret)
-                    } else if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
-                        self.credentials = Credentials(username: username, password: password)
+                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                    }
+
+                    if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
+                        self.userCredentials = Credentials(username: username, password: password)
                     }
                     
                     if let env = data[environmentKey] as? String {
