@@ -54,6 +54,13 @@ public enum HaloEnvironment {
             return url
         }
     }
+
+    public var baseUrlString: String {
+        get {
+            return self.baseUrl.absoluteString
+        }
+    }
+
 }
 
 public enum OfflinePolicy {

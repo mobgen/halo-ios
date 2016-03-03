@@ -72,8 +72,12 @@ class NetworkManager: HaloManager {
                 self.cachedTasks.append(cachedTask)
                 return
             }
-            
-            let dataTask = session.dataTaskWithRequest(urlRequest.URLRequest) { (data, response, error) -> Void in
+
+            if self.debug {
+                debugPrint(urlRequest)
+            }
+
+            session.dataTaskWithRequest(urlRequest.URLRequest) { (data, response, error) -> Void in
                 
                 if let resp = response as? NSHTTPURLResponse {
                     
@@ -97,13 +101,8 @@ class NetworkManager: HaloManager {
                 } else {
                     
                 }
-            }
-            
-            if self.debug {
-                debugPrint(urlRequest)
-            }
-            
-            dataTask.resume()
+            }.resume()
+
     }
 
     func startRequest(request urlRequest: Halo.Request,
