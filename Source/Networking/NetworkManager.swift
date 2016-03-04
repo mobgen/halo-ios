@@ -116,7 +116,7 @@ class NetworkManager: HaloManager {
                         handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                     }
                 } else {
-                    
+                    NSLog("No response received from server")
                 }
             }.resume()
 
@@ -211,4 +211,5 @@ class NetworkManager: HaloManager {
             NSLog("No credentials found")
         }
     }
+
 }
