@@ -145,21 +145,36 @@ public enum Effect {
             }
             return "brightness"
         case .Sepia(let value):
-            return ((1...100) ~= value) ? "sepia:\(value)" : "sepia"
+            if let v = value where (1...100) ~= v {
+                return "sepia:\(value)"
+            }
+            return "sepia"
         case .Grayscale:
             return "grayscale"
         case .BlackAndWhite:
             return "blackwhite"
         case .Saturation(let value):
-            return ((-100...100) ~= value) ? "saturation:\(value)" : "saturation"
+            if let v = value where (-100...100) ~= v {
+                return "saturation:\(value)"
+            }
+            return "saturation"
         case .Colorize(let value):
-            return ((0...100) ~= value) ? "colorize:\(value)" : "colorize"
+            if let v = value where (0...100) ~= v {
+                return "colorize:\(value)"
+            }
+            return "colorize"
         case .Contrast(let value):
-            return ((-100...100) ~= value) ? "contrast:\(value)" : "contrast"
+            if let v = value where (-100...100) ~= v {
+                return "contrast:\(value)"
+            }
+            return "contrast"
         case .AutoContrast:
             return "auto_contrast"
         case .Vibrance(let value):
-            return ((-100...100) ~= value) ? "vibrance:\(value)" : "vibrance"
+            if let v = value where (-100...100) ~= v {
+                return "vibrance:\(value)"
+            }
+            return "vibrance"
         case .AutoColor:
             return "auto_color"
         case .Improve:
@@ -167,11 +182,17 @@ public enum Effect {
         case .AutoBrightness:
             return "auto_brightness"
         case .FillLight(let value):
-            return ((-100...100) ~= value) ? "fill_light:\(value)" : "fill_light"
+            if let v = value where (-100...100) ~= v {
+                return "fill_light:\(value)"
+            }
+            return "fill_light"
         case .ViesusCorrect:
             return "viesus_correct"
         case .Gamma(let value):
-            return ((-50...150) ~= value) ? "gamma:\(value)" : "gamma"
+            if let v = value where (-50...150) ~= v {
+                return "gamma:\(value)"
+            }
+            return "gamma"
         case .Screen:
             return "screen"
         case .Multiply:
@@ -181,9 +202,15 @@ public enum Effect {
         case .MakeTransparent:
             return "make_transparent"
         case .Trim(let value):
-            return ((0...100) ~= value) ? "trim:\(value)" : "trim"
+            if let v = value where (0...100) ~= v {
+                return "trim:\(value)"
+            }
+            return "trim"
         case .Shadow(let value):
-            return ((0...100) ~= value) ? "shadow:\(value)" : "shadow"
+            if let v = value where (0...100) ~= v {
+                return "shadow:\(value)"
+            }
+            return "shadow"
         case .Distort(let p0, let p1, let p2, let p3):
             return "distort:\(p0.0):\(p0.1):\(p1.0):\(p1.1):\(p2.0):\(p2.1):\(p3.0):\(p3.1)"
         case .Shear(let xAxis, let yAxis):
@@ -191,23 +218,44 @@ public enum Effect {
         case .Displace:
             return "displace"
         case .OilPaint(let value):
-            return ((0...100) ~= value) ? "oil_paint:\(value)" : "oil_paint"
+            if let v = value where (0...100) ~= v {
+                return "oil_paint:\(value)"
+            }
+            return "oil_paint"
         case .RedEye:
             return "redeye"
         case .AdvancedRedEye:
             return "adv_redeye"
         case .Vignette(let value):
-            return ((0...100) ~= value) ? "vignette:\(value)" : "vignette"
+            if let v = value where (0...100) ~= v {
+                return "vignette:\(value)"
+            }
+            return "vignette"
         case .GradientFade(let value):
-            return ((0...100) ~= value) ? "gradient_fade:\(value)" : "gradient_fade"
+            if let v = value where (0...100) ~= v {
+                return "gradient_fade:\(value)"
+            }
+            return "gradient_fade"
         case .Pixelate(let value):
-            return ((1...200) ~= value) ? "pixelate:\(value)" : "pixelate"
+            if let v = value where (1...200) ~= v {
+                return "pixelate:\(value)"
+            }
+            return "pixelate"
         case .PixelateFaces(let value):
-            return ((1...200) ~= value) ? "pixelate_faces:\(value)" : "pixelate_faces"
+            if let v = value where (1...200) ~= v {
+                return "pixelate_faces:\(value)"
+            }
+            return "pixelate_faces"
         case .Blur(let value):
-            return ((1...2000) ~= value) ? "blur:\(value)" : "blur"
+            if let v = value where (1...2000) ~= v {
+                return "blur:\(value)"
+            }
+            return "blur"
         case .BlurFaces(let value):
-            return ((1...2000) ~= value) ? "blur_faces:\(value)" : "blur_faces"
+            if let v = value where (1...2000) ~= v {
+                return "blur_faces:\(value)"
+            }
+            return "blur_faces"
         }
     }
 }
