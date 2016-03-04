@@ -59,7 +59,9 @@ class NetworkManager: HaloManager {
     
     private let session = NSURLSession.sharedSession()
     
-    private let responseCodes = [401, 403]
+    private let unauthorizedResponseCodes = [401, 403]
+    
+    private let errorResponseCodes = [404, 500]
     
     init() {}
     
@@ -98,17 +100,29 @@ class NetworkManager: HaloManager {
                 
                 if let resp = response as? NSHTTPURLResponse {
                     
-                    if self.responseCodes.contains(resp.statusCode) {
+                    if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                         self.cachedTasks.append(cachedTask)
                         self.refreshToken()
                         return
                     }
                     
-                    if let e = error {
+                    if resp.statusCode > 399 {
                         if numberOfRetries > 0 {
                             self.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1)
                         } else {
-                            handler?(resp, .Failure(e))
+                            var message : NSString
+                            
+                            do {
+                                var error = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as! [String : AnyObject]
+                                error = error["error"] as! [String : AnyObject]
+                                
+                                message = error["message"] as? String ?? "An error has occurred"
+                                
+                            } catch {
+                                message = "The content of the response is not a valid JSON"
+                            }
+                            
+                            handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
                         }
                     } else if let d = data {
                         handler?(resp, .Success(d, false))
@@ -116,7 +130,7 @@ class NetworkManager: HaloManager {
                         handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                     }
                 } else {
-                    NSLog("No response received from server")
+                    handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
                 }
             }.resume()
 
