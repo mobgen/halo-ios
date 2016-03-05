@@ -6,7 +6,7 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-public enum CropMode: String {
+public enum ImageCropMode: String {
     case Scale = "scale"
     case Fit = "fit"
     case Limit = "limit"
@@ -22,7 +22,7 @@ public enum CropMode: String {
     case AOIScale = "imagga_scale" // Scale using Area Of Interest
 }
 
-public enum GravityMode: String {
+public enum ImageGravityMode: String {
     case NorthWest = "north_west"
     case North = "north"
     case NorthEast = "north_east"
@@ -46,7 +46,7 @@ public enum GravityMode: String {
     case CustomAllFaces = "custom:adv_faces"
 }
 
-public enum Rotation {
+public enum ImageRotation {
     case AutoRight
     case AutoLeft
     case Ignore
@@ -72,7 +72,7 @@ public enum Rotation {
     }
 }
 
-public enum Effect {
+public enum ImageEffect {
     
     case Hue(Int?)
     case Red(Int?)
@@ -256,6 +256,36 @@ public enum Effect {
                 return "blur_faces:\(value)"
             }
             return "blur_faces"
+        case .Sharpen(let value):
+            if let v = value where (1...2000) ~= v {
+                return "sharpen:\(value)"
+            }
+            return "sharpen"
+        case .UnsharpMask(let value):
+            if let v = value where (1...2000) ~= v {
+                return "unsharp_mask:\(value)"
+            }
+            return "unsharp_mask"
         }
     }
+}
+
+public enum ImageFlag: String {
+    case KeepIptc = "keep_iptc"
+    case Attachment = "attachment"
+    case Relative = "relative"
+    case RegionRelative = "region_relative"
+    case Progressive = "progressive"
+    case Png8 = "png8"
+    case ForceStrip = "force_strip"
+    case Cutter = "cutter"
+    case Clip = "clip"
+    case AWebP = "awebp"
+    case LayerApply = "layer_apply"
+    case IgnoreAspectRatio = "ignore_aspect_ratio"
+    case Tiled = "tiled"
+    case Lossy = "lossy"
+    case StripProfile = "strip_profile"
+    case Rasterize = "rasterize"
+    case TextNoTrim = "text_no_trim"
 }
