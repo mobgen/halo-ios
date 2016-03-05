@@ -230,40 +230,78 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         }
     }
 
-    // MARK: NSURLSessionDelegate implementation
+    // MARK: SSL Pinning
 
-    @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    func evaluateServerTrust(serverTrust: SecTrust, isValidForHost host: String) -> Bool {
+        var serverTrustIsValid = false
 
-        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            let serverTrust: SecTrustRef = challenge.protectionSpace.serverTrust!
-            SecTrustEvaluate(serverTrust, nil)
+        let policy = SecPolicyCreateSSL(true, host as CFString)
+        SecTrustSetPolicies(serverTrust, [policy])
 
-            let credential = NSURLCredential(forTrust: serverTrust)
+        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle())
+        SecTrustSetAnchorCertificatesOnly(serverTrust, true)
 
-            if !self.enableSSLpinning {
-                completionHandler(.UseCredential, credential)
-                return
+        serverTrustIsValid = trustIsValid(serverTrust)
+
+        return serverTrustIsValid
+    }
+
+
+    private func certificatesInBundle(bundle: NSBundle = NSBundle.mainBundle()) -> [SecCertificate] {
+        var certificates: [SecCertificate] = []
+
+        let paths = Set([".cer", ".CER", ".crt", ".CRT", ".der", ".DER"].map { fileExtension in
+            bundle.pathsForResourcesOfType(fileExtension, inDirectory: nil)
+            }.flatten())
+
+        for path in paths {
+            if let
+                certificateData = NSData(contentsOfFile: path),
+                certificate = SecCertificateCreateWithData(nil, certificateData)
+            {
+                certificates.append(certificate)
             }
-
-            if let certPath = NSBundle(identifier: "com.mobgen.HaloSDK")?.pathForResource("halo", ofType: "cer") {
-                if let localCertData = NSData(contentsOfFile: certPath), remoteCert = SecTrustGetCertificateAtIndex(serverTrust, 0) {
-
-                    let remoteCertData = SecCertificateCopyData(remoteCert)
-
-                    if localCertData.isEqualToData(remoteCertData) {
-                        completionHandler(.UseCredential, credential)
-                    } else {
-                        completionHandler(.RejectProtectionSpace, nil);
-                    }
-
-                    return
-                }
-            }
-
-            completionHandler(.RejectProtectionSpace, nil);
-
         }
 
+        return certificates
+    }
+
+    private func trustIsValid(trust: SecTrust) -> Bool {
+        var isValid = false
+
+        var result = SecTrustResultType(kSecTrustResultInvalid)
+        let status = SecTrustEvaluate(trust, &result)
+
+        if status == errSecSuccess {
+            let unspecified = SecTrustResultType(kSecTrustResultUnspecified)
+            let proceed = SecTrustResultType(kSecTrustResultProceed)
+
+            isValid = result == unspecified || result == proceed
+        }
+        
+        return isValid
+    }
+
+    // MARK: NSURLSessionDelegate implementation
+
+    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+        var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
+        var credential: NSURLCredential?
+
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            let host = challenge.protectionSpace.host
+
+            if let serverTrust = challenge.protectionSpace.serverTrust {
+                if !self.enableSSLpinning || evaluateServerTrust(serverTrust, isValidForHost: host) {
+                    disposition = .UseCredential
+                    credential = NSURLCredential(forTrust: serverTrust)
+                } else {
+                    disposition = .CancelAuthenticationChallenge
+                }
+            }
+        }
+
+        completionHandler(disposition, credential)
     }
 
 }
