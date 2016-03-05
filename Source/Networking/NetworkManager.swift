@@ -233,17 +233,13 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     // MARK: SSL Pinning
 
     func evaluateServerTrust(serverTrust: SecTrust, isValidForHost host: String) -> Bool {
-        var serverTrustIsValid = false
-
         let policy = SecPolicyCreateSSL(true, host as CFString)
         SecTrustSetPolicies(serverTrust, [policy])
 
-        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle())
+        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle(NSBundle(identifier: "com.mobgen.HaloSDK")!))
         SecTrustSetAnchorCertificatesOnly(serverTrust, true)
 
-        serverTrustIsValid = trustIsValid(serverTrust)
-
-        return serverTrustIsValid
+        return trustIsValid(serverTrust)
     }
 
 
