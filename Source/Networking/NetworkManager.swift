@@ -26,7 +26,7 @@ public enum AuthenticationMode {
     case App, User
 }
 
-class NetworkManager: HaloManager {
+class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     var debug: Bool = false
 
@@ -53,17 +53,21 @@ class NetworkManager: HaloManager {
     
     private var isRefreshing = false
     
-    private var enableSSLpinning = false
+    private var enableSSLpinning = true
     
     private var cachedTasks = [CachedTask]()
     
-    private let session = NSURLSession.sharedSession()
+    private var session: NSURLSession!
     
     private let unauthorizedResponseCodes = [401, 403]
     
     private let errorResponseCodes = [404, 500]
     
-    init() {}
+    override init() {
+        super.init()
+        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+    }
     
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
@@ -76,7 +80,7 @@ class NetworkManager: HaloManager {
                 self.enableSSLpinning = !disable
             }
         }
-        
+
         handler?(true)
     }
     
@@ -224,6 +228,42 @@ class NetworkManager: HaloManager {
         } else {
             NSLog("No credentials found")
         }
+    }
+
+    // MARK: NSURLSessionDelegate implementation
+
+    @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            let serverTrust: SecTrustRef = challenge.protectionSpace.serverTrust!
+            SecTrustEvaluate(serverTrust, nil)
+
+            let credential = NSURLCredential(forTrust: serverTrust)
+
+            if !self.enableSSLpinning {
+                completionHandler(.UseCredential, credential)
+                return
+            }
+
+            if let certPath = NSBundle(identifier: "com.mobgen.HaloSDK")?.pathForResource("halo", ofType: "cer") {
+                if let localCertData = NSData(contentsOfFile: certPath), remoteCert = SecTrustGetCertificateAtIndex(serverTrust, 0) {
+
+                    let remoteCertData = SecCertificateCopyData(remoteCert)
+
+                    if localCertData.isEqualToData(remoteCertData) {
+                        completionHandler(.UseCredential, credential)
+                    } else {
+                        completionHandler(.RejectProtectionSpace, nil);
+                    }
+
+                    return
+                }
+            }
+
+            completionHandler(.RejectProtectionSpace, nil);
+
+        }
+
     }
 
 }
