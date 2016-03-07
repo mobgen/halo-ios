@@ -25,6 +25,16 @@ public enum HaloEnvironment {
     case Prod
     case Custom(String)
     
+    public init(rawValue: String) {
+        switch (rawValue.lowercaseString) {
+        case "int": self = .Int
+        case "qa": self = .QA
+        case "stage": self = .Stage
+        case "prod": self = .Prod
+        default: self = .Custom(rawValue)
+        }
+    }
+    
     var baseUrl: NSURL {
         switch self {
         case .Int:

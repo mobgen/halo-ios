@@ -132,11 +132,16 @@ public class ImageURL {
         return self
     }
 
-    public func backgroundColor(color: String) -> ImageURL {
+    public func backgroundColor(identifier color: String) -> ImageURL {
         params.append("b_\(color)")
         return self
     }
 
+    public func backgroundColor(rgb color: String) -> ImageURL {
+        params.append("b_\(color)")
+        return self
+    }
+    
     public func overlay(id: String) -> ImageURL {
         params.append("l_\(id)")
         return self
@@ -183,7 +188,7 @@ public class ImageURL {
     }
 
     public func dpi(dpi: Int) -> ImageURL {
-        params.append("dpi_\(dpi)")
+        params.append("dn_\(dpi)")
         return self
     }
 
