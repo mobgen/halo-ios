@@ -74,12 +74,27 @@ public struct GeneralContentManager: HaloManager {
         flags: GeneralContentFlag? = [],
         completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
            
-//            switch offlinePolicy! {
-//            case .None:
-//                self.net.generalContentInstances(instanceIds: instanceIds, flags: flags, completionHandler: handler)
-//            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-//                self.persistence.generalContentInstances(instanceIds: instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
-//            }
+            switch offlinePolicy! {
+            case .None:
+                let request = Manager.network.generalContentInstances(instanceIds: instanceIds, flags: flags)
+                
+                request.response(completionHandler: { (result) -> Void in
+                    switch result {
+                    case .Success(let data as [String : AnyObject], let cached):
+                        let items = data["items"] as! [[String : AnyObject]]
+                        handler?(.Success(items.map({ GeneralContentInstance($0) }), cached))
+                    case .Success(let data as [[String : AnyObject]], let cached):
+                        handler?(.Success(data.map({ GeneralContentInstance($0) }), cached))
+                    case .Failure(let error):
+                        handler?(.Failure(error))
+                    default:
+                        break
+                    }
+                })
+                
+            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
+                Manager.persistence.generalContentInstances(instanceIds: instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+            }
     }
     
     // MARK: Get a single instance
@@ -95,12 +110,23 @@ public struct GeneralContentManager: HaloManager {
         offlinePolicy: OfflinePolicy? = Manager.core.defaultOfflinePolicy,
         completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
         
-//            switch offlinePolicy! {
-//            case .None:
-//                self.net.generalContentInstance(instanceId, completionHandler: handler)
-//            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-//                self.persistence.generalContentInstance(instanceId, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
-//            }
+            switch offlinePolicy! {
+            case .None:
+                let request = Manager.network.generalContentInstance(instanceId)
+                
+                request.response(completionHandler: { (result) -> Void in
+                    switch result {
+                    case .Success(let data as [String : AnyObject], let cached):
+                        handler?(.Success(GeneralContentInstance(data), cached))
+                    case .Failure(let error):
+                        handler?(.Failure(error))
+                    default:
+                        break
+                    }
+                })
+            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
+                Manager.persistence.generalContentInstance(instanceId, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+            }
     }
 
 }

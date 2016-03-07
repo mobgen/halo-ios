@@ -29,6 +29,7 @@ public enum ImageGravityMode: String {
     case West = "west"
     case Center = "center"
     case East = "east"
+    case South = "south"
     case SouthWest = "south_west"
     case SouthEast = "south_east"
     case XYCenter = "xy_center"
