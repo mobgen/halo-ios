@@ -17,7 +17,7 @@ public struct GeneralContentManager: HaloManager {
     init() {}
 
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
-
+        // Nothing to be done here yet
     }
 
     // MARK: Get instances

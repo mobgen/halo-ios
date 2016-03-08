@@ -123,6 +123,11 @@ public class CoreManager: HaloManager {
         
         Manager.network.startup { (success) -> Void in
             
+            if (!success) {
+                handler?(false)
+                return
+            }
+            
             let bundle = NSBundle.mainBundle()
             
             if let path = bundle.pathForResource("Halo", ofType: "plist") {
