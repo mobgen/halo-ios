@@ -23,27 +23,50 @@ extension PersistenceManager {
                 return
             }
             
-//            Manager.network.generalContentInstances(moduleIds: moduleIds).response { (result) -> Void in
-//                switch result {
-//                case .Success(let instances, _):
-//                    //handler?(result)
-//                    
-//                    try! self.realm.write({ () -> Void in
-//                        
-//                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds))
-//                        
-////                        for instance in instances {
-////                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
-////                        }
-//                    })
-//                case .Failure(let error):
-//                    if error.code == -1009 {
-//                        self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
-//                    } else {
-//                        //handler?(result)
-//                    }
-//                }
-//            }
+            Manager.network.generalContentInstances(moduleIds: moduleIds).response { (result) -> Void in
+                switch result {
+                case .Success(let data as [[String : AnyObject]], _):
+                    
+                    let instances = data.map({ GeneralContentInstance($0) })
+                    
+                    handler?(.Success(instances, false))
+                    
+                    try! self.realm.write({ () -> Void in
+                        
+                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds))
+                        
+                        for instance in instances {
+                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+                        }
+                    })
+                case .Success(let data as [String : AnyObject], _):
+                    
+                    let items = data["items"] as! [[String : AnyObject]]
+                    
+                    let instances = items.map({ GeneralContentInstance($0) })
+                    
+                    handler?(.Success(instances, false))
+                    
+                    try! self.realm.write({ () -> Void in
+                        
+                        self.realm.delete(self.realm.objects(PersistentGeneralContentInstance).filter("moduleId IN %@", moduleIds))
+                        
+                        for instance in instances {
+                            self.realm.add(PersistentGeneralContentInstance(instance), update: true)
+                        }
+                    })
+                    
+                    break
+                case .Failure(let error):
+                    if error.code == -1009 {
+                        self.getInstancesLocalDataDontLoad(moduleIds, completionHandler: handler)
+                    } else {
+                        handler?(.Failure(error))
+                    }
+                default:
+                    break
+                }
+            }
             
     }
     
@@ -75,8 +98,8 @@ extension PersistenceManager {
 //        Manager.network.generalContentInstance(instanceId).response { (result) -> Void in
 //            switch result {
 //            case .Success(let instance, _):
-                //handler?(result)
-                
+//                handler?(result)
+//                
 //                try! self.realm.write({ () -> Void in
 //                    self.realm.add(PersistentGeneralContentInstance(instance), update: true)
 //                })

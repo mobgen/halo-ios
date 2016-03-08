@@ -19,6 +19,20 @@ class PersistenceManager: HaloManager {
         
     }
     
+    func setupRealm(environment: HaloEnvironment) {
+        var config = Realm.Configuration()
+        
+        // Use the default directory, but replace the filename with the environment name
+        config.path = NSURL.fileURLWithPath(config.path!)
+            .URLByDeletingLastPathComponent?
+            .URLByAppendingPathComponent("\(environment.description).realm")
+            .path
+        
+        // Set this as the configuration used for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
+    }
+    
 }
 
 //class PersistenceManager {
@@ -32,21 +46,7 @@ class PersistenceManager: HaloManager {
 //    private init() {
 //        
 //    }
-//    
-//    func setupRealm(environment: HaloEnvironment) {
-//        var config = Realm.Configuration()
-//        
-//        // Use the default directory, but replace the filename with the environment name
-//        config.path = NSURL.fileURLWithPath(config.path!)
-//            .URLByDeletingLastPathComponent?
-//            .URLByAppendingPathComponent("\(environment.rawValue).realm")
-//            .path
-//        
-//        // Set this as the configuration used for the default Realm
-//        Realm.Configuration.defaultConfiguration = config
-//        
-//    }
-//    
+//
 //    func clearDatabase() {
 //        try! self.realm.write { () -> Void in
 //            self.realm.deleteAll()
