@@ -48,7 +48,7 @@ public class GeneralContentInstance: NSObject {
         super.init()
     }
     
-    init(_ dict: [String: AnyObject]) {
+    public init(_ dict: [String: AnyObject]) {
         
         id = dict["id"] as? String
         moduleId = dict["module"] as? String

@@ -22,7 +22,7 @@ enum Router {
     case OAuth(Credentials, [String: AnyObject])
     case Modules
     case GeneralContentInstances([String: AnyObject])
-    case GeneralContentInstance(String, [String: AnyObject])
+    case GeneralContentInstance(String)
     case SegmentationGetUser(String)
     case SegmentationCreateUser([String: AnyObject])
     case SegmentationUpdateUser(String, [String: AnyObject])
@@ -57,7 +57,7 @@ enum Router {
             return "api/authentication/module/"
         case .GeneralContentInstances(_):
             return "api/authentication/instance/"
-        case .GeneralContentInstance(let id, _):
+        case .GeneralContentInstance(let id):
             return "api/generalcontent/instance/\(id)"
         case .SegmentationCreateUser(_):
             return "api/segmentation/appuser/"
@@ -110,7 +110,6 @@ enum Router {
         switch self {
         case .OAuth(_, let params): return params
         case .GeneralContentInstances(let params): return params
-        case .GeneralContentInstance(_, let params): return params
         case .SegmentationCreateUser(let params): return params
         case .SegmentationUpdateUser(_, let params): return params
         case .CustomRequest(_, _, let params): return params

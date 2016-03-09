@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 extension CoreManager {
  
@@ -17,31 +16,15 @@ extension CoreManager {
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      - parameter completionHandler:  Closure to be executed when the request has finished
      */
-    public func getModules(offlinePolicy: OfflinePolicy? = Manager.core.defaultOfflinePolicy,
-        completionHandler handler:((Halo.Result<[Halo.Module], NSError>) -> Void)?) -> Void {
+    public func getModules(offlinePolicy: OfflinePolicy? = nil) -> Halo.Request {
         
-        switch offlinePolicy! {
-        case .None:
-            let request = Manager.network.getModules()
+        let request = Halo.Request(router: Router.Modules)
             
-            request.response(completionHandler: { (result) -> Void in
-                switch result {
-                case .Success(let data as [String : AnyObject], let cached):
-                    let items = data["items"] as! [[String : AnyObject]]
-                    handler?(.Success(items.map({ Module($0) }), cached))
-                case .Success(let data as [[String : AnyObject]], let cached):
-                    handler?(.Success(data.map({ Module($0) }), cached))
-                case .Failure(let error):
-                    handler?(.Failure(error))
-                default:
-                    break
-                }
-            })
-            
-        case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-            // TODO: Change for the real call
-            Manager.persistence.getModules(fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+        if let offline = offlinePolicy {
+            return request.offlinePolicy(offline)
         }
+        
+        return request
     }
 
 }

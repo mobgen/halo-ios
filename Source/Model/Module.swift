@@ -47,7 +47,7 @@ public class Module: NSObject {
     
     - parameter dict:   Dictionary containing the information about the module
     */
-    init(_ dict: Dictionary<String,AnyObject>) {
+    public init(_ dict: [String:AnyObject]) {
         id = dict["id"] as? NSNumber
         name = dict["name"] as? String
         isSingle = dict["isSingle"] as? Bool ?? false

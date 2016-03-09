@@ -6,8 +6,6 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-import Foundation
-
 public class Request: CustomDebugStringConvertible {
 
     private var url: NSURL?
@@ -15,9 +13,9 @@ public class Request: CustomDebugStringConvertible {
     private var method: Halo.Method = .GET
     private var parameterEncoding: Halo.ParameterEncoding = .URL
     private var headers: [String: String] = [:]
-    internal var params: [String: AnyObject]? = [:]
+    internal var params: [String: AnyObject] = [:]
 
-    public var URLRequest: NSMutableURLRequest {
+    var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
         
         req.HTTPMethod = self.method.rawValue
@@ -31,30 +29,28 @@ public class Request: CustomDebugStringConvertible {
         }
         
         if self.include {
-            self.params!["include"] = true
+            self.params["include"] = true
         }
         
         switch self.parameterEncoding {
         case .URL:
             if let url = NSURLComponents(URL: self.url!, resolvingAgainstBaseURL: true) {
-                url.queryItems = self.params?.flatMap({ (key, value) -> NSURLQueryItem? in
+                url.queryItems = self.params.flatMap({ (key, value) -> NSURLQueryItem? in
                     return NSURLQueryItem(name: key, value: String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()))
                 })
                 req.URL = url.URL
             }
         case .JSON:
             req.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            if let params = self.params {
-                req.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
-            }
+            req.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
         case .FORM:
             req.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
 
-            let queryString = self.params?.flatMap({ (key, value) -> String? in
+            let queryString = self.params.flatMap({ (key, value) -> String? in
                 return "\(key)=\(String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)"
             }).joinWithSeparator("&")
 
-            req.HTTPBody = queryString?.dataUsingEncoding(NSUTF8StringEncoding)
+            req.HTTPBody = queryString.dataUsingEncoding(NSUTF8StringEncoding)
         }
         
         return req
@@ -74,9 +70,19 @@ public class Request: CustomDebugStringConvertible {
         self.method = router.method
         self.parameterEncoding = router.parameterEncoding
         self.headers = router.headers
-        self.params = router.params
+        
+        if let params = router.params {
+            let _ = params.map({ self.params[$0.0] = $0.1 })
+        }
     }
 
+    var offlineMode = Manager.core.defaultOfflinePolicy
+    
+    func offlinePolicy(policy: OfflinePolicy) -> Halo.Request {
+        self.offlineMode = policy
+        return self
+    }
+    
     public func method(method: Halo.Method) -> Halo.Request {
         self.method = method
         return self
@@ -100,7 +106,7 @@ public class Request: CustomDebugStringConvertible {
     }
 
     public func params(params: [String : AnyObject]) -> Halo.Request {
-        self.params = params
+        let _ = params.map { self.params[$0] = $1 }
         return self
     }
 
@@ -109,10 +115,32 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
 
+    public func paginate(page page: Int, limit: Int) -> Halo.Request {
+        self.params["page"] = page
+        self.params["limit"] = limit
+        return self
+    }
+    
+    public func getAll() -> Halo.Request {
+        self.params["skip"] = "true"
+        return self
+    }
+    
+    public func fields(fields: [String]) -> Halo.Request {
+        self.params["fields"] = fields
+        return self
+    }
+    
     public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
         
-        Manager.network.startRequest(request: self) { (resp, result) in
-            handler?(result)
+        switch self.offlineMode {
+        case .None:
+            Manager.network.startRequest(request: self) { (resp, result) in
+                handler?(result)
+            }
+            // TODO: Implement remaining offline modes
+        default:
+            break
         }
         
         return self

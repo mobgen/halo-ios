@@ -9,6 +9,18 @@
 import Foundation
 import RealmSwift
 
+public struct GeneralContentFlag : OptionSetType {
+    
+    public let rawValue: UInt
+    
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+    
+    public static let IncludeArchived = GeneralContentFlag(rawValue: 1)
+    public static let IncludeUnpublished = GeneralContentFlag(rawValue: 2)
+}
+
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
  */
@@ -31,33 +43,23 @@ public struct GeneralContentManager: HaloManager {
     */
     public func getInstances(moduleIds moduleIds: [String],
         offlinePolicy: OfflinePolicy? = nil,
-        populate: Bool = false,
-        flags: GeneralContentFlag = [],
-        completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
-
-            let offline = offlinePolicy ?? Manager.core.defaultOfflinePolicy
+        flags: GeneralContentFlag? = nil) -> Halo.Request {
+        
+            var params: [String : AnyObject] = ["module": moduleIds]
             
-            switch offline {
-            case .None:
-                let request = Manager.network.generalContentInstances(moduleIds: moduleIds, flags: flags)
-                
-                request.response(completionHandler: { (result) -> Void in
-                    switch result {
-                    case .Success(let data as [String : AnyObject], let cached):
-                        let items = data["items"] as! [[String : AnyObject]]
-                        handler?(.Success(items.map({ GeneralContentInstance($0) }), cached))
-                    case .Success(let data as [[String : AnyObject]], let cached):
-                        handler?(.Success(data.map({ GeneralContentInstance($0) }), cached))
-                    case .Failure(let error):
-                        handler?(.Failure(error))
-                    default:
-                        break
-                    }
-                })
-    
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                Manager.persistence.generalContentInstances(moduleIds: moduleIds, flags: flags, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), populate: populate, completionHandler: handler)
+            if let f = flags {
+                if !f.contains(GeneralContentFlag.IncludeArchived) {
+                    params["archived"] = "false"
+                }
             }
+            
+            let request = Halo.Request(router: Router.GeneralContentInstances(params))
+            
+            if let offline = offlinePolicy {
+                return request.offlinePolicy(offline)
+            }
+                        
+            return request
     }
 
     // MARK: Get instances by array of ids
@@ -70,31 +72,24 @@ public struct GeneralContentManager: HaloManager {
      - parameter handler:       Closure to be executed after the completion of the request
      */
     public func getInstances(instanceIds instanceIds: [String],
-        offlinePolicy: OfflinePolicy? = Manager.core.defaultOfflinePolicy,
-        flags: GeneralContentFlag? = [],
-        completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+        offlinePolicy: OfflinePolicy? = nil,
+        flags: GeneralContentFlag? = nil) -> Halo.Request {
            
-            switch offlinePolicy! {
-            case .None:
-                let request = Manager.network.generalContentInstances(instanceIds: instanceIds, flags: flags)
-                
-                request.response(completionHandler: { (result) -> Void in
-                    switch result {
-                    case .Success(let data as [String : AnyObject], let cached):
-                        let items = data["items"] as! [[String : AnyObject]]
-                        handler?(.Success(items.map({ GeneralContentInstance($0) }), cached))
-                    case .Success(let data as [[String : AnyObject]], let cached):
-                        handler?(.Success(data.map({ GeneralContentInstance($0) }), cached))
-                    case .Failure(let error):
-                        handler?(.Failure(error))
-                    default:
-                        break
-                    }
-                })
-                
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                Manager.persistence.generalContentInstances(instanceIds: instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+            var params: [String : AnyObject] = ["id": instanceIds]
+            
+            if let f = flags {
+                if !f.contains(GeneralContentFlag.IncludeArchived) {
+                    params["archived"] = "false"
+                }
             }
+            
+            let request = Halo.Request(router: Router.GeneralContentInstances(params))
+            
+            if let offline = offlinePolicy {
+                return request.offlinePolicy(offline)
+            }
+            
+            return request
     }
     
     // MARK: Get a single instance
@@ -107,26 +102,15 @@ public struct GeneralContentManager: HaloManager {
     - parameter handler:        Closure to be executed after the completion of the request
     */
     public func getSingleInstance(instanceId instanceId: String,
-        offlinePolicy: OfflinePolicy? = Manager.core.defaultOfflinePolicy,
-        completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
-        
-            switch offlinePolicy! {
-            case .None:
-                let request = Manager.network.generalContentInstance(instanceId)
-                
-                request.response(completionHandler: { (result) -> Void in
-                    switch result {
-                    case .Success(let data as [String : AnyObject], let cached):
-                        handler?(.Success(GeneralContentInstance(data), cached))
-                    case .Failure(let error):
-                        handler?(.Failure(error))
-                    default:
-                        break
-                    }
-                })
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                Manager.persistence.generalContentInstance(instanceId, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+        offlinePolicy: OfflinePolicy? = nil) -> Halo.Request {
+            
+            let request = Halo.Request(router: Router.GeneralContentInstance(instanceId))
+            
+            if let offline = offlinePolicy {
+                return request.offlinePolicy(offline)
             }
+            
+            return request
     }
 
 }
