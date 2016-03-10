@@ -115,10 +115,6 @@ public class CoreManager: HaloManager {
         self.completionHandler = handler
         Router.token = nil
         
-        if let cred = self.credentials {
-            NSLog("Using credentials: \(cred.username) / \(cred.password)")
-        }
-        
         self.user = Halo.User.loadUser(self.environment)
         
         Manager.network.startup { (success) -> Void in
@@ -163,7 +159,11 @@ public class CoreManager: HaloManager {
                 NSLog("No .plist found")
             }
             
-            if let user = self.user {
+            if let cred = self.credentials {
+                NSLog("Using credentials: \(cred.username) / \(cred.password)")
+            }
+            
+            if let user = self.user, _ = user.id {
                 // Update the user
                 Manager.network.getUser(user) { (result) -> Void in
                     switch result {
@@ -184,10 +184,7 @@ public class CoreManager: HaloManager {
                 
             } else {
                 self.user = Halo.User()
-                
-                if let user = self.user {
-                    self.delegate?.managerWillSetupUser(user)
-                }
+                self.delegate?.managerWillSetupUser(self.user!)
                 
                 if self.enablePush {
                     self.configurePush()
@@ -289,11 +286,9 @@ public class CoreManager: HaloManager {
      - parameter deviceToken: Device token returned after registering for push notifications
      */
     private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
-        
         self.gcmManager.setupPushNotifications(deviceToken) { () -> Void in
             self.setupDefaultSystemTags()
         }
-        
     }
 
     /**
@@ -303,6 +298,7 @@ public class CoreManager: HaloManager {
      - parameter deviceToken: Token obtained for the current device
      */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        NSLog("Successfully registered for remote notifications")
         self.setupPushNotifications(application: application, deviceToken: deviceToken)
     }
 
@@ -313,6 +309,7 @@ public class CoreManager: HaloManager {
      - parameter error:       Error thrown during the process
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
         self.setupDefaultSystemTags()
     }
 

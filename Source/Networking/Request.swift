@@ -132,7 +132,10 @@ public class Request: CustomDebugStringConvertible {
     }
     
     public func tags(tags: [Halo.Tag]) -> Halo.Request {
-        
+        let _ = tags.map({ tag in
+            let json = try! NSJSONSerialization.dataWithJSONObject(tag.toDictionary(), options: [])
+            self.params["filter[tags][]"] = String(data: json, encoding: NSUTF8StringEncoding)
+        })
         return self
     }
     

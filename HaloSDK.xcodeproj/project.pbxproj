@@ -161,6 +161,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0047913B1C9179F000C24741 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 006A5FAC1B318CAC0045395A;
+			remoteInfo = Halo;
+		};
 		005BF7B31BD61A66002CE33A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 006A5F831B318C6E0045395A /* Project object */;
@@ -968,6 +975,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0047913C1C9179F000C24741 /* PBXTargetDependency */,
 			);
 			name = HaloObjC;
 			productName = HaloObjC;
@@ -1240,6 +1248,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0047913C1C9179F000C24741 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 006A5FAC1B318CAC0045395A /* Halo */;
+			targetProxy = 0047913B1C9179F000C24741 /* PBXContainerItemProxy */;
+		};
 		005BF7B41BD61A66002CE33A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 004FEC781BD0DCE8004216EE /* HaloResources */;
@@ -1256,6 +1269,7 @@
 		004790FF1C915C6C00C24741 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1272,7 +1286,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1280,6 +1293,7 @@
 		004791001C915C6C00C24741 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -1295,7 +1309,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -1377,7 +1390,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Halo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
@@ -1425,7 +1437,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Halo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
@@ -1437,6 +1448,7 @@
 		006A5FC11B318CAC0045395A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -1465,6 +1477,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Halo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1472,6 +1485,7 @@
 		006A5FC21B318CAC0045395A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEFINES_MODULE = YES;
@@ -1498,6 +1512,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Halo-Bridging-Header.h";
 			};
 			name = Release;
 		};
