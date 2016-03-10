@@ -131,6 +131,11 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
+    public func tags(tags: [Halo.Tag]) -> Halo.Request {
+        
+        return self
+    }
+    
     public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
         
         switch self.offlineMode {
