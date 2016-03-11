@@ -33,21 +33,35 @@ public class Request: CustomDebugStringConvertible {
             self.params["include"] = true
         }
         
+        // Transform parameters
+        let newParams = self.params.reduce([:]) { (var dict, value) -> [String: AnyObject] in
+            switch value.1 {
+            case let arr as NSArray:
+                let _ = arr.map({ (v) -> Void in
+                    dict["\(value.0)[]"] = v
+                })
+            default:
+                dict[value.0] = value.1
+            }
+            return dict
+        }
+        
         switch self.parameterEncoding {
         case .URL:
+            
             if let url = NSURLComponents(URL: self.url!, resolvingAgainstBaseURL: true) {
-                url.queryItems = self.params.flatMap({ (key, value) -> NSURLQueryItem? in
+                url.queryItems = newParams.flatMap({ (key, value) -> NSURLQueryItem? in
                     return NSURLQueryItem(name: key, value: String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()))
                 })
                 req.URL = url.URL
             }
         case .JSON:
             req.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            req.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+            req.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(self.params, options: [])
         case .FORM:
             req.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
 
-            let queryString = self.params.flatMap({ (key, value) -> String? in
+            let queryString = newParams.flatMap({ (key, value) -> String? in
                 return "\(key)=\(String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)"
             }).joinWithSeparator("&")
 
