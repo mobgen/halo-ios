@@ -6,7 +6,7 @@
 //  Copyright © 2015 MOBGEN Technology. All rights reserved.
 //
 
-public enum ParameterEncoding: Int {
+public enum ParameterEncoding {
     case JSON, URL, FORM
 }
 

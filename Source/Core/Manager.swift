@@ -74,9 +74,7 @@ public enum HaloEnvironment {
 }
 
 public enum OfflinePolicy {
-    case None
-    case LoadAndStoreLocalData
-    case ReturnLocalDataDontLoad
+    case None, LoadAndStoreLocalData, ReturnLocalDataDontLoad
 }
 
 protocol HaloManager {

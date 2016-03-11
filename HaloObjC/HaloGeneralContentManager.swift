@@ -6,7 +6,6 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-@objc
 public class HaloGeneralContentManager: NSObject {
  
     static let sharedInstance = HaloGeneralContentManager()

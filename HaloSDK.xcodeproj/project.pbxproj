@@ -67,6 +67,7 @@
 		004FECA41BD0DCF6004216EE /* tethys.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B911BBBD2CE00B79B50 /* tethys.aiff */; };
 		004FECA51BD0DCF6004216EE /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B921BBBD2CE00B79B50 /* upsilon.aiff */; };
 		004FECA61BD0DCF6004216EE /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00921B931BBBD2CE00B79B50 /* voila.aiff */; };
+		005034B21C92B11300362A8F /* HaloRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005034B11C92B11300362A8F /* HaloRequest.swift */; };
 		0053907E1B8C620B0036F579 /* oauth_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0053907D1B8C620B0036F579 /* oauth_success.json */; };
 		005390821B8C655C0036F579 /* oauth_failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 005390811B8C655C0036F579 /* oauth_failure.json */; };
 		005390841B8C67B80036F579 /* module_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 005390831B8C67B80036F579 /* module_list_success.json */; };
@@ -223,6 +224,7 @@
 		004FEC701BCFB788004216EE /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		004FEC711BCFB788004216EE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		004FEC791BD0DCE8004216EE /* HaloResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		005034B11C92B11300362A8F /* HaloRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloRequest.swift; sourceTree = "<group>"; };
 		0053907D1B8C620B0036F579 /* oauth_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oauth_success.json; sourceTree = "<group>"; };
 		005390811B8C655C0036F579 /* oauth_failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oauth_failure.json; sourceTree = "<group>"; };
 		005390831B8C67B80036F579 /* module_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = module_list_success.json; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				004791021C915CD100C24741 /* HaloManager.swift */,
 				004791041C915D1100C24741 /* HaloCoreManager.swift */,
 				004791061C915D4A00C24741 /* HaloGeneralContentManager.swift */,
+				005034B11C92B11300362A8F /* HaloRequest.swift */,
 			);
 			name = ObjC;
 			path = HaloObjC;
@@ -1182,6 +1185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				004791051C915D1100C24741 /* HaloCoreManager.swift in Sources */,
+				005034B21C92B11300362A8F /* HaloRequest.swift in Sources */,
 				004791071C915D4A00C24741 /* HaloGeneralContentManager.swift in Sources */,
 				004791031C915CD100C24741 /* HaloManager.swift in Sources */,
 			);
@@ -1552,6 +1556,7 @@
 				004791001C915C6C00C24741 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		004FEC7E1BD0DCE8004216EE /* Build configuration list for PBXNativeTarget "HaloResources" */ = {
 			isa = XCConfigurationList;

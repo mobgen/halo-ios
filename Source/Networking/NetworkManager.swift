@@ -35,13 +35,11 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
             Router.token = nil
         }
     }
-
+    
     var credentials: Credentials? {
-        get {
-            switch self.authenticationMode {
-            case .App: return self.appCredentials
-            case .User: return self.userCredentials
-            }
+        switch self.authenticationMode {
+        case .App: return self.appCredentials
+        case .User: return self.userCredentials
         }
     }
 
@@ -108,6 +106,10 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                         self.cachedTasks.append(cachedTask)
                         self.refreshToken()
                         return
+                    }
+                    
+                    if self.debug {
+                        NSLog("\(resp)")
                     }
                     
                     if resp.statusCode > 399 {

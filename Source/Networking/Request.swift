@@ -13,7 +13,8 @@ public class Request: CustomDebugStringConvertible {
     private var method: Halo.Method = .GET
     private var parameterEncoding: Halo.ParameterEncoding = .URL
     private var headers: [String: String] = [:]
-    internal var params: [String: AnyObject] = [:]
+    private var offlineMode = Manager.core.defaultOfflinePolicy
+    private var params: [String: AnyObject] = [:]
 
     var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
@@ -76,9 +77,7 @@ public class Request: CustomDebugStringConvertible {
         }
     }
 
-    var offlineMode = Manager.core.defaultOfflinePolicy
-    
-    func offlinePolicy(policy: OfflinePolicy) -> Halo.Request {
+    public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request {
         self.offlineMode = policy
         return self
     }
