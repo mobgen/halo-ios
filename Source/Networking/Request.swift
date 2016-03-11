@@ -138,16 +138,21 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
+    func hash() -> Int {
+        return URLRequest.hash
+    }
+    
     public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
         
         switch self.offlineMode {
         case .None:
             Manager.network.startRequest(request: self) { (resp, result) in
-                handler?(result)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    handler?(result)
+                })
             }
-            // TODO: Implement remaining offline modes
-        default:
-            break
+        case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
+            Manager.persistence.startRequest(request: self, useNetwork: (self.offlineMode == .LoadAndStoreLocalData), completionHandler: handler)
         }
         
         return self

@@ -117,6 +117,8 @@ public class CoreManager: HaloManager {
         
         self.user = Halo.User.loadUser(self.environment)
         
+        Manager.persistence.startup()
+        
         Manager.network.startup { (success) -> Void in
             
             if (!success) {
