@@ -6,10 +6,6 @@
 //  Copyright © 2015 MOBGEN Technology. All rights reserved.
 //
 
-public enum ParameterEncoding {
-    case JSON, URL, FORM
-}
-
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
 enum Router {
 
@@ -92,7 +88,7 @@ enum Router {
     var parameterEncoding: Halo.ParameterEncoding {
         switch self {
         case .OAuth(_, _):
-            return .FORM
+            return .URL
         case .SegmentationCreateUser(_), .SegmentationUpdateUser(_, _):
             return .JSON
         case .CustomRequest(let method, _, _):

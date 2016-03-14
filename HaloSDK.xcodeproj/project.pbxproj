@@ -13,6 +13,7 @@
 		0024964D1C00892C00F6F734 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; };
 		0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; };
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
+		003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B75F71C969E9800F05202 /* ParameterEncoding.swift */; };
 		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		004790FC1C915C6C00C24741 /* HaloObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 004790FB1C915C6C00C24741 /* HaloObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -203,6 +204,7 @@
 		0024964B1C00892C00F6F734 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		0024964C1C00892C00F6F734 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
+		003B75F71C969E9800F05202 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		004790F91C915C6C00C24741 /* HaloObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -558,6 +560,7 @@
 				0094A31F1B70A6A600DED864 /* NetworkManager.swift */,
 				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
 				000826FE1B6A34DE001E8248 /* Router.swift */,
+				003B75F71C969E9800F05202 /* ParameterEncoding.swift */,
 			);
 			name = Networking;
 			path = Source/Networking;
@@ -1195,6 +1198,7 @@
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
 				005034B41C92BEE900362A8F /* PersistentRequest.swift in Sources */,
 				0090DFD11C89E08200BAF181 /* ImageURLOptions.swift in Sources */,
+				003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				00E043D11C849CA8008270DE /* GCMManager.swift in Sources */,
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,

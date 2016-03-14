@@ -14,8 +14,3 @@ public enum Result<Value, Error: ErrorType> {
     case Failure(Error)
 
 }
-
-public enum Method: String {
-    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
-}
-

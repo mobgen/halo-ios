@@ -16,10 +16,6 @@ import Halo
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
 }
 
-@objc public enum HaloParameterEncoding: Int {
-    case JSON, URL, FORM
-}
-
 public class HaloRequest: NSObject {
     
     private var request: Halo.Request?

@@ -33,42 +33,9 @@ public class Request: CustomDebugStringConvertible {
             self.params["include"] = true
         }
         
-        // Transform parameters
-        let newParams = self.params.reduce([:]) { (var dict, value) -> [String: AnyObject] in
-            switch value.1 {
-            case let arr as NSArray:
-                let _ = arr.map({ (v) -> Void in
-                    dict["\(value.0)[]"] = v
-                })
-            default:
-                dict[value.0] = value.1
-            }
-            return dict
-        }
+        let (request, _) = self.parameterEncoding.encode(req, parameters: self.params)
         
-        switch self.parameterEncoding {
-        case .URL:
-            
-            if let url = NSURLComponents(URL: self.url!, resolvingAgainstBaseURL: true) {
-                url.queryItems = newParams.flatMap({ (key, value) -> NSURLQueryItem? in
-                    return NSURLQueryItem(name: key, value: String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()))
-                })
-                req.URL = url.URL
-            }
-        case .JSON:
-            req.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            req.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(self.params, options: [])
-        case .FORM:
-            req.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-
-            let queryString = newParams.flatMap({ (key, value) -> String? in
-                return "\(key)=\(String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)"
-            }).joinWithSeparator("&")
-
-            req.HTTPBody = queryString.dataUsingEncoding(NSUTF8StringEncoding)
-        }
-        
-        return req
+        return request
         
     }
 
