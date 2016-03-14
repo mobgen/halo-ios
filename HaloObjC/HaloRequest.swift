@@ -16,6 +16,10 @@ import Halo
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
 }
 
+@objc public enum HaloParameterEncoding: Int {
+    case URL, URLEncodedInURL, JSON
+}
+
 public class HaloRequest: NSObject {
     
     private var request: Halo.Request?
@@ -64,9 +68,9 @@ public class HaloRequest: NSObject {
         let newEncoding: Halo.ParameterEncoding
         
         switch encoding {
-        case .FORM: newEncoding = .FORM
         case .JSON: newEncoding = .JSON
         case .URL: newEncoding = .URL
+        case .URLEncodedInURL: newEncoding = .URLEncodedInURL
         }
         
         request?.parameterEncoding(newEncoding)
