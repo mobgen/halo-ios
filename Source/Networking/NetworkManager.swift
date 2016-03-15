@@ -108,10 +108,6 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                         return
                     }
                     
-                    if self.debug {
-                        NSLog("\(resp)")
-                    }
-                    
                     if resp.statusCode > 399 {
                         if numberOfRetries > 0 {
                             self.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1)

@@ -9,36 +9,6 @@
 import Foundation
 import UIKit
 
-/// Delegate to be implemented to handle push notifications easily
-public protocol PushDelegate {
-    /**
-    This handler will be called when any push notification is received (silent or not)
-
-    - parameter application:       Application receiving the push notification
-    - parameter userInfo:          Dictionary containing information about the push notification
-    - parameter completionHandler: Closure to be called after completion
-    */
-    func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-
-    /**
-    This handler will be called when a silent push notification is received
-
-    - parameter application:       Application receiving the silent push notification
-    - parameter userInfo:          Dictionary containing information about the push notification
-    - parameter completionHandler: Closure to be called after completion
-    */
-    func haloApplication(application: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-    
-    /**
-     This handler will be called when a push notification is received
-     
-     - parameter application:       Application receiving the silent push notification
-     - parameter userInfo:          Dictionary containing information about the push notification
-     - parameter completionHandler: Closure to be called after completion
-     */
-    func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-}
-
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     

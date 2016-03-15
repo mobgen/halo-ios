@@ -23,6 +23,36 @@ public protocol ManagerDelegate {
     
 }
 
+/// Delegate to be implemented to handle push notifications easily
+public protocol PushDelegate {
+    /**
+     This handler will be called when any push notification is received (silent or not)
+     
+     - parameter application:       Application receiving the push notification
+     - parameter userInfo:          Dictionary containing information about the push notification
+     - parameter completionHandler: Closure to be called after completion
+     */
+    func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    
+    /**
+     This handler will be called when a silent push notification is received
+     
+     - parameter application:       Application receiving the silent push notification
+     - parameter userInfo:          Dictionary containing information about the push notification
+     - parameter completionHandler: Closure to be called after completion
+     */
+    func haloApplication(application: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    
+    /**
+     This handler will be called when a push notification is received
+     
+     - parameter application:       Application receiving the silent push notification
+     - parameter userInfo:          Dictionary containing information about the push notification
+     - parameter completionHandler: Closure to be called after completion
+     */
+    func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+}
+
 public class CoreManager: HaloManager {
     
     /// Delegate that will handle launching completion and other important steps in the flow
@@ -280,6 +310,12 @@ public class CoreManager: HaloManager {
         }
     }
 
+    public func saveUser(completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
+        if let user = self.user {
+            Manager.network.createUpdateUser(user, completionHandler: handler)
+        }
+    }
+    
     /**
      Set up the desired push notifications to be received. To be called after the device has been
      registered
