@@ -324,7 +324,7 @@ public class CoreManager: HaloManager {
         // This works only if the app started the GCM service
         GCMService.sharedInstance().appDidReceiveMessage(userInfo);
         
-        self.pushDelegate?.haloApplication?(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        self.pushDelegate?.haloApplication(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
         
         if let silent = userInfo["content_available"] as? Int {
             if silent == 1 {

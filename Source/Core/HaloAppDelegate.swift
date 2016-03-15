@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 /// Delegate to be implemented to handle push notifications easily
-@objc(HaloPushDelegate)
 public protocol PushDelegate {
     /**
     This handler will be called when any push notification is received (silent or not)
@@ -19,7 +18,7 @@ public protocol PushDelegate {
     - parameter userInfo:          Dictionary containing information about the push notification
     - parameter completionHandler: Closure to be called after completion
     */
-    optional func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 
     /**
     This handler will be called when a silent push notification is received
