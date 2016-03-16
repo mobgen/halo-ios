@@ -12,6 +12,7 @@ import CoreBluetooth
 This delegate will provide methods that will act as interception points in the setup process of the SDK
 within the application
 */
+@objc(HaloManagerDelegate)
 public protocol ManagerDelegate {
     
     /**
@@ -24,6 +25,7 @@ public protocol ManagerDelegate {
 }
 
 /// Delegate to be implemented to handle push notifications easily
+@objc(HaloPushDelegate)
 public protocol PushDelegate {
     /**
      This handler will be called when any push notification is received (silent or not)
