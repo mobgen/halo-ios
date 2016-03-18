@@ -53,7 +53,7 @@ public enum ImageRotation {
     case Ignore
     case VerticalFlip
     case HorizontalFlip
-    case Custom(Int)
+    case Custom(Float)
     
     public var rawValue: String {
         switch self {

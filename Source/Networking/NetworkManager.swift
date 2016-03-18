@@ -148,7 +148,7 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     /**
      Obtain/refresh an authentication token when needed
      */
-    private func refreshToken(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    func refreshToken(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         
         self.isRefreshing = true
         var params: [String : AnyObject]

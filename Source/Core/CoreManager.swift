@@ -121,6 +121,10 @@ public class CoreManager: HaloManager {
         }
     }
     
+    public var frameworkVersion: String {
+        return NSBundle(identifier: "com.mobgen.HaloSDK")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+    }
+    
     /// Variable to decide whether to enable push notifications or not
     public var enablePush: Bool = false
     
@@ -195,6 +199,10 @@ public class CoreManager: HaloManager {
             
             if let cred = self.credentials {
                 NSLog("Using credentials: \(cred.username) / \(cred.password)")
+            }
+            
+            self.needsUpdate { (needs) -> Void in
+                
             }
             
             if let user = self.user, _ = user.id {
@@ -415,6 +423,26 @@ public class CoreManager: HaloManager {
         if self.enablePush {
             GCMService.sharedInstance().disconnect()
         }
+    }
+    
+    private func needsUpdate(completionHandler handler: (Bool) -> Void) -> Void {
+        
+        Request(path: "/api/authentication/version").params(["current": "true"]).response { result in
+            switch result {
+            case .Success(let data as [[String: AnyObject]], _):
+                if let info = data.first, minIOS = info["minIOS"] {
+                    if minIOS.compare(self.frameworkVersion, options: .NumericSearch) == .OrderedDescending {
+                        let changelog = info["iosChangeLog"] as! String
+                        NSLog("\n-------------------\nThe version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)\n-------------------")
+                    }
+                }
+            case .Failure(_):
+                handler(false)
+            default:
+                break
+            }
+        }
+        
     }
     
 }

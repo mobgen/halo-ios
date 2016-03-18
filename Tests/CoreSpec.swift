@@ -12,86 +12,88 @@ import OHHTTPStubs
 @testable import Halo
 
 class CoreSpec: QuickSpec {
-
+    
     override func spec() {
-
+        
         // Swift
         OHHTTPStubs.onStubActivation() { request, stub in
             NSLog("\(request.URL!) stubbed by \(stub.name).")
         }
         
-        let mgr = Halo.Manager.sharedInstance
-
+        let mgr = Halo.Manager.core
+        
         beforeSuite {
-            mgr.credentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+            mgr.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
             mgr.environment = .Stage
         }
-
+        
         afterSuite {
             NSLog("After suite")
             OHHTTPStubs.removeAllStubs()
         }
-
+        
         describe("The core manager") {
             it("has been initialised properly") {
                 expect(mgr).toNot(beNil())
             }
         }
-
+        
         describe("The oauth process") {
-
+            
             beforeEach {
                 Router.token = nil
             }
-
+            
             context("with the right credentials") {
-
+                
                 beforeEach {
                     OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/oauth/token"
                         }, withStubResponse: { _ in
                             let fixture = OHPathForFile("oauth_success.json", self.dynamicType)
                             return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     })
-
+                    
                     waitUntil { done in
-                        mgr.net.refreshToken { (req, resp, res) -> Void in
+                        Halo.Manager.network.refreshToken { (response, result) in
                             done()
                         }
                     }
+                    
+                    it("succeeds") {
+                        expect(Router.token).toNot(beNil())
+                    }
+                    
+                    it("retrieves a valid token") {
+                        expect(Router.token?.isValid()).to(beTrue())
+                        expect(Router.token?.isExpired()).to(beFalse())
+                    }
+                    
                 }
-
-                it("succeeds") {
-                    expect(Router.token).toNot(beNil())
-                }
-
-                it("retrieves a valid token") {
-                    expect(Router.token?.isValid()).to(beTrue())
-                    expect(Router.token?.isExpired()).to(beFalse())
-                }
-
-            }
-
-            context("with the wrong credentials") {
-
-                beforeEach {
-                    OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/oauth/token"
-                        }, withStubResponse: { _ in
-                            let fixture = OHPathForFile("oauth_failure.json", self.dynamicType)
-                            return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 401, headers: ["Content-Type": "application/json"])
-                    })
-
-                    waitUntil { done in
-                        mgr.net.refreshToken { (req, resp, res) -> Void in
-                            done()
+                
+                context("with the wrong credentials") {
+                    
+                    beforeEach {
+                        OHHTTPStubs.stubRequestsPassingTest({ $0.URL!.path! == "/api/oauth/token"
+                            }, withStubResponse: { _ in
+                                let fixture = OHPathForFile("oauth_failure.json", self.dynamicType)
+                                return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 401, headers: ["Content-Type": "application/json"])
+                        })
+                        
+                        waitUntil { done in
+                            Halo.Manager.network.refreshToken { (response, result) in
+                                done()
+                            }
                         }
                     }
-                }
-
-                it("fails") {
-                    expect(Router.token).to(beNil())
+                    
+                    it("fails") {
+                        expect(Router.token).to(beNil())
+                    }
                 }
             }
         }
+    }
+}
 
 //        describe("A full request cycle") {
 //            
@@ -181,6 +183,5 @@ class CoreSpec: QuickSpec {
 //            
 //        }
 //
-    }
-    
-}
+//  }
+//}
