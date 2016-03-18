@@ -128,6 +128,9 @@ public class CoreManager: HaloManager {
     /// Variable to decide whether to enable push notifications or not
     public var enablePush: Bool = false
     
+    /// Variable to decide whether to enable system tags or not
+    public var enableSystemTags: Bool = false
+    
     /// Instance holding all the user-related information
     public var user: User?
 
@@ -192,6 +195,8 @@ public class CoreManager: HaloManager {
                     }
                     
                     self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
+                    
+                    self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
                 }
             } else {
                 NSLog("No .plist found")
@@ -215,12 +220,18 @@ public class CoreManager: HaloManager {
                         if self.enablePush {
                             self.configurePush()
                             
-                        } else {
+                        } else if self.enableSystemTags {
                             self.setupDefaultSystemTags()
+                        } else {
+                            self.setupUser()
                         }
                     case .Failure(let error):
                         NSLog("Error: \(error.localizedDescription)")
-                        self.setupDefaultSystemTags()
+                        if self.enableSystemTags {
+                            self.setupDefaultSystemTags()
+                        } else {
+                            self.setupUser()
+                        }
                     }
                 }
                 
@@ -230,8 +241,10 @@ public class CoreManager: HaloManager {
                 
                 if self.enablePush {
                     self.configurePush()
-                } else {
+                } else if self.enableSystemTags {
                     self.setupDefaultSystemTags()
+                } else {
+                    self.setupUser()
                 }
             }
         }
@@ -298,6 +311,13 @@ public class CoreManager: HaloManager {
                 break
             }
                         
+            self.setupUser()
+        }
+    }
+
+    private func setupUser() -> Void {
+        
+        if let user = self.user {
             NSLog(user.description)
             self.user?.storeUser(self.environment)
             
@@ -317,9 +337,11 @@ public class CoreManager: HaloManager {
                 
                 self.completionHandler?(success)
             })
+        } else {
+            self.completionHandler?(false)
         }
     }
-
+    
     public func saveUser(completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
         if let user = self.user {
             Manager.network.createUpdateUser(user, completionHandler: handler)

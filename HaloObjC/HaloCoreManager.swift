@@ -90,6 +90,16 @@ public class HaloCoreManager: NSObject {
         }
     }
     
+    /// Variable to decide whether to enable system tags or not
+    public var enableSystemTags: Bool {
+        get {
+            return core.enableSystemTags
+        }
+        set {
+            core.enableSystemTags = newValue
+        }
+    }
+    
     /// Instance holding all the user-related information
     public var user: User? {
         get {
