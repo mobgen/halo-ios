@@ -70,10 +70,9 @@ public enum HaloEnvironment {
             return self.baseUrl.absoluteString
         }
     }
-
 }
 
-public enum OfflinePolicy {
+@objc public enum OfflinePolicy: Int {
     case None, LoadAndStoreLocalData, ReturnLocalDataDontLoad
 }
 

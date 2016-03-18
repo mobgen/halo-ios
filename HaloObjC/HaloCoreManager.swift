@@ -136,4 +136,9 @@ public class HaloCoreManager: NSObject {
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         core.application(application, didReceiveRemoteNotification: userInfo)
     }
+    
+    @objc
+    public func getModules(offlinePolicy: OfflinePolicy) -> HaloRequest {
+        return HaloRequest(request: core.getModules(offlinePolicy))
+    }
 }

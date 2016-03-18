@@ -29,6 +29,11 @@ public class HaloRequest: NSObject {
         super.init()
     }
     
+    init(request haloRequest: Halo.Request) {
+        request = haloRequest
+        super.init()
+    }
+    
     public func offlinePolicy(policy: HaloOfflinePolicy) -> HaloRequest {
         
         let newPolicy: Halo.OfflinePolicy

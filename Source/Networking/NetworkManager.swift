@@ -22,7 +22,7 @@ private struct CachedTask {
     
 }
 
-public enum AuthenticationMode {
+@objc public enum AuthenticationMode: Int {
     case App, User
 }
 
