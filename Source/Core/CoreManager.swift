@@ -74,6 +74,7 @@ public class CoreManager: HaloManager {
     public private(set) var environment: HaloEnvironment = .Prod {
         didSet {
             Router.baseURL = environment.baseUrl
+            Router.token = nil
         }
     }
     
