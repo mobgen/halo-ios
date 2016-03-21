@@ -148,15 +148,14 @@ public class CoreManager: HaloManager {
 
     public func setEnvironment(environment: HaloEnvironment, completionHandler handler:((Bool) -> Void)? = nil) {
         self.environment = environment
-        self.startup(completionHandler: handler)
+        self.completionHandler = handler
+        self.configureUser()
     }
 
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         self.completionHandler = handler
         Router.token = nil
-        
-        self.user = Halo.User.loadUser(self.environment)
         
         Manager.persistence.startup()
         
@@ -211,51 +210,58 @@ public class CoreManager: HaloManager {
             self.needsUpdate { (needs) -> Void in
                 
             }
-            
-            if let user = self.user, _ = user.id {
-                // Update the user
-                Manager.network.getUser(user) { (result) -> Void in
-                    switch result {
-                    case .Success(let user, _):
-                        self.user = user
-                        
-                        if self.enablePush {
-                            self.configurePush()
-                            
-                        } else if self.enableSystemTags {
-                            self.setupDefaultSystemTags()
-                        } else {
-                            self.setupUser()
-                        }
-                    case .Failure(let error):
-                        NSLog("Error: \(error.localizedDescription)")
-                        if self.enableSystemTags {
-                            self.setupDefaultSystemTags()
-                        } else {
-                            self.setupUser()
-                        }
-                    }
-                }
-                
-            } else {
-                self.user = Halo.User()
-                self.delegate?.managerWillSetupUser(self.user!)
-                
-                if self.enablePush {
-                    self.configurePush()
-                } else if self.enableSystemTags {
-                    self.setupDefaultSystemTags()
-                } else {
-                    self.setupUser()
-                }
-            }
+
+            self.configureUser()
+
         }
         
     }
-    
+
+    private func configureUser() {
+        self.user = Halo.User.loadUser(self.environment)
+
+        if let user = self.user, _ = user.id {
+            // Update the user
+            Manager.network.getUser(user) { (result) -> Void in
+                switch result {
+                case .Success(let user, _):
+                    self.user = user
+
+                    if self.enablePush {
+                        self.configurePush()
+
+                    } else if self.enableSystemTags {
+                        self.setupDefaultSystemTags()
+                    } else {
+                        self.setupUser()
+                    }
+                case .Failure(let error):
+                    NSLog("Error: \(error.localizedDescription)")
+                    if self.enableSystemTags {
+                        self.setupDefaultSystemTags()
+                    } else {
+                        self.setupUser()
+                    }
+                }
+            }
+
+        } else {
+            self.user = Halo.User()
+            self.delegate?.managerWillSetupUser(self.user!)
+
+            if self.enablePush {
+                self.configurePush()
+            } else if self.enableSystemTags {
+                self.setupDefaultSystemTags()
+            } else {
+                self.setupUser()
+            }
+        }
+    }
+
     private func configurePush() {
         self.gcmManager.configure()
-        
+
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
