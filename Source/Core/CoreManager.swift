@@ -134,9 +134,6 @@ public class CoreManager: HaloManager {
     /// Instance holding all the user-related information
     public var user: User?
 
-    /// Bluetooth manager to decide whether the device supports BLE
-    private let bluetoothManager: CBCentralManager = CBCentralManager(delegate: nil, queue: nil)
-    
     private let gcmManager = GCMManager.sharedInstance
     
     var deviceToken: NSString? {
@@ -295,12 +292,8 @@ public class CoreManager: HaloManager {
             user.addTag(CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
             user.addTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
             
-            let BLEsupported = (bluetoothManager.state != .Unsupported)
-            
-            if BLEsupported {
-                user.addTag(CoreConstants.tagBLESupportKey, value: nil)
-            }
-            
+            user.addTag(CoreConstants.tagBLESupportKey, value: nil)
+
             //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
             
             let screen = UIScreen.mainScreen()
