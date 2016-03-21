@@ -71,7 +71,7 @@ public class CoreManager: HaloManager {
         }
     }
     
-    public var environment: HaloEnvironment = .Prod {
+    private(set) var environment: HaloEnvironment = .Prod {
         didSet {
             Router.baseURL = environment.baseUrl
         }
@@ -148,7 +148,12 @@ public class CoreManager: HaloManager {
     private var completionHandler: ((Bool) -> Void)?
     
     init() {}
-    
+
+    public func setEnvironment(environment: HaloEnvironment, completionHandler handler:((Bool) -> Void)? = nil) {
+        self.environment = environment
+        self.startup(completionHandler: handler)
+    }
+
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         self.completionHandler = handler
