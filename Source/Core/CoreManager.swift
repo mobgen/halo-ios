@@ -71,7 +71,7 @@ public class CoreManager: HaloManager {
         }
     }
     
-    private(set) var environment: HaloEnvironment = .Prod {
+    public private(set) var environment: HaloEnvironment = .Prod {
         didSet {
             Router.baseURL = environment.baseUrl
         }
