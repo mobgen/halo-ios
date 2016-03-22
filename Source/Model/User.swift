@@ -213,9 +213,10 @@ public final class User: NSObject, NSCoding {
         if let tags = (dict["tags"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
             return Halo.Tag.fromDictionary(dict)
         }) {
-            user.tags = tags.reduce([:], combine: { (var dict, tag: Halo.Tag) -> [String: Halo.Tag] in
-                dict[tag.name] = tag
-                return dict
+            user.tags = tags.reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                var varDict = dict
+                varDict[tag.name] = tag
+                return varDict
             })
         }
 
