@@ -197,7 +197,6 @@ public class CoreManager: HaloManager {
                     }
                     
                     self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
-                    
                     self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
                 }
             } else {
@@ -230,7 +229,6 @@ public class CoreManager: HaloManager {
 
                     if self.enablePush {
                         self.configurePush()
-
                     } else if self.enableSystemTags {
                         self.setupDefaultSystemTags()
                     } else {
@@ -362,7 +360,11 @@ public class CoreManager: HaloManager {
      */
     private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
         self.gcmManager.setupPushNotifications(deviceToken) { () -> Void in
-            self.setupDefaultSystemTags()
+            if self.enableSystemTags {
+                self.setupDefaultSystemTags()
+            } else {
+                self.setupUser()
+            }
         }
     }
 
@@ -385,7 +387,11 @@ public class CoreManager: HaloManager {
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
-        self.setupDefaultSystemTags()
+        if self.enableSystemTags {
+            self.setupDefaultSystemTags()
+        } else {
+            self.setupUser()
+        }
     }
 
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
