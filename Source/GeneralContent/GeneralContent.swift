@@ -112,5 +112,15 @@ public struct GeneralContentManager: HaloManager {
             
             return request
     }
+    
+    
+    public func searchInstances(searchOptions: Halo.SearchOptions) -> Halo.Request {
+        
+        let request = Halo.Request(router: Router.GeneralContentSearch)
+        
+        // Process the search options
+        
+        return request
+    }
 
 }
