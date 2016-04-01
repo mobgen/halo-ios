@@ -23,11 +23,16 @@ public func infixToPrefix(expression: String) -> [String] {
     var stack: [String] = []
     var prefix: [String] = []
     
-    let tokens: [String] = expression.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        .stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: Range(expression.startIndex ..< expression.endIndex))
+    let tokens = expression
+        .stringByReplacingOccurrencesOfString(")", withString: " ) ")
+        .stringByReplacingOccurrencesOfString("(", withString: " ( ")
+        .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        
+    let tokensArr = tokens
+        .stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: Range(tokens.startIndex ..< tokens.endIndex))
         .componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).reverse()
     
-    for token in tokens {
+    for token in tokensArr {
         
         if isOperator(token) {
             
@@ -48,7 +53,6 @@ public func infixToPrefix(expression: String) -> [String] {
                     stack.append(token)
                 }
             }
-            
         } else {
             prefix.append(token)
         }
@@ -75,9 +79,9 @@ public func precedence(symbol: String) -> Int {
     switch(symbol) {
     case "=", "!=", ">", ">=", "<", "<=", "IN", "NOT_IN":
         return 3
-    case "(", ")":
-        return 2
     case "AND", "OR":
+        return 2
+    case "(", ")":
         return 1
     default:
         return 0
