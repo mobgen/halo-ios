@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import CoreBluetooth
 
 /**
 Enumeration holding the different environment options available
