@@ -103,10 +103,10 @@ public func tokenType(token: String) -> TokenType {
     }
 }
 
-public func processCondition(tokens: [String]) -> [String: AnyObject] {
+public func processCondition(tokens: [String], dict: [String: AnyObject]) -> [String: AnyObject] {
     
     var tokenArr = tokens
-    var currentOperand: [String: AnyObject] = [:]
+    var currentOperand = dict
     
     if let token = tokenArr.popLast() {
         
@@ -122,18 +122,20 @@ public func processCondition(tokens: [String]) -> [String: AnyObject] {
             currentOperand["operation"] = token
         case .Condition:
             currentOperand["condition"] = token
-            currentOperand["operands"] = processConditionOperands(tokenArr)
+            currentOperand["operands"] = processConditionOperands(tokenArr, dict: [:])
         }
+        
+        currentOperand = processCondition(tokenArr, dict: currentOperand)
     }
     
     return currentOperand
 }
 
-public func processConditionOperands(tokens: [String]) -> [[String: AnyObject]] {
+public func processConditionOperands(tokens: [String], dict:[String: AnyObject], operands: [[String: AnyObject]]? = nil) -> [[String: AnyObject]] {
     
     var tokenArr = tokens
-    var operands: [[String: AnyObject]] = []
-    var currentOperand: [String: AnyObject] = [:]
+    var operandsArr = operands ?? []
+    var currentOperand = dict ?? [:]
     
     if let token = tokenArr.popLast() {
         switch tokenType(token) {
@@ -141,7 +143,8 @@ public func processConditionOperands(tokens: [String]) -> [[String: AnyObject]] 
             if let _ = currentOperand["property"] {
                 currentOperand["value"] = token
                 currentOperand["type"] = "test"
-                operands.append(currentOperand)
+                operandsArr.append(currentOperand)
+                currentOperand = [:]
             } else {
                 currentOperand["property"] = token
             }
@@ -149,9 +152,20 @@ public func processConditionOperands(tokens: [String]) -> [[String: AnyObject]] 
             currentOperand["operation"] = token
         case .Condition:
             currentOperand["condition"] = token
-            currentOperand["operands"] = processConditionOperands(tokenArr)
+            currentOperand["operands"] = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
         }
     }
     
-    return operands
+    return operandsArr
+}
+
+public func JSONStringify(value: AnyObject, prettyPrinted: Bool = true) -> String {
+    let options: NSJSONWritingOptions = prettyPrinted ? .PrettyPrinted : []
+    if NSJSONSerialization.isValidJSONObject(value) {
+        let data = try! NSJSONSerialization.dataWithJSONObject(value, options: options)
+        if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
+            return string as String
+        }
+    }
+    return ""
 }
