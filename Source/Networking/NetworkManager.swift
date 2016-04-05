@@ -199,9 +199,10 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
             
                 if let resp = response as? NSHTTPURLResponse {
                     
-                    if let e = error {
+                    if resp.statusCode > 399 {
+//                    if let e = error {
                         
-                        handler?(resp, .Failure(e))
+                        handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                         
                     } else if let d = data {
                         

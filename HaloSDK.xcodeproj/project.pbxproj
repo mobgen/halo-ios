@@ -15,7 +15,6 @@
 		002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002E89B01B74B2BD00D25302 /* UIDevice+Extra.swift */; };
 		003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B75F71C969E9800F05202 /* ParameterEncoding.swift */; };
 		003B75FA1C97F5D600F05202 /* UIImage+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B75F91C97F5D600F05202 /* UIImage+Async.swift */; };
-		003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		004790FC1C915C6C00C24741 /* HaloObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 004790FB1C915C6C00C24741 /* HaloObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004791011C915C8000C24741 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
@@ -397,7 +396,6 @@
 				0024964E1C00892C00F6F734 /* RealmSwift.framework in Frameworks */,
 				008E2AE91C5111D500FACAB2 /* libGTMSessionFetcher_core.a in Frameworks */,
 				008E2AEB1C5111D500FACAB2 /* libGSDK_Overload.a in Frameworks */,
-				003CA6BE1B84C3DE00819611 /* CoreBluetooth.framework in Frameworks */,
 				008E2AEE1C5111D500FACAB2 /* libGTM_DebugUtils.a in Frameworks */,
 				008E2AF01C5111D500FACAB2 /* libGTM_iPhone.a in Frameworks */,
 				008E2AEC1C5111D500FACAB2 /* libGTM_AddressBook.a in Frameworks */,
@@ -1505,6 +1503,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
