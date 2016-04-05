@@ -124,8 +124,6 @@ public func processCondition(tokens: [String], dict: [String: AnyObject]) -> [St
             currentOperand["condition"] = token
             currentOperand["operands"] = processConditionOperands(tokenArr, dict: [:])
         }
-        
-        currentOperand = processCondition(tokenArr, dict: currentOperand)
     }
     
     return currentOperand
@@ -144,15 +142,17 @@ public func processConditionOperands(tokens: [String], dict:[String: AnyObject],
                 currentOperand["value"] = token
                 currentOperand["type"] = "test"
                 operandsArr.append(currentOperand)
-                currentOperand = [:]
+                operandsArr = processConditionOperands(tokenArr, dict: [:], operands: operandsArr)
             } else {
                 currentOperand["property"] = token
+                operandsArr = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
             }
         case .Operation:
             currentOperand["operation"] = token
+            operandsArr = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
         case .Condition:
             currentOperand["condition"] = token
-            currentOperand["operands"] = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
+            currentOperand["operands"] = processConditionOperands(tokenArr, dict: [:])
         }
     }
     
@@ -160,12 +160,15 @@ public func processConditionOperands(tokens: [String], dict:[String: AnyObject],
 }
 
 public func JSONStringify(value: AnyObject, prettyPrinted: Bool = true) -> String {
+    
     let options: NSJSONWritingOptions = prettyPrinted ? .PrettyPrinted : []
+    
     if NSJSONSerialization.isValidJSONObject(value) {
         let data = try! NSJSONSerialization.dataWithJSONObject(value, options: options)
         if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
             return string as String
         }
     }
+    
     return ""
 }
