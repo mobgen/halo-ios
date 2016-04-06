@@ -129,7 +129,7 @@ func processCondition(tokens: [String], dict: [String: AnyObject]? = nil) -> [St
     return currentOperand
 }
 
-func processConditionOperands(tokens: [String], dict:[String: AnyObject], operands: [[String: AnyObject]]? = nil) -> [[String: AnyObject]] {
+func processConditionOperands(tokens: [String], dict:[String: AnyObject]? = nil, operands: [[String: AnyObject]]? = nil) -> [[String: AnyObject]] {
     
     var tokenArr = tokens
     var operandsArr = operands ?? []
