@@ -18,7 +18,7 @@ enum GrammarToken {
     case Operator(String)
 }
 
-public func infixToPrefix(expression: String) -> [String] {
+func infixToPrefix(expression: String) -> [String] {
     
     var stack: [String] = []
     var prefix: [String] = []
@@ -27,7 +27,7 @@ public func infixToPrefix(expression: String) -> [String] {
         .stringByReplacingOccurrencesOfString(")", withString: " ) ")
         .stringByReplacingOccurrencesOfString("(", withString: " ( ")
         .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        
+    
     let tokensArr = tokens
         .stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: Range(tokens.startIndex ..< tokens.endIndex))
         .componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).reverse()
@@ -66,7 +66,7 @@ public func infixToPrefix(expression: String) -> [String] {
     
 }
 
-public func isOperator(str: String) -> Bool {
+func isOperator(str: String) -> Bool {
     switch str {
     case "=", "!=", ">", ">=", "<", "<=", "OR", "AND", "IN", "NOT_IN", "(", ")":
         return true
@@ -75,7 +75,7 @@ public func isOperator(str: String) -> Bool {
     }
 }
 
-public func precedence(symbol: String) -> Int {
+func precedence(symbol: String) -> Int {
     switch(symbol) {
     case "=", "!=", ">", ">=", "<", "<=", "IN", "NOT_IN":
         return 3
@@ -88,11 +88,11 @@ public func precedence(symbol: String) -> Int {
     }
 }
 
-public enum TokenType {
+enum TokenType {
     case Condition, Operation, Operand
 }
 
-public func tokenType(token: String) -> TokenType {
+func tokenType(token: String) -> TokenType {
     switch token {
     case "=", "!=", ">", ">=", "<", "<=", "IN", "NOT_IN":
         return .Operation
@@ -103,10 +103,10 @@ public func tokenType(token: String) -> TokenType {
     }
 }
 
-public func processCondition(tokens: [String], dict: [String: AnyObject]) -> [String: AnyObject] {
+func processCondition(tokens: [String], dict: [String: AnyObject]? = nil) -> [String: AnyObject] {
     
     var tokenArr = tokens
-    var currentOperand = dict
+    var currentOperand = dict ?? [:]
     
     if let token = tokenArr.popLast() {
         
@@ -122,14 +122,14 @@ public func processCondition(tokens: [String], dict: [String: AnyObject]) -> [St
             currentOperand["operation"] = token
         case .Condition:
             currentOperand["condition"] = token
-            currentOperand["operands"] = processConditionOperands(tokenArr, dict: [:])
+            currentOperand["operands"] = processConditionOperands(tokenArr)
         }
     }
     
     return currentOperand
 }
 
-public func processConditionOperands(tokens: [String], dict:[String: AnyObject], operands: [[String: AnyObject]]? = nil) -> [[String: AnyObject]] {
+func processConditionOperands(tokens: [String], dict:[String: AnyObject], operands: [[String: AnyObject]]? = nil) -> [[String: AnyObject]] {
     
     var tokenArr = tokens
     var operandsArr = operands ?? []
@@ -148,18 +148,18 @@ public func processConditionOperands(tokens: [String], dict:[String: AnyObject],
                 operandsArr = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
             }
         case .Operation:
-            currentOperand["operation"] = token
-            operandsArr = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
+            operandsArr = processConditionOperands(tokenArr, dict: ["operation": token], operands: operandsArr)
         case .Condition:
-            currentOperand["condition"] = token
+            currentOperand = ["condition": token]
             currentOperand["operands"] = processConditionOperands(tokenArr, dict: [:])
+            operandsArr.append(currentOperand)
         }
     }
     
     return operandsArr
 }
 
-public func JSONStringify(value: AnyObject, prettyPrinted: Bool = true) -> String {
+func JSONStringify(value: AnyObject, prettyPrinted: Bool = true) -> String {
     
     let options: NSJSONWritingOptions = prettyPrinted ? .PrettyPrinted : []
     

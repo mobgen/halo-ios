@@ -119,6 +119,7 @@ public struct GeneralContentManager: HaloManager {
         let request = Halo.Request(router: Router.GeneralContentSearch)
         
         // Process the search options
+        request.params(searchOptions.body)
         
         return request
     }
