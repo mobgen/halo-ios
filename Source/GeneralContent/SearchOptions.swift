@@ -32,6 +32,8 @@ public struct SearchOptions {
         return dict
     }
     
+    public init() {}
+    
     public mutating func addConditions(conditions: String) -> Halo.SearchOptions {
         self.conditions = processCondition(infixToPrefix(conditions))
         return self
