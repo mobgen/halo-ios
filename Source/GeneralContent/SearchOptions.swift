@@ -10,12 +10,23 @@ import Foundation
 
 public struct SearchOptions {
     
+    private var moduleIds: [String]?
+    private var instanceIds: [String]?
     private var conditions: [String: AnyObject]?
     private var fields: [String]?
     private var tags: [Halo.Tag]?
+    private var pagination: [String: AnyObject]?
     
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
+        
+        if let modules = self.moduleIds {
+            dict["moduleIds"] = modules
+        }
+        
+        if let instances = self.instanceIds {
+            dict["instanceIds"] = instances
+        }
         
         if let searchValues = self.conditions {
             dict["searchValues"] = searchValues
@@ -27,6 +38,10 @@ public struct SearchOptions {
         
         if let tags = self.tags {
             dict["tags"] = tags.map { $0.toDictionary() }
+        }
+        
+        if let pagination = self.pagination {
+            dict["pagination"] = pagination
         }
         
         return dict
@@ -49,4 +64,27 @@ public struct SearchOptions {
         return self
     }
     
+    public mutating func addModuleIds(ids: [String]) -> Halo.SearchOptions {
+        self.moduleIds = ids
+        return self
+    }
+    
+    public mutating func addInstanceIds(ids: [String]) -> Halo.SearchOptions {
+        self.instanceIds = ids
+        return self
+    }
+
+    public mutating func skipPagination() -> Halo.SearchOptions {
+        self.pagination = ["skip": true]
+        return self
+    }
+    
+    public mutating func addPagination(page: Int, limit: Int, skip: Bool) -> Halo.SearchOptions {
+        self.pagination = [
+            "page"  : page,
+            "limit" : limit,
+            "skip"  : skip
+        ]
+        return self
+    }
 }
