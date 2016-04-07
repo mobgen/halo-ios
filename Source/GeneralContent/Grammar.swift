@@ -18,17 +18,6 @@ enum GrammarToken {
     case Operator(String)
 }
 
-let operators = [
-    "=": "$eq",
-    "!=": "$ne",
-    "<": "$lt",
-    ">": "$gt",
-    ">=": "$gte",
-    "<=": "$lte",
-    "IN": "$in",
-    "NOT_IN": "$nin"
-]
-
 func infixToPrefix(expression: String) -> [String] {
     
     var stack: [String] = []
@@ -78,8 +67,8 @@ func infixToPrefix(expression: String) -> [String] {
 }
 
 func isOperator(str: String) -> Bool {
-    switch str {
-    case "=", "!=", ">", ">=", "<", "<=", "OR", "AND", "IN", "NOT_IN", "(", ")":
+    switch str.lowercaseString {
+    case "=", "!=", ">", ">=", "<", "<=", "or", "and", "in", "!in", "(", ")":
         return true
     default:
         return false
@@ -87,10 +76,10 @@ func isOperator(str: String) -> Bool {
 }
 
 func precedence(symbol: String) -> Int {
-    switch(symbol) {
-    case "=", "!=", ">", ">=", "<", "<=", "IN", "NOT_IN":
+    switch symbol.lowercaseString {
+    case "=", "!=", ">", ">=", "<", "<=", "in", "!in":
         return 3
-    case "AND", "OR":
+    case "and", "or":
         return 2
     case "(", ")":
         return 1
@@ -104,10 +93,10 @@ enum TokenType {
 }
 
 func tokenType(token: String) -> TokenType {
-    switch token {
-    case "=", "!=", ">", ">=", "<", "<=", "IN", "NOT_IN":
+    switch token.lowercaseString {
+    case "=", "!=", ">", ">=", "<", "<=", "in", "!in":
         return .Operation
-    case "AND", "OR":
+    case "and", "or":
         return .Condition
     default:
         return .Operand
@@ -137,9 +126,9 @@ func processCondition(tokens: [String], dict: [String: AnyObject]? = nil) -> [St
                 currentOperand = processCondition(tokenArr, dict: currentOperand)
             }
         case .Operation:
-            currentOperand = processCondition(tokenArr, dict: ["operation": operators[token]!])
+            currentOperand = processCondition(tokenArr, dict: ["operation": token.lowercaseString])
         case .Condition:
-            currentOperand["condition"] = token
+            currentOperand["condition"] = token.lowercaseString
             currentOperand["operands"] = processConditionOperands(tokenArr)
         }
     }
@@ -165,9 +154,9 @@ func processConditionOperands(tokens: [String], dict:[String: AnyObject]? = nil,
                 operandsArr = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
             }
         case .Operation:
-            operandsArr = processConditionOperands(tokenArr, dict: ["operation": operators[token]!], operands: operandsArr)
+            operandsArr = processConditionOperands(tokenArr, dict: ["operation": token.lowercaseString], operands: operandsArr)
         case .Condition:
-            currentOperand = ["condition": token]
+            currentOperand = ["condition": token.lowercaseString]
             currentOperand["operands"] = processConditionOperands(tokenArr, dict: [:])
             operandsArr.append(currentOperand)
         }
