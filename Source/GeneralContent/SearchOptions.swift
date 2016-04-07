@@ -55,8 +55,10 @@ public struct SearchOptions {
             dict["pagination"] = pagination
         }
         
-        if let user = self.user {
-            dict["segmentTags"] = user.tags?.values.map { $0.toDictionary() }
+        if let user = self.user, tags = user.tags {
+            if tags.count > 0 {
+                dict["segmentTags"] = user.tags?.values.map { $0.toDictionary() }
+            }
         }
         
         return dict
