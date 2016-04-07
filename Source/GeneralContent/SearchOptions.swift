@@ -15,6 +15,7 @@ public struct SearchOptions {
     private var conditions: [String: AnyObject]?
     private var metaConditions: [String: AnyObject]?
     private var fields: [String]?
+    private var populateFields: [String]?
     private var tags: [Halo.Tag]?
     private var pagination: [String: AnyObject]?
     
@@ -43,6 +44,10 @@ public struct SearchOptions {
         
         if let tags = self.tags {
             dict["tags"] = tags.map { $0.toDictionary() }
+        }
+        
+        if let include = self.populateFields {
+            dict["include"] = include
         }
         
         if let pagination = self.pagination {
@@ -84,6 +89,16 @@ public struct SearchOptions {
         return self
     }
 
+    public mutating func addPopulateFields(fields: [String]) -> Halo.SearchOptions {
+        self.populateFields = fields
+        return self
+    }
+    
+    public mutating func populateAll() -> Halo.SearchOptions {
+        self.populateFields = ["all"]
+        return self
+    }
+    
     public mutating func skipPagination() -> Halo.SearchOptions {
         self.pagination = ["skip": true]
         return self
