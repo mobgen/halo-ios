@@ -116,6 +116,7 @@ func processCondition(tokens: [String], dict: [String: AnyObject]? = nil) -> [St
                 currentOperand["value"] = token
             } else {
                 currentOperand["property"] = token
+                currentOperand = processCondition(tokenArr, dict: currentOperand)
             }
         case .Operation:
             currentOperand = processCondition(tokenArr, dict: ["operation": token])
