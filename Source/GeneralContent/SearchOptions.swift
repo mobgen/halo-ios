@@ -54,13 +54,13 @@ public struct SearchOptions {
     
     public init() {}
     
-    public mutating func addConditions(conditions: String) -> Halo.SearchOptions {
-        self.conditions = processCondition(infixToPrefix(conditions))
+    public mutating func addSearchFilter(filter: SearchFilter) -> Halo.SearchOptions {
+        self.conditions = filter.body
         return self
     }
     
-    public mutating func addMetaConditions(conditions: String) -> Halo.SearchOptions {
-        self.metaConditions = processCondition(infixToPrefix(conditions))
+    public mutating func addMetaFilter(filter: SearchFilter) -> Halo.SearchOptions {
+        self.metaConditions = filter.body
         return self
     }
     
