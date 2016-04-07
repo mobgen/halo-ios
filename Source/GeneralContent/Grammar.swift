@@ -18,6 +18,17 @@ enum GrammarToken {
     case Operator(String)
 }
 
+let operators = [
+    "=": "$eq",
+    "!=": "$ne",
+    "<": "$lt",
+    ">": "$gt",
+    ">=": "$gte",
+    "<=": "$lte",
+    "IN": "$in",
+    "NOT_IN": "$nin"
+]
+
 func infixToPrefix(expression: String) -> [String] {
     
     var stack: [String] = []
@@ -119,7 +130,7 @@ func processCondition(tokens: [String], dict: [String: AnyObject]? = nil) -> [St
                 currentOperand = processCondition(tokenArr, dict: currentOperand)
             }
         case .Operation:
-            currentOperand = processCondition(tokenArr, dict: ["operation": token])
+            currentOperand = processCondition(tokenArr, dict: ["operation": operators[token]!])
         case .Condition:
             currentOperand["condition"] = token
             currentOperand["operands"] = processConditionOperands(tokenArr)
@@ -140,7 +151,6 @@ func processConditionOperands(tokens: [String], dict:[String: AnyObject]? = nil,
         case .Operand:
             if let _ = currentOperand["property"] {
                 currentOperand["value"] = token
-                currentOperand["type"] = "test"
                 operandsArr.append(currentOperand)
                 operandsArr = processConditionOperands(tokenArr, dict: [:], operands: operandsArr)
             } else {
@@ -148,7 +158,7 @@ func processConditionOperands(tokens: [String], dict:[String: AnyObject]? = nil,
                 operandsArr = processConditionOperands(tokenArr, dict: currentOperand, operands: operandsArr)
             }
         case .Operation:
-            operandsArr = processConditionOperands(tokenArr, dict: ["operation": token], operands: operandsArr)
+            operandsArr = processConditionOperands(tokenArr, dict: ["operation": operators[token]!], operands: operandsArr)
         case .Condition:
             currentOperand = ["condition": token]
             currentOperand["operands"] = processConditionOperands(tokenArr, dict: [:])
