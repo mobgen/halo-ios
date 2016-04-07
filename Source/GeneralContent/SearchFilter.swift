@@ -59,11 +59,16 @@ public struct SearchFilter {
     
     init() {}
     
-    private init(operation: SearchFilterOperation, property: String, value: AnyObject, type: String) {
+    private init(operation: SearchFilterOperation, property: String, value: AnyObject?, type: String?) {
         self.operation = operation.description
         self.property = property
         self.value = value
-        self.type = type
+        
+        if let _ = value {
+            self.type = type
+        } else {
+            self.type = "null"
+        }
     }
     
     public init(operation: SearchFilterOperation, property: String, number: NSNumber) {
@@ -76,6 +81,10 @@ public struct SearchFilter {
     
     public init(operation: SearchFilterOperation, property: String, string: String) {
         self.init(operation: operation, property: property, value: string, type: "string")
+    }
+    
+    public init(operation: SearchFilterOperation, property: String, value: AnyObject?) {
+        self.init(operation: operation, property: property, value: value, type: nil)
     }
 }
 
