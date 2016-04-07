@@ -18,6 +18,7 @@ public struct SearchOptions {
     private var populateFields: [String]?
     private var tags: [Halo.Tag]?
     private var pagination: [String: AnyObject]?
+    private var user: Halo.User?
     
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
@@ -52,6 +53,10 @@ public struct SearchOptions {
         
         if let pagination = self.pagination {
             dict["pagination"] = pagination
+        }
+        
+        if let user = self.user {
+            dict["segmentTags"] = user.tags?.values.map { $0.toDictionary() }
         }
         
         return dict
@@ -96,6 +101,11 @@ public struct SearchOptions {
     
     public mutating func populateAll() -> Halo.SearchOptions {
         self.populateFields = ["all"]
+        return self
+    }
+    
+    public mutating func setUser(user: Halo.User) -> Halo.SearchOptions {
+        self.user = user
         return self
     }
     
