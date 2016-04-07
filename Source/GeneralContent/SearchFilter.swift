@@ -79,7 +79,7 @@ public struct SearchFilter {
     }
 }
 
-public func or(lhs: SearchFilter, rhs: SearchFilter) -> SearchFilter {
+public func or(left lhs: SearchFilter, right rhs: SearchFilter) -> SearchFilter {
     
     var filter = SearchFilter()
     
@@ -89,7 +89,7 @@ public func or(lhs: SearchFilter, rhs: SearchFilter) -> SearchFilter {
     return filter
 }
 
-public func and(lhs: SearchFilter, rhs: SearchFilter) -> SearchFilter {
+public func and(left lhs: SearchFilter, right rhs: SearchFilter) -> SearchFilter {
     
     var filter = SearchFilter()
     
