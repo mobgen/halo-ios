@@ -125,6 +125,13 @@ func processCondition(tokens: [String], dict: [String: AnyObject]? = nil) -> [St
         case .Operand:
             if let _ = currentOperand["property"] {
                 currentOperand["value"] = token
+                
+                if let _ = NSNumberFormatter().numberFromString(token) {
+                    currentOperand["type"] = "number"
+                } else {
+                    currentOperand["type"] = "string"
+                }
+                
             } else {
                 currentOperand["property"] = token
                 currentOperand = processCondition(tokenArr, dict: currentOperand)
