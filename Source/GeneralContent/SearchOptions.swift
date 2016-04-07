@@ -13,6 +13,7 @@ public struct SearchOptions {
     private var moduleIds: [String]?
     private var instanceIds: [String]?
     private var conditions: [String: AnyObject]?
+    private var metaConditions: [String: AnyObject]?
     private var fields: [String]?
     private var tags: [Halo.Tag]?
     private var pagination: [String: AnyObject]?
@@ -30,6 +31,10 @@ public struct SearchOptions {
         
         if let searchValues = self.conditions {
             dict["searchValues"] = searchValues
+        }
+        
+        if let metaSearch = self.metaConditions {
+            dict["metaSearch"] = metaSearch
         }
         
         if let fields = self.fields {
@@ -51,6 +56,11 @@ public struct SearchOptions {
     
     public mutating func addConditions(conditions: String) -> Halo.SearchOptions {
         self.conditions = processCondition(infixToPrefix(conditions))
+        return self
+    }
+    
+    public mutating func addMetaConditions(conditions: String) -> Halo.SearchOptions {
+        self.metaConditions = processCondition(infixToPrefix(conditions))
         return self
     }
     
