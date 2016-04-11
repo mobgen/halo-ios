@@ -57,7 +57,7 @@ public struct SearchOptions {
         
         if let user = self.user, tags = user.tags {
             if tags.count > 0 {
-                dict["segmentTags"] = user.tags?.values.map { $0.toDictionary() }
+                dict["segmentTags"] = tags.values.map { $0.toDictionary() }
             }
         }
         
