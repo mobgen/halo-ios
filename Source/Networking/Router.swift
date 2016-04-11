@@ -19,6 +19,7 @@ enum Router {
     case Modules
     case GeneralContentInstances([String: AnyObject])
     case GeneralContentInstance(String)
+    case GeneralContentSearch
     case SegmentationGetUser(String)
     case SegmentationCreateUser([String: AnyObject])
     case SegmentationUpdateUser(String, [String: AnyObject])
@@ -28,7 +29,8 @@ enum Router {
     var method: Halo.Method {
         switch self {
         case .OAuth(_, _),
-             .SegmentationCreateUser(_):
+             .SegmentationCreateUser(_),
+             .GeneralContentSearch:
             return .POST
         case .SegmentationUpdateUser(_):
             return .PUT
@@ -50,13 +52,15 @@ enum Router {
                 return "api/oauth/token?_user"
             }
         case .Modules:
-            return "api/authentication/module/"
+            return "api/authentication/module"
         case .GeneralContentInstances(_):
-            return "api/authentication/instance/"
+            return "api/authentication/instance"
         case .GeneralContentInstance(let id):
             return "api/generalcontent/instance/\(id)"
+        case .GeneralContentSearch:
+            return "api/generalcontent/instance/search"
         case .SegmentationCreateUser(_):
-            return "api/segmentation/appuser/"
+            return "api/segmentation/appuser"
         case .SegmentationGetUser(let id):
             return "api/segmentation/appuser/\(id)"
         case .SegmentationUpdateUser(let id, _):
@@ -89,12 +93,16 @@ enum Router {
         switch self {
         case .OAuth(_, _):
             return .URL
-        case .SegmentationCreateUser(_), .SegmentationUpdateUser(_, _):
+        case .SegmentationCreateUser(_),
+             .SegmentationUpdateUser(_, _),
+             .GeneralContentSearch:
             return .JSON
         case .CustomRequest(let method, _, _):
             switch method {
-            case .POST, .PUT: return .JSON
-            default: return .URL
+            case .POST, .PUT:
+                return .JSON
+            default:
+                return .URL
             }
         default:
             return .URL
