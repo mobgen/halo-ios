@@ -79,6 +79,7 @@ public struct GeneralContentManager: HaloManager {
         
         var searchOptions = options ?? SearchOptions()
         searchOptions.addInstanceIds([instanceId])
+        searchOptions.skipPagination()
         
         return self.searchInstances(searchOptions)
     }
