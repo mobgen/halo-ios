@@ -149,6 +149,9 @@ public class HaloCoreManager: NSObject {
     
     @objc
     public func modules(offlinePolicy: OfflinePolicy) -> HaloRequest {
-        return HaloRequest(request: core.getModules(offlinePolicy))
+        var searchOptions = SearchOptions()
+        searchOptions.setOfflinePolicy(offlinePolicy)
+        
+        return HaloRequest(request: core.getModules(searchOptions))
     }
 }
