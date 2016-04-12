@@ -6,8 +6,6 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-import CoreBluetooth
-
 /**
 This delegate will provide methods that will act as interception points in the setup process of the SDK
 within the application
