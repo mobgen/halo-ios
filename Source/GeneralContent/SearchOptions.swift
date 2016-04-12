@@ -10,15 +10,17 @@ import Foundation
 
 public struct SearchOptions {
     
-    private var moduleIds: [String]?
-    private var instanceIds: [String]?
-    private var conditions: [String: AnyObject]?
-    private var metaConditions: [String: AnyObject]?
-    private var fields: [String]?
-    private var populateFields: [String]?
-    private var tags: [Halo.Tag]?
-    private var pagination: [String: AnyObject]?
-    private var user: Halo.User?
+    internal var moduleIds: [String]?
+    internal var instanceIds: [String]?
+    internal var conditions: [String: AnyObject]?
+    internal var metaConditions: [String: AnyObject]?
+    internal var fields: [String]?
+    internal var populateFields: [String]?
+    internal var tags: [Halo.Tag]?
+    internal var pagination: [String: AnyObject]?
+    internal var user: Halo.User?
+    internal var offlinePolicy: Halo.OfflinePolicy?
+    internal var generalContentFlags: Halo.GeneralContentFlag?
     
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
@@ -58,6 +60,12 @@ public struct SearchOptions {
         if let user = self.user, tags = user.tags {
             if tags.count > 0 {
                 dict["segmentTags"] = tags.values.map { $0.toDictionary() }
+            }
+        }
+        
+        if let flags = self.generalContentFlags {
+            if !flags.contains(GeneralContentFlag.IncludeArchived) {
+                dict["archived"] = "false"
             }
         }
         
@@ -122,6 +130,16 @@ public struct SearchOptions {
             "limit" : limit,
             "skip"  : skip
         ]
+        return self
+    }
+    
+    public mutating func setOfflinePolicy(policy: Halo.OfflinePolicy) -> Halo.SearchOptions {
+        self.offlinePolicy = policy
+        return self
+    }
+    
+    public mutating func setGeneralContentFlags(flags: Halo.GeneralContentFlag) -> Halo.SearchOptions {
+        self.generalContentFlags = flags
         return self
     }
 }
