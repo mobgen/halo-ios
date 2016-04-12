@@ -16,11 +16,15 @@ extension CoreManager {
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      - parameter completionHandler:  Closure to be executed when the request has finished
      */
-    public func getModules(options: Halo.SearchOptions? = nil) -> Halo.Request {
+    public func getModules(offlinePolicy: OfflinePolicy? = nil) -> Halo.Request {
         
-        let searchOptions = options ?? SearchOptions()
+        let request = Halo.Request(router: Router.Modules)
+            
+        if let offline = offlinePolicy {
+            return request.offlinePolicy(offline)
+        }
         
-        return Halo.Manager.generalContent.searchInstances(searchOptions)
+        return request
     }
 
 }
