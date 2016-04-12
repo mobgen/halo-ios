@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 MOBGEN Technology. All rights reserved.
 //
 
-import Foundation
-
 /// Utility class containing some of the constants to be used within the SDK
 public class CoreConstants {
 
@@ -30,6 +28,9 @@ public class CoreConstants {
     
     /// Key which identifies the option to enable push notifications within the configuration plist
     static let enablePush = "ENABLE_PUSH"
+    
+    /// Key which identifies the option to enable push notifications within the configuration plist
+    static let enableSystemTags = "ENABLE_SYSTEM_TAGS"
 
     static let disableSSLpinning = "DISABLE_SSL_PINNING"
 

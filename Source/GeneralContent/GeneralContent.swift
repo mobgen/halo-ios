@@ -9,22 +9,29 @@
 import Foundation
 import RealmSwift
 
+public struct GeneralContentFlag : OptionSetType {
+    
+    public let rawValue: UInt
+    
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+    
+    public static let IncludeArchived = GeneralContentFlag(rawValue: 1)
+    public static let IncludeUnpublished = GeneralContentFlag(rawValue: 2)
+}
+
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
  */
-@objc(HaloGeneralContent)
-public class GeneralContent: NSObject {
+public struct GeneralContentManager: HaloManager {
 
-    /// Shortcut for the shared instance of the network manager
-    private let net = Halo.NetworkManager.instance
+    init() {}
 
-    private let persistence = Halo.PersistenceManager.sharedInstance
-    
-    /// Shared instance of the General Content component (Singleton pattern)
-    public static let sharedInstance = GeneralContent()
+    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+        // Nothing to be done here yet
+    }
 
-    private override init() {}
-    
     // MARK: Get instances
     
     /**
@@ -34,15 +41,25 @@ public class GeneralContent: NSObject {
     - parameter offlinePolicy:      Offline policy to be considered when retrieving data
     - parameter completionHandler:  Closure to be executed when the request has finished
     */
-    public func getInstances(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy, populate: Bool? = false,
-        completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+    public func getInstances(moduleIds moduleIds: [String],
+        offlinePolicy: OfflinePolicy? = nil,
+        flags: GeneralContentFlag? = nil) -> Halo.Request {
+        
+            var params: [String : AnyObject] = ["module": moduleIds]
             
-            switch offlinePolicy! {
-            case .None:
-                net.generalContentInstances(moduleIds, flags: [], populate: populate, completionHandler: handler)
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                persistence.generalContentInstances(moduleIds, flags: [], fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), populate: populate, completionHandler: handler)
+            if let f = flags {
+                if !f.contains(GeneralContentFlag.IncludeArchived) {
+                    params["archived"] = "false"
+                }
             }
+            
+            let request = Halo.Request(router: Router.GeneralContentInstances(params))
+            
+            if let offline = offlinePolicy {
+                return request.offlinePolicy(offline)
+            }
+                        
+            return request
     }
 
     // MARK: Get instances by array of ids
@@ -54,17 +71,25 @@ public class GeneralContent: NSObject {
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      - parameter handler:       Closure to be executed after the completion of the request
      */
-    public func getInstances(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
-        completionHandler handler: ((Halo.Result<[Halo.GeneralContentInstance], NSError>) -> Void)?) -> Void {
+    public func getInstances(instanceIds instanceIds: [String],
+        offlinePolicy: OfflinePolicy? = nil,
+        flags: GeneralContentFlag? = nil) -> Halo.Request {
            
-            switch offlinePolicy! {
-            case .None:
-                self.net.generalContentInstances(instanceIds, fetchFromNetwork: true, completionHandler: handler)
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                self.persistence.generalContentInstances(instanceIds, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: { (result) -> Void in
-                    handler?(result)
-                })
+            var params: [String : AnyObject] = ["id": instanceIds]
+            
+            if let f = flags {
+                if !f.contains(GeneralContentFlag.IncludeArchived) {
+                    params["archived"] = "false"
+                }
             }
+            
+            let request = Halo.Request(router: Router.GeneralContentInstances(params))
+            
+            if let offline = offlinePolicy {
+                return request.offlinePolicy(offline)
+            }
+            
+            return request
     }
     
     // MARK: Get a single instance
@@ -76,157 +101,16 @@ public class GeneralContent: NSObject {
     - parameter offlinePolicy:  Offline policy to be considered when retrieving data
     - parameter handler:        Closure to be executed after the completion of the request
     */
-    public func getSingleInstance(instanceId instanceId: String, offlinePolicy: OfflinePolicy? = Manager.sharedInstance.defaultOfflinePolicy,
-        completionHandler handler: ((Halo.Result<Halo.GeneralContentInstance, NSError>) -> Void)?) -> Void {
-        
-            switch offlinePolicy! {
-            case .None:
-                self.net.generalContentInstance(instanceId, fetchFromNetwork: true, completionHandler: handler)
-            case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-                self.persistence.generalContentInstance(instanceId, fetchFromNetwork: (offlinePolicy == .LoadAndStoreLocalData), completionHandler: handler)
+    public func getSingleInstance(instanceId instanceId: String,
+        offlinePolicy: OfflinePolicy? = nil) -> Halo.Request {
+            
+            let request = Halo.Request(router: Router.GeneralContentInstance(instanceId))
+            
+            if let offline = offlinePolicy {
+                return request.offlinePolicy(offline)
             }
-    }
-
-    // MARK: ObjC exposed methods
-
-    /**
-    Get the existing instances of a given General Content module from Objective C
-
-    - parameter moduleIds:      Internal ids of the modules from which we want to retrieve the instances
-    - parameter offlinePolicy:  Offline policy to be considered when retrieving data
-    - parameter success:        Closure to be executed when the request has succeeded
-    - parameter failure:        Closure to be executed when the request has failed
-    */
-    @objc(instancesInModules:offlinePolicy:success:failure:)
-    public func getInstancesWithOfflinePolicyFromObjC(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
-
-            self.privateGetInstancesFromObjC(moduleIds: moduleIds, offlinePolicy: offlinePolicy, success: success, failure: failure)
-    }
-
-    /**
-     Get the existing instances of a given General Content module from Objective C
-
-     - parameter moduleId:   Internal id of the module from which we want to retrieve the instances
-     - parameter success:    Closure to be executed when the request has succeeded
-     - parameter failure:    Closure to be executed when the request has failed
-     */
-    @objc(instancesInModules:success:failure:)
-    public func getInstancesFromObjC(moduleIds moduleIds: [String],
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
-
-            self.privateGetInstancesFromObjC(moduleIds: moduleIds, offlinePolicy: nil, success: success, failure: failure)
-    }
-
-
-    private func privateGetInstancesFromObjC(moduleIds moduleIds: [String], offlinePolicy: OfflinePolicy?,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
-
-            self.getInstances(moduleIds: moduleIds, offlinePolicy: offlinePolicy) { (result) -> Void in
-                switch result {
-                case .Success(let instances, let cached):
-                    success?(userData: instances, cached: cached)
-                case .Failure(let error):
-                    failure?(error: error)
-                }
-            }
-    }
-
-    /**
-     Get a set of instances given the collection of their ids from Objective C
-
-     - parameter instancesIds:  Array of instance ids
-     - parameter offlinePolicy: Offline policy to be considered when retrieving data
-     - parameter success:       Closure to be executed when the request has succeeded
-     - parameter failure:       Closure to be executed when the request has failed
-     */
-    @objc(instancesWithIds:offlinePolicy:success:failure:)
-    public func getInstancesWithOfflinePolicyFromObjC(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
-
-            self.privateGetInstancesFromObjC(moduleIds: instanceIds, offlinePolicy: offlinePolicy, success: success, failure: failure)
-    }
-
-    /**
-     Get a set of instances given the collection of their ids from Objective C
-
-     - parameter instancesIds:  Array of instance ids
-     - parameter offlinePolicy: Offline policy to be considered when retrieving data
-     - parameter success:       Closure to be executed when the request has succeeded
-     - parameter failure:       Closure to be executed when the request has failed
-     */
-    @objc(instancesWithIds:success:failure:)
-    public func getInstancesFromObjC(instanceIds instanceIds: [String],
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
-
-            self.privateGetInstancesFromObjC(moduleIds: instanceIds, offlinePolicy: nil, success: success, failure: failure)
-    }
-
-    private func privateGetInstancesFromObjC(instanceIds instanceIds: [String], offlinePolicy: OfflinePolicy?,
-        success:((userData: [GeneralContentInstance], cached: Bool) -> Void)?,
-        failure: ((error: NSError) -> Void)?) -> Void {
-
-            self.getInstances(moduleIds: instanceIds, offlinePolicy: offlinePolicy) { (result) -> Void in
-                switch result {
-                case .Success(let instances, let cached):
-                    success?(userData: instances, cached: cached)
-                case .Failure(let error):
-                    failure?(error: error)
-                }
-            }
-    }
-
-    /**
-     Get a specific general content instance given its id from Objective C
-
-     - parameter instanceId:    Internal id of the instance to be retrieved
-     - parameter offlinePolicy: Offline policy to be considered when retrieving data
-     - parameter success:       Closure to be executed when the request has succeeded
-     - parameter failure:       Closure to be executed when the request has failed
-     */
-    @objc(instance:offlinePolicy:success:failure:)
-    public func getInstanceWithOfflinePolicyFromObjC(instanceId instanceId: String, offlinePolicy: OfflinePolicy,
-        success:((userData: GeneralContentInstance, cached: Bool) -> Void)?,
-        failure:((error: NSError) -> Void)?) -> Void {
-
-            self.privateGetInstanceFromObjc(instanceId: instanceId, offlinePolicy: offlinePolicy, success: success, failure: failure)
-
-    }
-
-    /**
-     Get a specific general content instance given its id from Objective C
-
-     - parameter instanceId:    Internal id of the instance to be retrieved
-     - parameter offlinePolicy: Offline policy to be considered when retrieving data
-     - parameter success:       Closure to be executed when the request has succeeded
-     - parameter failure:       Closure to be executed when the request has failed
-     */
-    @objc(instance:success:failure:)
-    public func getInstanceFromObjC(instanceId instanceId: String,
-        success:((userData: GeneralContentInstance, cached: Bool) -> Void)?,
-        failure:((error: NSError) -> Void)?) -> Void {
-
-            self.privateGetInstanceFromObjc(instanceId: instanceId, offlinePolicy: nil, success: success, failure: failure)
-
-    }
-
-    private func privateGetInstanceFromObjc(instanceId instanceId: String, offlinePolicy: OfflinePolicy?,
-        success:((userData: GeneralContentInstance, cached: Bool) -> Void)?,
-        failure:((error: NSError) -> Void)?) -> Void {
-
-            self.getSingleInstance(instanceId: instanceId, offlinePolicy: offlinePolicy) { (result) -> Void in
-                switch result {
-                case .Success(let instance, let cached):
-                    success?(userData: instance, cached: cached)
-                case .Failure(let error):
-                    failure?(error: error)
-                }
-            }
+            
+            return request
     }
 
 }

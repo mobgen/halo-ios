@@ -1,15 +1,14 @@
 Pod::Spec.new do |s|
   s.name             = "Halo"
-  s.version          = "0.1.0"
+  s.version          = "1.1.3"
   s.summary          = "A short description of test."
-  s.description      = <<-DESC
+  # s.description      = <<-DESC
                        An optional longer description of test
 
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
   s.homepage         = "https://bitbucket.org/mobgen/halo-sdk-ios"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Borja Santos-Diez" => "borja.santos@mobgen.com" }
   # s.source           = { :git => "https://bitbucket.org/mobgen/halo-sdk-ios.git" }
@@ -18,7 +17,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.dependency 'Alamofire', '~> 3.0'
+  s.dependency 'Realm'
+  s.dependency 'RealmSwift'
 
   s.source_files = 'Source/**/*.{h,swift}'
   s.public_header_files = 'Source/**/*.h'

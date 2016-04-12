@@ -15,28 +15,28 @@ Model representing a user within the Halo environment
 public final class User: NSObject, NSCoding {
 
     /// Unique identifier of the user
-    internal(set) public var id:String?
+    internal(set) public var id: String?
     
     /// Application id which this user is associated to
-    internal(set) public var appId:Int?
+    internal(set) public var appId: Int?
     
     /// Email of this user
-    public var email:String?
+    public var email: String?
     
     /// An alias that also identifies the user
-    public var alias:String?
+    public var alias: String?
     
     /// List of devices linked to this user
     public var devices:[Halo.UserDevice]?
     
     /// Dictionary of tags associated to this user
-    public var tags:[String: Halo.Tag]?
+    public var tags: [String : Halo.Tag]?
     
     /// Date of creation of this user
-    internal(set) public var createdAt:NSDate?
+    internal(set) public var createdAt: NSDate?
     
     /// Date of the last update
-    internal(set) public var updatedAt:NSDate?
+    internal(set) public var updatedAt: NSDate?
 
     public override var description: String {
         return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n----"
@@ -127,17 +127,17 @@ public final class User: NSObject, NSCoding {
         let encodedObject = NSKeyedArchiver.archivedDataWithRootObject(self)
         let userDefaults = NSUserDefaults.standardUserDefaults()
 
-        userDefaults.setObject(encodedObject, forKey: "\(CoreConstants.userDefaultsUserKey)-\(env.rawValue)")
+        userDefaults.setObject(encodedObject, forKey: "\(CoreConstants.userDefaultsUserKey)-\(env.description)")
         userDefaults.synchronize()
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadUser(env: HaloEnvironment) -> Halo.User? {
+    class func loadUser(env: HaloEnvironment) -> Halo.User {
         
-        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsUserKey)-\(env.rawValue)") as? NSData {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as? Halo.User
+        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsUserKey)-\(env.description)") as? NSData {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as! Halo.User
         } else {
-            return nil
+            return User()
         }
     }
 
@@ -213,9 +213,10 @@ public final class User: NSObject, NSCoding {
         if let tags = (dict["tags"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
             return Halo.Tag.fromDictionary(dict)
         }) {
-            user.tags = tags.reduce([:], combine: { (var dict, tag: Halo.Tag) -> [String: Halo.Tag] in
-                dict[tag.name] = tag
-                return dict
+            user.tags = tags.reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                var varDict = dict
+                varDict[tag.name] = tag
+                return varDict
             })
         }
 

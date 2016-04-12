@@ -48,7 +48,7 @@ public class GeneralContentInstance: NSObject {
         super.init()
     }
     
-    init(_ dict: [String: AnyObject]) {
+    public init(_ dict: [String: AnyObject]) {
         
         id = dict["id"] as? String
         moduleId = dict["module"] as? String
@@ -59,9 +59,10 @@ public class GeneralContentInstance: NSObject {
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
             tags = tagsList.map({ (dict) -> Halo.Tag in
                 return Halo.Tag.fromDictionary(dict)
-            }).reduce([:], combine: { (var dict, tag: Halo.Tag) -> [String: Halo.Tag] in
-                dict[tag.name] = tag
-                return dict
+            }).reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                var varDict = dict
+                varDict[tag.name] = tag
+                return varDict
             })
         }
 

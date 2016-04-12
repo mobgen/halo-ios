@@ -47,7 +47,7 @@ public class Module: NSObject {
     
     - parameter dict:   Dictionary containing the information about the module
     */
-    init(_ dict: Dictionary<String,AnyObject>) {
+    public init(_ dict: [String:AnyObject]) {
         id = dict["id"] as? NSNumber
         name = dict["name"] as? String
         isSingle = dict["isSingle"] as? Bool ?? false
@@ -57,9 +57,10 @@ public class Module: NSObject {
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
             tags = tagsList.map({ (dict) -> Halo.Tag in
                 return Halo.Tag.fromDictionary(dict)
-            }).reduce([:], combine: { (var dict, tag: Halo.Tag) -> [String: Halo.Tag] in
-                dict[tag.name] = tag
-                return dict
+            }).reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                var varDict = dict
+                varDict[tag.name] = tag
+                return varDict
             })
         }
         

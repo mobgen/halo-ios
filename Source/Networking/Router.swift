@@ -6,24 +6,19 @@
 //  Copyright © 2015 MOBGEN Technology. All rights reserved.
 //
 
-import Foundation
-import Alamofire
-
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
-enum Router: URLRequestConvertible {
+enum Router {
 
     /// Common base url of all the API endpoints
     static var baseURL = NSURL(string: "https://halo.mobgen.com")
 
     /// Token to be used for authentication purposes
     static var token:Token?
-    
-    static var userAlias: String?
 
     case OAuth(Credentials, [String: AnyObject])
     case Modules
     case GeneralContentInstances([String: AnyObject])
-    case GeneralContentInstance(String, [String: AnyObject])
+    case GeneralContentInstance(String)
     case SegmentationGetUser(String)
     case SegmentationCreateUser([String: AnyObject])
     case SegmentationUpdateUser(String, [String: AnyObject])
@@ -50,15 +45,15 @@ enum Router: URLRequestConvertible {
         case .OAuth(let cred, _):
             switch cred.type {
             case .App:
-                return "/api/oauth/token?_1"
+                return "api/oauth/token?_app"
             case .User:
-                return "/api/oauth/token?_2"
+                return "api/oauth/token?_user"
             }
         case .Modules:
-            return "/api/authentication/module/"
+            return "api/authentication/module/"
         case .GeneralContentInstances(_):
             return "api/authentication/instance/"
-        case .GeneralContentInstance(let id, _):
+        case .GeneralContentInstance(let id):
             return "api/generalcontent/instance/\(id)"
         case .SegmentationCreateUser(_):
             return "api/segmentation/appuser/"
@@ -71,55 +66,52 @@ enum Router: URLRequestConvertible {
         }
     }
 
-    // MARK: URLRequestConvertible
+    var headers: [String: String] {
+        var h: [String: String] = [:]
 
-    /// Get the right URL request with the right headers
-    var URLRequest: NSMutableURLRequest {
-        let url = NSURL(string: path, relativeToURL: Router.baseURL)
-        let mutableURLRequest = NSMutableURLRequest(URL: url!)
-        mutableURLRequest.HTTPMethod = method.toAlamofire().rawValue
-
-        if let token = Router.token {
-            mutableURLRequest.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")
-        }
-
-        if let alias = Router.userAlias {
-            mutableURLRequest.setValue(alias, forHTTPHeaderField: "X-AppUser-Alias")
-        }
-        
-        /**
-        *  My god.. really awful. Think of a better way of doing this!
-        */
         switch self {
-        case .OAuth(let cred, let params):
-            
+        case .OAuth(let cred, _):
             if cred.type == .User {
                 let string = "\(cred.username):\(cred.password)"
                 if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
                     let base64string = data.base64EncodedStringWithOptions([])
-                    mutableURLRequest.setValue("Basic \(base64string)", forHTTPHeaderField: "Authorization")
-                    NSLog("Using Authorization header: Basic \(base64string)")
+                    h["Authorization"] = "Basic \(base64string)"
                 }
             }
-            
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
-        case .GeneralContentInstance(_, let params):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
-        case .GeneralContentInstances(let params):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
-        case .SegmentationCreateUser(let params):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
-        case .SegmentationUpdateUser(_, let params):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
-        case .CustomRequest(let method, _, let params):
+        default:
+            break
+        }
+
+        return h
+    }
+
+    var parameterEncoding: Halo.ParameterEncoding {
+        switch self {
+        case .OAuth(_, _):
+            return .URL
+        case .SegmentationCreateUser(_), .SegmentationUpdateUser(_, _):
+            return .JSON
+        case .CustomRequest(let method, _, _):
             switch method {
-            case .POST, .PUT:
-                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: params).0
-            default:
-                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: params).0
+            case .POST, .PUT: return .JSON
+            default: return .URL
             }
         default:
-            return mutableURLRequest
+            return .URL
         }
     }
+
+    var params: [String: AnyObject]? {
+
+        switch self {
+        case .OAuth(_, let params): return params
+        case .GeneralContentInstances(let params): return params
+        case .SegmentationCreateUser(let params): return params
+        case .SegmentationUpdateUser(_, let params): return params
+        case .CustomRequest(_, _, let params): return params
+        default: return nil
+        }
+
+    }
+
 }

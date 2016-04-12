@@ -1,2 +1,1 @@
-github "Alamofire/Alamofire" ~> 3.0
-github "realm/realm-cocoa"
+github "realm/realm-cocoa" "v0.98.6"
