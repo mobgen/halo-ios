@@ -64,14 +64,5 @@ public class HaloGeneralContentManager: NSObject {
         return HaloRequest(request: generalContent.getInstances(instanceIds: instanceIds, options: searchOptions))
         
     }
-    
-    @objc
-    public func singleInstance(instanceId instanceId: String,
-                                          offlinePolicy: OfflinePolicy) -> HaloRequest {
-        
-        var searchOptions = SearchOptions()
-        searchOptions.setOfflinePolicy(offlinePolicy)
-        
-        return HaloRequest(request: generalContent.getSingleInstance(instanceId: instanceId, options: searchOptions))
-    }
+
 }
