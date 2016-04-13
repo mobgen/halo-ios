@@ -46,7 +46,7 @@ public struct GeneralContentManager: HaloManager {
     public func getInstances(moduleIds moduleIds: [String], options: Halo.SearchOptions? = nil) -> Halo.Request {
         
         var searchOptions = options ?? SearchOptions()
-        searchOptions.addModuleIds(moduleIds)
+        searchOptions.setModuleIds(moduleIds)
         
         return self.searchInstances(searchOptions)
     }
@@ -63,7 +63,7 @@ public struct GeneralContentManager: HaloManager {
     public func getInstances(instanceIds instanceIds: [String], options: Halo.SearchOptions? = nil) -> Halo.Request {
         
         var searchOptions = options ?? SearchOptions()
-        searchOptions.addInstanceIds(instanceIds)
+        searchOptions.setInstanceIds(instanceIds)
         
         return self.searchInstances(searchOptions)
     }

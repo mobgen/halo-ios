@@ -79,37 +79,37 @@ public struct SearchOptions {
     
     public init() {}
     
-    public mutating func addSearchFilter(filter: SearchFilter) -> Halo.SearchOptions {
+    public mutating func setSearchFilter(filter: SearchFilter) -> Halo.SearchOptions {
         self.conditions = filter.body
         return self
     }
     
-    public mutating func addMetaFilter(filter: SearchFilter) -> Halo.SearchOptions {
+    public mutating func setMetaFilter(filter: SearchFilter) -> Halo.SearchOptions {
         self.metaConditions = filter.body
         return self
     }
     
-    public mutating func addFields(fields: [String]) -> Halo.SearchOptions {
+    public mutating func setFields(fields: [String]) -> Halo.SearchOptions {
         self.fields = fields
         return self
     }
     
-    public mutating func addTags(tags: [Halo.Tag]) -> Halo.SearchOptions {
+    public mutating func setTags(tags: [Halo.Tag]) -> Halo.SearchOptions {
         self.tags = tags
         return self
     }
     
-    public mutating func addModuleIds(ids: [String]) -> Halo.SearchOptions {
+    public mutating func setModuleIds(ids: [String]) -> Halo.SearchOptions {
         self.moduleIds = ids
         return self
     }
     
-    public mutating func addInstanceIds(ids: [String]) -> Halo.SearchOptions {
+    public mutating func setInstanceIds(ids: [String]) -> Halo.SearchOptions {
         self.instanceIds = ids
         return self
     }
 
-    public mutating func addPopulateFields(fields: [String]) -> Halo.SearchOptions {
+    public mutating func setPopulateFields(fields: [String]) -> Halo.SearchOptions {
         self.populateFields = fields
         return self
     }
@@ -134,7 +134,7 @@ public struct SearchOptions {
         return self
     }
     
-    public mutating func addPagination(page: Int, limit: Int, skip: Bool) -> Halo.SearchOptions {
+    public mutating func setPagination(page: Int, limit: Int, skip: Bool) -> Halo.SearchOptions {
         self.pagination = [
             "page"  : page,
             "limit" : limit,
