@@ -685,7 +685,7 @@ public enum Locale {
         case .FrenchNiger : return "fr-NE"
         case .FrenchFrenchPolynesia : return "fr-PF"
         case .FrenchSaintPierreAndMiquelon : return "fr-PM"
-        case .FrenchRwanda : return "fr-RE"
+        case .FrenchReunion : return "fr-RE"
         case .FrenchRwanda : return "fr-RW"
         case .FrenchSeychelles : return "fr-SC"
         case .FrenchChad : return "fr-TD"
@@ -898,7 +898,6 @@ public enum Locale {
         case .ChineseSingapore : return "zh-SG"
         case .ChineseTaiwan : return "zh-TW"
         case .Zulu : return "zu"
-        default: return nil
         }
     }
     
