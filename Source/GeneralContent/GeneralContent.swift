@@ -66,24 +66,6 @@ public struct GeneralContentManager: HaloManager {
         return self.searchInstances(searchOptions)
     }
     
-    // MARK: Get a single instance
-    
-    /**
-     Get a specific general content instance by id
-     
-     - parameter instanceId:     Id of the instance to be retrieved
-     - parameter offlinePolicy:  Offline policy to be considered when retrieving data
-     - parameter handler:        Closure to be executed after the completion of the request
-     */
-    public func getSingleInstance(instanceId instanceId: String, options: Halo.SearchOptions? = nil) -> Halo.Request {
-        
-        var searchOptions = options ?? SearchOptions()
-        searchOptions.addInstanceIds([instanceId])
-        searchOptions.skipPagination()
-        
-        return self.searchInstances(searchOptions)
-    }
-    
     
     public func searchInstances(searchOptions: Halo.SearchOptions) -> Halo.Request {
         

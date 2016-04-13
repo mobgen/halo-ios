@@ -21,6 +21,7 @@ public struct SearchOptions {
     internal var user: Halo.User?
     internal var offlinePolicy: Halo.OfflinePolicy?
     internal var generalContentFlags: Halo.GeneralContentFlag?
+    internal var locale: Halo.Locale?
     
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
@@ -61,6 +62,10 @@ public struct SearchOptions {
             if tags.count > 0 {
                 dict["segmentTags"] = tags.values.map { $0.toDictionary() }
             }
+        }
+        
+        if let locale = self.locale {
+            dict["locale"] = locale.description
         }
         
         if let flags = self.generalContentFlags {
@@ -116,6 +121,11 @@ public struct SearchOptions {
     
     public mutating func setUser(user: Halo.User) -> Halo.SearchOptions {
         self.user = user
+        return self
+    }
+    
+    public mutating func setLocale(locale: Halo.Locale) -> Halo.SearchOptions {
+        self.locale = locale
         return self
     }
     

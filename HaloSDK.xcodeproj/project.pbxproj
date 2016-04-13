@@ -147,6 +147,7 @@
 		0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615D1C32A33700EC72F9 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964B1C00892C00F6F734 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615E1C32A33700EC72F9 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0024964C1C00892C00F6F734 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBE04E1CBD2B1500B118AF /* Locale.swift */; };
 		00C2BCF11C033905006473B8 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2BCF01C033905006473B8 /* PersistenceManager.swift */; };
 		00DD96C21BD02F0200AF65CA /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
 		00E043CF1C848723008270DE /* CoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E043CE1C848723008270DE /* CoreManager.swift */; };
@@ -342,6 +343,7 @@
 		00921B921BBBD2CE00B79B50 /* upsilon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = upsilon.aiff; sourceTree = "<group>"; };
 		00921B931BBBD2CE00B79B50 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 		0094A31F1B70A6A600DED864 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NetworkManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		00BBE04E1CBD2B1500B118AF /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		00C2BCF01C033905006473B8 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceManager.swift; path = Source/Persistence/PersistenceManager.swift; sourceTree = "<group>"; };
 		00E043CE1C848723008270DE /* CoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreManager.swift; sourceTree = "<group>"; };
 		00E043D01C849CA8008270DE /* GCMManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCMManager.swift; sourceTree = "<group>"; };
@@ -890,6 +892,7 @@
 				0086F52D1B6C20C2001F70DE /* GeneralContent.swift */,
 				005677F31CABC8E900B6A4F3 /* SearchOptions.swift */,
 				00E508381CB691EB00B4B5AE /* SearchFilter.swift */,
+				00BBE04E1CBD2B1500B118AF /* Locale.swift */,
 			);
 			name = GeneralContent;
 			path = Source/GeneralContent;
@@ -1188,6 +1191,7 @@
 				005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */,
 				0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */,
 				002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */,
+				00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */,
 				00E043CF1C848723008270DE /* CoreManager.swift in Sources */,
 				003B75FA1C97F5D600F05202 /* UIImage+Async.swift in Sources */,
 				004ADDEB1BB1456B00FDDFE8 /* NSDate+Utils.swift in Sources */,
@@ -1433,7 +1437,6 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1469,7 +1472,6 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
