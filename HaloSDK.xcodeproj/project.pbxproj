@@ -87,7 +87,7 @@
 		007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */; };
 		0082D9C11B987BE400298AB8 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082D9C01B987BE400298AB8 /* ModelSpec.swift */; };
 		0082D9C31B98911200298AB8 /* instance_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0082D9C21B98911200298AB8 /* instance_list_success.json */; };
-		0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* GeneralContent.swift */; };
+		0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* ContentManager.swift */; };
 		008E2ACE1C5111D500FACAB2 /* GGLInstanceID.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A851C5111D500FACAB2 /* GGLInstanceID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		008E2ACF1C5111D500FACAB2 /* GGLInstanceIDConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A861C5111D500FACAB2 /* GGLInstanceIDConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		008E2AD01C5111D500FACAB2 /* GGLInstanceIDDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A871C5111D500FACAB2 /* GGLInstanceIDDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -246,7 +246,7 @@
 		007F78FE1B71F844004D1C22 /* GeneralContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentInstance.swift; sourceTree = "<group>"; };
 		0082D9C01B987BE400298AB8 /* ModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
 		0082D9C21B98911200298AB8 /* instance_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = instance_list_success.json; sourceTree = "<group>"; };
-		0086F52D1B6C20C2001F70DE /* GeneralContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContent.swift; sourceTree = "<group>"; };
+		0086F52D1B6C20C2001F70DE /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
 		008E2A851C5111D500FACAB2 /* GGLInstanceID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceID.h; sourceTree = "<group>"; };
 		008E2A861C5111D500FACAB2 /* GGLInstanceIDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceIDConfig.h; sourceTree = "<group>"; };
 		008E2A871C5111D500FACAB2 /* GGLInstanceIDDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceIDDelegate.h; sourceTree = "<group>"; };
@@ -889,7 +889,7 @@
 		00D1A36F1B42CA45008DFB71 /* GeneralContent */ = {
 			isa = PBXGroup;
 			children = (
-				0086F52D1B6C20C2001F70DE /* GeneralContent.swift */,
+				0086F52D1B6C20C2001F70DE /* ContentManager.swift */,
 				005677F31CABC8E900B6A4F3 /* SearchOptions.swift */,
 				00E508381CB691EB00B4B5AE /* SearchFilter.swift */,
 				00BBE04E1CBD2B1500B118AF /* Locale.swift */,
@@ -1189,7 +1189,7 @@
 				005677F41CABC8E900B6A4F3 /* SearchOptions.swift in Sources */,
 				0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */,
 				005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */,
-				0086F52E1B6C20C2001F70DE /* GeneralContent.swift in Sources */,
+				0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */,
 				002E89B11B74B2BD00D25302 /* UIDevice+Extra.swift in Sources */,
 				00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */,
 				00E043CF1C848723008270DE /* CoreManager.swift in Sources */,

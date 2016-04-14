@@ -107,8 +107,8 @@ public class HaloRequest: NSObject {
         return self
     }
     
-    public func getAll() -> HaloRequest {
-        request?.getAll()
+    public func skipPagination() -> HaloRequest {
+        request?.skipPagination()
         return self
     }
     

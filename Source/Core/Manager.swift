@@ -87,8 +87,8 @@ public struct Manager {
        return CoreManager()
     }()
     
-    public static var generalContent: GeneralContentManager = {
-       return GeneralContentManager()
+    public static var content: ContentManager = {
+       return ContentManager()
     }()
     
     static var network: NetworkManager = {

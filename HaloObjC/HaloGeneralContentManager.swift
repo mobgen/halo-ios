@@ -16,7 +16,7 @@ public class HaloGeneralContentManager: NSObject {
  
     static let sharedInstance = HaloGeneralContentManager()
     
-    private let generalContent = Halo.Manager.generalContent
+    private let content = Halo.Manager.content
     
     private override init() {
         super.init()
@@ -24,44 +24,23 @@ public class HaloGeneralContentManager: NSObject {
     
     @objc
     public func instances(moduleIds moduleIds: [String],
-        offlinePolicy: OfflinePolicy,
-        flags: GeneralContentFlags) -> HaloRequest {
+        offlinePolicy: OfflinePolicy) -> HaloRequest {
             
-            let flagOptions: GeneralContentFlag
-            
-            switch flags {
-            case .None: flagOptions = []
-            case .IncludeArchived: flagOptions = [.IncludeArchived]
-            case .IncludeUnpublished: flagOptions = [.IncludeUnpublished]
-            case .IncludeArchivedAndUnpublished: flagOptions = [.IncludeArchived, .IncludeUnpublished]
-            }
-        
             var searchOptions = SearchOptions()
             searchOptions.setOfflinePolicy(offlinePolicy)
-            searchOptions.setGeneralContentFlags(flagOptions)
         
-            return HaloRequest(request: generalContent.getInstances(moduleIds: moduleIds, options: searchOptions))
+            return HaloRequest(request: content.getInstances(searchOptions))
     }
     
     @objc
     public func instances(instanceIds instanceIds: [String],
-                                      offlinePolicy: OfflinePolicy,
-                                      flags: GeneralContentFlags) -> HaloRequest {
+                          offlinePolicy: OfflinePolicy) -> HaloRequest {
         
-        let flagOptions: GeneralContentFlag
-        
-        switch flags {
-        case .None: flagOptions = []
-        case .IncludeArchived: flagOptions = [.IncludeArchived]
-        case .IncludeUnpublished: flagOptions = [.IncludeUnpublished]
-        case .IncludeArchivedAndUnpublished: flagOptions = [.IncludeArchived, .IncludeUnpublished]
-        }
         
         var searchOptions = SearchOptions()
         searchOptions.setOfflinePolicy(offlinePolicy)
-        searchOptions.setGeneralContentFlags(flagOptions)
         
-        return HaloRequest(request: generalContent.getInstances(instanceIds: instanceIds, options: searchOptions))
+        return HaloRequest(request: content.getInstances(searchOptions))
         
     }
 

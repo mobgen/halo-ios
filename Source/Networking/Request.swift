@@ -101,7 +101,7 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
-    public func getAll() -> Halo.Request {
+    public func skipPagination() -> Halo.Request {
         self.params["skip"] = "true"
         return self
     }

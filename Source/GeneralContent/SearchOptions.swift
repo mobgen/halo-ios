@@ -20,7 +20,6 @@ public struct SearchOptions {
     internal var pagination: [String: AnyObject]?
     internal var user: Halo.User?
     internal var offlinePolicy: Halo.OfflinePolicy?
-    internal var generalContentFlags: Halo.GeneralContentFlag?
     internal var locale: Halo.Locale?
     
     public var body: [String: AnyObject] {
@@ -66,12 +65,6 @@ public struct SearchOptions {
         
         if let locale = self.locale {
             dict["locale"] = locale.description
-        }
-        
-        if let flags = self.generalContentFlags {
-            if !flags.contains(GeneralContentFlag.IncludeArchived) {
-                dict["archived"] = "false"
-            }
         }
         
         return dict
@@ -148,8 +141,4 @@ public struct SearchOptions {
         return self
     }
     
-    public mutating func setGeneralContentFlags(flags: Halo.GeneralContentFlag) -> Halo.SearchOptions {
-        self.generalContentFlags = flags
-        return self
-    }
 }
