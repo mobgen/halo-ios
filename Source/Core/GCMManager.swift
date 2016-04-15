@@ -51,13 +51,13 @@ class GCMManager: NSObject, GGLInstanceIDDelegate {
             
             gcm.tokenWithAuthorizedEntity(senderId, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
                 
-                if let currentUser = Manager.core.user {
-                    self.deviceToken = token
+                if let currentUser = Manager.core.user, gcmToken = token {
+                    self.deviceToken = gcmToken
                     
-                    let device = UserDevice(platform: "ios", token: token)
+                    let device = UserDevice(platform: "ios", token: gcmToken)
                     currentUser.devices = [device]
                 
-                    NSLog("Push device token: \(token)")
+                    NSLog("Push device token: \(gcmToken)")
                 }
                 
                 handler()

@@ -39,7 +39,7 @@ public final class User: NSObject, NSCoding {
     internal(set) public var updatedAt: NSDate?
 
     public override var description: String {
-        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n----"
+        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tdevices:\(devices)\n----"
     }
 
     public override init() {

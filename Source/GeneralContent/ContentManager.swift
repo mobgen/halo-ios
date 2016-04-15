@@ -44,5 +44,13 @@ public struct ContentManager: HaloManager {
         
         return request
     }
+    
+    public func syncModule(moduleId: String) -> Halo.Request {
+        
+        let request = Halo.Request(router: Router.ModuleSync)
+        
+        return request
+        
+    }
 
 }
