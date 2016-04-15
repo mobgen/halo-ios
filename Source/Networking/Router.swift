@@ -60,7 +60,7 @@ enum Router {
         case .SegmentationGetUser(let id):
             return "api/segmentation/appuser/\(id)"
         case .SegmentationUpdateUser(let id, _):
-            return "api/segmentation/appuser/\(id)?replaceTokens=true"
+            return "api/segmentation/appuser/\(id)"
         case .CustomRequest(_, let url, _):
             return "api/\(url)"
         }
@@ -107,7 +107,10 @@ enum Router {
         case .OAuth(_, let params): return params
         case .GeneralContentInstances(let params): return params
         case .SegmentationCreateUser(let params): return params
-        case .SegmentationUpdateUser(_, let params): return params
+        case .SegmentationUpdateUser(_, let params):
+            var newParams = params
+            newParams["replaceTokens"] = true
+            return newParams
         case .CustomRequest(_, _, let params): return params
         default: return nil
         }
