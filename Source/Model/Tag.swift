@@ -24,13 +24,16 @@ public final class Tag: NSObject, NSCoding {
     /// Value given to the tag
     public var value: String?
 
+    public var type: String?
+    
     override init() {
         super.init()
     }
-
-    public init(name: String, value: String?) {
+    
+    public init(name: String, value: String? = nil, type: String? = nil) {
         self.name = name
         self.value = value
+        self.type = type ?? "000000000000000000000002"
     }
 
     // MARK: NSCoding protocol implementation

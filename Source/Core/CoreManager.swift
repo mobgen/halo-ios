@@ -272,7 +272,7 @@ public class CoreManager: HaloManager {
         
         if let user = self.user {
             
-            user.addTag(CoreConstants.tagPlatformNameKey, value: "ios")
+            user.addSystemTag(CoreConstants.tagPlatformNameKey, value: "ios")
             
             let version = NSProcessInfo.processInfo().operatingSystemVersion
             var versionString = "\(version.majorVersion).\(version.minorVersion)"
@@ -281,21 +281,21 @@ public class CoreManager: HaloManager {
                 versionString = versionString.stringByAppendingString(".\(version.patchVersion)")
             }
             
-            user.addTag(CoreConstants.tagPlatformVersionKey, value: versionString)
+            user.addSystemTag(CoreConstants.tagPlatformVersionKey, value: versionString)
             
             if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
-                user.addTag(CoreConstants.tagApplicationNameKey, value: appName.description)
+                user.addSystemTag(CoreConstants.tagApplicationNameKey, value: appName.description)
             }
             
             if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
-                user.addTag(CoreConstants.tagApplicationVersionKey, value: appVersion.description)
+                user.addSystemTag(CoreConstants.tagApplicationVersionKey, value: appVersion.description)
             }
             
-            user.addTag(CoreConstants.tagDeviceManufacturerKey, value: "Apple")
-            user.addTag(CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
-            user.addTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
+            user.addSystemTag(CoreConstants.tagDeviceManufacturerKey, value: "Apple")
+            user.addSystemTag(CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
+            user.addSystemTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
             
-            user.addTag(CoreConstants.tagBLESupportKey, value: nil)
+            user.addSystemTag(CoreConstants.tagBLESupportKey, value: nil)
 
             //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
             
@@ -303,11 +303,11 @@ public class CoreManager: HaloManager {
             let bounds = screen.bounds
             let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
             
-            user.addTag(CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
+            user.addSystemTag(CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
             
             switch self.environment {
             case .Int, .Stage, .QA:
-                user.addTag(CoreConstants.tagTestDeviceKey, value: nil)
+                user.addSystemTag(CoreConstants.tagTestDeviceKey, value: nil)
             default:
                 break
             }
