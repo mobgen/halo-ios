@@ -127,10 +127,7 @@ public class Request: CustomDebugStringConvertible {
             return value + header.1.hash
         }) ?? 0
         
-        let hash = bodyHash + urlHash + headersHash
-        
-        NSLog("Request hash: \(hash)")
-        return hash
+        return bodyHash + urlHash + headersHash
     }
     
     public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
