@@ -63,11 +63,15 @@ public final class Tag: NSObject, NSCoding {
             dict["id"] = id
         }
 
+        dict["name"] = self.name
+        
         if let val = self.value {
             dict["value"] = val
         }
 
-        dict["name"] = self.name
+        if let type = self.type {
+            dict["tagType"] = type
+        }
 
         return dict
     }
