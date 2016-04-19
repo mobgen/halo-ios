@@ -98,8 +98,11 @@ class PersistenceManager: HaloManager {
         completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) {
         
             Manager.network.startRequest(request: urlRequest) { (response, result) -> Void in
-                handler?(result)
-            
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    handler?(result)
+                })
+                
                 let realm = try! Realm()
                 
                 switch result {
@@ -113,7 +116,9 @@ class PersistenceManager: HaloManager {
                     if error.code == -1009 {
                         self.localDataDontLoad(request: urlRequest, completionHandler: handler)
                     } else {
-                        handler?(result)
+                        dispatch_async(dispatch_get_main_queue(), { 
+                            handler?(result)
+                        })
                     }
                 }
             }
@@ -125,9 +130,13 @@ class PersistenceManager: HaloManager {
             let realm = try! Realm()
         
             if let persistentRequest = realm.objectForPrimaryKey(PersistentRequest.self, key: urlRequest.hash()), data = persistentRequest.data {
-                handler?(.Success(data, true))
+                dispatch_async(dispatch_get_main_queue(), { 
+                    handler?(.Success(data, true))
+                })
             } else {
-                handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: "No cached data found"])))
+                dispatch_async(dispatch_get_main_queue(), { 
+                    handler?(.Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: "No cached data found"])))
+                })
             }
     }
     

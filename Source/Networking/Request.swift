@@ -124,7 +124,7 @@ public class Request: CustomDebugStringConvertible {
         let bodyHash = URLRequest.HTTPBody?.hash ?? 0
         let urlHash = URLRequest.URL?.hash ?? 0
         let headersHash = URLRequest.allHTTPHeaderFields?.reduce(0, combine: { (value, header) -> Int in
-            return value + header.1.hash
+            return value + "\(header.0):\(header.1)".hash
         }) ?? 0
         
         return bodyHash + urlHash + headersHash
