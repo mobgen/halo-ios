@@ -44,6 +44,52 @@ class PersistenceManager: HaloManager {
             
     }
     
+    func syncModule(moduleId: String, completionHandler handler: (() -> Void)? = nil) -> Void {
+        
+        let request = Halo.Request(router: Router.ModuleSync)
+        var params: [String: AnyObject] = ["moduleId": moduleId]
+        
+        var persistentSync = self.realm.objectForPrimaryKey(Synchronization.self, key: moduleId)
+        
+        if let sync = persistentSync {
+            params["fromSync"] = sync.lastSync
+            
+        } else {
+            params["fromSync"] = 0
+            persistentSync = Synchronization(moduleId: moduleId)
+        }
+        
+        request.params(params).response { (result) in
+            
+            // Process the request
+            switch result {
+            case .Success(let values as [String: AnyObject], _):
+                
+                try! self.realm.write({
+                    // Persist/update the sync
+                    persistentSync!.lastSync = values["syncTimestamp"] as! Double
+                    
+                    self.realm.add(persistentSync!, update: true)
+                })
+                
+                NSLog("Values: \(values)")
+            
+            case .Failure(let error):
+                NSLog("Error sync'ing: \(error.localizedDescription)")
+            default:
+                break
+            }
+        }
+    }
+    
+    func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)? = nil) -> Void {
+        
+        if let sync = self.realm.objectForPrimaryKey(Synchronization.self, key: moduleId) {
+            self.realm.delete(sync)
+        }
+        
+    }
+    
     private func loadAndStoreData(request urlRequest: Halo.Request,
         completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) {
             

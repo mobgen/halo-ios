@@ -31,7 +31,8 @@ enum Router {
         switch self {
         case .OAuth(_, _),
              .SegmentationCreateUser(_),
-             .GeneralContentSearch:
+             .GeneralContentSearch,
+             .ModuleSync:
             return .POST
         case .SegmentationUpdateUser(_):
             return .PUT

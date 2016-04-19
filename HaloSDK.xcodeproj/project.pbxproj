@@ -139,6 +139,7 @@
 		008E2B0A1C51374600FACAB2 /* Halo-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2B011C511A7900FACAB2 /* Halo-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		008E2B591C524D7F00FACAB2 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B581C524D7F00FACAB2 /* AddressBook.framework */; };
 		008E2B5B1C524DAB00FACAB2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
+		008E651E1CC4ED9300BD94D0 /* Synchronization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E651D1CC4ED9300BD94D0 /* Synchronization.swift */; };
 		0090DFCF1C89BF9500BAF181 /* ImageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090DFCE1C89BF9500BAF181 /* ImageURL.swift */; };
 		0090DFD11C89E08200BAF181 /* ImageURLOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090DFD01C89E08200BAF181 /* ImageURLOptions.swift */; };
 		0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094A31F1B70A6A600DED864 /* NetworkManager.swift */; };
@@ -300,6 +301,7 @@
 		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		008E2B581C524D7F00FACAB2 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		008E651D1CC4ED9300BD94D0 /* Synchronization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Synchronization.swift; path = Source/Persistence/Synchronization.swift; sourceTree = "<group>"; };
 		0090DFCE1C89BF9500BAF181 /* ImageURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageURL.swift; path = Source/Helpers/ImageURL.swift; sourceTree = "<group>"; };
 		0090DFD01C89E08200BAF181 /* ImageURLOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageURLOptions.swift; path = Source/Helpers/ImageURLOptions.swift; sourceTree = "<group>"; };
 		00921B6C1BBBD2CE00B79B50 /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
@@ -903,6 +905,7 @@
 			children = (
 				00C2BCF01C033905006473B8 /* PersistenceManager.swift */,
 				005034B31C92BEE900362A8F /* PersistentRequest.swift */,
+				008E651D1CC4ED9300BD94D0 /* Synchronization.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -1203,6 +1206,7 @@
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,
 				00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */,
 				00EF266E1C86D55600A7BAC0 /* NSURLRequest+cURL.swift in Sources */,
+				008E651E1CC4ED9300BD94D0 /* Synchronization.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* GeneralContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
