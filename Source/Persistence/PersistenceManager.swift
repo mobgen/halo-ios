@@ -11,8 +11,6 @@ import RealmSwift
 
 class PersistenceManager: HaloManager {
 
-    let realm = try! Realm.init()
-
     init() {}
     
     func startup(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
@@ -49,27 +47,30 @@ class PersistenceManager: HaloManager {
         let request = Halo.Request(router: Router.ModuleSync)
         var params: [String: AnyObject] = ["moduleId": moduleId]
         
-        var persistentSync = self.realm.objectForPrimaryKey(Synchronization.self, key: moduleId)
+        let realm = try! Realm()
+        
+        var persistentSync = realm.objectForPrimaryKey(PersistentSync.self, key: moduleId)
         
         if let sync = persistentSync {
             params["fromSync"] = sync.lastSync
-            
         } else {
             params["fromSync"] = 0
-            persistentSync = Synchronization(moduleId: moduleId)
+            persistentSync = PersistentSync(moduleId: moduleId)
         }
         
         request.params(params).response { (result) in
+            
+            let realm = try! Realm()
             
             // Process the request
             switch result {
             case .Success(let values as [String: AnyObject], _):
                 
-                try! self.realm.write({
+                try! realm.write({
                     // Persist/update the sync
                     persistentSync!.lastSync = values["syncTimestamp"] as! Double
                     
-                    self.realm.add(persistentSync!, update: true)
+                    realm.add(persistentSync!, update: true)
                 })
                 
                 NSLog("Values: \(values)")
@@ -84,23 +85,28 @@ class PersistenceManager: HaloManager {
     
     func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)? = nil) -> Void {
         
-        if let sync = self.realm.objectForPrimaryKey(Synchronization.self, key: moduleId) {
-            self.realm.delete(sync)
-        }
+        let realm = try! Realm()
         
+        if let sync = realm.objectForPrimaryKey(PersistentSync.self, key: moduleId) {
+            let realm = try! Realm()
+            
+            realm.delete(sync)
+        }
     }
     
     private func loadAndStoreData(request urlRequest: Halo.Request,
         completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) {
-            
+        
             Manager.network.startRequest(request: urlRequest) { (response, result) -> Void in
                 handler?(result)
+            
+                let realm = try! Realm()
                 
                 switch result {
                 case .Success(let data, _):
                 
-                    try! self.realm.write({ () -> Void in
-                        self.realm.add(PersistentRequest(request: urlRequest, response: data), update: true)
+                    try! realm.write({ () -> Void in
+                        realm.add(PersistentRequest(request: urlRequest, response: data), update: true)
                     })
                 
                 case .Failure(let error):
@@ -115,7 +121,9 @@ class PersistenceManager: HaloManager {
     
     private func localDataDontLoad(request urlRequest: Halo.Request,
         completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) {
-            
+        
+            let realm = try! Realm()
+        
             if let persistentRequest = realm.objectForPrimaryKey(PersistentRequest.self, key: urlRequest.hash()), data = persistentRequest.data {
                 handler?(.Success(data, true))
             } else {

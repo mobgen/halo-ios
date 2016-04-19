@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-class Synchronization: Object {
+class PersistentSync: Object {
     
     dynamic var moduleId: String = ""
     dynamic var lastSync: Double = 0
