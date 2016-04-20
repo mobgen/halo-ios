@@ -12,7 +12,7 @@ import RealmSwift
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
  */
-public struct ContentManager: HaloManager {
+public struct ContentManager: HaloManager, ContentProvider {
 
     public var defaultLocale: Halo.Locale?
     

@@ -75,12 +75,6 @@ public enum HaloEnvironment {
     case None, LoadAndStoreLocalData, ReturnLocalDataDontLoad
 }
 
-protocol HaloManager {
-    
-    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
-    
-}
-
 public struct Manager {
     
     public static var core: CoreManager = {

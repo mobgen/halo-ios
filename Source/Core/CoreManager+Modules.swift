@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension CoreManager {
+extension CoreManager: ModulesProvider {
  
     /**
      Get a list of the existing modules for the provided client credentials
