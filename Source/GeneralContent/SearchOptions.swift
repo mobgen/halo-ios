@@ -18,7 +18,7 @@ public struct SearchOptions {
     internal var populateFields: [String]?
     internal var tags: [Halo.Tag]?
     internal var pagination: [String: AnyObject]?
-    internal var user: Halo.User?
+    internal var segmentWithUser: Bool = false
     internal var offlinePolicy: Halo.OfflinePolicy?
     internal var locale: Halo.Locale?
     
@@ -57,9 +57,11 @@ public struct SearchOptions {
             dict["pagination"] = pagination
         }
         
-        if let user = self.user, tags = user.tags {
-            if tags.count > 0 {
-                dict["segmentTags"] = tags.values.map { $0.toDictionary() }
+        if self.segmentWithUser {
+            if let user = Halo.Manager.core.user, tags = user.tags {
+                if tags.count > 0 {
+                    dict["segmentTags"] = tags.values.map { $0.toDictionary() }
+                }
             }
         }
         
@@ -112,8 +114,8 @@ public struct SearchOptions {
         return self
     }
     
-    public mutating func setUser(user: Halo.User) -> Halo.SearchOptions {
-        self.user = user
+    public mutating func segmentWithUser(segment: Bool) -> Halo.SearchOptions {
+        self.segmentWithUser = segment
         return self
     }
     
