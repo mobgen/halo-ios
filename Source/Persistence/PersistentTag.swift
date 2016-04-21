@@ -31,6 +31,10 @@ class PersistentTag: Object {
         
         let tag = Halo.Tag()
         
+        tag.id = self.id
+        tag.name = self.name
+        tag.value = self.value
+        
         return tag
     }
 }
