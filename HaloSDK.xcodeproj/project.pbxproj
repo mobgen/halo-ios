@@ -78,6 +78,9 @@
 		005421661CC76D230055B553 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421621CC76D230055B553 /* UIDevice+Extra.swift */; };
 		005421671CC76D230055B553 /* UIImage+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421631CC76D230055B553 /* UIImage+Async.swift */; };
 		005421691CC785210055B553 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421681CC785210055B553 /* Protocols.swift */; };
+		0054216B1CC8AE9C0055B553 /* PersistentTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054216A1CC8AE9C0055B553 /* PersistentTag.swift */; };
+		0054216D1CC8B41C0055B553 /* PersistentModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054216C1CC8B41C0055B553 /* PersistentModuleType.swift */; };
+		005421711CC8D6830055B553 /* PersistentContentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421701CC8D6830055B553 /* PersistentContentValue.swift */; };
 		005677F41CABC8E900B6A4F3 /* SearchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005677F31CABC8E900B6A4F3 /* SearchOptions.swift */; };
 		005DF3121B998BB500149B40 /* GeneralContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005DF3111B998BB500149B40 /* GeneralContentSpec.swift */; };
 		005E1ED61C69FFE800ED8763 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED51C69FFE800ED8763 /* Result.swift */; };
@@ -225,7 +228,7 @@
 		004FEC711BCFB788004216EE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		004FEC791BD0DCE8004216EE /* HaloResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		005034B11C92B11300362A8F /* HaloRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloRequest.swift; sourceTree = "<group>"; };
-		005034B31C92BEE900362A8F /* PersistentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentRequest.swift; path = Source/Persistence/PersistentRequest.swift; sourceTree = "<group>"; };
+		005034B31C92BEE900362A8F /* PersistentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRequest.swift; sourceTree = "<group>"; };
 		0053907D1B8C620B0036F579 /* oauth_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oauth_success.json; sourceTree = "<group>"; };
 		005390811B8C655C0036F579 /* oauth_failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = oauth_failure.json; sourceTree = "<group>"; };
 		005390831B8C67B80036F579 /* module_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = module_list_success.json; sourceTree = "<group>"; };
@@ -240,6 +243,9 @@
 		005421621CC76D230055B553 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
 		005421631CC76D230055B553 /* UIImage+Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Async.swift"; sourceTree = "<group>"; };
 		005421681CC785210055B553 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		0054216A1CC8AE9C0055B553 /* PersistentTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTag.swift; sourceTree = "<group>"; };
+		0054216C1CC8B41C0055B553 /* PersistentModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentModuleType.swift; sourceTree = "<group>"; };
+		005421701CC8D6830055B553 /* PersistentContentValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentContentValue.swift; sourceTree = "<group>"; };
 		005677F31CABC8E900B6A4F3 /* SearchOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchOptions.swift; sourceTree = "<group>"; };
 		005DF3111B998BB500149B40 /* GeneralContentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentSpec.swift; sourceTree = "<group>"; };
 		005E1ED51C69FFE800ED8763 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -314,7 +320,7 @@
 		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		008E2B581C524D7F00FACAB2 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		008E651D1CC4ED9300BD94D0 /* PersistentSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistentSync.swift; path = Source/Persistence/PersistentSync.swift; sourceTree = "<group>"; };
+		008E651D1CC4ED9300BD94D0 /* PersistentSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentSync.swift; sourceTree = "<group>"; };
 		0090DFCE1C89BF9500BAF181 /* CloudinaryURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudinaryURL.swift; path = Source/Helpers/CloudinaryURL.swift; sourceTree = "<group>"; };
 		0090DFD01C89E08200BAF181 /* CloudinaryURLOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudinaryURLOptions.swift; path = Source/Helpers/CloudinaryURLOptions.swift; sourceTree = "<group>"; };
 		00921B6C1BBBD2CE00B79B50 /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
@@ -359,7 +365,7 @@
 		00921B931BBBD2CE00B79B50 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 		0094A31F1B70A6A600DED864 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NetworkManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		00BBE04E1CBD2B1500B118AF /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
-		00C2BCF01C033905006473B8 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceManager.swift; path = Source/Persistence/PersistenceManager.swift; sourceTree = "<group>"; };
+		00C2BCF01C033905006473B8 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		00E043CE1C848723008270DE /* CoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreManager.swift; sourceTree = "<group>"; };
 		00E043D01C849CA8008270DE /* GCMManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCMManager.swift; sourceTree = "<group>"; };
 		00E508381CB691EB00B4B5AE /* SearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
@@ -920,12 +926,16 @@
 				0054215D1CC76C690055B553 /* PersistenceManager+Content.swift */,
 				0054215B1CC76A5B0055B553 /* PersistenceManager+Modules.swift */,
 				005421571CC678500055B553 /* PersistentContentInstance.swift */,
+				005421701CC8D6830055B553 /* PersistentContentValue.swift */,
 				005421591CC6785A0055B553 /* PersistentModule.swift */,
+				0054216C1CC8B41C0055B553 /* PersistentModuleType.swift */,
 				005034B31C92BEE900362A8F /* PersistentRequest.swift */,
 				005421551CC6783B0055B553 /* PersistentSearchResult.swift */,
 				008E651D1CC4ED9300BD94D0 /* PersistentSync.swift */,
+				0054216A1CC8AE9C0055B553 /* PersistentTag.swift */,
 			);
 			name = Persistence;
+			path = Source/Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1225,15 +1235,18 @@
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,
 				0054215A1CC6785A0055B553 /* PersistentModule.swift in Sources */,
 				00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */,
+				005421711CC8D6830055B553 /* PersistentContentValue.swift in Sources */,
 				005421561CC6783B0055B553 /* PersistentSearchResult.swift in Sources */,
 				0054215C1CC76A5B0055B553 /* PersistenceManager+Modules.swift in Sources */,
 				008E651E1CC4ED9300BD94D0 /* PersistentSync.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* ContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
+				0054216D1CC8B41C0055B553 /* PersistentModuleType.swift in Sources */,
 				005034B41C92BEE900362A8F /* PersistentRequest.swift in Sources */,
 				0090DFD11C89E08200BAF181 /* CloudinaryURLOptions.swift in Sources */,
 				003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */,
+				0054216B1CC8AE9C0055B553 /* PersistentTag.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				00E043D11C849CA8008270DE /* GCMManager.swift in Sources */,
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,

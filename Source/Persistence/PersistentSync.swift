@@ -11,6 +11,7 @@ import RealmSwift
 class PersistentSync: Object {
     
     dynamic var moduleId: String = ""
+    
     dynamic var lastSync: Double = 0
     
     convenience required init(moduleId: String, lastSync: Double? = nil) {

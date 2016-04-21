@@ -8,8 +8,10 @@
 
 import RealmSwift
 
-extension PersistenceManager {
+extension PersistenceManager: ModulesProvider {
     
-    
+    func getModules(offlinePolicy: OfflinePolicy?) -> Halo.Request {
+        return Halo.Request(path: "blah")
+    }
     
 }

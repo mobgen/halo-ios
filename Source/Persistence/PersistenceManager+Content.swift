@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-extension PersistenceManager {
+extension PersistenceManager: ContentProvider {
     
     func syncModule(moduleId: String, completionHandler handler: (() -> Void)? = nil) -> Void {
         
@@ -60,6 +60,10 @@ extension PersistenceManager {
             
             realm.delete(sync)
         }
+    }
+    
+    func getInstances(searchOptions: Halo.SearchOptions) -> Request {
+        return Halo.Request(path: "blah")
     }
     
 }

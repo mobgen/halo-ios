@@ -73,4 +73,6 @@ protocol ContentProvider {
     
     func syncModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void
     
+    func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void
+    
 }
