@@ -19,6 +19,7 @@ class PersistentModuleType: Object {
     dynamic var typeUrl: String = ""
     
     convenience required init(type: Halo.ModuleType) {
+        
         self.init()
         
         self.category = type.category?.rawValue ?? 0
@@ -27,4 +28,15 @@ class PersistentModuleType: Object {
         self.typeUrl = type.typeUrl ?? ""
     }
     
+    func getModel() -> Halo.ModuleType {
+        
+        let type = Halo.ModuleType()
+        
+        type.category = ModuleTypeCategory(rawValue: self.category)
+        type.enabled = self.enabled
+        type.name = self.name
+        type.typeUrl = self.typeUrl
+        
+        return type
+    }
 }

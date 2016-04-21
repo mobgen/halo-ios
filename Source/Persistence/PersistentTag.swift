@@ -26,4 +26,11 @@ class PersistentTag: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
+    
+    func getModel() -> Halo.Tag {
+        
+        let tag = Halo.Tag()
+        
+        return tag
+    }
 }
