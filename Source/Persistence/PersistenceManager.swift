@@ -11,8 +11,6 @@ import RealmSwift
 
 class PersistenceManager: HaloManager {
 
-    let realm = try! Realm.init()
-
     init() {}
     
     func startup(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
@@ -53,8 +51,10 @@ class PersistenceManager: HaloManager {
                 switch result {
                 case .Success(let data, _):
                 
-                    try! self.realm.write({ () -> Void in
-                        self.realm.add(PersistentRequest(request: urlRequest, response: data), update: true)
+                    let realm = try! Realm()
+                    
+                    try! realm.write({ () -> Void in
+                        realm.add(PersistentRequest(request: urlRequest, response: data), update: true)
                     })
                 
                 case .Failure(let error):
@@ -69,7 +69,9 @@ class PersistenceManager: HaloManager {
     
     private func localDataDontLoad(request urlRequest: Halo.Request,
         completionHandler handler: ((Halo.Result<NSData, NSError>) -> Void)? = nil) {
-            
+        
+            let realm = try! Realm()
+        
             if let persistentRequest = realm.objectForPrimaryKey(PersistentRequest.self, key: urlRequest.hash()), data = persistentRequest.data {
                 handler?(.Success(data, true))
             } else {
