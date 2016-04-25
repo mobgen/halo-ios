@@ -16,9 +16,23 @@ public class HaloCoreManager: NSObject {
     override private init() {}
     
     /// Delegate that will handle launching completion and other important steps in the flow
-    public var delegate: ManagerDelegate?
+    public var delegate: ManagerDelegate? {
+        get {
+            return core.delegate
+        }
+        set {
+            core.delegate = newValue
+        }
+    }
     
-    public var pushDelegate: PushDelegate?
+    public var pushDelegate: PushDelegate? {
+        get {
+            return core.pushDelegate
+        }
+        set {
+            core.pushDelegate = newValue
+        }
+    }
     
     public var debug: Bool {
         get {
