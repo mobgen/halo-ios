@@ -147,6 +147,10 @@ public class HaloCoreManager: NSObject {
         core.application(application, didReceiveRemoteNotification: userInfo)
     }
     
+    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        core.application(application, didReceiveLocalNotification: notification)
+    }
+    
     @objc
     public func modules(offlinePolicy: OfflinePolicy) -> HaloRequest {
         return HaloRequest(request: core.getModules(offlinePolicy))
