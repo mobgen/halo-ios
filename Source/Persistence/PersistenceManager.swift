@@ -56,11 +56,6 @@ class PersistenceManager: HaloManager {
                 switch result {
                 case .Success(let data, _):
                 
-<<<<<<< HEAD
-=======
-                    let realm = try! Realm()
-                    
->>>>>>> hotfix/1.1.6
                     try! realm.write({ () -> Void in
                         realm.add(PersistentRequest(request: urlRequest, response: data), update: true)
                     })
