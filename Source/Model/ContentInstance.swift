@@ -11,8 +11,8 @@ import Foundation
 /**
 This model class represents each of the instances stored as general content data.
 */
-@objc(HaloGeneralContentInstance)
-public class GeneralContentInstance: NSObject {
+@objc(HaloContentInstance)
+public class ContentInstance: NSObject {
 
     /// Unique identifier of this General Content instance
     public var id: String?

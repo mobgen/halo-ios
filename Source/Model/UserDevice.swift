@@ -21,6 +21,10 @@ public final class UserDevice: NSObject, NSCoding {
     /// Token used for push notifications
     public var token:String = ""
 
+    public override var description: String {
+        return "\n\t\tplatform: \(platform)\n\t\ttoken: \(token)"
+    }
+    
     init(platform: String, token: String) {
         self.platform = platform
         self.token = token

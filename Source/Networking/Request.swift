@@ -101,7 +101,7 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
-    public func getAll() -> Halo.Request {
+    public func skipPagination() -> Halo.Request {
         self.params["skip"] = "true"
         return self
     }
@@ -120,7 +120,14 @@ public class Request: CustomDebugStringConvertible {
     }
     
     func hash() -> Int {
-        return URLRequest.hash
+        
+        let bodyHash = URLRequest.HTTPBody?.hash ?? 0
+        let urlHash = URLRequest.URL?.hash ?? 0
+        let headersHash = URLRequest.allHTTPHeaderFields?.reduce(0, combine: { (value, header) -> Int in
+            return value + "\(header.0):\(header.1)".hash
+        }) ?? 0
+        
+        return bodyHash + urlHash + headersHash
     }
     
     public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
@@ -154,6 +161,5 @@ public class Request: CustomDebugStringConvertible {
         }
         return self
     }
-    
     
 }

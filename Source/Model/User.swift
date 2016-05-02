@@ -39,7 +39,7 @@ public final class User: NSObject, NSCoding {
     internal(set) public var updatedAt: NSDate?
 
     public override var description: String {
-        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n----"
+        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tdevices:\(devices)\n----"
     }
 
     public override init() {
@@ -79,20 +79,28 @@ public final class User: NSObject, NSCoding {
     - parameter name:  Name of the tag to be added
     - parameter value: Value of the tag to be added
     */
-    public func addTag(name: String, value: String?) {
+    public func addTag(name: String, value: String? = nil) -> Void {
+        self.addTag(name, value: value, type: "000000000000000000000002")
+    }
 
+    func addSystemTag(name: String, value: String? = nil) -> Void {
+        self.addTag(name, value: value, type: "000000000000000000000001")
+    }
+    
+    private func addTag(name: String, value: String? = nil, type: String) -> Void {
+        let tag = Halo.Tag(name: name, value: value, type: type)
+        
         if let tags = self.tags {
             if let tag = tags[name] {
                 tag.value = value
             } else {
-                self.tags![name] = Halo.Tag(name: name, value: value)
+                self.tags![name] = tag
             }
         } else {
-            self.tags = [name : Halo.Tag(name: name, value: value)]
+            self.tags = [name : tag]
         }
-
     }
-
+    
     /**
     Add a collection of custom tags to the user
 

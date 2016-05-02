@@ -132,7 +132,7 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                         handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                     }
                 } else {
-                    handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                    handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
                 }
             }.resume()
 

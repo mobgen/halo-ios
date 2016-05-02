@@ -28,6 +28,5 @@ class PersistentRequest: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
-
     
 }

@@ -6,53 +6,6 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-/**
-This delegate will provide methods that will act as interception points in the setup process of the SDK
-within the application
-*/
-@objc(HaloManagerDelegate)
-public protocol ManagerDelegate {
-    
-    /**
-     This delegate method provides full freedom to create the user that will be registered by the application.
-     
-     - returns: The newly created user
-     */
-    func managerWillSetupUser(user: Halo.User) -> Void
-    
-}
-
-/// Delegate to be implemented to handle push notifications easily
-@objc(HaloPushDelegate)
-public protocol PushDelegate {
-    /**
-     This handler will be called when any push notification is received (silent or not)
-     
-     - parameter application:       Application receiving the push notification
-     - parameter userInfo:          Dictionary containing information about the push notification
-     - parameter completionHandler: Closure to be called after completion
-     */
-    func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-    
-    /**
-     This handler will be called when a silent push notification is received
-     
-     - parameter application:       Application receiving the silent push notification
-     - parameter userInfo:          Dictionary containing information about the push notification
-     - parameter completionHandler: Closure to be called after completion
-     */
-    func haloApplication(application: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-    
-    /**
-     This handler will be called when a push notification is received
-     
-     - parameter application:       Application receiving the silent push notification
-     - parameter userInfo:          Dictionary containing information about the push notification
-     - parameter completionHandler: Closure to be called after completion
-     */
-    func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-}
-
 public class CoreManager: HaloManager {
     
     /// Delegate that will handle launching completion and other important steps in the flow
@@ -130,6 +83,9 @@ public class CoreManager: HaloManager {
     /// Variable to decide whether to enable system tags or not
     public var enableSystemTags: Bool = false
     
+    /// Variable to decide whether the SDK should behave as in development or production
+    public var development: Bool = true
+    
     /// Instance holding all the user-related information
     public var user: User?
 
@@ -196,6 +152,7 @@ public class CoreManager: HaloManager {
                     
                     self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
                     self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
+                    self.development = (data[CoreConstants.development] as? Bool) ?? true
                 }
             } else {
                 NSLog("No .plist found")
@@ -272,7 +229,7 @@ public class CoreManager: HaloManager {
         
         if let user = self.user {
             
-            user.addTag(CoreConstants.tagPlatformNameKey, value: "ios")
+            user.addSystemTag(CoreConstants.tagPlatformNameKey, value: "ios")
             
             let version = NSProcessInfo.processInfo().operatingSystemVersion
             var versionString = "\(version.majorVersion).\(version.minorVersion)"
@@ -281,21 +238,21 @@ public class CoreManager: HaloManager {
                 versionString = versionString.stringByAppendingString(".\(version.patchVersion)")
             }
             
-            user.addTag(CoreConstants.tagPlatformVersionKey, value: versionString)
+            user.addSystemTag(CoreConstants.tagPlatformVersionKey, value: versionString)
             
             if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
-                user.addTag(CoreConstants.tagApplicationNameKey, value: appName.description)
+                user.addSystemTag(CoreConstants.tagApplicationNameKey, value: appName.description)
             }
             
             if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
-                user.addTag(CoreConstants.tagApplicationVersionKey, value: appVersion.description)
+                user.addSystemTag(CoreConstants.tagApplicationVersionKey, value: appVersion.description)
             }
             
-            user.addTag(CoreConstants.tagDeviceManufacturerKey, value: "Apple")
-            user.addTag(CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
-            user.addTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
+            user.addSystemTag(CoreConstants.tagDeviceManufacturerKey, value: "Apple")
+            user.addSystemTag(CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
+            user.addSystemTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
             
-            user.addTag(CoreConstants.tagBLESupportKey, value: nil)
+            user.addSystemTag(CoreConstants.tagBLESupportKey, value: nil)
 
             //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
             
@@ -303,11 +260,11 @@ public class CoreManager: HaloManager {
             let bounds = screen.bounds
             let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
             
-            user.addTag(CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
+            user.addSystemTag(CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
             
             switch self.environment {
             case .Int, .Stage, .QA:
-                user.addTag(CoreConstants.tagTestDeviceKey, value: nil)
+                user.addSystemTag(CoreConstants.tagTestDeviceKey, value: nil)
             default:
                 break
             }
@@ -357,7 +314,7 @@ public class CoreManager: HaloManager {
      - parameter deviceToken: Device token returned after registering for push notifications
      */
     private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
-        self.gcmManager.setupPushNotifications(deviceToken) { () -> Void in
+        self.gcmManager.setupPushNotifications(deviceToken, development: self.development) { () -> Void in
             if self.enableSystemTags {
                 self.setupDefaultSystemTags()
             } else {
