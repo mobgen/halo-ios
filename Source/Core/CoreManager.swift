@@ -83,6 +83,9 @@ public class CoreManager: HaloManager {
     /// Variable to decide whether to enable system tags or not
     public var enableSystemTags: Bool = false
     
+    /// Variable to decide whether the SDK should behave as in development or production
+    public var development: Bool = true
+    
     /// Instance holding all the user-related information
     public var user: User?
 
@@ -149,6 +152,7 @@ public class CoreManager: HaloManager {
                     
                     self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
                     self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
+                    self.development = (data[CoreConstants.development] as? Bool) ?? true
                 }
             } else {
                 NSLog("No .plist found")
@@ -310,7 +314,7 @@ public class CoreManager: HaloManager {
      - parameter deviceToken: Device token returned after registering for push notifications
      */
     private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
-        self.gcmManager.setupPushNotifications(deviceToken) { () -> Void in
+        self.gcmManager.setupPushNotifications(deviceToken, development: self.development) { () -> Void in
             if self.enableSystemTags {
                 self.setupDefaultSystemTags()
             } else {

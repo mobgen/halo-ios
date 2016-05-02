@@ -28,7 +28,7 @@ class GCMManager: NSObject, GGLInstanceIDDelegate {
         self.gcmSenderId = GGLContext.sharedInstance().configuration.gcmSenderID
     }
     
-    func setupPushNotifications(token: NSData, completionHandler handler: () -> Void) -> Void {
+    func setupPushNotifications(token: NSData, development: Bool, completionHandler handler: () -> Void) -> Void {
         
         // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
         
@@ -46,7 +46,7 @@ class GCMManager: NSObject, GGLInstanceIDDelegate {
             
             let registrationOptions: [String : AnyObject] = [
                 kGGLInstanceIDRegisterAPNSOption: token,
-                kGGLInstanceIDAPNSServerTypeSandboxOption: true
+                kGGLInstanceIDAPNSServerTypeSandboxOption: development
             ]
             
             gcm.tokenWithAuthorizedEntity(senderId, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: { (token, error) -> Void in
