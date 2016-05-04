@@ -52,7 +52,7 @@ class PersistentModule: Object {
     }
     
     override static func primaryKey() -> String? {
-        return "id"
+        return "internalId"
     }
     
     func getModel() -> Halo.Module {
