@@ -390,7 +390,10 @@ public class CoreManager: HaloManager {
      */
     public func applicationDidBecomeActive(application: UIApplication) {
         // Connect to the GCM server to receive non-APNS notifications
-        if self.enablePush {
+        
+        let allowedPush = application.isRegisteredForRemoteNotifications()
+        
+        if allowedPush && self.enablePush {
             GCMService.sharedInstance().connectWithHandler({
                 (error) -> Void in
                 if error != nil {
@@ -408,7 +411,10 @@ public class CoreManager: HaloManager {
      - parameter application: Application being configured
      */
     public func applicationDidEnterBackground(application: UIApplication) {
-        if self.enablePush {
+        
+        let allowedPush = application.isRegisteredForRemoteNotifications()
+        
+        if allowedPush && self.enablePush {
             GCMService.sharedInstance().disconnect()
         }
     }
