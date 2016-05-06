@@ -161,6 +161,10 @@ public class HaloCoreManager: NSObject {
         core.application(application, didReceiveRemoteNotification: userInfo)
     }
     
+    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        core.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+    }
+    
     public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         core.application(application, didReceiveLocalNotification: notification)
     }
