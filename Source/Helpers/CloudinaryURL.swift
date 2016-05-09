@@ -19,7 +19,7 @@ public class CloudinaryURL {
 
         if self.url.containsString("cloudinary.com") {
             if let match = self.url.rangeOfString("/upload/") {
-                let endUrl = self.url.substringFromIndex(match.endIndex.successor())
+                let endUrl = self.url.substringFromIndex(match.endIndex)
                 self.url = self.url.stringByReplacingOccurrencesOfString(endUrl, withString: "\(params.joinWithSeparator(","))/\(endUrl)")
             }
         }

@@ -120,34 +120,34 @@ public enum ImageEffect {
         switch self {
         case .Hue(let value):
             if let v = value where (-100...100) ~= v {
-                return "hue:\(value)"
+                return "hue:\(v)"
             }
             return "hue"
         case .Red(let value):
             if let v = value where (-100...100) ~= v {
-                return "red:\(value)"
+                return "red:\(v)"
             }
             return "red"
         case .Green(let value):
             if let v = value where (-100...100) ~= v {
-                return "green:\(value)"
+                return "green:\(v)"
             }
             return "green"
         case .Blue(let value):
             if let v = value where (-100...100) ~= v {
-                return "blue:\(value)"
+                return "blue:\(v)"
             }
             return "blue"
         case .Negate:
             return "negate"
         case .Brightness(let value):
             if let v = value where (-99...100) ~= v {
-                return "brightness:\(value)"
+                return "brightness:\(v)"
             }
             return "brightness"
         case .Sepia(let value):
             if let v = value where (1...100) ~= v {
-                return "sepia:\(value)"
+                return "sepia:\(v)"
             }
             return "sepia"
         case .Grayscale:
@@ -156,24 +156,24 @@ public enum ImageEffect {
             return "blackwhite"
         case .Saturation(let value):
             if let v = value where (-100...100) ~= v {
-                return "saturation:\(value)"
+                return "saturation:\(v)"
             }
             return "saturation"
         case .Colorize(let value):
             if let v = value where (0...100) ~= v {
-                return "colorize:\(value)"
+                return "colorize:\(v)"
             }
             return "colorize"
         case .Contrast(let value):
             if let v = value where (-100...100) ~= v {
-                return "contrast:\(value)"
+                return "contrast:\(v)"
             }
             return "contrast"
         case .AutoContrast:
             return "auto_contrast"
         case .Vibrance(let value):
             if let v = value where (-100...100) ~= v {
-                return "vibrance:\(value)"
+                return "vibrance:\(v)"
             }
             return "vibrance"
         case .AutoColor:
@@ -184,14 +184,14 @@ public enum ImageEffect {
             return "auto_brightness"
         case .FillLight(let value):
             if let v = value where (-100...100) ~= v {
-                return "fill_light:\(value)"
+                return "fill_light:\(v)"
             }
             return "fill_light"
         case .ViesusCorrect:
             return "viesus_correct"
         case .Gamma(let value):
             if let v = value where (-50...150) ~= v {
-                return "gamma:\(value)"
+                return "gamma:\(v)"
             }
             return "gamma"
         case .Screen:
@@ -204,12 +204,12 @@ public enum ImageEffect {
             return "make_transparent"
         case .Trim(let value):
             if let v = value where (0...100) ~= v {
-                return "trim:\(value)"
+                return "trim:\(v)"
             }
             return "trim"
         case .Shadow(let value):
             if let v = value where (0...100) ~= v {
-                return "shadow:\(value)"
+                return "shadow:\(v)"
             }
             return "shadow"
         case .Distort(let p0, let p1, let p2, let p3):
@@ -220,7 +220,7 @@ public enum ImageEffect {
             return "displace"
         case .OilPaint(let value):
             if let v = value where (0...100) ~= v {
-                return "oil_paint:\(value)"
+                return "oil_paint:\(v)"
             }
             return "oil_paint"
         case .RedEye:
@@ -229,42 +229,42 @@ public enum ImageEffect {
             return "adv_redeye"
         case .Vignette(let value):
             if let v = value where (0...100) ~= v {
-                return "vignette:\(value)"
+                return "vignette:\(v)"
             }
             return "vignette"
         case .GradientFade(let value):
             if let v = value where (0...100) ~= v {
-                return "gradient_fade:\(value)"
+                return "gradient_fade:\(v)"
             }
             return "gradient_fade"
         case .Pixelate(let value):
             if let v = value where (1...200) ~= v {
-                return "pixelate:\(value)"
+                return "pixelate:\(v)"
             }
             return "pixelate"
         case .PixelateFaces(let value):
             if let v = value where (1...200) ~= v {
-                return "pixelate_faces:\(value)"
+                return "pixelate_faces:\(v)"
             }
             return "pixelate_faces"
         case .Blur(let value):
             if let v = value where (1...2000) ~= v {
-                return "blur:\(value)"
+                return "blur:\(v)"
             }
             return "blur"
         case .BlurFaces(let value):
             if let v = value where (1...2000) ~= v {
-                return "blur_faces:\(value)"
+                return "blur_faces:\(v)"
             }
             return "blur_faces"
         case .Sharpen(let value):
             if let v = value where (1...2000) ~= v {
-                return "sharpen:\(value)"
+                return "sharpen:\(v)"
             }
             return "sharpen"
         case .UnsharpMask(let value):
             if let v = value where (1...2000) ~= v {
-                return "unsharp_mask:\(value)"
+                return "unsharp_mask:\(v)"
             }
             return "unsharp_mask"
         }
