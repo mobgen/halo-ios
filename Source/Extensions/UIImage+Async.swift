@@ -31,11 +31,11 @@ extension UIImage {
 
 extension UIImageView {
     
-    public func setImageWithURL(url: NSURL) {
-        self.setImageWithURL(url, placeholderImage: nil)
+    public func setImageWithURL(url: NSURL, completionHandler handler: ((UIImageView) -> Void)? = nil) {
+        self.setImageWithURL(url, placeholderImage: nil, completionHandler: handler)
     }
     
-    public func setImageWithURL(url: NSURL, placeholderImage placeholder: UIImage?) {
+    public func setImageWithURL(url: NSURL, placeholderImage placeholder: UIImage?, completionHandler handler: ((UIImageView) -> Void)? = nil) {
     
         if let p = placeholder {
             self.image = p
@@ -45,6 +45,7 @@ extension UIImageView {
             if let img = image {
                 self.image = img
             }
+            handler?(self)
         }
         
     }
