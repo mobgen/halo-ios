@@ -136,8 +136,8 @@ public class Request: CustomDebugStringConvertible {
                     handler?(result)
                 })
             }
-        case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-            Manager.persistence.startRequest(request: self, useNetwork: (self.offlineMode == .LoadAndStoreLocalData), completionHandler: handler)
+        default:
+            break
         }
         
         return self

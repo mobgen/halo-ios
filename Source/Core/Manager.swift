@@ -89,7 +89,4 @@ public struct Manager {
         return NetworkManager()
     }()
     
-    static var persistence: PersistenceManager = {
-        return PersistenceManager()
-    }()
 }

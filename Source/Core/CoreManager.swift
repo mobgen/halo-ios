@@ -112,8 +112,6 @@ public class CoreManager: HaloManager {
         self.completionHandler = handler
         Router.token = nil
         
-        Manager.persistence.startup()
-        
         Manager.network.startup { (success) -> Void in
             
             if (!success) {

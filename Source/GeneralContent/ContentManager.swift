@@ -20,9 +20,6 @@ public struct ContentManager: HaloManager, ContentProvider {
 
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
-        // Start up the persistence manager
-        Manager.persistence.startup(completionHandler: handler)
-        
     }
 
     // MARK: Get instances
@@ -49,11 +46,11 @@ public struct ContentManager: HaloManager, ContentProvider {
     }
     
     public func syncModule(moduleId: String, completionHandler handler: (() -> Void)? = nil) -> Void {
-        Manager.persistence.syncModule(moduleId, completionHandler: handler)
+        
     }
     
     public func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void {
-        Manager.persistence.clearSyncedModule(moduleId, completionHandler: handler)
+        
     }
 
 }
