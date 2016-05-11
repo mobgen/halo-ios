@@ -360,8 +360,8 @@ public class CoreManager: HaloManager {
         
         self.pushDelegate?.haloApplication(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
         
-        if let silent = userInfo["content_available"] as? Int {
-            if silent == 1 {
+        if let silent = userInfo["content_available"] as? String {
+            if silent == "1" {
                 self.pushDelegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
             } else {
                 let notif = UILocalNotification()
