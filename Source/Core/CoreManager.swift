@@ -302,8 +302,18 @@ public class CoreManager: HaloManager {
     
     public func saveUser(completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
         if let user = self.user {
-            Manager.network.createUpdateUser(user, completionHandler: handler)
-        }
+            Manager.network.createUpdateUser(user) { result in
+                
+                switch result {
+                case .Success(let user, _):
+                    self.user = user
+                case .Failure(let error):
+                    NSLog("Error saving user: \(error.localizedDescription)")
+                }
+                
+                handler?(result)
+            }
+         }
     }
     
     /**
