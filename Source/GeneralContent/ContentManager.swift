@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
