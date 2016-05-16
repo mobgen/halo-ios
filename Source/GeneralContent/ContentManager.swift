@@ -43,13 +43,5 @@ public struct ContentManager: HaloManager, ContentProvider {
         
         return request
     }
-    
-    public func syncModule(moduleId: String, completionHandler handler: (() -> Void)? = nil) -> Void {
-        
-    }
-    
-    public func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void {
-        
-    }
 
 }

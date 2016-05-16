@@ -429,7 +429,7 @@ public class CoreManager: HaloManager {
     
     private func needsUpdate(completionHandler handler: (Bool) -> Void) -> Void {
         
-        Request(path: "/api/authentication/version").params(["current": "true"]).response { result in
+        try! Request(path: "/api/authentication/version").params(["current": "true"]).response { result in
             switch result {
             case .Success(let data as [[String: AnyObject]], _):
                 if let info = data.first, minIOS = info["minIOS"] {

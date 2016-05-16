@@ -127,7 +127,7 @@ public class Request: CustomDebugStringConvertible {
         return bodyHash + urlHash
     }
     
-    public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
+    public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
         
         switch self.offlineMode {
         case .None:
@@ -137,15 +137,15 @@ public class Request: CustomDebugStringConvertible {
                 })
             }
         default:
-            break
+            throw HaloError.NotImplementedOfflinePolicy
         }
         
         return self
     }
     
-    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Halo.Request {
+    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request {
         
-        self.responseData { (result) -> Void in
+        try self.responseData { (result) -> Void in
             switch result {
             case .Success(let data, _):
                 if let successHandler = handler {

@@ -87,6 +87,7 @@
 		0082D9C11B987BE400298AB8 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082D9C01B987BE400298AB8 /* ModelSpec.swift */; };
 		0082D9C31B98911200298AB8 /* instance_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0082D9C21B98911200298AB8 /* instance_list_success.json */; };
 		0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* ContentManager.swift */; };
+		008DB38B1CEA15D9001D6CDB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DB38A1CEA15D9001D6CDB /* Errors.swift */; };
 		008E2ACE1C5111D500FACAB2 /* GGLInstanceID.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A851C5111D500FACAB2 /* GGLInstanceID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		008E2ACF1C5111D500FACAB2 /* GGLInstanceIDConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A861C5111D500FACAB2 /* GGLInstanceIDConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		008E2AD01C5111D500FACAB2 /* GGLInstanceIDDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 008E2A871C5111D500FACAB2 /* GGLInstanceIDDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -245,6 +246,7 @@
 		0082D9C01B987BE400298AB8 /* ModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
 		0082D9C21B98911200298AB8 /* instance_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = instance_list_success.json; sourceTree = "<group>"; };
 		0086F52D1B6C20C2001F70DE /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
+		008DB38A1CEA15D9001D6CDB /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		008E2A851C5111D500FACAB2 /* GGLInstanceID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceID.h; sourceTree = "<group>"; };
 		008E2A861C5111D500FACAB2 /* GGLInstanceIDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceIDConfig.h; sourceTree = "<group>"; };
 		008E2A871C5111D500FACAB2 /* GGLInstanceIDDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLInstanceIDDelegate.h; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				006A60211B318DCC0045395A /* Manager.swift */,
 				005421681CC785210055B553 /* Protocols.swift */,
 				005E1ED51C69FFE800ED8763 /* Result.swift */,
+				008DB38A1CEA15D9001D6CDB /* Errors.swift */,
 			);
 			name = Core;
 			path = Source/Core;
@@ -1175,6 +1178,7 @@
 				005677F41CABC8E900B6A4F3 /* SearchOptions.swift in Sources */,
 				0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */,
 				005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */,
+				008DB38B1CEA15D9001D6CDB /* Errors.swift in Sources */,
 				0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */,
 				00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */,
 				00E043CF1C848723008270DE /* CoreManager.swift in Sources */,

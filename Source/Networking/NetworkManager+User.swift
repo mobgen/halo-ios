@@ -16,7 +16,7 @@ extension NetworkManager {
 
             let request = Halo.Request(router: Router.SegmentationGetUser(id))
             
-            request.response(completionHandler: { (result) -> Void in
+            try! request.response(completionHandler: { (result) -> Void in
                 switch result {
                 case .Success(let data as [String : AnyObject], let cached):
                     handler?(.Success(User.fromDictionary(data), cached))
@@ -49,7 +49,7 @@ extension NetworkManager {
             request = Halo.Request(router: Router.SegmentationCreateUser(user.toDictionary()))
         }
 
-        request.response { (result) -> Void in
+        try! request.response { (result) -> Void in
             switch result {
             case .Success(let data as [String : AnyObject], let cached):
                 handler?(.Success(User.fromDictionary(data), cached))
