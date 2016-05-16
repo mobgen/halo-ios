@@ -8,13 +8,13 @@
 
 public class Request: CustomDebugStringConvertible {
 
-    private var url: NSURL?
-    private var include = false
-    private var method: Halo.Method = .GET
-    private var parameterEncoding: Halo.ParameterEncoding = .URL
-    private var headers: [String: String] = [:]
-    private var offlineMode = Manager.core.defaultOfflinePolicy
-    private var params: [String: AnyObject] = [:]
+    public private(set) var url: NSURL?
+    public private(set) var include = false
+    public private(set) var method: Halo.Method = .GET
+    public private(set) var parameterEncoding: Halo.ParameterEncoding = .URL
+    public private(set) var headers: [String: String] = [:]
+    public private(set) var offlineMode = Manager.core.defaultOfflinePolicy
+    public private(set) var params: [String: AnyObject] = [:]
 
     var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)

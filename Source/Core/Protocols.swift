@@ -71,8 +71,4 @@ public protocol ContentProvider {
     
     func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request
     
-    func syncModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void
-    
-    func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void
-    
 }
