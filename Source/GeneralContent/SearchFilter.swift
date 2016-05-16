@@ -46,11 +46,10 @@ public struct SearchFilter {
         if let
             operation = self.operation,
             property = self.property,
-            value = self.value,
             type = self.type {
                 dict["operation"] = operation
                 dict["property"] = property
-                dict["value"] = value
+                dict["value"] = value ?? NSNull()
                 dict["type"] = type
         }
         
