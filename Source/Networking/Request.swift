@@ -47,7 +47,7 @@ public class Request: CustomDebugStringConvertible {
         self.url = NSURL(string: path, relativeToURL: relativeToURL)
     }
 
-    init(router: Router) {
+    public init(router: Router) {
         self.url = NSURL(string: router.path, relativeToURL: Router.baseURL)
         self.method = router.method
         self.parameterEncoding = router.parameterEncoding
@@ -119,7 +119,7 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
-    func hash() -> Int {
+    public func hash() -> Int {
         
         let bodyHash = URLRequest.HTTPBody?.hash ?? 0
         let urlHash = URLRequest.URL?.hash ?? 0

@@ -49,7 +49,7 @@ public enum HaloEnvironment {
         }
     }
     
-    var description: String {
+    public var description: String {
         switch self {
         case .Int:
             return "Int"
@@ -85,7 +85,7 @@ public struct Manager {
        return ContentManager()
     }()
     
-    static var network: NetworkManager = {
+    public static var network: NetworkManager = {
         return NetworkManager()
     }()
     

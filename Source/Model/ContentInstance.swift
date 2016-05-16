@@ -44,7 +44,7 @@ public class ContentInstance: NSObject {
     /// Dictionary of tags associated to this general content instance
     public var tags: [String: Halo.Tag] = [:]
     
-    override init() {
+    public override init() {
         super.init()
     }
     

@@ -25,7 +25,7 @@ public final class UserDevice: NSObject, NSCoding {
         return "\n\t\tplatform: \(platform)\n\t\ttoken: \(token)"
     }
     
-    init(platform: String, token: String) {
+    public init(platform: String, token: String) {
         self.platform = platform
         self.token = token
     }

@@ -55,19 +55,19 @@ public protocol PushDelegate {
 
 /// Internal protocols
 
-protocol HaloManager {
+public protocol HaloManager {
     
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
     
 }
 
-protocol ModulesProvider {
+public protocol ModulesProvider {
     
     func getModules(offlinePolicy: OfflinePolicy?) -> Halo.Request
     
 }
 
-protocol ContentProvider {
+public protocol ContentProvider {
     
     func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request
     

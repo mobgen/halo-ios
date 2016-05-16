@@ -17,7 +17,7 @@ public struct ContentManager: HaloManager, ContentProvider {
     
     init() {}
 
-    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
     }
 

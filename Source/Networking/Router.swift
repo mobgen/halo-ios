@@ -7,7 +7,7 @@
 //
 
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
-enum Router {
+public enum Router {
 
     /// Common base url of all the API endpoints
     static var baseURL = NSURL(string: "https://halo.mobgen.com")

@@ -26,7 +26,7 @@ private struct CachedTask {
     case App, User
 }
 
-class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
+public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     var debug: Bool = false
 
@@ -67,7 +67,7 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
     
-    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         let bundle = NSBundle.mainBundle()
         
@@ -138,7 +138,7 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     }
 
-    func startRequest(request urlRequest: Halo.Request,
+    public func startRequest(request urlRequest: Halo.Request,
         completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
 
             self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
@@ -279,7 +279,7 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     // MARK: NSURLSessionDelegate implementation
 
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
         var credential: NSURLCredential?
 
