@@ -124,21 +124,26 @@ public class HaloRequest: NSObject {
     
     public func responseData(success success:((NSData, Bool) -> Void)?, failure:((NSError) -> Void)?) -> HaloRequest {
         
-        request?.responseData(completionHandler: { (result) -> Void in
-            switch result {
-            case .Success(let data, let cached):
-                success?(data, cached)
-            case .Failure(let error):
-                failure?(error)
-            }
-        })
+        do {
+            try request?.responseData(completionHandler: { (result) -> Void in
+                switch result {
+                case .Success(let data, let cached):
+                    success?(data, cached)
+                case .Failure(let error):
+                    failure?(error)
+                }
+            })
+        } catch _ {
+            NSLog("Error performing request: \(self.debugDescription)")
+        }
         
         return self
     }
     
     public func response(success success:((AnyObject, Bool) -> Void)?, failure:((NSError) -> Void)?) -> HaloRequest {
         
-        request?.response(completionHandler: { (result) -> Void in
+        do {
+        try request?.response(completionHandler: { (result) -> Void in
             switch result {
             case .Success(let data, let cached):
                 success?(data, cached)
@@ -146,6 +151,9 @@ public class HaloRequest: NSObject {
                 failure?(error)
             }
         })
+        } catch _ {
+            NSLog("Error performing request: \(self.debugDescription)")
+        }
         
         return self
     }
