@@ -53,7 +53,7 @@ public protocol PushDelegate {
     func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 }
 
-/// Internal protocols
+/// Other protocols
 
 public protocol HaloManager {
     

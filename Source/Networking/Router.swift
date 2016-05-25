@@ -10,7 +10,7 @@
 public enum Router {
 
     /// Common base url of all the API endpoints
-    static var baseURL = NSURL(string: "https://halo.mobgen.com")
+    public static var baseURL = NSURL(string: "https://halo.mobgen.com")
 
     /// Token to be used for authentication purposes
     static var token:Token?

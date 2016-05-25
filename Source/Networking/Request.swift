@@ -13,7 +13,7 @@ public class Request: CustomDebugStringConvertible {
     public private(set) var method: Halo.Method = .GET
     public private(set) var parameterEncoding: Halo.ParameterEncoding = .URL
     public private(set) var headers: [String: String] = [:]
-    public private(set) var offlineMode = Manager.core.defaultOfflinePolicy
+    public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
     public private(set) var params: [String: AnyObject] = [:]
 
     var URLRequest: NSMutableURLRequest {
@@ -59,7 +59,7 @@ public class Request: CustomDebugStringConvertible {
     }
 
     public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request {
-        self.offlineMode = policy
+        self.offlinePolicy = policy
         return self
     }
     
@@ -129,7 +129,7 @@ public class Request: CustomDebugStringConvertible {
     
     public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
         
-        switch self.offlineMode {
+        switch self.offlinePolicy {
         case .None:
             Manager.network.startRequest(request: self) { (resp, result) in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
