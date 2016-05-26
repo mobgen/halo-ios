@@ -132,9 +132,7 @@ public class Request: CustomDebugStringConvertible {
         switch self.offlinePolicy {
         case .None:
             Manager.network.startRequest(request: self) { (resp, result) in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    handler?(result)
-                })
+                handler?(result)
             }
         default:
             throw HaloError.NotImplementedOfflinePolicy
