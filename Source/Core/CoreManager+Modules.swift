@@ -14,7 +14,6 @@ extension CoreManager: ModulesProvider {
      Get a list of the existing modules for the provided client credentials
      
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
-     - parameter completionHandler:  Closure to be executed when the request has finished
      */
     public func getModules(offlinePolicy: OfflinePolicy? = nil) -> Halo.Request {
         

@@ -147,7 +147,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     }
 
-    public func startRequest(request urlRequest: Halo.Request,
+    func startRequest(request urlRequest: Halo.Request,
         completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
 
             self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
