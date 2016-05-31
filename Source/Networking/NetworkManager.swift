@@ -104,7 +104,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                     
                     if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                         self.cachedTasks.append(cachedTask)
-                        self.refreshToken()
+                        self.authenticate()
                         return
                     }
                     
@@ -156,7 +156,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     /**
      Obtain/refresh an authentication token when needed
      */
-    func refreshToken(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    func authenticate(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         
         self.isRefreshing = true
         var params: [String : AnyObject]

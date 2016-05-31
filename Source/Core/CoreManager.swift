@@ -314,6 +314,12 @@ public class CoreManager: HaloManager {
          }
     }
     
+    public func authenticate(completionHandler handler: ((Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+        Manager.network.authenticate { (_, result) in
+            handler?(result)
+        }
+    }
+    
     /**
      Set up the desired push notifications to be received. To be called after the device has been
      registered
