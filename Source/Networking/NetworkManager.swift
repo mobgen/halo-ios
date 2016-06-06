@@ -94,13 +94,16 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 return
             }
 
-            if self.debug {
-                debugPrint(urlRequest)
-            }
-
+            let start = NSDate()
+        
             session.dataTaskWithRequest(urlRequest.URLRequest) { (data, response, error) -> Void in
                 
                 if let resp = response as? NSHTTPURLResponse {
+            
+                    if self.debug {
+                        let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
+                        print("\(urlRequest) [\(elapsed)ms]")
+                    }
                     
                     if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                         self.cachedTasks.append(cachedTask)
@@ -199,13 +202,16 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
             
             let req = Halo.Request(router: Router.OAuth(cred, params))
 
-            if self.debug {
-                debugPrint(req)
-            }
-
+            let start = NSDate()
+            
             self.session.dataTaskWithRequest(req.URLRequest, completionHandler: { (data, response, error) -> Void in
             
                 if let resp = response as? NSHTTPURLResponse {
+                    
+                    if self.debug {
+                        let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
+                        print("\(req) [\(elapsed)ms]")
+                    }
                     
                     if resp.statusCode > 399 {
                         
