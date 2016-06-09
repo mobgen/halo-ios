@@ -11,28 +11,28 @@ import Foundation
 public class SearchFilterHelper {
     
     public static func getDraftItems() -> SearchFilter {
-        return SearchFilter(operation: .Eq, property: "publishedAt", value: NSNull())
+        return SearchFilter(operation: .Eq, property: "publishedAt", value: nil)
     }
     
     public static func getLastUpdatedItems(from: NSDate) -> SearchFilter {
         let condition1 = SearchFilter(operation: .Gte, property: "updatedAt", date: from.timeIntervalSince1970 * 1000)
         let condition2 = SearchFilter(operation: .Lte, property: "updatedAt", date: NSDate().timeIntervalSince1970 * 1000)
-        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: NSNull())
+        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
         return and(left: and(left: condition1, right: condition2), right: notDeleted)
     }
     
     public static func getArchivedItems() -> SearchFilter {
         let condition1 = SearchFilter(operation: .Lte, property: "archivedAt", date: NSDate().timeIntervalSince1970 * 1000)
-        let condition2 = SearchFilter(operation: .Eq, property: "removedAt", value: NSNull())
-        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: NSNull())
+        let condition2 = SearchFilter(operation: .Eq, property: "removedAt", value: nil)
+        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
         return and(left: and(left: condition1, right: condition2), right: notDeleted)
     }
     
     public static func getExpiredItems() -> SearchFilter {
         let condition1 = SearchFilter(operation: .Lte, property: "removedAt", date: NSDate().timeIntervalSince1970 * 1000)
-        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: NSNull())
+        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
         return and(left: condition1, right: notDeleted)
     }
@@ -42,7 +42,7 @@ public class SearchFilterHelper {
         
         let condition1 = SearchFilter(operation: .Lte, property: "publishedAt", date: now)
         let condition2 = SearchFilter(operation: .Gt, property: "removedAt", date: now)
-        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: NSNull())
+        let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
         return and(left: and(left: condition1, right: condition2), right: notDeleted)
     }
