@@ -16,7 +16,7 @@ public class SearchFilterHelper {
         let condition3 = SearchFilter(operation: .Eq, property: "removedAt", value: nil)
         let condition4 = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
-        return and(left: and(left: and(left: condition1, right: condition2), right: condition3), right: condition4)
+        return and(condition1, condition2, condition3, condition4)
     }
     
     public static func getLastUpdatedItems(from: NSDate) -> SearchFilter {
@@ -24,7 +24,7 @@ public class SearchFilterHelper {
         let condition2 = SearchFilter(operation: .Lte, property: "updatedAt", date: NSDate().timeIntervalSince1970 * 1000)
         let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
-        return and(left: and(left: condition1, right: condition2), right: notDeleted)
+        return and(condition1, condition2, notDeleted)
     }
     
     public static func getArchivedItems() -> SearchFilter {
@@ -32,14 +32,14 @@ public class SearchFilterHelper {
         let condition2 = SearchFilter(operation: .Eq, property: "removedAt", value: nil)
         let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
-        return and(left: and(left: condition1, right: condition2), right: notDeleted)
+        return and(condition1, condition2, notDeleted)
     }
     
     public static func getExpiredItems() -> SearchFilter {
         let condition1 = SearchFilter(operation: .Lte, property: "removedAt", date: NSDate().timeIntervalSince1970 * 1000)
         let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
-        return and(left: condition1, right: notDeleted)
+        return and(condition1, notDeleted)
     }
     
     public static func getPublishedItems() -> SearchFilter {
@@ -50,7 +50,7 @@ public class SearchFilterHelper {
         let condition3 = SearchFilter(operation: .Eq, property: "removedAt", value: nil)
         let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
-        return and(left: and(left: condition1, right: or(left: condition2, right: condition3)), right: notDeleted)
+        return and(condition1, or(condition2, condition3), notDeleted)
     }
     
 }
