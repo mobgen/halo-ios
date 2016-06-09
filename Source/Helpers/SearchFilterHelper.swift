@@ -11,7 +11,12 @@ import Foundation
 public class SearchFilterHelper {
     
     public static func getDraftItems() -> SearchFilter {
-        return SearchFilter(operation: .Eq, property: "publishedAt", value: nil)
+        let condition1 = SearchFilter(operation: .Eq, property: "publishedAt", value: nil)
+        let condition2 = SearchFilter(operation: .Eq, property: "archivedAt", value: nil)
+        let condition3 = SearchFilter(operation: .Eq, property: "removedAt", value: nil)
+        let condition4 = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
+        
+        return and(left: and(left: and(left: condition1, right: condition2), right: condition3), right: condition4)
     }
     
     public static func getLastUpdatedItems(from: NSDate) -> SearchFilter {
@@ -42,9 +47,10 @@ public class SearchFilterHelper {
         
         let condition1 = SearchFilter(operation: .Lte, property: "publishedAt", date: now)
         let condition2 = SearchFilter(operation: .Gt, property: "removedAt", date: now)
+        let condition3 = SearchFilter(operation: .Eq, property: "removedAt", value: nil)
         let notDeleted = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
         
-        return and(left: and(left: condition1, right: condition2), right: notDeleted)
+        return and(left: and(left: condition1, right: or(left: condition2, right: condition3)), right: notDeleted)
     }
     
 }
