@@ -87,22 +87,22 @@ public struct SearchFilter {
     }
 }
 
-public func or(left lhs: SearchFilter, right rhs: SearchFilter) -> SearchFilter {
+public func or(elements: SearchFilter...) -> SearchFilter {
     
     var filter = SearchFilter()
     
     filter.condition = "or"
-    filter.operands = [lhs, rhs]
+    filter.operands = elements
     
     return filter
 }
 
-public func and(left lhs: SearchFilter, right rhs: SearchFilter) -> SearchFilter {
+public func and(elements: SearchFilter...) -> SearchFilter {
     
     var filter = SearchFilter()
     
     filter.condition = "and"
-    filter.operands = [lhs, rhs]
+    filter.operands = elements
     
     return filter
 }
