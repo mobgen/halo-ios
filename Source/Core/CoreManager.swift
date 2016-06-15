@@ -6,6 +6,9 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
+import Foundation
+import UIKit
+
 public class CoreManager: HaloManager {
     
     /// Delegate that will handle launching completion and other important steps in the flow
@@ -89,13 +92,11 @@ public class CoreManager: HaloManager {
     /// Instance holding all the user-related information
     public var user: User?
 
-    private let gcmManager = GCMManager.sharedInstance
-    
-    var deviceToken: NSString? {
-        get {
-            return self.gcmManager.deviceToken
-        }
-    }
+//    var deviceToken: NSString? {
+//        get {
+//            return self.gcmManager.deviceToken
+//        }
+//    }
     
     private var completionHandler: ((Bool) -> Void)?
     
@@ -212,13 +213,13 @@ public class CoreManager: HaloManager {
     }
 
     private func configurePush() {
-        self.gcmManager.configure()
+        //self.gcmManager.configure()
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
-        let gcmConfig = GCMConfig.defaultConfig()
-        GCMService.sharedInstance().startWithConfig(gcmConfig)
+//        let gcmConfig = GCMConfig.defaultConfig()
+//        GCMService.sharedInstance().startWithConfig(gcmConfig)
         
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
@@ -328,13 +329,13 @@ public class CoreManager: HaloManager {
      - parameter deviceToken: Device token returned after registering for push notifications
      */
     private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
-        self.gcmManager.setupPushNotifications(deviceToken, development: self.development) { () -> Void in
-            if self.enableSystemTags {
-                self.setupDefaultSystemTags()
-            } else {
-                self.setupUser()
-            }
-        }
+//        self.gcmManager.setupPushNotifications(deviceToken, development: self.development) { () -> Void in
+//            if self.enableSystemTags {
+//                self.setupDefaultSystemTags()
+//            } else {
+//                self.setupUser()
+//            }
+//        }
     }
 
     /**
@@ -370,7 +371,7 @@ public class CoreManager: HaloManager {
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
         // This works only if the app started the GCM service
-        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+//        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
         
         self.pushDelegate?.haloApplication(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
         
@@ -408,14 +409,14 @@ public class CoreManager: HaloManager {
         let allowedPush = application.isRegisteredForRemoteNotifications()
         
         if allowedPush && self.enablePush {
-            GCMService.sharedInstance().connectWithHandler({
-                (error) -> Void in
-                if error != nil {
-                    print("Could not connect to GCM: \(error.localizedDescription)")
-                } else {
-                    print("Connected to GCM")
-                }
-            })
+//            GCMService.sharedInstance().connectWithHandler({
+//                (error) -> Void in
+//                if error != nil {
+//                    print("Could not connect to GCM: \(error.localizedDescription)")
+//                } else {
+//                    print("Connected to GCM")
+//                }
+//            })
         }
     }
     
@@ -429,7 +430,7 @@ public class CoreManager: HaloManager {
         let allowedPush = application.isRegisteredForRemoteNotifications()
         
         if allowedPush && self.enablePush {
-            GCMService.sharedInstance().disconnect()
+//            GCMService.sharedInstance().disconnect()
         }
     }
     

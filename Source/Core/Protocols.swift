@@ -10,6 +10,10 @@
  This delegate will provide methods that will act as interception points in the setup process of the SDK
  within the application
  */
+
+import Foundation
+import UIKit
+
 @objc(HaloManagerDelegate)
 public protocol ManagerDelegate {
     

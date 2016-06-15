@@ -6,6 +6,8 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
+import Foundation
+
 public enum SearchFilterOperation {
     case Eq, Neq, Gt, Lt, Gte, Lte, In, NotIn
     
