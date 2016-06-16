@@ -77,7 +77,7 @@ public class CoreManager: HaloManager {
     }
     
     public var frameworkVersion: String {
-        return NSBundle(identifier: "com.mobgen.HaloSDK")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        return NSBundle(identifier: "com.mobgen.Halo")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
     /// Variable to decide whether to enable push notifications or not
