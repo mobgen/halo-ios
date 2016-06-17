@@ -9,12 +9,11 @@
 import Foundation
 import UIKit
 
-public class CoreManager: HaloManager {
+@objc(HaloCoreManager)
+public class CoreManager: NSObject, HaloManager {
     
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
-    
-    public var pushDelegate: PushDelegate?
     
     public var debug: Bool {
         get {
