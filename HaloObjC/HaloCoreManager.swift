@@ -25,15 +25,6 @@ public class HaloCoreManager: NSObject {
         }
     }
     
-    public var pushDelegate: PushDelegate? {
-        get {
-            return core.pushDelegate
-        }
-        set {
-            core.pushDelegate = newValue
-        }
-    }
-    
     public var debug: Bool {
         get {
             return core.debug
@@ -91,16 +82,6 @@ public class HaloCoreManager: NSObject {
         }
         set {
             core.userCredentials = newValue
-        }
-    }
-    
-    /// Variable to decide whether to enable push notifications or not
-    public var enablePush: Bool {
-        get {
-            return core.enablePush
-        }
-        set {
-            core.enablePush = newValue
         }
     }
     

@@ -89,7 +89,6 @@
 		008DB38B1CEA15D9001D6CDB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DB38A1CEA15D9001D6CDB /* Errors.swift */; };
 		008E2B031C51320C00FACAB2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B021C51320C00FACAB2 /* libsqlite3.tbd */; };
 		008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */; };
-		008E2B591C524D7F00FACAB2 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B581C524D7F00FACAB2 /* AddressBook.framework */; };
 		008E2B5B1C524DAB00FACAB2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
 		0090DFCF1C89BF9500BAF181 /* CloudinaryURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090DFCE1C89BF9500BAF181 /* CloudinaryURL.swift */; };
 		0090DFD11C89E08200BAF181 /* CloudinaryURLOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090DFD01C89E08200BAF181 /* CloudinaryURLOptions.swift */; };
@@ -271,7 +270,6 @@
 			files = (
 				00A409221D0FE72F005D4FB0 /* Foundation.framework in Frameworks */,
 				008E2B5B1C524DAB00FACAB2 /* libz.tbd in Frameworks */,
-				008E2B591C524D7F00FACAB2 /* AddressBook.framework in Frameworks */,
 				008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */,
 				008E2B031C51320C00FACAB2 /* libsqlite3.tbd in Frameworks */,
 			);
@@ -1031,7 +1029,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.Halo;

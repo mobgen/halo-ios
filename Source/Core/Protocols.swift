@@ -29,41 +29,28 @@ public protocol ManagerDelegate {
 @objc(HaloAddon)
 public protocol Addon {
     
+    var addonName: String {get}
+    
     func setup(core: Halo.CoreManager, completionHandler handler: ((Bool) -> Void)?) -> Void
-    func startup()
+    func startup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
+    
+    func willRegisterAddon(core: Halo.CoreManager) -> Void
+    func didRegisterAddon(core: Halo.CoreManager) -> Void
+    
+    func willRegisterUser(core: Halo.CoreManager) -> Void
+    func didRegisterUser(core: Halo.CoreManager) -> Void
+    
+    func applicationDidFinishLaunching(application: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidEnterBackground(application: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidBecomeActive(application: UIApplication, core: Halo.CoreManager) -> Void
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: Halo.CoreManager) -> Void
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: Halo.CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification, core: Halo.CoreManager) -> Void
     
 }
-
-/// Delegate to be implemented to handle push notifications easily
-//@objc(HaloPushDelegate)
-//public protocol PushDelegate {
-//    /**
-//     This handler will be called when any push notification is received (silent or not)
-//     
-//     - parameter application:       Application receiving the push notification
-//     - parameter userInfo:          Dictionary containing information about the push notification
-//     - parameter completionHandler: Closure to be called after completion
-//     */
-//    func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-//    
-//    /**
-//     This handler will be called when a silent push notification is received
-//     
-//     - parameter application:       Application receiving the silent push notification
-//     - parameter userInfo:          Dictionary containing information about the push notification
-//     - parameter completionHandler: Closure to be called after completion
-//     */
-//    func haloApplication(application: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-//    
-//    /**
-//     This handler will be called when a push notification is received
-//     
-//     - parameter application:       Application receiving the silent push notification
-//     - parameter userInfo:          Dictionary containing information about the push notification
-//     - parameter completionHandler: Closure to be called after completion
-//     */
-//    func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-//}
 
 /// Other protocols
 

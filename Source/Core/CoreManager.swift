@@ -79,9 +79,6 @@ public class CoreManager: NSObject, HaloManager {
         return NSBundle(identifier: "com.mobgen.Halo")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
-    /// Variable to decide whether to enable push notifications or not
-    public var enablePush: Bool = false
-    
     /// Variable to decide whether to enable system tags or not
     public var enableSystemTags: Bool = false
     
@@ -90,16 +87,12 @@ public class CoreManager: NSObject, HaloManager {
     
     /// Instance holding all the user-related information
     public var user: User?
-
-//    var deviceToken: NSString? {
-//        get {
-//            return self.gcmManager.deviceToken
-//        }
-//    }
+    
+    private var addons: [Halo.Addon] = []
     
     private var completionHandler: ((Bool) -> Void)?
     
-    init() {}
+    override init() {}
 
     public func setEnvironment(environment: HaloEnvironment, completionHandler handler:((Bool) -> Void)? = nil) {
         self.environment = environment
@@ -107,6 +100,12 @@ public class CoreManager: NSObject, HaloManager {
         self.configureUser()
     }
 
+    public func registerAddon(addon: Halo.Addon) -> Void {
+        addon.willRegisterAddon(self)
+        self.addons.append(addon)
+        addon.didRegisterAddon(self)
+    }
+    
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         self.completionHandler = handler
@@ -148,7 +147,6 @@ public class CoreManager: NSObject, HaloManager {
                         }
                     }
                     
-                    self.enablePush = (data[CoreConstants.enablePush] as? Bool) ?? false
                     self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
                     self.development = (data[CoreConstants.development] as? Bool) ?? true
                 }
@@ -160,16 +158,34 @@ public class CoreManager: NSObject, HaloManager {
                 NSLog("Using credentials: \(cred.username) / \(cred.password)")
             }
             
-            self.needsUpdate { (needs) -> Void in
-                
+            self.checkNeedsUpdate { _ in }
+            
+            // Configure all the registered addons
+            self.startupAddons { _ in
+                self.registerUser()
             }
-
-            self.configureUser()
-
         }
-        
     }
 
+    private func startupAddons(completionHandler handler: ((Bool) -> Void)) -> Void {
+        var counter = 0
+        
+        let _ = self.addons.map { $0.startup(self) { addon, success in
+            if success {
+                NSLog("Successfully started the \(addon.addonName) addon")
+            } else {
+                NSLog("There has been an error starting the \(addon.addonName) addon")
+            }
+            
+            counter += 1
+            
+            if counter == self.addons.count {
+                handler(true)
+            }
+            }
+        }
+    }
+    
     private func configureUser() {
         self.user = Halo.User.loadUser(self.environment)
 
@@ -179,20 +195,18 @@ public class CoreManager: NSObject, HaloManager {
                 switch result {
                 case .Success(let user, _):
                     self.user = user
-
-                    if self.enablePush {
-                        self.configurePush()
-                    } else if self.enableSystemTags {
+                    
+                    if self.enableSystemTags {
                         self.setupDefaultSystemTags()
                     } else {
-                        self.setupUser()
+                        self.registerUser()
                     }
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags()
                     } else {
-                        self.setupUser()
+                        self.registerUser()
                     }
                 }
             }
@@ -201,26 +215,12 @@ public class CoreManager: NSObject, HaloManager {
             self.user = Halo.User()
             self.delegate?.managerWillSetupUser(self.user!)
 
-            if self.enablePush {
-                self.configurePush()
-            } else if self.enableSystemTags {
+            if self.enableSystemTags {
                 self.setupDefaultSystemTags()
             } else {
-                self.setupUser()
+                self.registerUser()
             }
         }
-    }
-
-    private func configurePush() {
-        //self.gcmManager.configure()
-
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        
-//        let gcmConfig = GCMConfig.defaultConfig()
-//        GCMService.sharedInstance().startWithConfig(gcmConfig)
-        
-        UIApplication.sharedApplication().registerForRemoteNotifications()
     }
     
     private func setupDefaultSystemTags() {
@@ -267,11 +267,11 @@ public class CoreManager: NSObject, HaloManager {
                 break
             }
                         
-            self.setupUser()
+            self.registerUser()
         }
     }
 
-    private func setupUser() -> Void {
+    private func registerUser() -> Void {
         
         if let user = self.user {
             NSLog(user.description)
@@ -319,23 +319,6 @@ public class CoreManager: NSObject, HaloManager {
             handler?(result)
         }
     }
-    
-    /**
-     Set up the desired push notifications to be received. To be called after the device has been
-     registered
-     
-     - parameter application: Current application being configured to receive push notifications
-     - parameter deviceToken: Device token returned after registering for push notifications
-     */
-    private func setupPushNotifications(application app: UIApplication, deviceToken: NSData) {
-//        self.gcmManager.setupPushNotifications(deviceToken, development: self.development) { () -> Void in
-//            if self.enableSystemTags {
-//                self.setupDefaultSystemTags()
-//            } else {
-//                self.setupUser()
-//            }
-//        }
-    }
 
     /**
      Pass through the push notifications setup. To be called within the method in the app delegate.
@@ -345,7 +328,8 @@ public class CoreManager: NSObject, HaloManager {
      */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         NSLog("Successfully registered for remote notifications")
-        self.setupPushNotifications(application: application, deviceToken: deviceToken)
+        
+        let _ = self.addons.map { $0.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: self) }
     }
 
     /**
@@ -355,11 +339,15 @@ public class CoreManager: NSObject, HaloManager {
      - parameter error:       Error thrown during the process
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        
         NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
+        
+        let _ = self.addons.map { $0.application(application, didFailToRegisterForRemoteNotificationsWithError: error, core: self) }
+        
         if self.enableSystemTags {
             self.setupDefaultSystemTags()
         } else {
-            self.setupUser()
+            self.registerUser()
         }
     }
 
@@ -369,32 +357,12 @@ public class CoreManager: NSObject, HaloManager {
     
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
-        // This works only if the app started the GCM service
-//        GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+        let _ = self.addons.map { $0.application(application, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: completionHandler) }
         
-        self.pushDelegate?.haloApplication(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
-        
-        if let silent = userInfo["content_available"] as? String {
-            if silent == "1" {
-                self.pushDelegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
-            } else {
-                let notif = UILocalNotification()
-                notif.alertBody = userInfo["body"] as? String
-                notif.soundName = userInfo["sound"] as? String
-                notif.userInfo = userInfo
-                
-                application.presentLocalNotificationNow(notif)
-            }
-        } else {
-            self.pushDelegate?.haloApplication(application, didReceiveNotification: userInfo, fetchCompletionHandler: completionHandler)
-        }
     }
     
     public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        
-        if let userInfo = notification.userInfo {
-            self.pushDelegate?.haloApplication(application, didReceiveNotification: userInfo, fetchCompletionHandler: nil)
-        }
+        let _ = self.addons.map { $0.application(application, didReceiveLocalNotification: notification, core: self) }
     }
     
     /**
@@ -403,20 +371,7 @@ public class CoreManager: NSObject, HaloManager {
      - parameter application: Application being configured
      */
     public func applicationDidBecomeActive(application: UIApplication) {
-        // Connect to the GCM server to receive non-APNS notifications
-        
-        let allowedPush = application.isRegisteredForRemoteNotifications()
-        
-        if allowedPush && self.enablePush {
-//            GCMService.sharedInstance().connectWithHandler({
-//                (error) -> Void in
-//                if error != nil {
-//                    print("Could not connect to GCM: \(error.localizedDescription)")
-//                } else {
-//                    print("Connected to GCM")
-//                }
-//            })
-        }
+        let _ = self.addons.map { $0.applicationDidBecomeActive(application, core: self) }
     }
     
     /**
@@ -425,15 +380,10 @@ public class CoreManager: NSObject, HaloManager {
      - parameter application: Application being configured
      */
     public func applicationDidEnterBackground(application: UIApplication) {
-        
-        let allowedPush = application.isRegisteredForRemoteNotifications()
-        
-        if allowedPush && self.enablePush {
-//            GCMService.sharedInstance().disconnect()
-        }
+        let _ = self.addons.map { $0.applicationDidEnterBackground(application, core: self) }
     }
     
-    private func needsUpdate(completionHandler handler: (Bool) -> Void) -> Void {
+    private func checkNeedsUpdate(completionHandler handler: (Bool) -> Void) -> Void {
         
         try! Request(path: "/api/authentication/version").params(["current": "true"]).response { result in
             switch result {
