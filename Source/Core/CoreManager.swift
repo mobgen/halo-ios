@@ -148,7 +148,6 @@ public class CoreManager: NSObject, HaloManager {
                     }
                     
                     self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
-                    self.development = (data[CoreConstants.development] as? Bool) ?? true
                 }
             } else {
                 NSLog("No .plist found")
@@ -162,7 +161,7 @@ public class CoreManager: NSObject, HaloManager {
             
             // Configure all the registered addons
             self.startupAddons { _ in
-                self.registerUser()
+                self.configureUser()
             }
         }
     }
@@ -274,7 +273,6 @@ public class CoreManager: NSObject, HaloManager {
     private func registerUser() -> Void {
         
         if let user = self.user {
-            NSLog(user.description)
             self.user?.storeUser(self.environment)
             
             Manager.network.createUpdateUser(user, completionHandler: { (result) -> Void in
@@ -284,8 +282,12 @@ public class CoreManager: NSObject, HaloManager {
                 switch result {
                 case .Success(let user, _):
                     self.user = user
-                    NSLog((self.user?.description)!)
                     self.user?.storeUser(self.environment)
+                    
+                    if self.debug {
+                        debugPrint(user)
+                    }
+                    
                     success = true
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
@@ -305,6 +307,10 @@ public class CoreManager: NSObject, HaloManager {
                 switch result {
                 case .Success(let user, _):
                     self.user = user
+                    
+                    if self.debug {
+                        debugPrint(user)
+                    }
                 case .Failure(let error):
                     NSLog("Error saving user: \(error.localizedDescription)")
                 }

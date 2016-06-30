@@ -27,13 +27,8 @@ public class CoreConstants {
     static let passwordKey = "PASSWORD"
     
     /// Key which identifies the option to enable push notifications within the configuration plist
-    static let enablePush = "ENABLE_PUSH"
-    
-    /// Key which identifies the option to enable push notifications within the configuration plist
     static let enableSystemTags = "ENABLE_SYSTEM_TAGS"
 
-    static let development = "DEVELOPMENT"
-    
     static let disableSSLpinning = "DISABLE_SSL_PINNING"
 
     // MARK: User defaults keys
