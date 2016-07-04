@@ -82,9 +82,6 @@ public class CoreManager: NSObject, HaloManager {
     /// Variable to decide whether to enable system tags or not
     public var enableSystemTags: Bool = false
     
-    /// Variable to decide whether the SDK should behave as in development or production
-    public var development: Bool = true
-    
     /// Instance holding all the user-related information
     public var user: User?
     
@@ -157,7 +154,7 @@ public class CoreManager: NSObject, HaloManager {
                 NSLog("Using credentials: \(cred.username) / \(cred.password)")
             }
             
-            self.checkNeedsUpdate { _ in }
+            self.checkNeedsUpdate()
             
             // Configure all the registered addons
             self.startupAddons { _ in
@@ -275,16 +272,18 @@ public class CoreManager: NSObject, HaloManager {
         if let user = self.user {
             self.user?.storeUser(self.environment)
             
-            Manager.network.createUpdateUser(user, completionHandler: { (result) -> Void in
+            Manager.network.createUpdateUser(user, completionHandler: { [weak self] (result) -> Void in
                 
                 var success = false
                 
+                if let strongSelf = self {
+                
                 switch result {
                 case .Success(let user, _):
-                    self.user = user
-                    self.user?.storeUser(self.environment)
+                    strongSelf.user = user
+                    strongSelf.user?.storeUser(strongSelf.environment)
                     
-                    if self.debug {
+                    if strongSelf.debug {
                         debugPrint(user)
                     }
                     
@@ -293,7 +292,9 @@ public class CoreManager: NSObject, HaloManager {
                     NSLog("Error: \(error.localizedDescription)")
                 }
                 
-                self.completionHandler?(success)
+                strongSelf.completionHandler?(success)
+                
+                }
             })
         } else {
             self.completionHandler?(false)
@@ -302,13 +303,15 @@ public class CoreManager: NSObject, HaloManager {
     
     public func saveUser(completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
         if let user = self.user {
-            Manager.network.createUpdateUser(user) { result in
+            Manager.network.createUpdateUser(user) { [weak self] result in
+                
+                if let strongSelf = self {
                 
                 switch result {
                 case .Success(let user, _):
-                    self.user = user
+                    strongSelf.user = user
                     
-                    if self.debug {
+                    if strongSelf.debug {
                         debugPrint(user)
                     }
                 case .Failure(let error):
@@ -316,6 +319,8 @@ public class CoreManager: NSObject, HaloManager {
                 }
                 
                 handler?(result)
+                
+                }
             }
          }
     }
@@ -389,7 +394,7 @@ public class CoreManager: NSObject, HaloManager {
         let _ = self.addons.map { $0.applicationDidEnterBackground(application, core: self) }
     }
     
-    private func checkNeedsUpdate(completionHandler handler: (Bool) -> Void) -> Void {
+    private func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
         
         try! Request(path: "/api/authentication/version").params(["current": "true"]).response { result in
             switch result {
@@ -400,8 +405,9 @@ public class CoreManager: NSObject, HaloManager {
                         NSLog("\n-------------------\nThe version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)\n-------------------")
                     }
                 }
+                handler?(true)
             case .Failure(_):
-                handler(false)
+                handler?(false)
             default:
                 break
             }
