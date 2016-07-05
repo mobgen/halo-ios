@@ -31,7 +31,7 @@ public protocol Addon {
     
     var addonName: String {get}
     
-    func setup(core: Halo.CoreManager, completionHandler handler: ((Bool) -> Void)?) -> Void
+    func setup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
     func startup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
     
     func willRegisterAddon(core: Halo.CoreManager) -> Void
@@ -49,6 +49,19 @@ public protocol Addon {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: Halo.CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification, core: Halo.CoreManager) -> Void
+    
+}
+
+@objc(HaloNetworkAddon)
+public protocol NetworkAddon {
+    
+    var addonName: String {get}
+    
+    func setup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
+    func startup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
+    
+    func willPerformRequest(request: NSURLRequest) -> Void
+    func didPerformRequest(request: NSURLRequest, time: NSTimeInterval, response: NSURLResponse?) -> Void
     
 }
 

@@ -85,7 +85,7 @@ public class CoreManager: NSObject, HaloManager {
     /// Instance holding all the user-related information
     public var user: User?
     
-    private var addons: [Halo.Addon] = []
+    public var addons: [Halo.Addon] = []
     
     private var completionHandler: ((Bool) -> Void)?
     
@@ -129,7 +129,7 @@ public class CoreManager: NSObject, HaloManager {
                     if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
                         self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
                     }
-
+                    
                     if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
                         self.userCredentials = Credentials(username: username, password: password)
                     }
@@ -157,16 +157,41 @@ public class CoreManager: NSObject, HaloManager {
             self.checkNeedsUpdate()
             
             // Configure all the registered addons
-            self.startupAddons { _ in
-                self.configureUser()
+            self.setupAddons { _ in
+                
+                self.startupAddons { _ in
+                    self.configureUser()
+                }
             }
         }
     }
-
+    
+    private func setupAddons(completionHandler handler: ((Bool) -> Void)) -> Void {
+        
+        var counter = 0
+        
+        let _ = self.addons.map { $0.setup(self) { (addon, success) in
+            if success {
+                NSLog("Successfully set up the \(addon.addonName) addon")
+            } else {
+                NSLog("There has been an error setting up the \(addon.addonName) addon")
+            }
+            
+            counter += 1
+            
+            if counter == self.addons.count {
+                handler(true)
+            }
+            }
+        }
+        
+    }
+    
     private func startupAddons(completionHandler handler: ((Bool) -> Void)) -> Void {
         var counter = 0
         
-        let _ = self.addons.map { $0.startup(self) { addon, success in
+        let _ = self.addons.map { $0.startup(self) { (addon, success) in
+            
             if success {
                 NSLog("Successfully started the \(addon.addonName) addon")
             } else {
@@ -178,6 +203,7 @@ public class CoreManager: NSObject, HaloManager {
             if counter == self.addons.count {
                 handler(true)
             }
+            
             }
         }
     }
