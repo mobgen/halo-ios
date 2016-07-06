@@ -8,19 +8,25 @@
 
 import Foundation
 
+public enum SegmentMode: String {
+    case Total = "total",
+    Partial = "partial"
+}
+
 public struct SearchOptions {
     
-    internal var moduleIds: [String]?
-    internal var instanceIds: [String]?
-    internal var conditions: [String: AnyObject]?
-    internal var metaConditions: [String: AnyObject]?
-    internal var fields: [String]?
-    internal var populateFields: [String]?
-    internal var tags: [Halo.Tag]?
-    internal var pagination: [String: AnyObject]?
-    internal var segmentWithUser: Bool = false
-    internal var offlinePolicy: Halo.OfflinePolicy?
-    internal var locale: Halo.Locale?
+    var moduleIds: [String]?
+    var instanceIds: [String]?
+    var conditions: [String: AnyObject]?
+    var metaConditions: [String: AnyObject]?
+    var fields: [String]?
+    var populateFields: [String]?
+    var tags: [Halo.Tag]?
+    var pagination: [String: AnyObject]?
+    var segmentWithUser: Bool = false
+    var segmentMode: SegmentMode = .Partial
+    var offlinePolicy: Halo.OfflinePolicy?
+    var locale: Halo.Locale?
     
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
@@ -64,6 +70,8 @@ public struct SearchOptions {
                 }
             }
         }
+        
+        dict["segmentMode"] = self.segmentMode.rawValue
         
         if let locale = self.locale {
             dict["locale"] = locale.description
@@ -116,6 +124,11 @@ public struct SearchOptions {
     
     public mutating func segmentWithUser(segment: Bool) -> Halo.SearchOptions {
         self.segmentWithUser = segment
+        return self
+    }
+    
+    public mutating func segmentMode(mode: SegmentMode) -> Halo.SearchOptions {
+        self.segmentMode = mode
         return self
     }
     
