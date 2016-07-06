@@ -6,6 +6,8 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
+import Foundation
+
 public class Request: CustomDebugStringConvertible {
 
     public private(set) var url: NSURL?

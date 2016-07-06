@@ -7,6 +7,9 @@
 //
 
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
+
+import Foundation
+
 public enum Router {
 
     /// Common base url of all the API endpoints
