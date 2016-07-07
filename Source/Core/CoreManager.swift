@@ -327,11 +327,10 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
     
-    public func saveUser(completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
+    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
         if let user = self.user {
             
-            
-            Manager.network.createUpdateUser(user) { [weak self] (_, result) in
+            Manager.network.createUpdateUser(user) { [weak self] (response, result) in
                 
                 if let strongSelf = self {
                     
@@ -346,16 +345,17 @@ public class CoreManager: NSObject, HaloManager {
                         NSLog("Error saving user: \(error.localizedDescription)")
                     }
                     
-                    handler?(result)
+                    handler?(response, result)
                     
                 }
+                
             }
         }
     }
     
-    public func authenticate(completionHandler handler: ((Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
-        Manager.network.authenticate { (_, result) in
-            handler?(result)
+    public func authenticate(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+        Manager.network.authenticate { (response, result) in
+            handler?(response, result)
         }
     }
     
