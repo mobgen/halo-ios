@@ -41,7 +41,7 @@ public class CoreManager: NSObject, HaloManager {
             Manager.network.numberOfRetries = newValue
         }
     }
-
+    
     public var authenticationMode: AuthenticationMode {
         get {
             return Manager.network.authenticationMode
@@ -50,13 +50,13 @@ public class CoreManager: NSObject, HaloManager {
             Manager.network.authenticationMode = newValue
         }
     }
-
+    
     public var credentials: Credentials? {
         get {
             return Manager.network.credentials
         }
     }
-
+    
     public var appCredentials: Credentials? {
         get {
             return Manager.network.appCredentials
@@ -65,7 +65,7 @@ public class CoreManager: NSObject, HaloManager {
             Manager.network.appCredentials = newValue
         }
     }
-
+    
     public var userCredentials: Credentials? {
         get {
             return Manager.network.userCredentials
@@ -90,13 +90,13 @@ public class CoreManager: NSObject, HaloManager {
     private var completionHandler: ((Bool) -> Void)?
     
     override init() {}
-
+    
     public func setEnvironment(environment: HaloEnvironment, completionHandler handler:((Bool) -> Void)? = nil) {
         self.environment = environment
         self.completionHandler = handler
         self.configureUser()
     }
-
+    
     public func registerAddon(addon: Halo.Addon) -> Void {
         addon.willRegisterAddon(self)
         self.addons.append(addon)
@@ -210,10 +210,10 @@ public class CoreManager: NSObject, HaloManager {
     
     private func configureUser() {
         self.user = Halo.User.loadUser(self.environment)
-
+        
         if let user = self.user, _ = user.id {
             // Update the user
-            Manager.network.getUser(user) { (result) -> Void in
+            Manager.network.getUser(user) { (_, result) -> Void in
                 switch result {
                 case .Success(let user, _):
                     self.user = user
@@ -232,11 +232,11 @@ public class CoreManager: NSObject, HaloManager {
                     }
                 }
             }
-
+            
         } else {
             self.user = Halo.User()
             self.delegate?.managerWillSetupUser(self.user!)
-
+            
             if self.enableSystemTags {
                 self.setupDefaultSystemTags()
             } else {
@@ -273,7 +273,7 @@ public class CoreManager: NSObject, HaloManager {
             user.addSystemTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
             
             user.addSystemTag(CoreConstants.tagBLESupportKey, value: nil)
-
+            
             //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
             
             let screen = UIScreen.mainScreen()
@@ -288,40 +288,40 @@ public class CoreManager: NSObject, HaloManager {
             default:
                 break
             }
-                        
+            
             self.registerUser()
         }
     }
-
+    
     private func registerUser() -> Void {
         
         if let user = self.user {
             self.user?.storeUser(self.environment)
             
-            Manager.network.createUpdateUser(user, completionHandler: { [weak self] (result) -> Void in
+            Manager.network.createUpdateUser(user, completionHandler: { [weak self] (_, result) -> Void in
                 
                 var success = false
                 
                 if let strongSelf = self {
-                
-                switch result {
-                case .Success(let user, _):
-                    strongSelf.user = user
-                    strongSelf.user?.storeUser(strongSelf.environment)
                     
-                    if strongSelf.debug {
-                        debugPrint(user)
+                    switch result {
+                    case .Success(let user, _):
+                        strongSelf.user = user
+                        strongSelf.user?.storeUser(strongSelf.environment)
+                        
+                        if strongSelf.debug {
+                            debugPrint(user)
+                        }
+                        
+                        success = true
+                    case .Failure(let error):
+                        NSLog("Error: \(error.localizedDescription)")
                     }
                     
-                    success = true
-                case .Failure(let error):
-                    NSLog("Error: \(error.localizedDescription)")
+                    strongSelf.completionHandler?(success)
+                    
                 }
-                
-                strongSelf.completionHandler?(success)
-                
-                }
-            })
+                })
         } else {
             self.completionHandler?(false)
         }
@@ -329,26 +329,28 @@ public class CoreManager: NSObject, HaloManager {
     
     public func saveUser(completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
         if let user = self.user {
-            Manager.network.createUpdateUser(user) { [weak self] result in
+            
+            
+            Manager.network.createUpdateUser(user) { [weak self] (_, result) in
                 
                 if let strongSelf = self {
-                
-                switch result {
-                case .Success(let user, _):
-                    strongSelf.user = user
                     
-                    if strongSelf.debug {
-                        debugPrint(user)
+                    switch result {
+                    case .Success(let user, _):
+                        strongSelf.user = user
+                        
+                        if strongSelf.debug {
+                            debugPrint(user)
+                        }
+                    case .Failure(let error):
+                        NSLog("Error saving user: \(error.localizedDescription)")
                     }
-                case .Failure(let error):
-                    NSLog("Error saving user: \(error.localizedDescription)")
-                }
-                
-                handler?(result)
-                
+                    
+                    handler?(result)
+                    
                 }
             }
-         }
+        }
     }
     
     public func authenticate(completionHandler handler: ((Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
@@ -356,10 +358,10 @@ public class CoreManager: NSObject, HaloManager {
             handler?(result)
         }
     }
-
+    
     /**
      Pass through the push notifications setup. To be called within the method in the app delegate.
-
+     
      - parameter application: Application being configured
      - parameter deviceToken: Token obtained for the current device
      */
@@ -368,10 +370,10 @@ public class CoreManager: NSObject, HaloManager {
         
         let _ = self.addons.map { $0.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: self) }
     }
-
+    
     /**
      Pass through the push notifications setup. To be called within the method in the app delegate.
-
+     
      - parameter application: Application being configured
      - parameter error:       Error thrown during the process
      */
@@ -387,7 +389,7 @@ public class CoreManager: NSObject, HaloManager {
             self.registerUser()
         }
     }
-
+    
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { (fetchResult) -> Void in })
     }
@@ -422,7 +424,7 @@ public class CoreManager: NSObject, HaloManager {
     
     private func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
         
-        try! Request(path: "/api/authentication/version").params(["current": "true"]).response { result in
+        try! Request(path: "/api/authentication/version").params(["current": "true"]).response { (_, result) in
             switch result {
             case .Success(let data as [[String: AnyObject]], _):
                 if let info = data.first, minIOS = info["minIOS"] {

@@ -129,12 +129,12 @@ public class Request: CustomDebugStringConvertible {
         return bodyHash + urlHash
     }
     
-    public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
+    public func responseData(completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
         
         switch self.offlinePolicy {
         case .None:
             Manager.network.startRequest(request: self) { (resp, result) in
-                handler?(result)
+                handler?(resp, result)
             }
         default:
             throw HaloError.NotImplementedOfflinePolicy
@@ -143,17 +143,17 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
-    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request {
+    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request {
         
-        try self.responseData { (result) -> Void in
+        try self.responseData { (response, result) -> Void in
             switch result {
             case .Success(let data, _):
                 if let successHandler = handler {
                     let json = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    successHandler(.Success(json, false))
+                    successHandler(response, .Success(json, false))
                 }
             case .Failure(let error):
-                handler?(.Failure(error))
+                handler?(response, .Failure(error))
             }
         }
         return self
