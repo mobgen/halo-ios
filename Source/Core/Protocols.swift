@@ -53,26 +53,22 @@ public protocol PushDelegate {
     func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 }
 
-/// Internal protocols
+/// Other protocols
 
-protocol HaloManager {
+public protocol HaloManager {
     
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
     
 }
 
-protocol ModulesProvider {
+public protocol ModulesProvider {
     
     func getModules(offlinePolicy: OfflinePolicy?) -> Halo.Request
     
 }
 
-protocol ContentProvider {
+public protocol ContentProvider {
     
     func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request
-    
-    func syncModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void
-    
-    func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void
     
 }

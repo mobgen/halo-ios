@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
@@ -18,10 +17,7 @@ public struct ContentManager: HaloManager, ContentProvider {
     
     init() {}
 
-    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
-        
-        // Start up the persistence manager
-        Manager.persistence.startup(completionHandler: handler)
+    public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
     }
 
@@ -46,14 +42,6 @@ public struct ContentManager: HaloManager, ContentProvider {
         request.params(options.body)
         
         return request
-    }
-    
-    public func syncModule(moduleId: String, completionHandler handler: (() -> Void)? = nil) -> Void {
-        Manager.persistence.syncModule(moduleId, completionHandler: handler)
-    }
-    
-    public func clearSyncedModule(moduleId: String, completionHandler handler: (() -> Void)?) -> Void {
-        Manager.persistence.clearSyncedModule(moduleId, completionHandler: handler)
     }
 
 }

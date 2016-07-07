@@ -122,30 +122,38 @@ public class HaloRequest: NSObject {
         return self
     }
     
-    public func responseData(success success:((NSData, Bool) -> Void)?, failure:((NSError) -> Void)?) -> HaloRequest {
+    public func responseData(success success:((NSHTTPURLResponse?, NSData, Bool) -> Void)?, failure:((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
         
-        request?.responseData(completionHandler: { (result) -> Void in
-            switch result {
-            case .Success(let data, let cached):
-                success?(data, cached)
-            case .Failure(let error):
-                failure?(error)
-            }
-        })
+        do {
+            try request?.responseData(completionHandler: { (response, result) -> Void in
+                switch result {
+                case .Success(let data, let cached):
+                    success?(response, data, cached)
+                case .Failure(let error):
+                    failure?(response, error)
+                }
+            })
+        } catch _ {
+            NSLog("Error performing request: \(self.debugDescription)")
+        }
         
         return self
     }
     
-    public func response(success success:((AnyObject, Bool) -> Void)?, failure:((NSError) -> Void)?) -> HaloRequest {
+    public func response(success success:((NSHTTPURLResponse?, AnyObject, Bool) -> Void)?, failure:((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
         
-        request?.response(completionHandler: { (result) -> Void in
+        do {
+        try request?.response(completionHandler: { (response, result) -> Void in
             switch result {
             case .Success(let data, let cached):
-                success?(data, cached)
+                success?(response, data, cached)
             case .Failure(let error):
-                failure?(error)
+                failure?(response, error)
             }
         })
+        } catch _ {
+            NSLog("Error performing request: \(self.debugDescription)")
+        }
         
         return self
     }

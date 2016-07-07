@@ -97,7 +97,7 @@ public final class User: NSObject, NSCoding {
                 self.tags![name] = tag
             }
         } else {
-            self.tags = [name : tag]
+            self.tags = [name: tag]
         }
     }
     
@@ -119,8 +119,8 @@ public final class User: NSObject, NSCoding {
      */
     public func removeTag(name: String) -> Halo.Tag? {
         
-        if var tags = self.tags {
-            return tags.removeValueForKey(name)
+        if let _ = self.tags {
+            return tags!.removeValueForKey(name)
         } else {
             return nil
         }

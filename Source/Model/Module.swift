@@ -38,7 +38,7 @@ public class Module: NSObject {
     /// Dictionary of tags associated to this module
     public var tags: [String: Halo.Tag] = [:]
     
-    override init() {
+    public override init() {
         super.init()
     }
     

@@ -16,7 +16,7 @@ users and content.
 public final class Tag: NSObject, NSCoding {
 
     /// Id of the user tag instance
-    internal(set) public var id: String?
+    public var id: String?
 
     /// Name of the tag
     public var name: String = ""
@@ -26,7 +26,7 @@ public final class Tag: NSObject, NSCoding {
 
     public var type: String?
     
-    override init() {
+    public override init() {
         super.init()
     }
     

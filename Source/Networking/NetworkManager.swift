@@ -26,7 +26,7 @@ private struct CachedTask {
     case App, User
 }
 
-class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
+public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     var debug: Bool = false
 
@@ -67,7 +67,7 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
     
-    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         let bundle = NSBundle.mainBundle()
         
@@ -94,17 +94,20 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 return
             }
 
-            if self.debug {
-                debugPrint(urlRequest)
-            }
-
+            let start = NSDate()
+        
             session.dataTaskWithRequest(urlRequest.URLRequest) { (data, response, error) -> Void in
                 
                 if let resp = response as? NSHTTPURLResponse {
+            
+                    if self.debug {
+                        let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
+                        print("\(urlRequest) [\(elapsed)ms]")
+                    }
                     
                     if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                         self.cachedTasks.append(cachedTask)
-                        self.refreshToken()
+                        self.authenticate()
                         return
                     }
                     
@@ -124,15 +127,24 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                                 message = "The content of the response is not a valid JSON"
                             }
                             
-                            handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
+                            dispatch_async(dispatch_get_main_queue(), {
+                                handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
+                            })
+                            
                         }
                     } else if let d = data {
-                        handler?(resp, .Success(d, false))
+                        dispatch_async(dispatch_get_main_queue(), {
+                            handler?(resp, .Success(d, false))
+                        })
                     } else {
-                        handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                        dispatch_async(dispatch_get_main_queue(), {
+                            handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                        })
                     }
                 } else {
-                    handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                    dispatch_async(dispatch_get_main_queue(), {
+                        handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                    })
                 }
             }.resume()
 
@@ -142,13 +154,12 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
 
             self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
-
     }
 
     /**
      Obtain/refresh an authentication token when needed
      */
-    func refreshToken(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    func authenticate(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         
         self.isRefreshing = true
         var params: [String : AnyObject]
@@ -191,18 +202,22 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
             
             let req = Halo.Request(router: Router.OAuth(cred, params))
 
-            if self.debug {
-                debugPrint(req)
-            }
-
+            let start = NSDate()
+            
             self.session.dataTaskWithRequest(req.URLRequest, completionHandler: { (data, response, error) -> Void in
             
                 if let resp = response as? NSHTTPURLResponse {
                     
+                    if self.debug {
+                        let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
+                        print("\(req) [\(elapsed)ms]")
+                    }
+                    
                     if resp.statusCode > 399 {
-//                    if let e = error {
                         
-                        handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                        dispatch_async(dispatch_get_main_queue(), {
+                            handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                        })
                         
                     } else if let d = data {
                         
@@ -210,7 +225,11 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                         let token = Token(json)
                         
                         Router.token = token
-                        handler?(resp, .Success(token, false))
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            handler?(resp, .Success(token, false))
+                        })
+                        
                     }
                     
                     self.isRefreshing = false
@@ -279,7 +298,7 @@ class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     // MARK: NSURLSessionDelegate implementation
 
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
         var credential: NSURLCredential?
 

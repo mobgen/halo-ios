@@ -32,7 +32,7 @@ public class ModuleType: NSObject {
     /// Url of the module type
     public var typeUrl: String?
 
-    override init() {
+    public override init() {
         super.init()
     }
     

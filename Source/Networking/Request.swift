@@ -8,13 +8,13 @@
 
 public class Request: CustomDebugStringConvertible {
 
-    private var url: NSURL?
-    private var include = false
-    private var method: Halo.Method = .GET
-    private var parameterEncoding: Halo.ParameterEncoding = .URL
-    private var headers: [String: String] = [:]
-    private var offlineMode = Manager.core.defaultOfflinePolicy
-    private var params: [String: AnyObject] = [:]
+    public private(set) var url: NSURL?
+    public private(set) var include = false
+    public private(set) var method: Halo.Method = .GET
+    public private(set) var parameterEncoding: Halo.ParameterEncoding = .URL
+    public private(set) var headers: [String: String] = [:]
+    public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
+    public private(set) var params: [String: AnyObject] = [:]
 
     var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
@@ -47,7 +47,7 @@ public class Request: CustomDebugStringConvertible {
         self.url = NSURL(string: path, relativeToURL: relativeToURL)
     }
 
-    init(router: Router) {
+    public init(router: Router) {
         self.url = NSURL(string: router.path, relativeToURL: Router.baseURL)
         self.method = router.method
         self.parameterEncoding = router.parameterEncoding
@@ -59,7 +59,7 @@ public class Request: CustomDebugStringConvertible {
     }
 
     public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request {
-        self.offlineMode = policy
+        self.offlinePolicy = policy
         return self
     }
     
@@ -119,7 +119,7 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
-    func hash() -> Int {
+    public func hash() -> Int {
         
         let bodyHash = URLRequest.HTTPBody?.hash ?? 0
         let urlHash = URLRequest.URL?.hash ?? 0
@@ -127,33 +127,31 @@ public class Request: CustomDebugStringConvertible {
         return bodyHash + urlHash
     }
     
-    public func responseData(completionHandler handler:((Halo.Result<NSData, NSError>) -> Void)? = nil) -> Halo.Request {
+    public func responseData(completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
         
-        switch self.offlineMode {
+        switch self.offlinePolicy {
         case .None:
             Manager.network.startRequest(request: self) { (resp, result) in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    handler?(result)
-                })
+                handler?(resp, result)
             }
-        case .LoadAndStoreLocalData, .ReturnLocalDataDontLoad:
-            Manager.persistence.startRequest(request: self, useNetwork: (self.offlineMode == .LoadAndStoreLocalData), completionHandler: handler)
+        default:
+            throw HaloError.NotImplementedOfflinePolicy
         }
         
         return self
     }
     
-    public func response(completionHandler handler: ((Halo.Result<AnyObject, NSError>) -> Void)? = nil) -> Halo.Request {
+    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request {
         
-        self.responseData { (result) -> Void in
+        try self.responseData { (response, result) -> Void in
             switch result {
             case .Success(let data, _):
                 if let successHandler = handler {
                     let json = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    successHandler(.Success(json, false))
+                    successHandler(response, .Success(json, false))
                 }
             case .Failure(let error):
-                handler?(.Failure(error))
+                handler?(response, .Failure(error))
             }
         }
         return self
