@@ -122,15 +122,15 @@ public class HaloRequest: NSObject {
         return self
     }
     
-    public func responseData(success success:((NSData, Bool) -> Void)?, failure:((NSError) -> Void)?) -> HaloRequest {
+    public func responseData(success success:((NSHTTPURLResponse?, NSData, Bool) -> Void)?, failure:((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
         
         do {
-            try request?.responseData(completionHandler: { (result) -> Void in
+            try request?.responseData(completionHandler: { (response, result) -> Void in
                 switch result {
                 case .Success(let data, let cached):
-                    success?(data, cached)
+                    success?(response, data, cached)
                 case .Failure(let error):
-                    failure?(error)
+                    failure?(response, error)
                 }
             })
         } catch _ {
@@ -140,15 +140,15 @@ public class HaloRequest: NSObject {
         return self
     }
     
-    public func response(success success:((AnyObject, Bool) -> Void)?, failure:((NSError) -> Void)?) -> HaloRequest {
+    public func response(success success:((NSHTTPURLResponse?, AnyObject, Bool) -> Void)?, failure:((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
         
         do {
-        try request?.response(completionHandler: { (result) -> Void in
+        try request?.response(completionHandler: { (response, result) -> Void in
             switch result {
             case .Success(let data, let cached):
-                success?(data, cached)
+                success?(response, data, cached)
             case .Failure(let error):
-                failure?(error)
+                failure?(response, error)
             }
         })
         } catch _ {

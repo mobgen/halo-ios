@@ -175,7 +175,7 @@ public class CoreManager: HaloManager {
 
         if let user = self.user, _ = user.id {
             // Update the user
-            Manager.network.getUser(user) { (result) -> Void in
+            Manager.network.getUser(user) { (_, result) -> Void in
                 switch result {
                 case .Success(let user, _):
                     self.user = user
@@ -277,7 +277,7 @@ public class CoreManager: HaloManager {
             NSLog(user.description)
             self.user?.storeUser(self.environment)
             
-            Manager.network.createUpdateUser(user, completionHandler: { (result) -> Void in
+            Manager.network.createUpdateUser(user, completionHandler: { (_, result) -> Void in
                 
                 var success = false
                 
@@ -300,7 +300,7 @@ public class CoreManager: HaloManager {
     
     public func saveUser(completionHandler handler: ((Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
         if let user = self.user {
-            Manager.network.createUpdateUser(user) { result in
+            Manager.network.createUpdateUser(user) { (_, result) in
                 
                 switch result {
                 case .Success(let user, _):
@@ -435,7 +435,7 @@ public class CoreManager: HaloManager {
     
     private func needsUpdate(completionHandler handler: (Bool) -> Void) -> Void {
         
-        try! Request(path: "/api/authentication/version").params(["current": "true"]).response { result in
+        try! Request(path: "/api/authentication/version").params(["current": "true"]).response { (_, result) in
             switch result {
             case .Success(let data as [[String: AnyObject]], _):
                 if let info = data.first, minIOS = info["minIOS"] {
