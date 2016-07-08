@@ -65,26 +65,30 @@ public struct SearchFilter {
         self.property = property
         self.value = value
         
-        switch value {
-        case _ as String:
-            self.type = "string"
-        case _ as NSNumber:
-            self.type = "number"
-        case let data as NSArray:
-            if let element = data.firstObject {
-                switch element {
-                case _ as String:
-                    self.type = "string"
-                case _ as NSNumber:
-                    self.type = "number"
-                default:
-                    self.type = "null"
-                }
-            } else {
+        if let valueType = type {
+            self.type = valueType
+        } else {
+            switch value {
+            case _ as String:
                 self.type = "string"
+            case _ as NSNumber:
+                self.type = "number"
+            case let data as NSArray:
+                if let element = data.firstObject {
+                    switch element {
+                    case _ as String:
+                        self.type = "string"
+                    case _ as NSNumber:
+                        self.type = "number"
+                    default:
+                        self.type = "null"
+                    }
+                } else {
+                    self.type = "string"
+                }
+            default:
+                self.type = "null"
             }
-        default:
-            self.type = "null"
         }
     }
     
