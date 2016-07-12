@@ -13,32 +13,41 @@ Model class representing the different modules available in Halo
 */
 @objc(HaloModule)
 public class Module: NSObject {
-
+    
+    /// Identifier of the customer
+    public internal(set) var customerId: Int?
+    
     /// Unique identifier of the module
-    public var id: NSNumber?
-
-    /// Visual name of the module
-    public var name: String?
-
-    /// Type of the module
-    public var type: Halo.ModuleType?
-
-    /// Identifies the module as enabled or not
-    public var enabled: Bool = true
-    
-    /// Identifies the module as single item module
-    public var isSingle: Bool = false
-    
-    /// Date of the last update performed in this module
-    public var lastUpdate: NSDate?
+    public internal(set) var id: NSNumber?
 
     /// Internal id of the module
-    public var internalId: String?
+    public internal(set) var internalId: String?
+    
+    /// Visual name of the module
+    public internal(set) var name: String?
+
+    /// Type of the module
+    public internal(set) var type: Halo.ModuleType?
+
+    /// Identifies the module as enabled or not
+    public internal(set) var enabled: Bool = true
+    
+    /// Identifies the module as single item module
+    public internal(set) var isSingle: Bool = false
+    
+    /// Date in which the module was created
+    public internal(set) var createdAt: NSDate?
+    
+    /// Date of the last update performed in this module
+    public internal(set) var updatedAt: NSDate?
+
+    /// Name of the user who updated the module in last place
+    public internal(set) var updatedBy: String?
     
     /// Dictionary of tags associated to this module
-    public var tags: [String: Halo.Tag] = [:]
+    public internal(set) var tags: [String: Halo.Tag] = [:]
     
-    public override init() {
+    private override init() {
         super.init()
     }
     
@@ -49,9 +58,11 @@ public class Module: NSObject {
     */
     public init(_ dict: [String:AnyObject]) {
         id = dict["id"] as? NSNumber
+        internalId = dict["internalId"] as? String
         name = dict["name"] as? String
         isSingle = dict["isSingle"] as? Bool ?? false
         enabled = dict["enabled"] as? Bool ?? false
+        updatedBy = dict["updatedBy"] as? String
         tags = [:]
         
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
@@ -64,15 +75,16 @@ public class Module: NSObject {
             })
         }
         
-        let moduleTypeDict = dict["moduleType"] as? Dictionary<String, AnyObject> ?? [String: AnyObject]()
-        type = ModuleType(moduleTypeDict)
-
-        if let updated = dict["updatedAt"] as? NSNumber {
-            lastUpdate = NSDate(timeIntervalSince1970: updated.doubleValue/1000)
+        if let moduleTypeDict = dict["moduleType"] as? [String: AnyObject] {
+            type = ModuleType(moduleTypeDict)
         }
 
-        if let intId = dict["internalId"] as? String {
-            internalId = intId
+        if let created = dict["createdAt"] as? NSNumber {
+            createdAt = NSDate(timeIntervalSince1970: created.doubleValue/1000)
+        }
+        
+        if let updated = dict["updatedAt"] as? NSNumber {
+            updatedAt = NSDate(timeIntervalSince1970: updated.doubleValue/1000)
         }
     }
 }
