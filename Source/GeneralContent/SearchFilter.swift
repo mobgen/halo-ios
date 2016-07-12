@@ -8,10 +8,10 @@
 
 import Foundation
 
-public enum SearchFilterOperation {
+enum SearchFilterOperation {
     case Eq, Neq, Gt, Lt, Gte, Lte, In, NotIn
     
-    public var description: String {
+    var description: String {
         switch  self {
         case .Eq: return "="
         case .Neq: return "!="
@@ -27,13 +27,13 @@ public enum SearchFilterOperation {
 
 public struct SearchFilter {
     
-    private var condition: String?
-    private var operands: [SearchFilter]?
+    var condition: String?
+    var operands: [SearchFilter]?
     
-    private var operation: String?
-    private var property: String?
-    private var value: AnyObject?
-    private var type: String?
+    var operation: String?
+    var property: String?
+    var value: AnyObject?
+    var type: String?
 
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
@@ -60,7 +60,7 @@ public struct SearchFilter {
     
     init() {}
     
-    private init(operation: SearchFilterOperation, property: String, value: AnyObject?, type: String?) {
+    init(operation: SearchFilterOperation, property: String, value: AnyObject?, type: String? = nil) {
         self.operation = operation.description
         self.property = property
         self.value = value
@@ -92,39 +92,19 @@ public struct SearchFilter {
         }
     }
     
-    public init(operation: SearchFilterOperation, property: String, number: NSNumber) {
-        self.init(operation: operation, property: property, value: number, type: "number")
-    }
-    
-    public init(operation: SearchFilterOperation, property: String, date: Double) {
-        self.init(operation: operation, property: property, value: date, type: "date")
-    }
-    
-    public init(operation: SearchFilterOperation, property: String, string: String) {
-        self.init(operation: operation, property: property, value: string, type: "string")
-    }
-    
-    public init(operation: SearchFilterOperation, property: String, value: AnyObject?) {
-        self.init(operation: operation, property: property, value: value, type: nil)
-    }
-}
-
-public func or(elements: SearchFilter...) -> SearchFilter {
-    
-    var filter = SearchFilter()
-    
-    filter.condition = "or"
-    filter.operands = elements
-    
-    return filter
-}
-
-public func and(elements: SearchFilter...) -> SearchFilter {
-    
-    var filter = SearchFilter()
-    
-    filter.condition = "and"
-    filter.operands = elements
-    
-    return filter
+//    public init(operation: SearchFilterOperation, property: String, number: NSNumber) {
+//        self.init(operation: operation, property: property, value: number, type: "number")
+//    }
+//    
+//    public init(operation: SearchFilterOperation, property: String, date: Double) {
+//        self.init(operation: operation, property: property, value: date, type: "date")
+//    }
+//    
+//    public init(operation: SearchFilterOperation, property: String, string: String) {
+//        self.init(operation: operation, property: property, value: string, type: "string")
+//    }
+//    
+//    public init(operation: SearchFilterOperation, property: String, value: AnyObject?) {
+//        self.init(operation: operation, property: property, value: value, type: nil)
+//    }
 }
