@@ -10,36 +10,36 @@ import Foundation
 
 // MARK: Operations
 
-public func eq(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .Eq, property: property, value: value)
+public func eq(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .Eq, property: property, value: value, type: type)
 }
 
-public func neq(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .Neq, property: property, value: value)
+public func neq(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .Neq, property: property, value: value, type: type)
 }
 
-public func gt(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .Gt, property: property, value: value)
+public func gt(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .Gt, property: property, value: value, type: type)
 }
 
-public func lt(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .Lt, property: property, value: value)
+public func lt(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .Lt, property: property, value: value, type: type)
 }
 
-public func gte(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .Gte, property: property, value: value)
+public func gte(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .Gte, property: property, value: value, type: type)
 }
 
-public func lte(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .Lte, property: property, value: value)
+public func lte(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .Lte, property: property, value: value, type: type)
 }
 
-public func valueIn(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .In, property: property, value: value)
+public func valueIn(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .In, property: property, value: value, type: type)
 }
 
-public func valueNotIn(property: String, value: AnyObject?) -> SearchFilter {
-    return SearchFilter(operation: .NotIn, property: property, value: value)
+public func valueNotIn(property: String, value: AnyObject?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .NotIn, property: property, value: value, type: type)
 }
 
 public func or(elements: SearchFilter...) -> SearchFilter {
@@ -74,15 +74,15 @@ public class SearchFilterHelper {
     }
     
     public static func getLastUpdatedItems(from: NSDate) -> SearchFilter {
-        let condition1 = gte("updatedAt", value: from.timeIntervalSince1970 * 1000)
-        let condition2 = lte("updatedAt", value: NSDate().timeIntervalSince1970 * 1000)
+        let condition1 = gte("updatedAt", value: from.timeIntervalSince1970 * 1000, type: "date")
+        let condition2 = lte("updatedAt", value: NSDate().timeIntervalSince1970 * 1000, type: "date")
         let notDeleted = eq("deletedAt", value: nil)
         
         return and(condition1, condition2, notDeleted)
     }
     
     public static func getArchivedItems() -> SearchFilter {
-        let condition1 = lte("archivedAt", value: NSDate().timeIntervalSince1970 * 1000)
+        let condition1 = lte("archivedAt", value: NSDate().timeIntervalSince1970 * 1000, type: "date")
         let condition2 = eq("removedAt", value: nil)
         let notDeleted = eq("deletedAt", value: nil)
         
@@ -90,7 +90,7 @@ public class SearchFilterHelper {
     }
     
     public static func getExpiredItems() -> SearchFilter {
-        let condition1 = lte("removedAt", value: NSDate().timeIntervalSince1970 * 1000)
+        let condition1 = lte("removedAt", value: NSDate().timeIntervalSince1970 * 1000, type: "date")
         let notDeleted = eq("deletedAt", value: nil)
         
         return and(condition1, notDeleted)
@@ -99,8 +99,8 @@ public class SearchFilterHelper {
     public static func getPublishedItems() -> SearchFilter {
         let now = NSDate().timeIntervalSince1970 * 1000
         
-        let condition1 = lte("publishedAt", value: now)
-        let condition2 = gt("removedAt", value: now)
+        let condition1 = lte("publishedAt", value: now, type: "date")
+        let condition2 = gt("removedAt", value: now, type: "date")
         let condition3 = eq("removedAt", value: nil)
         let notDeleted = eq("deletedAt", value: nil)
         
