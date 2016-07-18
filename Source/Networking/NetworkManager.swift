@@ -269,7 +269,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         let policy = SecPolicyCreateSSL(true, host as CFString)
         SecTrustSetPolicies(serverTrust, [policy])
         
-        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle(NSBundle(identifier: "com.mobgen.HaloSDK")!))
+        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle(NSBundle(identifier: "com.mobgen.Halo")!))
         SecTrustSetAnchorCertificatesOnly(serverTrust, true)
         
         return trustIsValid(serverTrust)
