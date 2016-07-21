@@ -250,7 +250,7 @@ public class CoreManager: HaloManager {
             user.addSystemTag(CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
             user.addSystemTag(CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
             
-            user.addSystemTag(CoreConstants.tagBLESupportKey, value: nil)
+            user.addSystemTag(CoreConstants.tagBLESupportKey, value: "true")
 
             //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
             
