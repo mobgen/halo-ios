@@ -286,7 +286,7 @@ public class CoreManager: NSObject, HaloManager {
             
             switch self.environment {
             case .Int, .Stage, .QA:
-                user.addSystemTag(CoreConstants.tagTestDeviceKey, value: nil)
+                user.addSystemTag(CoreConstants.tagTestDeviceKey, value: "true")
             default:
                 break
             }
