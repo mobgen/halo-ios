@@ -74,8 +74,10 @@ public class CoreManager: HaloManager {
     }
     
     public var frameworkVersion: String {
-        return NSBundle(identifier: "com.mobgen.HaloSDK")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        return NSBundle(identifier: "com.mobgen.Halo")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
+    
+    public var configuration = "Halo"
     
     /// Variable to decide whether to enable push notifications or not
     public var enablePush: Bool = false
@@ -121,7 +123,7 @@ public class CoreManager: HaloManager {
             
             let bundle = NSBundle.mainBundle()
             
-            if let path = bundle.pathForResource("Halo", ofType: "plist") {
+            if let path = bundle.pathForResource(self.configuration, ofType: "plist") {
                 
                 if let data = NSDictionary(contentsOfFile: path) {
                     let clientIdKey = CoreConstants.clientIdKey
