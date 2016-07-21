@@ -18,7 +18,7 @@ public class Module: NSObject {
     public internal(set) var customerId: Int?
     
     /// Unique identifier of the module
-    public internal(set) var id: NSNumber?
+    public internal(set) var id: Int?
 
     /// Internal id of the module
     public internal(set) var internalId: String?
@@ -57,7 +57,8 @@ public class Module: NSObject {
     - parameter dict:   Dictionary containing the information about the module
     */
     public init(_ dict: [String:AnyObject]) {
-        id = dict["id"] as? NSNumber
+        id = dict["id"] as? Int
+        customerId = dict["customerId"] as? Int
         internalId = dict["internalId"] as? String
         name = dict["name"] as? String
         isSingle = dict["isSingle"] as? Bool ?? false
@@ -79,12 +80,12 @@ public class Module: NSObject {
             type = ModuleType(moduleTypeDict)
         }
 
-        if let created = dict["createdAt"] as? NSNumber {
-            createdAt = NSDate(timeIntervalSince1970: created.doubleValue/1000)
+        if let created = dict["createdAt"] as? Double {
+            createdAt = NSDate(timeIntervalSince1970: created/1000)
         }
         
-        if let updated = dict["updatedAt"] as? NSNumber {
-            updatedAt = NSDate(timeIntervalSince1970: updated.doubleValue/1000)
+        if let updated = dict["updatedAt"] as? Double {
+            updatedAt = NSDate(timeIntervalSince1970: updated/1000)
         }
     }
 }
