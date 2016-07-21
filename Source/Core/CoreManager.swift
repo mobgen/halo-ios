@@ -79,6 +79,8 @@ public class CoreManager: NSObject, HaloManager {
         return NSBundle(identifier: "com.mobgen.Halo")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
+    public var configuration = "Halo"
+    
     /// Variable to decide whether to enable system tags or not
     public var enableSystemTags: Bool = false
     
@@ -117,7 +119,7 @@ public class CoreManager: NSObject, HaloManager {
             
             let bundle = NSBundle.mainBundle()
             
-            if let path = bundle.pathForResource("Halo", ofType: "plist") {
+            if let path = bundle.pathForResource(self.configuration, ofType: "plist") {
                 
                 if let data = NSDictionary(contentsOfFile: path) {
                     let clientIdKey = CoreConstants.clientIdKey
