@@ -58,7 +58,7 @@ public class Module: NSObject {
     */
     public init(_ dict: [String:AnyObject]) {
         id = dict["id"] as? Int
-        customerId = dict["customerId"] as? Int
+        customerId = dict["customer"] as? Int
         internalId = dict["internalId"] as? String
         name = dict["name"] as? String
         isSingle = dict["isSingle"] as? Bool ?? false
