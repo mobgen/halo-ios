@@ -44,21 +44,21 @@ public protocol Addon {
     func applicationDidEnterBackground(application: UIApplication, core: Halo.CoreManager) -> Void
     func applicationDidBecomeActive(application: UIApplication, core: Halo.CoreManager) -> Void
     
+}
+
+@objc(HaloNotificationsAddon)
+public protocol NotificationsAddon: Addon {
+    
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: Halo.CoreManager) -> Void
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: Halo.CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification, core: Halo.CoreManager) -> Void
-    
+
 }
 
 @objc(HaloNetworkAddon)
-public protocol NetworkAddon {
-    
-    var addonName: String {get}
-    
-    func setup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
-    func startup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
+public protocol NetworkAddon: Addon {
     
     func willPerformRequest(request: NSURLRequest) -> Void
     func didPerformRequest(request: NSURLRequest, time: NSTimeInterval, response: NSURLResponse?) -> Void
