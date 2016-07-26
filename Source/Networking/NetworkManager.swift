@@ -109,10 +109,11 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         
         session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             
+            elapsed = NSDate().timeIntervalSinceDate(start) * 1000
+            
             if let resp = response as? NSHTTPURLResponse {
                 
                 if self.debug {
-                    elapsed = NSDate().timeIntervalSinceDate(start) * 1000
                     print("\(urlRequest) [\(elapsed)ms]")
                 }
                 
