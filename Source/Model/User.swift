@@ -79,15 +79,15 @@ public final class User: NSObject, NSCoding {
     - parameter name:  Name of the tag to be added
     - parameter value: Value of the tag to be added
     */
-    public func addTag(name: String, value: String? = nil) -> Void {
+    public func addTag(name: String, value: String) -> Void {
         self.addTag(name, value: value, type: "000000000000000000000002")
     }
 
-    func addSystemTag(name: String, value: String? = nil) -> Void {
+    func addSystemTag(name: String, value: String) -> Void {
         self.addTag(name, value: value, type: "000000000000000000000001")
     }
     
-    private func addTag(name: String, value: String? = nil, type: String) -> Void {
+    private func addTag(name: String, value: String, type: String) -> Void {
         let tag = Halo.Tag(name: name, value: value, type: type)
         
         if let tags = self.tags {
@@ -106,7 +106,7 @@ public final class User: NSObject, NSCoding {
 
     - parameter tags: collection of tags
     */
-    public func addTags(tags: [String: String?]) {
+    public func addTags(tags: [String: String]) {
         let _ = tags.map({ self.addTag($0, value: $1)})
     }
 

@@ -30,7 +30,7 @@ public final class Tag: NSObject, NSCoding {
         super.init()
     }
     
-    public init(name: String, value: String? = nil, type: String? = nil) {
+    public init(name: String, value: String, type: String? = nil) {
         self.name = name
         self.value = value
         self.type = type ?? "000000000000000000000002"
@@ -84,7 +84,7 @@ public final class Tag: NSObject, NSCoding {
     - returns: The newly created user tag
     */
     class func fromDictionary(dict: [String: AnyObject]) -> Halo.Tag {
-        let tag = Tag(name: dict["name"] as! String, value: dict["value"] as? String)
+        let tag = Tag(name: dict["name"] as! String, value: dict["value"] as! String)
         tag.id = dict["id"] as? String
 
         return tag
