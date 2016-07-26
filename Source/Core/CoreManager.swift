@@ -370,7 +370,11 @@ public class CoreManager: NSObject, HaloManager {
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         NSLog("Successfully registered for remote notifications")
         
-        let _ = self.addons.map { $0.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: self) }
+        let _ = self.addons.map { (addon) in
+            if let notifAddon = addon as? Halo.NotificationsAddon {
+                notifAddon.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: self)
+            }
+        }
     }
     
     /**
@@ -383,7 +387,11 @@ public class CoreManager: NSObject, HaloManager {
         
         NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
         
-        let _ = self.addons.map { $0.application(application, didFailToRegisterForRemoteNotificationsWithError: error, core: self) }
+        let _ = self.addons.map { (addon) in
+            if let notifAddon = addon as? Halo.NotificationsAddon {
+                notifAddon.application(application, didFailToRegisterForRemoteNotificationsWithError: error, core: self)
+            }
+        }
         
         if self.enableSystemTags {
             self.setupDefaultSystemTags()
@@ -398,12 +406,20 @@ public class CoreManager: NSObject, HaloManager {
     
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
-        let _ = self.addons.map { $0.application(application, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: completionHandler) }
+        let _ = self.addons.map { (addon) in
+            if let notifAddon = addon as? Halo.NotificationsAddon {
+                notifAddon.application(application, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: completionHandler)
+            }
+        }
         
     }
     
     public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        let _ = self.addons.map { $0.application(application, didReceiveLocalNotification: notification, core: self) }
+        let _ = self.addons.map { (addon) in
+            if let notifAddon = addon as? Halo.NotificationsAddon {
+                notifAddon.application(application, didReceiveLocalNotification: notification, core: self)
+            }
+        }
     }
     
     /**
