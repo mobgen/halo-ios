@@ -158,11 +158,14 @@ public class CoreManager: NSObject, HaloManager {
             
             self.checkNeedsUpdate()
             
-            // Configure all the registered addons
-            self.setupAddons { _ in
+            self.configureUser {
                 
-                self.startupAddons { _ in
-                    self.configureUser()
+                // Configure all the registered addons
+                self.setupAddons { _ in
+                    
+                    self.startupAddons { _ in
+                        self.registerUser()
+                    }
                 }
             }
         }
@@ -210,7 +213,7 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
     
-    private func configureUser() {
+    private func configureUser(completionHandler handler: (() -> Void)? = nil) {
         self.user = Halo.User.loadUser(self.environment)
         
         if let user = self.user, _ = user.id {
@@ -221,16 +224,16 @@ public class CoreManager: NSObject, HaloManager {
                     self.user = user
                     
                     if self.enableSystemTags {
-                        self.setupDefaultSystemTags()
+                        self.setupDefaultSystemTags(completionHandler: handler)
                     } else {
-                        self.registerUser()
+                        handler?()
                     }
                 case .Failure(let error):
                     NSLog("Error: \(error.localizedDescription)")
                     if self.enableSystemTags {
-                        self.setupDefaultSystemTags()
+                        self.setupDefaultSystemTags(completionHandler: handler)
                     } else {
-                        self.registerUser()
+                        handler?()
                     }
                 }
             }
@@ -240,14 +243,14 @@ public class CoreManager: NSObject, HaloManager {
             self.delegate?.managerWillSetupUser(self.user!)
             
             if self.enableSystemTags {
-                self.setupDefaultSystemTags()
+                self.setupDefaultSystemTags(completionHandler: handler)
             } else {
-                self.registerUser()
+                handler?()
             }
         }
     }
     
-    private func setupDefaultSystemTags() {
+    private func setupDefaultSystemTags(completionHandler handler: (() -> Void)? = nil) {
         
         if let user = self.user {
             
@@ -291,8 +294,11 @@ public class CoreManager: NSObject, HaloManager {
                 break
             }
             
-            self.registerUser()
+            handler?()
+        } else {
+            handler?()
         }
+        
     }
     
     private func registerUser() -> Void {
@@ -391,12 +397,6 @@ public class CoreManager: NSObject, HaloManager {
             if let notifAddon = addon as? Halo.NotificationsAddon {
                 notifAddon.application(application, didFailToRegisterForRemoteNotificationsWithError: error, core: self)
             }
-        }
-        
-        if self.enableSystemTags {
-            self.setupDefaultSystemTags()
-        } else {
-            self.registerUser()
         }
     }
     
