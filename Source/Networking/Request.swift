@@ -85,6 +85,11 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
 
+    public func authenticationMode(mode: Halo.AuthenticationMode) -> Halo.Request {
+        self.authenticationMode = mode
+        return self
+    }
+    
     public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request {
         self.parameterEncoding = encoding
         return self
