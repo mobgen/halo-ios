@@ -22,7 +22,8 @@ private struct CachedTask {
     
 }
 
-@objc public enum AuthenticationMode: Int {
+@objc(HaloAuthenticationMode)
+public enum AuthenticationMode: Int {
     case App, User
 }
 

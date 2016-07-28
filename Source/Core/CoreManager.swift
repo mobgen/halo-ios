@@ -87,7 +87,7 @@ public class CoreManager: NSObject, HaloManager {
     /// Instance holding all the user-related information
     public var user: User?
     
-    public var addons: [Halo.Addon] = []
+    public private(set) var addons: [Halo.Addon] = []
     
     private var completionHandler: ((Bool) -> Void)?
     
