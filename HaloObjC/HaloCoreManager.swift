@@ -52,21 +52,6 @@ public class HaloCoreManager: NSObject {
         }
     }
     
-    public var authenticationMode: AuthenticationMode {
-        get {
-            return core.authenticationMode
-        }
-        set {
-            core.authenticationMode = newValue
-        }
-    }
-    
-    public var credentials: Credentials? {
-        get {
-            return core.credentials
-        }
-    }
-    
     public var appCredentials: Credentials? {
         get {
             return core.appCredentials
