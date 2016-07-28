@@ -110,4 +110,8 @@ public class ContentInstance: NSObject {
         return false
     }
     
+    public func getValue(key: String) -> AnyObject? {
+        return self.values[key]
+    }
+    
 }

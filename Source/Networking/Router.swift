@@ -7,14 +7,18 @@
 //
 
 /// Custom implementation of the URLRequestConvertible protocol to handle authentication nicely
+
+import Foundation
+
 public enum Router {
 
     /// Common base url of all the API endpoints
     public static var baseURL = NSURL(string: "https://halo.mobgen.com")
 
     /// Token to be used for authentication purposes
-    static var token:Token?
-
+    static var appToken: Token?
+    static var userToken: Token?
+    
     case OAuth(Credentials, [String: AnyObject])
     case Modules
     case GeneralContentInstances([String: AnyObject])

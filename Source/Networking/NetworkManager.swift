@@ -22,29 +22,12 @@ private struct CachedTask {
     
 }
 
-@objc public enum AuthenticationMode: Int {
-    case App, User
-}
-
 public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
-
-    var debug: Bool = false
-
-    var authenticationMode: AuthenticationMode = .App {
-        didSet {
-            Router.token = nil
-        }
-    }
     
-    var credentials: Credentials? {
-        switch self.authenticationMode {
-        case .App: return self.appCredentials
-        case .User: return self.userCredentials
-        }
-    }
-
+    var debug: Bool = false
+    
     var appCredentials: Credentials?
-
+    
     var userCredentials: Credentials?
     
     var numberOfRetries = 0
@@ -61,10 +44,25 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     
     private let errorResponseCodes = [404, 500]
     
+    private var addons: [Halo.NetworkAddon] = []
+    
     override init() {
         super.init()
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+    }
+    
+    public func registerAddon(addon: Halo.NetworkAddon) -> Void {
+        self.addons.append(addon)
+    }
+    
+    private func getCredentials(mode: Halo.AuthenticationMode) -> Halo.Credentials? {
+        switch mode {
+        case .App:
+            return self.appCredentials
+        case .User:
+            return self.userCredentials
+        }
     }
     
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
@@ -78,95 +76,114 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 self.enableSSLpinning = !disable
             }
         }
-
+        
         handler?(true)
     }
     
     func startRequest(request urlRequest: Halo.Request,
-        numberOfRetries: Int,
-        completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
-            
-            let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
-            
-            if (self.isRefreshing) {
-                /// If the token is being obtained/refreshed, add the task to the queue and return
-                self.cachedTasks.append(cachedTask)
-                return
-            }
-
-            let start = NSDate()
+                              numberOfRetries: Int,
+                              completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
         
-            session.dataTaskWithRequest(urlRequest.URLRequest) { (data, response, error) -> Void in
-                
-                if let resp = response as? NSHTTPURLResponse {
+        let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
+        
+        if (self.isRefreshing) {
+            /// If the token is being obtained/refreshed, add the task to the queue and return
+            self.cachedTasks.append(cachedTask)
+            return
+        }
+        
+        let request = urlRequest.URLRequest
+        
+        let _ = self.addons.map { $0.willPerformRequest(request) }
+        
+        let start = NSDate()
+        var elapsed: NSTimeInterval = 0
+        
+        session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             
-                    if self.debug {
-                        let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
-                        print("\(urlRequest) [\(elapsed)ms]")
-                    }
-                    
-                    if self.unauthorizedResponseCodes.contains(resp.statusCode) {
-                        self.cachedTasks.append(cachedTask)
-                        self.authenticate()
-                        return
-                    }
-                    
-                    if resp.statusCode > 399 {
-                        if numberOfRetries > 0 {
-                            self.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1)
-                        } else {
-                            var message : NSString
-                            
-                            do {
-                                var error = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as! [String : AnyObject]
-                                error = error["error"] as! [String : AnyObject]
-                                
-                                message = error["message"] as? String ?? "An error has occurred"
-                                
-                            } catch {
-                                message = "The content of the response is not a valid JSON"
-                            }
-                            
-                            dispatch_async(dispatch_get_main_queue(), {
-                                handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
-                            })
-                            
-                        }
-                    } else if let d = data {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            handler?(resp, .Success(d, false))
-                        })
+            elapsed = NSDate().timeIntervalSinceDate(start) * 1000
+            
+            if let resp = response as? NSHTTPURLResponse {
+                
+                if self.debug {
+                    print("\(urlRequest) [\(elapsed)ms]")
+                }
+                
+                if self.unauthorizedResponseCodes.contains(resp.statusCode) {
+                    self.cachedTasks.append(cachedTask)
+                    self.authenticate(urlRequest.authenticationMode)
+                    return
+                }
+                
+                if resp.statusCode > 399 {
+                    if numberOfRetries > 0 {
+                        self.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1)
                     } else {
+                        var message : NSString
+                        
+                        do {
+                            var error = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as! [String : AnyObject]
+                            error = error["error"] as! [String : AnyObject]
+                            
+                            message = error["message"] as? String ?? "An error has occurred"
+                            
+                        } catch {
+                            message = "The content of the response is not a valid JSON"
+                        }
+                        
                         dispatch_async(dispatch_get_main_queue(), {
-                            handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                            handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
                         })
+                        
                     }
+                } else if let d = data {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        handler?(resp, .Success(d, false))
+                    })
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
-                        handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                        handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                     })
                 }
+                
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                })
+            }
+            
+            let _ = self.addons.map { $0.didPerformRequest(request, time: elapsed, response: response) }
+            
             }.resume()
-
+        
     }
-
+    
     func startRequest(request urlRequest: Halo.Request,
-        completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
-
-            self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
+                              completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
+        
+        self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
     }
-
+    
     /**
      Obtain/refresh an authentication token when needed
      */
-    func authenticate(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    func authenticate(mode: Halo.AuthenticationMode, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         
         self.isRefreshing = true
         var params: [String : AnyObject]
         
-        if let cred = self.credentials {
+        if let cred = getCredentials(mode) {
             
-            if let token = Router.token {
+            var tok: Token?
+            
+            switch cred.type {
+            case .App:
+                tok = Router.appToken
+            case .User:
+                tok = Router.userToken
+            }
+            
+            if let token = tok {
                 
                 params = [
                     "grant_type"    : "refresh_token",
@@ -200,12 +217,12 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 }
             }
             
-            let req = Halo.Request(router: Router.OAuth(cred, params))
-
+            let req = Halo.Request(router: Router.OAuth(cred, params)).authenticationMode(mode)
+            
             let start = NSDate()
             
             self.session.dataTaskWithRequest(req.URLRequest, completionHandler: { (data, response, error) -> Void in
-            
+                
                 if let resp = response as? NSHTTPURLResponse {
                     
                     if self.debug {
@@ -224,7 +241,12 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                         let json = try! NSJSONSerialization.JSONObjectWithData(d, options: []) as! [String : AnyObject]
                         let token = Token(json)
                         
-                        Router.token = token
+                        switch req.authenticationMode {
+                        case .App:
+                            Router.appToken = token
+                        case .User:
+                            Router.userToken = token
+                        }
                         
                         dispatch_async(dispatch_get_main_queue(), {
                             handler?(resp, .Success(token, false))
@@ -247,27 +269,27 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
             NSLog("No credentials found")
         }
     }
-
+    
     // MARK: SSL Pinning
-
+    
     func evaluateServerTrust(serverTrust: SecTrust, isValidForHost host: String) -> Bool {
         let policy = SecPolicyCreateSSL(true, host as CFString)
         SecTrustSetPolicies(serverTrust, [policy])
-
-        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle(NSBundle(identifier: "com.mobgen.HaloSDK")!))
+        
+        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle(NSBundle(identifier: "com.mobgen.Halo")!))
         SecTrustSetAnchorCertificatesOnly(serverTrust, true)
-
+        
         return trustIsValid(serverTrust)
     }
-
-
+    
+    
     private func certificatesInBundle(bundle: NSBundle = NSBundle.mainBundle()) -> [SecCertificate] {
         var certificates: [SecCertificate] = []
-
+        
         let paths = Set([".cer", ".CER", ".crt", ".CRT", ".der", ".DER"].map { fileExtension in
             bundle.pathsForResourcesOfType(fileExtension, inDirectory: nil)
             }.flatten())
-
+        
         for path in paths {
             if let
                 certificateData = NSData(contentsOfFile: path),
@@ -276,35 +298,35 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 certificates.append(certificate)
             }
         }
-
+        
         return certificates
     }
-
+    
     private func trustIsValid(trust: SecTrust) -> Bool {
         var isValid = false
-
+        
         var result = SecTrustResultType(kSecTrustResultInvalid)
         let status = SecTrustEvaluate(trust, &result)
-
+        
         if status == errSecSuccess {
             let unspecified = SecTrustResultType(kSecTrustResultUnspecified)
             let proceed = SecTrustResultType(kSecTrustResultProceed)
-
+            
             isValid = result == unspecified || result == proceed
         }
         
         return isValid
     }
-
+    
     // MARK: NSURLSessionDelegate implementation
-
+    
     public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
         var credential: NSURLCredential?
-
+        
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             let host = challenge.protectionSpace.host
-
+            
             if let serverTrust = challenge.protectionSpace.serverTrust {
                 if !self.enableSSLpinning || evaluateServerTrust(serverTrust, isValidForHost: host) {
                     disposition = .UseCredential
@@ -314,8 +336,8 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 }
             }
         }
-
+        
         completionHandler(disposition, credential)
     }
-
+    
 }

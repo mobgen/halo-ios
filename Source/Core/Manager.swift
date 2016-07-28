@@ -77,15 +77,15 @@ public enum HaloEnvironment {
 
 public struct Manager {
     
-    public static var core: CoreManager = {
+    public static let core: CoreManager = {
        return CoreManager()
     }()
     
-    public static var content: ContentManager = {
+    public static let content: ContentManager = {
        return ContentManager()
     }()
     
-    public static var network: NetworkManager = {
+    public static let network: NetworkManager = {
         return NetworkManager()
     }()
     
