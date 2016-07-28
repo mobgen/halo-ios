@@ -217,7 +217,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 }
             }
             
-            let req = Halo.Request(router: Router.OAuth(cred, params))
+            let req = Halo.Request(router: Router.OAuth(cred, params)).authenticationMode(mode)
             
             let start = NSDate()
             
