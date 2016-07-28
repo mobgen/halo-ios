@@ -22,27 +22,9 @@ private struct CachedTask {
     
 }
 
-@objc(HaloAuthenticationMode)
-public enum AuthenticationMode: Int {
-    case App, User
-}
-
 public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     
     var debug: Bool = false
-    
-    var authenticationMode: AuthenticationMode = .App {
-        didSet {
-            Router.token = nil
-        }
-    }
-    
-    var credentials: Credentials? {
-        switch self.authenticationMode {
-        case .App: return self.appCredentials
-        case .User: return self.userCredentials
-        }
-    }
     
     var appCredentials: Credentials?
     
@@ -72,6 +54,15 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     
     public func registerAddon(addon: Halo.NetworkAddon) -> Void {
         self.addons.append(addon)
+    }
+    
+    private func getCredentials(mode: Halo.AuthenticationMode) -> Halo.Credentials? {
+        switch mode {
+        case .App:
+            return self.appCredentials
+        case .User:
+            return self.userCredentials
+        }
     }
     
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
@@ -120,7 +111,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     self.cachedTasks.append(cachedTask)
-                    self.authenticate()
+                    self.authenticate(urlRequest.authenticationMode)
                     return
                 }
                 
@@ -176,14 +167,23 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     /**
      Obtain/refresh an authentication token when needed
      */
-    func authenticate(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    func authenticate(mode: Halo.AuthenticationMode, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         
         self.isRefreshing = true
         var params: [String : AnyObject]
         
-        if let cred = self.credentials {
+        if let cred = getCredentials(mode) {
             
-            if let token = Router.token {
+            var tok: Token?
+            
+            switch cred.type {
+            case .App:
+                tok = Router.appToken
+            case .User:
+                tok = Router.userToken
+            }
+            
+            if let token = tok {
                 
                 params = [
                     "grant_type"    : "refresh_token",
@@ -241,7 +241,12 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                         let json = try! NSJSONSerialization.JSONObjectWithData(d, options: []) as! [String : AnyObject]
                         let token = Token(json)
                         
-                        Router.token = token
+                        switch req.authenticationMode {
+                        case .App:
+                            Router.appToken = token
+                        case .User:
+                            Router.userToken = token
+                        }
                         
                         dispatch_async(dispatch_get_main_queue(), {
                             handler?(resp, .Success(token, false))

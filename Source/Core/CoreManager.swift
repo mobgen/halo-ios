@@ -27,7 +27,8 @@ public class CoreManager: NSObject, HaloManager {
     public private(set) var environment: HaloEnvironment = .Prod {
         didSet {
             Router.baseURL = environment.baseUrl
-            Router.token = nil
+            Router.userToken = nil
+            Router.appToken = nil
         }
     }
     
@@ -39,21 +40,6 @@ public class CoreManager: NSObject, HaloManager {
         }
         set {
             Manager.network.numberOfRetries = newValue
-        }
-    }
-    
-    public var authenticationMode: AuthenticationMode {
-        get {
-            return Manager.network.authenticationMode
-        }
-        set {
-            Manager.network.authenticationMode = newValue
-        }
-    }
-    
-    public var credentials: Credentials? {
-        get {
-            return Manager.network.credentials
         }
     }
     
@@ -108,7 +94,8 @@ public class CoreManager: NSObject, HaloManager {
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
         self.completionHandler = handler
-        Router.token = nil
+        Router.userToken = nil
+        Router.appToken = nil
         
         Manager.network.startup { (success) -> Void in
             
@@ -150,10 +137,6 @@ public class CoreManager: NSObject, HaloManager {
                 }
             } else {
                 NSLog("No .plist found")
-            }
-            
-            if let cred = self.credentials {
-                NSLog("Using credentials: \(cred.username) / \(cred.password)")
             }
             
             self.checkNeedsUpdate()
@@ -361,8 +344,8 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
     
-    public func authenticate(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
-        Manager.network.authenticate { (response, result) in
+    public func authenticate(mode: Halo.AuthenticationMode = .App, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+        Manager.network.authenticate(mode) { (response, result) in
             handler?(response, result)
         }
     }

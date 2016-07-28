@@ -8,6 +8,11 @@
 
 import Foundation
 
+@objc(HaloAuthenticationMode)
+public enum AuthenticationMode: Int {
+    case App, User
+}
+
 public class Request: CustomDebugStringConvertible {
 
     public private(set) var url: NSURL?
@@ -17,14 +22,24 @@ public class Request: CustomDebugStringConvertible {
     public private(set) var headers: [String: String] = [:]
     public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
     public private(set) var params: [String: AnyObject] = [:]
-
+    public private(set) var authenticationMode: Halo.AuthenticationMode = .App
+    
     var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
         
         req.HTTPMethod = self.method.rawValue
         
-        if let token = Router.token {
-            req.setValue("\(token.tokenType!) \(token.token!)", forHTTPHeaderField: "Authorization")
+        var token: Token?
+        
+        switch self.authenticationMode {
+        case .App:
+            token = Router.appToken
+        case .User:
+            token = Router.userToken
+        }
+        
+        if let tok = token {
+            req.setValue("\(tok.tokenType!) \(tok.token!)", forHTTPHeaderField: "Authorization")
         }
         
         for (key, value) in self.headers {
