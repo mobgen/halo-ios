@@ -90,6 +90,10 @@ public class HaloCoreManager: NSObject {
         }
     }
     
+    public func registerAddon(addon: Halo.Addon) -> Void {
+        core.registerAddon(addon)
+    }
+    
     @objc(startup:)
     public func startup(completionHandler handler: (Bool) -> Void) -> Void {
         core.startup(completionHandler: handler)
