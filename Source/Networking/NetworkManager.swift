@@ -69,7 +69,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         
         let bundle = NSBundle.mainBundle()
         
-        if let path = bundle.pathForResource("Halo", ofType: "plist") {
+        if let path = bundle.pathForResource(Manager.core.configuration, ofType: "plist") {
             
             if let data = NSDictionary(contentsOfFile: path) {
                 let disable = data[CoreConstants.disableSSLpinning] as? Bool ?? true
