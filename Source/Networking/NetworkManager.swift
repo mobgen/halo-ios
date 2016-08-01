@@ -56,7 +56,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         self.addons.append(addon)
     }
     
-    private func getCredentials(mode: Halo.AuthenticationMode) -> Halo.Credentials? {
+    private func getCredentials(mode: Halo.AuthenticationMode = .App) -> Halo.Credentials? {
         switch mode {
         case .App:
             return self.appCredentials
