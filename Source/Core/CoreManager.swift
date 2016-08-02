@@ -158,6 +158,7 @@ public class CoreManager: NSObject, HaloManager {
         var counter = 0
         
         let _ = self.addons.map { $0.setup(self) { (addon, success) in
+            
             if success {
                 NSLog("Successfully set up the \(addon.addonName) addon")
             } else {
@@ -288,7 +289,7 @@ public class CoreManager: NSObject, HaloManager {
         if let user = self.user {
             self.user?.storeUser(self.environment)
             
-            Manager.network.createUpdateUser(user, completionHandler: { [weak self] (_, result) -> Void in
+            Manager.network.createUpdateUser(user) { [weak self] (_, result) -> Void in
                 
                 var success = false
                 
@@ -300,7 +301,7 @@ public class CoreManager: NSObject, HaloManager {
                         strongSelf.user?.storeUser(strongSelf.environment)
                         
                         if strongSelf.debug {
-                            debugPrint(user)
+                            NSLog(user.description)
                         }
                         
                         success = true
@@ -311,7 +312,7 @@ public class CoreManager: NSObject, HaloManager {
                     strongSelf.completionHandler?(success)
                     
                 }
-                })
+            }
         } else {
             self.completionHandler?(false)
         }
@@ -329,7 +330,7 @@ public class CoreManager: NSObject, HaloManager {
                         strongSelf.user = user
                         
                         if strongSelf.debug {
-                            debugPrint(user)
+                            NSLog(user.description)
                         }
                     case .Failure(let error):
                         NSLog("Error saving user: \(error.localizedDescription)")
@@ -356,7 +357,10 @@ public class CoreManager: NSObject, HaloManager {
      - parameter deviceToken: Token obtained for the current device
      */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        NSLog("Successfully registered for remote notifications")
+        
+        if self.debug {
+            NSLog("Successfully registered for remote notifications with token \(deviceToken)")
+        }
         
         let _ = self.addons.map { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
@@ -373,7 +377,9 @@ public class CoreManager: NSObject, HaloManager {
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         
-        NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
+        if self.debug {
+            NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
+        }
         
         let _ = self.addons.map { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
