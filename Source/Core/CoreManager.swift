@@ -158,6 +158,7 @@ public class CoreManager: NSObject, HaloManager {
         var counter = 0
         
         let _ = self.addons.map { $0.setup(self) { (addon, success) in
+            
             if success {
                 NSLog("Successfully set up the \(addon.addonName) addon")
             } else {
@@ -357,7 +358,9 @@ public class CoreManager: NSObject, HaloManager {
      */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
-        NSLog("Successfully registered for remote notifications")
+        if self.debug {
+            NSLog("Successfully registered for remote notifications with token \(deviceToken)")
+        }
         
         let _ = self.addons.map { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
@@ -374,7 +377,9 @@ public class CoreManager: NSObject, HaloManager {
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         
-        NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
+        if self.debug {
+            NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
+        }
         
         let _ = self.addons.map { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
