@@ -288,7 +288,7 @@ public class CoreManager: NSObject, HaloManager {
         if let user = self.user {
             self.user?.storeUser(self.environment)
             
-            Manager.network.createUpdateUser(user, completionHandler: { [weak self] (_, result) -> Void in
+            Manager.network.createUpdateUser(user) { [weak self] (_, result) -> Void in
                 
                 var success = false
                 
@@ -300,7 +300,7 @@ public class CoreManager: NSObject, HaloManager {
                         strongSelf.user?.storeUser(strongSelf.environment)
                         
                         if strongSelf.debug {
-                            debugPrint(user)
+                            NSLog(user.description)
                         }
                         
                         success = true
@@ -311,7 +311,7 @@ public class CoreManager: NSObject, HaloManager {
                     strongSelf.completionHandler?(success)
                     
                 }
-                })
+            }
         } else {
             self.completionHandler?(false)
         }
@@ -329,7 +329,7 @@ public class CoreManager: NSObject, HaloManager {
                         strongSelf.user = user
                         
                         if strongSelf.debug {
-                            debugPrint(user)
+                            NSLog(user.description)
                         }
                     case .Failure(let error):
                         NSLog("Error saving user: \(error.localizedDescription)")
@@ -356,6 +356,7 @@ public class CoreManager: NSObject, HaloManager {
      - parameter deviceToken: Token obtained for the current device
      */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
         NSLog("Successfully registered for remote notifications")
         
         let _ = self.addons.map { (addon) in
