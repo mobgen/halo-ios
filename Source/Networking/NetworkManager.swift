@@ -259,9 +259,9 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                     // Restart cached tasks
                     let cachedTasksCopy = self.cachedTasks
                     self.cachedTasks.removeAll()
-                    let _ = cachedTasksCopy.map({ (task) -> Void in
+                    let _ = cachedTasksCopy.map { (task) -> Void in
                         self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
-                    })
+                    }
                 }
             }).resume()
             

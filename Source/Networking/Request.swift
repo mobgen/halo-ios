@@ -74,7 +74,7 @@ public class Request: CustomDebugStringConvertible {
             let _ = params.map({ self.params[$0.0] = $0.1 })
         }
     }
-
+    
     public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request {
         self.offlinePolicy = policy
         return self
@@ -176,6 +176,20 @@ public class Request: CustomDebugStringConvertible {
                 handler?(response, .Failure(error))
             }
         }
+        return self
+    }
+    
+    public func responseObject<T>(responseParser: (AnyObject) -> T?, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Halo.Request {
+        
+        try self.response { (response, result) in
+            switch result {
+            case .Success(let data, _):
+                handler?(response, .Success(responseParser(data), false))
+            case .Failure(let error):
+                handler?(response, .Failure(error))
+            }
+        }
+        
         return self
     }
     

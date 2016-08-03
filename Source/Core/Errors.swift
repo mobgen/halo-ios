@@ -8,4 +8,5 @@
 
 public enum HaloError: ErrorType {
     case NotImplementedOfflinePolicy
+    case NotImplementedResponseParser
 }
