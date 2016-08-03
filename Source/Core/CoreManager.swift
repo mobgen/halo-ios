@@ -277,6 +277,9 @@ public class CoreManager: NSObject, HaloManager {
                 break
             }
             
+            // Get APNs environment
+            user.addSystemTag("apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercaseString)
+            
             handler?()
         } else {
             handler?()
