@@ -10,11 +10,11 @@ import Foundation
 
 private struct CachedTask {
     
-    var request: Halo.Request
+    var request: Halo.Requestable
     var numberOfRetries: Int
     var handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)?
     
-    init(request: Halo.Request, retries: Int, handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)?) {
+    init(request: Halo.Requestable, retries: Int, handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)?) {
         self.request = request
         self.numberOfRetries = retries
         self.handler = handler
@@ -80,7 +80,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         handler?(true)
     }
     
-    func startRequest(request urlRequest: Halo.Request,
+    func startRequest(request urlRequest: Requestable,
                               numberOfRetries: Int,
                               completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
         
@@ -158,7 +158,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         
     }
     
-    func startRequest(request urlRequest: Halo.Request,
+    func startRequest<T>(request urlRequest: Halo.Request<T>,
                               completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
         
         self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
@@ -217,7 +217,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 }
             }
             
-            let req = Halo.Request(router: Router.OAuth(cred, params)).authenticationMode(mode)
+            let req = Halo.Request<Any>(router: Router.OAuth(cred, params)).authenticationMode(mode)
             
             let start = NSDate()
             

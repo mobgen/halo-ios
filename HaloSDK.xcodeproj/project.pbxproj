@@ -12,6 +12,9 @@
 		00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00121E8E1BF33B5B00FD656F /* CoreManager+Modules.swift */; };
 		001C96C91D268F9C00126DD9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B021C51320C00FACAB2 /* libsqlite3.tbd */; };
 		00396E3B1D51E9EE00594D0A /* MobileProvisionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E3A1D51E9EE00594D0A /* MobileProvisionParser.swift */; };
+		00396E471D53253600594D0A /* PaginatedModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E461D53253600594D0A /* PaginatedModules.swift */; };
+		00396E491D53255500594D0A /* PaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E481D53255500594D0A /* PaginationInfo.swift */; };
+		00396E4B1D5328B300594D0A /* PaginatedContentInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E4A1D5328B300594D0A /* PaginatedContentInstances.swift */; };
 		003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B75F71C969E9800F05202 /* ParameterEncoding.swift */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		004790FC1C915C6C00C24741 /* HaloObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 004790FB1C915C6C00C24741 /* HaloObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -150,6 +153,9 @@
 		000827001B6A57A5001E8248 /* ModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
 		00121E8E1BF33B5B00FD656F /* CoreManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+Modules.swift"; sourceTree = "<group>"; };
 		00396E3A1D51E9EE00594D0A /* MobileProvisionParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MobileProvisionParser.swift; path = Source/Helpers/MobileProvisionParser.swift; sourceTree = "<group>"; };
+		00396E461D53253600594D0A /* PaginatedModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedModules.swift; sourceTree = "<group>"; };
+		00396E481D53255500594D0A /* PaginationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationInfo.swift; sourceTree = "<group>"; };
+		00396E4A1D5328B300594D0A /* PaginatedContentInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedContentInstances.swift; sourceTree = "<group>"; };
 		003B75F71C969E9800F05202 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
@@ -300,6 +306,9 @@
 				0068D27B1B6778CA00B1E147 /* Token.swift */,
 				006CB9B51B870FB800EB872E /* User.swift */,
 				006CB9B91B87116D00EB872E /* UserDevice.swift */,
+				00396E461D53253600594D0A /* PaginatedModules.swift */,
+				00396E481D53255500594D0A /* PaginationInfo.swift */,
+				00396E4A1D5328B300594D0A /* PaginatedContentInstances.swift */,
 			);
 			name = Model;
 			path = Source/Model;
@@ -788,7 +797,10 @@
 				00E508391CB691EB00B4B5AE /* SearchFilter.swift in Sources */,
 				005421691CC785210055B553 /* Protocols.swift in Sources */,
 				005421651CC76D230055B553 /* NSURLRequest+cURL.swift in Sources */,
+				00396E471D53253600594D0A /* PaginatedModules.swift in Sources */,
+				00396E4B1D5328B300594D0A /* PaginatedContentInstances.swift in Sources */,
 				00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */,
+				00396E491D53255500594D0A /* PaginationInfo.swift in Sources */,
 				0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */,
 				006CB9B81B870FC400EB872E /* Tag.swift in Sources */,
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,

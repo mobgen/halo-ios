@@ -75,12 +75,12 @@ public protocol HaloManager {
 
 public protocol ModulesProvider {
     
-    func getModules(offlinePolicy: OfflinePolicy?) -> Halo.Request
+    func getModules(offlinePolicy: OfflinePolicy?) -> Halo.Request<PaginatedModules>
     
 }
 
 public protocol ContentProvider {
     
-    func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request
+    func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request<PaginatedContentInstances>
     
 }
