@@ -23,9 +23,30 @@ public struct ContentManager: HaloManager, ContentProvider {
 
     // MARK: Get instances
     
-    public func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request {
+    public func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request<PaginatedContentInstances> {
         
-        let request = Halo.Request(router: Router.GeneralContentSearch)
+        let request = Halo.Request<PaginatedContentInstances>(router: Router.GeneralContentSearch).responseParser { (any) in
+            
+            switch any {
+            case let data as [String: AnyObject]:
+                
+                if let pag = data["pagination"] as? [String: AnyObject], items = data["items"] as? [[String: AnyObject]] {
+                    let paginationInfo = PaginationInfo(data: pag)
+                    let instances = items.map { Halo.ContentInstance($0) }
+                    return PaginatedContentInstances(paginationInfo: paginationInfo, instances: instances)
+                }
+                return nil
+            
+            case let data as [[String: AnyObject]]:
+                
+                let items = data.map { Halo.ContentInstance($0) }
+                let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
+                return PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
+            
+            default:
+                return nil
+            }
+        }
 
         // Copy the options to make it mutable
         var options = searchOptions

@@ -13,7 +13,12 @@ public enum AuthenticationMode: Int {
     case App, User
 }
 
-public class Request: CustomDebugStringConvertible {
+public protocol Requestable {
+    var URLRequest: NSMutableURLRequest { get }
+    var authenticationMode: Halo.AuthenticationMode { get }
+}
+
+public class Request<T>: Requestable, CustomDebugStringConvertible {
 
     public private(set) var url: NSURL?
     public private(set) var include = false
@@ -23,8 +28,9 @@ public class Request: CustomDebugStringConvertible {
     public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
     public private(set) var params: [String: AnyObject] = [:]
     public private(set) var authenticationMode: Halo.AuthenticationMode = .App
+    public private(set) var responseParser: ((AnyObject) -> T?)?
     
-    var URLRequest: NSMutableURLRequest {
+    public var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
         
         req.HTTPMethod = self.method.rawValue
@@ -74,66 +80,71 @@ public class Request: CustomDebugStringConvertible {
             let _ = params.map({ self.params[$0.0] = $0.1 })
         }
     }
-
-    public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request {
+    
+    public func responseParser(parser: (AnyObject) -> T?) -> Halo.Request<T> {
+        self.responseParser = parser
+        return self
+    }
+    
+    public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
         return self
     }
     
-    public func method(method: Halo.Method) -> Halo.Request {
+    public func method(method: Halo.Method) -> Halo.Request<T> {
         self.method = method
         return self
     }
 
-    public func authenticationMode(mode: Halo.AuthenticationMode) -> Halo.Request {
+    public func authenticationMode(mode: Halo.AuthenticationMode) -> Halo.Request<T> {
         self.authenticationMode = mode
         return self
     }
     
-    public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request {
+    public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
         self.parameterEncoding = encoding
         return self
     }
 
-    public func addHeader(field field: String, value: String) -> Halo.Request {
+    public func addHeader(field field: String, value: String) -> Halo.Request<T> {
         self.headers[field] = value
         return self
     }
 
-    public func addHeaders(headers: [String : String]) -> Halo.Request {
+    public func addHeaders(headers: [String : String]) -> Halo.Request<T> {
         let _ = headers.map { (key, value) -> Void in
             let _ = self.addHeader(field: key, value: value)
         }
         return self
     }
 
-    public func params(params: [String : AnyObject]) -> Halo.Request {
+    public func params(params: [String : AnyObject]) -> Halo.Request<T> {
         let _ = params.map { self.params[$0] = $1 }
         return self
     }
 
-    public func includeAll() -> Halo.Request {
+    public func includeAll() -> Halo.Request<T> {
         self.include = true
         return self
     }
 
-    public func paginate(page page: Int, limit: Int) -> Halo.Request {
+    public func paginate(page page: Int, limit: Int) -> Halo.Request<T> {
         self.params["page"] = page
         self.params["limit"] = limit
         return self
     }
     
-    public func skipPagination() -> Halo.Request {
+    public func skipPagination() -> Halo.Request<T> {
         self.params["skip"] = "true"
         return self
     }
     
-    public func fields(fields: [String]) -> Halo.Request {
+    public func fields(fields: [String]) -> Halo.Request<T> {
         self.params["fields"] = fields
         return self
     }
     
-    public func tags(tags: [Halo.Tag]) -> Halo.Request {
+    public func tags(tags: [Halo.Tag]) -> Halo.Request<T> {
         let _ = tags.map({ tag in
             let json = try! NSJSONSerialization.dataWithJSONObject(tag.toDictionary(), options: [])
             self.params["filter[tags][]"] = String(data: json, encoding: NSUTF8StringEncoding)
@@ -149,7 +160,7 @@ public class Request: CustomDebugStringConvertible {
         return bodyHash + urlHash
     }
     
-    public func responseData(completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
+    public func responseData(completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
         
         switch self.offlinePolicy {
         case .None:
@@ -163,7 +174,7 @@ public class Request: CustomDebugStringConvertible {
         return self
     }
     
-    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request {
+    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
         
         try self.responseData { (response, result) -> Void in
             switch result {
@@ -176,6 +187,24 @@ public class Request: CustomDebugStringConvertible {
                 handler?(response, .Failure(error))
             }
         }
+        return self
+    }
+    
+    public func responseObject(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+        
+        guard let parser = self.responseParser else {
+            throw HaloError.NotImplementedResponseParser
+        }
+        
+        try self.response { (response, result) in
+            switch result {
+            case .Success(let data, _):
+                handler?(response, .Success(parser(data), false))
+            case .Failure(let error):
+                handler?(response, .Failure(error))
+            }
+        }
+        
         return self
     }
     

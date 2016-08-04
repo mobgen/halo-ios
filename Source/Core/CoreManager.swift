@@ -304,7 +304,9 @@ public class CoreManager: NSObject, HaloManager {
                         strongSelf.user?.storeUser(strongSelf.environment)
                         
                         if strongSelf.debug {
-                            NSLog(user.description)
+                            if let u = user {
+                                NSLog(u.description)
+                            }
                         }
                         
                         success = true
@@ -321,7 +323,7 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
     
-    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User, NSError>) -> Void)? = nil) -> Void {
+    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
         if let user = self.user {
             
             Manager.network.createUpdateUser(user) { [weak self] (response, result) in
@@ -333,7 +335,9 @@ public class CoreManager: NSObject, HaloManager {
                         strongSelf.user = user
                         
                         if strongSelf.debug {
-                            NSLog(user.description)
+                            if let u = user {
+                                NSLog(u.description)
+                            }
                         }
                     case .Failure(let error):
                         NSLog("Error saving user: \(error.localizedDescription)")
@@ -433,7 +437,7 @@ public class CoreManager: NSObject, HaloManager {
     
     private func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
         
-        try! Request(path: "/api/authentication/version").params(["current": "true"]).response { (_, result) in
+        try! Request<Any>(path: "/api/authentication/version").params(["current": "true"]).response { (_, result) in
             switch result {
             case .Success(let data as [[String: AnyObject]], _):
                 if let info = data.first, minIOS = info["minIOS"] {
