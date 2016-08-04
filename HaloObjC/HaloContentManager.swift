@@ -8,13 +8,13 @@
 
 import Halo
 
-@objc public enum GeneralContentFlags: Int {
+@objc public enum ContentFlags: Int {
     case None, IncludeArchived, IncludeUnpublished, IncludeArchivedAndUnpublished
 }
 
-public class HaloGeneralContentManager: NSObject {
+public class HaloContentManager: NSObject {
  
-    static let sharedInstance = HaloGeneralContentManager()
+    static let sharedInstance = HaloContentManager()
     
     private let content = Halo.Manager.content
     

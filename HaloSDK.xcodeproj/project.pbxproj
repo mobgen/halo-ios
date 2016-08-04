@@ -15,7 +15,7 @@
 		00396E471D53253600594D0A /* PaginatedModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E461D53253600594D0A /* PaginatedModules.swift */; };
 		00396E491D53255500594D0A /* PaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E481D53255500594D0A /* PaginationInfo.swift */; };
 		00396E4B1D5328B300594D0A /* PaginatedContentInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E4A1D5328B300594D0A /* PaginatedContentInstances.swift */; };
-		00396E5B1D535BF300594D0A /* HaloGeneralContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004791061C915D4A00C24741 /* HaloGeneralContentManager.swift */; };
+		00396E5B1D535BF300594D0A /* HaloContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004791061C915D4A00C24741 /* HaloContentManager.swift */; };
 		00396E5C1D535BF300594D0A /* HaloRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005034B11C92B11300362A8F /* HaloRequest.swift */; };
 		00396E5D1D535BF300594D0A /* HaloPaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E501D535B3600594D0A /* HaloPaginationInfo.swift */; };
 		00396E5E1D535BF300594D0A /* HaloPaginatedModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E521D535BD600594D0A /* HaloPaginatedModules.swift */; };
@@ -175,7 +175,7 @@
 		004790FB1C915C6C00C24741 /* HaloObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HaloObjC.h; sourceTree = "<group>"; };
 		004791021C915CD100C24741 /* HaloManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloManager.swift; sourceTree = "<group>"; };
 		004791041C915D1100C24741 /* HaloCoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloCoreManager.swift; sourceTree = "<group>"; };
-		004791061C915D4A00C24741 /* HaloGeneralContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloGeneralContentManager.swift; sourceTree = "<group>"; };
+		004791061C915D4A00C24741 /* HaloContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloContentManager.swift; sourceTree = "<group>"; };
 		004C73C41D09657A005A14FB /* SearchFilterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFilterHelper.swift; path = Source/Helpers/SearchFilterHelper.swift; sourceTree = "<group>"; };
 		004FEC6F1BCFB788004216EE /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		004FEC701BCFB788004216EE /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
@@ -345,7 +345,7 @@
 				004790FB1C915C6C00C24741 /* HaloObjC.h */,
 				004791021C915CD100C24741 /* HaloManager.swift */,
 				004791041C915D1100C24741 /* HaloCoreManager.swift */,
-				004791061C915D4A00C24741 /* HaloGeneralContentManager.swift */,
+				004791061C915D4A00C24741 /* HaloContentManager.swift */,
 				005034B11C92B11300362A8F /* HaloRequest.swift */,
 				00396E501D535B3600594D0A /* HaloPaginationInfo.swift */,
 				00396E521D535BD600594D0A /* HaloPaginatedModules.swift */,
@@ -792,7 +792,7 @@
 				00396E5E1D535BF300594D0A /* HaloPaginatedModules.swift in Sources */,
 				00396E651D53640E00594D0A /* HaloContentInstance.swift in Sources */,
 				00396E631D53635600594D0A /* HaloPaginatedContentInstances.swift in Sources */,
-				00396E5B1D535BF300594D0A /* HaloGeneralContentManager.swift in Sources */,
+				00396E5B1D535BF300594D0A /* HaloContentManager.swift in Sources */,
 				004791031C915CD100C24741 /* HaloManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
