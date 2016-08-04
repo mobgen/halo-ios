@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc(HaloModuleTypeCategory)
 public enum ModuleTypeCategory: Int {
     case OffersModule = 3
     case PushNotifications = 2
@@ -17,8 +18,8 @@ public enum ModuleTypeCategory: Int {
 /**
 Model class representing an existing module type within Halo
 */
-@objc(HaloModuleType)
-public class ModuleType: NSObject {
+
+public struct ModuleType {
 
     /// Unique identifier of the module type
     public var category: ModuleTypeCategory?
@@ -32,17 +33,12 @@ public class ModuleType: NSObject {
     /// Url of the module type
     public var typeUrl: String?
 
-    public override init() {
-        super.init()
-    }
-    
     /**
     Initialise the module type from a dictionary
     
     - parameter dict: Dictionary containing all the data about the module type
     */
     init(_ dict: Dictionary<String, AnyObject>) {
-        super.init()
         category = ModuleTypeCategory(rawValue: dict["id"] as! Int)
         enabled = dict["enabled"] as? Bool ?? false
         name = dict["name"] as? String

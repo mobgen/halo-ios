@@ -11,8 +11,8 @@ import Foundation
 /**
 This model class represents each of the instances stored as general content data.
 */
-@objc(HaloContentInstance)
-public class ContentInstance: NSObject {
+
+public struct ContentInstance {
 
     /// Unique identifier of this General Content instance
     public var id: String?
@@ -43,10 +43,6 @@ public class ContentInstance: NSObject {
 
     /// Dictionary of tags associated to this general content instance
     public var tags: [String: Halo.Tag] = [:]
-    
-    public override init() {
-        super.init()
-    }
     
     public init(_ dict: [String: AnyObject]) {
         

@@ -140,7 +140,22 @@ public class HaloCoreManager: NSObject {
     }
     
     @objc
-    public func modules(offlinePolicy: OfflinePolicy) -> HaloRequest {
-        return HaloRequest(request: core.getModules(offlinePolicy))
+    public func modules(offlinePolicy: OfflinePolicy,
+                        success: (NSHTTPURLResponse?, HaloPaginatedModules) -> Void,
+                        failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
+        
+        try! core.getModules(offlinePolicy).responseObject { (response, result) in
+            
+            switch result {
+            case .Success(let data, _):
+                if let modules = data {
+                    success(response, HaloPaginatedModules(data: modules))
+                }
+            case .Failure(let error):
+                failure(response, error)
+            }
+            
+        }
+    
     }
 }

@@ -24,23 +24,44 @@ public class HaloGeneralContentManager: NSObject {
     
     @objc
     public func instances(moduleIds moduleIds: [String],
-        offlinePolicy: OfflinePolicy) -> HaloRequest {
-            
-            var searchOptions = SearchOptions()
-            searchOptions.setOfflinePolicy(offlinePolicy)
-        
-            return HaloRequest(request: content.getInstances(searchOptions))
-    }
-    
-    @objc
-    public func instances(instanceIds instanceIds: [String],
-                          offlinePolicy: OfflinePolicy) -> HaloRequest {
-        
+                                    offlinePolicy: OfflinePolicy,
+                                    success: (NSHTTPURLResponse?, HaloPaginatedContentInstances) -> Void,
+                                    failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
         
         var searchOptions = SearchOptions()
         searchOptions.setOfflinePolicy(offlinePolicy)
         
-        return HaloRequest(request: content.getInstances(searchOptions))
+        try! content.getInstances(searchOptions).responseObject { (response, result) in
+            switch result {
+            case .Success(let data, _):
+                if let instances = data {
+                    success(response, HaloPaginatedContentInstances(data: instances))
+                }
+            case .Failure(let error):
+                failure(response, error)
+            }
+        }
+    }
+    
+    @objc
+    public func instances(instanceIds instanceIds: [String],
+                                      offlinePolicy: OfflinePolicy,
+                                      success: (NSHTTPURLResponse?, HaloPaginatedContentInstances) -> Void,
+                                      failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
+        
+        var searchOptions = SearchOptions()
+        searchOptions.setOfflinePolicy(offlinePolicy)
+        
+        try! content.getInstances(searchOptions).responseObject { (response, result) in
+            switch result {
+            case .Success(let data, _):
+                if let instances = data {
+                    success(response, HaloPaginatedContentInstances(data: instances))
+                }
+            case .Failure(let error):
+                failure(response, error)
+            }
+        }
         
     }
 

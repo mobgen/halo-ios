@@ -11,8 +11,8 @@ import Foundation
 /**
 Model class representing the different modules available in Halo
 */
-@objc(HaloModule)
-public class Module: NSObject {
+
+public struct Module {
     
     /// Identifier of the customer
     public internal(set) var customerId: Int?
@@ -46,10 +46,6 @@ public class Module: NSObject {
     
     /// Dictionary of tags associated to this module
     public internal(set) var tags: [String: Halo.Tag] = [:]
-    
-    private override init() {
-        super.init()
-    }
     
     /**
     Initialise a HaloModule from a dictionary
