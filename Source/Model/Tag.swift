@@ -16,15 +16,15 @@ users and content.
 public final class Tag: NSObject, NSCoding {
 
     /// Id of the user tag instance
-    public var id: String?
+    public internal(set) var id: String?
 
     /// Name of the tag
-    public var name: String = ""
+    public internal(set) var name: String = ""
 
     /// Value given to the tag
-    public var value: String?
+    public internal(set) var value: String?
 
-    public var type: String?
+    public internal(set) var type: String?
     
     public override init() {
         super.init()

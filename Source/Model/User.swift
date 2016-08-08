@@ -15,10 +15,10 @@ Model representing a user within the Halo environment
 public final class User: NSObject, NSCoding {
 
     /// Unique identifier of the user
-    internal(set) public var id: String?
+    public internal(set) var id: String?
     
     /// Application id which this user is associated to
-    internal(set) public var appId: Int?
+    public internal(set) var appId: Int?
     
     /// Email of this user
     public var email: String?
@@ -33,10 +33,10 @@ public final class User: NSObject, NSCoding {
     public var tags: [String : Halo.Tag]?
     
     /// Date of creation of this user
-    internal(set) public var createdAt: NSDate?
+    public internal(set) var createdAt: NSDate?
     
     /// Date of the last update
-    internal(set) public var updatedAt: NSDate?
+    public internal(set) var updatedAt: NSDate?
 
     public override var description: String {
         return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tdevices:\(devices)\n----"

@@ -15,7 +15,7 @@ This model class represents each of the instances stored as general content data
 public struct ContentInstance {
 
     /// Unique identifier of this General Content instance
-    public var id: String?
+    public internal(set) var id: String?
 
     /// Id of the module to which this instance belongs
     public var moduleId: String?

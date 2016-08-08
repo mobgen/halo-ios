@@ -64,7 +64,7 @@ public struct Module {
      
      - parameter dict:   Dictionary containing the information about the module
      */
-    public init(_ dict: [String:AnyObject]) {
+    public init(_ dict: [String: AnyObject]) {
         
         id = dict[Module.kId] as? Int
         customerId = dict[Module.kCustomer] as? Int

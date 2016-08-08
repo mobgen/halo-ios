@@ -8,8 +8,8 @@
 
 public struct PaginatedModules {
     
-    public var paginationInfo: PaginationInfo
-    public var modules: [Halo.Module]
+    public internal(set) var paginationInfo: PaginationInfo
+    public internal(set) var modules: [Halo.Module]
     
     init(paginationInfo: PaginationInfo, modules: [Halo.Module]) {
         self.paginationInfo = paginationInfo

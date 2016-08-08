@@ -31,7 +31,7 @@ public class Token: NSObject {
     
     - parameter dict: Dictionary containing all the token related information
     */
-    public init(_ dict: [String:AnyObject]) {
+    public init(_ dict: [String: AnyObject]) {
         token = dict["access_token"] as? String
         refreshToken = dict["refresh_token"] as? String
         tokenType = dict["token_type"] as? String

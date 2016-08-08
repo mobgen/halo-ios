@@ -16,10 +16,10 @@ or the push notifications token.
 public final class UserDevice: NSObject, NSCoding {
 
     /// Platform of the device
-    public var platform:String = ""
+    public  internal(set) var platform:String = ""
 
     /// Token used for push notifications
-    public var token:String = ""
+    public  internal(set) var token:String = ""
 
     public override var description: String {
         return "\n\t\tplatform: \(platform)\n\t\ttoken: \(token)"

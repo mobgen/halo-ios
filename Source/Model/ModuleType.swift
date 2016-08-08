@@ -22,23 +22,23 @@ Model class representing an existing module type within Halo
 public struct ModuleType {
 
     /// Unique identifier of the module type
-    public var category: ModuleTypeCategory?
+    public internal(set) var category: ModuleTypeCategory?
 
     /// Flag determining whether the module type is enabled or not
-    public var enabled: Bool = false
+    public internal(set) var enabled: Bool = false
 
     /// Visual name of the module type
-    public var name: String?
+    public internal(set) var name: String?
 
     /// Url of the module type
-    public var typeUrl: String?
+    public internal(set) var typeUrl: String?
 
     /**
     Initialise the module type from a dictionary
     
     - parameter dict: Dictionary containing all the data about the module type
     */
-    init(_ dict: Dictionary<String, AnyObject>) {
+    init(_ dict: [String: AnyObject]) {
         category = ModuleTypeCategory(rawValue: dict["id"] as! Int)
         enabled = dict["enabled"] as? Bool ?? false
         name = dict["name"] as? String

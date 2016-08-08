@@ -10,11 +10,11 @@ import Foundation
 
 public struct PaginationInfo {
     
-    public var page: Int
-    public var limit: Int
-    public var offset: Int
-    public var totalItems: Int
-    public var totalPages: Int
+    public internal(set) var page: Int
+    public internal(set) var limit: Int
+    public internal(set) var offset: Int
+    public internal(set) var totalItems: Int
+    public internal(set) var totalPages: Int
     
     init(page: Int, limit: Int, offset: Int, totalItems: Int, totalPages: Int) {
         self.page = page

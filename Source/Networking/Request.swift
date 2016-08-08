@@ -29,7 +29,7 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
     private var params: [String: AnyObject] = [:]
     private var responseParser: ((AnyObject) -> T?)?
     
-    public var authenticationMode: Halo.AuthenticationMode = .App
+    public internal(set) var authenticationMode: Halo.AuthenticationMode = .App
     
     public var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
