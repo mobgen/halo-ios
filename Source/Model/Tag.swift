@@ -24,7 +24,7 @@ public final class Tag: NSObject, NSCoding {
     /// Value given to the tag
     public internal(set) var value: String?
 
-    public internal(set) var type: String?
+    public var type: String?
     
     public override init() {
         super.init()
