@@ -24,7 +24,7 @@ public struct ContentInstance {
     public var name: String?
 
     /// Collection of key-value pairs which make up the information of this instance
-    public var values: [String: AnyObject] = [:]
+    public var values: [String: AnyObject]
 
     /// Name of the creator of the content
     public var createdBy: String?
@@ -49,17 +49,15 @@ public struct ContentInstance {
         id = dict["id"] as? String
         moduleId = dict["module"] as? String
         name = dict["name"] as? String
-        values = dict["values"] as! Dictionary<String, AnyObject>
+        values = dict["values"] as? [String: AnyObject] ?? [:]
         createdBy = dict["createdBy"] as? String
 
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
-            tags = tagsList.map({ (dict) -> Halo.Tag in
-                return Halo.Tag.fromDictionary(dict)
-            }).reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
-                var varDict = dict
+            tags = tagsList.map { Halo.Tag.fromDictionary($0) }.reduce([:]) { (tagsDict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                var varDict = tagsDict
                 varDict[tag.name] = tag
                 return varDict
-            })
+            }
         }
 
         if let created = dict["createdAt"] as? Double {
