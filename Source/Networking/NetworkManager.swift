@@ -24,8 +24,6 @@ private struct CachedTask {
 
 public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
-    var debug: Bool = false
-
     private var isRefreshing = false
 
     private var enableSSLpinning = true
@@ -99,7 +97,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
             if let resp = response as? NSHTTPURLResponse {
 
-                if self.debug {
+                if Manager.core.debug {
                     print("\(urlRequest) [\(elapsed)ms]")
                 }
 
@@ -219,7 +217,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
                 if let resp = response as? NSHTTPURLResponse {
 
-                    if self.debug {
+                    if Manager.core.debug {
                         let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
                         print("\(req) [\(elapsed)ms]")
                     }
