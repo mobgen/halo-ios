@@ -26,12 +26,6 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     
     var debug: Bool = false
     
-    var appCredentials: Credentials?
-    
-    var userCredentials: Credentials?
-    
-    var numberOfRetries = 0
-    
     private var isRefreshing = false
     
     private var enableSSLpinning = true
@@ -59,9 +53,9 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     private func getCredentials(mode: Halo.AuthenticationMode = .App) -> Halo.Credentials? {
         switch mode {
         case .App:
-            return self.appCredentials
+            return Manager.core.appCredentials
         case .User:
-            return self.userCredentials
+            return Manager.core.userCredentials
         }
     }
     
@@ -158,10 +152,10 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         
     }
     
-    func startRequest<T>(request urlRequest: Halo.Request<T>,
+    func startRequest(request urlRequest: Requestable,
                               completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
         
-        self.startRequest(request: urlRequest, numberOfRetries: Manager.core.numberOfRetries, completionHandler: handler)
+        self.startRequest(request: urlRequest, numberOfRetries: Manager.core.dataProvider.numberOfRetries, completionHandler: handler)
     }
     
     /**

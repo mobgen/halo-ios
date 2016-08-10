@@ -45,7 +45,9 @@
 		005677F41CABC8E900B6A4F3 /* SearchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005677F31CABC8E900B6A4F3 /* SearchOptions.swift */; };
 		005DF3121B998BB500149B40 /* GeneralContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005DF3111B998BB500149B40 /* GeneralContentSpec.swift */; };
 		005E1ED61C69FFE800ED8763 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED51C69FFE800ED8763 /* Result.swift */; };
-		005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1EFE1C6BEE2500ED8763 /* Request.swift */; };
+		006264351D5B049D0036F227 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006264341D5B049D0036F227 /* DataProvider.swift */; };
+		006264371D5B053D0036F227 /* NetworkDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006264361D5B053D0036F227 /* NetworkDataProvider.swift */; };
+		006264391D5B05F50036F227 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006264381D5B05F50036F227 /* Request.swift */; };
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A5FBF1B318CAC0045395A /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A5FBE1B318CAC0045395A /* CoreSpec.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
@@ -146,8 +148,10 @@
 		005677F31CABC8E900B6A4F3 /* SearchOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchOptions.swift; sourceTree = "<group>"; };
 		005DF3111B998BB500149B40 /* GeneralContentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentSpec.swift; sourceTree = "<group>"; };
 		005E1ED51C69FFE800ED8763 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		005E1EFE1C6BEE2500ED8763 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		006238251BCE5B8900E614B3 /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.cer; sourceTree = "<group>"; };
+		006264341D5B049D0036F227 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		006264361D5B053D0036F227 /* NetworkDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
+		006264381D5B05F50036F227 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		0068D27B1B6778CA00B1E147 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB71B318CAC0045395A /* HaloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				006A5FAE1B318CAC0045395A /* Core */,
+				006264331D5B048E0036F227 /* DataProviders */,
 				0054215F1CC76D230055B553 /* Extensions */,
 				00D1A36F1B42CA45008DFB71 /* GeneralContent */,
 				0090DFCD1C89BF7000BAF181 /* Helpers */,
@@ -288,6 +293,17 @@
 				003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		006264331D5B048E0036F227 /* DataProviders */ = {
+			isa = PBXGroup;
+			children = (
+				006264381D5B05F50036F227 /* Request.swift */,
+				006264341D5B049D0036F227 /* DataProvider.swift */,
+				006264361D5B053D0036F227 /* NetworkDataProvider.swift */,
+			);
+			name = DataProviders;
+			path = Source/DataProviders;
 			sourceTree = "<group>";
 		};
 		006A5F821B318C6E0045395A = {
@@ -356,7 +372,6 @@
 		006A5FCC1B318CBC0045395A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				005E1EFE1C6BEE2500ED8763 /* Request.swift */,
 				0094A31F1B70A6A600DED864 /* NetworkManager.swift */,
 				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
 				000826FE1B6A34DE001E8248 /* Router.swift */,
@@ -597,7 +612,6 @@
 				005421661CC76D230055B553 /* UIDevice+Extra.swift in Sources */,
 				005677F41CABC8E900B6A4F3 /* SearchOptions.swift in Sources */,
 				0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */,
-				005E1EFF1C6BEE2500ED8763 /* Request.swift in Sources */,
 				008DB38B1CEA15D9001D6CDB /* Errors.swift in Sources */,
 				0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */,
 				00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */,
@@ -615,6 +629,7 @@
 				006CB9B81B870FC400EB872E /* Tag.swift in Sources */,
 				006CB9B61B870FB800EB872E /* User.swift in Sources */,
 				00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */,
+				006264371D5B053D0036F227 /* NetworkDataProvider.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* ContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
@@ -625,9 +640,11 @@
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
 				00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */,
 				005421671CC76D230055B553 /* UIImage+Async.swift in Sources */,
+				006264391D5B05F50036F227 /* Request.swift in Sources */,
 				005421641CC76D230055B553 /* NSDate+Utils.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
+				006264351D5B049D0036F227 /* DataProvider.swift in Sources */,
 				0090DFCF1C89BF9500BAF181 /* CloudinaryURL.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,
 			);

@@ -14,14 +14,9 @@ public class CoreManager: NSObject, HaloManager {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
-    public var debug: Bool {
-        get {
-            return Manager.network.debug
-        }
-        set {
-            Manager.network.debug = newValue
-        }
-    }
+    public var dataProvider: DataProvider = NetworkDataProvider()
+    
+    public var debug: Bool = false
     
     public private(set) var environment: HaloEnvironment = .Prod {
         didSet {
@@ -33,32 +28,8 @@ public class CoreManager: NSObject, HaloManager {
     
     public var defaultOfflinePolicy: OfflinePolicy = .None
     
-    public var numberOfRetries: Int {
-        get {
-            return Manager.network.numberOfRetries
-        }
-        set {
-            Manager.network.numberOfRetries = newValue
-        }
-    }
-    
-    public var appCredentials: Credentials? {
-        get {
-            return Manager.network.appCredentials
-        }
-        set {
-            Manager.network.appCredentials = newValue
-        }
-    }
-    
-    public var userCredentials: Credentials? {
-        get {
-            return Manager.network.userCredentials
-        }
-        set {
-            Manager.network.userCredentials = newValue
-        }
-    }
+    public var appCredentials: Credentials?
+    public var userCredentials: Credentials?
     
     public var frameworkVersion: String {
         return NSBundle(identifier: "com.mobgen.Halo")!.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String

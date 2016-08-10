@@ -45,10 +45,10 @@ public class HaloCoreManager: NSObject {
     
     public var numberOfRetries: Int {
         get {
-            return core.numberOfRetries
+            return core.dataProvider.numberOfRetries
         }
         set {
-            core.numberOfRetries = newValue
+            core.dataProvider.numberOfRetries = newValue
         }
     }
     

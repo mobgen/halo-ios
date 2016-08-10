@@ -16,6 +16,8 @@ public enum AuthenticationMode: Int {
 public protocol Requestable {
     var URLRequest: NSMutableURLRequest { get }
     var authenticationMode: Halo.AuthenticationMode { get }
+    var offlinePolicy: Halo.OfflinePolicy { get }
+    var dataProvider: Halo.DataProvider { get }
 }
 
 public class Request<T>: Requestable, CustomDebugStringConvertible {
@@ -25,11 +27,12 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
     private var method: Halo.Method = .GET
     private var parameterEncoding: Halo.ParameterEncoding = .URL
     private var headers: [String: String] = [:]
-    private var offlinePolicy = Manager.core.defaultOfflinePolicy
     private var params: [String: AnyObject] = [:]
-    private var responseParser: ((AnyObject) -> T?)?
     
-    public internal(set) var authenticationMode: Halo.AuthenticationMode = .App
+    public private(set) var responseParser: ((AnyObject) -> T?)?
+    public private(set) var authenticationMode: Halo.AuthenticationMode = .App
+    public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
+    public private(set) var dataProvider: DataProvider = Manager.core.dataProvider
     
     public var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
@@ -89,6 +92,11 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
     
     public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
+        return self
+    }
+    
+    public func dataProvider(provider: Halo.DataProvider) -> Halo.Request<T> {
+        self.dataProvider = provider
         return self
     }
     
@@ -163,49 +171,19 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
     
     public func responseData(completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
         
-        switch self.offlinePolicy {
-        case .None:
-            Manager.network.startRequest(request: self) { (resp, result) in
-                handler?(resp, result)
-            }
-        default:
-            throw HaloError.NotImplementedOfflinePolicy
-        }
-        
+        try self.dataProvider.responseData(self, completionHandler: handler)
         return self
     }
     
     public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
         
-        try self.responseData { (response, result) -> Void in
-            switch result {
-            case .Success(let data, _):
-                if let successHandler = handler {
-                    let json = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    successHandler(response, .Success(json, false))
-                }
-            case .Failure(let error):
-                handler?(response, .Failure(error))
-            }
-        }
+        try self.dataProvider.response(self, completionHandler: handler)
         return self
     }
     
     public func responseObject(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
-        
-        guard let parser = self.responseParser else {
-            throw HaloError.NotImplementedResponseParser
-        }
-        
-        try self.response { (response, result) in
-            switch result {
-            case .Success(let data, _):
-                handler?(response, .Success(parser(data), false))
-            case .Failure(let error):
-                handler?(response, .Failure(error))
-            }
-        }
-        
+
+        try self.dataProvider.responseObject(self, completionHandler: handler)
         return self
     }
     
