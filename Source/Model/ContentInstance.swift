@@ -34,24 +34,24 @@ public struct ContentInstance {
 
     /// Date in which the content was (or is going to be) published
     public var publishedAt: NSDate?
-    
+
     /// Date in which the content was (or is going to be) removed
     public var removedAt: NSDate?
-    
+
     /// Most recent date in which the content was updated
     public var updatedAt: NSDate?
 
     /// Dictionary of tags associated to this general content instance
     public var tags: [String: Halo.Tag] = [:]
-    
+
     public init(_ dict: [String: AnyObject]) {
-        
+
         id = dict["id"] as? String
         moduleId = dict["module"] as? String
         name = dict["name"] as? String
         values = dict["values"] as! Dictionary<String, AnyObject>
         createdBy = dict["createdBy"] as? String
-        
+
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
             tags = tagsList.map({ (dict) -> Halo.Tag in
                 return Halo.Tag.fromDictionary(dict)
@@ -65,11 +65,11 @@ public struct ContentInstance {
         if let created = dict["createdAt"] as? Double {
             createdAt = NSDate(timeIntervalSince1970: created/1000)
         }
-        
+
         if let updated = dict["updatedAt"] as? Double {
             updatedAt = NSDate(timeIntervalSince1970: updated/1000)
         }
-        
+
         if let published = dict["publishedAt"] as? Double {
             publishedAt = NSDate(timeIntervalSince1970: published/1000)
         }
@@ -77,7 +77,7 @@ public struct ContentInstance {
         if let removed = dict["removedAt"] as? Double {
             removedAt = NSDate(timeIntervalSince1970: removed/1000)
         }
-        
+
     }
 
     /**
@@ -89,7 +89,7 @@ public struct ContentInstance {
         if let removed = self.removedAt {
             return removed < NSDate()
         }
-        
+
         return false
     }
 
@@ -102,12 +102,12 @@ public struct ContentInstance {
         if let published = self.publishedAt {
             return published < NSDate()
         }
-        
+
         return false
     }
-    
+
     public func getValue(key: String) -> AnyObject? {
         return self.values[key]
     }
-    
+
 }

@@ -11,10 +11,10 @@ import UIKit
 
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     /**
     Just pass through the configuration of the push notifications to the manager.
-    
+
     - parameter application: Application being configured
     - parameter deviceToken: Device token obtained in previous steps
     */
@@ -24,7 +24,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
     /**
      Just pass through the configuration of the push notifications to the manager.
-     
+
      - parameter application: Application being configured
      - parameter error:       Error thrown during the process
      */
@@ -35,18 +35,18 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     public func applicationDidBecomeActive(application: UIApplication) {
         Manager.core.applicationDidBecomeActive(application)
     }
-    
+
     public func applicationDidEnterBackground(application: UIApplication) {
         Manager.core.applicationDidEnterBackground(application)
     }
-    
+
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         Manager.core.application(application, didReceiveRemoteNotification: userInfo)
     }
-    
+
     /**
      Handle push notifications
-     
+
      - parameter application:       Application receiving the push notification
      - parameter userInfo:          Dictionary containing all the information about the notification
      - parameter completionHandler: Handler to be executed once the fetch has finished
@@ -54,7 +54,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         Manager.core.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
-    
+
     public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         Manager.core.application(application, didReceiveLocalNotification: notification)
     }

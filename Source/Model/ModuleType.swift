@@ -35,7 +35,7 @@ public struct ModuleType {
 
     /**
     Initialise the module type from a dictionary
-    
+
     - parameter dict: Dictionary containing all the data about the module type
     */
     init(_ dict: [String: AnyObject]) {

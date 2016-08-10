@@ -28,7 +28,7 @@ public class Token: NSObject {
 
     /**
     Initialise a HaloToken from a given dictionary
-    
+
     - parameter dict: Dictionary containing all the token related information
     */
     public init(_ dict: [String: AnyObject]) {

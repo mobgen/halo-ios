@@ -9,13 +9,13 @@
 import Foundation
 
 public struct PaginationInfo {
-    
+
     public internal(set) var page: Int
     public internal(set) var limit: Int
     public internal(set) var offset: Int
     public internal(set) var totalItems: Int
     public internal(set) var totalPages: Int
-    
+
     init(page: Int, limit: Int, offset: Int, totalItems: Int, totalPages: Int) {
         self.page = page
         self.limit = limit
@@ -23,7 +23,7 @@ public struct PaginationInfo {
         self.totalItems = totalItems
         self.totalPages = totalPages
     }
-    
+
     init(data: [String: AnyObject]) {
         self.page = data["page"] as? Int ?? 0
         self.limit = data["limit"] as? Int ?? 0
@@ -31,5 +31,5 @@ public struct PaginationInfo {
         self.totalItems = data["totalItems"] as? Int ?? 0
         self.totalPages = data["totalPages"] as? Int ?? 0
     }
-    
+
 }

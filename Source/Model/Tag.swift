@@ -25,11 +25,11 @@ public final class Tag: NSObject, NSCoding {
     public internal(set) var value: String?
 
     public internal(set) var type: String?
-    
+
     public override init() {
         super.init()
     }
-    
+
     public init(name: String, value: String, type: String? = nil) {
         self.name = name
         self.value = value
@@ -64,7 +64,7 @@ public final class Tag: NSObject, NSCoding {
         }
 
         dict["name"] = self.name
-        
+
         if let val = self.value {
             dict["value"] = val
         }

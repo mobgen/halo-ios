@@ -9,11 +9,11 @@
 import Foundation
 
 public class NetworkDataProvider: DataProvider {
-    
+
     public var numberOfRetries: Int = 0
-    
-    public func responseData(request: Requestable, completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Void {
-        
+
+    public func responseData(request: Requestable, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Void {
+
         switch request.offlinePolicy {
         case .None:
             Manager.network.startRequest(request: request) { (resp, result) in
@@ -22,11 +22,11 @@ public class NetworkDataProvider: DataProvider {
         default:
             throw HaloError.NotImplementedOfflinePolicy
         }
-        
+
     }
-    
+
     public func response(request: Requestable, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Void {
-        
+
         try self.responseData(request) { (response, result) -> Void in
             switch result {
             case .Success(let data, _):
@@ -39,14 +39,14 @@ public class NetworkDataProvider: DataProvider {
             }
         }
     }
-    
+
     public func responseObject<T>(request: Halo.Request<T>,
                                completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Void {
-        
+
         guard let parser = request.responseParser else {
             throw HaloError.NotImplementedResponseParser
         }
-        
+
         try self.response(request) { (response, result) in
             switch result {
             case .Success(let data, _):
@@ -55,8 +55,8 @@ public class NetworkDataProvider: DataProvider {
                 handler?(response, .Failure(error))
             }
         }
-        
+
     }
-    
-    
+
+
 }

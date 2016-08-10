@@ -28,42 +28,42 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
     private var parameterEncoding: Halo.ParameterEncoding = .URL
     private var headers: [String: String] = [:]
     private var params: [String: AnyObject] = [:]
-    
+
     public private(set) var responseParser: ((AnyObject) -> T?)?
     public private(set) var authenticationMode: Halo.AuthenticationMode = .App
     public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
     public private(set) var dataProvider: DataProvider = Manager.core.dataProvider
-    
+
     public var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
-        
+
         req.HTTPMethod = self.method.rawValue
-        
+
         var token: Token?
-        
+
         switch self.authenticationMode {
         case .App:
             token = Router.appToken
         case .User:
             token = Router.userToken
         }
-        
+
         if let tok = token {
             req.setValue("\(tok.tokenType!) \(tok.token!)", forHTTPHeaderField: "Authorization")
         }
-        
+
         for (key, value) in self.headers {
             req.setValue(value, forHTTPHeaderField: key)
         }
-        
+
         if self.include {
             self.params["include"] = true
         }
-        
+
         let (request, _) = self.parameterEncoding.encode(req, parameters: self.params)
-        
+
         return request
-        
+
     }
 
     public var debugDescription: String {
@@ -79,27 +79,27 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         self.method = router.method
         self.parameterEncoding = router.parameterEncoding
         self.headers = router.headers
-        
+
         if let params = router.params {
             let _ = params.map({ self.params[$0.0] = $0.1 })
         }
     }
-    
+
     public func responseParser(parser: (AnyObject) -> T?) -> Halo.Request<T> {
         self.responseParser = parser
         return self
     }
-    
+
     public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
         return self
     }
-    
+
     public func dataProvider(provider: Halo.DataProvider) -> Halo.Request<T> {
         self.dataProvider = provider
         return self
     }
-    
+
     public func method(method: Halo.Method) -> Halo.Request<T> {
         self.method = method
         return self
@@ -109,7 +109,7 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         self.authenticationMode = mode
         return self
     }
-    
+
     public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
         self.parameterEncoding = encoding
         return self
@@ -142,17 +142,17 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         self.params["limit"] = limit
         return self
     }
-    
+
     public func skipPagination() -> Halo.Request<T> {
         self.params["skip"] = "true"
         return self
     }
-    
+
     public func fields(fields: [String]) -> Halo.Request<T> {
         self.params["fields"] = fields
         return self
     }
-    
+
     public func tags(tags: [Halo.Tag]) -> Halo.Request<T> {
         let _ = tags.map({ tag in
             let json = try! NSJSONSerialization.dataWithJSONObject(tag.toDictionary(), options: [])
@@ -160,31 +160,31 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         })
         return self
     }
-    
+
     public func hash() -> Int {
-        
+
         let bodyHash = URLRequest.HTTPBody?.hash ?? 0
         let urlHash = URLRequest.URL?.hash ?? 0
-        
+
         return bodyHash + urlHash
     }
-    
-    public func responseData(completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
-        
+
+    public func responseData(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+
         try self.dataProvider.responseData(self, completionHandler: handler)
         return self
     }
-    
+
     public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
-        
+
         try self.dataProvider.response(self, completionHandler: handler)
         return self
     }
-    
+
     public func responseObject(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         try self.dataProvider.responseObject(self, completionHandler: handler)
         return self
     }
-    
+
 }

@@ -9,14 +9,14 @@
 import Foundation
 
 public class CloudinaryURL {
-    
+
     private var url: String
     private var params: [String] = []
-    
+
     public init(url: String) {
         self.url = url
     }
-    
+
     public var URL: NSURL {
 
         if self.url.containsString("cloudinary.com") {
@@ -25,90 +25,90 @@ public class CloudinaryURL {
                 self.url = self.url.stringByReplacingOccurrencesOfString(endUrl, withString: "\(params.joinWithSeparator(","))/\(endUrl)")
             }
         }
-        
+
         return NSURL(string: self.url)!
     }
-    
+
     public func width(pixels w: Int) -> CloudinaryURL {
         params.append("w_\(w)")
         return self
     }
-    
+
     public func width(percent w: Float) -> CloudinaryURL {
         params.append("w_\(w)")
         return self
     }
-    
+
     public func height(pixels w: Int) -> CloudinaryURL {
         params.append("h_\(w)")
         return self
     }
-    
+
     public func height(percent w: Float) -> CloudinaryURL {
         params.append("h_\(w)")
         return self
     }
-    
+
     public func crop(mode: ImageCropMode) -> CloudinaryURL {
         params.append("c_\(mode.rawValue)")
         return self
     }
-    
+
     public func aspectRatio(ratio ar: String) -> CloudinaryURL {
         params.append("ar_\(ar)")
         return self
     }
-    
+
     public func aspectRatio(percent ar: Float) -> CloudinaryURL {
         params.append("ar_\(ar)")
         return self
     }
-    
+
     public func gravity(g: ImageGravityMode) -> CloudinaryURL {
         params.append("g_\(g.rawValue)")
         return self
     }
-    
+
     public func zoom(percent: Float) -> CloudinaryURL {
         params.append("z_\(percent)")
         return self
     }
-    
+
     public func xPos(pixels x: Int) -> CloudinaryURL {
         params.append("x_\(x)")
         return self
     }
-    
+
     public func xPos(percent x: Float) -> CloudinaryURL {
         params.append("x_\(x)")
         return self
     }
-    
+
     public func yPos(pixels y: Int) -> CloudinaryURL {
         params.append("y_\(y)")
         return self
     }
-    
+
     public func yPos(percent y: Float) -> CloudinaryURL {
         params.append("y_\(y)")
         return self
     }
-    
+
     public func quality(percent: Float) -> CloudinaryURL {
         params.append("q_\(percent)")
         return self
     }
-    
+
     public func radius(pixels: Int) -> CloudinaryURL {
         params.append("r_\(pixels)")
         return self
     }
-    
+
     public func maxRadius() -> CloudinaryURL {
         params.append("r_max")
         return self
     }
-    
+
     public func rotate(a: ImageRotation) -> CloudinaryURL {
         params.append("a_\(a.rawValue)")
         return self
@@ -143,7 +143,7 @@ public class CloudinaryURL {
         params.append("b_\(color)")
         return self
     }
-    
+
     public func overlay(id: String) -> CloudinaryURL {
         params.append("l_\(id)")
         return self

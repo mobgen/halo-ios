@@ -7,10 +7,10 @@
 //
 
 public struct PaginatedContentInstances {
-    
+
     public internal(set) var paginationInfo: PaginationInfo
     public internal(set) var instances: [Halo.ContentInstance]
-    
+
     init(paginationInfo: PaginationInfo, instances: [Halo.ContentInstance]) {
         self.paginationInfo = paginationInfo
         self.instances = instances
