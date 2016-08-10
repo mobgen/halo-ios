@@ -32,9 +32,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     private var session: NSURLSession!
 
-    private let unauthorizedResponseCodes = [401, 403]
-
-    private let errorResponseCodes = [404, 500]
+    private let unauthorizedResponseCodes = [401]
 
     private var addons: [Halo.NetworkAddon] = []
 
