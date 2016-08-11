@@ -8,7 +8,6 @@
 
 import Foundation
 
-@objc(HaloAuthenticationMode)
 public enum AuthenticationMode: Int {
     case App, User
 }
@@ -23,37 +22,37 @@ public class Request: CustomDebugStringConvertible {
     public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
     public private(set) var params: [String: AnyObject] = [:]
     public private(set) var authenticationMode: Halo.AuthenticationMode = .App
-    
+
     var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
-        
+
         req.HTTPMethod = self.method.rawValue
-        
+
         var token: Token?
-        
+
         switch self.authenticationMode {
         case .App:
             token = Router.appToken
         case .User:
             token = Router.userToken
         }
-        
+
         if let tok = token {
             req.setValue("\(tok.tokenType!) \(tok.token!)", forHTTPHeaderField: "Authorization")
         }
-        
+
         for (key, value) in self.headers {
             req.setValue(value, forHTTPHeaderField: key)
         }
-        
+
         if self.include {
             self.params["include"] = true
         }
-        
+
         let (request, _) = self.parameterEncoding.encode(req, parameters: self.params)
-        
+
         return request
-        
+
     }
 
     public var debugDescription: String {
@@ -69,7 +68,7 @@ public class Request: CustomDebugStringConvertible {
         self.method = router.method
         self.parameterEncoding = router.parameterEncoding
         self.headers = router.headers
-        
+
         if let params = router.params {
             let _ = params.map({ self.params[$0.0] = $0.1 })
         }
@@ -79,7 +78,7 @@ public class Request: CustomDebugStringConvertible {
         self.offlinePolicy = policy
         return self
     }
-    
+
     public func method(method: Halo.Method) -> Halo.Request {
         self.method = method
         return self
@@ -89,7 +88,7 @@ public class Request: CustomDebugStringConvertible {
         self.authenticationMode = mode
         return self
     }
-    
+
     public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request {
         self.parameterEncoding = encoding
         return self
@@ -122,17 +121,17 @@ public class Request: CustomDebugStringConvertible {
         self.params["limit"] = limit
         return self
     }
-    
+
     public func skipPagination() -> Halo.Request {
         self.params["skip"] = "true"
         return self
     }
-    
+
     public func fields(fields: [String]) -> Halo.Request {
         self.params["fields"] = fields
         return self
     }
-    
+
     public func tags(tags: [Halo.Tag]) -> Halo.Request {
         let _ = tags.map({ tag in
             let json = try! NSJSONSerialization.dataWithJSONObject(tag.toDictionary(), options: [])
@@ -140,17 +139,17 @@ public class Request: CustomDebugStringConvertible {
         })
         return self
     }
-    
+
     public func hash() -> Int {
-        
+
         let bodyHash = URLRequest.HTTPBody?.hash ?? 0
         let urlHash = URLRequest.URL?.hash ?? 0
-        
+
         return bodyHash + urlHash
     }
-    
-    public func responseData(completionHandler handler:((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
-        
+
+    public func responseData(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request {
+
         switch self.offlinePolicy {
         case .None:
             Manager.network.startRequest(request: self) { (resp, result) in
@@ -159,12 +158,12 @@ public class Request: CustomDebugStringConvertible {
         default:
             throw HaloError.NotImplementedOfflinePolicy
         }
-        
+
         return self
     }
-    
+
     public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request {
-        
+
         try self.responseData { (response, result) -> Void in
             switch result {
             case .Success(let data, _):
@@ -178,5 +177,5 @@ public class Request: CustomDebugStringConvertible {
         }
         return self
     }
-    
+
 }
