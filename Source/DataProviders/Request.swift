@@ -8,7 +8,6 @@
 
 import Foundation
 
-@objc(HaloAuthenticationMode)
 public enum AuthenticationMode: Int {
     case App, User
 }
@@ -142,6 +141,7 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         self.params["limit"] = limit
         return self
     }
+
 
     public func skipPagination() -> Halo.Request<T> {
         self.params["skip"] = "true"
