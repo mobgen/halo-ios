@@ -8,8 +8,7 @@
 
 import Foundation
 
-@objc(HaloModuleTypeCategory)
-public enum ModuleTypeCategory: Int {
+@objc public enum ModuleTypeCategory: Int {
     case OffersModule = 3
     case PushNotifications = 2
     case GeneralContentModule = 1
