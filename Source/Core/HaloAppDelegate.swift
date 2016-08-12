@@ -55,7 +55,4 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         Manager.core.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
 
-//    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-//        Manager.core.application(application, didReceiveLocalNotification: notification)
-//    }
 }

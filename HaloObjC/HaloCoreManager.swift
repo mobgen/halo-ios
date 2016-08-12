@@ -135,10 +135,6 @@ public class HaloCoreManager: NSObject {
         core.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
 
-//    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-//        core.application(application, didReceiveLocalNotification: notification)
-//    }
-
     @objc
     public func modules(offlinePolicy: OfflinePolicy,
                         success: (NSHTTPURLResponse?, HaloPaginatedModules) -> Void,
