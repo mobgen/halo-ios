@@ -15,23 +15,23 @@ enum CredentialType {
 
 @objc(HaloCredentials)
 public class Credentials: NSObject {
-    
+
     var username: String = ""
     var password: String = ""
     var type: CredentialType = .App
-    
+
     public init(username: String, password: String) {
         super.init()
         self.type = .User
         self.username = username
         self.password = password
     }
-    
+
     public init(clientId: String, clientSecret: String) {
         super.init()
         self.type = .App
         self.username = clientId
         self.password = clientSecret
     }
-    
+
 }

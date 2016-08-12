@@ -7,7 +7,7 @@
 //
 
 public enum Locale {
-    
+
     case
     AfarDjibouti,
     AfarEritrea,
@@ -452,7 +452,7 @@ public enum Locale {
     ChineseSingapore,
     ChineseTaiwan,
     Zulu
-    
+
     internal var description: String? {
         switch self {
         case .AfarDjibouti: return "aa-DJ"
@@ -900,5 +900,5 @@ public enum Locale {
         case .Zulu : return "zu"
         }
     }
-    
+
 }

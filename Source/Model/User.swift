@@ -15,28 +15,28 @@ Model representing a user within the Halo environment
 public final class User: NSObject, NSCoding {
 
     /// Unique identifier of the user
-    internal(set) public var id: String?
-    
+    public internal(set) var id: String?
+
     /// Application id which this user is associated to
-    internal(set) public var appId: Int?
-    
+    public internal(set) var appId: Int?
+
     /// Email of this user
     public var email: String?
-    
+
     /// An alias that also identifies the user
     public var alias: String?
-    
+
     /// List of devices linked to this user
-    public var devices:[Halo.UserDevice]?
-    
+    public var devices: [Halo.UserDevice]?
+
     /// Dictionary of tags associated to this user
     public var tags: [String : Halo.Tag]?
-    
+
     /// Date of creation of this user
-    internal(set) public var createdAt: NSDate?
-    
+    public internal(set) var createdAt: NSDate?
+
     /// Date of the last update
-    internal(set) public var updatedAt: NSDate?
+    public internal(set) var updatedAt: NSDate?
 
     public override var description: String {
         return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tdevices:\(devices)\n----"
@@ -86,10 +86,10 @@ public final class User: NSObject, NSCoding {
     func addSystemTag(name: String, value: String) -> Void {
         self.addTag(name, value: value, type: "000000000000000000000001")
     }
-    
+
     private func addTag(name: String, value: String, type: String) -> Void {
         let tag = Halo.Tag(name: name, value: value, type: type)
-        
+
         if let tags = self.tags {
             if let tag = tags[name] {
                 tag.value = value
@@ -100,7 +100,7 @@ public final class User: NSObject, NSCoding {
             self.tags = [name: tag]
         }
     }
-    
+
     /**
     Add a collection of custom tags to the user
 
@@ -112,20 +112,20 @@ public final class User: NSObject, NSCoding {
 
     /**
      Remove a tag by providing its name
-     
+
      - parameter name: Name of the tag to be removed
-     
+
      - returns: Returns the removed tag or nil if no tag was found and removed
      */
     public func removeTag(name: String) -> Halo.Tag? {
-        
+
         if let _ = self.tags {
             return tags!.removeValueForKey(name)
         } else {
             return nil
         }
     }
-    
+
     // MARK: Management of user storage
 
     /**
@@ -141,7 +141,7 @@ public final class User: NSObject, NSCoding {
 
     /// Retrieve and deserialize a stored user from the user preferences
     class func loadUser(env: HaloEnvironment) -> Halo.User {
-        
+
         if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsUserKey)-\(env.description)") as? NSData {
             return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as! Halo.User
         } else {
@@ -231,7 +231,7 @@ public final class User: NSObject, NSCoding {
         if let created = dict["createdAt"] as? NSTimeInterval {
             user.createdAt = NSDate(timeIntervalSince1970:created/1000)
         }
-        
+
         if let updated = dict["updatedAt"] as? NSTimeInterval {
             user.updatedAt = NSDate(timeIntervalSince1970:updated/1000)
         }

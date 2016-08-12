@@ -57,10 +57,10 @@ private let DeviceList = [
     "iPod4,1"		: "iPod touch 4",
     "iPhone2,1"		: "iPhone 3GS",
     "iPad1,1"		: "iPad 1",
-    "iPod3,1"		: "iPod touch 3",			
-    "iPod2,1"		: "iPod touch 2G",			
-    "iPhone1,2"		: "iPhone 3G",					
-    "iPhone1,1"		: "iPhone 2G",					
+    "iPod3,1"		: "iPod touch 3",
+    "iPod2,1"		: "iPod touch 2G",
+    "iPhone1,2"		: "iPhone 3G",
+    "iPhone1,1"		: "iPhone 2G",
     "iPod1,1"		: "iPod touch 1G",
     "x86_64"        : "Simulator",
     "i386"          : "Simulator"
@@ -91,9 +91,9 @@ public extension UIDevice {
 
     /**
      Get the device type based on the user interface idiom
-     
+
      - parameter idiom: User interface idiom of the device
-     
+
      - returns: Device type
      */
     func getDeviceType(idiom: UIUserInterfaceIdiom) -> String {
@@ -102,13 +102,12 @@ public extension UIDevice {
 
     /**
      Get the model name of the current device from the not-so-descriptive identifier
-     
+
      - parameter identifier: Device identifier
-     
+
      - returns: More readable model name
      */
     func getModelName(identifier: String) -> String {
         return DeviceList[identifier] ?? identifier
     }
 }
-

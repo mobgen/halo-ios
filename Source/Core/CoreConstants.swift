@@ -9,9 +9,9 @@
 /// Utility class containing some of the constants to be used within the SDK
 public class CoreConstants {
 
-    /// Key to be used to store the latest environment used  
+    /// Key to be used to store the latest environment used
     public static let environmentKey = "HaloEnvironment"
-    
+
     /// Key which identifies the client id within the configuration plist
     static let clientIdKey = "CLIENT_ID"
 
@@ -22,10 +22,10 @@ public class CoreConstants {
 
     /// Key which identifies the username within the configuration plist
     static let usernameKey = "USERNAME"
-    
+
     /// Key which identifies the user password within the configuration plist
     static let passwordKey = "PASSWORD"
-    
+
     /// Key which identifies the option to enable push notifications within the configuration plist
     static let enableSystemTags = "ENABLE_SYSTEM_TAGS"
 

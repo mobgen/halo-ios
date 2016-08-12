@@ -22,14 +22,14 @@ import Halo
 
 public class HaloRequest: NSObject {
     
-    private var request: Halo.Request?
+    private var request: Halo.Request<Any>?
     
     public init(path: String, relativeToURL: NSURL?) {
-        request = Halo.Request(path: path, relativeToURL: relativeToURL)
+        request = Halo.Request<Any>(path: path, relativeToURL: relativeToURL)
         super.init()
     }
     
-    init(request haloRequest: Halo.Request) {
+    init(request haloRequest: Halo.Request<Any>) {
         request = haloRequest
         super.init()
     }
@@ -125,14 +125,14 @@ public class HaloRequest: NSObject {
     public func responseData(success success:((NSHTTPURLResponse?, NSData, Bool) -> Void)?, failure:((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
         
         do {
-            try request?.responseData(completionHandler: { (response, result) -> Void in
+            try request?.responseData { (response, result) -> Void in
                 switch result {
                 case .Success(let data, let cached):
                     success?(response, data, cached)
                 case .Failure(let error):
                     failure?(response, error)
                 }
-            })
+            }
         } catch _ {
             NSLog("Error performing request: \(self.debugDescription)")
         }
@@ -143,14 +143,14 @@ public class HaloRequest: NSObject {
     public func response(success success:((NSHTTPURLResponse?, AnyObject, Bool) -> Void)?, failure:((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
         
         do {
-        try request?.response(completionHandler: { (response, result) -> Void in
-            switch result {
-            case .Success(let data, let cached):
-                success?(response, data, cached)
-            case .Failure(let error):
-                failure?(response, error)
+            try request?.response { (response, result) -> Void in
+                switch result {
+                case .Success(let data, let cached):
+                    success?(response, data, cached)
+                case .Failure(let error):
+                    failure?(response, error)
+                }
             }
-        })
         } catch _ {
             NSLog("Error performing request: \(self.debugDescription)")
         }

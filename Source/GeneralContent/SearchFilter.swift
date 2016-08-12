@@ -10,7 +10,7 @@ import Foundation
 
 enum SearchFilterOperation {
     case Eq, Neq, Gt, Lt, Gte, Lte, In, NotIn
-    
+
     var description: String {
         switch  self {
         case .Eq: return "="
@@ -26,10 +26,10 @@ enum SearchFilterOperation {
 }
 
 public struct SearchFilter {
-    
+
     var condition: String?
     var operands: [SearchFilter]?
-    
+
     var operation: String?
     var property: String?
     var value: AnyObject?
@@ -37,7 +37,7 @@ public struct SearchFilter {
 
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
-        
+
         if let
             cond = self.condition,
             operands = self.operands {
@@ -54,17 +54,17 @@ public struct SearchFilter {
                 dict["value"] = value ?? NSNull()
                 dict["type"] = type
         }
-        
+
         return dict
     }
-    
+
     init() {}
-    
+
     init(operation: SearchFilterOperation, property: String, value: AnyObject?, type: String? = nil) {
         self.operation = operation.description
         self.property = property
         self.value = value
-        
+
         if let valueType = type {
             self.type = valueType
         } else {
@@ -91,19 +91,19 @@ public struct SearchFilter {
             }
         }
     }
-    
+
 //    public init(operation: SearchFilterOperation, property: String, number: NSNumber) {
 //        self.init(operation: operation, property: property, value: number, type: "number")
 //    }
-//    
+//
 //    public init(operation: SearchFilterOperation, property: String, date: Double) {
 //        self.init(operation: operation, property: property, value: date, type: "date")
 //    }
-//    
+//
 //    public init(operation: SearchFilterOperation, property: String, string: String) {
 //        self.init(operation: operation, property: property, value: string, type: "string")
 //    }
-//    
+//
 //    public init(operation: SearchFilterOperation, property: String, value: AnyObject?) {
 //        self.init(operation: operation, property: property, value: value, type: nil)
 //    }

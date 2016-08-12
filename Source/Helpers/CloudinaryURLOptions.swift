@@ -54,7 +54,7 @@ public enum ImageRotation {
     case VerticalFlip
     case HorizontalFlip
     case Custom(Float)
-    
+
     public var rawValue: String {
         switch self {
         case .AutoRight:
@@ -74,7 +74,7 @@ public enum ImageRotation {
 }
 
 public enum ImageEffect {
-    
+
     case Hue(Int?)
     case Red(Int?)
     case Green(Int?)
@@ -101,8 +101,8 @@ public enum ImageEffect {
     case MakeTransparent
     case Trim(Int?)
     case Shadow(Int?)
-    case Distort((Int,Int),(Int,Int),(Int,Int),(Int,Int))
-    case Shear(Float,Float)
+    case Distort((Int, Int),(Int, Int),(Int, Int),(Int, Int))
+    case Shear(Float, Float)
     case Displace
     case OilPaint(Int?)
     case RedEye
@@ -115,7 +115,7 @@ public enum ImageEffect {
     case BlurFaces(Int?)
     case Sharpen(Int?)
     case UnsharpMask(Int?)
-    
+
     public var rawValue: String {
         switch self {
         case .Hue(let value):

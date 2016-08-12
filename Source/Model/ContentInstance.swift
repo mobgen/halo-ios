@@ -11,11 +11,11 @@ import Foundation
 /**
 This model class represents each of the instances stored as general content data.
 */
-@objc(HaloContentInstance)
-public class ContentInstance: NSObject {
+
+public struct ContentInstance {
 
     /// Unique identifier of this General Content instance
-    public var id: String?
+    public internal(set) var id: String?
 
     /// Id of the module to which this instance belongs
     public var moduleId: String?
@@ -24,7 +24,7 @@ public class ContentInstance: NSObject {
     public var name: String?
 
     /// Collection of key-value pairs which make up the information of this instance
-    public var values: [String: AnyObject] = [:]
+    public var values: [String: AnyObject]
 
     /// Name of the creator of the content
     public var createdBy: String?
@@ -34,46 +34,40 @@ public class ContentInstance: NSObject {
 
     /// Date in which the content was (or is going to be) published
     public var publishedAt: NSDate?
-    
+
     /// Date in which the content was (or is going to be) removed
     public var removedAt: NSDate?
-    
+
     /// Most recent date in which the content was updated
     public var updatedAt: NSDate?
 
     /// Dictionary of tags associated to this general content instance
     public var tags: [String: Halo.Tag] = [:]
-    
-    public override init() {
-        super.init()
-    }
-    
+
     public init(_ dict: [String: AnyObject]) {
-        
+
         id = dict["id"] as? String
         moduleId = dict["module"] as? String
         name = dict["name"] as? String
-        values = dict["values"] as! Dictionary<String, AnyObject>
+        values = dict["values"] as? [String: AnyObject] ?? [:]
         createdBy = dict["createdBy"] as? String
-        
+
         if let tagsList = dict["tags"] as? [[String: AnyObject]] {
-            tags = tagsList.map({ (dict) -> Halo.Tag in
-                return Halo.Tag.fromDictionary(dict)
-            }).reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
-                var varDict = dict
+            tags = tagsList.map { Halo.Tag.fromDictionary($0) }.reduce([:]) { (tagsDict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                var varDict = tagsDict
                 varDict[tag.name] = tag
                 return varDict
-            })
+            }
         }
 
         if let created = dict["createdAt"] as? Double {
             createdAt = NSDate(timeIntervalSince1970: created/1000)
         }
-        
+
         if let updated = dict["updatedAt"] as? Double {
             updatedAt = NSDate(timeIntervalSince1970: updated/1000)
         }
-        
+
         if let published = dict["publishedAt"] as? Double {
             publishedAt = NSDate(timeIntervalSince1970: published/1000)
         }
@@ -81,7 +75,7 @@ public class ContentInstance: NSObject {
         if let removed = dict["removedAt"] as? Double {
             removedAt = NSDate(timeIntervalSince1970: removed/1000)
         }
-        
+
     }
 
     /**
@@ -93,7 +87,7 @@ public class ContentInstance: NSObject {
         if let removed = self.removedAt {
             return removed < NSDate()
         }
-        
+
         return false
     }
 
@@ -106,12 +100,12 @@ public class ContentInstance: NSObject {
         if let published = self.publishedAt {
             return published < NSDate()
         }
-        
+
         return false
     }
-    
+
     public func getValue(key: String) -> AnyObject? {
         return self.values[key]
     }
-    
+
 }

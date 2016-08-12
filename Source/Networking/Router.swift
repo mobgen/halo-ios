@@ -18,7 +18,7 @@ public enum Router {
     /// Token to be used for authentication purposes
     static var appToken: Token?
     static var userToken: Token?
-    
+
     case OAuth(Credentials, [String: AnyObject])
     case Modules
     case GeneralContentInstances([String: AnyObject])

@@ -23,7 +23,7 @@ public enum HaloEnvironment {
     case Stage
     case Prod
     case Custom(String)
-    
+
     public init(rawValue: String) {
         switch (rawValue.lowercaseString) {
         case "int": self = .Int
@@ -33,7 +33,7 @@ public enum HaloEnvironment {
         default: self = .Custom(rawValue)
         }
     }
-    
+
     var baseUrl: NSURL {
         switch self {
         case .Int:
@@ -48,7 +48,7 @@ public enum HaloEnvironment {
             return NSURL(string: url)!
         }
     }
-    
+
     public var description: String {
         switch self {
         case .Int:
@@ -76,17 +76,17 @@ public enum HaloEnvironment {
 }
 
 public struct Manager {
-    
+
     public static let core: CoreManager = {
        return CoreManager()
     }()
-    
+
     public static let content: ContentManager = {
        return ContentManager()
     }()
-    
+
     public static let network: NetworkManager = {
         return NetworkManager()
     }()
-    
+
 }
