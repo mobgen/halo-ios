@@ -380,13 +380,13 @@ public class CoreManager: NSObject, HaloManager {
 
     }
 
-    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        let _ = self.addons.map { (addon) in
-            if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application, didReceiveLocalNotification: notification, core: self)
-            }
-        }
-    }
+//    public func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+//        let _ = self.addons.map { (addon) in
+//            if let notifAddon = addon as? Halo.NotificationsAddon {
+//                notifAddon.application(application, didReceiveLocalNotification: notification, core: self)
+//            }
+//        }
+//    }
 
     /**
      Extra setup steps to be called from the corresponding method in the app delegate

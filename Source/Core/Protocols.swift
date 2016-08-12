@@ -53,7 +53,6 @@ public protocol NotificationsAddon: Addon {
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: Halo.CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification, core: Halo.CoreManager) -> Void
 
 }
 
