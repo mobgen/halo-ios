@@ -470,7 +470,6 @@
 				006A5FA91B318CAC0045395A /* Frameworks */,
 				006A5FAA1B318CAC0045395A /* Headers */,
 				006A5FAB1B318CAC0045395A /* Resources */,
-				00A34E861BDF9F9E0080DD93 /* Documentation */,
 			);
 			buildRules = (
 			);
@@ -569,23 +568,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		00A34E861BDF9F9E0080DD93 /* Documentation */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Documentation;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#cd ${PROJECT_DIR}/Source;jazzy -m 'Halo SDK' -a 'MOBGEN Technology' -c -o ${PROJECT_DIR}/docs -x '-workspace,../HALO.xcworkspace,-scheme,Halo' --hide-documentation-coverage";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		004790F41C915C6C00C24741 /* Sources */ = {
