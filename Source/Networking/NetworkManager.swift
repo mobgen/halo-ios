@@ -89,7 +89,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         let start = NSDate()
         var elapsed: NSTimeInterval = 0
 
-        session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
 
             elapsed = NSDate().timeIntervalSinceDate(start) * 1000
 
@@ -119,30 +119,34 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                             message = "The content of the response is not a valid JSON"
                         }
 
-                        dispatch_async(dispatch_get_main_queue(), {
+                        dispatch_async(dispatch_get_main_queue()) {
                             handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
-                        })
+                        }
 
                     }
                 } else if let d = data {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    dispatch_async(dispatch_get_main_queue()) {
                         handler?(resp, .Success(d, false))
-                    })
+                    }
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    dispatch_async(dispatch_get_main_queue()) {
                         handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
-                    })
+                    }
                 }
 
             } else {
-                dispatch_async(dispatch_get_main_queue(), {
+                dispatch_async(dispatch_get_main_queue()) {
                     handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
-                })
+                }
             }
 
             let _ = self.addons.map { $0.didPerformRequest(request, time: elapsed, response: response) }
 
-            }.resume()
+            }
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            task.resume()
+        }
 
     }
 
@@ -209,7 +213,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
             let start = NSDate()
 
-            self.session.dataTaskWithRequest(req.URLRequest, completionHandler: { (data, response, error) -> Void in
+            let task = self.session.dataTaskWithRequest(req.URLRequest) { (data, response, error) -> Void in
 
                 if let resp = response as? NSHTTPURLResponse {
 
@@ -218,9 +222,9 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
                     if resp.statusCode > 399 {
 
-                        dispatch_async(dispatch_get_main_queue(), {
+                        dispatch_async(dispatch_get_main_queue()) {
                             handler?(resp, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
-                        })
+                        }
 
                     } else if let d = data {
 
@@ -234,9 +238,9 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                             Router.userToken = token
                         }
 
-                        dispatch_async(dispatch_get_main_queue(), {
+                        dispatch_async(dispatch_get_main_queue()) {
                             handler?(resp, .Success(token, false))
-                        })
+                        }
 
                     }
 
@@ -249,7 +253,11 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                         self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
                     }
                 }
-            }).resume()
+            }
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                task.resume()
+            }
 
         } else {
             LogMessage("No credentials found", level: .Error).print()
