@@ -95,9 +95,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
             if let resp = response as? NSHTTPURLResponse {
 
-                if Manager.core.debug {
-                    print("\(urlRequest) [\(elapsed)ms]")
-                }
+                LogMessage("\(urlRequest) [\(elapsed)ms]", level: .Info).print()
 
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     self.cachedTasks.append(cachedTask)
@@ -215,10 +213,8 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
                 if let resp = response as? NSHTTPURLResponse {
 
-                    if Manager.core.debug {
-                        let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
-                        print("\(req) [\(elapsed)ms]")
-                    }
+                    let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
+                    LogMessage("\(req) [\(elapsed)ms]", level: .Info).print()
 
                     if resp.statusCode > 399 {
 
@@ -256,7 +252,8 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
             }).resume()
 
         } else {
-            NSLog("No credentials found")
+            LogMessage("No credentials found", level: .Error).print()
+            handler?(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
         }
     }
 
