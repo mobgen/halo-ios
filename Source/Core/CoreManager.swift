@@ -65,6 +65,11 @@ public class CoreManager: NSObject, HaloManager {
 
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
+        if (token != 0) {
+            LogMessage("Startup method is being called more than once. No side-effects are caused by this, but you should probably double check that.",
+                       level: .Warning).print()
+        }
+
         dispatch_once(&token) {
 
             self.completionHandler = handler
@@ -126,11 +131,6 @@ public class CoreManager: NSObject, HaloManager {
                     }
                 }
             }
-        }
-
-        if (token != 0) {
-            LogMessage("Startup method is being called more than once. No side-effects are caused by this, but you should probably double check that.",
-                       level: .Warning).print()
         }
     }
 
