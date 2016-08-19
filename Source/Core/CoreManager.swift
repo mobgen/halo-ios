@@ -136,6 +136,11 @@ public class CoreManager: NSObject, HaloManager {
 
     private func setupAddons(completionHandler handler: ((Bool) -> Void)) -> Void {
 
+        if self.addons.isEmpty {
+            handler(true)
+            return
+        }
+
         var counter = 0
 
         let _ = self.addons.map { $0.setup(self) { (addon, success) in
@@ -157,6 +162,12 @@ public class CoreManager: NSObject, HaloManager {
     }
 
     private func startupAddons(completionHandler handler: ((Bool) -> Void)) -> Void {
+
+        if self.addons.isEmpty {
+            handler(true)
+            return
+        }
+
         var counter = 0
 
         let _ = self.addons.map { $0.startup(self) { (addon, success) in
