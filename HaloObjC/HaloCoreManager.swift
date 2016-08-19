@@ -25,12 +25,12 @@ public class HaloCoreManager: NSObject {
         }
     }
 
-    public var debug: Bool {
+    public var logLevel: HaloLogLevel {
         get {
-            return core.debug
+            return core.logLevel
         }
         set {
-            core.debug = newValue
+            core.logLevel = newValue
         }
     }
 

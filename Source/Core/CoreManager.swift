@@ -16,7 +16,9 @@ public class CoreManager: NSObject, HaloManager {
 
     public var dataProvider: DataProvider = NetworkDataProvider()
 
-    public var debug: Bool = false
+    public var logLevel: HaloLogLevel = .Warning
+
+    private var token: dispatch_once_t = 0
 
     public private(set) var environment: HaloEnvironment = .Prod {
         didSet {
@@ -63,61 +65,69 @@ public class CoreManager: NSObject, HaloManager {
 
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
-        self.completionHandler = handler
-        Router.userToken = nil
-        Router.appToken = nil
+        if (token != 0) {
+            LogMessage("Startup method is being called more than once. No side-effects are caused by this, but you should probably double check that.",
+                       level: .Warning).print()
+        }
 
-        Manager.network.startup { (success) -> Void in
+        dispatch_once(&token) {
 
-            if (!success) {
-                handler?(false)
-                return
-            }
+            self.completionHandler = handler
+            Router.userToken = nil
+            Router.appToken = nil
 
-            let bundle = NSBundle.mainBundle()
+            Manager.network.startup { (success) -> Void in
 
-            if let path = bundle.pathForResource(self.configuration, ofType: "plist") {
-
-                if let data = NSDictionary(contentsOfFile: path) {
-                    let clientIdKey = CoreConstants.clientIdKey
-                    let clientSecretKey = CoreConstants.clientSecretKey
-                    let usernameKey = CoreConstants.usernameKey
-                    let passwordKey = CoreConstants.passwordKey
-                    let environmentKey = CoreConstants.environmentSettingKey
-
-                    if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
-                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
-                    }
-
-                    if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
-                        self.userCredentials = Credentials(username: username, password: password)
-                    }
-
-                    if let env = data[environmentKey] as? String {
-                        switch env.lowercaseString {
-                        case "int": self.environment = .Int
-                        case "qa": self.environment = .QA
-                        case "prod": self.environment = .Prod
-                        case "stage": self.environment = .Stage
-                        default: self.environment = .Custom(env)
-                        }
-                    }
-
-                    self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
+                if (!success) {
+                    handler?(false)
+                    return
                 }
-            } else {
-                NSLog("No .plist found")
-            }
 
-            self.checkNeedsUpdate()
+                let bundle = NSBundle.mainBundle()
 
-            self.configureUser {
+                if let path = bundle.pathForResource(self.configuration, ofType: "plist") {
 
-                // Configure all the registered addons
-                self.setupAddons { _ in
+                    if let data = NSDictionary(contentsOfFile: path) {
+                        let clientIdKey = CoreConstants.clientIdKey
+                        let clientSecretKey = CoreConstants.clientSecretKey
+                        let usernameKey = CoreConstants.usernameKey
+                        let passwordKey = CoreConstants.passwordKey
+                        let environmentKey = CoreConstants.environmentSettingKey
 
-                    self.startupAddons { _ in
-                        self.registerUser()
+                        if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
+                            self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                        }
+
+                        if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
+                            self.userCredentials = Credentials(username: username, password: password)
+                        }
+
+                        if let env = data[environmentKey] as? String {
+                            switch env.lowercaseString {
+                            case "int": self.environment = .Int
+                            case "qa": self.environment = .QA
+                            case "prod": self.environment = .Prod
+                            case "stage": self.environment = .Stage
+                            default: self.environment = .Custom(env)
+                            }
+                        }
+
+                        self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
+                    }
+                } else {
+                    LogMessage("No .plist found", level: .Error).print()
+                }
+
+                self.checkNeedsUpdate()
+
+                self.configureUser {
+
+                    // Configure all the registered addons
+                    self.setupAddons { _ in
+
+                        self.startupAddons { _ in
+                            self.registerUser()
+                        }
                     }
                 }
             }
@@ -126,14 +136,19 @@ public class CoreManager: NSObject, HaloManager {
 
     private func setupAddons(completionHandler handler: ((Bool) -> Void)) -> Void {
 
+        if self.addons.isEmpty {
+            handler(true)
+            return
+        }
+
         var counter = 0
 
         let _ = self.addons.map { $0.setup(self) { (addon, success) in
 
             if success {
-                NSLog("Successfully set up the \(addon.addonName) addon")
+                LogMessage("Successfully set up the \(addon.addonName) addon", level: .Info).print()
             } else {
-                NSLog("There has been an error setting up the \(addon.addonName) addon")
+                LogMessage("There has been an error setting up the \(addon.addonName) addon", level: .Info).print()
             }
 
             counter += 1
@@ -147,14 +162,20 @@ public class CoreManager: NSObject, HaloManager {
     }
 
     private func startupAddons(completionHandler handler: ((Bool) -> Void)) -> Void {
+
+        if self.addons.isEmpty {
+            handler(true)
+            return
+        }
+
         var counter = 0
 
         let _ = self.addons.map { $0.startup(self) { (addon, success) in
 
             if success {
-                NSLog("Successfully started the \(addon.addonName) addon")
+                LogMessage("Successfully started the \(addon.addonName) addon", level: .Info).print()
             } else {
-                NSLog("There has been an error starting the \(addon.addonName) addon")
+                LogMessage("There has been an error starting the \(addon.addonName) addon", level: .Info).print()
             }
 
             counter += 1
@@ -183,7 +204,9 @@ public class CoreManager: NSObject, HaloManager {
                         handler?()
                     }
                 case .Failure(let error):
-                    NSLog("Error: \(error.localizedDescription)")
+
+                    LogMessage("Error retrieving user from server", error: error).print()
+
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags(completionHandler: handler)
                     } else {
@@ -274,15 +297,13 @@ public class CoreManager: NSObject, HaloManager {
                         strongSelf.user = user
                         strongSelf.user?.storeUser(strongSelf.environment)
 
-                        if strongSelf.debug {
-                            if let u = user {
-                                NSLog(u.description)
-                            }
+                        if let u = user {
+                            LogMessage(u.description, level: .Info).print()
                         }
 
                         success = true
                     case .Failure(let error):
-                        NSLog("Error: \(error.localizedDescription)")
+                        LogMessage("Error creating/updating user", error: error).print()
                     }
 
                     strongSelf.completionHandler?(success)
@@ -305,13 +326,13 @@ public class CoreManager: NSObject, HaloManager {
                     case .Success(let user, _):
                         strongSelf.user = user
 
-                        if strongSelf.debug {
-                            if let u = user {
-                                NSLog(u.description)
-                            }
+                        if let u = user {
+                            LogMessage(u.description, level: .Info).print()
                         }
+
                     case .Failure(let error):
-                        NSLog("Error saving user: \(error.localizedDescription)")
+                        LogMessage("Error saving user", error: error).print()
+
                     }
 
                     handler?(response, result)
@@ -336,9 +357,7 @@ public class CoreManager: NSObject, HaloManager {
      */
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
 
-        if self.debug {
-            NSLog("Successfully registered for remote notifications with token \(deviceToken)")
-        }
+        LogMessage("Successfully registered for remote notifications with token \(deviceToken)", level: .Info).print()
 
         let _ = self.addons.map { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
@@ -355,9 +374,7 @@ public class CoreManager: NSObject, HaloManager {
      */
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
 
-        if self.debug {
-            NSLog("Failed registering for remote notifications: \(error.localizedDescription)")
-        }
+        LogMessage("Failed registering for remote notifications", error: error).print()
 
         let _ = self.addons.map { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
@@ -406,7 +423,8 @@ public class CoreManager: NSObject, HaloManager {
                 if let info = data.first, minIOS = info["minIOS"] {
                     if minIOS.compare(self.frameworkVersion, options: .NumericSearch) == .OrderedDescending {
                         let changelog = info["iosChangeLog"] as! String
-                        NSLog("\n-------------------\nThe version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)\n-------------------")
+
+                        LogMessage("The version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)", level: .Warning).print()
                     }
                 }
                 handler?(true)

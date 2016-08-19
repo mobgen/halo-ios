@@ -24,6 +24,7 @@
 		00396E631D53635600594D0A /* HaloPaginatedContentInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E621D53635600594D0A /* HaloPaginatedContentInstances.swift */; };
 		00396E651D53640E00594D0A /* HaloContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E641D53640E00594D0A /* HaloContentInstance.swift */; };
 		003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003B75F71C969E9800F05202 /* ParameterEncoding.swift */; };
+		004149091D645A4300E872B6 /* HaloError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004149081D645A4300E872B6 /* HaloError.swift */; };
 		0045393B1B67E8170060C30B /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045393A1B67E8170060C30B /* Module.swift */; };
 		004790FC1C915C6C00C24741 /* HaloObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 004790FB1C915C6C00C24741 /* HaloObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004791011C915C8000C24741 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
@@ -59,7 +60,6 @@
 		0082D9C11B987BE400298AB8 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082D9C01B987BE400298AB8 /* ModelSpec.swift */; };
 		0082D9C31B98911200298AB8 /* instance_list_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0082D9C21B98911200298AB8 /* instance_list_success.json */; };
 		0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* ContentManager.swift */; };
-		008DB38B1CEA15D9001D6CDB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008DB38A1CEA15D9001D6CDB /* Errors.swift */; };
 		008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */; };
 		0090DFCF1C89BF9500BAF181 /* CloudinaryURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090DFCE1C89BF9500BAF181 /* CloudinaryURL.swift */; };
 		0090DFD11C89E08200BAF181 /* CloudinaryURLOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090DFD01C89E08200BAF181 /* CloudinaryURLOptions.swift */; };
@@ -70,6 +70,7 @@
 		00A409221D0FE72F005D4FB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A409211D0FE72F005D4FB0 /* Foundation.framework */; };
 		00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
 		00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBE04E1CBD2B1500B118AF /* Locale.swift */; };
+		00C2F3351D635A2E002C1125 /* LogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2F3341D635A2E002C1125 /* LogMessage.swift */; };
 		00DD96C21BD02F0200AF65CA /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
 		00E043CF1C848723008270DE /* CoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E043CE1C848723008270DE /* CoreManager.swift */; };
 		00E508391CB691EB00B4B5AE /* SearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E508381CB691EB00B4B5AE /* SearchFilter.swift */; };
@@ -125,6 +126,7 @@
 		00396E641D53640E00594D0A /* HaloContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloContentInstance.swift; sourceTree = "<group>"; };
 		003B75F71C969E9800F05202 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		004149081D645A4300E872B6 /* HaloError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloError.swift; sourceTree = "<group>"; };
 		0045393A1B67E8170060C30B /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		004790F91C915C6C00C24741 /* HaloObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		004790FB1C915C6C00C24741 /* HaloObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HaloObjC.h; sourceTree = "<group>"; };
@@ -167,7 +169,6 @@
 		0082D9C01B987BE400298AB8 /* ModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
 		0082D9C21B98911200298AB8 /* instance_list_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = instance_list_success.json; sourceTree = "<group>"; };
 		0086F52D1B6C20C2001F70DE /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
-		008DB38A1CEA15D9001D6CDB /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		008E2B021C51320C00FACAB2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		008E2B581C524D7F00FACAB2 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -177,6 +178,7 @@
 		0094A31F1B70A6A600DED864 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NetworkManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		00A409211D0FE72F005D4FB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00BBE04E1CBD2B1500B118AF /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
+		00C2F3341D635A2E002C1125 /* LogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogMessage.swift; sourceTree = "<group>"; };
 		00E043CE1C848723008270DE /* CoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreManager.swift; sourceTree = "<group>"; };
 		00E508381CB691EB00B4B5AE /* SearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
 		00EC9D361C43F72F00A3291D /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
@@ -340,7 +342,8 @@
 				006A60211B318DCC0045395A /* Manager.swift */,
 				005421681CC785210055B553 /* Protocols.swift */,
 				005E1ED51C69FFE800ED8763 /* Result.swift */,
-				008DB38A1CEA15D9001D6CDB /* Errors.swift */,
+				00C2F3341D635A2E002C1125 /* LogMessage.swift */,
+				004149081D645A4300E872B6 /* HaloError.swift */,
 			);
 			name = Core;
 			path = Source/Core;
@@ -470,7 +473,6 @@
 				006A5FA91B318CAC0045395A /* Frameworks */,
 				006A5FAA1B318CAC0045395A /* Headers */,
 				006A5FAB1B318CAC0045395A /* Resources */,
-				00A34E861BDF9F9E0080DD93 /* Documentation */,
 			);
 			buildRules = (
 			);
@@ -570,23 +572,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		00A34E861BDF9F9E0080DD93 /* Documentation */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Documentation;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#cd ${PROJECT_DIR}/Source;jazzy -m 'Halo SDK' -a 'MOBGEN Technology' -c -o ${PROJECT_DIR}/docs -x '-workspace,../HALO.xcworkspace,-scheme,Halo' --hide-documentation-coverage";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		004790F41C915C6C00C24741 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -612,7 +597,6 @@
 				005421661CC76D230055B553 /* UIDevice+Extra.swift in Sources */,
 				005677F41CABC8E900B6A4F3 /* SearchOptions.swift in Sources */,
 				0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */,
-				008DB38B1CEA15D9001D6CDB /* Errors.swift in Sources */,
 				0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */,
 				00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */,
 				00E043CF1C848723008270DE /* CoreManager.swift in Sources */,
@@ -635,6 +619,8 @@
 				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
 				0090DFD11C89E08200BAF181 /* CloudinaryURLOptions.swift in Sources */,
 				003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */,
+				00C2F3351D635A2E002C1125 /* LogMessage.swift in Sources */,
+				004149091D645A4300E872B6 /* HaloError.swift in Sources */,
 				000827011B6A57A5001E8248 /* ModuleType.swift in Sources */,
 				004C73C51D09657A005A14FB /* SearchFilterHelper.swift in Sources */,
 				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
