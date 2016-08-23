@@ -91,20 +91,4 @@ public struct SearchFilter {
             }
         }
     }
-
-//    public init(operation: SearchFilterOperation, property: String, number: NSNumber) {
-//        self.init(operation: operation, property: property, value: number, type: "number")
-//    }
-//
-//    public init(operation: SearchFilterOperation, property: String, date: Double) {
-//        self.init(operation: operation, property: property, value: date, type: "date")
-//    }
-//
-//    public init(operation: SearchFilterOperation, property: String, string: String) {
-//        self.init(operation: operation, property: property, value: string, type: "string")
-//    }
-//
-//    public init(operation: SearchFilterOperation, property: String, value: AnyObject?) {
-//        self.init(operation: operation, property: property, value: value, type: nil)
-//    }
 }
