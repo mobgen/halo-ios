@@ -7,12 +7,12 @@
 //
 
 public class HaloManager: NSObject {
-    
+
     public static let core = HaloCoreManager.sharedInstance
-    public static let generalContent = HaloContentManager.sharedInstance
-    
+    public static let content = HaloContentManager.sharedInstance
+
     private override init() {
         super.init()
     }
-    
+
 }

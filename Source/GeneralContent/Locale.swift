@@ -6,7 +6,10 @@
 //  Copyright © 2016 MOBGEN Technology. All rights reserved.
 //
 
-public enum Locale {
+import Foundation
+
+@objc
+public enum Locale: Int {
 
     case
     AfarDjibouti,
