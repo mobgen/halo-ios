@@ -20,6 +20,8 @@ public class CoreManager: NSObject, HaloManager {
 
     private var token: dispatch_once_t = 0
 
+    private let lockQueue = dispatch_queue_create("com.mobgen.halo.lockQueue", nil)
+
     public private(set) var environment: HaloEnvironment = .Prod {
         didSet {
             Router.baseURL = environment.baseUrl
@@ -316,29 +318,37 @@ public class CoreManager: NSObject, HaloManager {
     }
 
     public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
-        if let user = self.user {
 
-            Manager.network.createUpdateUser(user) { [weak self] (response, result) in
+        /**
+         *  Make sure no 'saveUser' are executed concurrently. That could lead to some inconsistencies in the server (several users
+         *  created for the same device).
+         */
+        dispatch_sync(lockQueue) {
 
-                if let strongSelf = self {
+            if let user = self.user {
 
-                    switch result {
-                    case .Success(let user, _):
-                        strongSelf.user = user
+                Manager.network.createUpdateUser(user) { [weak self] (response, result) in
 
-                        if let u = user {
-                            LogMessage(u.description, level: .Info).print()
+                    if let strongSelf = self {
+
+                        switch result {
+                        case .Success(let user, _):
+                            strongSelf.user = user
+
+                            if let u = user {
+                                LogMessage(u.description, level: .Info).print()
+                            }
+
+                        case .Failure(let error):
+                            LogMessage("Error saving user", error: error).print()
+
                         }
 
-                    case .Failure(let error):
-                        LogMessage("Error saving user", error: error).print()
+                        handler?(response, result)
 
                     }
 
-                    handler?(response, result)
-
                 }
-
             }
         }
     }
