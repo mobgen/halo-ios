@@ -55,16 +55,26 @@ public class HaloTranslations: NSObject {
         }
     }
 
-    public func getTexts(keys: String..., completionHandler handler: ([String] -> Void)?) -> Void {
+    public func getTexts(keys: String..., completionHandler handler: ([String?]? -> Void)?) -> Void {
 
-
-
-
-
-        handler?([])
+        if translationsMap.isEmpty {
+            self.load { success in
+                if success {
+                    let texts = keys.map { self.translationsMap[$0] }
+                    handler?(texts)
+                } else {
+                    handler?(nil)
+                }
+            }
+        } else {
+            let texts = keys.map { translationsMap[$0] }
+            handler?(texts)
+        }
     }
 
     public func getAllTexts(handler: (([String]) -> Void)?) -> Void {
+
+
 
         handler?([])
     }
@@ -72,6 +82,7 @@ public class HaloTranslations: NSObject {
     private func load(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
         if self.isLoading {
+            handler?(true)
             return
         }
 
