@@ -142,11 +142,11 @@ public struct SearchOptions {
         return self
     }
 
-    public mutating func setPagination(page: Int, limit: Int, skip: Bool) -> Halo.SearchOptions {
+    public mutating func setPagination(page: Int, limit: Int) -> Halo.SearchOptions {
         self.pagination = [
             "page"  : page,
             "limit" : limit,
-            "skip"  : skip.description
+            "skip"  : "false"
         ]
         return self
     }

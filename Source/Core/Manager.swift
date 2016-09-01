@@ -12,10 +12,11 @@ import UIKit
 /**
 Enumeration holding the different environment options available
 
-- Int:   Integration environment
-- QA:    QA environment
-- Stage: Stage environment
-- Prod:  Production environment
+- Int:    Integration environment
+- QA:     QA environment
+- Stage:  Stage environment
+- Prod:   Production environment
+- Custom: Custom environment (providing the full url)
 */
 public enum HaloEnvironment {
     case Int

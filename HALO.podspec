@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Halo"
-  s.version          = "1.2.0"
+  s.version          = "1.2.1"
   s.summary          = "HALO iOS SDK"
   s.homepage         = "https://bitbucket.org/mobgen/halo-sdk-ios"
   s.license          = 'MIT'
