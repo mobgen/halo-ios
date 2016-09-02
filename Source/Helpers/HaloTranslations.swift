@@ -86,10 +86,11 @@ public class HaloTranslations: NSObject {
             return
         }
 
-        if let locale = self.locale, keyField = self.keyField, valueField = self.valueField {
+        if let locale = self.locale, moduleId = self.moduleId, keyField = self.keyField, valueField = self.valueField {
 
             var options = SearchOptions()
             options.skipPagination()
+            options.setModuleIds([moduleId])
             options.setLocale(locale)
 
             self.isLoading = true

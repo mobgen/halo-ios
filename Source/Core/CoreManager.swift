@@ -16,10 +16,13 @@ public class CoreManager: NSObject, HaloManager {
 
     public var dataProvider: DataProvider = NetworkDataProvider()
 
+    ///
     public var logLevel: HaloLogLevel = .Warning
 
+    /// Token used to make sure the startup process is done only once
     private var token: dispatch_once_t = 0
 
+    ///
     private let lockQueue = dispatch_queue_create("com.mobgen.halo.lockQueue", nil)
 
     public private(set) var environment: HaloEnvironment = .Prod {
@@ -53,18 +56,36 @@ public class CoreManager: NSObject, HaloManager {
 
     override init() {}
 
+    /**
+     Allows changing the current environment against which the connections are made. It will imply a setup process again
+     and that is why a completion handler can be provided. Once the process has finished and the environment is
+     properly configured, it will be called.
+
+     - parameter environment:   The new environment to be set
+     - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
+     */
     public func setEnvironment(environment: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = environment
         self.completionHandler = handler
         self.configureUser()
     }
 
+    /**
+     Allows registering an add-on within the Core Manager.
+
+     - parameter addon: Add-on implementation
+     */
     public func registerAddon(addon: Halo.Addon) -> Void {
         addon.willRegisterAddon(self)
         self.addons.append(addon)
         addon.didRegisterAddon(self)
     }
 
+    /**
+     Function to be executed to start the configuration and setup process of the HALO Framework
+
+     - parameter handler: Closure to be executed once the process has finished. The parameter will provide information about whether the process has succeeded or not
+     */
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
         if (token != 0) {
@@ -317,6 +338,11 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
+    /**
+     By calling this function, the current user handled by the Core Manager will be saved in the server.
+
+     - parameter handler: Closure to be executed once the request has finished, providing a result.
+     */
     public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
 
         /**
@@ -353,6 +379,14 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
+    /**
+     Authenticate against the server using the provided mode and the stored credentials. No authentication is needed under normal
+     circumnstances. The system will take care of everything, but this could become handy if the authentication wants to be forced for
+     some reason.
+
+     - parameter mode:    Authentication mode to be used
+     - parameter handler: Closure to be executed once the authentication has finished
+     */
     public func authenticate(mode: Halo.AuthenticationMode = .App, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
         Manager.network.authenticate(mode) { (response, result) in
             handler?(response, result)
@@ -394,7 +428,7 @@ public class CoreManager: NSObject, HaloManager {
     }
 
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { (fetchResult) -> Void in })
+        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { _ in })
     }
 
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -404,23 +438,12 @@ public class CoreManager: NSObject, HaloManager {
                 notifAddon.application(application, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: completionHandler)
             }
         }
-
     }
 
-    /**
-     Extra setup steps to be called from the corresponding method in the app delegate
-
-     - parameter application: Application being configured
-     */
     public func applicationDidBecomeActive(application: UIApplication) {
         let _ = self.addons.map { $0.applicationDidBecomeActive(application, core: self) }
     }
 
-    /**
-     Extra setup steps to be called from the corresponding method in the app delegate
-
-     - parameter application: Application being configured
-     */
     public func applicationDidEnterBackground(application: UIApplication) {
         let _ = self.addons.map { $0.applicationDidEnterBackground(application, core: self) }
     }
