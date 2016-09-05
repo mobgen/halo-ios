@@ -19,6 +19,8 @@ public class HaloTranslations: NSObject {
     private var translationsMap: [String: String] = [:]
     private var isLoading: Bool = false
 
+    private var completionHandlers: [() -> Void] = []
+
     private override init() {
         super.init()
     }
@@ -41,64 +43,60 @@ public class HaloTranslations: NSObject {
     }
 
     public func getText(key: String, completionHandler handler: ((String?) -> Void)?) -> Void {
-
-        if translationsMap.isEmpty {
-            self.load { success in
-                if success {
-                    handler?(self.translationsMap[key])
-                } else {
-                    handler?(nil)
+        if self.isLoading {
+            if let h = handler {
+                self.completionHandlers.append {
+                    h(self.translationsMap[key])
                 }
             }
+            handler?(self.defaultText)
         } else {
-            handler?(self.translationsMap[key])
+            if let value = self.translationsMap[key] {
+                handler?(value)
+            } else {
+                handler?(self.defaultText)
+            }
         }
     }
 
-    public func getTexts(keys: String..., completionHandler handler: ([String?]? -> Void)?) -> Void {
+    public func getTexts(keys: String...) -> [String: String?] {
 
-        if translationsMap.isEmpty {
-            self.load { success in
-                if success {
-                    let texts = keys.map { self.translationsMap[$0] }
-                    handler?(texts)
-                } else {
-                    handler?(nil)
-                }
+        var values: [String: String?] = [:]
+
+        let _ = keys.map { key in
+            if let value = translationsMap[key] {
+                values[key] = value
+            } else {
+                values[key] = self.defaultText
             }
-        } else {
-            let texts = keys.map { translationsMap[$0] }
-            handler?(texts)
         }
+
+        return values
+
     }
 
-    public func getAllTexts(handler: (([String]) -> Void)?) -> Void {
+    public func getAllTexts() -> [String: String?] {
 
-
-
-        handler?([])
+        return translationsMap
     }
 
-    private func load(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    public func load(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
         if self.isLoading {
-            handler?(true)
+            handler?(false)
             return
         }
 
         if let locale = self.locale, moduleId = self.moduleId, keyField = self.keyField, valueField = self.valueField {
 
-            var options = SearchOptions()
-            options.skipPagination()
-            options.setModuleIds([moduleId])
-            options.setLocale(locale)
+            let options = SearchOptions().skipPagination().moduleIds([moduleId]).locale(locale)
 
             self.isLoading = true
+            self.translationsMap.removeAll()
 
             try! Manager.content.getInstances(options).response { (response, result) in
 
                 self.isLoading = false
-                self.translationsMap.removeAll()
 
                 switch result {
                 case .Success(let data as [[String: AnyObject]], _):
@@ -113,6 +111,11 @@ public class HaloTranslations: NSObject {
                     }
 
                     handler?(true)
+
+                    // Execute all the pending completion handlers
+                    let _ = self.completionHandlers.map { $0() }
+                    self.completionHandlers.removeAll()
+
                 case .Failure(let error):
                     LogMessage(error: error).print()
                     handler?(false)

@@ -8,12 +8,20 @@
 
 import Foundation
 
-public enum SegmentMode: String {
-    case Total = "total",
-    Partial = "partial"
+@objc
+public enum SegmentMode: Int {
+    case Total, Partial
+
+    public var description: String {
+        switch self {
+        case .Total: return "total"
+        case .Partial: return "partial"
+        }
+    }
 }
 
-public struct SearchOptions {
+@objc(HaloSearchOptions)
+public class SearchOptions: NSObject {
 
     var moduleIds: [String]?
     var instanceIds: [String]?
@@ -71,7 +79,7 @@ public struct SearchOptions {
             }
         }
 
-        dict["segmentMode"] = self.segmentMode.rawValue
+        dict["segmentMode"] = self.segmentMode.description
 
         if let locale = self.locale {
             dict["locale"] = locale.description
@@ -80,69 +88,67 @@ public struct SearchOptions {
         return dict
     }
 
-    public init() {}
-
-    public mutating func setSearchFilter(filter: SearchFilter) -> Halo.SearchOptions {
+    public func searchFilter(filter: SearchFilter) -> Halo.SearchOptions {
         self.conditions = filter.body
         return self
     }
 
-    public mutating func setMetaFilter(filter: SearchFilter) -> Halo.SearchOptions {
+    public func metaFilter(filter: SearchFilter) -> Halo.SearchOptions {
         self.metaConditions = filter.body
         return self
     }
 
-    public mutating func setFields(fields: [String]) -> Halo.SearchOptions {
+    public func fields(fields: [String]) -> Halo.SearchOptions {
         self.fields = fields
         return self
     }
 
-    public mutating func setTags(tags: [Halo.Tag]) -> Halo.SearchOptions {
+    public func tags(tags: [Halo.Tag]) -> Halo.SearchOptions {
         self.tags = tags
         return self
     }
 
-    public mutating func setModuleIds(ids: [String]) -> Halo.SearchOptions {
+    public func moduleIds(ids: [String]) -> Halo.SearchOptions {
         self.moduleIds = ids
         return self
     }
 
-    public mutating func setInstanceIds(ids: [String]) -> Halo.SearchOptions {
+    public func instanceIds(ids: [String]) -> Halo.SearchOptions {
         self.instanceIds = ids
         return self
     }
 
-    public mutating func setPopulateFields(fields: [String]) -> Halo.SearchOptions {
+    public func populateFields(fields: [String]) -> Halo.SearchOptions {
         self.populateFields = fields
         return self
     }
 
-    public mutating func populateAll() -> Halo.SearchOptions {
+    public func populateAll() -> Halo.SearchOptions {
         self.populateFields = ["all"]
         return self
     }
 
-    public mutating func segmentWithUser(segment: Bool) -> Halo.SearchOptions {
+    public func segmentWithUser(segment: Bool) -> Halo.SearchOptions {
         self.segmentWithUser = segment
         return self
     }
 
-    public mutating func segmentMode(mode: SegmentMode) -> Halo.SearchOptions {
+    public func segmentMode(mode: SegmentMode) -> Halo.SearchOptions {
         self.segmentMode = mode
         return self
     }
 
-    public mutating func setLocale(locale: Halo.Locale) -> Halo.SearchOptions {
+    public func locale(locale: Halo.Locale) -> Halo.SearchOptions {
         self.locale = locale
         return self
     }
 
-    public mutating func skipPagination() -> Halo.SearchOptions {
+    public func skipPagination() -> Halo.SearchOptions {
         self.pagination = ["skip": "true"]
         return self
     }
 
-    public mutating func setPagination(page: Int, limit: Int) -> Halo.SearchOptions {
+    public func pagination(page: Int, limit: Int) -> Halo.SearchOptions {
         self.pagination = [
             "page"  : page,
             "limit" : limit,
@@ -151,7 +157,7 @@ public struct SearchOptions {
         return self
     }
 
-    public mutating func setOfflinePolicy(policy: Halo.OfflinePolicy) -> Halo.SearchOptions {
+    public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.SearchOptions {
         self.offlinePolicy = policy
         return self
     }

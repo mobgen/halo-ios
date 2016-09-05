@@ -48,19 +48,16 @@ public struct ContentManager: HaloManager, ContentProvider {
             }
         }
 
-        // Copy the options to make it mutable
-        var options = searchOptions
-
         // Check offline mode
-        if let offline = options.offlinePolicy {
+        if let offline = searchOptions.offlinePolicy {
             request.offlinePolicy(offline)
         }
 
         // Set the provided locale or fall back to the default one
-        options.locale = options.locale ?? self.defaultLocale
+        searchOptions.locale = searchOptions.locale ?? self.defaultLocale
 
         // Process the search options
-        request.params(options.body)
+        request.params(searchOptions.body)
 
         return request
     }

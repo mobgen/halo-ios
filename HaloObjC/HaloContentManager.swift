@@ -13,24 +13,23 @@ import Halo
 }
 
 public class HaloContentManager: NSObject {
- 
+
     static let sharedInstance = HaloContentManager()
-    
+
     private let content = Halo.Manager.content
-    
+
     private override init() {
         super.init()
     }
-    
+
     @objc
     public func instances(moduleIds moduleIds: [String],
                                     offlinePolicy: OfflinePolicy,
                                     success: (NSHTTPURLResponse?, HaloPaginatedContentInstances) -> Void,
                                     failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
-        
-        var searchOptions = SearchOptions()
-        searchOptions.setOfflinePolicy(offlinePolicy)
-        
+
+        let searchOptions = SearchOptions().offlinePolicy(offlinePolicy)
+
         try! content.getInstances(searchOptions).responseObject { (response, result) in
             switch result {
             case .Success(let data, _):
@@ -42,16 +41,15 @@ public class HaloContentManager: NSObject {
             }
         }
     }
-    
+
     @objc
     public func instances(instanceIds instanceIds: [String],
                                       offlinePolicy: OfflinePolicy,
                                       success: (NSHTTPURLResponse?, HaloPaginatedContentInstances) -> Void,
                                       failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
-        
-        var searchOptions = SearchOptions()
-        searchOptions.setOfflinePolicy(offlinePolicy)
-        
+
+        let searchOptions = SearchOptions().offlinePolicy(offlinePolicy)
+
         try! content.getInstances(searchOptions).responseObject { (response, result) in
             switch result {
             case .Success(let data, _):
@@ -62,7 +60,7 @@ public class HaloContentManager: NSObject {
                 failure(response, error)
             }
         }
-        
+
     }
 
 }
