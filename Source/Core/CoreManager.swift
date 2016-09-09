@@ -343,7 +343,7 @@ public class CoreManager: NSObject, HaloManager {
 
      - parameter handler: Closure to be executed once the request has finished, providing a result.
      */
-    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
+    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
 
         /**
          *  Make sure no 'saveUser' are executed concurrently. That could lead to some inconsistencies in the server (several users
@@ -387,7 +387,7 @@ public class CoreManager: NSObject, HaloManager {
      - parameter mode:    Authentication mode to be used
      - parameter handler: Closure to be executed once the authentication has finished
      */
-    public func authenticate(mode: Halo.AuthenticationMode = .App, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    public func authenticate(mode: Halo.AuthenticationMode = .App, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token>) -> Void)? = nil) -> Void {
         Manager.network.authenticate(mode) { (response, result) in
             handler?(response, result)
         }

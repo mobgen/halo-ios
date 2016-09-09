@@ -20,8 +20,22 @@ public enum SegmentMode: Int {
     }
 }
 
-@objc(HaloSearchOptions)
-public class SearchOptions: NSObject {
+@objc(HaloSearchQuery)
+public class SearchQuery: NSObject {
+
+    struct Keys {
+        static let ModuleIds = "moduleIds"
+        static let InstanceIds = "instanceIds"
+        static let SearchValues = "searchValues"
+        static let MetaSearch = "metaSearch"
+        static let Fields = "fields"
+        static let Tags = "tags"
+        static let Include = "include"
+        static let Pagination = "pagination"
+        static let SegmentTags = "segmentTags"
+        static let SegmentMode = "segmentMode"
+        static let Locale = "locale"
+    }
 
     var moduleIds: [String]?
     var instanceIds: [String]?
@@ -40,115 +54,115 @@ public class SearchOptions: NSObject {
         var dict = [String: AnyObject]()
 
         if let modules = self.moduleIds {
-            dict["moduleIds"] = modules
+            dict[Keys.ModuleIds] = modules
         }
 
         if let instances = self.instanceIds {
-            dict["instanceIds"] = instances
+            dict[Keys.InstanceIds] = instances
         }
 
         if let searchValues = self.conditions {
-            dict["searchValues"] = searchValues
+            dict[Keys.SearchValues] = searchValues
         }
 
         if let metaSearch = self.metaConditions {
-            dict["metaSearch"] = metaSearch
+            dict[Keys.MetaSearch] = metaSearch
         }
 
         if let fields = self.fields {
-            dict["fields"] = fields
+            dict[Keys.Fields] = fields
         }
 
         if let tags = self.tags {
-            dict["tags"] = tags.map { $0.toDictionary() }
+            dict[Keys.Tags] = tags.map { $0.toDictionary() }
         }
 
         if let include = self.populateFields {
-            dict["include"] = include
+            dict[Keys.Include] = include
         }
 
         if let pagination = self.pagination {
-            dict["pagination"] = pagination
+            dict[Keys.Pagination] = pagination
         }
 
         if self.segmentWithUser {
             if let user = Halo.Manager.core.user, tags = user.tags {
                 if tags.count > 0 {
-                    dict["segmentTags"] = tags.values.map { $0.toDictionary() }
+                    dict[Keys.SegmentTags] = tags.values.map { $0.toDictionary() }
                 }
             }
         }
 
-        dict["segmentMode"] = self.segmentMode.description
+        dict[Keys.SegmentMode] = self.segmentMode.description
 
         if let locale = self.locale {
-            dict["locale"] = locale.description
+            dict[Keys.Locale] = locale.description
         }
 
         return dict
     }
 
-    public func searchFilter(filter: SearchFilter) -> Halo.SearchOptions {
+    public func searchFilter(filter: SearchFilter) -> Halo.SearchQuery {
         self.conditions = filter.body
         return self
     }
 
-    public func metaFilter(filter: SearchFilter) -> Halo.SearchOptions {
+    public func metaFilter(filter: SearchFilter) -> Halo.SearchQuery {
         self.metaConditions = filter.body
         return self
     }
 
-    public func fields(fields: [String]) -> Halo.SearchOptions {
+    public func fields(fields: [String]) -> Halo.SearchQuery {
         self.fields = fields
         return self
     }
 
-    public func tags(tags: [Halo.Tag]) -> Halo.SearchOptions {
+    public func tags(tags: [Halo.Tag]) -> Halo.SearchQuery {
         self.tags = tags
         return self
     }
 
-    public func moduleIds(ids: [String]) -> Halo.SearchOptions {
+    public func moduleIds(ids: [String]) -> Halo.SearchQuery {
         self.moduleIds = ids
         return self
     }
 
-    public func instanceIds(ids: [String]) -> Halo.SearchOptions {
+    public func instanceIds(ids: [String]) -> Halo.SearchQuery {
         self.instanceIds = ids
         return self
     }
 
-    public func populateFields(fields: [String]) -> Halo.SearchOptions {
+    public func populateFields(fields: [String]) -> Halo.SearchQuery {
         self.populateFields = fields
         return self
     }
 
-    public func populateAll() -> Halo.SearchOptions {
+    public func populateAll() -> Halo.SearchQuery {
         self.populateFields = ["all"]
         return self
     }
 
-    public func segmentWithUser(segment: Bool) -> Halo.SearchOptions {
+    public func segmentWithUser(segment: Bool) -> Halo.SearchQuery {
         self.segmentWithUser = segment
         return self
     }
 
-    public func segmentMode(mode: SegmentMode) -> Halo.SearchOptions {
+    public func segmentMode(mode: SegmentMode) -> Halo.SearchQuery {
         self.segmentMode = mode
         return self
     }
 
-    public func locale(locale: Halo.Locale) -> Halo.SearchOptions {
+    public func locale(locale: Halo.Locale) -> Halo.SearchQuery {
         self.locale = locale
         return self
     }
 
-    public func skipPagination() -> Halo.SearchOptions {
+    public func skipPagination() -> Halo.SearchQuery {
         self.pagination = ["skip": "true"]
         return self
     }
 
-    public func pagination(page: Int, limit: Int) -> Halo.SearchOptions {
+    public func pagination(page: Int, limit: Int) -> Halo.SearchQuery {
         self.pagination = [
             "page"  : page,
             "limit" : limit,
@@ -157,7 +171,7 @@ public class SearchOptions: NSObject {
         return self
     }
 
-    public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.SearchOptions {
+    public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.SearchQuery {
         self.offlinePolicy = policy
         return self
     }

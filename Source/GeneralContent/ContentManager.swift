@@ -11,7 +11,7 @@ import Foundation
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
  */
-public struct ContentManager: HaloManager, ContentProvider {
+public struct ContentManager: HaloManager {
 
     public var defaultLocale: Halo.Locale?
 
@@ -23,7 +23,7 @@ public struct ContentManager: HaloManager, ContentProvider {
 
     // MARK: Get instances
 
-    public func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request<PaginatedContentInstances> {
+    public func getInstances(searchOptions: Halo.SearchQuery) -> Halo.Request<PaginatedContentInstances> {
 
         let request = Halo.Request<PaginatedContentInstances>(router: Router.GeneralContentSearch).responseParser { (any) in
 
@@ -31,15 +31,15 @@ public struct ContentManager: HaloManager, ContentProvider {
             case let data as [String: AnyObject]:
 
                 if let pag = data["pagination"] as? [String: AnyObject], items = data["items"] as? [[String: AnyObject]] {
-                    let paginationInfo = PaginationInfo(data: pag)
-                    let instances = items.map { Halo.ContentInstance($0) }
+                    let paginationInfo = PaginationInfo.fromDictionary(pag)
+                    let instances = items.map { Halo.ContentInstance.fromDictionary($0) }
                     return PaginatedContentInstances(paginationInfo: paginationInfo, instances: instances)
                 }
                 return nil
 
             case let data as [[String: AnyObject]]:
 
-                let items = data.map { Halo.ContentInstance($0) }
+                let items = data.map { Halo.ContentInstance.fromDictionary($0) }
                 let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
                 return PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
 

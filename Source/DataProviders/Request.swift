@@ -169,19 +169,19 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         return bodyHash + urlHash
     }
 
-    public func responseData(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+    public func responseData(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         try self.dataProvider.responseData(self, completionHandler: handler)
         return self
     }
 
-    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         try self.dataProvider.response(self, completionHandler: handler)
         return self
     }
 
-    public func responseObject(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+    public func responseObject(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         try self.dataProvider.responseObject(self, completionHandler: handler)
         return self

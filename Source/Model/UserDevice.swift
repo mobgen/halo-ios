@@ -15,6 +15,11 @@ or the push notifications token.
 @objc(HaloUserDevice)
 public final class UserDevice: NSObject, NSCoding {
 
+    struct Keys {
+        static let Platform = "platform"
+        static let Token = "token"
+    }
+
     /// Platform of the device
     public  internal(set) var platform: String = ""
 
@@ -34,13 +39,13 @@ public final class UserDevice: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        platform = aDecoder.decodeObjectForKey("platform") as! String
-        token = aDecoder.decodeObjectForKey("token") as! String
+        platform = aDecoder.decodeObjectForKey(Keys.Platform) as! String
+        token = aDecoder.decodeObjectForKey(Keys.Token) as! String
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(platform, forKey: "platform")
-        aCoder.encodeObject(token, forKey: "token")
+        aCoder.encodeObject(platform, forKey: Keys.Platform)
+        aCoder.encodeObject(token, forKey: Keys.Token)
     }
 
     /**
@@ -50,8 +55,8 @@ public final class UserDevice: NSObject, NSCoding {
     */
     func toDictionary() -> [String: AnyObject] {
         return [
-            "platform"  : self.platform,
-            "token"     : self.token
+            Keys.Platform  : self.platform,
+            Keys.Token     : self.token
         ]
     }
 
@@ -63,6 +68,6 @@ public final class UserDevice: NSObject, NSCoding {
     - returns: The newly created user device
     */
     class func fromDictionary(dict: [String: AnyObject]) -> Halo.UserDevice {
-        return UserDevice(platform: dict["platform"] as! String, token: dict["token"] as! String)
+        return UserDevice(platform: dict[Keys.Platform] as! String, token: dict[Keys.Token] as! String)
     }
 }

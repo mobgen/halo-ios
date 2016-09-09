@@ -12,9 +12,9 @@ private struct CachedTask {
 
     var request: Halo.Requestable
     var numberOfRetries: Int
-    var handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)?
+    var handler: ((NSHTTPURLResponse?, Halo.Result<NSData>) -> Void)?
 
-    init(request: Halo.Requestable, retries: Int, handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)?) {
+    init(request: Halo.Requestable, retries: Int, handler: ((NSHTTPURLResponse?, Halo.Result<NSData>) -> Void)?) {
         self.request = request
         self.numberOfRetries = retries
         self.handler = handler
@@ -72,7 +72,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
 
     func startRequest(request urlRequest: Requestable,
                               numberOfRetries: Int,
-                              completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
+                              completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData>) -> Void)? = nil) -> Void {
 
         let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
 
@@ -151,7 +151,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     }
 
     func startRequest(request urlRequest: Requestable,
-                              completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) -> Void {
+                              completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData>) -> Void)? = nil) -> Void {
 
         self.startRequest(request: urlRequest, numberOfRetries: Manager.core.dataProvider.numberOfRetries, completionHandler: handler)
     }
@@ -159,7 +159,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
     /**
      Obtain/refresh an authentication token when needed
      */
-    func authenticate(mode: Halo.AuthenticationMode, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    func authenticate(mode: Halo.AuthenticationMode, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token>) -> Void)? = nil) -> Void {
 
         self.isRefreshing = true
         var params: [String : AnyObject]
@@ -229,7 +229,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                     } else if let d = data {
 
                         let json = try! NSJSONSerialization.JSONObjectWithData(d, options: []) as! [String : AnyObject]
-                        let token = Token(json)
+                        let token = Token.fromDictionary(json)
 
                         switch req.authenticationMode {
                         case .App:

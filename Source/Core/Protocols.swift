@@ -71,15 +71,3 @@ public protocol HaloManager {
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
 
 }
-
-public protocol ModulesProvider {
-
-    func getModules(offlinePolicy: OfflinePolicy?) -> Halo.Request<PaginatedModules>
-
-}
-
-public protocol ContentProvider {
-
-    func getInstances(searchOptions: Halo.SearchOptions) -> Halo.Request<PaginatedContentInstances>
-
-}

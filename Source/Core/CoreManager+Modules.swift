@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension CoreManager: ModulesProvider {
+extension CoreManager {
 
     /**
      Get a list of the existing modules for the provided client credentials
@@ -23,14 +23,14 @@ extension CoreManager: ModulesProvider {
             case let data as [String: AnyObject]:
 
                 if let pagination = data["pagination"] as? [String: AnyObject], items = data["items"] as? [[String: AnyObject]] {
-                    let paginationInfo = PaginationInfo(data: pagination)
-                    let modules = items.map { Halo.Module($0) }
+                    let paginationInfo = PaginationInfo.fromDictionary(pagination)
+                    let modules = items.map { Halo.Module.fromDictionary($0) }
                     return PaginatedModules(paginationInfo: paginationInfo, modules: modules)
                 }
                 return nil
 
             case let data as [[String: AnyObject]]:
-                let items = data.map { Halo.Module($0) }
+                let items = data.map { Halo.Module.fromDictionary($0) }
                 let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
 
                 return PaginatedModules(paginationInfo: paginationInfo, modules: items)

@@ -89,7 +89,7 @@ public class HaloTranslations: NSObject {
 
         if let locale = self.locale, moduleId = self.moduleId, keyField = self.keyField, valueField = self.valueField {
 
-            let options = SearchOptions().skipPagination().moduleIds([moduleId]).locale(locale)
+            let options = SearchQuery().skipPagination().moduleIds([moduleId]).locale(locale)
 
             self.isLoading = true
             self.translationsMap.removeAll()

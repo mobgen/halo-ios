@@ -18,7 +18,7 @@ extension NetworkManager {
         return User.fromDictionary(userDict)
     }
 
-    func getUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
+    func getUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
 
         if let id = user.id {
 
@@ -37,7 +37,7 @@ extension NetworkManager {
     - parameter user:    User object containing all the information to be sent
     - parameter handler: Closure to be executed after the request has completed
     */
-    func createUpdateUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
+    func createUpdateUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
         var request: Halo.Request<Halo.User>
