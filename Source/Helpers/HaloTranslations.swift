@@ -94,17 +94,16 @@ public class HaloTranslations: NSObject {
             self.isLoading = true
             self.translationsMap.removeAll()
 
-            try! Manager.content.getInstances(options).response { (response, result) in
+            Manager.content.getInstances(options) { (response, result) in
 
                 self.isLoading = false
 
                 switch result {
-                case .Success(let data as [[String: AnyObject]], _):
+                case .Success(let res, _):
 
-                    let _ = data.map { item in
-                        if let values = item["values"] as? [String: AnyObject],
-                            key = values[keyField] as? String,
-                            value = values[valueField] as? String {
+                    let _ = res?.instances.map { item in
+                        if let key = item.values[keyField] as? String,
+                            value = item.values[valueField] as? String {
 
                             self.translationsMap.updateValue(value, forKey: key)
                         }
@@ -118,8 +117,6 @@ public class HaloTranslations: NSObject {
 
                 case .Failure(let error):
                     LogMessage(error: error).print()
-                    handler?(false)
-                default:
                     handler?(false)
                 }
             }

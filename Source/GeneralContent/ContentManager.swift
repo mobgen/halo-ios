@@ -23,13 +23,12 @@ public struct ContentManager: HaloManager {
 
     // MARK: Get instances
 
-    public func getInstances(searchOptions: Halo.SearchQuery) -> Halo.Request<PaginatedContentInstances> {
+    public func getInstances(searchQuery: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Result<PaginatedContentInstances?>) -> Void) -> Void {
 
         let request = Halo.Request<PaginatedContentInstances>(router: Router.GeneralContentSearch).responseParser { (any) in
 
             switch any {
             case let data as [String: AnyObject]:
-
                 if let pag = data["pagination"] as? [String: AnyObject], items = data["items"] as? [[String: AnyObject]] {
                     let paginationInfo = PaginationInfo.fromDictionary(pag)
                     let instances = items.map { Halo.ContentInstance.fromDictionary($0) }
@@ -38,7 +37,6 @@ public struct ContentManager: HaloManager {
                 return nil
 
             case let data as [[String: AnyObject]]:
-
                 let items = data.map { Halo.ContentInstance.fromDictionary($0) }
                 let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
                 return PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
@@ -49,17 +47,17 @@ public struct ContentManager: HaloManager {
         }
 
         // Check offline mode
-        if let offline = searchOptions.offlinePolicy {
-            request.offlinePolicy(offline)
+        if let offline = searchQuery.offlinePolicy {
+            request.setOfflinePolicy(offline)
         }
 
         // Set the provided locale or fall back to the default one
-        searchOptions.locale = searchOptions.locale ?? self.defaultLocale
+        searchQuery.locale = searchQuery.locale ?? self.defaultLocale
 
         // Process the search options
-        request.params(searchOptions.body)
+        request.params(searchQuery.body)
 
-        return request
+        try! request.responseObject(completionHandler: handler)
     }
 
 }

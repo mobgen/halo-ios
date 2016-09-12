@@ -15,7 +15,7 @@ extension CoreManager {
 
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      */
-    public func getModules(offlinePolicy: OfflinePolicy? = nil) -> Halo.Request<PaginatedModules> {
+    public func getModules(offlinePolicy: OfflinePolicy? = nil, completionHandler handler: (NSHTTPURLResponse?, Result<PaginatedModules?>) -> Void) -> Void {
 
         let request = Halo.Request<PaginatedModules>(router: Router.Modules).responseParser { (any) in
 
@@ -42,10 +42,10 @@ extension CoreManager {
         }
 
         if let offline = offlinePolicy {
-            return request.offlinePolicy(offline)
+            request.setOfflinePolicy(offline)
         }
 
-        return request
+        try! request.responseObject(completionHandler: handler)
     }
 
 }

@@ -10,7 +10,7 @@ import Foundation
 
 public protocol DataProvider {
 
-    func getModules(completionHandler handler: (Halo.Result<PaginatedModules>) -> Void) -> Void
-    func search(searchQuery: Halo.SearchQuery, completionHandler handler: (Halo.Result<PaginatedContentInstances>) -> Void) -> Void
+    func getModules(completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void
+    func search(searchQuery: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void
 
 }
