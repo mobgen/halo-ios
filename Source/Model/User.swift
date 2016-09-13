@@ -22,7 +22,7 @@ public final class User: NSObject, NSCoding {
         static let Devices = "devices"
         static let Tags = "tags"
         static let CreatedAt = "createdAt"
-        static let UpdatedAt = "udpatedAt"
+        static let UpdatedAt = "updatedAt"
     }
 
     /// Unique identifier of the user
