@@ -23,7 +23,6 @@ public class NetworkDataProvider: DataProvider {
                     let items = items.map { Halo.Module.fromDictionary($0) }
                     result = PaginatedModules(paginationInfo: paginationInfo, modules: items)
                 }
-                return nil
             case let d as [[String: AnyObject]]: // Non-paginated response
                 let items = d.map { Halo.Module.fromDictionary($0) }
                 let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
