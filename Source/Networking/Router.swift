@@ -58,9 +58,9 @@ public enum Router {
                 return "api/oauth/token?_user"
             }
         case .Modules:
-            return "api/authentication/module"
+            return "api/generalcontent/module"
         case .GeneralContentInstances(_):
-            return "api/authentication/instance"
+            return "api/generalcontent/instance"
         case .GeneralContentInstance(let id):
             return "api/generalcontent/instance/\(id)"
         case .ModuleSync:
