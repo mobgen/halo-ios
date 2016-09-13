@@ -50,6 +50,10 @@ public class SearchQuery: NSObject {
     var offlinePolicy: Halo.OfflinePolicy?
     var locale: Halo.Locale?
 
+    public override var hash: Int {
+        return body.map { "\($0)-\($1.description!)" }.joinWithSeparator("+").hash
+    }
+
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
 
@@ -175,5 +179,4 @@ public class SearchQuery: NSObject {
         self.offlinePolicy = policy
         return self
     }
-
 }

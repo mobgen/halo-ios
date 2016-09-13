@@ -14,7 +14,7 @@ public class CoreManager: NSObject, HaloManager {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
 
-    public var dataProvider: DataProvider = NetworkDataProvider()
+    public var dataProvider: DataProvider = NetworkOfflineDataProvider()
 
     ///
     public var logLevel: HaloLogLevel = .Warning

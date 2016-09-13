@@ -23,41 +23,8 @@ public struct ContentManager: HaloManager {
 
     // MARK: Get instances
 
-    public func getInstances(searchQuery: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Result<PaginatedContentInstances?>) -> Void) -> Void {
-
-        let request = Halo.Request<PaginatedContentInstances>(router: Router.GeneralContentSearch).responseParser { (any) in
-
-            switch any {
-            case let data as [String: AnyObject]:
-                if let pag = data["pagination"] as? [String: AnyObject], items = data["items"] as? [[String: AnyObject]] {
-                    let paginationInfo = PaginationInfo.fromDictionary(pag)
-                    let instances = items.map { Halo.ContentInstance.fromDictionary($0) }
-                    return PaginatedContentInstances(paginationInfo: paginationInfo, instances: instances)
-                }
-                return nil
-
-            case let data as [[String: AnyObject]]:
-                let items = data.map { Halo.ContentInstance.fromDictionary($0) }
-                let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
-                return PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
-
-            default:
-                return nil
-            }
-        }
-
-        // Check offline mode
-        if let offline = searchQuery.offlinePolicy {
-            request.setOfflinePolicy(offline)
-        }
-
-        // Set the provided locale or fall back to the default one
-        searchQuery.locale = searchQuery.locale ?? self.defaultLocale
-
-        // Process the search options
-        request.params(searchQuery.body)
-
-        try! request.responseObject(completionHandler: handler)
+    public func search(searchQuery: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+        Manager.core.dataProvider.search(searchQuery, completionHandler: handler)
     }
 
 }

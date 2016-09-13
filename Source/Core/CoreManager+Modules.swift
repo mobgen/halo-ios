@@ -16,36 +16,7 @@ extension CoreManager {
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      */
     public func getModules(offlinePolicy: OfflinePolicy? = nil, completionHandler handler: (NSHTTPURLResponse?, Result<PaginatedModules?>) -> Void) -> Void {
-
-        let request = Halo.Request<PaginatedModules>(router: Router.Modules).responseParser { (any) in
-
-            switch any {
-            case let data as [String: AnyObject]:
-
-                if let pagination = data["pagination"] as? [String: AnyObject], items = data["items"] as? [[String: AnyObject]] {
-                    let paginationInfo = PaginationInfo.fromDictionary(pagination)
-                    let modules = items.map { Halo.Module.fromDictionary($0) }
-                    return PaginatedModules(paginationInfo: paginationInfo, modules: modules)
-                }
-                return nil
-
-            case let data as [[String: AnyObject]]:
-                let items = data.map { Halo.Module.fromDictionary($0) }
-                let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
-
-                return PaginatedModules(paginationInfo: paginationInfo, modules: items)
-
-            default:
-                return nil
-            }
-
-        }
-
-        if let offline = offlinePolicy {
-            request.setOfflinePolicy(offline)
-        }
-
-        try! request.responseObject(completionHandler: handler)
+        return dataProvider.getModules(completionHandler: handler)
     }
 
 }

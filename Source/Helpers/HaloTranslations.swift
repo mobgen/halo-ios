@@ -89,12 +89,12 @@ public class HaloTranslations: NSObject {
 
         if let locale = self.locale, moduleId = self.moduleId, keyField = self.keyField, valueField = self.valueField {
 
-            let options = SearchQuery().skipPagination().moduleIds([moduleId]).locale(locale)
+            let query = SearchQuery().skipPagination().moduleIds([moduleId]).locale(locale)
 
             self.isLoading = true
             self.translationsMap.removeAll()
 
-            Manager.content.getInstances(options) { (response, result) in
+            Manager.content.search(query) { (response, result) in
 
                 self.isLoading = false
 

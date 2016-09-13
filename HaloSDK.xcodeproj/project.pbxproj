@@ -40,6 +40,8 @@
 		005677F41CABC8E900B6A4F3 /* SearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005677F31CABC8E900B6A4F3 /* SearchQuery.swift */; };
 		005DF3121B998BB500149B40 /* GeneralContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005DF3111B998BB500149B40 /* GeneralContentSpec.swift */; };
 		005E1ED61C69FFE800ED8763 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E1ED51C69FFE800ED8763 /* Result.swift */; };
+		005F608B1D87D40800F68FEB /* OfflineDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F608A1D87D40800F68FEB /* OfflineDataProvider.swift */; };
+		005F608E1D87FEB400F68FEB /* NetworkOfflineDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005F608D1D87FEB400F68FEB /* NetworkOfflineDataProvider.swift */; };
 		006264351D5B049D0036F227 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006264341D5B049D0036F227 /* DataProvider.swift */; };
 		006264371D5B053D0036F227 /* NetworkDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006264361D5B053D0036F227 /* NetworkDataProvider.swift */; };
 		006264391D5B05F50036F227 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006264381D5B05F50036F227 /* Request.swift */; };
@@ -139,6 +141,8 @@
 		005677F31CABC8E900B6A4F3 /* SearchQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQuery.swift; sourceTree = "<group>"; };
 		005DF3111B998BB500149B40 /* GeneralContentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralContentSpec.swift; sourceTree = "<group>"; };
 		005E1ED51C69FFE800ED8763 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		005F608A1D87D40800F68FEB /* OfflineDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineDataProvider.swift; sourceTree = "<group>"; };
+		005F608D1D87FEB400F68FEB /* NetworkOfflineDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOfflineDataProvider.swift; sourceTree = "<group>"; };
 		006238251BCE5B8900E614B3 /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.cer; sourceTree = "<group>"; };
 		006264341D5B049D0036F227 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		006264361D5B053D0036F227 /* NetworkDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 				006264381D5B05F50036F227 /* Request.swift */,
 				006264341D5B049D0036F227 /* DataProvider.swift */,
 				006264361D5B053D0036F227 /* NetworkDataProvider.swift */,
+				005F608A1D87D40800F68FEB /* OfflineDataProvider.swift */,
+				005F608D1D87FEB400F68FEB /* NetworkOfflineDataProvider.swift */,
 			);
 			name = DataProviders;
 			path = Source/DataProviders;
@@ -584,6 +590,7 @@
 				00E508391CB691EB00B4B5AE /* SearchFilter.swift in Sources */,
 				005421691CC785210055B553 /* Protocols.swift in Sources */,
 				005421651CC76D230055B553 /* NSURLRequest+cURL.swift in Sources */,
+				005F608B1D87D40800F68FEB /* OfflineDataProvider.swift in Sources */,
 				00396E471D53253600594D0A /* PaginatedModules.swift in Sources */,
 				00396E4B1D5328B300594D0A /* PaginatedContentInstances.swift in Sources */,
 				00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */,
@@ -612,6 +619,7 @@
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
 				006264351D5B049D0036F227 /* DataProvider.swift in Sources */,
 				0090DFCF1C89BF9500BAF181 /* CloudinaryURL.swift in Sources */,
+				005F608E1D87FEB400F68FEB /* NetworkOfflineDataProvider.swift in Sources */,
 				0068D27C1B6778CA00B1E147 /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
