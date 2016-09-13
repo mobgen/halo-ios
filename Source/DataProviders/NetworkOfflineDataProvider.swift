@@ -40,12 +40,12 @@ public class NetworkOfflineDataProvider: NetworkDataProvider {
             case .Success(let data, _):
                 if let d = data {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                        NSKeyedArchiver.archiveRootObject(d, toFile: searchQuery.description)
+                        NSKeyedArchiver.archiveRootObject(d, toFile: "instances-\(searchQuery.hash)")
                     }
                 }
                 handler(response, .Success(data, false))
             case .Failure(_):
-                if let instances = NSKeyedUnarchiver.unarchiveObjectWithFile(searchQuery.description) as? PaginatedContentInstances {
+                if let instances = NSKeyedUnarchiver.unarchiveObjectWithFile("instances-\(searchQuery.hash)") as? PaginatedContentInstances {
                     handler(response, .Success(instances, true))
                 } else {
                     handler(response, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
