@@ -17,7 +17,6 @@ public class Module: NSObject, NSCoding {
     struct Keys {
         static let Customer = "customer"
         static let Id = "id"
-        static let InternalId = "internalId"
         static let Name = "name"
         static let ModuleType = "moduleType"
         static let Enabled = "enabled"
@@ -32,10 +31,7 @@ public class Module: NSObject, NSCoding {
     public internal(set) var customerId: Int?
 
     /// Unique identifier of the module
-    public internal(set) var id: Int?
-
-    /// Internal id of the module
-    public internal(set) var internalId: String?
+    public internal(set) var id: String?
 
     /// Visual name of the module
     public internal(set) var name: String?
@@ -74,9 +70,8 @@ public class Module: NSObject, NSCoding {
 
         let module = Module()
 
-        module.id = dict[Keys.Id] as? Int
+        module.id = dict[Keys.Id] as? String
         module.customerId = dict[Keys.Customer] as? Int
-        module.internalId = dict[Keys.InternalId] as? String
         module.name = dict[Keys.Name] as? String
         module.isSingle = dict[Keys.IsSingle] as? Bool ?? false
         module.enabled = dict[Keys.Enabled] as? Bool ?? false
@@ -110,9 +105,8 @@ public class Module: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        id = aDecoder.decodeObjectForKey(Keys.Id) as? Int
+        id = aDecoder.decodeObjectForKey(Keys.Id) as? String
         customerId = aDecoder.decodeObjectForKey(Keys.Customer) as? Int
-        internalId = aDecoder.decodeObjectForKey(Keys.InternalId) as? String
         name = aDecoder.decodeObjectForKey(Keys.Name) as? String
         isSingle = aDecoder.decodeObjectForKey(Keys.IsSingle) as? Bool ?? false
         enabled = aDecoder.decodeObjectForKey(Keys.Enabled) as? Bool ?? true
@@ -126,7 +120,6 @@ public class Module: NSObject, NSCoding {
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(id, forKey: Keys.Id)
         aCoder.encodeObject(customerId, forKey: Keys.Customer)
-        aCoder.encodeObject(internalId, forKey: Keys.InternalId)
         aCoder.encodeObject(name, forKey: Keys.Name)
         aCoder.encodeObject(isSingle, forKey: Keys.IsSingle)
         aCoder.encodeObject(enabled, forKey: Keys.Enabled)
