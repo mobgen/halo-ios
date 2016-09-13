@@ -44,7 +44,7 @@ public class HaloRequest: NSObject {
         case .ReturnLocalDataDontLoad: newPolicy = .ReturnLocalDataDontLoad
         }
 
-        request?.offlinePolicy(newPolicy)
+        request?.setOfflinePolicy(newPolicy)
         return self
     }
 

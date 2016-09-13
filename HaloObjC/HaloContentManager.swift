@@ -25,16 +25,16 @@ public class HaloContentManager: NSObject {
     @objc
     public func instances(moduleIds moduleIds: [String],
                                     offlinePolicy: OfflinePolicy,
-                                    success: (NSHTTPURLResponse?, HaloPaginatedContentInstances) -> Void,
+                                    success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
                                     failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
 
-        let searchOptions = SearchOptions().offlinePolicy(offlinePolicy)
+        let searchOptions = SearchQuery().offlinePolicy(offlinePolicy)
 
-        try! content.getInstances(searchOptions).responseObject { (response, result) in
+        content.search(searchOptions) { (response, result) in
             switch result {
             case .Success(let data, _):
                 if let instances = data {
-                    success(response, HaloPaginatedContentInstances(data: instances))
+                    success(response, instances)
                 }
             case .Failure(let error):
                 failure(response, error)
@@ -45,16 +45,16 @@ public class HaloContentManager: NSObject {
     @objc
     public func instances(instanceIds instanceIds: [String],
                                       offlinePolicy: OfflinePolicy,
-                                      success: (NSHTTPURLResponse?, HaloPaginatedContentInstances) -> Void,
+                                      success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
                                       failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
 
-        let searchOptions = SearchOptions().offlinePolicy(offlinePolicy)
+        let searchOptions = SearchQuery().offlinePolicy(offlinePolicy)
 
-        try! content.getInstances(searchOptions).responseObject { (response, result) in
+        content.search(searchOptions) { (response, result) in
             switch result {
             case .Success(let data, _):
                 if let instances = data {
-                    success(response, HaloPaginatedContentInstances(data: instances))
+                    success(response, instances)
                 }
             case .Failure(let error):
                 failure(response, error)
