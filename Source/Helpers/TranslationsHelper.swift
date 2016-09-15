@@ -8,8 +8,8 @@
 
 import Foundation
 
-@objc
-public class HaloTranslations: NSObject {
+@objc(HaloTranslationsHelper)
+public class TranslationsHelper: NSObject {
 
     private var moduleId: String?
     private var keyField: String?
@@ -32,12 +32,12 @@ public class HaloTranslations: NSObject {
         self.valueField = valueField
     }
 
-    public func locale(locale: Locale) -> HaloTranslations {
+    public func locale(locale: Locale) -> TranslationsHelper {
         self.locale = locale
         return self
     }
 
-    public func defaultText(text: String) -> HaloTranslations {
+    public func defaultText(text: String) -> TranslationsHelper {
         self.defaultText = text
         return self
     }

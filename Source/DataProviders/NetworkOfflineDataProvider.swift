@@ -36,7 +36,7 @@ public class NetworkOfflineDataProvider: NetworkDataProvider {
 
         super.search(searchQuery) { response, result in
 
-            let path = OfflineDataProvider.filePath.URLByAppendingPathComponent("search-(\(searchQuery.hash))").path!
+            let path = OfflineDataProvider.filePath.URLByAppendingPathComponent("search-(\(searchQuery.hash))")!.path!
 
             switch result {
             case .Success(let data, _):

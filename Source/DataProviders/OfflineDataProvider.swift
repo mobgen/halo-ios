@@ -16,7 +16,7 @@ public class OfflineDataProvider: DataProvider {
     }
 
     static var modulesPath: String {
-        return OfflineDataProvider.filePath.URLByAppendingPathComponent("modules").path!
+        return OfflineDataProvider.filePath.URLByAppendingPathComponent("modules")!.path!
     }
 
     public func getModules(completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {

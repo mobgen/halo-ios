@@ -67,7 +67,7 @@ public enum HaloEnvironment {
 
     public var baseUrlString: String {
         get {
-            return self.baseUrl.absoluteString
+            return self.baseUrl.absoluteString!
         }
     }
 }
