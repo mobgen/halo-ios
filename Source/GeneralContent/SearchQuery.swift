@@ -24,6 +24,7 @@ public enum SegmentMode: Int {
 public class SearchQuery: NSObject {
 
     struct Keys {
+        static let ModuleName = "moduleName"
         static let ModuleIds = "moduleIds"
         static let InstanceIds = "instanceIds"
         static let SearchValues = "searchValues"
@@ -37,18 +38,19 @@ public class SearchQuery: NSObject {
         static let Locale = "locale"
     }
 
-    var moduleIds: [String]?
-    var instanceIds: [String]?
-    var conditions: [String: AnyObject]?
-    var metaConditions: [String: AnyObject]?
-    var fields: [String]?
-    var populateFields: [String]?
-    var tags: [Halo.Tag]?
-    var pagination: [String: AnyObject]?
-    var segmentWithUser: Bool = false
-    var segmentMode: SegmentMode = .Partial
-    var offlinePolicy: Halo.OfflinePolicy?
-    var locale: Halo.Locale?
+    private(set) var moduleName: String?
+    private(set) var moduleIds: [String]?
+    private(set) var instanceIds: [String]?
+    private(set) var conditions: [String: AnyObject]?
+    private(set) var metaConditions: [String: AnyObject]?
+    private(set) var fields: [String]?
+    private(set) var populateFields: [String]?
+    private(set) var tags: [Halo.Tag]?
+    private(set) var pagination: [String: AnyObject]?
+    private(set) var segmentWithUser: Bool = false
+    private(set) var segmentMode: SegmentMode = .Partial
+    private(set) var offlinePolicy: Halo.OfflinePolicy?
+    private(set) var locale: Halo.Locale?
 
     public override var hash: Int {
         return body.map { "\($0)-\($1.description!)" }.joinWithSeparator("+").hash
@@ -61,6 +63,10 @@ public class SearchQuery: NSObject {
             dict[Keys.ModuleIds] = modules
         }
 
+        if let moduleName = self.moduleName {
+            dict[Keys.ModuleName] = moduleName
+        }
+        
         if let instances = self.instanceIds {
             dict[Keys.InstanceIds] = instances
         }
@@ -131,6 +137,11 @@ public class SearchQuery: NSObject {
         return self
     }
 
+    public func moduleName(name: String) -> Halo.SearchQuery {
+        self.moduleName = name
+        return self
+    }
+    
     public func instanceIds(ids: [String]) -> Halo.SearchQuery {
         self.instanceIds = ids
         return self
