@@ -11,7 +11,7 @@ import Foundation
 @objc(HaloTranslationsHelper)
 public class TranslationsHelper: NSObject {
 
-    private var moduleId: String?
+    private var moduleName: String?
     private var keyField: String?
     private var valueField: String?
     private var defaultText: String?
@@ -25,9 +25,9 @@ public class TranslationsHelper: NSObject {
         super.init()
     }
 
-    public convenience init(moduleId: String, keyField: String, valueField: String) {
+    public convenience init(moduleName: String, keyField: String, valueField: String) {
         self.init()
-        self.moduleId = moduleId
+        self.moduleName = moduleName
         self.keyField = keyField
         self.valueField = valueField
     }
@@ -45,7 +45,7 @@ public class TranslationsHelper: NSObject {
     public func getText(key: String, completionHandler handler: ((String?) -> Void)?) -> Void {
         if self.isLoading {
             if let h = handler {
-                self.completionHandlers.append {
+                self.completionHandlers.append { _ in
                     h(self.translationsMap[key])
                 }
             }
@@ -80,48 +80,42 @@ public class TranslationsHelper: NSObject {
         return translationsMap
     }
 
-    public func load(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    public func load() -> Void {
 
         if self.isLoading {
-            handler?(false)
             return
         }
 
-        if let locale = self.locale, moduleId = self.moduleId, keyField = self.keyField, valueField = self.valueField {
-
-            let query = SearchQuery().skipPagination().moduleIds([moduleId]).locale(locale)
+        if let locale = self.locale, moduleName = self.moduleName, keyField = self.keyField, valueField = self.valueField {
 
             self.isLoading = true
             self.translationsMap.removeAll()
 
-            Manager.content.search(query) { (response, result) in
-
+            let syncQuery = SyncQuery(moduleName: moduleName).locale(locale)
+            
+            Manager.content.sync(syncQuery) { moduleName, error in
+            
                 self.isLoading = false
-
-                switch result {
-                case .Success(let res, _):
-
-                    let _ = res?.instances.map { item in
+                
+                if let _ = error {
+                    return
+                }
+                
+                if let instances = Manager.content.getSyncedInstances(moduleName) {
+                    
+                    let _ = instances.map { item in
                         if let key = item.values[keyField] as? String,
                             value = item.values[valueField] as? String {
-
+                            
                             self.translationsMap.updateValue(value, forKey: key)
                         }
                     }
-
-                    handler?(true)
-
-                    // Execute all the pending completion handlers
+                    
                     let _ = self.completionHandlers.map { $0() }
-                    self.completionHandlers.removeAll()
-
-                case .Failure(let error):
-                    LogMessage(error: error).print()
-                    handler?(false)
                 }
             }
         } else {
-            handler?(false)
+            NSLog("--- Missing parameter")
         }
     }
 

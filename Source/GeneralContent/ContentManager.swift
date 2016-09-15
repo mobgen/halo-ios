@@ -8,20 +8,12 @@
 
 import Foundation
 
-public protocol SyncListener {
-
-    func moduleSyncingSucceeded(moduleName: String)
-    func moduleSyncingFailed(moduleName: String, error: NSError)
-
-}
-
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
  */
 public class ContentManager: HaloManager {
 
     public var defaultLocale: Halo.Locale?
-    private var syncListeners: [SyncListener] = []
     private let serverCachingTime = "86400"
 
     init() {}
@@ -38,15 +30,7 @@ public class ContentManager: HaloManager {
 
     // MARK: Sync instances from a module
 
-    public func addSyncListener(listener: SyncListener) -> Void {
-        syncListeners.append(listener)
-    }
-
-    public func removeSyncListener(listener: SyncListener) -> Void {
-        //syncListeners = syncListeners.filter { listener !== $0 }
-    }
-    
-    public func sync(syncQuery: SyncQuery) -> Void {
+    public func sync(syncQuery: SyncQuery, completionHandler handler: (String, NSError?) -> Void) -> Void {
 
         if syncQuery.fromSync == nil {
             if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile("synctimestamp-\(syncQuery.moduleName)") as? SyncResult, let from = sync.syncTimestamp {
@@ -91,13 +75,13 @@ public class ContentManager: HaloManager {
                         NSKeyedArchiver.archiveRootObject(instanceIds, toFile: "sync-\(result.moduleName)")
                         
                         dispatch_async(dispatch_get_main_queue()) {
-                            let _ = self.syncListeners.map { $0.moduleSyncingSucceeded(result.moduleName) }
+                            handler(result.moduleName, nil)
                         }
                     }
                 }
             case .Failure(let e):
                 LogMessage(error: e).print()
-                let _ = self.syncListeners.map { $0.moduleSyncingSucceeded(syncQuery.moduleName) }
+                handler(syncQuery.moduleName, e)
             }
         }
     }

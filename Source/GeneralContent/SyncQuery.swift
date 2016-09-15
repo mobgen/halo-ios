@@ -58,10 +58,4 @@ public class SyncQuery: NSObject {
         self.locale = locale
         return self
     }
-
-    public func moduleName(moduleName: String) -> SyncQuery {
-        self.moduleName = moduleName
-        return self
-    }
-
 }
