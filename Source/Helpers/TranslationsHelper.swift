@@ -11,7 +11,7 @@ import Foundation
 @objc(HaloTranslationsHelper)
 public class TranslationsHelper: NSObject {
 
-    private var moduleName: String?
+    private var moduleId: String?
     private var keyField: String?
     private var valueField: String?
     private var defaultText: String?
@@ -26,9 +26,10 @@ public class TranslationsHelper: NSObject {
         super.init()
     }
 
-    public convenience init(moduleName: String, keyField: String, valueField: String) {
+    public convenience init(moduleId: String, locale: Locale, keyField: String, valueField: String) {
         self.init()
-        self.moduleName = moduleName
+        self.moduleId = moduleId
+        self.locale = locale
         self.keyField = keyField
         self.valueField = valueField
     }
@@ -92,12 +93,12 @@ public class TranslationsHelper: NSObject {
             return
         }
 
-        if let locale = self.locale, moduleName = self.moduleName, keyField = self.keyField, valueField = self.valueField {
+        if let locale = self.locale, moduleId = self.moduleId, keyField = self.keyField, valueField = self.valueField {
 
             self.isLoading = true
             self.translationsMap.removeAll()
 
-            let syncQuery = SyncQuery().moduleName(moduleName).locale(locale)
+            let syncQuery = SyncQuery().moduleId(moduleId).locale(locale)
             
             Manager.content.sync(syncQuery) { moduleName, error in
             
