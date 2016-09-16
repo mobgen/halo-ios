@@ -53,8 +53,13 @@ public class SyncQuery: NSObject {
         return dict
     }
 
-    public override init() {
+    private override init() {
         super.init()
+    }
+    
+    public init(moduleId: String) {
+        super.init()
+        self.moduleId = moduleId
     }
     
     public func moduleName(name: String) -> SyncQuery {
@@ -62,11 +67,6 @@ public class SyncQuery: NSObject {
         return self
     }
 
-    public func moduleId(id: String) -> SyncQuery {
-        self.moduleId = id
-        return self
-    }
-    
     public func locale(locale: Locale) -> SyncQuery {
         self.locale = locale
         return self

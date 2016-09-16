@@ -12,6 +12,7 @@ import Foundation
 public class SyncResult: NSObject, NSCoding {
     
     struct Keys {
+        static let ModuleId = "moduleId"
         static let ModuleName = "moduleName"
         static let SyncTimestamp = "syncTimestamp"
         static let Created = "created"
@@ -20,16 +21,18 @@ public class SyncResult: NSObject, NSCoding {
     }
     
     var moduleName: String = ""
+    var moduleId: String = ""
     public internal(set) var syncTimestamp: NSDate?
     public internal(set) var created: [ContentInstance] = []
     public internal(set) var updated: [ContentInstance] = []
     public internal(set) var deleted: [String] = [] // Store only the ids that will be used for deletion
     
-    override init() {
+    private override init() {
         super.init()
     }
     
     init(data: [String: AnyObject]) {
+        
         super.init()
         syncTimestamp = NSDate(timeIntervalSince1970: (data[Keys.SyncTimestamp] as? Double ?? 0)/1000)
         
@@ -49,11 +52,13 @@ public class SyncResult: NSObject, NSCoding {
     public required init?(coder aDecoder: NSCoder) {
         super.init()
         moduleName = aDecoder.decodeObjectForKey(Keys.ModuleName) as! String
+        moduleId = aDecoder.decodeObjectForKey(Keys.ModuleId) as! String
         syncTimestamp = aDecoder.decodeObjectForKey(Keys.SyncTimestamp) as? NSDate
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(moduleName, forKey: Keys.ModuleName)
+        aCoder.encodeObject(moduleId, forKey: Keys.ModuleId)
         aCoder.encodeObject(syncTimestamp, forKey: Keys.SyncTimestamp)
     }
 }

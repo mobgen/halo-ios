@@ -87,7 +87,7 @@ public class TranslationsHelper: NSObject {
         return translationsMap
     }
 
-    public func load() -> Void {
+    public func load(completionHandler handler: ((String, NSError?) -> Void)?) -> Void {
 
         if self.isLoading {
             return
@@ -98,13 +98,15 @@ public class TranslationsHelper: NSObject {
             self.isLoading = true
             self.translationsMap.removeAll()
 
-            let syncQuery = SyncQuery().moduleId(moduleId).locale(locale)
+            let syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
             
             Manager.content.sync(syncQuery) { moduleName, error in
             
                 self.isLoading = false
                 
-                if let _ = error {
+                if let e = error {
+                    handler?(moduleId, e)
+                    let _ = self.completionHandlers.map { $0() }
                     return
                 }
                 
@@ -117,9 +119,10 @@ public class TranslationsHelper: NSObject {
                             self.translationsMap.updateValue(value, forKey: key)
                         }
                     }
-                    
-                    let _ = self.completionHandlers.map { $0() }
                 }
+                
+                handler?(moduleId, error)
+                let _ = self.completionHandlers.map { $0() }
             }
         } else {
             NSLog("--- Missing parameter")

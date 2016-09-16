@@ -33,7 +33,7 @@ public class ContentManager: HaloManager {
     public func sync(syncQuery: SyncQuery, completionHandler handler: (String, NSError?) -> Void) -> Void {
 
         if syncQuery.fromSync == nil {
-            if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile("synctimestamp-\(syncQuery.moduleName)") as? SyncResult, let from = sync.syncTimestamp {
+            if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile("synctimestamp-\(syncQuery.moduleId)") as? SyncResult, let from = sync.syncTimestamp {
                 syncQuery.fromSync = from
             }
         }
@@ -45,6 +45,7 @@ public class ContentManager: HaloManager {
             switch any {
             case let d as [String: AnyObject]: // Sync response
                 result = SyncResult(data: d)
+                result?.moduleId = syncQuery.moduleId!
             default: // Everything else
                 break
             }
@@ -64,34 +65,32 @@ public class ContentManager: HaloManager {
                 if let result = syncResult {
                     
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                        NSKeyedArchiver.archiveRootObject(result, toFile: "synctimestamp-\(result.moduleName)")
+                        NSKeyedArchiver.archiveRootObject(result, toFile: "synctimestamp-\(result.moduleId)")
                         
-                        var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile("sync-\(result.moduleName)") as? Set<String> ?? Set<String>()
+                        var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile("sync-\(result.moduleId)") as? Set<String> ?? Set<String>()
                         
                         let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: $0.id!); instanceIds.insert($0.id!) }
                         let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: $0.id!); instanceIds.insert($0.id!) }
                         let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath($0) }
                         
-                        NSKeyedArchiver.archiveRootObject(instanceIds, toFile: "sync-\(result.moduleName)")
+                        NSKeyedArchiver.archiveRootObject(instanceIds, toFile: "sync-\(result.moduleId)")
                         
                         dispatch_async(dispatch_get_main_queue()) {
-                            handler(result.moduleName, nil)
+                            handler(result.moduleId, nil)
                         }
                     }
                 }
             case .Failure(let e):
                 LogMessage(error: e).print()
-                if let moduleName = syncQuery.moduleName ?? syncQuery.moduleId {
-                    handler(moduleName, e)
-                }
+                handler(syncQuery.moduleId!, e)
             }
         }
     }
     
-    public func getSyncedInstances(moduleName: String) -> [ContentInstance]? {
+    public func getSyncedInstances(moduleId: String) -> [ContentInstance]? {
         
         // Get the ids of the instances for the given module
-        if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile("sync-\(moduleName)") as? [String] {
+        if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile("sync-\(moduleId)") as? [String] {
             return instanceIds.map { NSKeyedUnarchiver.unarchiveObjectWithFile($0) as! ContentInstance }
         } else {
             // No instance ids have been found for that module
