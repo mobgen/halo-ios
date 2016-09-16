@@ -81,7 +81,9 @@ public class ContentManager: HaloManager {
                 }
             case .Failure(let e):
                 LogMessage(error: e).print()
-                handler(syncQuery.moduleName, e)
+                if let moduleName = syncQuery.moduleName ?? syncQuery.moduleId {
+                    handler(moduleName, e)
+                }
             }
         }
     }

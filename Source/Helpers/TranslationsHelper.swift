@@ -97,7 +97,7 @@ public class TranslationsHelper: NSObject {
             self.isLoading = true
             self.translationsMap.removeAll()
 
-            let syncQuery = SyncQuery(moduleName: moduleName).locale(locale)
+            let syncQuery = SyncQuery().moduleName(moduleName).locale(locale)
             
             Manager.content.sync(syncQuery) { moduleName, error in
             
