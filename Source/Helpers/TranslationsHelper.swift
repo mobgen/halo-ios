@@ -15,6 +15,7 @@ public class TranslationsHelper: NSObject {
     private var keyField: String?
     private var valueField: String?
     private var defaultText: String?
+    private var loadingText: String?
     private var locale: Locale?
     private var translationsMap: [String: String] = [:]
     private var isLoading: Bool = false
@@ -42,6 +43,11 @@ public class TranslationsHelper: NSObject {
         return self
     }
 
+    public func loadingText(text: String) -> TranslationsHelper {
+        self.loadingText = text
+        return self
+    }
+    
     public func getText(key: String, completionHandler handler: ((String?) -> Void)?) -> Void {
         if self.isLoading {
             if let h = handler {
@@ -49,7 +55,7 @@ public class TranslationsHelper: NSObject {
                     h(self.translationsMap[key])
                 }
             }
-            handler?(self.defaultText)
+            handler?(self.loadingText)
         } else {
             if let value = self.translationsMap[key] {
                 handler?(value)
