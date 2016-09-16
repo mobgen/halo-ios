@@ -12,6 +12,7 @@ import Foundation
 public class SyncQuery: NSObject {
 
     struct Keys {
+        static let ModuleId = "moduleId"
         static let ModuleName = "moduleName"
         static let Locale = "locale"
         static let FromSync = "fromSync"
@@ -19,14 +20,21 @@ public class SyncQuery: NSObject {
     }
 
     var locale: Locale?
-    var moduleName: String = ""
+    var moduleName: String?
+    var moduleId: String?
     var fromSync: NSDate?
     var toSync: NSDate?
 
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
 
-        dict[Keys.ModuleName] = moduleName
+        if let name = moduleName {
+            dict[Keys.ModuleName] = name
+        }
+        
+        if let id = moduleId {
+            dict[Keys.ModuleId] = id
+        }
 
         if let loc = locale {
             dict[Keys.Locale] = loc.description
@@ -45,15 +53,20 @@ public class SyncQuery: NSObject {
         return dict
     }
 
-    private override init() {
+    public override init() {
         super.init()
     }
-
-    public init(moduleName: String) {
-        self.moduleName = moduleName
-        super.init()
+    
+    public func moduleName(name: String) -> SyncQuery {
+        self.moduleName = name
+        return self
     }
 
+    public func moduleId(id: String) -> SyncQuery {
+        self.moduleId = id
+        return self
+    }
+    
     public func locale(locale: Locale) -> SyncQuery {
         self.locale = locale
         return self
