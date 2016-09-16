@@ -82,12 +82,12 @@ public class TranslationsHelper: NSObject {
 
     }
 
-    public func getAllTexts() -> [String: String?] {
+    public func getAllTexts() -> [String: String] {
 
         return translationsMap
     }
 
-    public func load(completionHandler handler: ((String, NSError?) -> Void)?) -> Void {
+    public func load(completionHandler handler: ((String, NSError?) -> Void)? = nil) -> Void {
 
         if self.isLoading {
             return
@@ -100,7 +100,7 @@ public class TranslationsHelper: NSObject {
 
             let syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
             
-            Manager.content.sync(syncQuery) { moduleName, error in
+            Manager.content.sync(syncQuery) { moduleId, error in
             
                 self.isLoading = false
                 
@@ -110,7 +110,7 @@ public class TranslationsHelper: NSObject {
                     return
                 }
                 
-                if let instances = Manager.content.getSyncedInstances(moduleName) {
+                if let instances = Manager.content.getSyncedInstances(moduleId) {
                     
                     let _ = instances.map { item in
                         if let key = item.values[keyField] as? String,

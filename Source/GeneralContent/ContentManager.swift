@@ -16,12 +16,21 @@ public class ContentManager: HaloManager {
     public var defaultLocale: Halo.Locale?
     private let serverCachingTime = "86400"
 
+    static var filePath: NSURL {
+        let manager = NSFileManager.defaultManager()
+        return manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+    }
+    
     init() {}
 
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
     }
 
+    private func getPath(file: String) -> String {
+        return ContentManager.filePath.URLByAppendingPathComponent(file)!.path!
+    }
+    
     // MARK: Get instances
 
     public func search(searchQuery: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
@@ -33,12 +42,12 @@ public class ContentManager: HaloManager {
     public func sync(syncQuery: SyncQuery, completionHandler handler: (String, NSError?) -> Void) -> Void {
 
         if syncQuery.fromSync == nil {
-            if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile("synctimestamp-\(syncQuery.moduleId)") as? SyncResult, let from = sync.syncTimestamp {
+            if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile(getPath("synctimestamp-\(syncQuery.moduleId)")) as? SyncResult, let from = sync.syncTimestamp {
                 syncQuery.fromSync = from
             }
         }
         
-        let request = Halo.Request<SyncResult>(router: Router.ModuleSync).params(syncQuery.body).skipPagination().responseParser { any in
+        let request = Halo.Request<SyncResult>(router: Router.ModuleSync).params(syncQuery.body).responseParser { any in
             
             var result: SyncResult? = nil
             
@@ -65,15 +74,16 @@ public class ContentManager: HaloManager {
                 if let result = syncResult {
                     
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                        NSKeyedArchiver.archiveRootObject(result, toFile: "synctimestamp-\(result.moduleId)")
+                        NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
                         
-                        var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile("sync-\(result.moduleId)") as? Set<String> ?? Set<String>()
+                        var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath("sync-\(result.moduleId)")) as? Set<String> ?? Set<String>()
                         
-                        let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: $0.id!); instanceIds.insert($0.id!) }
-                        let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: $0.id!); instanceIds.insert($0.id!) }
+                        let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
+                        let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
                         let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath($0) }
                         
-                        NSKeyedArchiver.archiveRootObject(instanceIds, toFile: "sync-\(result.moduleId)")
+                        let path = self.getPath("sync-\(result.moduleId)")
+                        NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
                         
                         dispatch_async(dispatch_get_main_queue()) {
                             handler(result.moduleId, nil)
@@ -90,8 +100,8 @@ public class ContentManager: HaloManager {
     public func getSyncedInstances(moduleId: String) -> [ContentInstance]? {
         
         // Get the ids of the instances for the given module
-        if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile("sync-\(moduleId)") as? [String] {
-            return instanceIds.map { NSKeyedUnarchiver.unarchiveObjectWithFile($0) as! ContentInstance }
+        if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(getPath("sync-\(moduleId)")) as? Set<String> {
+            return instanceIds.map { NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath($0)) as! ContentInstance }
         } else {
             // No instance ids have been found for that module
             return nil
