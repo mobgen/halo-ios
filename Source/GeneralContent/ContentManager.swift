@@ -24,7 +24,7 @@ public class ContentManager: HaloManager {
     init() {}
 
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
-
+        handler?(true)
     }
 
     private func getPath(file: String) -> String {
@@ -54,7 +54,7 @@ public class ContentManager: HaloManager {
             switch any {
             case let d as [String: AnyObject]: // Sync response
                 result = SyncResult(data: d)
-                result?.moduleId = syncQuery.moduleId!
+                result?.moduleId = syncQuery.moduleId
             default: // Everything else
                 break
             }
@@ -75,7 +75,7 @@ public class ContentManager: HaloManager {
                 self.processSyncResult(syncQuery, syncResult: syncResult, wasFirstSync: isFirstSync, completionHandler: handler)
             case .Failure(let e):
                 LogMessage(error: e).print()
-                handler(syncQuery.moduleId!, e)
+                handler(syncQuery.moduleId, e)
             }
         }
     }
@@ -84,7 +84,7 @@ public class ContentManager: HaloManager {
         if let result = syncResult {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
+                let success = NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
                 
                 var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath("sync-\(result.moduleId)")) as? Set<String> ?? Set<String>()
                 

@@ -21,21 +21,19 @@ public class SyncQuery: NSObject {
 
     var locale: Locale?
     var moduleName: String?
-    var moduleId: String?
+    var moduleId: String = ""
     var fromSync: NSDate?
     var toSync: NSDate?
 
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
 
+        dict[Keys.ModuleId] = moduleId
+        
         if let name = moduleName {
             dict[Keys.ModuleName] = name
         }
         
-        if let id = moduleId {
-            dict[Keys.ModuleId] = id
-        }
-
         if let loc = locale {
             dict[Keys.Locale] = loc.description
         }
