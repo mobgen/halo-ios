@@ -124,7 +124,7 @@ public class ContentManager: HaloManager {
         let path = getPath("sync-\(moduleId)")
         
         if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? Set<String> {
-            instanceIds.map { try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
+            let _ = instanceIds.map { try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
             try! NSFileManager.defaultManager().removeItemAtPath(path)
             try! NSFileManager.defaultManager().removeItemAtPath(self.getPath("synctimestamp-\(moduleId)"))
         }
