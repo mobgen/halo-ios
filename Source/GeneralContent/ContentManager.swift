@@ -121,8 +121,12 @@ public class ContentManager: HaloManager {
     }
     
     public func removeSyncedInstances(moduleId: String) -> Void {
-        if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(getPath("sync-\(moduleId)")) as? Set<String> {
+        let path = getPath("sync-\(moduleId)")
+        
+        if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? Set<String> {
             instanceIds.map { try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
+            try! NSFileManager.defaultManager().removeItemAtPath(path)
+            try! NSFileManager.defaultManager().removeItemAtPath(self.getPath("synctimestamp-\(moduleId)"))
         }
     }
 }

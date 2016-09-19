@@ -11,7 +11,7 @@ import Foundation
 @objc(HaloTranslationsHelper)
 public class TranslationsHelper: NSObject {
 
-    private var moduleId: String?
+    private var moduleId: String = ""
     private var keyField: String?
     private var valueField: String?
     private var defaultText: String?
@@ -36,6 +36,7 @@ public class TranslationsHelper: NSObject {
 
     public func locale(locale: Locale, completionHandler handler: ((String, NSError?) -> Void)? = nil) -> TranslationsHelper {
         self.locale = locale
+        self.clearAllTexts()
         load(completionHandler: handler)
         return self
     }
@@ -88,13 +89,18 @@ public class TranslationsHelper: NSObject {
         return translationsMap
     }
 
+    public func clearAllTexts() -> Void {
+        translationsMap.removeAll()
+        Manager.content.removeSyncedInstances(self.moduleId)
+    }
+    
     public func load(completionHandler handler: ((String, NSError?) -> Void)? = nil) -> Void {
 
         if self.isLoading {
             return
         }
 
-        if let locale = self.locale, moduleId = self.moduleId, keyField = self.keyField, valueField = self.valueField {
+        if let locale = self.locale, keyField = self.keyField, valueField = self.valueField {
 
             self.isLoading = true
             self.translationsMap.removeAll()
