@@ -62,7 +62,9 @@ public class ContentManager: HaloManager {
             return result
         }
 
-        if syncQuery.fromSync == nil {
+        let isFirstSync = (syncQuery.fromSync == nil)
+        
+        if isFirstSync {
             request.addHeader(field: "to-cache", value: serverCachingTime)
         }
         
@@ -70,29 +72,39 @@ public class ContentManager: HaloManager {
             
             switch result {
             case .Success(let syncResult, _):
-                
-                if let result = syncResult {
-                    
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                        NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
-                        
-                        var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath("sync-\(result.moduleId)")) as? Set<String> ?? Set<String>()
-                        
-                        let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
-                        let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
-                        let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
-                        
-                        let path = self.getPath("sync-\(result.moduleId)")
-                        NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
-                        
-                        dispatch_async(dispatch_get_main_queue()) {
-                            handler(result.moduleId, nil)
-                        }
-                    }
-                }
+                self.processSyncResult(syncQuery, syncResult: syncResult, wasFirstSync: isFirstSync, completionHandler: handler)
             case .Failure(let e):
                 LogMessage(error: e).print()
                 handler(syncQuery.moduleId!, e)
+            }
+        }
+    }
+    
+    private func processSyncResult(syncQuery: SyncQuery, syncResult: SyncResult?, wasFirstSync: Bool, completionHandler handler: (String, NSError?) -> Void) -> Void {
+        if let result = syncResult {
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
+                
+                var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath("sync-\(result.moduleId)")) as? Set<String> ?? Set<String>()
+                
+                let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
+                let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
+                let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
+                
+                let path = self.getPath("sync-\(result.moduleId)")
+                NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
+                
+                if wasFirstSync {
+                    // Sync again. The first sync might be cached so we need to resync in case there have been changes
+                    var query = syncQuery
+                    query.fromSync = result.syncTimestamp
+                    self.sync(query, completionHandler: handler)
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        handler(result.moduleId, nil)
+                    }
+                }
             }
         }
     }
