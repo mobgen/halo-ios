@@ -12,7 +12,7 @@ public class NetworkDataProvider: DataProvider {
 
     public func getModules(completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
-        let request = Halo.Request<PaginatedModules>(router: Router.Modules).responseParser { (data) in
+        let request = Halo.Request<PaginatedModules>(router: Router.Modules).skipPagination().responseParser { (data) in
 
             var result: PaginatedModules? = nil
 
