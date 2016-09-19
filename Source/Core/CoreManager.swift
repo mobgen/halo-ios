@@ -14,7 +14,7 @@ public class CoreManager: NSObject, HaloManager {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
 
-    public var dataProvider: DataProvider = NetworkDataProvider()
+    public var dataProvider: DataProvider = NetworkOfflineDataProvider()
 
     ///
     public var logLevel: HaloLogLevel = .Warning
@@ -67,7 +67,13 @@ public class CoreManager: NSObject, HaloManager {
     public func setEnvironment(environment: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = environment
         self.completionHandler = handler
-        self.configureUser()
+        self.configureUser { success in
+            if success {
+                self.registerUser()
+            } else {
+                handler?(false)
+            }
+        }
     }
 
     /**
@@ -143,14 +149,18 @@ public class CoreManager: NSObject, HaloManager {
 
                 self.checkNeedsUpdate()
 
-                self.configureUser {
+                self.configureUser { success in
 
-                    // Configure all the registered addons
-                    self.setupAddons { _ in
-
-                        self.startupAddons { _ in
-                            self.registerUser()
+                    if success {
+                        // Configure all the registered addons
+                        self.setupAddons { _ in
+                            
+                            self.startupAddons { _ in
+                                self.registerUser()
+                            }
                         }
+                    } else {
+                        self.completionHandler?(false)
                     }
                 }
             }
@@ -211,7 +221,7 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
-    private func configureUser(completionHandler handler: (() -> Void)? = nil) {
+    private func configureUser(completionHandler handler: ((Bool) -> Void)? = nil) {
         self.user = Halo.User.loadUser(self.environment)
 
         if let user = self.user, _ = user.id {
@@ -224,7 +234,7 @@ public class CoreManager: NSObject, HaloManager {
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags(completionHandler: handler)
                     } else {
-                        handler?()
+                        handler?(true)
                     }
                 case .Failure(let error):
 
@@ -233,7 +243,7 @@ public class CoreManager: NSObject, HaloManager {
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags(completionHandler: handler)
                     } else {
-                        handler?()
+                        handler?(false)
                     }
                 }
             }
@@ -245,12 +255,12 @@ public class CoreManager: NSObject, HaloManager {
             if self.enableSystemTags {
                 self.setupDefaultSystemTags(completionHandler: handler)
             } else {
-                handler?()
+                handler?(true)
             }
         }
     }
 
-    private func setupDefaultSystemTags(completionHandler handler: (() -> Void)? = nil) {
+    private func setupDefaultSystemTags(completionHandler handler: ((Bool) -> Void)? = nil) {
 
         if let user = self.user {
 
@@ -297,9 +307,9 @@ public class CoreManager: NSObject, HaloManager {
             // Get APNs environment
             user.addSystemTag("apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercaseString)
 
-            handler?()
+            handler?(true)
         } else {
-            handler?()
+            handler?(false)
         }
 
     }
@@ -343,7 +353,7 @@ public class CoreManager: NSObject, HaloManager {
 
      - parameter handler: Closure to be executed once the request has finished, providing a result.
      */
-    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
+    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
 
         /**
          *  Make sure no 'saveUser' are executed concurrently. That could lead to some inconsistencies in the server (several users
@@ -387,7 +397,7 @@ public class CoreManager: NSObject, HaloManager {
      - parameter mode:    Authentication mode to be used
      - parameter handler: Closure to be executed once the authentication has finished
      */
-    public func authenticate(mode: Halo.AuthenticationMode = .App, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token, NSError>) -> Void)? = nil) -> Void {
+    public func authenticate(mode: Halo.AuthenticationMode = .App, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Token>) -> Void)? = nil) -> Void {
         Manager.network.authenticate(mode) { (response, result) in
             handler?(response, result)
         }

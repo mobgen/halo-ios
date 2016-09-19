@@ -89,7 +89,7 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         return self
     }
 
-    public func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
+    public func setOfflinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
         return self
     }
@@ -169,21 +169,52 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         return bodyHash + urlHash
     }
 
-    public func responseData(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+    public func responseData(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData>) -> Void)? = nil) throws -> Halo.Request<T> {
 
-        try self.dataProvider.responseData(self, completionHandler: handler)
+        switch self.offlinePolicy {
+        case .None:
+            Manager.network.startRequest(request: self) { (resp, result) in
+                handler?(resp, result)
+            }
+        default:
+            throw HaloError.NotImplementedOfflinePolicy
+        }
+
         return self
     }
 
-    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+    public func response(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject>) -> Void)? = nil) throws -> Halo.Request<T> {
 
-        try self.dataProvider.response(self, completionHandler: handler)
+        try self.responseData { (response, result) -> Void in
+            switch result {
+            case .Success(let data, _):
+                if let successHandler = handler {
+                    let json = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
+                    successHandler(response, .Success(json, false))
+                }
+            case .Failure(let error):
+                handler?(response, .Failure(error))
+            }
+        }
+
         return self
     }
 
-    public func responseObject(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Halo.Request<T> {
+    public func responseObject(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?>) -> Void)? = nil) throws -> Halo.Request<T> {
 
-        try self.dataProvider.responseObject(self, completionHandler: handler)
+        guard let parser = self.responseParser else {
+            throw HaloError.NotImplementedResponseParser
+        }
+
+        try self.response { (response, result) in
+            switch result {
+            case .Success(let data, _):
+                handler?(response, .Success(parser(data), false))
+            case .Failure(let error):
+                handler?(response, .Failure(error))
+            }
+        }
+
         return self
     }
 

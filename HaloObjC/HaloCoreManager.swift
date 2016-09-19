@@ -43,14 +43,7 @@ public class HaloCoreManager: NSObject {
         }
     }
 
-    public var numberOfRetries: Int {
-        get {
-            return core.dataProvider.numberOfRetries
-        }
-        set {
-            core.dataProvider.numberOfRetries = newValue
-        }
-    }
+    public var numberOfRetries: Int = 0
 
     public var appCredentials: Credentials? {
         get {
@@ -137,15 +130,15 @@ public class HaloCoreManager: NSObject {
 
     @objc
     public func modules(offlinePolicy: OfflinePolicy,
-                        success: (NSHTTPURLResponse?, HaloPaginatedModules) -> Void,
+                        success: (NSHTTPURLResponse?, PaginatedModules) -> Void,
                         failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
 
-        try! core.getModules(offlinePolicy).responseObject { (response, result) in
+        core.getModules(offlinePolicy) { (response, result) in
 
             switch result {
             case .Success(let data, _):
                 if let modules = data {
-                    success(response, HaloPaginatedModules(data: modules))
+                    success(response, modules)
                 }
             case .Failure(let error):
                 failure(response, error)

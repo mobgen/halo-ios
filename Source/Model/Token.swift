@@ -14,6 +14,13 @@ Class holding all the information related to the authentication token
 @objc(HaloToken)
 public class Token: NSObject {
 
+    struct Keys {
+        static let AccessToken = "access_token"
+        static let RefreshToken = "refresh_token"
+        static let TokenType = "token_type"
+        static let ExpiresIn = "expires_in"
+    }
+
     /// Access token
     public var token: String?
 
@@ -26,19 +33,28 @@ public class Token: NSObject {
     /// Expiration date of this authentication token
     public var expirationDate: NSDate?
 
+    private override init() {
+        super.init()
+    }
+
     /**
     Initialise a HaloToken from a given dictionary
 
     - parameter dict: Dictionary containing all the token related information
     */
-    public init(_ dict: [String: AnyObject]) {
-        token = dict["access_token"] as? String
-        refreshToken = dict["refresh_token"] as? String
-        tokenType = dict["token_type"] as? String
+    public static func fromDictionary(dict: [String: AnyObject]) -> Token {
 
-        if let expire = dict["expires_in"] as? NSNumber {
-            expirationDate = NSDate().dateByAddingTimeInterval(expire.doubleValue/1000)
+        let token = Token()
+
+        token.token = dict[Keys.AccessToken] as? String
+        token.refreshToken = dict[Keys.RefreshToken] as? String
+        token.tokenType = dict[Keys.TokenType] as? String
+
+        if let expire = dict[Keys.ExpiresIn] as? NSNumber {
+            token.expirationDate = NSDate().dateByAddingTimeInterval(expire.doubleValue/1000)
         }
+
+        return token
     }
 
     /**

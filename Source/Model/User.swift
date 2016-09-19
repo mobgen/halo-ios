@@ -14,6 +14,17 @@ Model representing a user within the Halo environment
 @objc(HaloUser)
 public final class User: NSObject, NSCoding {
 
+    struct Keys {
+        static let Id = "id"
+        static let AppId = "appId"
+        static let Email = "email"
+        static let Alias = "alias"
+        static let Devices = "devices"
+        static let Tags = "tags"
+        static let CreatedAt = "createdAt"
+        static let UpdatedAt = "updatedAt"
+    }
+
     /// Unique identifier of the user
     public internal(set) var id: String?
 
@@ -50,25 +61,25 @@ public final class User: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        self.id = aDecoder.decodeObjectForKey("id") as? String
-        self.appId = aDecoder.decodeObjectForKey("appId") as? Int
-        self.email = aDecoder.decodeObjectForKey("email") as? String
-        self.alias = aDecoder.decodeObjectForKey("alias") as? String
-        self.devices = aDecoder.decodeObjectForKey("devices") as? [Halo.UserDevice]
-        self.tags = aDecoder.decodeObjectForKey("tags") as? [String: Halo.Tag]
-        self.createdAt = aDecoder.decodeObjectForKey("createdAt") as? NSDate
-        self.updatedAt = aDecoder.decodeObjectForKey("updatedAt") as? NSDate
+        self.id = aDecoder.decodeObjectForKey(Keys.Id) as? String
+        self.appId = aDecoder.decodeObjectForKey(Keys.AppId) as? Int
+        self.email = aDecoder.decodeObjectForKey(Keys.Email) as? String
+        self.alias = aDecoder.decodeObjectForKey(Keys.Alias) as? String
+        self.devices = aDecoder.decodeObjectForKey(Keys.Devices) as? [Halo.UserDevice]
+        self.tags = aDecoder.decodeObjectForKey(Keys.Tags) as? [String: Halo.Tag]
+        self.createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
+        self.updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: "id")
-        aCoder.encodeObject(appId, forKey: "appId")
-        aCoder.encodeObject(email, forKey: "email")
-        aCoder.encodeObject(alias, forKey: "alias")
-        aCoder.encodeObject(devices, forKey: "devices")
-        aCoder.encodeObject(tags, forKey: "tags")
-        aCoder.encodeObject(createdAt, forKey: "createdAt")
-        aCoder.encodeObject(updatedAt, forKey: "updatedAt")
+        aCoder.encodeObject(id, forKey: Keys.Id)
+        aCoder.encodeObject(appId, forKey: Keys.AppId)
+        aCoder.encodeObject(email, forKey: Keys.Email)
+        aCoder.encodeObject(alias, forKey: Keys.Alias)
+        aCoder.encodeObject(devices, forKey: Keys.Devices)
+        aCoder.encodeObject(tags, forKey: Keys.Tags)
+        aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
+        aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
     }
 
     // MARK: User tags management
@@ -158,31 +169,31 @@ public final class User: NSObject, NSCoding {
 
         var dict = [String: AnyObject]()
 
-        dict["id"] = self.id
-        dict["appId"] = self.appId
+        dict[Keys.Id] = self.id
+        dict[Keys.AppId] = self.appId
 
         if let email = self.email {
-            dict["email"] = email
+            dict[Keys.Email] = email
         }
 
         if let alias = self.alias {
-            dict["alias"] = alias
+            dict[Keys.Alias] = alias
         }
 
         if let devices = self.devices {
-            dict["devices"] = devices.map({ (device: UserDevice) -> NSDictionary in
+            dict[Keys.Devices] = devices.map({ (device: UserDevice) -> NSDictionary in
                 return device.toDictionary()
             })
         }
 
         if let tags = self.tags {
-            dict["tags"] = tags.map({ (key, tag: Halo.Tag) -> NSDictionary in
+            dict[Keys.Tags] = tags.map({ (key, tag: Halo.Tag) -> NSDictionary in
                 tag.toDictionary()
             })
         }
 
-        dict["createdAt"] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
-        dict["updatedAt"] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000
+        dict[Keys.CreatedAt] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
+        dict[Keys.UpdatedAt] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000
 
         return dict
 
@@ -201,24 +212,24 @@ public final class User: NSObject, NSCoding {
 
         user = User()
 
-        if let id = dict["id"] as? String {
+        if let id = dict[Keys.Id] as? String {
             user.id = id
         }
 
-        if let appId = dict["appId"] as? Int {
+        if let appId = dict[Keys.AppId] as? Int {
             user.appId = appId
         }
 
-        if let alias = dict["alias"] as? String {
+        if let alias = dict[Keys.Alias] as? String {
             user.alias = alias
         }
 
-        user.email = dict["email"] as? String
-        user.devices = (dict["devices"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserDevice in
+        user.email = dict[Keys.Email] as? String
+        user.devices = (dict[Keys.Devices] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserDevice in
             return UserDevice.fromDictionary(dict)
         })
 
-        if let tags = (dict["tags"] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
+        if let tags = (dict[Keys.Tags] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
             return Halo.Tag.fromDictionary(dict)
         }) {
             user.tags = tags.reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
@@ -228,11 +239,11 @@ public final class User: NSObject, NSCoding {
             })
         }
 
-        if let created = dict["createdAt"] as? NSTimeInterval {
+        if let created = dict[Keys.CreatedAt] as? NSTimeInterval {
             user.createdAt = NSDate(timeIntervalSince1970:created/1000)
         }
 
-        if let updated = dict["updatedAt"] as? NSTimeInterval {
+        if let updated = dict[Keys.UpdatedAt] as? NSTimeInterval {
             user.updatedAt = NSDate(timeIntervalSince1970:updated/1000)
         }
 

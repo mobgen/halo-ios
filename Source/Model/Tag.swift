@@ -15,6 +15,13 @@ users and content.
 @objc(HaloTag)
 public final class Tag: NSObject, NSCoding {
 
+    struct Keys {
+        static let Id = "id"
+        static let Name = "name"
+        static let Value = "value"
+        static let TagType = "type"
+    }
+
     /// Id of the user tag instance
     public internal(set) var id: String?
 
@@ -26,11 +33,12 @@ public final class Tag: NSObject, NSCoding {
 
     public internal(set) var type: String?
 
-    public override init() {
+    private override init() {
         super.init()
     }
 
     public init(name: String, value: String, type: String? = nil) {
+        super.init()
         self.name = name
         self.value = value
         self.type = type ?? "000000000000000000000002"
@@ -40,15 +48,17 @@ public final class Tag: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        id = aDecoder.decodeObjectForKey("id") as? String
-        name = aDecoder.decodeObjectForKey("name") as! String
-        value = aDecoder.decodeObjectForKey("value") as? String
+        id = aDecoder.decodeObjectForKey(Keys.Id) as? String
+        name = aDecoder.decodeObjectForKey(Keys.Name) as! String
+        value = aDecoder.decodeObjectForKey(Keys.Value) as? String
+        type = aDecoder.decodeObjectForKey(Keys.TagType) as? String
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: "id")
-        aCoder.encodeObject(name, forKey: "name")
-        aCoder.encodeObject(value, forKey: "value")
+        aCoder.encodeObject(id, forKey: Keys.Id)
+        aCoder.encodeObject(name, forKey: Keys.Name)
+        aCoder.encodeObject(value, forKey: Keys.Value)
+        aCoder.encodeObject(type, forKey: Keys.TagType)
     }
 
     /**
