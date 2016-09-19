@@ -53,52 +53,53 @@ public class SearchQuery: NSObject {
     private(set) var locale: Halo.Locale?
 
     public override var hash: Int {
-        return body.map { "\($0)-\($1.description!)" }.joinWithSeparator("+").hash
+        let values: [String] = body.map { "\($0)-\($1.description!)" }
+        return values.joinWithSeparator("+").hash
     }
 
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
 
         if let modules = self.moduleIds {
-            dict[Keys.ModuleIds] = modules
+            dict.updateValue(modules, forKey: Keys.ModuleIds)
         }
 
         if let moduleName = self.moduleName {
-            dict[Keys.ModuleName] = moduleName
+            dict.updateValue(moduleName, forKey: Keys.ModuleName)
         }
         
         if let instances = self.instanceIds {
-            dict[Keys.InstanceIds] = instances
+            dict.updateValue(instances, forKey: Keys.InstanceIds)
         }
 
         if let searchValues = self.conditions {
-            dict[Keys.SearchValues] = searchValues
+            dict.updateValue(searchValues, forKey: Keys.SearchValues)
         }
 
         if let metaSearch = self.metaConditions {
-            dict[Keys.MetaSearch] = metaSearch
+            dict.updateValue(metaSearch, forKey: Keys.MetaSearch)
         }
 
         if let fields = self.fields {
-            dict[Keys.Fields] = fields
+            dict.updateValue(fields, forKey: Keys.Fields)
         }
 
         if let tags = self.tags {
-            dict[Keys.Tags] = tags.map { $0.toDictionary() }
+            dict.updateValue(tags.map { $0.toDictionary() }, forKey: Keys.Tags)
         }
 
         if let include = self.populateFields {
-            dict[Keys.Include] = include
+            dict.updateValue(include, forKey: Keys.Include)
         }
 
         if let pagination = self.pagination {
-            dict[Keys.Pagination] = pagination
+            dict.updateValue(pagination, forKey: Keys.Pagination)
         }
 
         if self.segmentWithUser {
-            if let user = Halo.Manager.core.user, tags = user.tags {
+            if let user = Halo.Manager.core.user, let tags = user.tags {
                 if tags.count > 0 {
-                    dict[Keys.SegmentTags] = tags.values.map { $0.toDictionary() }
+                    dict.updateValue(tags.values.map { $0.toDictionary() }, forKey: Keys.SegmentTags)
                 }
             }
         }

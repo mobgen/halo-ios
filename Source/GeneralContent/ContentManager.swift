@@ -97,7 +97,7 @@ public class ContentManager: HaloManager {
                 
                 if wasFirstSync {
                     // Sync again. The first sync might be cached so we need to resync in case there have been changes
-                    var query = syncQuery
+                    let query = syncQuery
                     query.fromSync = result.syncTimestamp
                     self.sync(query, completionHandler: handler)
                 } else {
