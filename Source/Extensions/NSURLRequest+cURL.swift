@@ -27,7 +27,7 @@ extension NSURLRequest {
         }
 
         if let url = self.URL {
-            curlString.appendString(" \"\(url.absoluteString)\"")
+            curlString.appendString(" \"\(url.absoluteString!)\"")
         }
 
         return curlString as String
