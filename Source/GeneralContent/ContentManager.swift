@@ -84,7 +84,7 @@ public class ContentManager: HaloManager {
         if let result = syncResult {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                let success = NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
+                NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
                 
                 var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath("sync-\(result.moduleId)")) as? Set<String> ?? Set<String>()
                 
