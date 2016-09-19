@@ -34,8 +34,9 @@ public class TranslationsHelper: NSObject {
         self.valueField = valueField
     }
 
-    public func locale(locale: Locale) -> TranslationsHelper {
+    public func locale(locale: Locale, completionHandler handler: ((String, NSError?) -> Void)? = nil) -> TranslationsHelper {
         self.locale = locale
+        load(completionHandler: handler)
         return self
     }
 

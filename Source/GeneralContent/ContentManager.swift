@@ -80,7 +80,7 @@ public class ContentManager: HaloManager {
                         
                         let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
                         let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
-                        let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath($0) }
+                        let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
                         
                         let path = self.getPath("sync-\(result.moduleId)")
                         NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
@@ -106,6 +106,11 @@ public class ContentManager: HaloManager {
             // No instance ids have been found for that module
             return nil
         }
-        
+    }
+    
+    public func removeSyncedInstances(moduleId: String) -> Void {
+        if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(getPath("sync-\(moduleId)")) as? Set<String> {
+            instanceIds.map { try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
+        }
     }
 }
