@@ -14,7 +14,7 @@ import Foundation
 public class ContentManager: HaloManager {
 
     public var defaultLocale: Halo.Locale?
-    private let serverCachingTime = "86400"
+    private let serverCachingTime = "86400000"
 
     static var filePath: NSURL {
         let manager = NSFileManager.defaultManager()
