@@ -126,7 +126,7 @@ public class TranslationsHelper: NSObject {
                 let _ = self.completionHandlers.map { $0() }
             }
         } else {
-            NSLog("--- Missing parameter")
+            LogMessage("Missing parameter for the translations sync request", level: .Error).print()
         }
     }
 
