@@ -15,14 +15,14 @@ extension NSURLRequest {
         let curlString = NSMutableString(string: "curl -k -X \(self.HTTPMethod!) --dump-header -")
 
         self.allHTTPHeaderFields?.forEach({ (key, value) -> () in
-            let headerKey = self.escapeQuotesInString(key)
-            let headerValue = self.escapeQuotesInString(value)
+            let headerKey = self.escapeString(key)
+            let headerValue = self.escapeString(value)
             curlString.appendString(" -H \"\(headerKey): \(headerValue)\"")
         })
 
         if let bodyData = self.HTTPBody {
             if let bodyDataString = String(data: bodyData, encoding: NSUTF8StringEncoding) {
-                curlString.appendString(" -d \"\(self.escapeQuotesInString(bodyDataString))\"")
+                curlString.appendString(" -d \"\(self.escapeString(bodyDataString))\"")
             }
         }
 
@@ -34,7 +34,7 @@ extension NSURLRequest {
     }
 
 
-    private func escapeQuotesInString(str: String) -> String {
-        return str.stringByReplacingOccurrencesOfString("\"", withString: "\\\"")
+    private func escapeString(str: String) -> String {
+        return str.stringByReplacingOccurrencesOfString("\"", withString: "\\\"").stringByReplacingOccurrencesOfString("%", withString: "%%")
     }
 }
