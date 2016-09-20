@@ -40,15 +40,15 @@ public struct SearchFilter {
 
         if let
             cond = self.condition,
-            operands = self.operands {
+            let operands = self.operands {
                 dict["condition"] = cond
                 dict["operands"] = operands.map { $0.body }
         }
 
         if let
             operation = self.operation,
-            property = self.property,
-            type = self.type {
+            let property = self.property,
+            let type = self.type {
                 dict["operation"] = operation
                 dict["property"] = property
                 dict["value"] = value ?? NSNull()

@@ -18,7 +18,7 @@ public class NetworkDataProvider: DataProvider {
 
             switch data {
             case let d as [String: AnyObject]: // Paginated response
-                if let pag = d["pagination"] as? [String: AnyObject], items = d["items"] as? [[String: AnyObject]] {
+                if let pag = d["pagination"] as? [String: AnyObject], let items = d["items"] as? [[String: AnyObject]] {
                     let paginationInfo = PaginationInfo.fromDictionary(pag)
                     let items = items.map { Halo.Module.fromDictionary($0) }
                     result = PaginatedModules(paginationInfo: paginationInfo, modules: items)
@@ -46,7 +46,7 @@ public class NetworkDataProvider: DataProvider {
 
             switch data {
             case let d as [String: AnyObject]: // Paginated response
-                if let pag = d["pagination"] as? [String: AnyObject], items = d["items"] as? [[String: AnyObject]] {
+                if let pag = d["pagination"] as? [String: AnyObject], let items = d["items"] as? [[String: AnyObject]] {
                     let paginationInfo = PaginationInfo.fromDictionary(pag)
                     let items = items.map { Halo.ContentInstance.fromDictionary($0) }
                     result = PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)

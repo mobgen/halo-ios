@@ -100,7 +100,7 @@ public class TranslationsHelper: NSObject {
             return
         }
 
-        if let locale = self.locale, keyField = self.keyField, valueField = self.valueField {
+        if let locale = self.locale, keyField = self.keyField, let valueField = self.valueField {
 
             self.isLoading = true
             self.translationsMap.removeAll()
@@ -121,7 +121,7 @@ public class TranslationsHelper: NSObject {
                     
                     let _ = instances.map { item in
                         if let key = item.values[keyField] as? String,
-                            value = item.values[valueField] as? String {
+                            let value = item.values[valueField] as? String {
                             
                             self.translationsMap.updateValue(value, forKey: key)
                         }

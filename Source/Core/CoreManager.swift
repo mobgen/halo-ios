@@ -123,11 +123,11 @@ public class CoreManager: NSObject, HaloManager {
                         let passwordKey = CoreConstants.passwordKey
                         let environmentKey = CoreConstants.environmentSettingKey
 
-                        if let clientId = data[clientIdKey] as? String, clientSecret = data[clientSecretKey] as? String {
+                        if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
                             self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
                         }
 
-                        if let username = data[usernameKey] as? String, password = data[passwordKey] as? String {
+                        if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
                             self.userCredentials = Credentials(username: username, password: password)
                         }
 
@@ -224,7 +224,7 @@ public class CoreManager: NSObject, HaloManager {
     private func configureUser(completionHandler handler: ((Bool) -> Void)? = nil) {
         self.user = Halo.User.loadUser(self.environment)
 
-        if let user = self.user, _ = user.id {
+        if let user = self.user, let _ = user.id {
             // Update the user
             Manager.network.getUser(user) { (_, result) -> Void in
                 switch result {
@@ -463,7 +463,7 @@ public class CoreManager: NSObject, HaloManager {
         try! Request<Any>(path: "/api/authentication/version").params(["current": "true"]).response { (_, result) in
             switch result {
             case .Success(let data as [[String: AnyObject]], _):
-                if let info = data.first, minIOS = info["minIOS"] {
+                if let info = data.first, let minIOS = info["minIOS"] {
                     if minIOS.compare(self.frameworkVersion, options: .NumericSearch) == .OrderedDescending {
                         let changelog = info["iosChangeLog"] as! String
 

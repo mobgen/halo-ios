@@ -288,7 +288,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         for path in paths {
             if let
                 certificateData = NSData(contentsOfFile: path),
-                certificate = SecCertificateCreateWithData(nil, certificateData) {
+                let certificate = SecCertificateCreateWithData(nil, certificateData) {
                 certificates.append(certificate)
             }
         }
