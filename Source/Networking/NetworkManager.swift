@@ -218,7 +218,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
                 if let resp = response as? NSHTTPURLResponse {
 
                     let elapsed = NSDate().timeIntervalSinceDate(start) * 1000
-                    LogMessage("\(req) [\(elapsed)ms]", level: .Info).print()
+                    LogMessage("\(req.debugDescription) [\(elapsed)ms]", level: .Info).print()
 
                     if resp.statusCode > 399 {
 
