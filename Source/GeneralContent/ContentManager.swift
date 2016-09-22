@@ -75,7 +75,7 @@ public class ContentManager: HaloManager {
                 self.processSyncResult(syncQuery, syncResult: syncResult, wasFirstSync: isFirstSync, completionHandler: handler)
             case .Failure(let e):
                 LogMessage(error: e).print()
-                handler(syncQuery.moduleId, e)
+                handler(syncQuery.moduleId, nil)
             }
         }
     }
