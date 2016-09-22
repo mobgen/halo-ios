@@ -94,7 +94,7 @@ public final class Tag: NSObject, NSCoding {
     - returns: The newly created user tag
     */
     class func fromDictionary(dict: [String: AnyObject]) -> Halo.Tag {
-        let tag = Tag(name: dict["name"] as! String, value: dict["value"] as! String)
+        let tag = Tag(name: dict["name"] as! String, value: dict["value"] as! String, type: dict["tagType"] as? String)
         tag.id = dict["id"] as? String
 
         return tag
