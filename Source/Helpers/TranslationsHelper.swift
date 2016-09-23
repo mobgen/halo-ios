@@ -16,10 +16,11 @@ public class TranslationsHelper: NSObject {
     private var valueField: String?
     private var defaultText: String?
     private var loadingText: String?
-    private var locale: Locale?
     private var translationsMap: [String: String] = [:]
     private var isLoading: Bool = false
-
+    private var syncQuery: SyncQuery!
+    private var locale: Locale?
+    
     private var completionHandlers: [() -> Void] = []
 
     private override init() {
@@ -32,12 +33,16 @@ public class TranslationsHelper: NSObject {
         self.locale = locale
         self.keyField = keyField
         self.valueField = valueField
+        self.syncQuery = SyncQuery(moduleId: moduleId)
     }
 
-    public func locale(locale: Locale, completionHandler handler: ((String, NSError?) -> Void)? = nil) -> TranslationsHelper {
+    public func addCompletionHandler(handler: () -> Void) -> Void {
+        completionHandlers.append(handler)
+    }
+    
+    public func locale(locale: Locale) -> TranslationsHelper {
         self.locale = locale
-        self.clearAllTexts()
-        load(completionHandler: handler)
+        load()
         return self
     }
 
@@ -51,7 +56,7 @@ public class TranslationsHelper: NSObject {
         return self
     }
     
-    public func getText(key: String, completionHandler handler: ((String?) -> Void)?) -> Void {
+    public func getText(key: String, completionHandler handler: ((String?) -> Void)? = nil) -> Void {
         if self.isLoading {
             if let h = handler {
                 self.completionHandlers.append { _ in
@@ -72,7 +77,7 @@ public class TranslationsHelper: NSObject {
 
         var values: [String: String?] = [:]
 
-        let _ = keys.map { key in
+        keys.forEach { key in
             if let value = translationsMap[key] {
                 values[key] = value
             } else {
@@ -85,54 +90,48 @@ public class TranslationsHelper: NSObject {
     }
 
     public func getAllTexts() -> [String: String] {
-
         return translationsMap
     }
 
     public func clearAllTexts() -> Void {
         translationsMap.removeAll()
-        Manager.content.removeSyncedInstances(self.moduleId)
+        Manager.content.removeSyncedInstances(moduleId)
     }
     
-    public func load(completionHandler handler: ((String, NSError?) -> Void)? = nil) -> Void {
+    public func load() -> Void {
 
-        if self.isLoading {
+        if isLoading {
             return
         }
-
-        if let locale = self.locale, keyField = self.keyField, let valueField = self.valueField {
-
-            self.isLoading = true
-            self.translationsMap.removeAll()
-
-            let syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
+    
+        isLoading = true
+        translationsMap.removeAll()
+        
+        Manager.content.sync(syncQuery) { moduleId, error in
+            self.processSyncResult(moduleId, error: error)
+            self.completionHandlers.forEach { $0() }
+        }
+        
+    }
+    
+    private func processSyncResult(moduleId: String, error: NSError?) {
+        
+        self.isLoading = false
+        
+        if error != nil {
+            completionHandlers.forEach { $0() }
+            return
+        }
+        
+        if let instances = Manager.content.getSyncedInstances(moduleId), let keyField = self.keyField, let valueField = self.valueField {
             
-            Manager.content.sync(syncQuery) { moduleId, error in
-            
-                self.isLoading = false
-                
-                if let e = error {
-                    handler?(moduleId, e)
-                    let _ = self.completionHandlers.map { $0() }
-                    return
-                }
-                
-                if let instances = Manager.content.getSyncedInstances(moduleId) {
+            instances.forEach { item in
+                if let key = item.values[keyField] as? String,
+                    let value = item.values[valueField] as? String {
                     
-                    let _ = instances.map { item in
-                        if let key = item.values[keyField] as? String,
-                            let value = item.values[valueField] as? String {
-                            
-                            self.translationsMap.updateValue(value, forKey: key)
-                        }
-                    }
+                    self.translationsMap.updateValue(value, forKey: key)
                 }
-                
-                handler?(moduleId, error)
-                let _ = self.completionHandlers.map { $0() }
             }
-        } else {
-            LogMessage("Missing parameter for the translations sync request", level: .Error).print()
         }
     }
 

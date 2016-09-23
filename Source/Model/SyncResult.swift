@@ -18,6 +18,7 @@ public class SyncResult: NSObject, NSCoding {
         static let Created = "created"
         static let Updated = "updated"
         static let Deleted = "deleted"
+        static let Locale = "locale"
     }
     
     var moduleName: String = ""
@@ -26,6 +27,7 @@ public class SyncResult: NSObject, NSCoding {
     public internal(set) var created: [ContentInstance] = []
     public internal(set) var updated: [ContentInstance] = []
     public internal(set) var deleted: [String] = [] // Store only the ids that will be used for deletion
+    public internal(set) var locale: Locale?
     
     private override init() {
         super.init()
@@ -54,11 +56,13 @@ public class SyncResult: NSObject, NSCoding {
         moduleName = aDecoder.decodeObjectForKey(Keys.ModuleName) as! String
         moduleId = aDecoder.decodeObjectForKey(Keys.ModuleId) as! String
         syncTimestamp = aDecoder.decodeObjectForKey(Keys.SyncTimestamp) as? NSDate
+        locale = Locale(rawValue: aDecoder.decodeIntegerForKey(Keys.Locale))
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(moduleName, forKey: Keys.ModuleName)
         aCoder.encodeObject(moduleId, forKey: Keys.ModuleId)
         aCoder.encodeObject(syncTimestamp, forKey: Keys.SyncTimestamp)
+        aCoder.encodeObject(locale?.rawValue, forKey: Keys.Locale)
     }
 }

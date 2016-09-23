@@ -41,8 +41,12 @@ public class ContentManager: HaloManager {
 
     public func sync(syncQuery: SyncQuery, completionHandler handler: (String, NSError?) -> Void) -> Void {
 
-        if syncQuery.fromSync == nil {
-            if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile(getPath("synctimestamp-\(syncQuery.moduleId)")) as? SyncResult, let from = sync.syncTimestamp {
+        let path = getPath("synctimestamp-\(syncQuery.moduleId)")
+        
+        if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? SyncResult, let from = sync.syncTimestamp {
+            if sync.locale != syncQuery.locale {
+                syncQuery.fromSync = nil
+            } else if syncQuery.fromSync == nil {
                 syncQuery.fromSync = from
             }
         }
@@ -55,6 +59,7 @@ public class ContentManager: HaloManager {
             case let d as [String: AnyObject]: // Sync response
                 result = SyncResult(data: d)
                 result?.moduleId = syncQuery.moduleId
+                result?.locale = syncQuery.locale
             default: // Everything else
                 break
             }
@@ -68,6 +73,7 @@ public class ContentManager: HaloManager {
             request.addHeader(field: "to-cache", value: serverCachingTime)
         }
         
+        // Perform the request
         try! request.responseObject { response, result in
             
             switch result {
@@ -84,15 +90,26 @@ public class ContentManager: HaloManager {
         if let result = syncResult {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                NSKeyedArchiver.archiveRootObject(result, toFile: self.getPath("synctimestamp-\(result.moduleId)"))
+                var path = self.getPath("synctimestamp-\(result.moduleId)")
                 
+                // Get the "old" sync info
+                if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? SyncResult, let newLocale = syncResult?.locale {
+                    if sync.locale != newLocale {
+                        self.removeSyncedInstances(sync.moduleId)
+                    }
+                }
+                
+                // Save the new sync info
+                NSKeyedArchiver.archiveRootObject(result, toFile: path)
+                
+                // Get the instances (if any)
                 var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath("sync-\(result.moduleId)")) as? Set<String> ?? Set<String>()
                 
                 let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
                 let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
                 let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
                 
-                let path = self.getPath("sync-\(result.moduleId)")
+                path = self.getPath("sync-\(result.moduleId)")
                 NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
                 
                 if wasFirstSync {
