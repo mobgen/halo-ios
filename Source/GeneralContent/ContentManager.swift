@@ -112,7 +112,14 @@ public class ContentManager: HaloManager {
                 
                 path = self.getPath("sync-\(result.moduleId)")
                 NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
-                
+
+                // Store a log entry for this sync
+                path = self.getPath("synclog-\(result.moduleId)")
+
+                var logEntries = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [SyncLogEntry] ?? []
+                logEntries.append(SyncLogEntry(result: result))
+                NSKeyedArchiver.archiveRootObject(logEntries, toFile: path)
+
                 if wasFirstSync {
                     // Sync again. The first sync might be cached so we need to resync in case there have been changes
                     let query = syncQuery
@@ -126,7 +133,7 @@ public class ContentManager: HaloManager {
             }
         }
     }
-    
+
     public func getSyncedInstances(moduleId: String) -> [ContentInstance]? {
         
         // Get the ids of the instances for the given module
@@ -146,5 +153,11 @@ public class ContentManager: HaloManager {
             try! NSFileManager.defaultManager().removeItemAtPath(path)
             try! NSFileManager.defaultManager().removeItemAtPath(self.getPath("synctimestamp-\(moduleId)"))
         }
+    }
+
+    public func getSyncLog(moduleId: String) -> [SyncLogEntry] {
+        let path = self.getPath("synclog-\(moduleId)")
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [SyncLogEntry] ?? []
+
     }
 }

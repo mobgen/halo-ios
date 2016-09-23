@@ -14,7 +14,7 @@ public class SyncResult: NSObject, NSCoding {
     struct Keys {
         static let ModuleId = "moduleId"
         static let ModuleName = "moduleName"
-        static let SyncTimestamp = "syncTimestamp"
+        static let SyncDate = "syncDate"
         static let Created = "created"
         static let Updated = "updated"
         static let Deleted = "deleted"
@@ -36,7 +36,7 @@ public class SyncResult: NSObject, NSCoding {
     init(data: [String: AnyObject]) {
         
         super.init()
-        syncTimestamp = NSDate(timeIntervalSince1970: (data[Keys.SyncTimestamp] as? Double ?? 0)/1000)
+        syncTimestamp = NSDate(timeIntervalSince1970: (data[Keys.SyncDate] as? Double ?? 0)/1000)
         
         if let created = data[Keys.Created] as? [[String: AnyObject]] {
             created.forEach { self.created.append(ContentInstance.fromDictionary($0)) }
@@ -55,7 +55,7 @@ public class SyncResult: NSObject, NSCoding {
         super.init()
         moduleName = aDecoder.decodeObjectForKey(Keys.ModuleName) as! String
         moduleId = aDecoder.decodeObjectForKey(Keys.ModuleId) as! String
-        syncTimestamp = aDecoder.decodeObjectForKey(Keys.SyncTimestamp) as? NSDate
+        syncTimestamp = aDecoder.decodeObjectForKey(Keys.SyncDate) as? NSDate
         
         if let loc = aDecoder.decodeObjectForKey(Keys.Locale) as? Int {
             locale = Locale(rawValue: loc)
@@ -65,7 +65,7 @@ public class SyncResult: NSObject, NSCoding {
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(moduleName, forKey: Keys.ModuleName)
         aCoder.encodeObject(moduleId, forKey: Keys.ModuleId)
-        aCoder.encodeObject(syncTimestamp, forKey: Keys.SyncTimestamp)
+        aCoder.encodeObject(syncTimestamp, forKey: Keys.SyncDate)
         
         if let loc = locale?.rawValue {
             aCoder.encodeObject(loc, forKey: Keys.Locale)

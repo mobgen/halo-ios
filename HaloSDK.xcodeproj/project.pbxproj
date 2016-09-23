@@ -11,6 +11,7 @@
 		000827011B6A57A5001E8248 /* ModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000827001B6A57A5001E8248 /* ModuleType.swift */; };
 		00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00121E8E1BF33B5B00FD656F /* CoreManager+Modules.swift */; };
 		001C96C91D268F9C00126DD9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B021C51320C00FACAB2 /* libsqlite3.tbd */; };
+		0033A1351D958A630003C2B2 /* SyncLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0033A1341D958A630003C2B2 /* SyncLogEntry.swift */; };
 		00396E3B1D51E9EE00594D0A /* MobileProvisionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E3A1D51E9EE00594D0A /* MobileProvisionParser.swift */; };
 		00396E471D53253600594D0A /* PaginatedModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E461D53253600594D0A /* PaginatedModules.swift */; };
 		00396E491D53255500594D0A /* PaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00396E481D53255500594D0A /* PaginationInfo.swift */; };
@@ -113,6 +114,7 @@
 		000826FE1B6A34DE001E8248 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		000827001B6A57A5001E8248 /* ModuleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
 		00121E8E1BF33B5B00FD656F /* CoreManager+Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+Modules.swift"; sourceTree = "<group>"; };
+		0033A1341D958A630003C2B2 /* SyncLogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncLogEntry.swift; sourceTree = "<group>"; };
 		00396E3A1D51E9EE00594D0A /* MobileProvisionParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MobileProvisionParser.swift; path = Source/Helpers/MobileProvisionParser.swift; sourceTree = "<group>"; };
 		00396E461D53253600594D0A /* PaginatedModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedModules.swift; sourceTree = "<group>"; };
 		00396E481D53255500594D0A /* PaginationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationInfo.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				00396E481D53255500594D0A /* PaginationInfo.swift */,
 				00396E4A1D5328B300594D0A /* PaginatedContentInstances.swift */,
 				0066217A1D8A7AF000A020EC /* SyncResult.swift */,
+				0033A1341D958A630003C2B2 /* SyncLogEntry.swift */,
 			);
 			name = Model;
 			path = Source/Model;
@@ -600,6 +603,7 @@
 				005E1ED61C69FFE800ED8763 /* Result.swift in Sources */,
 				00E508391CB691EB00B4B5AE /* SearchFilter.swift in Sources */,
 				005421691CC785210055B553 /* Protocols.swift in Sources */,
+				0033A1351D958A630003C2B2 /* SyncLogEntry.swift in Sources */,
 				005421651CC76D230055B553 /* NSURLRequest+cURL.swift in Sources */,
 				005F608B1D87D40800F68FEB /* OfflineDataProvider.swift in Sources */,
 				00396E471D53253600594D0A /* PaginatedModules.swift in Sources */,
