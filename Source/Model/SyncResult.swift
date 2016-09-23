@@ -56,13 +56,19 @@ public class SyncResult: NSObject, NSCoding {
         moduleName = aDecoder.decodeObjectForKey(Keys.ModuleName) as! String
         moduleId = aDecoder.decodeObjectForKey(Keys.ModuleId) as! String
         syncTimestamp = aDecoder.decodeObjectForKey(Keys.SyncTimestamp) as? NSDate
-        locale = Locale(rawValue: aDecoder.decodeIntegerForKey(Keys.Locale))
+        
+        if let loc = aDecoder.decodeObjectForKey(Keys.Locale) as? Int {
+            locale = Locale(rawValue: loc)
+        }
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(moduleName, forKey: Keys.ModuleName)
         aCoder.encodeObject(moduleId, forKey: Keys.ModuleId)
         aCoder.encodeObject(syncTimestamp, forKey: Keys.SyncTimestamp)
-        aCoder.encodeObject(locale?.rawValue, forKey: Keys.Locale)
+        
+        if let loc = locale?.rawValue {
+            aCoder.encodeInteger(loc, forKey: Keys.Locale)
+        }
     }
 }
