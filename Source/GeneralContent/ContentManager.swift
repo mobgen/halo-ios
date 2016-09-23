@@ -43,6 +43,7 @@ public class ContentManager: HaloManager {
 
         let path = getPath("synctimestamp-\(syncQuery.moduleId)")
         
+        // Check whether we just sync or re-sync all the content (locale changed)
         if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? SyncResult, let from = sync.syncTimestamp {
             if sync.locale != syncQuery.locale {
                 syncQuery.fromSync = nil
@@ -105,9 +106,9 @@ public class ContentManager: HaloManager {
                 // Get the instances (if any)
                 var instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath("sync-\(result.moduleId)")) as? Set<String> ?? Set<String>()
                 
-                let _ = result.created.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
-                let _ = result.updated.map { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
-                let _ = result.deleted.map { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
+                result.created.forEach { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
+                result.updated.forEach { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
+                result.deleted.forEach { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
                 
                 path = self.getPath("sync-\(result.moduleId)")
                 NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
@@ -141,7 +142,7 @@ public class ContentManager: HaloManager {
         let path = getPath("sync-\(moduleId)")
         
         if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? Set<String> {
-            let _ = instanceIds.map { try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
+            instanceIds.forEach { try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
             try! NSFileManager.defaultManager().removeItemAtPath(path)
             try! NSFileManager.defaultManager().removeItemAtPath(self.getPath("synctimestamp-\(moduleId)"))
         }

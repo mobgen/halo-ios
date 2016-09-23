@@ -39,15 +39,15 @@ public class SyncResult: NSObject, NSCoding {
         syncTimestamp = NSDate(timeIntervalSince1970: (data[Keys.SyncTimestamp] as? Double ?? 0)/1000)
         
         if let created = data[Keys.Created] as? [[String: AnyObject]] {
-            let _ = created.map { self.created.append(ContentInstance.fromDictionary($0)) }
+            created.forEach { self.created.append(ContentInstance.fromDictionary($0)) }
         }
         
         if let updated = data[Keys.Updated] as? [[String: AnyObject]] {
-            let _ = updated.map { self.updated.append(ContentInstance.fromDictionary($0)) }
+            updated.forEach { self.updated.append(ContentInstance.fromDictionary($0)) }
         }
         
         if let deleted = data[Keys.Deleted] as? [[String: AnyObject]] {
-            let _ = deleted.map { self.deleted.append($0[ContentInstance.Keys.Id] as! String) }
+            deleted.forEach { self.deleted.append($0[ContentInstance.Keys.Id] as! String) }
         }
     }
     
@@ -68,7 +68,7 @@ public class SyncResult: NSObject, NSCoding {
         aCoder.encodeObject(syncTimestamp, forKey: Keys.SyncTimestamp)
         
         if let loc = locale?.rawValue {
-            aCoder.encodeInteger(loc, forKey: Keys.Locale)
+            aCoder.encodeObject(loc, forKey: Keys.Locale)
         }
     }
 }

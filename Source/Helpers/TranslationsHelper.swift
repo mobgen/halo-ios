@@ -19,9 +19,9 @@ public class TranslationsHelper: NSObject {
     private var translationsMap: [String: String] = [:]
     private var isLoading: Bool = false
     private var syncQuery: SyncQuery!
-    private var locale: Locale?
+    private var locale: Locale!
     
-    private var completionHandlers: [() -> Void] = []
+    private var completionHandlers: [(NSError?) -> Void] = []
 
     private override init() {
         super.init()
@@ -33,15 +33,16 @@ public class TranslationsHelper: NSObject {
         self.locale = locale
         self.keyField = keyField
         self.valueField = valueField
-        self.syncQuery = SyncQuery(moduleId: moduleId)
+        self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
     }
 
-    public func addCompletionHandler(handler: () -> Void) -> Void {
+    public func addCompletionHandler(handler: (NSError?) -> Void) -> Void {
         completionHandlers.append(handler)
     }
     
     public func locale(locale: Locale) -> TranslationsHelper {
         self.locale = locale
+        self.syncQuery.locale = locale
         load()
         return self
     }
@@ -106,11 +107,9 @@ public class TranslationsHelper: NSObject {
     
         isLoading = true
         
-        syncQuery.locale = locale
-        
         Manager.content.sync(syncQuery) { moduleId, error in
             self.processSyncResult(moduleId, error: error)
-            self.completionHandlers.forEach { $0() }
+            self.completionHandlers.forEach { $0(error) }
         }
     }
     
@@ -118,8 +117,8 @@ public class TranslationsHelper: NSObject {
         
         self.isLoading = false
         
-        if error != nil {
-            completionHandlers.forEach { $0() }
+        if let e = error {
+            LogMessage(error: e).print()
             return
         }
         
