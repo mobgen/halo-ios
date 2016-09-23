@@ -105,13 +105,13 @@ public class TranslationsHelper: NSObject {
         }
     
         isLoading = true
-        translationsMap.removeAll()
+        
+        syncQuery.locale = locale
         
         Manager.content.sync(syncQuery) { moduleId, error in
             self.processSyncResult(moduleId, error: error)
             self.completionHandlers.forEach { $0() }
         }
-        
     }
     
     private func processSyncResult(moduleId: String, error: NSError?) {
@@ -124,6 +124,8 @@ public class TranslationsHelper: NSObject {
         }
         
         if let instances = Manager.content.getSyncedInstances(moduleId), let keyField = self.keyField, let valueField = self.valueField {
+            
+            translationsMap.removeAll()
             
             instances.forEach { item in
                 if let key = item.values[keyField] as? String,
