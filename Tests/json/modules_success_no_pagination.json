@@ -1,0 +1,1463 @@
+{
+  "search": {
+    "facets": {}
+  },
+  "sort": {
+    "query": "updatedAt desc"
+  },
+  "pagination": {
+  },
+  "items": [
+    {
+      "isSingle": false,
+      "name": "publish-archive",
+      "customerId": 1,
+      "createdBy": "Name selfupdated Vrijmoet",
+      "updatedBy": "Name selfupdated Vrijmoet",
+      "tags": [
+        {
+          "id": "57dab9fbc8486a0021ec0927",
+          "name": "iOS Version",
+          "value": "10.0.1",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "57ac3687a478ac1d00f0fe90",
+          "name": "iOS Version",
+          "value": "8.1.1",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "56f24be45558363700912cdc",
+          "name": "iOS Version",
+          "value": "9.3",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "579132c67380eb003adc98a3",
+          "name": "iOS Version",
+          "value": "9.3.2",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "57a08f962e9a4a0031290b56",
+          "name": "iOS Version",
+          "value": "9.3.3",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "5747197555ed362a0085ae56",
+          "name": "Android SDK Version",
+          "value": "1.4.2-SNAPSHOT",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "572caee880b5bc2a00d8f22a",
+          "name": "Android SDK Version",
+          "value": "1.4.0-SNAPSHOT",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "5685084df017aa1600fd6b2d",
+          "name": "Android Version",
+          "value": "4.4.2",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "57e3fea5193537002265dccd",
+          "name": "Android SDK Version",
+          "value": "2.0.0-SNAPSHOT",
+          "tagType": "000000000000000000000002"
+        }
+      ],
+      "pushTemplates": [
+        {
+          "name": "00 matus",
+          "silentContent": true,
+          "message": true,
+          "badge": true,
+          "description": "3131321",
+          "customerId": 1,
+          "tags": [
+            {
+              "id": "5677d8a1ec841c17006a5c86",
+              "name": "Android Version",
+              "value": "6.0.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5673f2aa50a9601c00a8c588",
+              "name": "Android Version",
+              "value": "6.0",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5679612f8abaf01800db95fb",
+              "name": "Android Version",
+              "value": "5.1.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "568169a5302a6f1b00f76a84",
+              "name": "Android Version",
+              "value": "5.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5679281fbbeaa01800e764ea",
+              "name": "Android Version",
+              "value": "5.0.2",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "569f5f44d74e721700f8562a",
+              "name": "Android Version",
+              "value": "5.0.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "56c1ff2e610b8934001aa89e",
+              "name": "Android Version",
+              "value": "5.0",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5685084df017aa1600fd6b2d",
+              "name": "Android Version",
+              "value": "4.4.2",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5747197555ed362a0085ae56",
+              "name": "Android SDK Version",
+              "value": "1.4.2-SNAPSHOT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "572caee880b5bc2a00d8f22a",
+              "name": "Android SDK Version",
+              "value": "1.4.0-SNAPSHOT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57163fecbe43242b001a3b86",
+              "name": "Android SDK Version",
+              "value": "1.3.0-SNAPSHOT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "571f259311512e2b0035ee75",
+              "name": "Android SDK Version",
+              "value": "1.3.0",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575183cd780cc43500a79870",
+              "name": "Application Version",
+              "value": "1.4.2-SNAPSHOT-dynamo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5751868f780cc43500a79872",
+              "name": "Application Version",
+              "value": "1.4.2-SNAPSHOT-demo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575566cba803393000662cc8",
+              "name": "Application Version",
+              "value": "1.4.1-9-g91be544",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5751c6bb780cc43500a79877",
+              "name": "Application Version",
+              "value": "1.4.1-6-gace68fb",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "576bd1c9cb33fa31009d1845",
+              "name": "Application Version",
+              "value": "1.4.1-25-ge0ed36c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57486eaea4195f3100ce3e8d",
+              "name": "Application Version",
+              "value": "1.4.1-3-g6685536",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574c1e39912f2634006fc182",
+              "name": "Application Version",
+              "value": "1.4.1-4-gd6bb73d",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574d4d96c073da2c008c8e2a",
+              "name": "Application Version",
+              "value": "1.4.1-5-g2da0200",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57628a2187cfbe3a00dac00e",
+              "name": "Application Version",
+              "value": "1.4.1-24-g3c6447f",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57627c0d87cfbe3a00dac00c",
+              "name": "Application Version",
+              "value": "1.4.1-23-g761935a",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5760394917d3583400f765e2",
+              "name": "Application Version",
+              "value": "1.4.1-22-g8ed95a6",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575fc7403e747b2b00f5e930",
+              "name": "Application Version",
+              "value": "1.4.1-20-gd9ad174",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574810e855ed362a0085ae57",
+              "name": "Application Version",
+              "value": "1.4.1-2-g04decca",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575a75dc75dd83370056bcec",
+              "name": "Application Version",
+              "value": "1.4.1-18-ge702e2c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5759a19321d1e02b00cd2405",
+              "name": "Application Version",
+              "value": "1.4.1-17-gb736e2b",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57585e22152580300035a407",
+              "name": "Application Version",
+              "value": "1.4.1-16-g6301b95",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57580b131bda4e2b00b6fb60",
+              "name": "Application Version",
+              "value": "1.4.1-15-ge6b5ab9",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5756e4315dfb223200e6c34e",
+              "name": "Application Version",
+              "value": "1.4.1-14-g001c1a5",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5755ad0ade95962b0096e3dd",
+              "name": "Application Version",
+              "value": "1.4.1-12-g9c9c09c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "573ec8d69ba7f22b00f6ab45",
+              "name": "Application Version",
+              "value": "1.4.0-SNAPSHOT-demo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5747197555ed362a0085ae55",
+              "name": "Application Version",
+              "value": "1.4.1-1-gca3b24c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57558cd3de95962b0096e3d5",
+              "name": "Application Version",
+              "value": "1.4.1-11-g637ffa8",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574327680e22002b0074d441",
+              "name": "Application Version",
+              "value": "1.3.0-43-g2900a5e",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574306dd0e22002b0074d43c",
+              "name": "Application Version",
+              "value": "1.3.0-42-gc9f6278",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "573ef63c9ba7f22b00f6ab49",
+              "name": "Application Version",
+              "value": "1.3.0-40-g7049974",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5707bff7f9afab3600ca576d",
+              "name": "Application Version",
+              "value": "1.3.0-SNAPSHOT-demo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57441bf0ae4ce72a002c4198",
+              "name": "Application Version",
+              "value": "1.3.0-45-gfc20b4e",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5707c3adf9afab3600ca576f",
+              "name": "Application Version",
+              "value": "1.3.0-SNAPSHOT-dynamo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5745b4e8cf80322b00c4c3f7",
+              "name": "Bluetooth 4 Support",
+              "value": "false",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "56dd40399a02f5310013806c",
+              "name": "Bluetooth 4 Support",
+              "value": "true",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000455",
+              "name": "Czech",
+              "value": "cs",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000159",
+              "name": "Czech Republic",
+              "value": "CZ",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000209",
+              "name": "Italy",
+              "value": "IT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "56701ab95ab4861900fdbd73",
+              "name": "Platform Name",
+              "value": "ios",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000275",
+              "name": "Pitcairn",
+              "value": "PN",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5673f2aa50a9601c00a8c583",
+              "name": "Platform Name",
+              "value": "android",
+              "tagType": "000000000000000000000002"
+            }
+          ],
+          "ledColor": true,
+          "url": true,
+          "customSound": true,
+          "deletedAt": null,
+          "createdAt": 1464937367588,
+          "updatedAt": 1474537307051,
+          "id": "57512b978417ac100079816e"
+        },
+        {
+          "tags": [],
+          "silentContent": true,
+          "name": "all",
+          "description": "asdfads",
+          "customerId": 1,
+          "ledColor": true,
+          "message": true,
+          "url": true,
+          "customSound": true,
+          "badge": true,
+          "deletedAt": null,
+          "createdAt": 1463357565157,
+          "updatedAt": 1472634627974,
+          "id": "5739107d7886821200eee83c"
+        }
+      ],
+      "importers": [],
+      "exporters": [],
+      "deletedAt": null,
+      "deletedBy": null,
+      "createdAt": 1474889373650,
+      "updatedAt": 1474890816229,
+      "id": "57e9069d1479ce001cf60fde"
+    },
+    {
+      "externalId": 224,
+      "name": "all fields module",
+      "isSingle": false,
+      "customerId": 1,
+      "deletedAt": null,
+      "createdBy": "James Vrijmoet",
+      "tags": [
+        {
+          "id": "000000000000000000000403",
+          "name": "Abkhazian",
+          "value": "ab",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "568169a5302a6f1b00f76a84",
+          "name": "Android Version",
+          "value": "5.1",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "5677d8a1ec841c17006a5c86",
+          "name": "Android Version",
+          "value": "6.0.1",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "5673f2aa50a9601c00a8c588",
+          "name": "Android Version",
+          "value": "6.0",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "572caee880b5bc2a00d8f22a",
+          "name": "Android SDK Version",
+          "value": "1.4.0-SNAPSHOT",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "5747197555ed362a0085ae56",
+          "name": "Android SDK Version",
+          "value": "1.4.2-SNAPSHOT",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "57b6db055b2d5b001db8fc7d",
+          "name": "iOS Version",
+          "value": "9.3.4",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "57cfc76361a111002204b9fe",
+          "name": "iOS Version",
+          "value": "9.3.5",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000301",
+          "name": "Slovakia",
+          "value": "SK",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000564",
+          "name": "Spanish Argentina",
+          "value": "es-AR",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000771",
+          "name": "Slovak",
+          "value": "sk",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000467",
+          "name": "German Germany",
+          "value": "de-DE",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000102",
+          "name": "Albania",
+          "value": "AL",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000103",
+          "name": "Algeria",
+          "value": "DZ",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000104",
+          "name": "American Samoa",
+          "value": "AS",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000106",
+          "name": "Angola",
+          "value": "AO",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000100",
+          "name": "Afghanistan",
+          "value": "AF",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000105",
+          "name": "Andorra",
+          "value": "AD",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000107",
+          "name": "Anguilla",
+          "value": "AI",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000108",
+          "name": "Antarctica",
+          "value": "AQ",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000109",
+          "name": "Antigua and Barbuda",
+          "value": "AG",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000110",
+          "name": "Argentina",
+          "value": "AR",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000111",
+          "name": "Armenia",
+          "value": "AM",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000112",
+          "name": "Aruba",
+          "value": "AW",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000285",
+          "name": "Ascension and Tristan da Cunha Saint Helena",
+          "value": "SH",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000113",
+          "name": "Australia",
+          "value": "AU",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000114",
+          "name": "Austria",
+          "value": "AT",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000115",
+          "name": "Azerbaijan",
+          "value": "AZ",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000116",
+          "name": "Bahamas",
+          "value": "BS",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000117",
+          "name": "Bahrain",
+          "value": "BH",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000118",
+          "name": "Bangladesh",
+          "value": "BD",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000119",
+          "name": "Barbados",
+          "value": "BB",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000121",
+          "name": "Belgium",
+          "value": "BE",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000123",
+          "name": "Benin",
+          "value": "BJ",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000124",
+          "name": "Bermuda",
+          "value": "BM",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000125",
+          "name": "Bhutan",
+          "value": "BT",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000340",
+          "name": "Bolivarian Republic of Venezuela",
+          "value": "VE",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000128",
+          "name": "Bosnia and Herzegovina",
+          "value": "BA",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000129",
+          "name": "Botswana",
+          "value": "BW",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000130",
+          "name": "Bouvet Island",
+          "value": "BV",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000131",
+          "name": "Brazil",
+          "value": "BR",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000132",
+          "name": "British Indian Ocean Territory",
+          "value": "IO",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000342",
+          "name": "British Virgin Islands",
+          "value": "VG",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000133",
+          "name": "Brunei Darussalam",
+          "value": "BN",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000135",
+          "name": "Burkina Faso",
+          "value": "BF",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000136",
+          "name": "Burundi",
+          "value": "BI",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000137",
+          "name": "Cambodia",
+          "value": "KH",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000138",
+          "name": "Cameroon",
+          "value": "CM",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000139",
+          "name": "Canada",
+          "value": "CA",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000140",
+          "name": "Cape Verde",
+          "value": "CV",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000141",
+          "name": "Cayman Islands",
+          "value": "KY",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000142",
+          "name": "Central African Republic",
+          "value": "CF",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000143",
+          "name": "Chad",
+          "value": "TD",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000144",
+          "name": "Chile",
+          "value": "CL",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000145",
+          "name": "China",
+          "value": "CN",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000146",
+          "name": "Christmas Island",
+          "value": "CX",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000147",
+          "name": "Cocos (Keeling) Islands",
+          "value": "CC",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000149",
+          "name": "Comoros",
+          "value": "KM",
+          "tagType": "000000000000000000000002"
+        }
+      ],
+      "pushTemplates": [
+        {
+          "name": "matus edit",
+          "description": "12345678900-123",
+          "message": true,
+          "tags": [],
+          "customerId": 1,
+          "silentContent": true,
+          "ledColor": false,
+          "url": false,
+          "customSound": false,
+          "badge": false,
+          "createdAt": 1467033768676,
+          "updatedAt": 1472211186947,
+          "id": "577128a890129b0e00afe5a3"
+        },
+        {
+          "tags": [],
+          "name": "test18sadasd-12312",
+          "description": "test18",
+          "message": true,
+          "customerId": 1,
+          "silentContent": true,
+          "ledColor": false,
+          "url": false,
+          "customSound": true,
+          "badge": true,
+          "createdAt": 1463587519549,
+          "updatedAt": 1472209986011,
+          "id": "573c92bf4136db110007a8a5"
+        },
+        {
+          "tags": [],
+          "silentContent": true,
+          "name": "all",
+          "description": "asdfads",
+          "customerId": 1,
+          "ledColor": true,
+          "message": true,
+          "url": true,
+          "customSound": true,
+          "badge": true,
+          "deletedAt": null,
+          "createdAt": 1463357565157,
+          "updatedAt": 1472634627974,
+          "id": "5739107d7886821200eee83c"
+        },
+        {
+          "name": "halo",
+          "message": true,
+          "badge": true,
+          "ledColor": true,
+          "customSound": true,
+          "url": false,
+          "silentContent": true,
+          "description": "halo",
+          "tags": [],
+          "customerId": 1,
+          "deletedAt": null,
+          "createdAt": 1473410714591,
+          "updatedAt": 1473410714591,
+          "id": "57d2769a2a4d030f00829941"
+        },
+        {
+          "customerId": 1,
+          "name": "Only Text And Some Other Stuff",
+          "description": "This push template allows to only send text messages to the applications",
+          "message": true,
+          "silentContent": false,
+          "ledColor": false,
+          "url": false,
+          "customSound": false,
+          "badge": false,
+          "tags": [],
+          "deletedAt": null,
+          "createdAt": 1462785208693,
+          "updatedAt": 1462785208693,
+          "id": "573054b8e52b8b0f00b3bc6e"
+        },
+        {
+          "name": "test tags",
+          "silentContent": true,
+          "tags": [
+            {
+              "id": "000000000000000000000103",
+              "name": "Algeria",
+              "value": "Algeria (DZ)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000104",
+              "name": "American Samoa",
+              "value": "American Samoa (AS)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000105",
+              "name": "Andorra",
+              "value": "Andorra (AD)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000106",
+              "name": "Angola",
+              "value": "Angola (AO)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000107",
+              "name": "Anguilla",
+              "value": "Anguilla (AI)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000108",
+              "name": "Antarctica",
+              "value": "Antarctica (AQ)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000109",
+              "name": "Antigua and Barbuda",
+              "value": "Antigua and Barbuda (AG)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000110",
+              "name": "Argentina",
+              "value": "Argentina (AR)",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            }
+          ],
+          "customerId": 1,
+          "description": "",
+          "ledColor": false,
+          "message": false,
+          "url": false,
+          "customSound": false,
+          "badge": false,
+          "deletedAt": null,
+          "createdAt": 1472615081008,
+          "updatedAt": 1472634882713,
+          "id": "57c652a91044171000b51238"
+        },
+        {
+          "name": "Testing Template",
+          "silentContent": true,
+          "url": true,
+          "message": true,
+          "tags": [
+            {
+              "id": "000000000000000000000102",
+              "name": "Albania",
+              "value": "AL",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "deletedAt": null,
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000103",
+              "name": "Algeria",
+              "value": "DZ",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "deletedAt": null,
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000105",
+              "name": "Andorra",
+              "value": "AD",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "deletedAt": null,
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            },
+            {
+              "id": "000000000000000000000107",
+              "name": "Anguilla",
+              "value": "AI",
+              "tagType": {
+                "name": "Market",
+                "description": "Collection of market tags",
+                "deletedAt": null,
+                "createdAt": 1450186635357,
+                "updatedAt": 1450186635357,
+                "id": "000000000000000000000003"
+              }
+            }
+          ],
+          "customerId": 1,
+          "description": "",
+          "ledColor": false,
+          "customSound": false,
+          "badge": false,
+          "deletedAt": null,
+          "createdAt": 1474539903360,
+          "updatedAt": 1474539903360,
+          "id": "57e3b17f8f67f1100024487e"
+        },
+        {
+          "name": "postman automation C3rjasg",
+          "description": "This push template allows to only send text messages to the applications",
+          "message": true,
+          "silentContent": false,
+          "ledColor": false,
+          "url": false,
+          "customSound": false,
+          "badge": false,
+          "customerId": 1,
+          "tags": [],
+          "deletedAt": null,
+          "createdAt": 1474536257592,
+          "updatedAt": 1474536257592,
+          "id": "57e3a3418f67f11000244828"
+        },
+        {
+          "name": "tus",
+          "url": true,
+          "customerId": 1,
+          "description": "",
+          "tags": [],
+          "silentContent": false,
+          "ledColor": false,
+          "message": false,
+          "customSound": false,
+          "badge": false,
+          "deletedAt": null,
+          "createdAt": 1472218370803,
+          "updatedAt": 1472218370803,
+          "id": "57c04502136c180e003cca71"
+        },
+        {
+          "name": "00 matus",
+          "silentContent": true,
+          "message": true,
+          "badge": true,
+          "description": "3131321",
+          "customerId": 1,
+          "tags": [
+            {
+              "id": "5677d8a1ec841c17006a5c86",
+              "name": "Android Version",
+              "value": "6.0.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5673f2aa50a9601c00a8c588",
+              "name": "Android Version",
+              "value": "6.0",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5679612f8abaf01800db95fb",
+              "name": "Android Version",
+              "value": "5.1.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "568169a5302a6f1b00f76a84",
+              "name": "Android Version",
+              "value": "5.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5679281fbbeaa01800e764ea",
+              "name": "Android Version",
+              "value": "5.0.2",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "569f5f44d74e721700f8562a",
+              "name": "Android Version",
+              "value": "5.0.1",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "56c1ff2e610b8934001aa89e",
+              "name": "Android Version",
+              "value": "5.0",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5685084df017aa1600fd6b2d",
+              "name": "Android Version",
+              "value": "4.4.2",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5747197555ed362a0085ae56",
+              "name": "Android SDK Version",
+              "value": "1.4.2-SNAPSHOT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "572caee880b5bc2a00d8f22a",
+              "name": "Android SDK Version",
+              "value": "1.4.0-SNAPSHOT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57163fecbe43242b001a3b86",
+              "name": "Android SDK Version",
+              "value": "1.3.0-SNAPSHOT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "571f259311512e2b0035ee75",
+              "name": "Android SDK Version",
+              "value": "1.3.0",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575183cd780cc43500a79870",
+              "name": "Application Version",
+              "value": "1.4.2-SNAPSHOT-dynamo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5751868f780cc43500a79872",
+              "name": "Application Version",
+              "value": "1.4.2-SNAPSHOT-demo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575566cba803393000662cc8",
+              "name": "Application Version",
+              "value": "1.4.1-9-g91be544",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5751c6bb780cc43500a79877",
+              "name": "Application Version",
+              "value": "1.4.1-6-gace68fb",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "576bd1c9cb33fa31009d1845",
+              "name": "Application Version",
+              "value": "1.4.1-25-ge0ed36c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57486eaea4195f3100ce3e8d",
+              "name": "Application Version",
+              "value": "1.4.1-3-g6685536",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574c1e39912f2634006fc182",
+              "name": "Application Version",
+              "value": "1.4.1-4-gd6bb73d",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574d4d96c073da2c008c8e2a",
+              "name": "Application Version",
+              "value": "1.4.1-5-g2da0200",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57628a2187cfbe3a00dac00e",
+              "name": "Application Version",
+              "value": "1.4.1-24-g3c6447f",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57627c0d87cfbe3a00dac00c",
+              "name": "Application Version",
+              "value": "1.4.1-23-g761935a",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5760394917d3583400f765e2",
+              "name": "Application Version",
+              "value": "1.4.1-22-g8ed95a6",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575fc7403e747b2b00f5e930",
+              "name": "Application Version",
+              "value": "1.4.1-20-gd9ad174",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574810e855ed362a0085ae57",
+              "name": "Application Version",
+              "value": "1.4.1-2-g04decca",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "575a75dc75dd83370056bcec",
+              "name": "Application Version",
+              "value": "1.4.1-18-ge702e2c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5759a19321d1e02b00cd2405",
+              "name": "Application Version",
+              "value": "1.4.1-17-gb736e2b",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57585e22152580300035a407",
+              "name": "Application Version",
+              "value": "1.4.1-16-g6301b95",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57580b131bda4e2b00b6fb60",
+              "name": "Application Version",
+              "value": "1.4.1-15-ge6b5ab9",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5756e4315dfb223200e6c34e",
+              "name": "Application Version",
+              "value": "1.4.1-14-g001c1a5",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5755ad0ade95962b0096e3dd",
+              "name": "Application Version",
+              "value": "1.4.1-12-g9c9c09c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "573ec8d69ba7f22b00f6ab45",
+              "name": "Application Version",
+              "value": "1.4.0-SNAPSHOT-demo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5747197555ed362a0085ae55",
+              "name": "Application Version",
+              "value": "1.4.1-1-gca3b24c",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57558cd3de95962b0096e3d5",
+              "name": "Application Version",
+              "value": "1.4.1-11-g637ffa8",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574327680e22002b0074d441",
+              "name": "Application Version",
+              "value": "1.3.0-43-g2900a5e",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "574306dd0e22002b0074d43c",
+              "name": "Application Version",
+              "value": "1.3.0-42-gc9f6278",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "573ef63c9ba7f22b00f6ab49",
+              "name": "Application Version",
+              "value": "1.3.0-40-g7049974",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5707bff7f9afab3600ca576d",
+              "name": "Application Version",
+              "value": "1.3.0-SNAPSHOT-demo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "57441bf0ae4ce72a002c4198",
+              "name": "Application Version",
+              "value": "1.3.0-45-gfc20b4e",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5707c3adf9afab3600ca576f",
+              "name": "Application Version",
+              "value": "1.3.0-SNAPSHOT-dynamo",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5745b4e8cf80322b00c4c3f7",
+              "name": "Bluetooth 4 Support",
+              "value": "false",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "56dd40399a02f5310013806c",
+              "name": "Bluetooth 4 Support",
+              "value": "true",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000455",
+              "name": "Czech",
+              "value": "cs",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000159",
+              "name": "Czech Republic",
+              "value": "CZ",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000209",
+              "name": "Italy",
+              "value": "IT",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "56701ab95ab4861900fdbd73",
+              "name": "Platform Name",
+              "value": "ios",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "000000000000000000000275",
+              "name": "Pitcairn",
+              "value": "PN",
+              "tagType": "000000000000000000000002"
+            },
+            {
+              "id": "5673f2aa50a9601c00a8c583",
+              "name": "Platform Name",
+              "value": "android",
+              "tagType": "000000000000000000000002"
+            }
+          ],
+          "ledColor": true,
+          "url": true,
+          "customSound": true,
+          "deletedAt": null,
+          "createdAt": 1464937367588,
+          "updatedAt": 1474537307051,
+          "id": "57512b978417ac100079816e"
+        },
+        {
+          "name": "matus template 1 edit",
+          "message": true,
+          "description": "matus template edit",
+          "customerId": 1,
+          "silentContent": false,
+          "ledColor": false,
+          "url": true,
+          "customSound": false,
+          "badge": true,
+          "deletedAt": null,
+          "createdAt": 1461064183589,
+          "updatedAt": 1467033733629,
+          "tags": [],
+          "id": "571611f7e54aa71200204e6a"
+        }
+      ],
+      "importers": [],
+      "exporters": [],
+      "updatedBy": "Name selfupdated mobgen",
+      "deletedBy": null,
+      "createdAt": 1462792854680,
+      "updatedAt": 1474632253207,
+      "id": "57307296e9523e2a00404dcf"
+    },
+    {
+      "externalId": 173,
+      "isSingle": false,
+      "customerId": 1,
+      "deletedAt": null,
+      "createdBy": "James Vrijmoet",
+      "tags": [
+        {
+          "id": "000000000000000000000572",
+          "name": "Spanish Spain",
+          "value": "es-ES",
+          "tagType": "000000000000000000000002"
+        },
+        {
+          "id": "000000000000000000000554",
+          "name": "English United States",
+          "value": "English United States (en-US)",
+          "tagType": "000000000000000000000004"
+        }
+      ],
+      "pushTemplates": [],
+      "importers": [],
+      "exporters": [],
+      "createdAt": 1460105951005,
+      "updatedAt": 1474013951305,
+      "name": "Demo Translations",
+      "updatedBy": "Name selfupdated mobgen",
+      "id": "570772df82b5872b00ebcbcf"
+    },
+    {
+      "externalId": 225,
+      "name": "hrvr",
+      "isSingle": false,
+      "customerId": 1,
+      "deletedAt": null,
+      "createdBy": "James Vrijmoet",
+      "tags": [],
+      "pushTemplates": [],
+      "importers": [],
+      "exporters": [],
+      "updatedBy": "manager mobgen",
+      "deletedBy": null,
+      "createdAt": 1462960740764,
+      "updatedAt": 1465554896295,
+      "id": "57330264e046742f00344f72"
+    },
+    {
+      "externalId": 219,
+      "name": "Load tests",
+      "isSingle": false,
+      "customerId": 1,
+      "deletedAt": null,
+      "createdBy": "James Vrijmoet",
+      "tags": [],
+      "pushTemplates": [],
+      "importers": [],
+      "exporters": [],
+      "createdAt": 1461663929464,
+      "updatedAt": 1463999292467,
+      "updatedBy": "James Vrijmoet",
+      "id": "571f38b9bb7f372900a14cbc"
+    },
+    {
+      "externalId": 191,
+      "isSingle": false,
+      "customerId": 1,
+      "deletedAt": null,
+      "createdBy": "Matus Super Admin",
+      "tags": [],
+      "pushTemplates": [],
+      "importers": [],
+      "exporters": [],
+      "createdAt": 1460449815137,
+      "updatedAt": 1462790519156,
+      "name": "moduletestthomas",
+      "updatedBy": "Manager MOBGEN",
+      "id": "570cb2172330d92c00731653"
+    }
+  ]
+}

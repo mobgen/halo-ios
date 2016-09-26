@@ -10,7 +10,7 @@ import Quick
 import Nimble
 @testable import Halo
 
-class ModelSpec: QuickSpec {
+class ModelSpec: BaseSpec {
 
     override func spec() {
 
@@ -20,6 +20,8 @@ class ModelSpec: QuickSpec {
                 expect(UIDevice.currentDevice().modelName).toNot(equal("iPhone 6"))
             }
         }
+        
+        
         
     }
 

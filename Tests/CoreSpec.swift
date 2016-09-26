@@ -11,27 +11,15 @@ import Nimble
 import OHHTTPStubs
 @testable import Halo
 
-class CoreSpec: QuickSpec {
+class CoreSpec: BaseSpec {
     
     override func spec() {
-        
-        // Swift
-        OHHTTPStubs.onStubActivation() { request, stub, response in
-            if let url = request.URL, name = stub.name {
-                print("\(url) stubbed by \"\(name).\"")
-            }
-        }
         
         let mgr = Halo.Manager.core
         
         beforeSuite {
             mgr.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
             mgr.setEnvironment(.Stage)
-        }
-        
-        afterSuite {
-            NSLog("After suite")
-            OHHTTPStubs.removeAllStubs()
         }
         
         describe("The core manager") {
