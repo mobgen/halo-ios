@@ -28,6 +28,27 @@ class CoreSpec: BaseSpec {
             }
         }
         
+        describe("Framework version") {
+            it("is correct") {
+                expect(mgr.frameworkVersion).to(equal("2.0.0"))
+            }
+        }
+        
+        describe("Registering an addon") {
+            
+//            class DummyAddon: Addon {
+//                
+//            }
+            
+            beforeEach {
+                
+            }
+            
+            it("succeeds") {
+                
+            }
+        }
+        
         describe("The oauth process") {
             
             beforeEach {
