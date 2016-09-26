@@ -16,7 +16,7 @@ class CoreSpec: QuickSpec {
     override func spec() {
         
         // Swift
-        OHHTTPStubs.onStubActivation() { request, stub in
+        OHHTTPStubs.onStubActivation() { request, stub, response in
             if let url = request.URL, name = stub.name {
                 print("\(url) stubbed by \"\(name).\"")
             }
@@ -43,7 +43,8 @@ class CoreSpec: QuickSpec {
         describe("The oauth process") {
             
             beforeEach {
-                Router.token = nil
+                Halo.Router.appToken = nil
+                Halo.Router.userToken = nil
             }
             
             context("with the right credentials") {
@@ -55,7 +56,7 @@ class CoreSpec: QuickSpec {
                     }.name = "Successful OAuth stub"
                     
                     waitUntil { done in
-                        Halo.Manager.network.refreshToken { (response, result) in
+                        Halo.Manager.network.authenticate(.App) { (response, result) in
                             done()
                         }
                     }
@@ -66,12 +67,12 @@ class CoreSpec: QuickSpec {
                 }
                 
                 it("succeeds") {
-                    expect(Router.token).toNot(beNil())
+                    expect(Halo.Router.appToken).toNot(beNil())
                 }
                 
                 it("retrieves a valid token") {
-                    expect(Router.token?.isValid()).to(beTrue())
-                    expect(Router.token?.isExpired()).to(beFalse())
+                    expect(Halo.Router.appToken?.isValid()).to(beTrue())
+                    expect(Halo.Router.appToken?.isExpired()).to(beFalse())
                 }
                 
             }
@@ -85,14 +86,14 @@ class CoreSpec: QuickSpec {
                     }.name = "Failed OAuth stub"
                                         
                     waitUntil { done in
-                        Halo.Manager.network.refreshToken { (response, result) in
+                        Halo.Manager.network.authenticate(.App) { (response, result) in
                             done()
                         }
                     }
                 }
                 
                 it("fails") {
-                    expect(Router.token).to(beNil())
+                    expect(Halo.Router.appToken).to(beNil())
                 }
             }
         }

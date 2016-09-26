@@ -75,6 +75,8 @@
 		00E17A951D75BE8400C3217D /* TranslationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E17A941D75BE8400C3217D /* TranslationsHelper.swift */; };
 		00E508391CB691EB00B4B5AE /* SearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E508381CB691EB00B4B5AE /* SearchFilter.swift */; };
 		00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EC9D361C43F72F00A3291D /* Credentials.swift */; };
+		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
+		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +104,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				00F106131D9946A100557900 /* Halo.framework in CopyFiles */,
 				009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */,
 				009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */,
 				0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */,
@@ -182,6 +185,7 @@
 		00E17A941D75BE8400C3217D /* TranslationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslationsHelper.swift; path = Source/Helpers/TranslationsHelper.swift; sourceTree = "<group>"; };
 		00E508381CB691EB00B4B5AE /* SearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
 		00EC9D361C43F72F00A3291D /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F1060E1D99416A00557900 /* Halo.framework in Frameworks */,
 				004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */,
 				004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */,
 				004FEC741BCFB788004216EE /* Quick.framework in Frameworks */,
@@ -280,6 +285,7 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00F106141D9946B700557900 /* XCTest.framework */,
 				00A409211D0FE72F005D4FB0 /* Foundation.framework */,
 				008E2B5A1C524DAB00FACAB2 /* libz.tbd */,
 				008E2B021C51320C00FACAB2 /* libsqlite3.tbd */,
@@ -865,7 +871,6 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 2.3;
 			};
