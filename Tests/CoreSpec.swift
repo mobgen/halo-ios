@@ -36,16 +36,16 @@ class CoreSpec: BaseSpec {
         
         describe("Registering an addon") {
             
-//            class DummyAddon: Addon {
-//                
-//            }
+            var addon: Addon?
             
             beforeEach {
-                
+                addon = DummyAddon()
+                mgr.registerAddon(addon!)
             }
             
             it("succeeds") {
-                
+                expect(mgr.addons.count).to(be(1))
+                expect(mgr.addons.first).to(be(addon))
             }
         }
         
