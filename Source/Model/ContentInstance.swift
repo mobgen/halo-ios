@@ -20,11 +20,15 @@ public class ContentInstance: NSObject, NSCoding {
         static let Name = "name"
         static let Module = "module"
         static let Values = "values"
-        static let CreatedBy = "createdBy"
-        static let PublishedAt = "publishedAt"
         static let CreatedAt = "createdAt"
-        static let RemovedAt = "removedAt"
         static let UpdatedAt = "updatedAt"
+        static let DeletedAt = "deletedAt"
+        static let CreatedBy = "createdBy"
+        static let UpdatedBy = "updatedBy"
+        static let DeletedBy = "deletedBy"
+        static let RemovedAt = "removedAt"
+        static let ArchivedAt = "archivedAt"
+        static let PublishedAt = "publishedAt"
         static let Tags = "tags"
     }
 
@@ -32,29 +36,38 @@ public class ContentInstance: NSObject, NSCoding {
     public internal(set) var id: String?
 
     /// Id of the module to which this instance belongs
-    public var moduleId: String?
+    public internal(set) var moduleId: String?
 
     /// Name of the instance
-    public var name: String?
+    public internal(set) var name: String?
 
     /// Collection of key-value pairs which make up the information of this instance
-    public var values: [String: AnyObject] = [:]
+    public internal(set) var values: [String: AnyObject] = [:]
 
+    /// Date in which the content was created
+    public internal(set) var createdAt: NSDate?
+
+    /// Most recent date in which the content was updated
+    public internal(set) var updatedAt: NSDate?
+    
+    public internal(set) var deletedAt: NSDate?
+    
+    /// Date in which the content was (or is going to be) removed
+    public internal(set) var removedAt: NSDate?
+    
+    /// Date in which the content was (or is going to be) published
+    public internal(set) var publishedAt: NSDate?
+
+    public internal(set) var archivedAt: NSDate?
+    
     /// Name of the creator of the content
     public var createdBy: String?
 
-    /// Date in which the content was created
-    public var createdAt: NSDate?
-
-    /// Date in which the content was (or is going to be) published
-    public var publishedAt: NSDate?
-
-    /// Date in which the content was (or is going to be) removed
-    public var removedAt: NSDate?
-
-    /// Most recent date in which the content was updated
-    public var updatedAt: NSDate?
-
+    public var updatedBy: String?
+    
+    public var deletedBy: String?
+    
+    
     /// Dictionary of tags associated to this general content instance
     public var tags: [String: Halo.Tag] = [:]
 
@@ -71,6 +84,8 @@ public class ContentInstance: NSObject, NSCoding {
         instance.name = dict[Keys.Name] as? String
 
         instance.createdBy = dict[Keys.CreatedBy] as? String
+        instance.deletedBy = dict[Keys.DeletedBy] as? String
+        instance.updatedBy = dict[Keys.UpdatedBy] as? String
 
         if let valuesList = dict[Keys.Values] as? [String: AnyObject] {
             instance.values = valuesList
@@ -99,6 +114,14 @@ public class ContentInstance: NSObject, NSCoding {
         if let removed = dict[Keys.RemovedAt] as? Double {
             instance.removedAt = NSDate(timeIntervalSince1970: removed/1000)
         }
+        
+        if let deleted = dict[Keys.DeletedAt] as? Double {
+            instance.deletedAt = NSDate(timeIntervalSince1970: deleted/1000)
+        }
+        
+        if let archived = dict[Keys.ArchivedAt] as? Double {
+            instance.archivedAt = NSDate(timeIntervalSince1970: archived/1000)
+        }
 
         return instance
 
@@ -111,10 +134,14 @@ public class ContentInstance: NSObject, NSCoding {
         moduleId = aDecoder.decodeObjectForKey(Keys.Module) as? String
         values = aDecoder.decodeObjectForKey(Keys.Values) as! [String: AnyObject]
         createdBy = aDecoder.decodeObjectForKey(Keys.CreatedBy) as? String
+        updatedBy = aDecoder.decodeObjectForKey(Keys.UpdatedBy) as? String
+        deletedBy = aDecoder.decodeObjectForKey(Keys.DeletedBy) as? String
         createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
         publishedAt = aDecoder.decodeObjectForKey(Keys.PublishedAt) as? NSDate
         removedAt = aDecoder.decodeObjectForKey(Keys.RemovedAt) as? NSDate
         updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
+        deletedAt = aDecoder.decodeObjectForKey(Keys.DeletedAt) as? NSDate
+        archivedAt = aDecoder.decodeObjectForKey(Keys.ArchivedAt) as? NSDate
         tags = aDecoder.decodeObjectForKey(Keys.Tags) as! [String: Halo.Tag]
     }
 
@@ -124,10 +151,14 @@ public class ContentInstance: NSObject, NSCoding {
         aCoder.encodeObject(moduleId, forKey: Keys.Module)
         aCoder.encodeObject(values, forKey: Keys.Values)
         aCoder.encodeObject(createdBy, forKey: Keys.CreatedBy)
+        aCoder.encodeObject(updatedBy, forKey: Keys.UpdatedBy)
+        aCoder.encodeObject(deletedBy, forKey: Keys.DeletedBy)
         aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
         aCoder.encodeObject(publishedAt, forKey: Keys.PublishedAt)
         aCoder.encodeObject(removedAt, forKey: Keys.RemovedAt)
         aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
+        aCoder.encodeObject(deletedAt, forKey: Keys.DeletedAt)
+        aCoder.encodeObject(archivedAt, forKey: Keys.ArchivedAt)
         aCoder.encodeObject(tags, forKey: Keys.Tags)
     }
 

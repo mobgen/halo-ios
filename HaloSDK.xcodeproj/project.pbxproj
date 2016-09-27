@@ -84,6 +84,7 @@
 		00F106441D9A75D600557900 /* search_success_not_paginated.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F106431D9A75D600557900 /* search_success_not_paginated.json */; };
 		00F106461D9A827900557900 /* segmentation_appuser_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F106451D9A827900557900 /* segmentation_appuser_success.json */; };
 		00F106481D9A87D100557900 /* segmentation_appuser_failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F106471D9A87D100557900 /* segmentation_appuser_failure.json */; };
+		00F1064A1D9ABF2F00557900 /* simple_search_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F106491D9ABF2F00557900 /* simple_search_success.json */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -200,6 +201,7 @@
 		00F106431D9A75D600557900 /* search_success_not_paginated.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search_success_not_paginated.json; sourceTree = "<group>"; };
 		00F106451D9A827900557900 /* segmentation_appuser_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = segmentation_appuser_success.json; sourceTree = "<group>"; };
 		00F106471D9A87D100557900 /* segmentation_appuser_failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = segmentation_appuser_failure.json; sourceTree = "<group>"; };
+		00F106491D9ABF2F00557900 /* simple_search_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = simple_search_success.json; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -443,6 +445,7 @@
 		00F106191D9960DB00557900 /* json */ = {
 			isa = PBXGroup;
 			children = (
+				00F106491D9ABF2F00557900 /* simple_search_success.json */,
 				00F106431D9A75D600557900 /* search_success_not_paginated.json */,
 				00F106411D9A74CC00557900 /* search_success_paginated.json */,
 				00F1061B1D9960DB00557900 /* module_list_success_not_paginated.json */,
@@ -624,6 +627,7 @@
 				00F106421D9A74CC00557900 /* search_success_paginated.json in Resources */,
 				00F106441D9A75D600557900 /* search_success_not_paginated.json in Resources */,
 				00F106251D9960E200557900 /* module_list_success_not_paginated.json in Resources */,
+				00F1064A1D9ABF2F00557900 /* simple_search_success.json in Resources */,
 				00F106261D9960E200557900 /* module_list_success_paginated.json in Resources */,
 				00F106461D9A827900557900 /* segmentation_appuser_success.json in Resources */,
 				00F106481D9A87D100557900 /* segmentation_appuser_failure.json in Resources */,

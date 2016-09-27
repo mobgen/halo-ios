@@ -21,8 +21,6 @@ class ModelSpec: BaseSpec {
             }
         }
         
-        
-        
     }
 
 }

@@ -23,6 +23,10 @@ class CoreSpec: BaseSpec {
         
         describe("The core manager") {
             
+            afterEach {
+                OHHTTPStubs.removeAllStubs()
+            }
+            
             context("when the startup process succeeds") {
             
                 beforeEach {
@@ -30,10 +34,6 @@ class CoreSpec: BaseSpec {
                         let fixture = OHPathForFile("segmentation_appuser_success.json", self.dynamicType)
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful appuser stub"
-                }
-                
-                afterEach {
-                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("has been initialised properly") {
@@ -58,10 +58,6 @@ class CoreSpec: BaseSpec {
                         let fixture = OHPathForFile("segmentation_appuser_failure.json", self.dynamicType)
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 400, headers: ["Content-Type": "application/json"])
                     }.name = "Successful appuser stub"
-                }
-                
-                afterEach {
-                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("user has not changed") {
@@ -107,6 +103,10 @@ class CoreSpec: BaseSpec {
                 Halo.Router.userToken = nil
             }
             
+            afterEach {
+                OHHTTPStubs.removeAllStubs()
+            }
+            
             context("with the right credentials") {
                 
                 beforeEach {
@@ -120,10 +120,6 @@ class CoreSpec: BaseSpec {
                             done()
                         }
                     }
-                }
-                
-                afterEach {
-                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("succeeds") {
@@ -150,10 +146,6 @@ class CoreSpec: BaseSpec {
                             done()
                         }
                     }
-                }
-                
-                afterEach {
-                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("fails") {

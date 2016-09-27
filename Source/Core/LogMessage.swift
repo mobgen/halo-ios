@@ -20,7 +20,7 @@ public enum HaloLogLevel: Int {
         case .Info: return "INFO"
         case .Warning: return "WARNING"
         case .Error: return "ERROR"
-        default: return ""
+        default: return "UNKNOWN"
         }
     }
 }
