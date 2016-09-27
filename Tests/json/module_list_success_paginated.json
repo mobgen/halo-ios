@@ -1,167 +1,51 @@
 {
+  "search": {
+    "facets": {}
+  },
+  "sort": {
+    "query": "updatedAt desc"
+  },
   "pagination": {
     "page": 1,
     "limit": 10,
     "offset": 0,
-    "totalItems": 12,
-    "totalPages": 2
+    "totalItems": 2,
+    "totalPages": 1
   },
   "items": [
     {
-      "externalId": 116,
-      "name": "security test module",
+      "name": "News",
+      "externalId": 4,
       "isSingle": false,
       "customerId": 1,
-      "createdBy": "Admin Admin",
+      "createdBy": "Admin",
       "tags": [],
       "pushTemplates": [],
       "importers": [],
       "exporters": [],
-      "updatedBy": "Manager Manager",
+      "deletedAt": null,
+      "updatedBy": "undefined",
       "deletedBy": null,
-      "createdAt": 1463998365805,
-      "updatedAt": 1463998446508,
-      "id": "5742d79dd6401c2a00d3fd06"
+      "createdAt": 1474036570134,
+      "updatedAt": 1474063790249,
+      "id": "000000000000000000000004"
     },
     {
-      "externalId": 61,
-      "isSingle": false,
-      "createdBy": "James Admin",
-      "tags": [],
-      "pushTemplates": [],
-      "createdAt": 1448448195000,
-      "updatedAt": 1464169542604,
-      "customerId": 1,
-      "name": "News Motorist",
-      "updatedBy": "Manager Manager",
-      "id": "565590c3e7428616003d590e"
-    },
-    {
-      "externalId": 80,
+      "name": "My Offers",
+      "externalId": 3,
       "isSingle": false,
       "customerId": 1,
-      "createdBy": "Admin Admin",
-      "tags": [],
-      "pushTemplates": [],
-      "createdAt": 1457607996702,
-      "updatedAt": 1466065990594,
-      "name": "Gallery",
-      "id": "56e1553c3a0c7d3200437020"
-    },
-    {
-      "externalId": 68,
-      "isSingle": false,
-      "createdBy": "James Admin",
-      "tags": [],
-      "pushTemplates": [],
-      "createdAt": 1450777384132,
-      "updatedAt": 1466065997834,
-      "customerId": 1,
-      "name": "Store Locator",
-      "id": "56791b28e7428616003d5949"
-    },
-    {
-      "externalId": 67,
-      "isSingle": false,
-      "createdBy": "James Admin",
-      "tags": [],
-      "pushTemplates": [],
-      "createdAt": 1450776918665,
-      "updatedAt": 1466066461251,
-      "customerId": 1,
-      "name": "QROffer",
-      "id": "56791956e7428616003d5944"
-    },
-    {
-      "externalId": 62,
-      "isSingle": false,
-      "createdBy": "James Admin",
-      "tags": [],
-      "pushTemplates": [],
-      "createdAt": 1448448651681,
-      "updatedAt": 1466069702203,
-      "customerId": 1,
-      "name": "ColorConfiguration",
-      "id": "5655928be7428616003d592c"
-    },
-    {
-      "externalId": 74,
-      "isSingle": false,
-      "createdBy": "James Admin",
-      "tags": [],
-      "pushTemplates": [],
-      "createdAt": 1455734379303,
-      "updatedAt": 1466070579825,
-      "customerId": 1,
-      "name": "Dictionary ",
-      "id": "56c4be6be7428616003d5961"
-    },
-    {
-      "externalId": 115,
-      "name": "QA module",
-      "isSingle": false,
-      "customerId": 1,
-      "createdBy": "matus QA",
-      "tags": [],
-      "pushTemplates": [
-        {
-          "name": "Only Text",
-          "id": "000000000000000000000001"
-        },
-        {
-          "customerId": 1,
-          "name": "Multimedia Notification",
-          "description": "This push template allows to use the device led color with a custom sound, message and badge",
-          "ledColor": true,
-          "customSound": true,
-          "message": true,
-          "badge": true,
-          "silentContent": false,
-          "url": false,
-          "createdAt": 1457443871026,
-          "updatedAt": 1457443871026,
-          "id": "000000000000000000000004"
-        }
-      ],
-      "importers": [],
-      "exporters": [],
-      "updatedBy": "Manager Manager",
-      "deletedBy": null,
-      "createdAt": 1463560056168,
-      "updatedAt": 1467966117017,
-      "id": "573c2778d6401c2a00d3fcfd"
-    },
-    {
-      "externalId": 155,
-      "name": "Smoke test",
-      "isSingle": false,
-      "customerId": 1,
-      "createdBy": "Admin Admin",
+      "createdBy": "Admin",
       "tags": [],
       "pushTemplates": [],
       "importers": [],
       "exporters": [],
-      "updatedBy": "smoke test",
+      "deletedAt": null,
+      "updatedBy": "undefined",
       "deletedBy": null,
-      "createdAt": 1468480485166,
-      "updatedAt": 1468481268071,
-      "id": "57873be52e2ef5003589466d"
-    },
-    {
-      "externalId": 156,
-      "name": "Smoke test single",
-      "isSingle": true,
-      "customerId": 1,
-      "createdBy": "Admin Admin",
-      "tags": [],
-      "pushTemplates": [],
-      "importers": [],
-      "exporters": [],
-      "updatedBy": "Manager Manager",
-      "deletedBy": null,
-      "createdAt": 1468482779458,
-      "updatedAt": 1468482828755,
-      "id": "578744db37fc14002b07b700"
+      "createdAt": 1474036570128,
+      "updatedAt": 1474063790248,
+      "id": "000000000000000000000003"
     }
   ]
 }

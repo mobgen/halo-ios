@@ -144,7 +144,7 @@ public class CoreManager: NSObject, HaloManager {
                         self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
                     }
                 } else {
-                    LogMessage("No .plist found", level: .Error).print()
+                    LogMessage("No .plist found", level: .Warning).print()
                 }
 
                 self.checkNeedsUpdate()

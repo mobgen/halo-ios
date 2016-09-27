@@ -53,10 +53,23 @@ class ModulesSpec : BaseSpec {
                     expect(pag?.page).to(equal(1))
                     expect(pag?.limit).to(equal(10))
                     expect(pag?.offset).to(equal(0))
-                    expect(pag?.totalItems).to(equal(12))
-                    expect(pag?.totalPages).to(equal(2))
+                    expect(pag?.totalItems).to(equal(2))
+                    expect(pag?.totalPages).to(equal(1))
                     
-                    expect(resp?.modules.count).to(equal(10))
+                    expect(resp?.modules.count).to(equal(2))
+                    
+                    let module: Halo.Module? = resp?.modules.first!
+                    
+                    // Check some parsed values of the first module
+                    expect(module?.id).to(equal("000000000000000000000004"))
+                    expect(module?.customerId).to(equal(1))
+                    expect(module?.name).to(equal("News"))
+                    expect(module?.isSingle).to(beFalse())
+                    expect(module?.createdBy).to(equal("Admin"))
+                    expect(module?.updatedBy).to(equal("undefined"))
+                    expect(module?.deletedAt).to(beNil())
+                    expect(module?.deletedBy).to(beNil())
+                    
                 }
             }
             
@@ -95,12 +108,12 @@ class ModulesSpec : BaseSpec {
                     let pag: PaginationInfo? = resp?.paginationInfo
                     
                     expect(pag?.page).to(equal(1))
-                    expect(pag?.limit).to(equal(12))
+                    expect(pag?.limit).to(equal(2))
                     expect(pag?.offset).to(equal(0))
-                    expect(pag?.totalItems).to(equal(12))
+                    expect(pag?.totalItems).to(equal(2))
                     expect(pag?.totalPages).to(equal(1))
                     
-                    expect(resp?.modules.count).to(equal(12))
+                    expect(resp?.modules.count).to(equal(2))
                 }
                 
             }

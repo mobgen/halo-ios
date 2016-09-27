@@ -95,7 +95,7 @@ class CoreSpec: BaseSpec {
             }
             
             it("succeeds") {
-                expect(mgr.addons.count).to(be(1))
+                expect(mgr.addons.count).to(equal(1))
                 expect(mgr.addons.first).to(be(addon))
             }
         }
@@ -116,7 +116,7 @@ class CoreSpec: BaseSpec {
                     }.name = "Successful OAuth stub"
                     
                     waitUntil { done in
-                        Halo.Manager.network.authenticate(.App) { (response, result) in
+                        Halo.Manager.network.authenticate(.App) { _ in
                             done()
                         }
                     }
@@ -146,10 +146,14 @@ class CoreSpec: BaseSpec {
                     }.name = "Failed OAuth stub"
                                         
                     waitUntil { done in
-                        Halo.Manager.network.authenticate(.App) { (response, result) in
+                        Halo.Manager.network.authenticate(.App) { _ in
                             done()
                         }
                     }
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("fails") {

@@ -15,15 +15,17 @@ import Foundation
 public class Module: NSObject, NSCoding {
 
     struct Keys {
-        static let Customer = "customer"
+        static let Customer = "customerId"
         static let Id = "id"
         static let Name = "name"
         static let ModuleType = "moduleType"
-        static let Enabled = "enabled"
         static let IsSingle = "isSingle"
+        static let CreatedBy = "createdBy"
         static let CreatedAt = "createdAt"
         static let UpdatedAt = "updatedAt"
         static let UpdatedBy = "updatedBy"
+        static let DeletedAt = "deletedAt"
+        static let DeletedBy = "deletedBy"
         static let Tags = "tags"
     }
 
@@ -36,9 +38,6 @@ public class Module: NSObject, NSCoding {
     /// Visual name of the module
     public internal(set) var name: String?
 
-    /// Identifies the module as enabled or not
-    public internal(set) var enabled: Bool = true
-
     /// Identifies the module as single item module
     public internal(set) var isSingle: Bool = false
 
@@ -48,9 +47,16 @@ public class Module: NSObject, NSCoding {
     /// Date of the last update performed in this module
     public internal(set) var updatedAt: NSDate?
 
+    /// Name of the user who created the module in the first place
+    public internal(set) var createdBy: String?
+    
     /// Name of the user who updated the module in last place
     public internal(set) var updatedBy: String?
 
+    public internal(set) var deletedAt: NSDate?
+    
+    public internal(set) var deletedBy: String?
+    
     /// Dictionary of tags associated to this module
     public internal(set) var tags: [String: Halo.Tag] = [:]
 
@@ -71,8 +77,10 @@ public class Module: NSObject, NSCoding {
         module.customerId = dict[Keys.Customer] as? Int
         module.name = dict[Keys.Name] as? String
         module.isSingle = dict[Keys.IsSingle] as? Bool ?? false
-        module.enabled = dict[Keys.Enabled] as? Bool ?? false
+        module.createdBy = dict[Keys.CreatedBy] as? String
         module.updatedBy = dict[Keys.UpdatedBy] as? String
+        module.deletedAt = dict[Keys.DeletedAt] as? NSDate
+        module.deletedBy = dict[Keys.DeletedBy] as? String
         module.tags = [:]
 
         if let tagsList = dict[Keys.Tags] as? [[String: AnyObject]] {
@@ -102,11 +110,13 @@ public class Module: NSObject, NSCoding {
         customerId = aDecoder.decodeObjectForKey(Keys.Customer) as? Int
         name = aDecoder.decodeObjectForKey(Keys.Name) as? String
         isSingle = aDecoder.decodeObjectForKey(Keys.IsSingle) as? Bool ?? false
-        enabled = aDecoder.decodeObjectForKey(Keys.Enabled) as? Bool ?? true
+        createdBy = aDecoder.decodeObjectForKey(Keys.CreatedBy) as? String
         updatedBy = aDecoder.decodeObjectForKey(Keys.UpdatedBy) as? String
         tags = aDecoder.decodeObjectForKey(Keys.Tags) as? [String: Halo.Tag] ?? [:]
         createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
         updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
+        deletedAt = aDecoder.decodeObjectForKey(Keys.DeletedAt) as? NSDate
+        deletedBy = aDecoder.decodeObjectForKey(Keys.DeletedBy) as? String
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
@@ -114,11 +124,13 @@ public class Module: NSObject, NSCoding {
         aCoder.encodeObject(customerId, forKey: Keys.Customer)
         aCoder.encodeObject(name, forKey: Keys.Name)
         aCoder.encodeObject(isSingle, forKey: Keys.IsSingle)
-        aCoder.encodeObject(enabled, forKey: Keys.Enabled)
+        aCoder.encodeObject(createdBy, forKey: Keys.CreatedBy)
         aCoder.encodeObject(updatedBy, forKey: Keys.UpdatedBy)
         aCoder.encodeObject(tags, forKey: Keys.Tags)
         aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
         aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
+        aCoder.encodeObject(deletedAt, forKey: Keys.DeletedAt)
+        aCoder.encodeObject(deletedBy, forKey: Keys.DeletedBy)
     }
 
 }
