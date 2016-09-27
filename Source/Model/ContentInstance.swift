@@ -187,6 +187,14 @@ public class ContentInstance: NSObject, NSCoding {
 
         return false
     }
+    
+    public func isDeleted() -> Bool {
+        if let deleted = self.deletedAt {
+            return deleted < NSDate()
+        }
+        
+        return false
+    }
 
     public func getValue(key: String) -> AnyObject? {
         return self.values[key]

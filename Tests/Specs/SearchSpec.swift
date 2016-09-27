@@ -59,6 +59,13 @@ class SearchSpec: BaseSpec {
                     // Check instances
                     expect(paginated?.instances.count).to(equal(10))
                     
+                    // Check first instance
+                    let instance: ContentInstance? = paginated?.instances.first
+                    
+                    expect(instance?.isPublished()).to(beTrue())
+                    expect(instance?.isDeleted()).to(beFalse())
+                    expect(instance?.isRemoved()).to(beFalse())
+                    
                 }
                 
             }
