@@ -36,9 +36,6 @@ public class Module: NSObject, NSCoding {
     /// Visual name of the module
     public internal(set) var name: String?
 
-    /// Type of the module
-    public internal(set) var type: Halo.ModuleType?
-
     /// Identifies the module as enabled or not
     public internal(set) var enabled: Bool = true
 
@@ -88,10 +85,6 @@ public class Module: NSObject, NSCoding {
             })
         }
 
-        if let moduleTypeDict = dict[Keys.ModuleType] as? [String: AnyObject] {
-            module.type = ModuleType.fromDictionary(moduleTypeDict)
-        }
-
         if let created = dict[Keys.CreatedAt] as? Double {
             module.createdAt = NSDate(timeIntervalSince1970: created/1000)
         }
@@ -112,7 +105,6 @@ public class Module: NSObject, NSCoding {
         enabled = aDecoder.decodeObjectForKey(Keys.Enabled) as? Bool ?? true
         updatedBy = aDecoder.decodeObjectForKey(Keys.UpdatedBy) as? String
         tags = aDecoder.decodeObjectForKey(Keys.Tags) as? [String: Halo.Tag] ?? [:]
-        type = aDecoder.decodeObjectForKey(Keys.ModuleType) as? ModuleType
         createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
         updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
     }
@@ -125,7 +117,6 @@ public class Module: NSObject, NSCoding {
         aCoder.encodeObject(enabled, forKey: Keys.Enabled)
         aCoder.encodeObject(updatedBy, forKey: Keys.UpdatedBy)
         aCoder.encodeObject(tags, forKey: Keys.Tags)
-        aCoder.encodeObject(type, forKey: Keys.ModuleType)
         aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
         aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
     }
