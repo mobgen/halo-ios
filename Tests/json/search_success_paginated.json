@@ -1,0 +1,219 @@
+{
+    "pagination": {
+        "page": 1,
+        "limit": 10,
+        "offset": 0,
+        "totalItems": 23,
+        "totalPages": 3
+    },
+    "items": [
+        {
+            "name": "pOwztyP",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "archivedAt": null,
+            "removedAt": null,
+            "publishedAt": null,
+            "createdBy": "Editor Editor",
+            "customerId": 1,
+            "values": {
+                "CXJP2HJ Boolean": true
+            },
+            "pushSchedule": null,
+            "externalId": null,
+            "revision": 0,
+            "createdAt": 1464082524018,
+            "updatedAt": null,
+            "id": "5744205c83bf055c00b8a779"
+        },
+        {
+            "name": "The Greatest Road Trips in Europe",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1464162122576,
+            "values": {
+                "ContentHtml": "",
+                "Date": 1388298780000,
+                "Summary": "Pack your bags, fill up the car, and hit the road. From sun-soaked Sicily to the beauty of the Scottish highlands, we bring you the best road trips in Europe. ",
+                "Title": "The Greatest Road Trips in Europe",
+                "Image": "http://s02.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/1440x810/1440x810-uk-road.png",
+                "Thumbnail": "http://s07.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/140x140/greatest-road-trips-europe-app-thumbnail-140x140.png"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448485747,
+            "updatedAt": 1466072256773,
+            "customerId": 1,
+            "id": "565591e5e7428616003d5916"
+        },
+        {
+            "name": "3 top tips to saving fuel this season!",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448486489,
+            "values": {
+                "Title": "3 top tips to saving fuel this season!",
+                "Date": 1293361020000,
+                "Summary": "Small changes to your driving habits can mean big savings this season.",
+                "ContentHtml": "<p>Small changes to your driving habits can mean fuel savings this season. Here are 3 top tips from our FuelSave Experts that can help improve your fuel efficiency:</p>  <p><strong>Do you still have your roof rack or box attached to your car from a recent trip? It’s time to take it off!<br></strong>Putting your roof rack on only when you need it could save you up to 5% more fuel according to the US Department of Energy website.</p>  <p><strong>Tyre pressure</strong><br>If your tyres are under inflated by just 3psi, fuel efficiency can be reduced by up to 1% - according to a European report in 2004 by the Policy Department Economic and Scientific Policy. So check tyres once a week or whenever you fill up. This is not only a great way to save fuel, it’s safer too.</p>  <p><strong>Avoid excess idling</strong><br>Idling gets you nowhere, but still burns fuel. If you’re likely to be in a queue for more than ten seconds, turn your engine off until you need it. Next time you are on the school run, remember this tip to help you save fuel.</p>",
+                "Thumbnail": "http://s00.static-shell.com/content/dam/shell/static/public/imgs/140x140/fuel-saving-tips.png",
+                "Image": "http://s03.static-shell.com/content/dam/shell/static/public/imgs/632x400/fuel-saving-tips.png"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448485838,
+            "updatedAt": 1448448485838,
+            "customerId": 1,
+            "id": "565591e5e7428616003d5917"
+        },
+        {
+            "name": "Just Drive - Vicki Butler-Henderson",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448486572,
+            "values": {
+                "Title": "Just Drive - Vicki Butler-Henderson",
+                "Date": 1388326980000,
+                "Summary": "Joining us for this month’s Just Drive is Vicki Butler Henderson.",
+                "ContentHtml": "<p>Joining us for this month’s Just Drive is Vicki Butler Henderson. Vicky is one of TV’s best known motoring presenters having worked for some of the UK’s most popular motoring shows. But she’s more than just a pretty face as Vicki devotes much of her spare time to her true passion: racing. Vicki started racing 100cc karts against the likes of David Coulthard when she was 12, and still races today in whatever she can - most recently a Ferrari F430 and Honda NSX. We caught up with the high powered former racing instructor to learn more about her passion for driving.</p> \n<p><a href=\"http://www.shell.co.uk/motorist/driving-inspiration/just-drive.html\">Read the full article</a></p>",
+                "Thumbnail": "http://s05.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/140x140/app-asset-vbh-140x140.png",
+                "Image": "http://s01.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/632x400/app-asset-vbh-632x400.png"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448485909,
+            "updatedAt": 1448448485909,
+            "customerId": 1,
+            "id": "565591e5e7428616003d5918"
+        },
+        {
+            "name": "Secret Circuits: Amsterdam",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448486630,
+            "values": {
+                "Title": "Secret Circuits: Amsterdam",
+                "Date": 1388312400000,
+                "Summary": "Amsterdam is better known for its barges and bikes than car-friendly streets. Motoring journalist Victoria MacMillan Bell travelled to the Netherlands, the home of Royal Dutch Shell. ",
+                "ContentHtml": "<p>A driving story in Amsterdam, the city of bicycles? A city linked in the main by canals? Is someone playing a cruel joke on me? Fortunately not. There’s no joking involved. As for the cruelty – well, there’s only one way to find out...</p> <p>Bicycles rule the city for the simple fact that on two wheels, you can whistle through the narrowest of streets while a car will be log-jammed at snail’s pace, caught in one giant three-point turn around a city which prides itself on keeping the automobile at bay.</p> <p>But I’ve always liked a challenge, and sit me in something compact, a little adrenalin-fuelling two-seater sports car, and I will give those crazy exercise fiends a run for their trainers – while remaining snug and smug should it decide to rain.</p> <p><strong>Oosteliijke Obstruction</strong></p> <p>My first encounter with the city’s two-wheeled inhabitants occurs as I unload my bags in front of my hotel, the Lloyd, in the hip, eastern docks area. It’s a few minutes before I realise that I’ve become a mobile roundabout, causing a temporary halt in the bike lane. The road is dead straight for about half-a-mile either side of the hotel, so how they hadn’t spotted me is anyone’s guess. But I quickly realise that those foolish enough to venture into the bicycle lane will inevitably attract internationally recognised statements of abuse.</p> <p>It is dusk here on Oostelijke Handelskade, a 2km long island on which my hotel sits. I fire up the motor and set a course for the city centre. I cruise past some old warehouses, most of which were constructed in the late 1800s and named after the countries the ships and steamboats were sailing to. But these warehouses are slowly disappearing and being replaced by ultra-modern buildings, including the stunning Muziekgebouw Concert Hall, an incredible marriage of glass and concrete. I pull over to get a better look.</p> <p>In the distance I make out Nemo, Renzo Piano’s ship-like science museum which stands high out of this virtually flat cityscape. But there is so much more to see, so I cruise along the roads alongside cyclists and trams, under a bright, white moon. Many residents are escaping Amsterdam for the weekend, like the ebb and flow of tide.</p> <p><strong>Starry Night</strong></p> <p>I move on to Prinsengracht, the location of Anne Frank’s house, extended in 1999 to great effect. Here at 4am, only the ripple of wake from a passing swan interrupts its reflection across the water. It is so tranquil. In contrast, nearby Jordaan is a Mecca for cafes, art galleries and studios, and even at this hour its inhabitants are slipping in and out of doorways. While other residents of the city continue to sleep, I head to another art zone, the Fashion and museum District with the van Gogh museum positioned centrally in the park alongside Paulus Potterstraat.</p> <p>A chink of dawn opens above me, a slash of palest purple among the inky blackness of night. Sitting in the warmth of the car and cruising the cobbled streets around the Rijksmuseum, this is a cosy place to be, despite the temporarily uneven surface. I veer off it soon enough and head along Stadhouderskade, which is suddenly rammed with cycling commuters, trams and buses. Crossing the Binnenamstel canal with its bridges made famous by Van Gogh, I feel as though I have stepped into one of the artist’s canvases.</p> <p>Shops are opening now, closed signs are coming off doors and Amsterdam is stretching its limbs in the morning sunshine.  Breakfast calls and so does the road home, sadly. I like Amsterdam and its people. There are many ways of seeing the city, but by night in a car that can provide warmth and comfort has got to be the best.</p> ",
+                "Thumbnail": "http://s01.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/140x140/sc-amsterdam-app-thumbnail-140x140.jpg",
+                "Image": "http://s02.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/632x400/sc-amsterdam-app-article-header-632x400.jpg"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448486064,
+            "updatedAt": 1448448486064,
+            "customerId": 1,
+            "id": "565591e6e7428616003d5919"
+        },
+        {
+            "name": "Secret Circuits: Barcelona",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448486794,
+            "values": {
+                "Title": "Secret Circuits: Barcelona",
+                "Date": 1388328300000,
+                "Summary": "Barcelona, prepare to reveal your night-time secrets. We sent journalist Jane Cloete to the midnight streets of the Catalan capital to find a secret circuit.",
+                "ContentHtml": "<p>Barcelona, prepare to reveal your night-time secrets. We sent journalist Jane Cloete to the midnight streets of the Catalan capital to find a secret circuit.</p> <p>I’m here to tackle Barcelona and to explore the best of the city while its inhabitants sleep. I knew Barcelona would be tricky though, as it’s famous for its late-night dining and party atmosphere, but I’m up for the challenge. I begin at the highest point in Barcelona, on the mountain of Tibidabo.<br> <br> The drive down the steep hill back into town is tight, twisty and fun. If the city centre wasn’t calling, I might be tempted to head along the coast.<br> <br> First stop is Antoni Gaudi’s Sagrada Familia. It’s almost 11.30pm, but tourists are still milling around the famous Catholic church that’s been under construction since 1882. Barcelona is now synonymous with the architect, and pictures of his signature flamboyant, otherworldly work grace pretty much every printed tourist guide for the city.</p> <p><strong>Catalan Extravagance</strong><br> I cruise down Carrer de Provença, one of the long, straight and very wide roads in the Eixample district. After a few blocks it’s a wide left corner into Passeig de Gràcia, Barcelona’s well-known shopping street. Allegedly the most expensive street in the country, it offers up designer stores, excellent restaurants and cafes, plus some of the city’s best-known buildings. I slow down outside another Gaudi building, Casa Mila, appreciating Gaudi’s now recognisable undulating lines and the rather wonderful Espanta Bruixes chimneys.<br> <br> There’s no point in speeding up, because casa Batlló – yes, another Gaudi building – is soon on my right. The city has considerately placed benches outside the building, and these are now filled with visitors, gawping up as their cameras capture close-ups and wide-angles of Batlló’s animal-mask-like balconies and dragon-spine roof.<br> <br> The road ends at the famous square Plaça de Cataluña, and I’m just in time to see the last few minutes of the illuminated fountains before they hit their midnight curfew.<br> <br> I turn down la Rambla, the famed party street with its wide pedestrianised central section, and the youthful revellers up their challenge. They’re not making it easy for me – despite it being a tuesday night, supposedly one of the quietest of the week. The smiling, jovial crowd is being catered to by tapas restaurants, bars, stalls, artists - no one shows any signs of tiring out.</p> <p><strong>Liechtenstein at the Olympics</strong><br> I’m not going to win now so, as soon as I can, I turn left into Barri Gòtic, Barcelona’s gothic Quarter. This is the oldest part of the city, and one of the nicest to walk through during the day. At night the atmosphere is quite haunting, and without the crowds you’re able to appreciate the grandeur of places such as the Plaça de Sant Jaume. This square has always been the home of important government buildings – even during Roman times – and today the city hall faces the Palau de la Generalitat (seat of the Catalan government).<br> <br> I’ve spent a few hours slowly exploring the tangled, narrow streets of the quarter with only a few pedestrians and policemen for company, so it’s off to the waterfront, which has completely changed the face of Barcelona. To get there I drive round the 20-metre-high Roy Lichtenstein sculpture, Barcelona Head, which was inspired by Gaudi and commissioned for the Olympics. To stay close to the sea, I drive up and down he fingers of land that stretch out into the water.<br> <br> My last hope for peace in the city is back in the quieter gothic Quarter. So, taking the Via Laietana, I pull up outside the Museum of History of Barcelona. It’s 5am and I’m going to enjoy the silence while admiring the building that contains evidence of the city’s 2,000-year past. Just then, the first of the morning’s dog walkers strolls by with a cheery “Buenos dias!” That’s it! Barcelona has beaten me. But with the warmth of its locals, the beauty of its architecture and the vibrancy of its waterfront, I’m happy to admit defeat.</p> ",
+                "Thumbnail": "http://s02.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/140x140/barcelona-app-thumbnail-140x140.jpg",
+                "Image": "http://s05.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/632x400/barcelona-app-article-header-632x400.jpg"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448486226,
+            "updatedAt": 1448448486226,
+            "customerId": 1,
+            "id": "565591e6e7428616003d591a"
+        },
+        {
+            "name": "Desert Storm",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448486966,
+            "values": {
+                "Title": "Desert Storm",
+                "Date": 1388308200000,
+                "Summary": "When dirt riding and adventure biking novice Gary Inman decided to cross the Sahara by motorcycle, he ignored knobbly tyres in favour of semi-slicks, and ditched relative ease for crashes by the dozen. Why? He thought, “it would make a good story”. It does…",
+                "ContentHtml": "<p>When dirt riding and adventure biking novice Gary Inman decided to cross the Sahara by motorcycle, he ignored knobbly tyres in favour of semi-slicks, and ditched relative ease for crashes by the dozen. Why? He thought, “it would make a good story”. It does…</p> <p>I knew the idea of crossing the Sahara on a road bike was ambitious, but I had no idea how hard it would actually be.<br> <br> At the Moroccan border I’m immediately unnerved by some Frenchmen. They look at my bike and shake their heads; “you’re taking this on the piste?” The 1,130cc machine still looks box-fresh and ill-prepared for one of the planet’s toughest environments.</p> <p><strong>Taking on the Piste</strong><br> “Oui,” I reply, wondering what a piste looks like. Soon I’m into the no-man’s-land between the Moroccan and Mauritanian borders. Now it’s a piste. I soon learn that this term defines every surface that can be travelled on – from smooth dirt road to rugged wilderness.  <br> <br> The 135bhp bike starts acting like it’s drunk. I ride slowly, paddling with my feet when the sand is deep. I’m soon in the Mauritanian town of Nouadhibou.</p> <p><strong>Mauritanian Madness</strong><br> It’s post-apocalypse fiction brought to life. The cars have no headlights or windows; most look like they’ve been rolled a dozen times. Locals give me dead-eyed, zombie-like stares. The architecture is Mogadishu-chic. In among the madness my bike has become invisible. Nothing gives me an inch. I’d be safer on a donkey.<br> <br> Sanctuary is found in a walled campsite full of Europeans. Tomorrow I’ll start on the real purpose of the journey – riding in the Sahara. For that I’ll need a guide. I hook up with two Dutch guys driving to Gambia. The guide will travel in their car and I can follow. As guides go, Mr Abba certainly looks the part: a dark-skinned Arab in his mid-50s wearing a Bedouin’s flowing, white robe and head dress. He doesn’t seem fazed about taking the bike along, though he takes a long, close look at the fat rear tyre.<br> <br> The next day we’re out on the piste. There may be some tarmac here, but the riding is hot, dusty work demanding concentration. After 55 miles the car turns right, off the piste and into the Sahara desert. My mouth dries in an instant.</p> <p><strong>Doing Things the Hard Way</strong><br> Now I know I need to relax and just keep the front wheel pointing in the direction I want it to go and the rear will follow. I know I should try standing up. I know I should grip the bars lightly. But I sit down and hold on with white-knuckle ferocity. I have little faith in myself and close to none in the road tyres. All I do is stare at the Dutchmen’s car and try to follow. It’s painfully slow going. At times it’s just painful.<br> <br> At one point I haven’t fallen off for close to an hour, my confidence has risen and I make the mistake of attempting a turn in the sand. Then I’m down and pinned to the floor. I have time to reflect on just how much fun I’m having - none. After four hours we make a proper stop and Mr Abba brews a pot of mint tea.<br> <br> “You look like an accident happening in slow motion,” I’m told. But I feel remarkably upbeat. Mr Abba points to a mountain in the distance and says we’re staying beyond that. The day no longer feels like it’s going to last forever. 2 hours later, we’re past the mountain and spend the night at a small Bedouin camp.</p> <p><br> <strong>The Finishing Line</strong><br> The next morning I crash within five miles of an 80-mile day on the sand. I’ve no choice but to get back in the saddle and keep riding. My reward is being taught a lesson in life: it doesn’t matter how much talent you lack, perseverance can often paper over the cracks.<br> <br> My last night in the desert is spent in a tent on the beach with the Atlantic crashing a few feet away. Home aside, it’s the best destination I’ve ever reached on a bike. I’m no longer scared of dying in the desert or of crashing and breaking bones. I’ve ridden a bike fitted with road tyres through a gruelling section of the Sahara. I know that’s a first.</p>",
+                "Thumbnail": "http://s06.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/140x140/desertstorm-app-thumbnail-140x140.jpg",
+                "Image": "http://s03.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/632x400/desertstorm-app-article-header-632x400.jpg"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448486385,
+            "updatedAt": 1448448486385,
+            "customerId": 1,
+            "id": "565591e6e7428616003d591b"
+        },
+        {
+            "name": "SCUDERIA FERRARI LAUNCHES SF15-T FORMULA ONE™ CAR",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448487107,
+            "values": {
+                "Title": "SCUDERIA FERRARI LAUNCHES SF15-T FORMULA ONE™ CAR",
+                "Date": 1419779700000,
+                "Summary": "Scuderia Ferrari’s new Formula One car was unveiled online to the world on Friday 30 January.",
+                "ContentHtml": "<p>The SF15-T, Scuderia Ferrari’s 2015 Formula One car, was unveiled by Ferrari VIPs including Scuderia Ferrari Team Principal Maurizio Arrivabene, and official Scuderia Ferrari Formula One drivers Sebastian Vettel and Kimi Räikkönen.</p> <p>The event marked Sebastian and Kimi’s first official appearance together as the Italian marque’s new driver line-up following the announcement at the end of the 2014 season that Sebastian would be joining the team. Shell is looking forward to working closely with the four-time World Champion and using his extensive knowledge and experience to help develop Shell’s fuels and lubricants of the future.</p> <p><strong>Kai-Uwe Witterstein, Shell Global Sponsorship Manager, </strong>commented:<em> “We are very pleased with the Ferrari SF15-T and look forward to seeing it on track for the first time in Jerez this weekend. Shell has worked closely with Scuderia Ferrari to prepare for the 2015 season. The challenge Ferrari presents us with is that we always have to stretch ourselves to be better than the year before, we have to push ourselves even further.”</em></p> <p><em>“At Shell, we see the Ferrari partnership as a great opportunity to develop the best products for our customers. It’s not just about Ferrari, it’s also about access to Formula One and all its advanced technology because this is where you come up with new ideas.” </em></p> <p><strong>View Ferrari launch video here:</strong></p> <p><a href=\"http://2015f1car.ferrari.com/desktop/en/#revelation\">http://2015f1car.ferrari.com/desktop/en/#revelation</a></p> <p>In 2014 the challenges faced by the two companies, developing a revolutionary powertrain and optimising fuels and lubricants to meet last year’s new regulations, were some of the most demanding ever confronted. Those challenges continue in 2015, as the number of power units available to each driver over the course of the season has been reduced from last year’s total of five to just four. This means Scuderia Ferrari has been looking to Shell to provide fuels and lubricants that increase protection throughout this extended engine life while still enhancing performance.</p> <p>Speaking about the upcoming season, <strong>Guy Lovett, Shell Technology Manager for Ferrari</strong>, commented: <em>“Shell’s contribution to the performance of Scuderia Ferrari’s power unit is crucial. We have worked extremely closely with the team in the build up to the 2015 season to ensure that our Shell V-Power fuel and Shell Helix Ultra with PurePlus technology lubricant can meet the demands of its latest evolution. Now we are looking forward to seeing how the SF15-T performs on the track this weekend and throughout the winter tests before making the final adjustments needed to be ready for the first F1 race in Melbourne.”</em></p>",
+                "Thumbnail": "http://s04.static-shell.com/content/dam/shell-new/local/country/nld/mobile/motorist/service/voc-140x140.jpg",
+                "Image": "http://s03.static-shell.com/content/dam/shell-new/local/country/aus/mobile/motorist/1440x810/sf15t-1440x810-expanded.png"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448486454,
+            "updatedAt": 1448448486454,
+            "customerId": 1,
+            "id": "565591e6e7428616003d591c"
+        },
+        {
+            "name": "Shell and BMW deepen collaboration",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448487173,
+            "values": {
+                "Title": "Shell and BMW deepen collaboration",
+                "Date": 1419779700000,
+                "Summary": "Shell premium motor oils Shell Helix Ultra and Pennzoil Platinum to power BMW Motorsport and Shell V-Power becomes the premium fuel recommended by BMW M Automobiles",
+                "ContentHtml": "<p>Shell is expanding its collaboration with the BMW AG, following on from being named the recommended supplier of genuine BMW engine oil and BMW Group’s only recommended global supplier for aftermarket motor oils. Shell Lubricants – Shell Helix Ultra and Pennzoil Platinum – joins forces with BMW Motorsport as its premium technology partner and exclusive supplier of premium motor oils. And Shell V-Power will be the recommended fuel for the BMW M Automobiles.</p> <p>The lubricants’ partnership spans Deutsche Tourenwagen Masters (DTM), the TUDOR United SportsCar Championship (USCC) and the 24-hour race at the Nürburgring-Nordschleife circuit (Germany) covering races in Austria, Canada, Germany, the Netherlands, Russia and the USA.</p> <p>The types of racing covered are varied: ranging from the well-established sedan-racing DTM series, which is among the most popular touring car series in the world, to the newbie USCC series, only in its second season, combining a heritage of road and endurance racing in North America, and not forgetting the pure endurance of the Nürburgring 24-hour race. Shell’s involvement in motor racing helps Shell to develop its range of products for the everyday motorist: this new link up strengthens this commitment.</p> <p>The fuels alliance means Shell V-Power Gasoline and Shell V-Power Diesel are recommended for the BMW M Automobiles recognising more than 100 years heritage in innovation and fuels leadership. With its unique formulations designed to actively clean and protect vital engine parts, Shell V-Power is seen as an ideal partner for BMW M Automobiles, BMWs pinnacle of technology.</p> <p>Speaking on the tie-up, Mark Gainsborough, Shell Executive Vice President said, “Shell has passion for motor racing, as demonstrated by our long standing involvement in the international motorsport arena. We are excited to be expanding this involvement as BMW Motorsport’s partner, in addition to being the BMW Group’s recommended supplier of aftermarket engine oils.</p> <p>The partnership with BMW highlights the significant contribution that our brands such as Shell Helix Ultra and Pennzoil Platinum motor oils and Shell V-Power fuels can make to the performance of BMW cars both on and off the track. This collaboration will enable two like-minded companies to push the boundaries of both motor oil, fuel and engine development - hopefully for the ultimate benefit of the everyday car driver.”</p> <p>Motor oils are crucial in ensuring engine durability and enabling vehicle efficiency and performance. Their cleansing, friction reduction and temperature control properties are important contributors to durability and performance. Evolving motorsport race rules have made the use of premium oils even more vital for an ambitious race team such as BMW. For example each DTM manufacturer is only permitted nine engines to last the full 2015 season. In pre-season testing, BMW Motorsport has already seen enhanced performance benefits to the engine from using Shell Helix Ultra with PurePlus Technology.</p> <p>“Everyone at BMW Motorsport is delighted that we can count on the support of Shell in the future, both in DTM and USCC, as well as the Nürburgring 24 Hours,” said BMW Motorsport Director Jens Marquardt. “Shell Helix Ultra and Pennzoil Platinum as products are perfectly suited to our motorsport projects. We are putting our faith in these high-performance motor oils, and hope that the new partnership will allow us to lay the foundation for great success together on the racetrack.”</p> <p>Shell will allocate a dedicated team of engineers, who will work alongside BMW Motorsport engineers. They will apply decades of motorsport experience to develop a bespoke blend of motor oil for the BMW M4 DTM car. This development will be on-going during testing and the race season.</p>",
+                "Thumbnail": "http://s04.static-shell.com/content/dam/shell-new/local/country/nld/mobile/motorist/service/voc-140x140.jpg",
+                "Image": "http://s03.static-shell.com/content/dam/shell-new/local/country/gbr/motoristapp/1440x810/BMW1_1440x810_Full.png"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448486597,
+            "updatedAt": 1448448486597,
+            "customerId": 1,
+            "id": "565591e6e7428616003d591d"
+        },
+        {
+            "name": "Ducati launches 2015 GP15 MotoGP bike",
+            "module": "565590c3e7428616003d590e",
+            "tags": [],
+            "publishedAt": 1448448487317,
+            "values": {
+                "Title": "Ducati launches 2015 GP15 MotoGP bike",
+                "Date": 1419794580000,
+                "Summary": "Ducati has launched its new bike for the 2015 MotoGP season, the Ducati Desmosedici GP15.",
+                "ContentHtml": "<p><em>As Technical Partner to Ducati we are looking forward to an exciting year of racing!</em></p>",
+                "Thumbnail": "http://s04.static-shell.com/content/dam/shell-new/local/country/nld/mobile/motorist/service/voc-140x140.jpg",
+                "Image": "http://s03.static-shell.com/content/dam/shell-new/local/country/aus/mobile/motorist/1440x810/gp15-1440x810.png"
+            },
+            "createdBy": "News Editor",
+            "archivedAt": null,
+            "removedAt": null,
+            "createdAt": 1448448486658,
+            "updatedAt": 1448448486658,
+            "customerId": 1,
+            "id": "565591e6e7428616003d591e"
+        }
+    ]
+}

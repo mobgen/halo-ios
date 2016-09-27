@@ -17,11 +17,11 @@ class ContentSpec : BaseSpec {
         
         describe("Retrieving all modules") {
             
-            context("with pagination info") {
+            context("paginated") {
                 
                 beforeEach {
                     stub(isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("modules_success.json", self.dynamicType)
+                        let fixture = OHPathForFile("module_list_success_paginated.json", self.dynamicType)
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
                 }
@@ -49,16 +49,16 @@ class ContentSpec : BaseSpec {
                     expect(pag?.page).to(equal(1))
                     expect(pag?.limit).to(equal(10))
                     expect(pag?.offset).to(equal(0))
-                    expect(pag?.totalItems).to(equal(6))
-                    expect(pag?.totalPages).to(equal(1))
+                    expect(pag?.totalItems).to(equal(12))
+                    expect(pag?.totalPages).to(equal(2))
                 }
             }
             
-            context("with missing pagination info") {
+            context("not paginated") {
                 
                 beforeEach {
                     stub(isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("modules_success_no_pagination.json", self.dynamicType)
+                        let fixture = OHPathForFile("module_list_success_not_paginated.json", self.dynamicType)
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
                 }
@@ -83,11 +83,11 @@ class ContentSpec : BaseSpec {
                     
                     // Check pagination
                     let pag: PaginationInfo? = resp?.paginationInfo
-                    expect(pag?.page).to(equal(0))
-                    expect(pag?.limit).to(equal(0))
+                    expect(pag?.page).to(equal(1))
+                    expect(pag?.limit).to(equal(12))
                     expect(pag?.offset).to(equal(0))
-                    expect(pag?.totalItems).to(equal(0))
-                    expect(pag?.totalPages).to(equal(0))
+                    expect(pag?.totalItems).to(equal(12))
+                    expect(pag?.totalPages).to(equal(1))
                 }
                 
             }
