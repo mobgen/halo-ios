@@ -19,12 +19,63 @@ class CoreSpec: BaseSpec {
         
         beforeSuite {
             mgr.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
-            mgr.setEnvironment(.Stage)
         }
         
         describe("The core manager") {
-            it("has been initialised properly") {
-                expect(mgr).toNot(beNil())
+            
+            context("when the startup process succeeds") {
+            
+                beforeEach {
+                    stub(pathStartsWith("/api/segmentation/appuser")) { (request) -> OHHTTPStubsResponse in
+                        let fixture = OHPathForFile("segmentation_appuser_success.json", self.dynamicType)
+                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                    }.name = "Successful appuser stub"
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
+                }
+                
+                it("has been initialised properly") {
+                    expect(mgr).toNot(beNil())
+                }
+                
+                it("starts properly") {
+                    waitUntil { done in
+                        mgr.startup { success in
+                            done()
+                        }
+                    }
+                    
+                    expect(mgr.user).toNot(beNil())
+                }
+            }
+            
+            context("when saving the user fails") {
+                
+                beforeEach {
+                    stub(pathStartsWith("/api/segmentation/appuser")) { (request) -> OHHTTPStubsResponse in
+                        let fixture = OHPathForFile("segmentation_appuser_failure.json", self.dynamicType)
+                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 400, headers: ["Content-Type": "application/json"])
+                    }.name = "Successful appuser stub"
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
+                }
+                
+                it("user has not changed") {
+                    
+                    let oldUser = mgr.user
+                    
+                    waitUntil { done in
+                        mgr.saveUser { _ in
+                            done()
+                        }
+                    }
+                    
+                    expect(mgr.user).to(be(oldUser))
+                }
             }
         }
         

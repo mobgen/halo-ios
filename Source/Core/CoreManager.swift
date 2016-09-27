@@ -377,7 +377,6 @@ public class CoreManager: NSObject, HaloManager {
 
                         case .Failure(let error):
                             LogMessage("Error saving user", error: error).print()
-
                         }
 
                         handler?(response, result)

@@ -1,0 +1,9 @@
+{
+  "error": {
+    "message": "One or more fields have validation problems",
+    "extra": {
+      "blah": "undefined_attribute"
+    },
+    "type": "HaloError"
+  }
+}

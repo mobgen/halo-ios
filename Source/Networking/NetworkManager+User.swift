@@ -11,13 +11,12 @@ import Foundation
 extension NetworkManager {
 
     func userParser(data: AnyObject) -> Halo.User? {
-        guard let userDict = data as? [String: AnyObject] else {
-            return nil
+        if let dict = data as? [String: AnyObject] {
+            return User.fromDictionary(dict)
         }
-
-        return User.fromDictionary(userDict)
+        return nil
     }
-
+    
     func getUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
 
         if let id = user.id {

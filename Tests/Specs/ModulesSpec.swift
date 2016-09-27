@@ -11,7 +11,7 @@ import Nimble
 import OHHTTPStubs
 @testable import Halo
 
-class ContentSpec : BaseSpec {
+class ModulesSpec : BaseSpec {
 
     override func spec() {
         
@@ -24,6 +24,10 @@ class ContentSpec : BaseSpec {
                         let fixture = OHPathForFile("module_list_success_paginated.json", self.dynamicType)
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("works") {
@@ -51,6 +55,8 @@ class ContentSpec : BaseSpec {
                     expect(pag?.offset).to(equal(0))
                     expect(pag?.totalItems).to(equal(12))
                     expect(pag?.totalPages).to(equal(2))
+                    
+                    expect(resp?.modules.count).to(equal(10))
                 }
             }
             
@@ -61,6 +67,10 @@ class ContentSpec : BaseSpec {
                         let fixture = OHPathForFile("module_list_success_not_paginated.json", self.dynamicType)
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("works") {
@@ -83,11 +93,14 @@ class ContentSpec : BaseSpec {
                     
                     // Check pagination
                     let pag: PaginationInfo? = resp?.paginationInfo
+                    
                     expect(pag?.page).to(equal(1))
                     expect(pag?.limit).to(equal(12))
                     expect(pag?.offset).to(equal(0))
                     expect(pag?.totalItems).to(equal(12))
                     expect(pag?.totalPages).to(equal(1))
+                    
+                    expect(resp?.modules.count).to(equal(12))
                 }
                 
             }
