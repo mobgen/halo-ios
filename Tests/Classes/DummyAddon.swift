@@ -15,39 +15,39 @@ class DummyAddon: NSObject, Addon {
     
     var addonName: String = "Dummy addon"
     
-    func setup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void {
+    func setup(haloCore core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void {
         
     }
     
-    func startup(core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void {
+    func startup(haloCore core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void {
         
     }
     
-    func willRegisterAddon(core: Halo.CoreManager) -> Void {
+    func willRegisterAddon(haloCore core: Halo.CoreManager) -> Void {
         
     }
     
-    func didRegisterAddon(core: Halo.CoreManager) -> Void {
+    func didRegisterAddon(haloCore core: Halo.CoreManager) -> Void {
         
     }
     
-    func willRegisterUser(core: Halo.CoreManager) -> Void {
+    func willRegisterUser(haloCore core: Halo.CoreManager) -> Void {
         
     }
     
-    func didRegisterUser(core: Halo.CoreManager) -> Void {
+    func didRegisterUser(haloCore core: Halo.CoreManager) -> Void {
         
     }
     
-    func applicationDidFinishLaunching(application: UIApplication, core: Halo.CoreManager) -> Void {
+    func applicationDidFinishLaunching(application app: UIApplication, core: Halo.CoreManager) -> Void {
         
     }
     
-    func applicationDidEnterBackground(application: UIApplication, core: Halo.CoreManager) -> Void {
+    func applicationDidEnterBackground(application app: UIApplication, core: Halo.CoreManager) -> Void {
         
     }
     
-    func applicationDidBecomeActive(application: UIApplication, core: Halo.CoreManager) -> Void {
+    func applicationDidBecomeActive(application app: UIApplication, core: Halo.CoreManager) -> Void {
         
     }
     

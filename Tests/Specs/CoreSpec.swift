@@ -89,7 +89,7 @@ class CoreSpec: BaseSpec {
             
             beforeEach {
                 addon = DummyAddon()
-                mgr.registerAddon(addon!)
+                mgr.registerAddon(addon: addon!)
             }
             
             it("succeeds") {
@@ -118,7 +118,7 @@ class CoreSpec: BaseSpec {
                     }.name = "Successful OAuth stub"
                     
                     waitUntil { done in
-                        Halo.Manager.network.authenticate(.App) { _ in
+                        Halo.Manager.network.authenticate(mode: .App) { _ in
                             done()
                         }
                     }
@@ -144,7 +144,7 @@ class CoreSpec: BaseSpec {
                     }.name = "Failed OAuth stub"
                                         
                     waitUntil { done in
-                        Halo.Manager.network.authenticate(.App) { _ in
+                        Halo.Manager.network.authenticate(mode: .App) { _ in
                             done()
                         }
                     }

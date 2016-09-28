@@ -48,7 +48,7 @@ class SyncSpec: BaseSpec {
                     expect(instances).to(beEmpty())
                     
                     waitUntil(timeout: 5) { done in
-                        content.sync(query) { moduleId, error in
+                        content.sync(query: query) { moduleId, error in
                             done()
                         }
                     }
@@ -97,11 +97,11 @@ class SyncSpec: BaseSpec {
                 
                 it("works") {
                     
-                    let firstSyncQuery = SyncQuery(moduleId: moduleId).toSync(date)
-                    let secondSyncQuery = SyncQuery(moduleId: moduleId).fromSync(date)
+                    let firstSyncQuery = SyncQuery(moduleId: moduleId).toSync(date: date)
+                    let secondSyncQuery = SyncQuery(moduleId: moduleId).fromSync(date: date)
                     
                     waitUntil(timeout: 10) { done in
-                        content.sync(firstSyncQuery) { _ in
+                        content.sync(query: firstSyncQuery) { _ in
                             done()
                         }
                     }
@@ -118,7 +118,7 @@ class SyncSpec: BaseSpec {
                     expect(logEntry.deletions).to(equal(0))
                     
                     waitUntil(timeout: 10) { done in
-                        content.sync(secondSyncQuery) { _ in
+                        content.sync(query: secondSyncQuery) { _ in
                             done()
                         }
                     }

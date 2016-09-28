@@ -25,11 +25,9 @@ class ModelSpec: BaseSpec {
         
         describe("The search filter") {
             
-            it("works as expected") {
+            it("is built correctly") {
                 
-                let filter = SearchFilter(operation: .Eq, property: "test", value: "blah")
-                
-                filter.
+                let _ = SearchFilter(operation: .Eq, property: "test", value: "blah")
                 
             }
             

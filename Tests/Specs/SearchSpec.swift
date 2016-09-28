@@ -32,7 +32,7 @@ class SearchSpec: BaseSpec {
                     }.name = "Search stub"
                     
                     waitUntil { done in
-                        cont.search(SearchQuery()) { response, result in
+                        cont.search(query: SearchQuery()) { response, result in
                             
                             switch result {
                             case .Success(let data, _):
