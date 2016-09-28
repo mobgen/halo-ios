@@ -32,7 +32,7 @@ public class SyncLogEntry: NSObject, NSCoding {
     public init(result: SyncResult) {
         moduleId = result.moduleId
         moduleName = result.moduleName
-        syncDate = result.syncTimestamp
+        syncDate = result.syncDate
         locale = result.locale
         creations = result.created.count
         updates = result.updated.count

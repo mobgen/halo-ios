@@ -15,6 +15,8 @@ class CoreSpec: BaseSpec {
     
     override func spec() {
         
+        super.spec()
+        
         let mgr = Halo.Manager.core
         
         beforeSuite {

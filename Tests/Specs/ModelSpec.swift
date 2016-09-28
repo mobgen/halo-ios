@@ -14,6 +14,8 @@ class ModelSpec: BaseSpec {
 
     override func spec() {
 
+        super.spec()
+        
         describe("The device extension") {
             it("provides the right model name") {
                 expect(UIDevice.currentDevice().modelName).to(equal("Simulator"))

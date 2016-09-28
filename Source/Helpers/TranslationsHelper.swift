@@ -42,7 +42,7 @@ public class TranslationsHelper: NSObject {
     
     public func locale(locale: Locale) -> TranslationsHelper {
         self.locale = locale
-        self.syncQuery.locale = locale
+        self.syncQuery.locale(locale)
         load()
         return self
     }
@@ -122,7 +122,9 @@ public class TranslationsHelper: NSObject {
             return
         }
         
-        if let instances = Manager.content.getSyncedInstances(moduleId), let keyField = self.keyField, let valueField = self.valueField {
+        let instances = Manager.content.getSyncedInstances(moduleId)
+        
+        if let keyField = self.keyField, let valueField = self.valueField {
             
             translationsMap.removeAll()
             

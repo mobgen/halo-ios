@@ -19,11 +19,11 @@ public class SyncQuery: NSObject {
         static let ToSync = "toSync"
     }
 
-    var locale: Locale?
-    var moduleName: String?
-    var moduleId: String = ""
-    var fromSync: NSDate?
-    var toSync: NSDate?
+    public private(set) var locale: Locale?
+    public private(set) var moduleName: String?
+    public private(set) var moduleId: String = ""
+    public private(set) var fromSync: NSDate?
+    public private(set) var toSync: NSDate?
 
     public var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
@@ -44,8 +44,6 @@ public class SyncQuery: NSObject {
 
         if let to = toSync {
             dict[Keys.ToSync] = to.timeIntervalSince1970 * 1000
-        } else {
-            dict[Keys.ToSync] = NSDate().timeIntervalSince1970 * 1000
         }
 
         return dict
@@ -60,13 +58,28 @@ public class SyncQuery: NSObject {
         self.moduleId = moduleId
     }
     
-    public func moduleName(name: String) -> SyncQuery {
+    public func moduleName(name: String?) -> SyncQuery {
         self.moduleName = name
         return self
     }
 
+    public func moduleId(id: String) -> SyncQuery {
+        self.moduleId = id
+        return self
+    }
+    
     public func locale(locale: Locale) -> SyncQuery {
         self.locale = locale
+        return self
+    }
+    
+    public func fromSync(date: NSDate?) -> SyncQuery {
+        self.fromSync = date
+        return self
+    }
+    
+    public func toSync(date: NSDate?) -> SyncQuery {
+        self.toSync = date
         return self
     }
 }

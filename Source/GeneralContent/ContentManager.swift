@@ -44,11 +44,11 @@ public class ContentManager: HaloManager {
         let path = getPath("synctimestamp-\(syncQuery.moduleId)")
         
         // Check whether we just sync or re-sync all the content (locale changed)
-        if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? SyncResult, let from = sync.syncTimestamp {
+        if let sync = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? SyncResult, let from = sync.syncDate {
             if sync.locale != syncQuery.locale {
-                syncQuery.fromSync = nil
+                syncQuery.fromSync(nil)
             } else if syncQuery.fromSync == nil {
-                syncQuery.fromSync = from
+                syncQuery.fromSync(from)
             }
         }
         
@@ -108,7 +108,16 @@ public class ContentManager: HaloManager {
                 
                 result.created.forEach { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
                 result.updated.forEach { NSKeyedArchiver.archiveRootObject($0, toFile: self.getPath($0.id!)); instanceIds.insert($0.id!) }
-                result.deleted.forEach { instanceIds.remove($0); try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
+                
+                result.deleted.forEach { instanceId in
+                    instanceIds.remove(instanceId)
+                    
+                    do {
+                        try NSFileManager.defaultManager().removeItemAtPath(self.getPath(instanceId))
+                    } catch {
+                        LogMessage("Error deleting instance \(instanceId)", level: .Error).print()
+                    }
+                }
                 
                 path = self.getPath("sync-\(result.moduleId)")
                 NSKeyedArchiver.archiveRootObject(instanceIds, toFile: path)
@@ -123,7 +132,7 @@ public class ContentManager: HaloManager {
                 if wasFirstSync {
                     // Sync again. The first sync might be cached so we need to resync in case there have been changes
                     let query = syncQuery
-                    query.fromSync = result.syncTimestamp
+                    query.fromSync(result.syncDate)
                     self.sync(query, completionHandler: handler)
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
@@ -134,14 +143,14 @@ public class ContentManager: HaloManager {
         }
     }
 
-    public func getSyncedInstances(moduleId: String) -> [ContentInstance]? {
+    public func getSyncedInstances(moduleId: String) -> [ContentInstance] {
         
         // Get the ids of the instances for the given module
         if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(getPath("sync-\(moduleId)")) as? Set<String> {
             return instanceIds.map { NSKeyedUnarchiver.unarchiveObjectWithFile(self.getPath($0)) as! ContentInstance }
         } else {
             // No instance ids have been found for that module
-            return nil
+            return []
         }
     }
     
@@ -149,15 +158,28 @@ public class ContentManager: HaloManager {
         let path = getPath("sync-\(moduleId)")
         
         if let instanceIds = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? Set<String> {
-            instanceIds.forEach { try! NSFileManager.defaultManager().removeItemAtPath(self.getPath($0)) }
-            try! NSFileManager.defaultManager().removeItemAtPath(path)
-            try! NSFileManager.defaultManager().removeItemAtPath(self.getPath("synctimestamp-\(moduleId)"))
+            do {
+                try instanceIds.forEach { instanceId in
+                    try NSFileManager.defaultManager().removeItemAtPath(self.getPath(instanceId))
+                }
+                try NSFileManager.defaultManager().removeItemAtPath(path)
+                try NSFileManager.defaultManager().removeItemAtPath(self.getPath("synctimestamp-\(moduleId)"))
+            } catch {
+                
+            }
         }
     }
 
     public func getSyncLog(moduleId: String) -> [SyncLogEntry] {
         let path = self.getPath("synclog-\(moduleId)")
         return NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [SyncLogEntry] ?? []
-
+    }
+    
+    func clearSyncLog(moduleId: String) -> Void {
+        let path = self.getPath("synclog-\(moduleId)")
+        
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(path)
+        } catch {}
     }
 }

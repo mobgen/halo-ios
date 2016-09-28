@@ -15,6 +15,8 @@ class SearchSpec: BaseSpec {
     
     override func spec() {
         
+        super.spec()
+        
         let cont = Halo.Manager.content
         
         describe("The search call") {
@@ -27,7 +29,7 @@ class SearchSpec: BaseSpec {
                     stub(isPath("/api/generalcontent/instance/search")) { (request) -> OHHTTPStubsResponse in
                         let fixture = OHPathForFile("simple_search_success.json", self.dynamicType)
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
-                    }.name = "Simple search stub"
+                    }.name = "Search stub"
                     
                     waitUntil { done in
                         cont.search(SearchQuery()) { response, result in

@@ -27,7 +27,6 @@ class BaseSpec: QuickSpec {
         
         afterSuite {
             NSLog("-- Executing after suite")
-            OHHTTPStubs.removeAllStubs()
         }
     
     }
