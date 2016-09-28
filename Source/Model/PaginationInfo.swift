@@ -38,7 +38,7 @@ public class PaginationInfo: NSObject, NSCoding {
         super.init()
     }
 
-    static func fromDictionary(dict: [String: AnyObject]) -> PaginationInfo {
+    static func fromDictionary(dict dict: [String: AnyObject]) -> PaginationInfo {
 
         let info = PaginationInfo()
 

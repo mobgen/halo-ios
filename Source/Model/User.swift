@@ -90,15 +90,15 @@ public final class User: NSObject, NSCoding {
     - parameter name:  Name of the tag to be added
     - parameter value: Value of the tag to be added
     */
-    public func addTag(name: String, value: String) -> Void {
-        self.addTag(name, value: value, type: "000000000000000000000002")
+    public func addTag(name name: String, value: String) -> Void {
+        self.addTag(name: name, value: value, type: "000000000000000000000002")
     }
 
-    func addSystemTag(name: String, value: String) -> Void {
-        self.addTag(name, value: value, type: "000000000000000000000001")
+    func addSystemTag(name name: String, value: String) -> Void {
+        self.addTag(name: name, value: value, type: "000000000000000000000001")
     }
 
-    private func addTag(name: String, value: String, type: String) -> Void {
+    private func addTag(name name: String, value: String, type: String) -> Void {
         let tag = Halo.Tag(name: name, value: value, type: type)
 
         if let tags = self.tags {
@@ -117,8 +117,8 @@ public final class User: NSObject, NSCoding {
 
     - parameter tags: collection of tags
     */
-    public func addTags(tags: [String: String]) {
-        let _ = tags.map({ self.addTag($0, value: $1)})
+    public func addTags(tags tags: [String: String]) {
+        let _ = tags.map({ self.addTag(name: $0, value: $1)})
     }
 
     /**
@@ -128,7 +128,7 @@ public final class User: NSObject, NSCoding {
 
      - returns: Returns the removed tag or nil if no tag was found and removed
      */
-    public func removeTag(name: String) -> Halo.Tag? {
+    public func removeTag(name name: String) -> Halo.Tag? {
 
         if let _ = self.tags {
             return tags!.removeValueForKey(name)
@@ -142,7 +142,7 @@ public final class User: NSObject, NSCoding {
     /**
     Store a serialized version of the current user inside the user preferences
     */
-    func storeUser(env: HaloEnvironment) -> Void {
+    func storeUser(env env: HaloEnvironment) -> Void {
         let encodedObject = NSKeyedArchiver.archivedDataWithRootObject(self)
         let userDefaults = NSUserDefaults.standardUserDefaults()
 
@@ -151,7 +151,7 @@ public final class User: NSObject, NSCoding {
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadUser(env: HaloEnvironment) -> Halo.User {
+    class func loadUser(env env: HaloEnvironment) -> Halo.User {
 
         if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsUserKey)-\(env.description)") as? NSData {
             return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as! Halo.User
@@ -206,7 +206,7 @@ public final class User: NSObject, NSCoding {
 
     - returns: The newly created user instance
     */
-    class func fromDictionary(dict: [String: AnyObject]) -> Halo.User {
+    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.User {
 
         var user: Halo.User
 
@@ -226,11 +226,11 @@ public final class User: NSObject, NSCoding {
 
         user.email = dict[Keys.Email] as? String
         user.devices = (dict[Keys.Devices] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserDevice in
-            return UserDevice.fromDictionary(dict)
+            return UserDevice.fromDictionary(dict: dict)
         })
 
         if let tags = (dict[Keys.Tags] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
-            return Halo.Tag.fromDictionary(dict)
+            return Halo.Tag.fromDictionary(dict: dict)
         }) {
             user.tags = tags.reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
                 var varDict = dict

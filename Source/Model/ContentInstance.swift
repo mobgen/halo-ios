@@ -75,7 +75,7 @@ public class ContentInstance: NSObject, NSCoding {
         super.init()
     }
 
-    public static func fromDictionary(dict: [String: AnyObject]) -> ContentInstance {
+    public static func fromDictionary(dict dict: [String: AnyObject]) -> ContentInstance {
 
         let instance = ContentInstance()
 
@@ -92,7 +92,7 @@ public class ContentInstance: NSObject, NSCoding {
         }
 
         if let tagsList = dict[Keys.Tags] as? [[String: AnyObject]] {
-            instance.tags = tagsList.map { Halo.Tag.fromDictionary($0) }.reduce([:]) { (tagsDict, tag: Halo.Tag) -> [String: Halo.Tag] in
+            instance.tags = tagsList.map { Halo.Tag.fromDictionary(dict: $0) }.reduce([:]) { (tagsDict, tag: Halo.Tag) -> [String: Halo.Tag] in
                 var varDict = tagsDict
                 varDict[tag.name] = tag
                 return varDict
@@ -196,7 +196,7 @@ public class ContentInstance: NSObject, NSCoding {
         return false
     }
 
-    public func getValue(key: String) -> AnyObject? {
+    public func getValue(key key: String) -> AnyObject? {
         return self.values[key]
     }
 

@@ -67,7 +67,7 @@ public final class UserDevice: NSObject, NSCoding {
 
     - returns: The newly created user device
     */
-    class func fromDictionary(dict: [String: AnyObject]) -> Halo.UserDevice {
+    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.UserDevice {
         return UserDevice(platform: dict[Keys.Platform] as! String, token: dict[Keys.Token] as! String)
     }
 }

@@ -35,13 +35,13 @@ public class LogMessage: NSObject {
         return "<HALO/\(self.level.description)>: \(self.message)"
     }
 
-    public init(_ message: String, level: HaloLogLevel) {
+    public init(message: String, level: HaloLogLevel) {
         super.init()
         self.message = message
         self.level = level
     }
 
-    public init(_ message: String? = nil, error: NSError) {
+    public init(message: String? = nil, error: NSError) {
         super.init()
 
         if let msg = message {

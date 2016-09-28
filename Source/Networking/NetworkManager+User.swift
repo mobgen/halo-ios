@@ -12,7 +12,7 @@ extension NetworkManager {
 
     func userParser(data: AnyObject) -> Halo.User? {
         if let dict = data as? [String: AnyObject] {
-            return User.fromDictionary(dict)
+            return User.fromDictionary(dict: dict)
         }
         return nil
     }
@@ -22,7 +22,7 @@ extension NetworkManager {
         if let id = user.id {
 
             let request = Halo.Request<Halo.User>(router: Router.SegmentationGetUser(id))
-            try! request.responseParser(self.userParser).responseObject(completionHandler: handler)
+            try! request.responseParser(parser: self.userParser).responseObject(completionHandler: handler)
 
         } else {
             handler?(nil, .Success(user, false))
@@ -47,6 +47,6 @@ extension NetworkManager {
             request = Halo.Request(router: Router.SegmentationCreateUser(user.toDictionary()))
         }
 
-        try! request.responseParser(self.userParser).responseObject(completionHandler: handler)
+        try! request.responseParser(parser: self.userParser).responseObject(completionHandler: handler)
     }
 }

@@ -23,6 +23,18 @@ class ModelSpec: BaseSpec {
             }
         }
         
+        describe("The search filter") {
+            
+            it("works as expected") {
+                
+                let filter = SearchFilter(operation: .Eq, property: "test", value: "blah")
+                
+                filter.
+                
+            }
+            
+        }
+        
     }
 
 }

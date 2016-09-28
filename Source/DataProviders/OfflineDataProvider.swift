@@ -28,9 +28,9 @@ public class OfflineDataProvider: DataProvider {
         }
     }
 
-    public func search(searchQuery: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    public func search(query query: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
-        if let instances = NSKeyedUnarchiver.unarchiveObjectWithFile(searchQuery.description) as? PaginatedContentInstances {
+        if let instances = NSKeyedUnarchiver.unarchiveObjectWithFile(query.description) as? PaginatedContentInstances {
             handler(nil, .Success(instances, true))
         } else {
             handler(nil, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))

@@ -69,7 +69,7 @@ public class Module: NSObject, NSCoding {
 
      - parameter dict:   Dictionary containing the information about the module
      */
-    public static func fromDictionary(dict: [String: AnyObject]) -> Halo.Module {
+    public static func fromDictionary(dict dict: [String: AnyObject]) -> Halo.Module {
 
         let module = Module()
 
@@ -85,7 +85,7 @@ public class Module: NSObject, NSCoding {
 
         if let tagsList = dict[Keys.Tags] as? [[String: AnyObject]] {
             module.tags = tagsList.map({ (dict) -> Halo.Tag in
-                return Halo.Tag.fromDictionary(dict)
+                return Halo.Tag.fromDictionary(dict: dict)
             }).reduce(module.tags, combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
                 var varDict = dict
                 varDict[tag.name] = tag

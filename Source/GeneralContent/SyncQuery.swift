@@ -58,27 +58,27 @@ public class SyncQuery: NSObject {
         self.moduleId = moduleId
     }
     
-    public func moduleName(name: String?) -> SyncQuery {
+    public func moduleName(name name: String?) -> SyncQuery {
         self.moduleName = name
         return self
     }
 
-    public func moduleId(id: String) -> SyncQuery {
+    public func moduleId(id id: String) -> SyncQuery {
         self.moduleId = id
         return self
     }
     
-    public func locale(locale: Locale) -> SyncQuery {
+    public func locale(locale locale: Locale) -> SyncQuery {
         self.locale = locale
         return self
     }
     
-    public func fromSync(date: NSDate?) -> SyncQuery {
+    public func fromSync(date date: NSDate?) -> SyncQuery {
         self.fromSync = date
         return self
     }
     
-    public func toSync(date: NSDate?) -> SyncQuery {
+    public func toSync(date date: NSDate?) -> SyncQuery {
         self.toSync = date
         return self
     }

@@ -108,7 +108,7 @@ public extension UIDevice {
 
     /// Get the current device type (phone or tablet) as String
     var deviceType: String {
-        return getDeviceType(UIDevice.currentDevice().userInterfaceIdiom)
+        return getDeviceType(idiom: UIDevice.currentDevice().userInterfaceIdiom)
     }
 
     /**
@@ -118,7 +118,7 @@ public extension UIDevice {
 
      - returns: Device type
      */
-    func getDeviceType(idiom: UIUserInterfaceIdiom) -> String {
+    func getDeviceType(idiom idiom: UIUserInterfaceIdiom) -> String {
         return (idiom == .Phone) ? "Phone" : "Tablet"
     }
 }

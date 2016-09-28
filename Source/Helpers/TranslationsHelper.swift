@@ -33,31 +33,31 @@ public class TranslationsHelper: NSObject {
         self.locale = locale
         self.keyField = keyField
         self.valueField = valueField
-        self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
+        self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale: locale)
     }
 
-    public func addCompletionHandler(handler: (NSError?) -> Void) -> Void {
+    public func addCompletionHandler(handler handler: (NSError?) -> Void) -> Void {
         completionHandlers.append(handler)
     }
     
-    public func locale(locale: Locale) -> TranslationsHelper {
+    public func locale(locale locale: Locale) -> TranslationsHelper {
         self.locale = locale
-        self.syncQuery.locale(locale)
+        self.syncQuery.locale(locale: locale)
         load()
         return self
     }
 
-    public func defaultText(text: String) -> TranslationsHelper {
+    public func defaultText(text text: String) -> TranslationsHelper {
         self.defaultText = text
         return self
     }
 
-    public func loadingText(text: String) -> TranslationsHelper {
+    public func loadingText(text text: String) -> TranslationsHelper {
         self.loadingText = text
         return self
     }
     
-    public func getText(key: String, completionHandler handler: ((String?) -> Void)? = nil) -> Void {
+    public func getText(key key: String, completionHandler handler: ((String?) -> Void)? = nil) -> Void {
         if self.isLoading {
             if let h = handler {
                 self.completionHandlers.append { _ in
@@ -74,7 +74,7 @@ public class TranslationsHelper: NSObject {
         }
     }
 
-    public func getTexts(keys: String...) -> [String: String?] {
+    public func getTexts(keys keys: String...) -> [String: String?] {
 
         var values: [String: String?] = [:]
 
@@ -107,13 +107,13 @@ public class TranslationsHelper: NSObject {
     
         isLoading = true
         
-        Manager.content.sync(syncQuery) { moduleId, error in
-            self.processSyncResult(moduleId, error: error)
+        Manager.content.sync(query: syncQuery) { moduleId, error in
+            self.processSyncResult(moduleId: moduleId, error: error)
             self.completionHandlers.forEach { $0(error) }
         }
     }
     
-    private func processSyncResult(moduleId: String, error: NSError?) {
+    private func processSyncResult(moduleId moduleId: String, error: NSError?) {
         
         self.isLoading = false
         

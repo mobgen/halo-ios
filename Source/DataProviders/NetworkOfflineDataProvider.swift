@@ -32,11 +32,11 @@ public class NetworkOfflineDataProvider: NetworkDataProvider {
 
     }
 
-    public override func search(searchQuery: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    public override func search(query query: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
-        super.search(searchQuery) { response, result in
+        super.search(query: query) { response, result in
 
-            let path = OfflineDataProvider.filePath.URLByAppendingPathComponent("search-(\(searchQuery.hash))")!.path!
+            let path = OfflineDataProvider.filePath.URLByAppendingPathComponent("search-(\(query.hash))")!.path!
 
             switch result {
             case .Success(let data, _):

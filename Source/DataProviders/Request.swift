@@ -59,7 +59,7 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
             self.params["include"] = true
         }
 
-        let (request, _) = self.parameterEncoding.encode(req, parameters: self.params)
+        let (request, _) = self.parameterEncoding.encode(request: req, parameters: self.params)
 
         return request
 
@@ -84,32 +84,32 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         }
     }
 
-    public func responseParser(parser: (AnyObject) -> T?) -> Halo.Request<T> {
+    public func responseParser(parser parser: (AnyObject) -> T?) -> Halo.Request<T> {
         self.responseParser = parser
         return self
     }
 
-    public func setOfflinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
+    public func offlinePolicy(policy policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
         return self
     }
 
-    public func dataProvider(provider: Halo.DataProvider) -> Halo.Request<T> {
+    public func dataProvider(provider provider: Halo.DataProvider) -> Halo.Request<T> {
         self.dataProvider = provider
         return self
     }
 
-    public func method(method: Halo.Method) -> Halo.Request<T> {
+    public func method(method method: Halo.Method) -> Halo.Request<T> {
         self.method = method
         return self
     }
 
-    public func authenticationMode(mode: Halo.AuthenticationMode) -> Halo.Request<T> {
+    public func authenticationMode(mode mode: Halo.AuthenticationMode) -> Halo.Request<T> {
         self.authenticationMode = mode
         return self
     }
 
-    public func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
+    public func parameterEncoding(encoding encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
         self.parameterEncoding = encoding
         return self
     }
@@ -119,15 +119,15 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         return self
     }
 
-    public func addHeaders(headers: [String : String]) -> Halo.Request<T> {
-        let _ = headers.map { (key, value) -> Void in
+    public func addHeaders(headers headers: [String : String]) -> Halo.Request<T> {
+        headers.forEach { (key, value) -> Void in
             let _ = self.addHeader(field: key, value: value)
         }
         return self
     }
 
-    public func params(params: [String : AnyObject]) -> Halo.Request<T> {
-        let _ = params.map { self.params[$0] = $1 }
+    public func params(params params: [String : AnyObject]) -> Halo.Request<T> {
+        params.forEach { self.params[$0] = $1 }
         return self
     }
 
@@ -148,16 +148,16 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         return self
     }
 
-    public func fields(fields: [String]) -> Halo.Request<T> {
+    public func fields(fields fields: [String]) -> Halo.Request<T> {
         self.params["fields"] = fields
         return self
     }
 
-    public func tags(tags: [Halo.Tag]) -> Halo.Request<T> {
-        let _ = tags.map({ tag in
+    public func tags(tags tags: [Halo.Tag]) -> Halo.Request<T> {
+        tags.forEach { tag in
             let json = try! NSJSONSerialization.dataWithJSONObject(tag.toDictionary(), options: [])
             self.params["filter[tags][]"] = String(data: json, encoding: NSUTF8StringEncoding)
-        })
+        }
         return self
     }
 

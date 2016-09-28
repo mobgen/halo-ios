@@ -42,7 +42,7 @@ public class Token: NSObject {
 
     - parameter dict: Dictionary containing all the token related information
     */
-    public static func fromDictionary(dict: [String: AnyObject]) -> Token {
+    public static func fromDictionary(dict dict: [String: AnyObject]) -> Token {
 
         let token = Token()
 
