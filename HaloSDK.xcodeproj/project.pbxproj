@@ -88,6 +88,7 @@
 		00F1064C1D9BA2B900557900 /* full_sync.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F1064B1D9BA2B900557900 /* full_sync.json */; };
 		00F1064F1D9BBC3B00557900 /* from_sync.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F1064D1D9BBC3B00557900 /* from_sync.json */; };
 		00F106501D9BBC3B00557900 /* to_sync.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F1064E1D9BBC3B00557900 /* to_sync.json */; };
+		00F106521D9CFD4C00557900 /* CloudinarySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F106511D9CFD4C00557900 /* CloudinarySpec.swift */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +209,7 @@
 		00F1064B1D9BA2B900557900 /* full_sync.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = full_sync.json; sourceTree = "<group>"; };
 		00F1064D1D9BBC3B00557900 /* from_sync.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = from_sync.json; sourceTree = "<group>"; };
 		00F1064E1D9BBC3B00557900 /* to_sync.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = to_sync.json; sourceTree = "<group>"; };
+		00F106511D9CFD4C00557900 /* CloudinarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudinarySpec.swift; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -484,6 +486,7 @@
 				00F106371D9A721000557900 /* ModelSpec.swift */,
 				00F106381D9A721000557900 /* SearchSpec.swift */,
 				00F106391D9A721000557900 /* SyncSpec.swift */,
+				00F106511D9CFD4C00557900 /* CloudinarySpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				00F1063A1D9A721000557900 /* DummyAddon.swift in Sources */,
 				00F1063D1D9A721000557900 /* CoreSpec.swift in Sources */,
 				00F1063E1D9A721000557900 /* ModelSpec.swift in Sources */,
+				00F106521D9CFD4C00557900 /* CloudinarySpec.swift in Sources */,
 				00F1063C1D9A721000557900 /* ModulesSpec.swift in Sources */,
 				00F106401D9A721000557900 /* SyncSpec.swift in Sources */,
 				00F1063B1D9A721000557900 /* BaseSpec.swift in Sources */,

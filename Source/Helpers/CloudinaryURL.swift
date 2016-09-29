@@ -29,6 +29,10 @@ public class CloudinaryURL {
         return NSURL(string: self.url)!
     }
 
+    public var absoluteURLString: String {
+        return URL.absoluteString ?? ""
+    }
+    
     public func width(pixels w: Int) -> CloudinaryURL {
         params.append("w_\(w)")
         return self
@@ -119,11 +123,6 @@ public class CloudinaryURL {
         return self
     }
 
-    public func addEfects(effects e: [ImageEffect]) -> CloudinaryURL {
-        e.forEach { self.addEffect(effect: $0) }
-        return self
-    }
-
     public func opacity(opacity op: Int) -> CloudinaryURL {
         params.append("o_\(op)")
         return self
@@ -140,7 +139,7 @@ public class CloudinaryURL {
     }
 
     public func backgroundColor(rgb color: String) -> CloudinaryURL {
-        params.append("b_\(color)")
+        params.append("b_rgb:\(color)")
         return self
     }
 
@@ -194,7 +193,7 @@ public class CloudinaryURL {
         return self
     }
 
-    public func addFlags(flags flags: [ImageFlag]) -> CloudinaryURL {
+    public func addFlags(flags flags: ImageFlag...) -> CloudinaryURL {
         let arg = flags.map({ $0.rawValue }).joinWithSeparator(".")
         params.append("fl_\(arg)")
         return self
