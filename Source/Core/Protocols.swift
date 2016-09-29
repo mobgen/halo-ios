@@ -66,6 +66,7 @@ public protocol NetworkAddon: Addon {
 
 /// Other protocols
 
+@objc
 public protocol HaloManager {
 
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void

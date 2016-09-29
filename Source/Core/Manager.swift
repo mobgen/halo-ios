@@ -72,22 +72,24 @@ public enum HaloEnvironment {
     }
 }
 
-@objc public enum OfflinePolicy: Int {
+@objc
+public enum OfflinePolicy: Int {
     case None, LoadAndStoreLocalData, ReturnLocalDataDontLoad
 }
 
-public struct Manager {
-
+@objc(HaloManager)
+public class Manager: NSObject {
+    
     public static let core: CoreManager = {
-       return CoreManager()
+        return CoreManager()
     }()
-
+    
     public static let content: ContentManager = {
-       return ContentManager()
+        return ContentManager()
     }()
-
+    
     public static let network: NetworkManager = {
         return NetworkManager()
     }()
-
+    
 }

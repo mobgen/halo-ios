@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@objc(HaloCoreManager)
 public class CoreManager: NSObject, HaloManager {
 
     /// Delegate that will handle launching completion and other important steps in the flow

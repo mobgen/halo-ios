@@ -11,7 +11,8 @@ import Foundation
 /**
  Access point to the General Content. This class will provide methods to obtain the data stored as general content.
  */
-public class ContentManager: HaloManager {
+@objc(HaloContentManager)
+public class ContentManager: NSObject, HaloManager {
 
     public var defaultLocale: Halo.Locale?
     private let serverCachingTime = "86400000"
@@ -21,7 +22,9 @@ public class ContentManager: HaloManager {
         return manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     }
     
-    init() {}
+    override init() {
+        super.init()
+    }
 
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         handler?(true)
