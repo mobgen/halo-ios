@@ -8,29 +8,22 @@
 
 import Halo
 
-@objc public enum ContentFlags: Int {
+@objc
+public enum ContentFlags: Int {
     case None, IncludeArchived, IncludeUnpublished, IncludeArchivedAndUnpublished
 }
 
-public class HaloContentManager: NSObject {
-
-    static let sharedInstance = HaloContentManager()
-
-    private let content = Halo.Manager.content
-
-    private override init() {
-        super.init()
-    }
-
+extension ContentManager {
+    
     @objc
     public func instances(moduleIds moduleIds: [String],
                                     offlinePolicy: OfflinePolicy,
                                     success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
                                     failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
 
-        let searchOptions = SearchQuery().offlinePolicy(offlinePolicy)
+        let searchOptions = SearchQuery().offlinePolicy(policy: offlinePolicy)
 
-        content.search(searchOptions) { (response, result) in
+        self.search(query: searchOptions) { (response, result) in
             switch result {
             case .Success(let data, _):
                 if let instances = data {
@@ -48,9 +41,9 @@ public class HaloContentManager: NSObject {
                                       success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
                                       failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
 
-        let searchOptions = SearchQuery().offlinePolicy(offlinePolicy)
+        let searchOptions = SearchQuery().offlinePolicy(policy: offlinePolicy)
 
-        content.search(searchOptions) { (response, result) in
+        self.search(query: searchOptions) { (response, result) in
             switch result {
             case .Success(let data, _):
                 if let instances = data {

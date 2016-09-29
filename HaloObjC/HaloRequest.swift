@@ -8,16 +8,25 @@
 
 import Halo
 
-@objc public enum HaloOfflinePolicy: Int {
+@objc
+public enum HaloOfflinePolicy: Int {
     case None, LoadAndStoreLocalData, ReturnLocalDataDontLoad
 }
 
-@objc public enum HaloMethod: Int {
+@objc
+public enum HaloMethod: Int {
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
 }
 
-@objc public enum HaloParameterEncoding: Int {
+@objc
+public enum HaloParameterEncoding: Int {
     case URL, URLEncodedInURL, JSON
+}
+
+extension Request {
+    
+    
+    
 }
 
 public class HaloRequest: NSObject {
@@ -44,7 +53,7 @@ public class HaloRequest: NSObject {
         case .ReturnLocalDataDontLoad: newPolicy = .ReturnLocalDataDontLoad
         }
 
-        request?.setOfflinePolicy(newPolicy)
+        request?.offlinePolicy(policy: newPolicy)
         return self
     }
 
@@ -64,7 +73,7 @@ public class HaloRequest: NSObject {
         case .TRACE: newMethod = .TRACE
         }
 
-        request?.method(newMethod)
+        request?.method(method: newMethod)
         return self
     }
 
@@ -78,7 +87,7 @@ public class HaloRequest: NSObject {
         case .URLEncodedInURL: newEncoding = .URLEncodedInURL
         }
 
-        request?.parameterEncoding(newEncoding)
+        request?.parameterEncoding(encoding: newEncoding)
         return self
     }
 
@@ -88,12 +97,12 @@ public class HaloRequest: NSObject {
     }
 
     public func addHeaders(headers: [String : String]) -> HaloRequest {
-        request?.addHeaders(headers)
+        request?.addHeaders(headers: headers)
         return self
     }
 
     public func params(params: [String : AnyObject]) -> HaloRequest {
-        request?.params(params)
+        request?.params(params: params)
         return self
     }
 
@@ -113,12 +122,12 @@ public class HaloRequest: NSObject {
     }
 
     public func fields(fields: [String]) -> HaloRequest {
-        request?.fields(fields)
+        request?.fields(fields: fields)
         return self
     }
 
     public func tags(tags: [Halo.Tag]) -> HaloRequest {
-        request?.tags(tags)
+        request?.tags(tags: tags)
         return self
     }
 
@@ -134,7 +143,7 @@ public class HaloRequest: NSObject {
                 }
             }
         } catch _ {
-            LogMessage("Error performing request: \(self.debugDescription)", level: .Error).print()
+            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .Error).print()
         }
 
         return self
@@ -152,7 +161,7 @@ public class HaloRequest: NSObject {
                 }
             }
         } catch _ {
-            LogMessage("Error performing request: \(self.debugDescription)", level: .Error).print()
+            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .Error).print()
         }
 
         return self

@@ -18,7 +18,7 @@ public class CoreManager: NSObject, HaloManager {
     public var dataProvider: DataProvider = NetworkOfflineDataProvider()
 
     ///
-    public var logLevel: HaloLogLevel = .Warning
+    public var logLevel: LogLevel = .Warning
 
     /// Token used to make sure the startup process is done only once
     private var token: dispatch_once_t = 0
