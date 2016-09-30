@@ -22,7 +22,7 @@ public protocol ManagerDelegate {
 
      - returns: The newly created user
      */
-    func managerWillSetupUser(user: Halo.User) -> Void
+    func managerWillSetupDevice(device: Halo.Device) -> Void
 
 }
 

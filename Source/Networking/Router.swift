@@ -25,20 +25,20 @@ public enum Router {
     case GeneralContentInstance(String)
     case GeneralContentSearch
     case ModuleSync
-    case SegmentationGetUser(String)
-    case SegmentationCreateUser([String: AnyObject])
-    case SegmentationUpdateUser(String, [String: AnyObject])
+    case SegmentationGetDevice(String)
+    case SegmentationCreateDevice([String: AnyObject])
+    case SegmentationUpdateDevice(String, [String: AnyObject])
     case CustomRequest(Halo.Method, String, [String: AnyObject]?)
 
     /// Decide the HTTP method based on the specific request
     var method: Halo.Method {
         switch self {
         case .OAuth(_, _),
-             .SegmentationCreateUser(_),
+             .SegmentationCreateDevice(_),
              .GeneralContentSearch,
              .ModuleSync:
             return .POST
-        case .SegmentationUpdateUser(_):
+        case .SegmentationUpdateDevice(_):
             return .PUT
         case .CustomRequest(let method, _, _):
             return method
@@ -67,11 +67,11 @@ public enum Router {
             return "api/generalcontent/instance/sync"
         case .GeneralContentSearch:
             return "api/generalcontent/instance/search"
-        case .SegmentationCreateUser(_):
+        case .SegmentationCreateDevice(_):
             return "api/segmentation/appuser"
-        case .SegmentationGetUser(let id):
+        case .SegmentationGetDevice(let id):
             return "api/segmentation/appuser/\(id)"
-        case .SegmentationUpdateUser(let id, _):
+        case .SegmentationUpdateDevice(let id, _):
             return "api/segmentation/appuser/\(id)"
         case .CustomRequest(_, let url, _):
             return "api/\(url)"
@@ -101,8 +101,8 @@ public enum Router {
         switch self {
         case .OAuth(_, _):
             return .URL
-        case .SegmentationCreateUser(_),
-             .SegmentationUpdateUser(_, _),
+        case .SegmentationCreateDevice(_),
+             .SegmentationUpdateDevice(_, _),
              .GeneralContentSearch,
              .ModuleSync:
             return .JSON
@@ -123,8 +123,8 @@ public enum Router {
         switch self {
         case .OAuth(_, let params): return params
         case .GeneralContentInstances(let params): return params
-        case .SegmentationCreateUser(let params): return params
-        case .SegmentationUpdateUser(_, let params):
+        case .SegmentationCreateDevice(let params): return params
+        case .SegmentationUpdateDevice(_, let params):
             var newParams = params
             newParams["replaceTokens"] = true
             return newParams

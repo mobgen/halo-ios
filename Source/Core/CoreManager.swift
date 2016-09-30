@@ -49,7 +49,7 @@ public class CoreManager: NSObject, HaloManager {
     public var enableSystemTags: Bool = false
 
     /// Instance holding all the user-related information
-    public var user: User?
+    public var device: Device?
 
     public private(set) var addons: [Halo.Addon] = []
 
@@ -224,14 +224,14 @@ public class CoreManager: NSObject, HaloManager {
     }
 
     private func configureUser(completionHandler handler: ((Bool) -> Void)? = nil) {
-        self.user = Halo.User.loadUser(env: self.environment)
+        self.device = Halo.Device.loadDevice(env: self.environment)
 
-        if let user = self.user, let _ = user.id {
+        if let device = self.device where device.id != nil {
             // Update the user
-            Manager.network.getUser(user) { (_, result) -> Void in
+            Manager.network.getDevice(device) { (_, result) -> Void in
                 switch result {
-                case .Success(let user, _):
-                    self.user = user
+                case .Success(let device, _):
+                    self.device = device
 
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags(completionHandler: handler)
@@ -251,8 +251,8 @@ public class CoreManager: NSObject, HaloManager {
             }
 
         } else {
-            self.user = Halo.User()
-            self.delegate?.managerWillSetupUser(self.user!)
+            self.device = Halo.Device()
+            self.delegate?.managerWillSetupDevice(self.device!)
 
             if self.enableSystemTags {
                 self.setupDefaultSystemTags(completionHandler: handler)
@@ -264,9 +264,9 @@ public class CoreManager: NSObject, HaloManager {
 
     private func setupDefaultSystemTags(completionHandler handler: ((Bool) -> Void)? = nil) {
 
-        if let user = self.user {
+        if let device = self.device {
 
-            user.addSystemTag(name: CoreConstants.tagPlatformNameKey, value: "ios")
+            device.addSystemTag(name: CoreConstants.tagPlatformNameKey, value: "ios")
 
             let version = NSProcessInfo.processInfo().operatingSystemVersion
             var versionString = "\(version.majorVersion).\(version.minorVersion)"
@@ -275,21 +275,21 @@ public class CoreManager: NSObject, HaloManager {
                 versionString = versionString.stringByAppendingString(".\(version.patchVersion)")
             }
 
-            user.addSystemTag(name: CoreConstants.tagPlatformVersionKey, value: versionString)
+            device.addSystemTag(name: CoreConstants.tagPlatformVersionKey, value: versionString)
 
             if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") {
-                user.addSystemTag(name: CoreConstants.tagApplicationNameKey, value: appName.description)
+                device.addSystemTag(name: CoreConstants.tagApplicationNameKey, value: appName.description)
             }
 
             if let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") {
-                user.addSystemTag(name: CoreConstants.tagApplicationVersionKey, value: appVersion.description)
+                device.addSystemTag(name: CoreConstants.tagApplicationVersionKey, value: appVersion.description)
             }
 
-            user.addSystemTag(name: CoreConstants.tagDeviceManufacturerKey, value: "Apple")
-            user.addSystemTag(name: CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
-            user.addSystemTag(name: CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
+            device.addSystemTag(name: CoreConstants.tagDeviceManufacturerKey, value: "Apple")
+            device.addSystemTag(name: CoreConstants.tagDeviceModelKey, value: UIDevice.currentDevice().modelName)
+            device.addSystemTag(name: CoreConstants.tagDeviceTypeKey, value: UIDevice.currentDevice().deviceType)
 
-            user.addSystemTag(name: CoreConstants.tagBLESupportKey, value: "true")
+            device.addSystemTag(name: CoreConstants.tagBLESupportKey, value: "true")
 
             //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
 
@@ -297,17 +297,17 @@ public class CoreManager: NSObject, HaloManager {
             let bounds = screen.bounds
             let (width, height) = (CGRectGetWidth(bounds) * screen.scale, round(CGRectGetHeight(bounds) * screen.scale))
 
-            user.addSystemTag(name: CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
+            device.addSystemTag(name: CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
 
             switch self.environment {
             case .Int, .Stage, .QA:
-                user.addSystemTag(name: CoreConstants.tagTestDeviceKey, value: "true")
+                device.addSystemTag(name: CoreConstants.tagTestDeviceKey, value: "true")
             default:
                 break
             }
 
             // Get APNs environment
-            user.addSystemTag(name: "apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercaseString)
+            device.addSystemTag(name: "apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercaseString)
 
             handler?(true)
         } else {
@@ -318,21 +318,21 @@ public class CoreManager: NSObject, HaloManager {
 
     private func registerUser() -> Void {
 
-        if let user = self.user {
-            self.user?.storeUser(env: self.environment)
+        if let device = self.device {
+            self.device?.storeDevice(env: self.environment)
 
-            Manager.network.createUpdateUser(user) { [weak self] (_, result) -> Void in
+            Manager.network.createUpdateDevice(device) { [weak self] (_, result) -> Void in
 
                 var success = false
 
                 if let strongSelf = self {
 
                     switch result {
-                    case .Success(let user, _):
-                        strongSelf.user = user
-                        strongSelf.user?.storeUser(env: strongSelf.environment)
+                    case .Success(let device, _):
+                        strongSelf.device = device
+                        strongSelf.device?.storeDevice(env: strongSelf.environment)
 
-                        if let u = user {
+                        if let u = device {
                             LogMessage(message: u.description, level: .Info).print()
                         }
 
@@ -355,7 +355,7 @@ public class CoreManager: NSObject, HaloManager {
 
      - parameter handler: Closure to be executed once the request has finished, providing a result.
      */
-    public func saveUser(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
+    public func saveDevice(completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.Device?>) -> Void)? = nil) -> Void {
 
         /**
          *  Make sure no 'saveUser' are executed concurrently. That could lead to some inconsistencies in the server (several users
@@ -363,17 +363,17 @@ public class CoreManager: NSObject, HaloManager {
          */
         dispatch_sync(lockQueue) {
 
-            if let user = self.user {
+            if let device = self.device {
 
-                Manager.network.createUpdateUser(user) { [weak self] (response, result) in
+                Manager.network.createUpdateDevice(device) { [weak self] (response, result) in
 
                     if let strongSelf = self {
 
                         switch result {
-                        case .Success(let user, _):
-                            strongSelf.user = user
+                        case .Success(let device, _):
+                            strongSelf.device = device
 
-                            if let u = user {
+                            if let u = device {
                                 LogMessage(message: u.description, level: .Info).print()
                             }
 
