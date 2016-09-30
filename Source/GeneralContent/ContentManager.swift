@@ -42,6 +42,7 @@ public class ContentManager: NSObject, HaloManager {
 
     // MARK: Sync instances from a module
 
+    @objc(syncWithQuery:completionHandler:)
     public func sync(query query: SyncQuery, completionHandler handler: (String, NSError?) -> Void) -> Void {
 
         let path = getPath(file: "synctimestamp-\(query.moduleId)")
@@ -146,6 +147,7 @@ public class ContentManager: NSObject, HaloManager {
         }
     }
 
+    @objc(syncedInstancesForModule:)
     public func getSyncedInstances(moduleId: String) -> [ContentInstance] {
         
         // Get the ids of the instances for the given module
@@ -157,6 +159,7 @@ public class ContentManager: NSObject, HaloManager {
         }
     }
     
+    @objc(removeSyncedInstancesForModule:)
     public func removeSyncedInstances(moduleId: String) -> Void {
         let path = getPath(file: "sync-\(moduleId)")
         
@@ -173,6 +176,7 @@ public class ContentManager: NSObject, HaloManager {
         }
     }
 
+    @objc(syncLogForModule:)
     public func getSyncLog(moduleId: String) -> [SyncLogEntry] {
         let path = self.getPath(file: "synclog-\(moduleId)")
         return NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [SyncLogEntry] ?? []
