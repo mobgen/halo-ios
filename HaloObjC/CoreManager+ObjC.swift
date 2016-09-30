@@ -14,7 +14,7 @@ extension CoreManager {
         return self.environment.description
     }
     
-    @objc
+    @objc(modulesWithSuccess:failure:)
     public func modules(success: (NSHTTPURLResponse?, PaginatedModules) -> Void,
                         failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
 
