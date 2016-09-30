@@ -15,15 +15,11 @@ public enum ContentFlags: Int {
 
 extension ContentManager {
     
-    @objc
-    public func instances(moduleIds moduleIds: [String],
-                                    offlinePolicy: OfflinePolicy,
-                                    success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
-                                    failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
-
-        let searchOptions = SearchQuery().offlinePolicy(policy: offlinePolicy)
-
-        self.search(query: searchOptions) { (response, result) in
+    @objc(searchWithQuery:success:failure:)
+    public func search(query query: Halo.SearchQuery,
+                             success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
+                             failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
+        Manager.core.dataProvider.search(query: query) { (response, result) in
             switch result {
             case .Success(let data, _):
                 if let instances = data {
@@ -34,26 +30,5 @@ extension ContentManager {
             }
         }
     }
-
-    @objc
-    public func instances(instanceIds instanceIds: [String],
-                                      offlinePolicy: OfflinePolicy,
-                                      success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
-                                      failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
-
-        let searchOptions = SearchQuery().offlinePolicy(policy: offlinePolicy)
-
-        self.search(query: searchOptions) { (response, result) in
-            switch result {
-            case .Success(let data, _):
-                if let instances = data {
-                    success(response, instances)
-                }
-            case .Failure(let error):
-                failure(response, error)
-            }
-        }
-
-    }
-
+    
 }
