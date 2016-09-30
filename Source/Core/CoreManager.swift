@@ -65,6 +65,7 @@ public class CoreManager: NSObject, HaloManager {
      - parameter environment:   The new environment to be set
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
+    @objc(setEnvironment:)
     public func setEnvironment(environment: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = environment
         self.completionHandler = handler
@@ -82,6 +83,7 @@ public class CoreManager: NSObject, HaloManager {
 
      - parameter addon: Add-on implementation
      */
+    @objc(registerAddon:)
     public func registerAddon(addon a: Halo.Addon) -> Void {
         a.willRegisterAddon(haloCore: self)
         self.addons.append(a)
