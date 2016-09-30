@@ -65,9 +65,8 @@ public class CoreManager: NSObject, HaloManager {
      - parameter environment:   The new environment to be set
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
-    @objc(setEnvironment:)
-    public func setEnvironment(environment: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
-        self.environment = environment
+    public func setEnvironment(environment env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
+        self.environment = env
         self.completionHandler = handler
         self.configureUser { success in
             if success {

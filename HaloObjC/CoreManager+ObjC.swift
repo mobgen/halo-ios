@@ -10,6 +10,10 @@ import Halo
 
 extension CoreManager {
 
+    public var env: String {
+        return self.environment.description
+    }
+    
     @objc
     public func modules(success: (NSHTTPURLResponse?, PaginatedModules) -> Void,
                         failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
@@ -25,5 +29,27 @@ extension CoreManager {
                 failure(response, error)
             }
         }
+    }
+    
+    @objc(setEnvironment:withCompletionHandler:)
+    public func setEnvironment(environment env: String, completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
+        
+        var envir: HaloEnvironment!
+        
+        switch env.lowercaseString {
+        case "int":
+            envir = .Int
+        case "prod":
+            envir = .Prod
+        case "stage":
+            envir = .Stage
+        case "qa":
+            envir = .QA
+        default:
+            envir = .Custom(env)
+        }
+        
+        self.setEnvironment(environment: envir, completionHandler: handler)
+        
     }
 }
