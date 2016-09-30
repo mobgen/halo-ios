@@ -11,8 +11,8 @@ import Foundation
 /**
 Model representing a user within the Halo environment
  */
-@objc(HaloUser)
-public final class User: NSObject, NSCoding {
+@objc(HaloDevice)
+public final class Device: NSObject, NSCoding {
 
     struct Keys {
         static let Id = "id"
@@ -38,7 +38,7 @@ public final class User: NSObject, NSCoding {
     public var alias: String?
 
     /// List of devices linked to this user
-    public var devices: [Halo.UserDevice]?
+    public var info: Halo.DeviceInfo?
 
     /// Dictionary of tags associated to this user
     public var tags: [String : Halo.Tag]?
@@ -50,7 +50,7 @@ public final class User: NSObject, NSCoding {
     public internal(set) var updatedAt: NSDate?
 
     public override var description: String {
-        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tdevices:\(devices)\n----"
+        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tinfo:\(info)\n----"
     }
 
     public override init() {
@@ -65,7 +65,7 @@ public final class User: NSObject, NSCoding {
         self.appId = aDecoder.decodeObjectForKey(Keys.AppId) as? Int
         self.email = aDecoder.decodeObjectForKey(Keys.Email) as? String
         self.alias = aDecoder.decodeObjectForKey(Keys.Alias) as? String
-        self.devices = aDecoder.decodeObjectForKey(Keys.Devices) as? [Halo.UserDevice]
+        self.info = aDecoder.decodeObjectForKey(Keys.Devices) as? Halo.DeviceInfo
         self.tags = aDecoder.decodeObjectForKey(Keys.Tags) as? [String: Halo.Tag]
         self.createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
         self.updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
@@ -76,7 +76,7 @@ public final class User: NSObject, NSCoding {
         aCoder.encodeObject(appId, forKey: Keys.AppId)
         aCoder.encodeObject(email, forKey: Keys.Email)
         aCoder.encodeObject(alias, forKey: Keys.Alias)
-        aCoder.encodeObject(devices, forKey: Keys.Devices)
+        aCoder.encodeObject(info, forKey: Keys.Devices)
         aCoder.encodeObject(tags, forKey: Keys.Tags)
         aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
         aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
@@ -118,7 +118,7 @@ public final class User: NSObject, NSCoding {
     - parameter tags: collection of tags
     */
     public func addTags(tags tags: [String: String]) {
-        let _ = tags.map({ self.addTag(name: $0, value: $1)})
+        tags.forEach { self.addTag(name: $0, value: $1) }
     }
 
     /**
@@ -142,21 +142,21 @@ public final class User: NSObject, NSCoding {
     /**
     Store a serialized version of the current user inside the user preferences
     */
-    func storeUser(env env: HaloEnvironment) -> Void {
+    func storeDevice(env env: HaloEnvironment) -> Void {
         let encodedObject = NSKeyedArchiver.archivedDataWithRootObject(self)
         let userDefaults = NSUserDefaults.standardUserDefaults()
 
-        userDefaults.setObject(encodedObject, forKey: "\(CoreConstants.userDefaultsUserKey)-\(env.description)")
+        userDefaults.setObject(encodedObject, forKey: "\(CoreConstants.userDefaultsDeviceKey)-\(env.description)")
         userDefaults.synchronize()
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadUser(env env: HaloEnvironment) -> Halo.User {
+    class func loadDevice(env env: HaloEnvironment) -> Halo.Device {
 
-        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsUserKey)-\(env.description)") as? NSData {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as! Halo.User
+        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsDeviceKey)-\(env.description)") as? NSData {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as! Halo.Device
         } else {
-            return User()
+            return Device()
         }
     }
 
@@ -180,10 +180,8 @@ public final class User: NSObject, NSCoding {
             dict[Keys.Alias] = alias
         }
 
-        if let devices = self.devices {
-            dict[Keys.Devices] = devices.map({ (device: UserDevice) -> NSDictionary in
-                return device.toDictionary()
-            })
+        if let info = self.info {
+            dict[Keys.Devices] = [info.toDictionary()]
         }
 
         if let tags = self.tags {
@@ -206,33 +204,34 @@ public final class User: NSObject, NSCoding {
 
     - returns: The newly created user instance
     */
-    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.User {
+    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.Device {
 
-        var user: Halo.User
+        var device: Halo.Device
 
-        user = User()
+        device = Device()
 
         if let id = dict[Keys.Id] as? String {
-            user.id = id
+            device.id = id
         }
 
         if let appId = dict[Keys.AppId] as? Int {
-            user.appId = appId
+            device.appId = appId
         }
 
         if let alias = dict[Keys.Alias] as? String {
-            user.alias = alias
+            device.alias = alias
         }
 
-        user.email = dict[Keys.Email] as? String
-        user.devices = (dict[Keys.Devices] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.UserDevice in
-            return UserDevice.fromDictionary(dict: dict)
-        })
-
+        device.email = dict[Keys.Email] as? String
+        
+        if let info = dict[Keys.Devices] as? [[String: AnyObject]], let first = info.first {
+            device.info = DeviceInfo.fromDictionary(dict: first)
+        }
+        
         if let tags = (dict[Keys.Tags] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
             return Halo.Tag.fromDictionary(dict: dict)
         }) {
-            user.tags = tags.reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+            device.tags = tags.reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
                 var varDict = dict
                 varDict[tag.name] = tag
                 return varDict
@@ -240,14 +239,14 @@ public final class User: NSObject, NSCoding {
         }
 
         if let created = dict[Keys.CreatedAt] as? NSTimeInterval {
-            user.createdAt = NSDate(timeIntervalSince1970:created/1000)
+            device.createdAt = NSDate(timeIntervalSince1970:created/1000)
         }
 
         if let updated = dict[Keys.UpdatedAt] as? NSTimeInterval {
-            user.updatedAt = NSDate(timeIntervalSince1970:updated/1000)
+            device.updatedAt = NSDate(timeIntervalSince1970:updated/1000)
         }
 
-        return user
+        return device
     }
 
 }

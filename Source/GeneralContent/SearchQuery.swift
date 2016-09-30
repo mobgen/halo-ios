@@ -97,7 +97,7 @@ public class SearchQuery: NSObject {
         }
 
         if self.segmentWithUser {
-            if let user = Halo.Manager.core.user, let tags = user.tags {
+            if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
                     dict.updateValue(tags.values.map { $0.toDictionary() }, forKey: Keys.SegmentTags)
                 }

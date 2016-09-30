@@ -27,7 +27,7 @@
 		004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; };
 		004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; };
 		004FEC741BCFB788004216EE /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; };
-		005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+User.swift */; };
+		005390861B8DB7590036F579 /* NetworkManager+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+Device.swift */; };
 		005421641CC76D230055B553 /* NSDate+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421601CC76D230055B553 /* NSDate+Utils.swift */; };
 		005421651CC76D230055B553 /* NSURLRequest+cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421611CC76D230055B553 /* NSURLRequest+cURL.swift */; };
 		005421661CC76D230055B553 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421621CC76D230055B553 /* UIDevice+Extra.swift */; };
@@ -44,9 +44,9 @@
 		0066217B1D8A7AF000A020EC /* SyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0066217A1D8A7AF000A020EC /* SyncResult.swift */; };
 		0068D27C1B6778CA00B1E147 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068D27B1B6778CA00B1E147 /* Token.swift */; };
 		006A60221B318DCC0045395A /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A60211B318DCC0045395A /* Manager.swift */; };
-		006CB9B61B870FB800EB872E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B51B870FB800EB872E /* User.swift */; };
+		006CB9B61B870FB800EB872E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B51B870FB800EB872E /* Device.swift */; };
 		006CB9B81B870FC400EB872E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B71B870FC400EB872E /* Tag.swift */; };
-		006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B91B87116D00EB872E /* UserDevice.swift */; };
+		006CB9BA1B87116D00EB872E /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006CB9B91B87116D00EB872E /* DeviceInfo.swift */; };
 		0073E6581BBE804400365DBD /* HaloAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0073E6571BBE804400365DBD /* HaloAppDelegate.swift */; };
 		007F78FF1B71F844004D1C22 /* ContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F78FE1B71F844004D1C22 /* ContentInstance.swift */; };
 		0086F52E1B6C20C2001F70DE /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086F52D1B6C20C2001F70DE /* ContentManager.swift */; };
@@ -145,7 +145,7 @@
 		004FEC701BCFB788004216EE /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		004FEC711BCFB788004216EE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		005034B11C92B11300362A8F /* HaloRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloRequest.swift; sourceTree = "<group>"; };
-		005390851B8DB7590036F579 /* NetworkManager+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+User.swift"; sourceTree = "<group>"; };
+		005390851B8DB7590036F579 /* NetworkManager+Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Device.swift"; sourceTree = "<group>"; };
 		005421601CC76D230055B553 /* NSDate+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Utils.swift"; sourceTree = "<group>"; };
 		005421611CC76D230055B553 /* NSURLRequest+cURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLRequest+cURL.swift"; sourceTree = "<group>"; };
 		005421621CC76D230055B553 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
@@ -167,9 +167,9 @@
 		006A5FBD1B318CAC0045395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006A60211B318DCC0045395A /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		006CB9901B85BBA100EB872E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		006CB9B51B870FB800EB872E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		006CB9B51B870FB800EB872E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		006CB9B71B870FC400EB872E /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
-		006CB9B91B87116D00EB872E /* UserDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDevice.swift; sourceTree = "<group>"; };
+		006CB9B91B87116D00EB872E /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		0073E6571BBE804400365DBD /* HaloAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloAppDelegate.swift; sourceTree = "<group>"; };
 		007F78FE1B71F844004D1C22 /* ContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentInstance.swift; sourceTree = "<group>"; };
 		0086F52D1B6C20C2001F70DE /* ContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
@@ -252,8 +252,8 @@
 				0045393A1B67E8170060C30B /* Module.swift */,
 				006CB9B71B870FC400EB872E /* Tag.swift */,
 				0068D27B1B6778CA00B1E147 /* Token.swift */,
-				006CB9B51B870FB800EB872E /* User.swift */,
-				006CB9B91B87116D00EB872E /* UserDevice.swift */,
+				006CB9B51B870FB800EB872E /* Device.swift */,
+				006CB9B91B87116D00EB872E /* DeviceInfo.swift */,
 				00396E461D53253600594D0A /* PaginatedModules.swift */,
 				00396E481D53255500594D0A /* PaginationInfo.swift */,
 				00396E4A1D5328B300594D0A /* PaginatedContentInstances.swift */,
@@ -396,7 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				0094A31F1B70A6A600DED864 /* NetworkManager.swift */,
-				005390851B8DB7590036F579 /* NetworkManager+User.swift */,
+				005390851B8DB7590036F579 /* NetworkManager+Device.swift */,
 				000826FE1B6A34DE001E8248 /* Router.swift */,
 				003B75F71C969E9800F05202 /* ParameterEncoding.swift */,
 			);
@@ -684,19 +684,19 @@
 				005F60C41D89326C00F68FEB /* SyncQuery.swift in Sources */,
 				0094A3201B70A6A600DED864 /* NetworkManager.swift in Sources */,
 				006CB9B81B870FC400EB872E /* Tag.swift in Sources */,
-				006CB9B61B870FB800EB872E /* User.swift in Sources */,
+				006CB9B61B870FB800EB872E /* Device.swift in Sources */,
 				00121E8F1BF33B5C00FD656F /* CoreManager+Modules.swift in Sources */,
 				006264371D5B053D0036F227 /* NetworkDataProvider.swift in Sources */,
 				007F78FF1B71F844004D1C22 /* ContentInstance.swift in Sources */,
 				006A60221B318DCC0045395A /* Manager.swift in Sources */,
-				006CB9BA1B87116D00EB872E /* UserDevice.swift in Sources */,
+				006CB9BA1B87116D00EB872E /* DeviceInfo.swift in Sources */,
 				0090DFD11C89E08200BAF181 /* CloudinaryURLOptions.swift in Sources */,
 				0066217B1D8A7AF000A020EC /* SyncResult.swift in Sources */,
 				003B75F81C969E9800F05202 /* ParameterEncoding.swift in Sources */,
 				00C2F3351D635A2E002C1125 /* LogMessage.swift in Sources */,
 				004149091D645A4300E872B6 /* HaloError.swift in Sources */,
 				004C73C51D09657A005A14FB /* SearchFilterHelper.swift in Sources */,
-				005390861B8DB7590036F579 /* NetworkManager+User.swift in Sources */,
+				005390861B8DB7590036F579 /* NetworkManager+Device.swift in Sources */,
 				00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */,
 				005421671CC76D230055B553 /* UIImage+Async.swift in Sources */,
 				006264391D5B05F50036F227 /* Request.swift in Sources */,

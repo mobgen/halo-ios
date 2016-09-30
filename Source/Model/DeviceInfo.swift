@@ -12,8 +12,8 @@ import Foundation
 Representation of a user's device, containing information such as the platform
 or the push notifications token.
  */
-@objc(HaloUserDevice)
-public final class UserDevice: NSObject, NSCoding {
+@objc(HaloDeviceInfo)
+public final class DeviceInfo: NSObject, NSCoding {
 
     struct Keys {
         static let Platform = "platform"
@@ -67,7 +67,7 @@ public final class UserDevice: NSObject, NSCoding {
 
     - returns: The newly created user device
     */
-    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.UserDevice {
-        return UserDevice(platform: dict[Keys.Platform] as! String, token: dict[Keys.Token] as! String)
+    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.DeviceInfo {
+        return DeviceInfo(platform: dict[Keys.Platform] as! String, token: dict[Keys.Token] as! String)
     }
 }
