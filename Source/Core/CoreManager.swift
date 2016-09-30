@@ -410,6 +410,7 @@ public class CoreManager: NSObject, HaloManager {
      - parameter application: Application being configured
      - parameter deviceToken: Token obtained for the current device
      */
+    @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:)
     public func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
 
         LogMessage(message: "Successfully registered for remote notifications with token \(deviceToken)", level: .Info).print()
@@ -427,6 +428,7 @@ public class CoreManager: NSObject, HaloManager {
      - parameter application: Application being configured
      - parameter error:       Error thrown during the process
      */
+    @objc(application:didFailToRegisterForRemoteNotificationsWithError:)
     public func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
 
         LogMessage(message: "Failed registering for remote notifications", error: error).print()
@@ -438,10 +440,12 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
+    @objc(application:didReceiveRemoteNotification:)
     public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         self.application(application: app, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { _ in })
     }
 
+    @objc(application:didReceiveRemoteNotification:fetchCompletionHandler:)
     public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
         let _ = self.addons.map { (addon) in
@@ -451,10 +455,12 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
+    @objc(applicationDidBecomeActive:)
     public func applicationDidBecomeActive(application app: UIApplication) {
         let _ = self.addons.map { $0.applicationDidBecomeActive(application: app, core: self) }
     }
 
+    @objc(applicationDidEnterBackground:)
     public func applicationDidEnterBackground(application app: UIApplication) {
         let _ = self.addons.map { $0.applicationDidEnterBackground(application: app, core: self) }
     }
