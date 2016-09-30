@@ -44,7 +44,7 @@ public func valueNotIn(property property: String, value: AnyObject?, type: Strin
 
 public func or(elements elements: SearchFilter...) -> SearchFilter {
 
-    var filter = SearchFilter()
+    let filter = SearchFilter()
 
     filter.condition = "or"
     filter.operands = elements
@@ -54,7 +54,7 @@ public func or(elements elements: SearchFilter...) -> SearchFilter {
 
 public func and(elements elements: SearchFilter...) -> SearchFilter {
 
-    var filter = SearchFilter()
+    let filter = SearchFilter()
 
     filter.condition = "and"
     filter.operands = elements

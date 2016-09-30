@@ -25,7 +25,8 @@ enum SearchFilterOperation {
     }
 }
 
-public struct SearchFilter {
+@objc(HaloSearchFilter)
+public class SearchFilter: NSObject {
 
     var condition: String?
     var operands: [SearchFilter]?
@@ -58,7 +59,9 @@ public struct SearchFilter {
         return dict
     }
 
-    init() {}
+    override init() {
+        super.init()
+    }
 
     init(operation: SearchFilterOperation, property: String, value: AnyObject?, type: String? = nil) {
         self.operation = operation.description

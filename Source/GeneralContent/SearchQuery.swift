@@ -113,41 +113,49 @@ public class SearchQuery: NSObject {
         return dict
     }
 
+    @objc(searchFilter:)
     public func searchFilter(filter filter: SearchFilter) -> Halo.SearchQuery {
         self.conditions = filter.body
         return self
     }
 
+    @objc(metaFilter:)
     public func metaFilter(filter filter: SearchFilter) -> Halo.SearchQuery {
         self.metaConditions = filter.body
         return self
     }
 
+    @objc(fields:)
     public func fields(fields fields: [String]) -> Halo.SearchQuery {
         self.fields = fields
         return self
     }
 
+    @objc(tags:)
     public func tags(tags tags: [Halo.Tag]) -> Halo.SearchQuery {
         self.tags = tags
         return self
     }
 
+    @objc(moduleIds:)
     public func moduleIds(ids ids: [String]) -> Halo.SearchQuery {
         self.moduleIds = ids
         return self
     }
 
+    @objc(moduleName:)
     public func moduleName(name name: String) -> Halo.SearchQuery {
         self.moduleName = name
         return self
     }
     
+    @objc(instanceIds:)
     public func instanceIds(ids ids: [String]) -> Halo.SearchQuery {
         self.instanceIds = ids
         return self
     }
 
+    @objc(populateFields:)
     public func populateFields(fields fields: [String]) -> Halo.SearchQuery {
         self.populateFields = fields
         return self
@@ -158,16 +166,19 @@ public class SearchQuery: NSObject {
         return self
     }
 
+    @objc(segmentWithUser:)
     public func segmentWithUser(segment segment: Bool) -> Halo.SearchQuery {
         self.segmentWithUser = segment
         return self
     }
 
+    @objc(segmentMode:)
     public func segmentMode(mode mode: SegmentMode) -> Halo.SearchQuery {
         self.segmentMode = mode
         return self
     }
 
+    @objc(locale:)
     public func locale(locale locale: Halo.Locale) -> Halo.SearchQuery {
         self.locale = locale
         return self
@@ -178,6 +189,7 @@ public class SearchQuery: NSObject {
         return self
     }
 
+    @objc(paginationWithPage:limit:)
     public func pagination(page page: Int, limit: Int) -> Halo.SearchQuery {
         self.pagination = [
             "page"  : page,
@@ -187,6 +199,7 @@ public class SearchQuery: NSObject {
         return self
     }
 
+    @objc(offlinePolicy:)
     public func offlinePolicy(policy policy: Halo.OfflinePolicy) -> Halo.SearchQuery {
         self.offlinePolicy = policy
         return self
