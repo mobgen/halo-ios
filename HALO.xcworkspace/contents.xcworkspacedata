@@ -5,12 +5,12 @@
       location = "group:HaloSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../halo-persistence-sdk-ios/HaloPersistenceSDK.xcodeproj">
+      location = "group:../halo-notifications-sdk-ios/HaloNotificationSDK.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../halo-analytics-sdk-ios/HaloAnalyticsSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../halo-notifications-sdk-ios/HaloNotificationSDK.xcodeproj">
+      location = "group:../halo-persistence-sdk-ios/HaloPersistenceSDK.xcodeproj">
    </FileRef>
 </Workspace>

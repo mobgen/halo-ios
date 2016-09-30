@@ -1,7 +1,0 @@
-{
-    "access_token": "Er8GgCtynOofOP9ZQb4Fddx6kxFu3gHfLs1RgGOt",
-    "refresh_token": "zUno91SAfO5B4lvppYq3IQBOSVgo8ISBd6ipx0V4",
-    "expires_in": 86400000,
-    "scope": "app::module::3;app::module::4;",
-    "token_type": "Bearer"
-}

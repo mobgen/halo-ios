@@ -11,19 +11,18 @@ import Foundation
 extension NetworkManager {
 
     func userParser(data: AnyObject) -> Halo.User? {
-        guard let userDict = data as? [String: AnyObject] else {
-            return nil
+        if let dict = data as? [String: AnyObject] {
+            return User.fromDictionary(dict: dict)
         }
-
-        return User.fromDictionary(userDict)
+        return nil
     }
-
-    func getUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
+    
+    func getUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
 
         if let id = user.id {
 
             let request = Halo.Request<Halo.User>(router: Router.SegmentationGetUser(id))
-            try! request.responseParser(self.userParser).responseObject(completionHandler: handler)
+            try! request.responseParser(parser: self.userParser).responseObject(completionHandler: handler)
 
         } else {
             handler?(nil, .Success(user, false))
@@ -37,7 +36,7 @@ extension NetworkManager {
     - parameter user:    User object containing all the information to be sent
     - parameter handler: Closure to be executed after the request has completed
     */
-    func createUpdateUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?, NSError>) -> Void)? = nil) -> Void {
+    func createUpdateUser(user: Halo.User, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<Halo.User?>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
         var request: Halo.Request<Halo.User>
@@ -48,6 +47,6 @@ extension NetworkManager {
             request = Halo.Request(router: Router.SegmentationCreateUser(user.toDictionary()))
         }
 
-        try! request.responseParser(self.userParser).responseObject(completionHandler: handler)
+        try! request.responseParser(parser: self.userParser).responseObject(completionHandler: handler)
     }
 }

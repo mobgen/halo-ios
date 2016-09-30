@@ -10,53 +10,62 @@ import Foundation
 
 public class NetworkDataProvider: DataProvider {
 
-    public var numberOfRetries: Int = 0
+    public func getModules(completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
-    public func responseData(request: Requestable, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<NSData, NSError>) -> Void)? = nil) throws -> Void {
+        let request = Halo.Request<PaginatedModules>(router: Router.Modules).skipPagination().responseParser { (data) in
 
-        switch request.offlinePolicy {
-        case .None:
-            Manager.network.startRequest(request: request) { (resp, result) in
-                handler?(resp, result)
-            }
-        default:
-            throw HaloError.NotImplementedOfflinePolicy
-        }
+            var result: PaginatedModules? = nil
 
-    }
-
-    public func response(request: Requestable, completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<AnyObject, NSError>) -> Void)? = nil) throws -> Void {
-
-        try self.responseData(request) { (response, result) -> Void in
-            switch result {
-            case .Success(let data, _):
-                if let successHandler = handler {
-                    let json = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    successHandler(response, .Success(json, false))
+            switch data {
+            case let d as [String: AnyObject]: // Paginated response
+                if let pag = d["pagination"] as? [String: AnyObject], let items = d["items"] as? [[String: AnyObject]] {
+                    let paginationInfo = PaginationInfo.fromDictionary(dict: pag)
+                    let items = items.map { Halo.Module.fromDictionary(dict: $0) }
+                    result = PaginatedModules(paginationInfo: paginationInfo, modules: items)
                 }
-            case .Failure(let error):
-                handler?(response, .Failure(error))
+            case let d as [[String: AnyObject]]: // Non-paginated response
+                let items = d.map { Halo.Module.fromDictionary(dict: $0) }
+                let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
+                result = PaginatedModules(paginationInfo: paginationInfo, modules: items)
+            default: // Everything else
+                break
             }
-        }
-    }
 
-    public func responseObject<T>(request: Halo.Request<T>,
-                               completionHandler handler: ((NSHTTPURLResponse?, Halo.Result<T?, NSError>) -> Void)? = nil) throws -> Void {
-
-        guard let parser = request.responseParser else {
-            throw HaloError.NotImplementedResponseParser
+            return result
         }
 
-        try self.response(request) { (response, result) in
-            switch result {
-            case .Success(let data, _):
-                handler?(response, .Success(parser(data), false))
-            case .Failure(let error):
-                handler?(response, .Failure(error))
-            }
-        }
+        try! request.responseObject(completionHandler: handler)
 
     }
 
+    public func search(query query: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+
+        let request = Halo.Request<PaginatedContentInstances>(router: Router.GeneralContentSearch).params(params: query.body).responseParser { data in
+
+            var result: PaginatedContentInstances? = nil
+
+            switch data {
+            case let d as [String: AnyObject]: // Paginated response
+                if let pag = d["pagination"] as? [String: AnyObject], let items = d["items"] as? [[String: AnyObject]] {
+                    let paginationInfo = PaginationInfo.fromDictionary(dict: pag)
+                    let items = items.map { Halo.ContentInstance.fromDictionary(dict: $0) }
+                    result = PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
+                }
+            case let d as [[String: AnyObject]]: // Non-paginated response
+                let items = d.map { Halo.ContentInstance.fromDictionary(dict: $0) }
+                let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
+                result = PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
+            default: // Everything else
+                break
+            }
+
+            return result
+
+        }
+
+        try! request.responseObject(completionHandler: handler)
+
+
+    }
 
 }

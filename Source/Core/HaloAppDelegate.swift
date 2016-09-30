@@ -18,8 +18,8 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     - parameter application: Application being configured
     - parameter deviceToken: Device token obtained in previous steps
     */
-    public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        Manager.core.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+    public func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        Manager.core.application(application: app, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
     /**
@@ -28,20 +28,20 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter application: Application being configured
      - parameter error:       Error thrown during the process
      */
-    public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        Manager.core.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
+    public func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        Manager.core.application(application: app, didFailToRegisterForRemoteNotificationsWithError: error)
     }
 
-    public func applicationDidBecomeActive(application: UIApplication) {
-        Manager.core.applicationDidBecomeActive(application)
+    public func applicationDidBecomeActive(application app: UIApplication) {
+        Manager.core.applicationDidBecomeActive(application: app)
     }
 
-    public func applicationDidEnterBackground(application: UIApplication) {
-        Manager.core.applicationDidEnterBackground(application)
+    public func applicationDidEnterBackground(application app: UIApplication) {
+        Manager.core.applicationDidEnterBackground(application: app)
     }
 
-    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        Manager.core.application(application, didReceiveRemoteNotification: userInfo)
+    public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        Manager.core.application(application: app, didReceiveRemoteNotification: userInfo)
     }
 
     /**
@@ -51,8 +51,8 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter userInfo:          Dictionary containing all the information about the notification
      - parameter completionHandler: Handler to be executed once the fetch has finished
      */
-    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        Manager.core.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+    public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        Manager.core.application(application: app, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
     }
 
 }

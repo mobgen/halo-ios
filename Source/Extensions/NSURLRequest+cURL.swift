@@ -15,26 +15,26 @@ extension NSURLRequest {
         let curlString = NSMutableString(string: "curl -k -X \(self.HTTPMethod!) --dump-header -")
 
         self.allHTTPHeaderFields?.forEach({ (key, value) -> () in
-            let headerKey = self.escapeQuotesInString(key)
-            let headerValue = self.escapeQuotesInString(value)
+            let headerKey = self.escapeString(string: key)
+            let headerValue = self.escapeString(string: value)
             curlString.appendString(" -H \"\(headerKey): \(headerValue)\"")
         })
 
         if let bodyData = self.HTTPBody {
             if let bodyDataString = String(data: bodyData, encoding: NSUTF8StringEncoding) {
-                curlString.appendString(" -d \"\(self.escapeQuotesInString(bodyDataString))\"")
+                curlString.appendString(" -d \"\(self.escapeString(string: bodyDataString))\"")
             }
         }
 
         if let url = self.URL {
-            curlString.appendString(" \"\(url.absoluteString)\"")
+            curlString.appendString(" \"\(url.absoluteString!)\"")
         }
 
         return curlString as String
     }
 
 
-    private func escapeQuotesInString(str: String) -> String {
-        return str.stringByReplacingOccurrencesOfString("\"", withString: "\\\"")
+    private func escapeString(string str: String) -> String {
+        return str.stringByReplacingOccurrencesOfString("\"", withString: "\\\"").stringByReplacingOccurrencesOfString("%", withString: "%%")
     }
 }

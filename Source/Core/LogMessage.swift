@@ -9,7 +9,7 @@
 import Foundation
 
 @objc
-public enum HaloLogLevel: Int {
+public enum LogLevel: Int {
     case None = 0,
     Error = 1,
     Warning = 2,
@@ -20,7 +20,7 @@ public enum HaloLogLevel: Int {
         case .Info: return "INFO"
         case .Warning: return "WARNING"
         case .Error: return "ERROR"
-        default: return ""
+        default: return "UNKNOWN"
         }
     }
 }
@@ -29,19 +29,19 @@ public enum HaloLogLevel: Int {
 public class LogMessage: NSObject {
 
     private var message: String = ""
-    private var level: HaloLogLevel = .Error
+    private var level: LogLevel = .Error
 
     public override var debugDescription: String {
         return "<HALO/\(self.level.description)>: \(self.message)"
     }
 
-    public init(_ message: String, level: HaloLogLevel) {
+    public init(message: String, level: LogLevel) {
         super.init()
         self.message = message
         self.level = level
     }
 
-    public init(_ message: String? = nil, error: NSError) {
+    public init(message: String? = nil, error: NSError) {
         super.init()
 
         if let msg = message {

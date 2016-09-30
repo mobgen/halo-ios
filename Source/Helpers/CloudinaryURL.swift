@@ -29,6 +29,10 @@ public class CloudinaryURL {
         return NSURL(string: self.url)!
     }
 
+    public var absoluteURLString: String {
+        return URL.absoluteString ?? ""
+    }
+    
     public func width(pixels w: Int) -> CloudinaryURL {
         params.append("w_\(w)")
         return self
@@ -64,13 +68,13 @@ public class CloudinaryURL {
         return self
     }
 
-    public func gravity(g: ImageGravityMode) -> CloudinaryURL {
+    public func gravity(g g: ImageGravityMode) -> CloudinaryURL {
         params.append("g_\(g.rawValue)")
         return self
     }
 
-    public func zoom(percent: Float) -> CloudinaryURL {
-        params.append("z_\(percent)")
+    public func zoom(percent p: Float) -> CloudinaryURL {
+        params.append("z_\(p)")
         return self
     }
 
@@ -94,13 +98,13 @@ public class CloudinaryURL {
         return self
     }
 
-    public func quality(percent: Float) -> CloudinaryURL {
-        params.append("q_\(percent)")
+    public func quality(percent p: Float) -> CloudinaryURL {
+        params.append("q_\(p)")
         return self
     }
 
-    public func radius(pixels: Int) -> CloudinaryURL {
-        params.append("r_\(pixels)")
+    public func radius(pixels px: Int) -> CloudinaryURL {
+        params.append("r_\(px)")
         return self
     }
 
@@ -109,28 +113,23 @@ public class CloudinaryURL {
         return self
     }
 
-    public func rotate(a: ImageRotation) -> CloudinaryURL {
+    public func rotate(angle a: ImageRotation) -> CloudinaryURL {
         params.append("a_\(a.rawValue)")
         return self
     }
 
-    public func addEffect(e: ImageEffect) -> CloudinaryURL {
+    public func addEffect(effect e: ImageEffect) -> CloudinaryURL {
         params.append("e_\(e.rawValue)")
         return self
     }
 
-    public func addEfects(effects: [ImageEffect]) -> CloudinaryURL {
-        let _ = effects.map { self.addEffect($0) }
+    public func opacity(opacity op: Int) -> CloudinaryURL {
+        params.append("o_\(op)")
         return self
     }
 
-    public func opacity(opacity: Int) -> CloudinaryURL {
-        params.append("o_\(opacity)")
-        return self
-    }
-
-    public func border(border: String) -> CloudinaryURL {
-        params.append("bo_\(border)")
+    public func border(border b: String) -> CloudinaryURL {
+        params.append("bo_\(b)")
         return self
     }
 
@@ -140,31 +139,31 @@ public class CloudinaryURL {
     }
 
     public func backgroundColor(rgb color: String) -> CloudinaryURL {
-        params.append("b_\(color)")
+        params.append("b_rgb:\(color)")
         return self
     }
 
-    public func overlay(id: String) -> CloudinaryURL {
+    public func overlay(id id: String) -> CloudinaryURL {
         params.append("l_\(id)")
         return self
     }
 
-    public func overlayText(text: String) -> CloudinaryURL {
+    public func overlayText(text text: String) -> CloudinaryURL {
         params.append("l_text:\(text)")
         return self
     }
 
-    public func underlay(id: String) -> CloudinaryURL {
+    public func underlay(id id: String) -> CloudinaryURL {
         params.append("u_\(id)")
         return self
     }
 
-    public func defaultImage(id: String) -> CloudinaryURL {
+    public func defaultImage(id id: String) -> CloudinaryURL {
         params.append("d_\(id)")
         return self
     }
 
-    public func delay(delay: Int) ->  CloudinaryURL {
+    public func delay(delay delay: Int) ->  CloudinaryURL {
         params.append("dl_\(delay)")
         return self
     }
@@ -179,28 +178,28 @@ public class CloudinaryURL {
         return self
     }
 
-    public func devicePixelRatio(ratio: Float) -> CloudinaryURL {
-        params.append("dpr_\(ratio)")
+    public func devicePixelRatio(ratio r: Float) -> CloudinaryURL {
+        params.append("dpr_\(r)")
         return self
     }
 
-    public func page(page: Int) -> CloudinaryURL {
-        params.append("pg_\(page)")
+    public func page(page pg: Int) -> CloudinaryURL {
+        params.append("pg_\(pg)")
         return self
     }
 
-    public func dpi(dpi: Int) -> CloudinaryURL {
+    public func dpi(dpi dpi: Int) -> CloudinaryURL {
         params.append("dn_\(dpi)")
         return self
     }
 
-    public func addFlags(flags: [ImageFlag]) -> CloudinaryURL {
+    public func addFlags(flags flags: ImageFlag...) -> CloudinaryURL {
         let arg = flags.map({ $0.rawValue }).joinWithSeparator(".")
         params.append("fl_\(arg)")
         return self
     }
 
-    public func namedTransformation(name: String) -> CloudinaryURL {
+    public func namedTransformation(name name: String) -> CloudinaryURL {
         params.append("t_\(name)")
         return self
     }

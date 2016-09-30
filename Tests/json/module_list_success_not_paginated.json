@@ -1,0 +1,36 @@
+[
+  {
+    "name": "News",
+    "externalId": 4,
+    "isSingle": false,
+    "customerId": 1,
+    "createdBy": "Admin",
+    "tags": [],
+    "pushTemplates": [],
+    "importers": [],
+    "exporters": [],
+    "deletedAt": null,
+    "updatedBy": "undefined",
+    "deletedBy": null,
+    "createdAt": 1474036570134,
+    "updatedAt": 1474063790249,
+    "id": "000000000000000000000004"
+  },
+  {
+    "name": "My Offers",
+    "externalId": 3,
+    "isSingle": false,
+    "customerId": 1,
+    "createdBy": "Admin",
+    "tags": [],
+    "pushTemplates": [],
+    "importers": [],
+    "exporters": [],
+    "deletedAt": null,
+    "updatedBy": "undefined",
+    "deletedBy": null,
+    "createdAt": 1474036570128,
+    "updatedAt": 1474063790248,
+    "id": "000000000000000000000003"
+  }
+]

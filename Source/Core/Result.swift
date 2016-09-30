@@ -8,9 +8,9 @@
 
 import Foundation
 
-public enum Result<Value, Error: ErrorType> {
+public enum Result<Value> {
 
     case Success(Value, Bool)
-    case Failure(Error)
+    case Failure(NSError)
 
 }

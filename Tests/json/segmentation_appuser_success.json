@@ -1,0 +1,26 @@
+{
+  "appId": 2,
+  "devices": [
+    {
+      "platform": "ios",
+      "token": "c123"
+    }
+  ],
+  "tags": [
+    {
+      "id": "56deeb7e669aee2a00bc82ec",
+      "name": "Platform Name",
+      "value": "ios"
+    },
+    {
+      "id": "56e1b1c43e101b2e00224d0f",
+      "name": "female",
+      "value": "true"
+    }
+  ],
+  "customerId": 1,
+  "alias": "anonymous-citlcgo4d01cv1hqrmfwlujak",
+  "createdAt": 1474972364317,
+  "updatedAt": 1474972364317,
+  "id": "57ea4acc1de50500358d00c0"
+}

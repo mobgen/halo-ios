@@ -61,10 +61,8 @@ public enum ParameterEncoding {
      - returns: A tuple containing the constructed request and the error that occurred during parameter encoding,
      if any.
      */
-    public func encode(
-        URLRequest: NSMutableURLRequest, parameters: [String: AnyObject]?)
-        -> (NSMutableURLRequest, NSError?) {
-        var mutableURLRequest = URLRequest
+    public func encode(request request: NSMutableURLRequest, parameters: [String: AnyObject]?) -> (NSMutableURLRequest, NSError?) {
+        var mutableURLRequest = request
 
         guard let parameters = parameters else { return (mutableURLRequest, nil) }
 
@@ -77,7 +75,7 @@ public enum ParameterEncoding {
 
                 for key in parameters.keys.sort(<) {
                     let value = parameters[key]!
-                    components += queryComponents(key, value)
+                    components += queryComponents(key: key, value)
                 }
 
                 return (components.map { "\($0)=\($1)" } as [String]).joinWithSeparator("&")
@@ -162,19 +160,19 @@ public enum ParameterEncoding {
 
      - returns: The percent-escaped, URL encoded query string components.
      */
-    public func queryComponents(key: String, _ value: AnyObject) -> [(String, String)] {
+    public func queryComponents(key key: String, _ value: AnyObject) -> [(String, String)] {
         var components: [(String, String)] = []
 
         if let dictionary = value as? [String: AnyObject] {
             for (nestedKey, value) in dictionary {
-                components += queryComponents("\(key)[\(nestedKey)]", value)
+                components += queryComponents(key: "\(key)[\(nestedKey)]", value)
             }
         } else if let array = value as? [AnyObject] {
             for value in array {
-                components += queryComponents("\(key)[]", value)
+                components += queryComponents(key: "\(key)[]", value)
             }
         } else {
-            components.append((escape(key), escape("\(value)")))
+            components.append((escape(string: key), escape(string: "\(value)")))
         }
 
         return components
@@ -196,7 +194,7 @@ public enum ParameterEncoding {
 
      - returns: The percent-escaped string.
      */
-    public func escape(string: String) -> String {
+    public func escape(string string: String) -> String {
         let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
         let subDelimitersToEncode = "!$&'()*+, ;="
 

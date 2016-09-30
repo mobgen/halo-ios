@@ -17,7 +17,7 @@
     "F8FB45E167EAEDE9DFF836E719755CAD9ABE2307" : "halo-persistence-sdk-ios\/",
     "F17A97E8CEE8FE31592C3CC5EBD6505FAF523743" : "halo-analytics-sdk-ios\/",
     "7F31AB206543B69D74AFEF254FF544C208ADE7D8" : "halo-notifications-sdk-ios\/",
-    "ED5ABB80638FDFA66EEBAF4FC7183817E815CA3B" : "momos-sdk-ios",
+    "ED5ABB80638FDFA66EEBAF4FC7183817E815CA3B" : "halo-sdk-ios\/",
     "67620B5EFA902936DF04070AF595B76AB0333747" : "momos-sdk-iosAlamofire"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "HALO",
