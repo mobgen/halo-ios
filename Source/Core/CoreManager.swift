@@ -70,7 +70,7 @@ public class CoreManager: NSObject, HaloManager {
         self.completionHandler = handler
         self.configureUser { success in
             if success {
-                self.registerUser()
+                self.registerDevice()
             } else {
                 handler?(false)
             }
@@ -158,7 +158,7 @@ public class CoreManager: NSObject, HaloManager {
                         self.setupAddons { _ in
                             
                             self.startupAddons { _ in
-                                self.registerUser()
+                                self.registerDevice()
                             }
                         }
                     } else {
@@ -316,11 +316,13 @@ public class CoreManager: NSObject, HaloManager {
 
     }
 
-    private func registerUser() -> Void {
+    private func registerDevice() -> Void {
 
         if let device = self.device {
             self.device?.storeDevice(env: self.environment)
 
+            self.addons.forEach { $0.willRegisterDevice(haloCore: self) }
+            
             Manager.network.createUpdateDevice(device) { [weak self] (_, result) -> Void in
 
                 var success = false
@@ -341,6 +343,7 @@ public class CoreManager: NSObject, HaloManager {
                         LogMessage(message: "Error creating/updating user", error: error).print()
                     }
 
+                    strongSelf.addons.forEach { $0.didRegisterDevice(haloCore: strongSelf) }
                     strongSelf.completionHandler?(success)
 
                 }
@@ -415,7 +418,7 @@ public class CoreManager: NSObject, HaloManager {
 
         LogMessage(message: "Successfully registered for remote notifications with token \(deviceToken)", level: .Info).print()
 
-        let _ = self.addons.map { (addon) in
+        self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
                 notifAddon.application(application: app, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: self)
             }
@@ -433,7 +436,7 @@ public class CoreManager: NSObject, HaloManager {
 
         LogMessage(message: "Failed registering for remote notifications", error: error).print()
 
-        let _ = self.addons.map { (addon) in
+        self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
                 notifAddon.application(application: app, didFailToRegisterForRemoteNotificationsWithError: error, core: self)
             }
@@ -448,7 +451,7 @@ public class CoreManager: NSObject, HaloManager {
     @objc(application:didReceiveRemoteNotification:fetchCompletionHandler:)
     public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
-        let _ = self.addons.map { (addon) in
+        self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
                 notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: completionHandler)
             }
@@ -457,12 +460,12 @@ public class CoreManager: NSObject, HaloManager {
 
     @objc(applicationDidBecomeActive:)
     public func applicationDidBecomeActive(application app: UIApplication) {
-        let _ = self.addons.map { $0.applicationDidBecomeActive(application: app, core: self) }
+        self.addons.forEach { $0.applicationDidBecomeActive(application: app, core: self) }
     }
 
     @objc(applicationDidEnterBackground:)
     public func applicationDidEnterBackground(application app: UIApplication) {
-        let _ = self.addons.map { $0.applicationDidEnterBackground(application: app, core: self) }
+        self.addons.forEach { $0.applicationDidEnterBackground(application: app, core: self) }
     }
 
     private func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {

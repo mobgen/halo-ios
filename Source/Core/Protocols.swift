@@ -37,8 +37,8 @@ public protocol Addon {
     func willRegisterAddon(haloCore core: Halo.CoreManager) -> Void
     func didRegisterAddon(haloCore core: Halo.CoreManager) -> Void
 
-    func willRegisterUser(haloCore core: Halo.CoreManager) -> Void
-    func didRegisterUser(haloCore core: Halo.CoreManager) -> Void
+    func willRegisterDevice(haloCore core: Halo.CoreManager) -> Void
+    func didRegisterDevice(haloCore core: Halo.CoreManager) -> Void
 
     func applicationDidFinishLaunching(application app: UIApplication, core: Halo.CoreManager) -> Void
     func applicationDidEnterBackground(application app: UIApplication, core: Halo.CoreManager) -> Void
