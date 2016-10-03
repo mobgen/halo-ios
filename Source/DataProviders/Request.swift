@@ -30,7 +30,15 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
 
     public private(set) var responseParser: ((AnyObject) -> T?)?
     public private(set) var authenticationMode: Halo.AuthenticationMode = .App
-    public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy
+    public private(set) var offlinePolicy = Manager.core.defaultOfflinePolicy {
+        didSet {
+            switch offlinePolicy {
+            case .None: self.dataProvider = DataProviderManager.online
+            case .LoadAndStoreLocalData: self.dataProvider = DataProviderManager.onlineOffline
+            case .ReturnLocalDataDontLoad: self.dataProvider = DataProviderManager.offline
+            }
+        }
+    }
     public private(set) var dataProvider: DataProvider = Manager.core.dataProvider
 
     public var URLRequest: NSMutableURLRequest {
@@ -91,11 +99,6 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
 
     public func offlinePolicy(policy policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
-        return self
-    }
-
-    public func dataProvider(provider provider: Halo.DataProvider) -> Halo.Request<T> {
-        self.dataProvider = provider
         return self
     }
 

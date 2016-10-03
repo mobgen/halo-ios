@@ -14,3 +14,11 @@ public protocol DataProvider {
     func search(query query: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void
 
 }
+
+struct DataProviderManager {
+    
+    static let online: NetworkDataProvider = NetworkDataProvider()
+    static let onlineOffline: NetworkOfflineDataProvider = NetworkOfflineDataProvider()
+    static let offline: OfflineDataProvider = OfflineDataProvider()
+    
+}

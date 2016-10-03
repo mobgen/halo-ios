@@ -34,7 +34,15 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
-    public var defaultOfflinePolicy: OfflinePolicy = .None
+    public var defaultOfflinePolicy: OfflinePolicy = .None {
+        didSet {
+            switch defaultOfflinePolicy {
+            case .None: self.dataProvider = DataProviderManager.online
+            case .LoadAndStoreLocalData: self.dataProvider = DataProviderManager.onlineOffline
+            case .ReturnLocalDataDontLoad: self.dataProvider = DataProviderManager.offline
+            }
+        }
+    }
 
     public var appCredentials: Credentials?
     public var userCredentials: Credentials?
