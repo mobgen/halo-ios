@@ -16,7 +16,7 @@ public protocol Requestable {
     var URLRequest: NSMutableURLRequest { get }
     var authenticationMode: Halo.AuthenticationMode { get }
     var offlinePolicy: Halo.OfflinePolicy { get }
-    var numberOfRetries: Int { get }
+    var numberOfRetries: Int? { get }
 }
 
 public class Request<T>: Requestable, CustomDebugStringConvertible {
