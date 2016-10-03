@@ -47,7 +47,7 @@ public class SearchQuery: NSObject {
     private(set) var populateFields: [String]?
     private(set) var tags: [Halo.Tag]?
     private(set) var pagination: [String: AnyObject]?
-    private(set) var segmentWithUser: Bool = false
+    private(set) var segmentWithDevice: Bool = false
     private(set) var segmentMode: SegmentMode = .Partial
     private(set) var offlinePolicy: Halo.OfflinePolicy?
     private(set) var locale: Halo.Locale?
@@ -96,7 +96,7 @@ public class SearchQuery: NSObject {
             dict.updateValue(pagination, forKey: Keys.Pagination)
         }
 
-        if self.segmentWithUser {
+        if self.segmentWithDevice {
             if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
                     dict.updateValue(tags.values.map { $0.toDictionary() }, forKey: Keys.SegmentTags)
@@ -166,9 +166,9 @@ public class SearchQuery: NSObject {
         return self
     }
 
-    @objc(segmentWithUser:)
-    public func segmentWithUser(segment segment: Bool) -> Halo.SearchQuery {
-        self.segmentWithUser = segment
+    @objc(segmentWithDevice:)
+    public func segmentWithDevice(segment segment: Bool) -> Halo.SearchQuery {
+        self.segmentWithDevice = segment
         return self
     }
 
@@ -196,12 +196,6 @@ public class SearchQuery: NSObject {
             "limit" : limit,
             "skip"  : "false"
         ]
-        return self
-    }
-
-    @objc(offlinePolicy:)
-    public func offlinePolicy(policy policy: Halo.OfflinePolicy) -> Halo.SearchQuery {
-        self.offlinePolicy = policy
         return self
     }
 }
