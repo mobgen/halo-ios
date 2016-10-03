@@ -44,6 +44,8 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
+    public var numberOfRetries: Int = 0
+    
     public var appCredentials: Credentials?
     public var userCredentials: Credentials?
 

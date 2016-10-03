@@ -16,7 +16,7 @@ public protocol Requestable {
     var URLRequest: NSMutableURLRequest { get }
     var authenticationMode: Halo.AuthenticationMode { get }
     var offlinePolicy: Halo.OfflinePolicy { get }
-    var dataProvider: Halo.DataProvider { get }
+    var numberOfRetries: Int { get }
 }
 
 public class Request<T>: Requestable, CustomDebugStringConvertible {
@@ -39,7 +39,9 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
             }
         }
     }
-    public private(set) var dataProvider: DataProvider = Manager.core.dataProvider
+    public private(set) var numberOfRetries: Int?
+    
+    private(set) var dataProvider: DataProvider = Manager.core.dataProvider
 
     public var URLRequest: NSMutableURLRequest {
         let req = NSMutableURLRequest(URL: self.url!)
@@ -102,6 +104,11 @@ public class Request<T>: Requestable, CustomDebugStringConvertible {
         return self
     }
 
+    public func numberOfRetries(retries retries: Int) -> Halo.Request<T> {
+        self.numberOfRetries = retries
+        return self
+    }
+    
     public func method(method method: Halo.Method) -> Halo.Request<T> {
         self.method = method
         return self
