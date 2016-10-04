@@ -516,7 +516,6 @@
 				004790F41C915C6C00C24741 /* Sources */,
 				004790F51C915C6C00C24741 /* Frameworks */,
 				004790F61C915C6C00C24741 /* Headers */,
-				004790F71C915C6C00C24741 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -612,13 +611,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		004790F71C915C6C00C24741 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		006A5FAB1B318CAC0045395A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
