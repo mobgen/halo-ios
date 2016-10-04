@@ -43,6 +43,7 @@ public class HaloRequest: NSObject {
         super.init()
     }
 
+    @objc(offlinePolicy:)
     public func offlinePolicy(policy: HaloOfflinePolicy) -> HaloRequest {
 
         let newPolicy: Halo.OfflinePolicy
@@ -57,6 +58,7 @@ public class HaloRequest: NSObject {
         return self
     }
 
+    @objc(method:)
     public func method(method: HaloMethod) -> HaloRequest {
 
         let newMethod: Halo.Method
@@ -77,6 +79,7 @@ public class HaloRequest: NSObject {
         return self
     }
 
+    @objc(parameterEncoding:)
     public func parameterEncoding(encoding: HaloParameterEncoding) -> HaloRequest {
 
         let newEncoding: Halo.ParameterEncoding
@@ -96,11 +99,13 @@ public class HaloRequest: NSObject {
         return self
     }
 
+    @objc(addHeaders:)
     public func addHeaders(headers: [String : String]) -> HaloRequest {
         request?.addHeaders(headers: headers)
         return self
     }
 
+    @objc(params:)
     public func params(params: [String : AnyObject]) -> HaloRequest {
         request?.params(params: params)
         return self
@@ -121,6 +126,7 @@ public class HaloRequest: NSObject {
         return self
     }
 
+    @objc(fields:)
     public func fields(fields: [String]) -> HaloRequest {
         request?.fields(fields: fields)
         return self
