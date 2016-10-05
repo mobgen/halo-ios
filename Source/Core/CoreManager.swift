@@ -188,7 +188,7 @@ public class CoreManager: NSObject, HaloManager {
 
         var counter = 0
 
-        let _ = self.addons.map { $0.setup(haloCore: self) { (addon, success) in
+        self.addons.forEach { $0.setup(haloCore: self) { (addon, success) in
 
             if success {
                 LogMessage(message: "Successfully set up the \(addon.addonName) addon", level: .Info).print()
@@ -215,7 +215,7 @@ public class CoreManager: NSObject, HaloManager {
 
         var counter = 0
 
-        let _ = self.addons.map { $0.startup(haloCore: self) { (addon, success) in
+        self.addons.forEach { $0.startup(haloCore: self) { (addon, success) in
 
             if success {
                 LogMessage(message: "Successfully started the \(addon.addonName) addon", level: .Info).print()
