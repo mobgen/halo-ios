@@ -42,7 +42,7 @@ public func valueNotIn(property property: String, value: AnyObject?, type: Strin
     return SearchFilter(operation: .NotIn, property: property, value: value, type: type)
 }
 
-public func or(elements elements: SearchFilter...) -> SearchFilter {
+public func or(elements: SearchFilter...) -> SearchFilter {
 
     let filter = SearchFilter()
 
@@ -52,7 +52,7 @@ public func or(elements elements: SearchFilter...) -> SearchFilter {
     return filter
 }
 
-public func and(elements elements: SearchFilter...) -> SearchFilter {
+public func and(elements: SearchFilter...) -> SearchFilter {
 
     let filter = SearchFilter()
 
@@ -70,7 +70,7 @@ public class SearchFilterHelper {
         let condition3 = SearchFilter(operation: .Eq, property: "removedAt", value: nil)
         let condition4 = SearchFilter(operation: .Eq, property: "deletedAt", value: nil)
 
-        return and(elements: condition1, condition2, condition3, condition4)
+        return and(condition1, condition2, condition3, condition4)
     }
 
     public static func getLastUpdatedItems(from from: NSDate) -> SearchFilter {
@@ -78,7 +78,7 @@ public class SearchFilterHelper {
         let condition2 = lte(property: "updatedAt", value: NSDate().timeIntervalSince1970 * 1000, type: "date")
         let notDeleted = eq(property: "deletedAt", value: nil)
 
-        return and(elements: condition1, condition2, notDeleted)
+        return and(condition1, condition2, notDeleted)
     }
 
     public static func getArchivedItems() -> SearchFilter {
@@ -86,14 +86,14 @@ public class SearchFilterHelper {
         let condition2 = eq(property: "removedAt", value: nil)
         let notDeleted = eq(property: "deletedAt", value: nil)
 
-        return and(elements: condition1, condition2, notDeleted)
+        return and(condition1, condition2, notDeleted)
     }
 
     public static func getExpiredItems() -> SearchFilter {
         let condition1 = lte(property: "removedAt", value: NSDate().timeIntervalSince1970 * 1000, type: "date")
         let notDeleted = eq(property: "deletedAt", value: nil)
 
-        return and(elements: condition1, notDeleted)
+        return and(condition1, notDeleted)
     }
 
     public static func getPublishedItems() -> SearchFilter {
@@ -104,7 +104,7 @@ public class SearchFilterHelper {
         let condition3 = eq(property: "removedAt", value: nil)
         let notDeleted = eq(property: "deletedAt", value: nil)
 
-        return and(elements: condition1, or(elements: condition2, condition3), notDeleted)
+        return and(condition1, or(condition2, condition3), notDeleted)
     }
 
 }
