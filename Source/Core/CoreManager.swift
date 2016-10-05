@@ -15,7 +15,7 @@ public class CoreManager: NSObject, HaloManager {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
 
-    public var dataProvider: DataProvider = NetworkOfflineDataProvider()
+    var dataProvider: DataProvider = DataProviderManager.online
 
     ///
     public var logLevel: LogLevel = .Warning
@@ -78,7 +78,7 @@ public class CoreManager: NSObject, HaloManager {
     public func setEnvironment(environment env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = env
         self.completionHandler = handler
-        self.configureUser { success in
+        self.configureDevice { success in
             if success {
                 self.registerDevice()
             } else {
@@ -161,7 +161,7 @@ public class CoreManager: NSObject, HaloManager {
 
                 self.checkNeedsUpdate()
 
-                self.configureUser { success in
+                self.configureDevice { success in
 
                     if success {
                         // Configure all the registered addons
@@ -233,7 +233,7 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
-    private func configureUser(completionHandler handler: ((Bool) -> Void)? = nil) {
+    private func configureDevice(completionHandler handler: ((Bool) -> Void)? = nil) {
         self.device = Halo.Device.loadDevice(env: self.environment)
 
         if let device = self.device where device.id != nil {
