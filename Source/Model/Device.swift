@@ -117,6 +117,7 @@ public final class Device: NSObject, NSCoding {
 
     - parameter tags: collection of tags
     */
+    @objc(addTags:)
     public func addTags(tags tags: [String: String]) {
         tags.forEach { self.addTag(name: $0, value: $1) }
     }
@@ -204,6 +205,7 @@ public final class Device: NSObject, NSCoding {
 
     - returns: The newly created user instance
     */
+    @objc(fromDictionary:)
     class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.Device {
 
         var device: Halo.Device
