@@ -1,8 +1,8 @@
 #!/bin/bash
 
-$DIRECTORY_TO_EVALUATE=$1
+DIRECTORY_TO_EVALUATE=$1
 
-sloc $DIRECTORY_TO_EVALUATE >> sloc.tmp 
+sloc $DIRECTORY_TO_EVALUATE > sloc.tmp 
 TOTAL=$(cat sloc.tmp | grep 'Physical' | awk '{print $3}')
 SOURCE=$(cat sloc.tmp | grep 'Source' | awk '{print $3}')
 COMMENTS=$(cat sloc.tmp | grep 'Comment' | awk '{print $3}')
