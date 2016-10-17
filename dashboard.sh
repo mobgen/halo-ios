@@ -11,13 +11,12 @@ rm -rf sloc.tmp
 # Report the lines
 echo "Total lines: "$TOTAL "Source lines: "$SOURCE "Comment lines: "$COMMENTS
 
-# Report to dashboard
-BODY="code_size,platform=ios_core total=$TOTAL,source=$SOURCE,comments=$COMMENTS"
-curl -XPOST 'http://halo-dashboard.aws.mobgen.com:8086/write?db=halo' --data-binary "$BODY"
-
 COVERAGE=$(slather coverage --scheme Halo --show HaloSDK.xcodeproj | grep 'Test Coverage' | awk '{print $3}' | sed -e 's/\%//g')
 
 echo "Code coverage: "$COVERAGE
 
-BODY="code_coverage,platform=ios_core coverage=$COVERAGE"
+# Report to dashboard
+BODY="code_size,platform=ios_core total=$TOTAL,source=$SOURCE,comments=$COMMENTS
+code_coverage,platform=ios_core coverage=$COVERAGE"
+
 curl -XPOST 'http://halo-dashboard.aws.mobgen.com:8086/write?db=halo' --data-binary "$BODY"
