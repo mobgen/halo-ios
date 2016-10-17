@@ -22,6 +22,7 @@ public protocol ManagerDelegate {
 
      - returns: The newly created user
      */
+    @objc(managerWillSetupDevice:)
     func managerWillSetupDevice(device: Halo.Device) -> Void
 
 }
@@ -31,17 +32,31 @@ public protocol Addon {
 
     var addonName: String {get}
 
+    @objc(setup:completionHandler:)
     func setup(haloCore core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
+    
+    @objc(startup:completionHandler:)
     func startup(haloCore core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
 
+    @objc(willRegisterAddon:)
     func willRegisterAddon(haloCore core: Halo.CoreManager) -> Void
+    
+    @objc(didRegisterAddon:)
     func didRegisterAddon(haloCore core: Halo.CoreManager) -> Void
 
+    @objc(willRegisterDevice:)
     func willRegisterDevice(haloCore core: Halo.CoreManager) -> Void
+    
+    @objc(didRegisterDevice:)
     func didRegisterDevice(haloCore core: Halo.CoreManager) -> Void
 
+    @objc(applicationDidFinishLaunching:core:)
     func applicationDidFinishLaunching(application app: UIApplication, core: Halo.CoreManager) -> Void
+    
+    @objc(applicationDidEnterBackground:core:)
     func applicationDidEnterBackground(application app: UIApplication, core: Halo.CoreManager) -> Void
+    
+    @objc(applicationDidBecomeActive:core:)
     func applicationDidBecomeActive(application app: UIApplication, core: Halo.CoreManager) -> Void
 
 }
@@ -49,9 +64,13 @@ public protocol Addon {
 @objc(HaloNotificationsAddon)
 public protocol NotificationsAddon: Addon {
 
+    @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:core:)
     func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: Halo.CoreManager) -> Void
+    
+    @objc(application:didFailToRegisterForRemoteNotificationsWithError:core:)
     func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
 
+    @objc(application:didReceiveRemoteNotification:core:fetchCompletionHandler:)
     func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: Halo.CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
 
 }
@@ -59,7 +78,10 @@ public protocol NotificationsAddon: Addon {
 @objc(HaloNetworkAddon)
 public protocol NetworkAddon: Addon {
 
+    @objc(willPerformRequest:)
     func willPerformRequest(request req: NSURLRequest) -> Void
+    
+    @objc(didPerformRequest:time:response:)
     func didPerformRequest(request req: NSURLRequest, time: NSTimeInterval, response: NSURLResponse?) -> Void
 
 }
@@ -69,6 +91,7 @@ public protocol NetworkAddon: Addon {
 @objc
 public protocol HaloManager {
 
+    @objc(startup:)
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
 
 }
