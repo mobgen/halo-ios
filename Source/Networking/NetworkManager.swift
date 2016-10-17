@@ -42,6 +42,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
 
+    @objc(registerAddon:)
     public func registerAddon(addon addon: Halo.NetworkAddon) -> Void {
         self.addons.append(addon)
     }
@@ -55,6 +56,7 @@ public class NetworkManager: NSObject, HaloManager, NSURLSessionDelegate {
         }
     }
 
+    @objc(startup:)
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
         let bundle = NSBundle.mainBundle()

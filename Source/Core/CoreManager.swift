@@ -104,6 +104,7 @@ public class CoreManager: NSObject, HaloManager {
 
      - parameter handler: Closure to be executed once the process has finished. The parameter will provide information about whether the process has succeeded or not
      */
+    @objc(startup:)
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
         if (token != 0) {
