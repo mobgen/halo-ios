@@ -49,7 +49,7 @@ class CoreSpec: BaseSpec {
                         }
                     }
                     
-                    expect(mgr.user).toNot(beNil())
+                    expect(mgr.device).toNot(beNil())
                 }
             }
             
@@ -64,15 +64,15 @@ class CoreSpec: BaseSpec {
                 
                 it("user has not changed") {
                     
-                    let oldUser = mgr.user
+                    let oldDevice = mgr.device
                     
                     waitUntil { done in
-                        mgr.saveUser { _ in
+                        mgr.saveDevice { _ in
                             done()
                         }
                     }
                     
-                    expect(mgr.user).to(be(oldUser))
+                    expect(mgr.device).to(be(oldDevice))
                 }
             }
         }
