@@ -80,7 +80,13 @@ public class CoreManager: NSObject, HaloManager {
         self.completionHandler = handler
         self.configureDevice { success in
             if success {
-                self.registerDevice()
+                // Configure all the registered addons
+                self.setupAddons { _ in
+                    
+                    self.startupAddons { _ in
+                        self.registerDevice()
+                    }
+                }
             } else {
                 handler?(false)
             }
