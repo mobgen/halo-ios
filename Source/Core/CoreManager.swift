@@ -77,16 +77,36 @@ public class CoreManager: NSObject, HaloManager {
      */
     public func setEnvironment(environment env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = env
+        
+        // Save the environment
+        NSUserDefaults.standardUserDefaults().setValue(env.description, forKey: CoreConstants.environmentSettingKey)
+        
         self.completionHandler = handler
         self.configureDevice { success in
             if success {
-                self.registerDevice()
+                // Configure all the registered addons
+                self.setupAddons { _ in
+                    
+                    self.startupAddons { _ in
+                        self.registerDevice()
+                    }
+                }
             } else {
                 handler?(false)
             }
         }
     }
 
+    private func setEnvironment(env: String) {
+        switch env.lowercaseString {
+        case "int": self.environment = .Int
+        case "qa": self.environment = .QA
+        case "prod": self.environment = .Prod
+        case "stage": self.environment = .Stage
+        default: self.environment = .Custom(env)
+        }
+    }
+    
     /**
      Allows registering an add-on within the Core Manager.
 
@@ -104,6 +124,7 @@ public class CoreManager: NSObject, HaloManager {
 
      - parameter handler: Closure to be executed once the process has finished. The parameter will provide information about whether the process has succeeded or not
      */
+    @objc(startup:)
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
 
         if (token != 0) {
@@ -144,19 +165,18 @@ public class CoreManager: NSObject, HaloManager {
                         }
 
                         if let env = data[environmentKey] as? String {
-                            switch env.lowercaseString {
-                            case "int": self.environment = .Int
-                            case "qa": self.environment = .QA
-                            case "prod": self.environment = .Prod
-                            case "stage": self.environment = .Stage
-                            default: self.environment = .Custom(env)
-                            }
+                            self.setEnvironment(env)
                         }
 
                         self.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
                     }
                 } else {
                     LogMessage(message: "No .plist found", level: .Warning).print()
+                }
+                
+                // Check if there's a stored environment
+                if let env = NSUserDefaults.standardUserDefaults().objectForKey(CoreConstants.environmentSettingKey) as? String {
+                    self.setEnvironment(env)
                 }
 
                 self.checkNeedsUpdate()
