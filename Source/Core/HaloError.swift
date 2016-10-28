@@ -9,8 +9,8 @@
 import Foundation
 
 @objc
-public enum HaloError: Int, ErrorType {
+public enum HaloError: Int, Error {
 
-    case NotImplementedResponseParser, NotImplementedOfflinePolicy
+    case notImplementedResponseParser, notImplementedOfflinePolicy
 
 }

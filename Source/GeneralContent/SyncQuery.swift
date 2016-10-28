@@ -9,7 +9,7 @@
 import Foundation
 
 @objc(HaloSyncQuery)
-public class SyncQuery: NSObject {
+open class SyncQuery: NSObject {
 
     struct Keys {
         static let ModuleId = "moduleId"
@@ -19,23 +19,23 @@ public class SyncQuery: NSObject {
         static let ToSync = "toSync"
     }
 
-    public private(set) var locale: Locale?
-    public private(set) var moduleName: String?
-    public private(set) var moduleId: String = ""
-    public private(set) var fromSync: NSDate?
-    public private(set) var toSync: NSDate?
+    open fileprivate(set) var locale: Locale?
+    open fileprivate(set) var moduleName: String?
+    open fileprivate(set) var moduleId: String = ""
+    open fileprivate(set) var fromSync: Date?
+    open fileprivate(set) var toSync: Date?
 
-    public var body: [String: AnyObject] {
+    open var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
 
-        dict[Keys.ModuleId] = moduleId
+        dict[Keys.ModuleId] = moduleId as AnyObject?
         
         if let name = moduleName {
-            dict[Keys.ModuleName] = name
+            dict[Keys.ModuleName] = name as AnyObject?
         }
         
         if let loc = locale {
-            dict[Keys.Locale] = loc.description
+            dict[Keys.Locale] = loc.description as AnyObject?
         }
 
         if let from = fromSync {
@@ -49,7 +49,7 @@ public class SyncQuery: NSObject {
         return dict
     }
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
@@ -58,27 +58,27 @@ public class SyncQuery: NSObject {
         self.moduleId = moduleId
     }
     
-    public func moduleName(name name: String?) -> SyncQuery {
+    open func moduleName(name: String?) -> SyncQuery {
         self.moduleName = name
         return self
     }
 
-    public func moduleId(id id: String) -> SyncQuery {
+    open func moduleId(id: String) -> SyncQuery {
         self.moduleId = id
         return self
     }
     
-    public func locale(locale locale: Locale) -> SyncQuery {
+    open func locale(locale: Locale) -> SyncQuery {
         self.locale = locale
         return self
     }
     
-    public func fromSync(date date: NSDate?) -> SyncQuery {
+    open func fromSync(date: Date?) -> SyncQuery {
         self.fromSync = date
         return self
     }
     
-    public func toSync(date date: NSDate?) -> SyncQuery {
+    open func toSync(date: Date?) -> SyncQuery {
         self.toSync = date
         return self
     }

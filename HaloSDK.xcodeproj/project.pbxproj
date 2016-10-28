@@ -750,7 +750,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -771,7 +771,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -895,7 +895,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.Halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Frameworks/Firebase";
 			};
 			name = Debug;
@@ -915,7 +915,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.Halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Frameworks/Firebase";
 			};
 			name = Release;
@@ -932,7 +932,7 @@
 				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -949,7 +949,7 @@
 				);
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

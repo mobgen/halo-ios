@@ -44,10 +44,10 @@ public final class Device: NSObject, NSCoding {
     public var tags: [String : Halo.Tag]?
 
     /// Date of creation of this user
-    public internal(set) var createdAt: NSDate?
+    public internal(set) var createdAt: Date?
 
     /// Date of the last update
-    public internal(set) var updatedAt: NSDate?
+    public internal(set) var updatedAt: Date?
 
     public override var description: String {
         return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tinfo:\(info)\n----"
@@ -61,25 +61,25 @@ public final class Device: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        self.id = aDecoder.decodeObjectForKey(Keys.Id) as? String
-        self.appId = aDecoder.decodeObjectForKey(Keys.AppId) as? Int
-        self.email = aDecoder.decodeObjectForKey(Keys.Email) as? String
-        self.alias = aDecoder.decodeObjectForKey(Keys.Alias) as? String
-        self.info = aDecoder.decodeObjectForKey(Keys.Devices) as? Halo.DeviceInfo
-        self.tags = aDecoder.decodeObjectForKey(Keys.Tags) as? [String: Halo.Tag]
-        self.createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
-        self.updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
+        self.id = aDecoder.decodeObject(forKey: Keys.Id) as? String
+        self.appId = aDecoder.decodeObject(forKey: Keys.AppId) as? Int
+        self.email = aDecoder.decodeObject(forKey: Keys.Email) as? String
+        self.alias = aDecoder.decodeObject(forKey: Keys.Alias) as? String
+        self.info = aDecoder.decodeObject(forKey: Keys.Devices) as? Halo.DeviceInfo
+        self.tags = aDecoder.decodeObject(forKey: Keys.Tags) as? [String: Halo.Tag]
+        self.createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date
+        self.updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: Keys.Id)
-        aCoder.encodeObject(appId, forKey: Keys.AppId)
-        aCoder.encodeObject(email, forKey: Keys.Email)
-        aCoder.encodeObject(alias, forKey: Keys.Alias)
-        aCoder.encodeObject(info, forKey: Keys.Devices)
-        aCoder.encodeObject(tags, forKey: Keys.Tags)
-        aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
-        aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: Keys.Id)
+        aCoder.encode(appId, forKey: Keys.AppId)
+        aCoder.encode(email, forKey: Keys.Email)
+        aCoder.encode(alias, forKey: Keys.Alias)
+        aCoder.encode(info, forKey: Keys.Devices)
+        aCoder.encode(tags, forKey: Keys.Tags)
+        aCoder.encode(createdAt, forKey: Keys.CreatedAt)
+        aCoder.encode(updatedAt, forKey: Keys.UpdatedAt)
     }
 
     // MARK: User tags management
@@ -90,15 +90,15 @@ public final class Device: NSObject, NSCoding {
     - parameter name:  Name of the tag to be added
     - parameter value: Value of the tag to be added
     */
-    public func addTag(name name: String, value: String) -> Void {
+    public func addTag(name: String, value: String) -> Void {
         self.addTag(name: name, value: value, type: "000000000000000000000002")
     }
 
-    func addSystemTag(name name: String, value: String) -> Void {
+    func addSystemTag(name: String, value: String) -> Void {
         self.addTag(name: name, value: value, type: "000000000000000000000001")
     }
 
-    private func addTag(name name: String, value: String, type: String) -> Void {
+    fileprivate func addTag(name: String, value: String, type: String) -> Void {
         let tag = Halo.Tag(name: name, value: value, type: type)
 
         if let tags = self.tags {
@@ -118,7 +118,7 @@ public final class Device: NSObject, NSCoding {
     - parameter tags: collection of tags
     */
     @objc(addTags:)
-    public func addTags(tags tags: [String: String]) {
+    public func addTags(tags: [String: String]) {
         tags.forEach { self.addTag(name: $0, value: $1) }
     }
 
@@ -129,10 +129,10 @@ public final class Device: NSObject, NSCoding {
 
      - returns: Returns the removed tag or nil if no tag was found and removed
      */
-    public func removeTag(name name: String) -> Halo.Tag? {
+    public func removeTag(name: String) -> Halo.Tag? {
 
         if let _ = self.tags {
-            return tags!.removeValueForKey(name)
+            return tags!.removeValue(forKey: name)
         } else {
             return nil
         }
@@ -143,19 +143,19 @@ public final class Device: NSObject, NSCoding {
     /**
     Store a serialized version of the current user inside the user preferences
     */
-    func storeDevice(env env: HaloEnvironment) -> Void {
-        let encodedObject = NSKeyedArchiver.archivedDataWithRootObject(self)
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+    func storeDevice(env: HaloEnvironment) -> Void {
+        let encodedObject = NSKeyedArchiver.archivedData(withRootObject: self)
+        let userDefaults = UserDefaults.standard
 
-        userDefaults.setObject(encodedObject, forKey: "\(CoreConstants.userDefaultsDeviceKey)-\(env.description)")
+        userDefaults.set(encodedObject, forKey: "\(CoreConstants.userDefaultsDeviceKey)-\(env.description)")
         userDefaults.synchronize()
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadDevice(env env: HaloEnvironment) -> Halo.Device {
+    class func loadDevice(env: HaloEnvironment) -> Halo.Device {
 
-        if let encodedObject = NSUserDefaults.standardUserDefaults().objectForKey("\(CoreConstants.userDefaultsDeviceKey)-\(env.description)") as? NSData {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject) as! Halo.Device
+        if let encodedObject = UserDefaults.standard.object(forKey: "\(CoreConstants.userDefaultsDeviceKey)-\(env.description)") as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as! Halo.Device
         } else {
             return Device()
         }
@@ -170,15 +170,15 @@ public final class Device: NSObject, NSCoding {
 
         var dict = [String: AnyObject]()
 
-        dict[Keys.Id] = self.id
-        dict[Keys.AppId] = self.appId
+        dict[Keys.Id] = self.id as AnyObject?
+        dict[Keys.AppId] = self.appId as AnyObject?
 
         if let email = self.email {
-            dict[Keys.Email] = email
+            dict[Keys.Email] = email as AnyObject?
         }
 
         if let alias = self.alias {
-            dict[Keys.Alias] = alias
+            dict[Keys.Alias] = alias as AnyObject?
         }
 
         if let info = self.info {
@@ -206,7 +206,7 @@ public final class Device: NSObject, NSCoding {
     - returns: The newly created user instance
     */
     @objc(fromDictionary:)
-    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.Device {
+    class func fromDictionary(dict: [String: AnyObject]) -> Halo.Device {
 
         var device: Halo.Device
 
@@ -233,19 +233,19 @@ public final class Device: NSObject, NSCoding {
         if let tags = (dict[Keys.Tags] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
             return Halo.Tag.fromDictionary(dict: dict)
         }) {
-            device.tags = tags.reduce([:], combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+            device.tags = tags.reduce([:], { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
                 var varDict = dict
                 varDict[tag.name] = tag
                 return varDict
             })
         }
 
-        if let created = dict[Keys.CreatedAt] as? NSTimeInterval {
-            device.createdAt = NSDate(timeIntervalSince1970:created/1000)
+        if let created = dict[Keys.CreatedAt] as? TimeInterval {
+            device.createdAt = Date(timeIntervalSince1970:created/1000)
         }
 
-        if let updated = dict[Keys.UpdatedAt] as? NSTimeInterval {
-            device.updatedAt = NSDate(timeIntervalSince1970:updated/1000)
+        if let updated = dict[Keys.UpdatedAt] as? TimeInterval {
+            device.updatedAt = Date(timeIntervalSince1970:updated/1000)
         }
 
         return device

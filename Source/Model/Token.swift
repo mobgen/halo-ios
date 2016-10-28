@@ -7,12 +7,23 @@
 //
 
 import Foundation
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 /**
 Class holding all the information related to the authentication token
  */
 @objc(HaloToken)
-public class Token: NSObject {
+open class Token: NSObject {
 
     struct Keys {
         static let AccessToken = "access_token"
@@ -22,18 +33,18 @@ public class Token: NSObject {
     }
 
     /// Access token
-    public var token: String?
+    open var token: String?
 
     /// Refresh token
-    public var refreshToken: String?
+    open var refreshToken: String?
 
     /// Type of the auth token
-    public var tokenType: String?
+    open var tokenType: String?
 
     /// Expiration date of this authentication token
-    public var expirationDate: NSDate?
+    open var expirationDate: Date?
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 
@@ -42,7 +53,7 @@ public class Token: NSObject {
 
     - parameter dict: Dictionary containing all the token related information
     */
-    public static func fromDictionary(dict dict: [String: AnyObject]) -> Token {
+    open static func fromDictionary(dict: [String: AnyObject]) -> Token {
 
         let token = Token()
 
@@ -51,7 +62,7 @@ public class Token: NSObject {
         token.tokenType = dict[Keys.TokenType] as? String
 
         if let expire = dict[Keys.ExpiresIn] as? NSNumber {
-            token.expirationDate = NSDate().dateByAddingTimeInterval(expire.doubleValue/1000)
+            token.expirationDate = Date().addingTimeInterval(expire.doubleValue/1000)
         }
 
         return token
@@ -62,8 +73,8 @@ public class Token: NSObject {
 
     - returns: Boolean determining whether the token has expired or not
     */
-    public func isExpired() -> Bool {
-        return expirationDate?.timeIntervalSinceDate(NSDate()) < 0
+    open func isExpired() -> Bool {
+        return expirationDate?.timeIntervalSince(Date()) < 0
     }
 
     /**
@@ -71,7 +82,7 @@ public class Token: NSObject {
 
     - returns: Boolean determining whether the token is still valid or not
     */
-    public func isValid() -> Bool {
+    open func isValid() -> Bool {
         return !isExpired()
     }
 }

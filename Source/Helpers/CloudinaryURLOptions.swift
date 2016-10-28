@@ -48,26 +48,26 @@ public enum ImageGravityMode: String {
 }
 
 public enum ImageRotation {
-    case AutoRight
-    case AutoLeft
-    case Ignore
-    case VerticalFlip
-    case HorizontalFlip
-    case Custom(Float)
+    case autoRight
+    case autoLeft
+    case ignore
+    case verticalFlip
+    case horizontalFlip
+    case custom(Float)
 
     public var rawValue: String {
         switch self {
-        case .AutoRight:
+        case .autoRight:
             return "auto_right"
-        case .AutoLeft:
+        case .autoLeft:
             return "auto_left"
-        case .Ignore:
+        case .ignore:
             return "ignore"
-        case .VerticalFlip:
+        case .verticalFlip:
             return "vflip"
-        case .HorizontalFlip:
+        case .horizontalFlip:
             return "hflip"
-        case .Custom(let angle):
+        case .custom(let angle):
             return String(angle)
         }
     }
@@ -75,195 +75,195 @@ public enum ImageRotation {
 
 public enum ImageEffect {
 
-    case Hue(Int?)
-    case Red(Int?)
-    case Green(Int?)
-    case Blue(Int?)
-    case Negate
-    case Brightness(Int?)
-    case Sepia(Int?)
-    case Grayscale
-    case BlackAndWhite
-    case Saturation(Int?)
-    case Colorize(Int?)
-    case Contrast(Int?)
-    case AutoContrast
-    case Vibrance(Int?)
-    case AutoColor
-    case Improve
-    case AutoBrightness
-    case FillLight(Int?)
-    case ViesusCorrect
-    case Gamma(Int?)
-    case Screen
-    case Multiply
-    case Overlay
-    case MakeTransparent
-    case Trim(Int?)
-    case Shadow(Int?)
-    case Distort((Int, Int),(Int, Int),(Int, Int),(Int, Int))
-    case Shear(Float, Float)
-    case Displace
-    case OilPaint(Int?)
-    case RedEye
-    case AdvancedRedEye
-    case Vignette(Int?)
-    case GradientFade(Int?)
-    case Pixelate(Int?)
-    case PixelateFaces(Int?)
-    case Blur(Int?)
-    case BlurFaces(Int?)
-    case Sharpen(Int?)
-    case UnsharpMask(Int?)
+    case hue(Int?)
+    case red(Int?)
+    case green(Int?)
+    case blue(Int?)
+    case negate
+    case brightness(Int?)
+    case sepia(Int?)
+    case grayscale
+    case blackAndWhite
+    case saturation(Int?)
+    case colorize(Int?)
+    case contrast(Int?)
+    case autoContrast
+    case vibrance(Int?)
+    case autoColor
+    case improve
+    case autoBrightness
+    case fillLight(Int?)
+    case viesusCorrect
+    case gamma(Int?)
+    case screen
+    case multiply
+    case overlay
+    case makeTransparent
+    case trim(Int?)
+    case shadow(Int?)
+    case distort((Int, Int),(Int, Int),(Int, Int),(Int, Int))
+    case shear(Float, Float)
+    case displace
+    case oilPaint(Int?)
+    case redEye
+    case advancedRedEye
+    case vignette(Int?)
+    case gradientFade(Int?)
+    case pixelate(Int?)
+    case pixelateFaces(Int?)
+    case blur(Int?)
+    case blurFaces(Int?)
+    case sharpen(Int?)
+    case unsharpMask(Int?)
 
     public var rawValue: String {
         switch self {
-        case .Hue(let value):
-            if let v = value where (-100...100) ~= v {
+        case .hue(let value):
+            if let v = value , (-100...100) ~= v {
                 return "hue:\(v)"
             }
             return "hue"
-        case .Red(let value):
-            if let v = value where (-100...100) ~= v {
+        case .red(let value):
+            if let v = value , (-100...100) ~= v {
                 return "red:\(v)"
             }
             return "red"
-        case .Green(let value):
-            if let v = value where (-100...100) ~= v {
+        case .green(let value):
+            if let v = value , (-100...100) ~= v {
                 return "green:\(v)"
             }
             return "green"
-        case .Blue(let value):
-            if let v = value where (-100...100) ~= v {
+        case .blue(let value):
+            if let v = value , (-100...100) ~= v {
                 return "blue:\(v)"
             }
             return "blue"
-        case .Negate:
+        case .negate:
             return "negate"
-        case .Brightness(let value):
-            if let v = value where (-99...100) ~= v {
+        case .brightness(let value):
+            if let v = value , (-99...100) ~= v {
                 return "brightness:\(v)"
             }
             return "brightness"
-        case .Sepia(let value):
-            if let v = value where (1...100) ~= v {
+        case .sepia(let value):
+            if let v = value , (1...100) ~= v {
                 return "sepia:\(v)"
             }
             return "sepia"
-        case .Grayscale:
+        case .grayscale:
             return "grayscale"
-        case .BlackAndWhite:
+        case .blackAndWhite:
             return "blackwhite"
-        case .Saturation(let value):
-            if let v = value where (-100...100) ~= v {
+        case .saturation(let value):
+            if let v = value , (-100...100) ~= v {
                 return "saturation:\(v)"
             }
             return "saturation"
-        case .Colorize(let value):
-            if let v = value where (0...100) ~= v {
+        case .colorize(let value):
+            if let v = value , (0...100) ~= v {
                 return "colorize:\(v)"
             }
             return "colorize"
-        case .Contrast(let value):
-            if let v = value where (-100...100) ~= v {
+        case .contrast(let value):
+            if let v = value , (-100...100) ~= v {
                 return "contrast:\(v)"
             }
             return "contrast"
-        case .AutoContrast:
+        case .autoContrast:
             return "auto_contrast"
-        case .Vibrance(let value):
-            if let v = value where (-100...100) ~= v {
+        case .vibrance(let value):
+            if let v = value , (-100...100) ~= v {
                 return "vibrance:\(v)"
             }
             return "vibrance"
-        case .AutoColor:
+        case .autoColor:
             return "auto_color"
-        case .Improve:
+        case .improve:
             return "improve"
-        case .AutoBrightness:
+        case .autoBrightness:
             return "auto_brightness"
-        case .FillLight(let value):
-            if let v = value where (-100...100) ~= v {
+        case .fillLight(let value):
+            if let v = value , (-100...100) ~= v {
                 return "fill_light:\(v)"
             }
             return "fill_light"
-        case .ViesusCorrect:
+        case .viesusCorrect:
             return "viesus_correct"
-        case .Gamma(let value):
-            if let v = value where (-50...150) ~= v {
+        case .gamma(let value):
+            if let v = value , (-50...150) ~= v {
                 return "gamma:\(v)"
             }
             return "gamma"
-        case .Screen:
+        case .screen:
             return "screen"
-        case .Multiply:
+        case .multiply:
             return "multiply"
-        case .Overlay:
+        case .overlay:
             return "overlay"
-        case .MakeTransparent:
+        case .makeTransparent:
             return "make_transparent"
-        case .Trim(let value):
-            if let v = value where (0...100) ~= v {
+        case .trim(let value):
+            if let v = value , (0...100) ~= v {
                 return "trim:\(v)"
             }
             return "trim"
-        case .Shadow(let value):
-            if let v = value where (0...100) ~= v {
+        case .shadow(let value):
+            if let v = value , (0...100) ~= v {
                 return "shadow:\(v)"
             }
             return "shadow"
-        case .Distort(let p0, let p1, let p2, let p3):
+        case .distort(let p0, let p1, let p2, let p3):
             return "distort:\(p0.0):\(p0.1):\(p1.0):\(p1.1):\(p2.0):\(p2.1):\(p3.0):\(p3.1)"
-        case .Shear(let xAxis, let yAxis):
+        case .shear(let xAxis, let yAxis):
             return "shear:\(xAxis):\(yAxis)"
-        case .Displace:
+        case .displace:
             return "displace"
-        case .OilPaint(let value):
-            if let v = value where (0...100) ~= v {
+        case .oilPaint(let value):
+            if let v = value , (0...100) ~= v {
                 return "oil_paint:\(v)"
             }
             return "oil_paint"
-        case .RedEye:
+        case .redEye:
             return "redeye"
-        case .AdvancedRedEye:
+        case .advancedRedEye:
             return "adv_redeye"
-        case .Vignette(let value):
-            if let v = value where (0...100) ~= v {
+        case .vignette(let value):
+            if let v = value , (0...100) ~= v {
                 return "vignette:\(v)"
             }
             return "vignette"
-        case .GradientFade(let value):
-            if let v = value where (0...100) ~= v {
+        case .gradientFade(let value):
+            if let v = value , (0...100) ~= v {
                 return "gradient_fade:\(v)"
             }
             return "gradient_fade"
-        case .Pixelate(let value):
-            if let v = value where (1...200) ~= v {
+        case .pixelate(let value):
+            if let v = value , (1...200) ~= v {
                 return "pixelate:\(v)"
             }
             return "pixelate"
-        case .PixelateFaces(let value):
-            if let v = value where (1...200) ~= v {
+        case .pixelateFaces(let value):
+            if let v = value , (1...200) ~= v {
                 return "pixelate_faces:\(v)"
             }
             return "pixelate_faces"
-        case .Blur(let value):
-            if let v = value where (1...2000) ~= v {
+        case .blur(let value):
+            if let v = value , (1...2000) ~= v {
                 return "blur:\(v)"
             }
             return "blur"
-        case .BlurFaces(let value):
-            if let v = value where (1...2000) ~= v {
+        case .blurFaces(let value):
+            if let v = value , (1...2000) ~= v {
                 return "blur_faces:\(v)"
             }
             return "blur_faces"
-        case .Sharpen(let value):
-            if let v = value where (1...2000) ~= v {
+        case .sharpen(let value):
+            if let v = value , (1...2000) ~= v {
                 return "sharpen:\(v)"
             }
             return "sharpen"
-        case .UnsharpMask(let value):
-            if let v = value where (1...2000) ~= v {
+        case .unsharpMask(let value):
+            if let v = value , (1...2000) ~= v {
                 return "unsharp_mask:\(v)"
             }
             return "unsharp_mask"

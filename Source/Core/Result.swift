@@ -10,7 +10,7 @@ import Foundation
 
 public enum Result<Value> {
 
-    case Success(Value, Bool)
-    case Failure(NSError)
+    case success(Value, Bool)
+    case failure(NSError)
 
 }

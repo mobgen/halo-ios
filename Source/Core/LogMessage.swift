@@ -10,28 +10,28 @@ import Foundation
 
 @objc
 public enum LogLevel: Int {
-    case None = 0,
-    Error = 1,
-    Warning = 2,
-    Info = 3
+    case none = 0,
+    error = 1,
+    warning = 2,
+    info = 3
 
     public var description: String {
         switch self {
-        case .Info: return "INFO"
-        case .Warning: return "WARNING"
-        case .Error: return "ERROR"
+        case .info: return "INFO"
+        case .warning: return "WARNING"
+        case .error: return "ERROR"
         default: return "UNKNOWN"
         }
     }
 }
 
 @objc(HaloLogMessage)
-public class LogMessage: NSObject {
+open class LogMessage: NSObject {
 
-    private var message: String = ""
-    private var level: LogLevel = .Error
+    fileprivate var message: String = ""
+    fileprivate var level: LogLevel = .error
 
-    public override var debugDescription: String {
+    open override var debugDescription: String {
         return "<HALO/\(self.level.description)>: \(self.message)"
     }
 
@@ -50,10 +50,10 @@ public class LogMessage: NSObject {
             self.message = error.localizedDescription
         }
 
-        self.level = .Error
+        self.level = .error
     }
 
-    public func print() -> Void {
+    open func print() -> Void {
         if Manager.core.logLevel.rawValue >= self.level.rawValue {
             NSLog(self.debugDescription)
         }

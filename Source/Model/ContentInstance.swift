@@ -13,7 +13,7 @@ This model class represents each of the instances stored as general content data
 */
 
 @objc(HaloContentInstance)
-public class ContentInstance: NSObject, NSCoding {
+open class ContentInstance: NSObject, NSCoding {
 
     struct Keys {
         static let Id = "id"
@@ -33,49 +33,49 @@ public class ContentInstance: NSObject, NSCoding {
     }
 
     /// Unique identifier of this General Content instance
-    public internal(set) var id: String?
+    open internal(set) var id: String?
 
     /// Id of the module to which this instance belongs
-    public internal(set) var moduleId: String?
+    open internal(set) var moduleId: String?
 
     /// Name of the instance
-    public internal(set) var name: String?
+    open internal(set) var name: String?
 
     /// Collection of key-value pairs which make up the information of this instance
-    public internal(set) var values: [String: AnyObject] = [:]
+    open internal(set) var values: [String: AnyObject] = [:]
 
     /// Date in which the content was created
-    public internal(set) var createdAt: NSDate?
+    open internal(set) var createdAt: Date?
 
     /// Most recent date in which the content was updated
-    public internal(set) var updatedAt: NSDate?
+    open internal(set) var updatedAt: Date?
     
-    public internal(set) var deletedAt: NSDate?
+    open internal(set) var deletedAt: Date?
     
     /// Date in which the content was (or is going to be) removed
-    public internal(set) var removedAt: NSDate?
+    open internal(set) var removedAt: Date?
     
     /// Date in which the content was (or is going to be) published
-    public internal(set) var publishedAt: NSDate?
+    open internal(set) var publishedAt: Date?
 
-    public internal(set) var archivedAt: NSDate?
+    open internal(set) var archivedAt: Date?
     
     /// Name of the creator of the content
-    public var createdBy: String?
+    open var createdBy: String?
 
-    public var updatedBy: String?
+    open var updatedBy: String?
     
-    public var deletedBy: String?
+    open var deletedBy: String?
     
     
     /// Dictionary of tags associated to this general content instance
-    public var tags: [String: Halo.Tag] = [:]
+    open var tags: [String: Halo.Tag] = [:]
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 
-    public static func fromDictionary(dict dict: [String: AnyObject]) -> ContentInstance {
+    open static func fromDictionary(dict: [String: AnyObject]) -> ContentInstance {
 
         let instance = ContentInstance()
 
@@ -100,27 +100,27 @@ public class ContentInstance: NSObject, NSCoding {
         }
 
         if let created = dict[Keys.CreatedAt] as? Double {
-            instance.createdAt = NSDate(timeIntervalSince1970: created/1000)
+            instance.createdAt = Date(timeIntervalSince1970: created/1000)
         }
 
         if let updated = dict[Keys.UpdatedAt] as? Double {
-            instance.updatedAt = NSDate(timeIntervalSince1970: updated/1000)
+            instance.updatedAt = Date(timeIntervalSince1970: updated/1000)
         }
 
         if let published = dict[Keys.PublishedAt] as? Double {
-            instance.publishedAt = NSDate(timeIntervalSince1970: published/1000)
+            instance.publishedAt = Date(timeIntervalSince1970: published/1000)
         }
 
         if let removed = dict[Keys.RemovedAt] as? Double {
-            instance.removedAt = NSDate(timeIntervalSince1970: removed/1000)
+            instance.removedAt = Date(timeIntervalSince1970: removed/1000)
         }
         
         if let deleted = dict[Keys.DeletedAt] as? Double {
-            instance.deletedAt = NSDate(timeIntervalSince1970: deleted/1000)
+            instance.deletedAt = Date(timeIntervalSince1970: deleted/1000)
         }
         
         if let archived = dict[Keys.ArchivedAt] as? Double {
-            instance.archivedAt = NSDate(timeIntervalSince1970: archived/1000)
+            instance.archivedAt = Date(timeIntervalSince1970: archived/1000)
         }
 
         return instance
@@ -129,37 +129,37 @@ public class ContentInstance: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        id = aDecoder.decodeObjectForKey(Keys.Id) as? String
-        name = aDecoder.decodeObjectForKey(Keys.Name) as? String
-        moduleId = aDecoder.decodeObjectForKey(Keys.Module) as? String
-        values = aDecoder.decodeObjectForKey(Keys.Values) as! [String: AnyObject]
-        createdBy = aDecoder.decodeObjectForKey(Keys.CreatedBy) as? String
-        updatedBy = aDecoder.decodeObjectForKey(Keys.UpdatedBy) as? String
-        deletedBy = aDecoder.decodeObjectForKey(Keys.DeletedBy) as? String
-        createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
-        publishedAt = aDecoder.decodeObjectForKey(Keys.PublishedAt) as? NSDate
-        removedAt = aDecoder.decodeObjectForKey(Keys.RemovedAt) as? NSDate
-        updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
-        deletedAt = aDecoder.decodeObjectForKey(Keys.DeletedAt) as? NSDate
-        archivedAt = aDecoder.decodeObjectForKey(Keys.ArchivedAt) as? NSDate
-        tags = aDecoder.decodeObjectForKey(Keys.Tags) as! [String: Halo.Tag]
+        id = aDecoder.decodeObject(forKey: Keys.Id) as? String
+        name = aDecoder.decodeObject(forKey: Keys.Name) as? String
+        moduleId = aDecoder.decodeObject(forKey: Keys.Module) as? String
+        values = aDecoder.decodeObject(forKey: Keys.Values) as! [String: AnyObject]
+        createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String
+        updatedBy = aDecoder.decodeObject(forKey: Keys.UpdatedBy) as? String
+        deletedBy = aDecoder.decodeObject(forKey: Keys.DeletedBy) as? String
+        createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date
+        publishedAt = aDecoder.decodeObject(forKey: Keys.PublishedAt) as? Date
+        removedAt = aDecoder.decodeObject(forKey: Keys.RemovedAt) as? Date
+        updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
+        deletedAt = aDecoder.decodeObject(forKey: Keys.DeletedAt) as? Date
+        archivedAt = aDecoder.decodeObject(forKey: Keys.ArchivedAt) as? Date
+        tags = aDecoder.decodeObject(forKey: Keys.Tags) as! [String: Halo.Tag]
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: Keys.Id)
-        aCoder.encodeObject(name, forKey: Keys.Name)
-        aCoder.encodeObject(moduleId, forKey: Keys.Module)
-        aCoder.encodeObject(values, forKey: Keys.Values)
-        aCoder.encodeObject(createdBy, forKey: Keys.CreatedBy)
-        aCoder.encodeObject(updatedBy, forKey: Keys.UpdatedBy)
-        aCoder.encodeObject(deletedBy, forKey: Keys.DeletedBy)
-        aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
-        aCoder.encodeObject(publishedAt, forKey: Keys.PublishedAt)
-        aCoder.encodeObject(removedAt, forKey: Keys.RemovedAt)
-        aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
-        aCoder.encodeObject(deletedAt, forKey: Keys.DeletedAt)
-        aCoder.encodeObject(archivedAt, forKey: Keys.ArchivedAt)
-        aCoder.encodeObject(tags, forKey: Keys.Tags)
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: Keys.Id)
+        aCoder.encode(name, forKey: Keys.Name)
+        aCoder.encode(moduleId, forKey: Keys.Module)
+        aCoder.encode(values, forKey: Keys.Values)
+        aCoder.encode(createdBy, forKey: Keys.CreatedBy)
+        aCoder.encode(updatedBy, forKey: Keys.UpdatedBy)
+        aCoder.encode(deletedBy, forKey: Keys.DeletedBy)
+        aCoder.encode(createdAt, forKey: Keys.CreatedAt)
+        aCoder.encode(publishedAt, forKey: Keys.PublishedAt)
+        aCoder.encode(removedAt, forKey: Keys.RemovedAt)
+        aCoder.encode(updatedAt, forKey: Keys.UpdatedAt)
+        aCoder.encode(deletedAt, forKey: Keys.DeletedAt)
+        aCoder.encode(archivedAt, forKey: Keys.ArchivedAt)
+        aCoder.encode(tags, forKey: Keys.Tags)
     }
 
     /**
@@ -167,9 +167,9 @@ public class ContentInstance: NSObject, NSCoding {
 
     - returns: Boolean determining if the instance is removed
     */
-    public func isRemoved() -> Bool {
+    open func isRemoved() -> Bool {
         if let removed = self.removedAt {
-            return removed < NSDate()
+            return removed < Date()
         }
 
         return false
@@ -180,23 +180,23 @@ public class ContentInstance: NSObject, NSCoding {
 
     - returns: Boolean determining if the instance is published
     */
-    public func isPublished() -> Bool {
+    open func isPublished() -> Bool {
         if let published = self.publishedAt {
-            return published < NSDate()
+            return published < Date()
         }
 
         return false
     }
     
-    public func isDeleted() -> Bool {
+    open func isDeleted() -> Bool {
         if let deleted = self.deletedAt {
-            return deleted < NSDate()
+            return deleted < Date()
         }
         
         return false
     }
 
-    public func getValue(key key: String) -> AnyObject? {
+    open func getValue(key: String) -> AnyObject? {
         return self.values[key]
     }
 

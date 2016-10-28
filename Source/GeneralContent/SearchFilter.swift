@@ -9,24 +9,24 @@
 import Foundation
 
 enum SearchFilterOperation {
-    case Eq, Neq, Gt, Lt, Gte, Lte, In, NotIn
+    case eq, neq, gt, lt, gte, lte, `in`, notIn
 
     var description: String {
         switch  self {
-        case .Eq: return "="
-        case .Neq: return "!="
-        case .Gt: return ">"
-        case .Lt: return "<"
-        case .Gte: return ">="
-        case .Lte: return "<="
-        case .In: return "in"
-        case .NotIn: return "!in"
+        case .eq: return "="
+        case .neq: return "!="
+        case .gt: return ">"
+        case .lt: return "<"
+        case .gte: return ">="
+        case .lte: return "<="
+        case .in: return "in"
+        case .notIn: return "!in"
         }
     }
 }
 
 @objc(HaloSearchFilter)
-public class SearchFilter: NSObject {
+open class SearchFilter: NSObject {
 
     var condition: String?
     var operands: [SearchFilter]?
@@ -36,13 +36,13 @@ public class SearchFilter: NSObject {
     var value: AnyObject?
     var type: String?
 
-    public var body: [String: AnyObject] {
+    open var body: [String: AnyObject] {
         var dict = [String: AnyObject]()
 
         if let
             cond = self.condition,
             let operands = self.operands {
-                dict["condition"] = cond
+                dict["condition"] = cond as AnyObject?
                 dict["operands"] = operands.map { $0.body }
         }
 
@@ -50,10 +50,10 @@ public class SearchFilter: NSObject {
             operation = self.operation,
             let property = self.property,
             let type = self.type {
-                dict["operation"] = operation
-                dict["property"] = property
+                dict["operation"] = operation as AnyObject?
+                dict["property"] = property as AnyObject?
                 dict["value"] = value ?? NSNull()
-                dict["type"] = type
+                dict["type"] = type as AnyObject?
         }
 
         return dict

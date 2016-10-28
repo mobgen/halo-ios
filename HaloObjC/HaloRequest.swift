@@ -10,17 +10,17 @@ import Halo
 
 @objc
 public enum HaloOfflinePolicy: Int {
-    case None, LoadAndStoreLocalData, ReturnLocalDataDontLoad
+    case none, loadAndStoreLocalData, returnLocalDataDontLoad
 }
 
 @objc
 public enum HaloMethod: Int {
-    case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
+    case options, get, head, post, put, patch, delete, trace, connect
 }
 
 @objc
 public enum HaloParameterEncoding: Int {
-    case URL, URLEncodedInURL, JSON
+    case url, urlEncodedInURL, json
 }
 
 extension Request {
@@ -29,11 +29,11 @@ extension Request {
     
 }
 
-public class HaloRequest: NSObject {
+open class HaloRequest: NSObject {
 
-    private var request: Halo.Request<Any>?
+    fileprivate var request: Halo.Request<Any>?
 
-    public init(path: String, relativeToURL: NSURL?) {
+    public init(path: String, relativeToURL: URL?) {
         request = Halo.Request<Any>(path: path, relativeToURL: relativeToURL)
         super.init()
     }
@@ -44,14 +44,14 @@ public class HaloRequest: NSObject {
     }
 
     @objc(offlinePolicy:)
-    public func offlinePolicy(policy: HaloOfflinePolicy) -> HaloRequest {
+    open func offlinePolicy(_ policy: HaloOfflinePolicy) -> HaloRequest {
 
         let newPolicy: Halo.OfflinePolicy
 
         switch policy {
-        case .None: newPolicy = .None
-        case .LoadAndStoreLocalData: newPolicy = .LoadAndStoreLocalData
-        case .ReturnLocalDataDontLoad: newPolicy = .ReturnLocalDataDontLoad
+        case .none: newPolicy = .None
+        case .loadAndStoreLocalData: newPolicy = .LoadAndStoreLocalData
+        case .returnLocalDataDontLoad: newPolicy = .ReturnLocalDataDontLoad
         }
 
         request?.offlinePolicy(policy: newPolicy)
@@ -59,20 +59,20 @@ public class HaloRequest: NSObject {
     }
 
     @objc(method:)
-    public func method(method: HaloMethod) -> HaloRequest {
+    open func method(_ method: HaloMethod) -> HaloRequest {
 
         let newMethod: Halo.Method
 
         switch method {
-        case .CONNECT: newMethod = .CONNECT
-        case .DELETE: newMethod = .DELETE
-        case .GET: newMethod = .GET
-        case .HEAD: newMethod = .HEAD
-        case .OPTIONS: newMethod = .OPTIONS
-        case .PATCH: newMethod = .PATCH
-        case .POST: newMethod = .POST
-        case .PUT: newMethod = .PUT
-        case .TRACE: newMethod = .TRACE
+        case .connect: newMethod = .CONNECT
+        case .delete: newMethod = .DELETE
+        case .get: newMethod = .GET
+        case .head: newMethod = .HEAD
+        case .options: newMethod = .OPTIONS
+        case .patch: newMethod = .PATCH
+        case .post: newMethod = .POST
+        case .put: newMethod = .PUT
+        case .trace: newMethod = .TRACE
         }
 
         request?.method(method: newMethod)
@@ -80,64 +80,64 @@ public class HaloRequest: NSObject {
     }
 
     @objc(parameterEncoding:)
-    public func parameterEncoding(encoding: HaloParameterEncoding) -> HaloRequest {
+    open func parameterEncoding(_ encoding: HaloParameterEncoding) -> HaloRequest {
 
         let newEncoding: Halo.ParameterEncoding
 
         switch encoding {
-        case .JSON: newEncoding = .JSON
-        case .URL: newEncoding = .URL
-        case .URLEncodedInURL: newEncoding = .URLEncodedInURL
+        case .json: newEncoding = .JSON
+        case .url: newEncoding = .URL
+        case .urlEncodedInURL: newEncoding = .URLEncodedInURL
         }
 
         request?.parameterEncoding(encoding: newEncoding)
         return self
     }
 
-    public func addHeader(field field: String, value: String) -> HaloRequest {
+    open func addHeader(field: String, value: String) -> HaloRequest {
         request?.addHeader(field: field, value: value)
         return self
     }
 
     @objc(addHeaders:)
-    public func addHeaders(headers: [String : String]) -> HaloRequest {
+    open func addHeaders(_ headers: [String : String]) -> HaloRequest {
         request?.addHeaders(headers: headers)
         return self
     }
 
     @objc(params:)
-    public func params(params: [String : AnyObject]) -> HaloRequest {
+    open func params(_ params: [String : AnyObject]) -> HaloRequest {
         request?.params(params: params)
         return self
     }
 
-    public func includeAll() -> HaloRequest {
+    open func includeAll() -> HaloRequest {
         request?.includeAll()
         return self
     }
 
-    public func paginate(page page: Int, limit: Int) -> HaloRequest {
+    open func paginate(page: Int, limit: Int) -> HaloRequest {
         request?.paginate(page: page, limit: limit)
         return self
     }
 
-    public func skipPagination() -> HaloRequest {
+    open func skipPagination() -> HaloRequest {
         request?.skipPagination()
         return self
     }
 
     @objc(fields:)
-    public func fields(fields: [String]) -> HaloRequest {
+    open func fields(_ fields: [String]) -> HaloRequest {
         request?.fields(fields: fields)
         return self
     }
 
-    public func tags(tags: [Halo.Tag]) -> HaloRequest {
+    open func tags(_ tags: [Halo.Tag]) -> HaloRequest {
         request?.tags(tags: tags)
         return self
     }
 
-    public func responseData(success success: ((NSHTTPURLResponse?, NSData, Bool) -> Void)?, failure: ((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
+    open func responseData(success: ((HTTPURLResponse?, Data, Bool) -> Void)?, failure: ((HTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
 
         do {
             try request?.responseData { (response, result) -> Void in
@@ -155,7 +155,7 @@ public class HaloRequest: NSObject {
         return self
     }
 
-    public func response(success success: ((NSHTTPURLResponse?, AnyObject, Bool) -> Void)?, failure: ((NSHTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
+    open func response(success: ((HTTPURLResponse?, AnyObject, Bool) -> Void)?, failure: ((HTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
 
         do {
             try request?.response { (response, result) -> Void in

@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension NSDate: Comparable {}
+extension Date: Comparable {}
 
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
+public func ==(lhs: Date, rhs: Date) -> Bool {
     return lhs.timeIntervalSince1970 == rhs.timeIntervalSince1970
 }
 
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
+public func <(lhs: Date, rhs: Date) -> Bool {
     return lhs.timeIntervalSince1970 < rhs.timeIntervalSince1970
 }

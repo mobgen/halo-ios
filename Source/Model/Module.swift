@@ -12,7 +12,7 @@ import Foundation
  Model class representing the different modules available in Halo
  */
 @objc(HaloModule)
-public class Module: NSObject, NSCoding {
+open class Module: NSObject, NSCoding {
 
     struct Keys {
         static let Customer = "customerId"
@@ -30,37 +30,37 @@ public class Module: NSObject, NSCoding {
     }
 
     /// Identifier of the customer
-    public internal(set) var customerId: Int?
+    open internal(set) var customerId: Int?
 
     /// Unique identifier of the module
-    public internal(set) var id: String?
+    open internal(set) var id: String?
 
     /// Visual name of the module
-    public internal(set) var name: String?
+    open internal(set) var name: String?
 
     /// Identifies the module as single item module
-    public internal(set) var isSingle: Bool = false
+    open internal(set) var isSingle: Bool = false
 
     /// Date in which the module was created
-    public internal(set) var createdAt: NSDate?
+    open internal(set) var createdAt: Date?
 
     /// Date of the last update performed in this module
-    public internal(set) var updatedAt: NSDate?
+    open internal(set) var updatedAt: Date?
 
     /// Name of the user who created the module in the first place
-    public internal(set) var createdBy: String?
+    open internal(set) var createdBy: String?
     
     /// Name of the user who updated the module in last place
-    public internal(set) var updatedBy: String?
+    open internal(set) var updatedBy: String?
 
-    public internal(set) var deletedAt: NSDate?
+    open internal(set) var deletedAt: Date?
     
-    public internal(set) var deletedBy: String?
+    open internal(set) var deletedBy: String?
     
     /// Dictionary of tags associated to this module
-    public internal(set) var tags: [String: Halo.Tag] = [:]
+    open internal(set) var tags: [String: Halo.Tag] = [:]
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 
@@ -69,7 +69,7 @@ public class Module: NSObject, NSCoding {
 
      - parameter dict:   Dictionary containing the information about the module
      */
-    public static func fromDictionary(dict dict: [String: AnyObject]) -> Halo.Module {
+    open static func fromDictionary(dict: [String: AnyObject]) -> Halo.Module {
 
         let module = Module()
 
@@ -79,14 +79,14 @@ public class Module: NSObject, NSCoding {
         module.isSingle = dict[Keys.IsSingle] as? Bool ?? false
         module.createdBy = dict[Keys.CreatedBy] as? String
         module.updatedBy = dict[Keys.UpdatedBy] as? String
-        module.deletedAt = dict[Keys.DeletedAt] as? NSDate
+        module.deletedAt = dict[Keys.DeletedAt] as? Date
         module.deletedBy = dict[Keys.DeletedBy] as? String
         module.tags = [:]
 
         if let tagsList = dict[Keys.Tags] as? [[String: AnyObject]] {
             module.tags = tagsList.map({ (dict) -> Halo.Tag in
                 return Halo.Tag.fromDictionary(dict: dict)
-            }).reduce(module.tags, combine: { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
+            }).reduce(module.tags, { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in
                 var varDict = dict
                 varDict[tag.name] = tag
                 return varDict
@@ -94,11 +94,11 @@ public class Module: NSObject, NSCoding {
         }
 
         if let created = dict[Keys.CreatedAt] as? Double {
-            module.createdAt = NSDate(timeIntervalSince1970: created/1000)
+            module.createdAt = Date(timeIntervalSince1970: created/1000)
         }
 
         if let updated = dict[Keys.UpdatedAt] as? Double {
-            module.updatedAt = NSDate(timeIntervalSince1970: updated/1000)
+            module.updatedAt = Date(timeIntervalSince1970: updated/1000)
         }
 
         return module
@@ -106,31 +106,31 @@ public class Module: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        id = aDecoder.decodeObjectForKey(Keys.Id) as? String
-        customerId = aDecoder.decodeObjectForKey(Keys.Customer) as? Int
-        name = aDecoder.decodeObjectForKey(Keys.Name) as? String
-        isSingle = aDecoder.decodeObjectForKey(Keys.IsSingle) as? Bool ?? false
-        createdBy = aDecoder.decodeObjectForKey(Keys.CreatedBy) as? String
-        updatedBy = aDecoder.decodeObjectForKey(Keys.UpdatedBy) as? String
-        tags = aDecoder.decodeObjectForKey(Keys.Tags) as? [String: Halo.Tag] ?? [:]
-        createdAt = aDecoder.decodeObjectForKey(Keys.CreatedAt) as? NSDate
-        updatedAt = aDecoder.decodeObjectForKey(Keys.UpdatedAt) as? NSDate
-        deletedAt = aDecoder.decodeObjectForKey(Keys.DeletedAt) as? NSDate
-        deletedBy = aDecoder.decodeObjectForKey(Keys.DeletedBy) as? String
+        id = aDecoder.decodeObject(forKey: Keys.Id) as? String
+        customerId = aDecoder.decodeObject(forKey: Keys.Customer) as? Int
+        name = aDecoder.decodeObject(forKey: Keys.Name) as? String
+        isSingle = aDecoder.decodeObject(forKey: Keys.IsSingle) as? Bool ?? false
+        createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String
+        updatedBy = aDecoder.decodeObject(forKey: Keys.UpdatedBy) as? String
+        tags = aDecoder.decodeObject(forKey: Keys.Tags) as? [String: Halo.Tag] ?? [:]
+        createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date
+        updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
+        deletedAt = aDecoder.decodeObject(forKey: Keys.DeletedAt) as? Date
+        deletedBy = aDecoder.decodeObject(forKey: Keys.DeletedBy) as? String
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: Keys.Id)
-        aCoder.encodeObject(customerId, forKey: Keys.Customer)
-        aCoder.encodeObject(name, forKey: Keys.Name)
-        aCoder.encodeObject(isSingle, forKey: Keys.IsSingle)
-        aCoder.encodeObject(createdBy, forKey: Keys.CreatedBy)
-        aCoder.encodeObject(updatedBy, forKey: Keys.UpdatedBy)
-        aCoder.encodeObject(tags, forKey: Keys.Tags)
-        aCoder.encodeObject(createdAt, forKey: Keys.CreatedAt)
-        aCoder.encodeObject(updatedAt, forKey: Keys.UpdatedAt)
-        aCoder.encodeObject(deletedAt, forKey: Keys.DeletedAt)
-        aCoder.encodeObject(deletedBy, forKey: Keys.DeletedBy)
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: Keys.Id)
+        aCoder.encode(customerId, forKey: Keys.Customer)
+        aCoder.encode(name, forKey: Keys.Name)
+        aCoder.encode(isSingle, forKey: Keys.IsSingle)
+        aCoder.encode(createdBy, forKey: Keys.CreatedBy)
+        aCoder.encode(updatedBy, forKey: Keys.UpdatedBy)
+        aCoder.encode(tags, forKey: Keys.Tags)
+        aCoder.encode(createdAt, forKey: Keys.CreatedAt)
+        aCoder.encode(updatedAt, forKey: Keys.UpdatedAt)
+        aCoder.encode(deletedAt, forKey: Keys.DeletedAt)
+        aCoder.encode(deletedBy, forKey: Keys.DeletedBy)
     }
 
 }

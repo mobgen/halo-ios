@@ -21,7 +21,7 @@ public extension UIDevice {
         var identifier = ""
 
         for child in mirror.children where child.value as? Int8 != 0 {
-            identifier.append(UnicodeScalar(UInt8(child.value as! Int8)))
+            identifier.append(String(UnicodeScalar(UInt8(child.value as! Int8))))
         }
 
         switch identifier {
@@ -108,7 +108,7 @@ public extension UIDevice {
 
     /// Get the current device type (phone or tablet) as String
     var deviceType: String {
-        return getDeviceType(idiom: UIDevice.currentDevice().userInterfaceIdiom)
+        return getDeviceType(idiom: UIDevice.current.userInterfaceIdiom)
     }
 
     /**
@@ -118,7 +118,7 @@ public extension UIDevice {
 
      - returns: Device type
      */
-    func getDeviceType(idiom idiom: UIUserInterfaceIdiom) -> String {
-        return (idiom == .Phone) ? "Phone" : "Tablet"
+    func getDeviceType(idiom: UIUserInterfaceIdiom) -> String {
+        return (idiom == .phone) ? "Phone" : "Tablet"
     }
 }

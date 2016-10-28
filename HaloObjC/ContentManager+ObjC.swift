@@ -10,15 +10,15 @@ import Halo
 
 @objc
 public enum ContentFlags: Int {
-    case None, IncludeArchived, IncludeUnpublished, IncludeArchivedAndUnpublished
+    case none, includeArchived, includeUnpublished, includeArchivedAndUnpublished
 }
 
 extension ContentManager {
     
     @objc(searchWithQuery:success:failure:)
-    public func search(query query: Halo.SearchQuery,
-                             success: (NSHTTPURLResponse?, PaginatedContentInstances) -> Void,
-                             failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
+    public func search(query: Halo.SearchQuery,
+                             success: (HTTPURLResponse?, PaginatedContentInstances) -> Void,
+                             failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
         Manager.core.dataProvider.search(query: query) { (response, result) in
             switch result {
             case .Success(let data, _):

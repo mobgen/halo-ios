@@ -9,7 +9,7 @@
 import Foundation
 
 @objc(HaloPaginationInfo)
-public class PaginationInfo: NSObject, NSCoding {
+open class PaginationInfo: NSObject, NSCoding {
 
     struct Keys {
         static let Page = "page"
@@ -19,13 +19,13 @@ public class PaginationInfo: NSObject, NSCoding {
         static let TotalPages = "totalPages"
     }
 
-    public internal(set) var page: Int = 0
-    public internal(set) var limit: Int = 0
-    public internal(set) var offset: Int = 0
-    public internal(set) var totalItems: Int = 0
-    public internal(set) var totalPages: Int = 0
+    open internal(set) var page: Int = 0
+    open internal(set) var limit: Int = 0
+    open internal(set) var offset: Int = 0
+    open internal(set) var totalItems: Int = 0
+    open internal(set) var totalPages: Int = 0
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 
@@ -38,7 +38,7 @@ public class PaginationInfo: NSObject, NSCoding {
         super.init()
     }
 
-    static func fromDictionary(dict dict: [String: AnyObject]) -> PaginationInfo {
+    static func fromDictionary(dict: [String: AnyObject]) -> PaginationInfo {
 
         let info = PaginationInfo()
 
@@ -52,20 +52,20 @@ public class PaginationInfo: NSObject, NSCoding {
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        page = aDecoder.decodeObjectForKey(Keys.Page) as? Int ?? 0
-        limit = aDecoder.decodeObjectForKey(Keys.Limit) as? Int ?? 0
-        offset = aDecoder.decodeObjectForKey(Keys.Offset) as? Int ?? 0
-        totalItems = aDecoder.decodeObjectForKey(Keys.TotalItems) as? Int ?? 0
-        totalPages = aDecoder.decodeObjectForKey(Keys.TotalPages) as? Int ?? 0
+        page = aDecoder.decodeObject(forKey: Keys.Page) as? Int ?? 0
+        limit = aDecoder.decodeObject(forKey: Keys.Limit) as? Int ?? 0
+        offset = aDecoder.decodeObject(forKey: Keys.Offset) as? Int ?? 0
+        totalItems = aDecoder.decodeObject(forKey: Keys.TotalItems) as? Int ?? 0
+        totalPages = aDecoder.decodeObject(forKey: Keys.TotalPages) as? Int ?? 0
         super.init()
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(page, forKey: Keys.Page)
-        aCoder.encodeObject(limit, forKey: Keys.Limit)
-        aCoder.encodeObject(offset, forKey: Keys.Offset)
-        aCoder.encodeObject(totalItems, forKey: Keys.TotalItems)
-        aCoder.encodeObject(totalPages, forKey: Keys.TotalPages)
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(page, forKey: Keys.Page)
+        aCoder.encode(limit, forKey: Keys.Limit)
+        aCoder.encode(offset, forKey: Keys.Offset)
+        aCoder.encode(totalItems, forKey: Keys.TotalItems)
+        aCoder.encode(totalPages, forKey: Keys.TotalPages)
     }
 
 }

@@ -33,7 +33,7 @@ class CoreSpec: BaseSpec {
             
                 beforeEach {
                     stub(pathStartsWith("/api/segmentation/appuser")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("segmentation_appuser_success.json", self.dynamicType)
+                        let fixture = OHPathForFile("segmentation_appuser_success.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful appuser stub"
                 }
@@ -57,7 +57,7 @@ class CoreSpec: BaseSpec {
                 
                 beforeEach {
                     stub(pathStartsWith("/api/segmentation/appuser")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("segmentation_appuser_failure.json", self.dynamicType)
+                        let fixture = OHPathForFile("segmentation_appuser_failure.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 400, headers: ["Content-Type": "application/json"])
                     }.name = "Successful appuser stub"
                 }
@@ -113,7 +113,7 @@ class CoreSpec: BaseSpec {
                 
                 beforeEach {
                     stub(isPath("/api/oauth/token")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("oauth_success.json", self.dynamicType)
+                        let fixture = OHPathForFile("oauth_success.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful OAuth stub"
                     
@@ -139,7 +139,7 @@ class CoreSpec: BaseSpec {
                 
                 beforeEach {
                     stub(isPath("/api/oauth/token")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("oauth_failure.json", self.dynamicType)
+                        let fixture = OHPathForFile("oauth_failure.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 403, headers: ["Content-Type": "application/json"])
                     }.name = "Failed OAuth stub"
                                         

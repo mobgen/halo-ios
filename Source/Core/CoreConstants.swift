@@ -7,10 +7,10 @@
 //
 
 /// Utility class containing some of the constants to be used within the SDK
-public class CoreConstants {
+open class CoreConstants {
 
     /// Key to be used to store the latest environment used
-    public static let environmentKey = "HaloEnvironment"
+    open static let environmentKey = "HaloEnvironment"
 
     /// Key which identifies the client id within the configuration plist
     static let clientIdKey = "CLIENT_ID"

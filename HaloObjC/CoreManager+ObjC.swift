@@ -15,8 +15,8 @@ extension CoreManager {
     }
     
     @objc(modulesWithSuccess:failure:)
-    public func modules(success: (NSHTTPURLResponse?, PaginatedModules) -> Void,
-                        failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
+    public func modules(_ success: (HTTPURLResponse?, PaginatedModules) -> Void,
+                        failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
 
         self.getModules { (response, result) in
 
@@ -36,7 +36,7 @@ extension CoreManager {
         
         var envir: HaloEnvironment!
         
-        switch env.lowercaseString {
+        switch env.lowercased {
         case "int":
             envir = .Int
         case "prod":

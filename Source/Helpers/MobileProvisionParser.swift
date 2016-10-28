@@ -32,14 +32,14 @@ class MobileProvisionParser {
             return .AppStore
             #endif
         } else if let provisions = mobileProvision["ProvisionsAllDevices"] {
-            if provisions.boolValue! {
+            if (provisions as AnyObject).boolValue! {
                 return .Enterprise
             }
-        } else if let devices = mobileProvision["ProvisionedDevices"] as? NSArray where devices.count > 0 {
+        } else if let devices = mobileProvision["ProvisionedDevices"] as? NSArray , devices.count > 0 {
 
             if let entitlements = mobileProvision["Entitlements"] as? NSDictionary {
                 if let taskAllow = entitlements["get-task-allow"] {
-                    return taskAllow.boolValue! ? .Development : .AdHoc
+                    return (taskAllow as AnyObject).boolValue! ? .Development : .AdHoc
                 }
             }
         } else {
@@ -54,24 +54,24 @@ class MobileProvisionParser {
 
         var mobileProvision: NSDictionary?
 
-        if let provisioningPath = NSBundle.mainBundle().pathForResource("embedded", ofType: "mobileprovision") {
+        if let provisioningPath = Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") {
 
-            let binaryString = try! String(contentsOfFile: provisioningPath, encoding: NSISOLatin1StringEncoding)
+            let binaryString = try! String(contentsOfFile: provisioningPath, encoding: String.Encoding.isoLatin1)
 
-            let scanner = NSScanner(string: binaryString)
+            let scanner = Scanner(string: binaryString)
 
-            if !scanner.scanUpToString("<plist", intoString: nil) {
+            if !scanner.scanUpTo("<plist", into: nil) {
                 return mobileProvision
             }
 
             var plistString: NSString?
 
-            scanner.scanUpToString("</plist>", intoString: &plistString)
+            scanner.scanUpTo("</plist>", into: &plistString)
 
-            plistString = plistString?.stringByAppendingString("</plist>")
+            plistString = plistString?.appending("</plist>") as NSString?
 
-            if let plistData = plistString?.dataUsingEncoding(NSISOLatin1StringEncoding) {
-                mobileProvision = try! NSPropertyListSerialization.propertyListWithData(plistData, options: .Immutable, format: nil) as? NSDictionary
+            if let plistData = plistString?.data(using: String.Encoding.isoLatin1.rawValue) {
+                mobileProvision = try! PropertyListSerialization.propertyList(from: plistData, options: PropertyListSerialization.MutabilityOptions(), format: nil) as? NSDictionary
             }
         }
 

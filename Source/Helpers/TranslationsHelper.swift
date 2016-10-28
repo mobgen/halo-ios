@@ -9,21 +9,21 @@
 import Foundation
 
 @objc(HaloTranslationsHelper)
-public class TranslationsHelper: NSObject {
+open class TranslationsHelper: NSObject {
 
-    private var moduleId: String = ""
-    private var keyField: String?
-    private var valueField: String?
-    private var defaultText: String?
-    private var loadingText: String?
-    private var translationsMap: [String: String] = [:]
-    private var isLoading: Bool = false
-    private var syncQuery: SyncQuery!
-    private var locale: Locale!
+    fileprivate var moduleId: String = ""
+    fileprivate var keyField: String?
+    fileprivate var valueField: String?
+    fileprivate var defaultText: String?
+    fileprivate var loadingText: String?
+    fileprivate var translationsMap: [String: String] = [:]
+    fileprivate var isLoading: Bool = false
+    fileprivate var syncQuery: SyncQuery!
+    fileprivate var locale: Locale!
     
-    private var completionHandlers: [(NSError?) -> Void] = []
+    fileprivate var completionHandlers: [(NSError?) -> Void] = []
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 
@@ -36,28 +36,28 @@ public class TranslationsHelper: NSObject {
         self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale: locale)
     }
 
-    public func addCompletionHandler(handler handler: (NSError?) -> Void) -> Void {
+    open func addCompletionHandler(handler: @escaping (NSError?) -> Void) -> Void {
         completionHandlers.append(handler)
     }
     
-    public func locale(locale locale: Locale) -> TranslationsHelper {
+    open func locale(locale: Locale) -> TranslationsHelper {
         self.locale = locale
         self.syncQuery.locale(locale: locale)
         load()
         return self
     }
 
-    public func defaultText(text text: String) -> TranslationsHelper {
+    open func defaultText(text: String) -> TranslationsHelper {
         self.defaultText = text
         return self
     }
 
-    public func loadingText(text text: String) -> TranslationsHelper {
+    open func loadingText(text: String) -> TranslationsHelper {
         self.loadingText = text
         return self
     }
     
-    public func getText(key key: String, completionHandler handler: ((String?) -> Void)? = nil) -> Void {
+    open func getText(key: String, completionHandler handler: ((String?) -> Void)? = nil) -> Void {
         if self.isLoading {
             if let h = handler {
                 self.completionHandlers.append { _ in
@@ -74,7 +74,7 @@ public class TranslationsHelper: NSObject {
         }
     }
 
-    public func getTexts(keys keys: String...) -> [String: String?] {
+    open func getTexts(keys: String...) -> [String: String?] {
 
         var values: [String: String?] = [:]
 
@@ -90,16 +90,16 @@ public class TranslationsHelper: NSObject {
 
     }
 
-    public func getAllTexts() -> [String: String] {
+    open func getAllTexts() -> [String: String] {
         return translationsMap
     }
 
-    public func clearAllTexts() -> Void {
+    open func clearAllTexts() -> Void {
         translationsMap.removeAll()
         Manager.content.removeSyncedInstances(moduleId)
     }
     
-    public func load() -> Void {
+    open func load() -> Void {
 
         if isLoading {
             return
@@ -113,7 +113,7 @@ public class TranslationsHelper: NSObject {
         }
     }
     
-    private func processSyncResult(moduleId moduleId: String, error: NSError?) {
+    fileprivate func processSyncResult(moduleId: String, error: NSError?) {
         
         self.isLoading = false
         
