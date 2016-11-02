@@ -49,9 +49,9 @@ open class HaloRequest: NSObject {
         let newPolicy: Halo.OfflinePolicy
 
         switch policy {
-        case .none: newPolicy = .None
-        case .loadAndStoreLocalData: newPolicy = .LoadAndStoreLocalData
-        case .returnLocalDataDontLoad: newPolicy = .ReturnLocalDataDontLoad
+        case .none: newPolicy = .none
+        case .loadAndStoreLocalData: newPolicy = .loadAndStoreLocalData
+        case .returnLocalDataDontLoad: newPolicy = .returnLocalDataDontLoad
         }
 
         request?.offlinePolicy(policy: newPolicy)
@@ -85,9 +85,9 @@ open class HaloRequest: NSObject {
         let newEncoding: Halo.ParameterEncoding
 
         switch encoding {
-        case .json: newEncoding = .JSON
-        case .url: newEncoding = .URL
-        case .urlEncodedInURL: newEncoding = .URLEncodedInURL
+        case .json: newEncoding = .json
+        case .url: newEncoding = .url
+        case .urlEncodedInURL: newEncoding = .urlEncodedInURL
         }
 
         request?.parameterEncoding(encoding: newEncoding)
@@ -137,37 +137,37 @@ open class HaloRequest: NSObject {
         return self
     }
 
-    open func responseData(success: ((HTTPURLResponse?, Data, Bool) -> Void)?, failure: ((HTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
+    open func responseData(success: @escaping ((HTTPURLResponse?, Data, Bool) -> Void), failure: @escaping ((HTTPURLResponse?, NSError) -> Void)) -> HaloRequest {
 
         do {
             try request?.responseData { (response, result) -> Void in
                 switch result {
-                case .Success(let data, let cached):
-                    success?(response, data, cached)
-                case .Failure(let error):
-                    failure?(response, error)
+                case .success(let data, let cached):
+                    success(response, data, cached)
+                case .failure(let error):
+                    failure(response, error)
                 }
             }
         } catch _ {
-            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .Error).print()
+            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .error).print()
         }
 
         return self
     }
 
-    open func response(success: ((HTTPURLResponse?, AnyObject, Bool) -> Void)?, failure: ((HTTPURLResponse?, NSError) -> Void)?) -> HaloRequest {
+    open func response(success: @escaping ((HTTPURLResponse?, AnyObject?, Bool) -> Void), failure: @escaping ((HTTPURLResponse?, NSError) -> Void)) -> HaloRequest {
 
         do {
             try request?.response { (response, result) -> Void in
                 switch result {
-                case .Success(let data, let cached):
-                    success?(response, data, cached)
-                case .Failure(let error):
-                    failure?(response, error)
+                case .success(let data, let cached):
+                    success(response, data, cached)
+                case .failure(let error):
+                    failure(response, error)
                 }
             }
         } catch _ {
-            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .Error).print()
+            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .error).print()
         }
 
         return self

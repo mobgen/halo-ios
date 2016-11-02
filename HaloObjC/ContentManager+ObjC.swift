@@ -17,15 +17,15 @@ extension ContentManager {
     
     @objc(searchWithQuery:success:failure:)
     public func search(query: Halo.SearchQuery,
-                             success: (HTTPURLResponse?, PaginatedContentInstances) -> Void,
+                             success: @escaping (HTTPURLResponse?, PaginatedContentInstances) -> Void,
                              failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
         Manager.core.dataProvider.search(query: query) { (response, result) in
             switch result {
-            case .Success(let data, _):
+            case .success(let data, _):
                 if let instances = data {
                     success(response, instances)
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 failure(response, error)
             }
         }
