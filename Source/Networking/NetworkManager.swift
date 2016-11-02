@@ -84,47 +84,47 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
             return
         }
 
-        let request = urlRequest.URLRequest
+        let request = urlRequest.URLRequest as URLRequest
 
-        let _ = self.addons.map { $0.willPerformRequest(request: request) }
+        self.addons.forEach { $0.willPerformRequest(request: request) }
 
         let start = Date()
         var elapsed: TimeInterval = 0
 
-        let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
-
+        let task = session.dataTask(with: request) { (data, response, error) -> Void in
+            
             elapsed = Date().timeIntervalSince(start) * 1000
-
+            
             if let resp = response as? HTTPURLResponse {
-
+                
                 LogMessage(message: "\(urlRequest) [\(elapsed)ms]", level: .info).print()
-
+                
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     self.cachedTasks.append(cachedTask)
                     self.authenticate(mode: urlRequest.authenticationMode)
                     return
                 }
-
+                
                 if resp.statusCode > 399 {
                     if numberOfRetries > 0 {
                         self.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1)
                     } else {
-                        var message: NSString
-
+                        var message: String
+                        
                         do {
                             var error = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : AnyObject]
                             error = error["error"] as! [String : AnyObject]
-
+                            
                             message = error["message"] as? String ?? "An error has occurred"
-
+                            
                         } catch {
                             message = "The content of the response is not a valid JSON"
                         }
-
+                        
                         DispatchQueue.main.async {
                             handler?(resp, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
                         }
-
+                        
                     }
                 } else if let d = data {
                     DispatchQueue.main.async {
@@ -135,18 +135,18 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                         handler?(resp, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                     }
                 }
-
+                
             } else {
                 DispatchQueue.main.async {
                     handler?(nil, .failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
                 }
             }
-
-            let _ = self.addons.map { $0.didPerformRequest(request: request, time: elapsed, response: response) }
-
-            }) 
-
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+            
+            self.addons.forEach { $0.didPerformRequest(request: request, time: elapsed, response: response) }
+            
+        }
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             task.resume()
         }
 
@@ -215,7 +215,7 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
 
             let start = Date()
 
-            let task = self.session.dataTask(with: req.URLRequest, completionHandler: { (data, response, error) -> Void in
+            let task = self.session.dataTask(with: req.URLRequest) { (data, response, error) -> Void in
 
                 if let resp = response as? HTTPURLResponse {
 
@@ -255,9 +255,9 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                         self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
                     }
                 }
-            }) 
+            }
 
-            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                 task.resume()
             }
 
@@ -271,7 +271,7 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
 
     func evaluateServerTrust(serverTrust: SecTrust, isValidForHost host: String) -> Bool {
         let policy = SecPolicyCreateSSL(true, host as CFString)
-        SecTrustSetPolicies(serverTrust, [policy])
+        SecTrustSetPolicies(serverTrust, [policy] as AnyObject)
 
         SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle(bundle: Bundle(identifier: "com.mobgen.Halo")!) as CFArray)
         SecTrustSetAnchorCertificatesOnly(serverTrust, true)
@@ -315,8 +315,8 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
     }
 
     // MARK: NSURLSessionDelegate implementation
-
-    open func URLSession(session: Foundation.URLSession, didReceiveChallenge challenge: URLAuthenticationChallenge, completionHandler: (Foundation.URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    
+    open func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         var disposition: Foundation.URLSession.AuthChallengeDisposition = .performDefaultHandling
         var credential: URLCredential?
 

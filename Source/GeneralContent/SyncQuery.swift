@@ -39,11 +39,11 @@ open class SyncQuery: NSObject {
         }
 
         if let from = fromSync {
-            dict[Keys.FromSync] = from.timeIntervalSince1970 * 1000
+            dict[Keys.FromSync] = from.timeIntervalSince1970 * 1000 as AnyObject
         }
 
         if let to = toSync {
-            dict[Keys.ToSync] = to.timeIntervalSince1970 * 1000
+            dict[Keys.ToSync] = to.timeIntervalSince1970 * 1000 as AnyObject
         }
 
         return dict
@@ -58,26 +58,31 @@ open class SyncQuery: NSObject {
         self.moduleId = moduleId
     }
     
+    @discardableResult
     open func moduleName(name: String?) -> SyncQuery {
         self.moduleName = name
         return self
     }
 
+    @discardableResult
     open func moduleId(id: String) -> SyncQuery {
         self.moduleId = id
         return self
     }
     
+    @discardableResult
     open func locale(locale: Locale) -> SyncQuery {
         self.locale = locale
         return self
     }
     
+    @discardableResult
     open func fromSync(date: Date?) -> SyncQuery {
         self.fromSync = date
         return self
     }
     
+    @discardableResult
     open func toSync(date: Date?) -> SyncQuery {
         self.toSync = date
         return self

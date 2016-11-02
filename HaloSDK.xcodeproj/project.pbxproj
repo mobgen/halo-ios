@@ -28,7 +28,6 @@
 		004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; };
 		004FEC741BCFB788004216EE /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; };
 		005390861B8DB7590036F579 /* NetworkManager+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005390851B8DB7590036F579 /* NetworkManager+Device.swift */; };
-		005421641CC76D230055B553 /* NSDate+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421601CC76D230055B553 /* NSDate+Utils.swift */; };
 		005421651CC76D230055B553 /* NSURLRequest+cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421611CC76D230055B553 /* NSURLRequest+cURL.swift */; };
 		005421661CC76D230055B553 /* UIDevice+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421621CC76D230055B553 /* UIDevice+Extra.swift */; };
 		005421671CC76D230055B553 /* UIImage+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005421631CC76D230055B553 /* UIImage+Async.swift */; };
@@ -146,7 +145,6 @@
 		004FEC711BCFB788004216EE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		005034B11C92B11300362A8F /* HaloRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloRequest.swift; sourceTree = "<group>"; };
 		005390851B8DB7590036F579 /* NetworkManager+Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Device.swift"; sourceTree = "<group>"; };
-		005421601CC76D230055B553 /* NSDate+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Utils.swift"; sourceTree = "<group>"; };
 		005421611CC76D230055B553 /* NSURLRequest+cURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLRequest+cURL.swift"; sourceTree = "<group>"; };
 		005421621CC76D230055B553 /* UIDevice+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extra.swift"; sourceTree = "<group>"; };
 		005421631CC76D230055B553 /* UIImage+Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Async.swift"; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 		0054215F1CC76D230055B553 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				005421601CC76D230055B553 /* NSDate+Utils.swift */,
 				005421611CC76D230055B553 /* NSURLRequest+cURL.swift */,
 				005421621CC76D230055B553 /* UIDevice+Extra.swift */,
 				005421631CC76D230055B553 /* UIImage+Async.swift */,
@@ -692,7 +689,6 @@
 				00EC9D371C43F72F00A3291D /* Credentials.swift in Sources */,
 				005421671CC76D230055B553 /* UIImage+Async.swift in Sources */,
 				006264391D5B05F50036F227 /* Request.swift in Sources */,
-				005421641CC76D230055B553 /* NSDate+Utils.swift in Sources */,
 				000826FF1B6A34DE001E8248 /* Router.swift in Sources */,
 				0045393B1B67E8170060C30B /* Module.swift in Sources */,
 				006264351D5B049D0036F227 /* DataProvider.swift in Sources */,

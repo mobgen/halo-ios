@@ -43,7 +43,7 @@ open class SearchFilter: NSObject {
             cond = self.condition,
             let operands = self.operands {
                 dict["condition"] = cond as AnyObject?
-                dict["operands"] = operands.map { $0.body }
+                dict["operands"] = operands.map { $0.body } as AnyObject
         }
 
         if let

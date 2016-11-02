@@ -85,7 +85,8 @@ open class SearchQuery: NSObject {
         }
 
         if let tags = self.tags {
-            dict.updateValue(tags.map { $0.toDictionary() }, forKey: Keys.Tags)
+            let tagsList = tags.map { $0.toDictionary() } as AnyObject
+            dict.updateValue(tagsList, forKey: Keys.Tags)
         }
 
         if let include = self.populateFields {
@@ -99,7 +100,7 @@ open class SearchQuery: NSObject {
         if self.segmentWithDevice {
             if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
-                    dict.updateValue(tags.values.map { $0.toDictionary() }, forKey: Keys.SegmentTags)
+                    dict.updateValue(tags.values.map { $0.toDictionary() } as AnyObject, forKey: Keys.SegmentTags)
                 }
             }
         }

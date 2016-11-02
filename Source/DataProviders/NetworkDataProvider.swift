@@ -10,7 +10,7 @@ import Foundation
 
 open class NetworkDataProvider: DataProvider {
 
-    open func getModules(completionHandler handler: (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
+    open func getModules(completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
         let request = Halo.Request<PaginatedModules>(router: Router.modules).skipPagination().responseParser { (data) in
 
@@ -34,11 +34,11 @@ open class NetworkDataProvider: DataProvider {
             return result
         }
 
-        try! request.responseObject(completionHandler: handler)
+        _ = try? request.responseObject(completionHandler: handler)
 
     }
 
-    open func search(query: Halo.SearchQuery, completionHandler handler: (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
         let request = Halo.Request<PaginatedContentInstances>(router: Router.generalContentSearch).params(params: query.body).responseParser { data in
 
@@ -63,7 +63,7 @@ open class NetworkDataProvider: DataProvider {
 
         }
 
-        try! request.responseObject(completionHandler: handler)
+        _ = try? request.responseObject(completionHandler: handler)
 
 
     }

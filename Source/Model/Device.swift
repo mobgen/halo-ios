@@ -182,17 +182,16 @@ public final class Device: NSObject, NSCoding {
         }
 
         if let info = self.info {
-            dict[Keys.Devices] = [info.toDictionary()]
+            dict[Keys.Devices] = [info.toDictionary()] as AnyObject
         }
 
         if let tags = self.tags {
-            dict[Keys.Tags] = tags.map({ (key, tag: Halo.Tag) -> NSDictionary in
-                tag.toDictionary()
-            })
+            let tagsList = tags.map { $0.value.toDictionary() } as AnyObject
+            dict.updateValue(tagsList, forKey: Keys.Tags)
         }
 
-        dict[Keys.CreatedAt] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
-        dict[Keys.UpdatedAt] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000
+        dict[Keys.CreatedAt] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000 as AnyObject
+        dict[Keys.UpdatedAt] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000 as AnyObject
 
         return dict
 

@@ -37,7 +37,7 @@ open class ContentManager: NSObject, HaloManager {
     
     // MARK: Get instances
 
-    open func search(query: Halo.SearchQuery, completionHandler handler: (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
         Manager.core.dataProvider.search(query: query, completionHandler: handler)
     }
 
@@ -95,7 +95,7 @@ open class ContentManager: NSObject, HaloManager {
     fileprivate func processSyncResult(_ syncQuery: SyncQuery, syncResult: SyncResult?, wasFirstSync: Bool, completionHandler handler: @escaping (String, NSError?) -> Void) -> Void {
         if let result = syncResult {
             
-            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                 var path = self.getPath(file: "synctimestamp-\(result.moduleId)")
                 
                 // Get the "old" sync info

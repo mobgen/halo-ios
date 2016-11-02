@@ -13,7 +13,7 @@ public enum AuthenticationMode: Int {
 }
 
 public protocol Requestable {
-    var URLRequest: NSMutableURLRequest { get }
+    var URLRequest: URLRequest { get }
     var authenticationMode: Halo.AuthenticationMode { get }
     var offlinePolicy: Halo.OfflinePolicy { get }
     var numberOfRetries: Int? { get }
@@ -28,7 +28,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     fileprivate var headers: [String: String] = [:]
     fileprivate var params: [String: AnyObject] = [:]
 
-    open fileprivate(set) var responseParser: ((AnyObject) -> T?)?
+    open fileprivate(set) var responseParser: ((AnyObject?) -> T?)?
     open fileprivate(set) var authenticationMode: Halo.AuthenticationMode = .app
     open fileprivate(set) var offlinePolicy = Manager.core.defaultOfflinePolicy {
         didSet {
@@ -43,7 +43,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     
     fileprivate(set) var dataProvider: DataProvider = Manager.core.dataProvider
 
-    open var URLRequest: NSMutableURLRequest {
+    open var URLRequest: URLRequest {
         let req = NSMutableURLRequest(url: self.url!)
 
         req.httpMethod = self.method.rawValue
@@ -71,7 +71,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
 
         let (request, _) = self.parameterEncoding.encode(request: req, parameters: self.params)
 
-        return request
+        return request as URLRequest
 
     }
 
@@ -94,41 +94,49 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
     }
 
-    open func responseParser(parser: @escaping (AnyObject) -> T?) -> Halo.Request<T> {
+    @discardableResult
+    open func responseParser(parser: @escaping (AnyObject?) -> T?) -> Halo.Request<T> {
         self.responseParser = parser
         return self
     }
 
+    @discardableResult
     open func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
         return self
     }
 
+    @discardableResult
     open func numberOfRetries(retries: Int) -> Halo.Request<T> {
         self.numberOfRetries = retries
         return self
     }
     
+    @discardableResult
     open func method(method: Halo.Method) -> Halo.Request<T> {
         self.method = method
         return self
     }
 
+    @discardableResult
     open func authenticationMode(mode: Halo.AuthenticationMode) -> Halo.Request<T> {
         self.authenticationMode = mode
         return self
     }
 
+    @discardableResult
     open func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
         self.parameterEncoding = encoding
         return self
     }
 
+    @discardableResult
     open func addHeader(field: String, value: String) -> Halo.Request<T> {
         self.headers[field] = value
         return self
     }
 
+    @discardableResult
     open func addHeaders(headers: [String : String]) -> Halo.Request<T> {
         headers.forEach { (key, value) -> Void in
             let _ = self.addHeader(field: key, value: value)
@@ -136,33 +144,38 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         return self
     }
 
+    @discardableResult
     open func params(params: [String : AnyObject]) -> Halo.Request<T> {
         params.forEach { self.params[$0] = $1 }
         return self
     }
 
+    @discardableResult
     open func includeAll() -> Halo.Request<T> {
         self.include = true
         return self
     }
 
+    @discardableResult
     open func paginate(page: Int, limit: Int) -> Halo.Request<T> {
         self.params["page"] = page as AnyObject?
         self.params["limit"] = limit as AnyObject?
         return self
     }
 
-
+    @discardableResult
     open func skipPagination() -> Halo.Request<T> {
         self.params["skip"] = "true" as AnyObject?
         return self
     }
 
+    @discardableResult
     open func fields(fields: [String]) -> Halo.Request<T> {
         self.params["fields"] = fields as AnyObject?
         return self
     }
 
+    @discardableResult
     open func tags(tags: [Halo.Tag]) -> Halo.Request<T> {
         tags.forEach { tag in
             let json = try! JSONSerialization.data(withJSONObject: tag.toDictionary(), options: [])
@@ -179,6 +192,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         return bodyHash + urlHash
     }
 
+    @discardableResult
     open func responseData(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         switch self.offlinePolicy {
@@ -193,13 +207,14 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         return self
     }
 
-    open func response(completionHandler handler: ((HTTPURLResponse?, Halo.Result<AnyObject>) -> Void)? = nil) throws -> Halo.Request<T> {
-
+    @discardableResult
+    open func response(completionHandler handler: ((HTTPURLResponse?, Halo.Result<AnyObject?>) -> Void)? = nil) throws -> Halo.Request<T> {
+        
         try self.responseData { (response, result) -> Void in
             switch result {
             case .success(let data, _):
                 if let successHandler = handler {
-                    let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                    let json: AnyObject? = try? JSONSerialization.jsonObject(with: data, options: []) as AnyObject
                     successHandler(response, .success(json, false))
                 }
             case .failure(let error):
@@ -210,6 +225,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         return self
     }
 
+    @discardableResult
     open func responseObject(completionHandler handler: ((HTTPURLResponse?, Halo.Result<T?>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         guard let parser = self.responseParser else {

@@ -30,7 +30,7 @@ open class CloudinaryURL {
     }
 
     open var absoluteURLString: String {
-        return URL.absoluteString ?? ""
+        return URL.absoluteString
     }
     
     open func width(pixels w: Int) -> CloudinaryURL {

@@ -13,7 +13,7 @@ extension UIImage {
 
     static func loadFromUrl(url: URL, completionHandler handler: @escaping (UIImage?) -> Void) {
 
-        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
+        let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
 
         queue.async { () -> Void in
             if let imageData = try? Data(contentsOf: url) {

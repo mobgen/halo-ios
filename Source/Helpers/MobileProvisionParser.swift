@@ -53,23 +53,22 @@ class MobileProvisionParser {
     static func getMobileProvision() -> NSDictionary? {
 
         var mobileProvision: NSDictionary?
-
-        if let provisioningPath = Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") {
-
-            let binaryString = try! String(contentsOfFile: provisioningPath, encoding: String.Encoding.isoLatin1)
-
+        
+        if let provisioningPath = Bundle.main.path(forResource: "embedded", ofType: "mobileprovision"),
+            let binaryString = try? String(contentsOfFile: provisioningPath, encoding: String.Encoding.isoLatin1) {
+            
             let scanner = Scanner(string: binaryString)
-
+            
             if !scanner.scanUpTo("<plist", into: nil) {
                 return mobileProvision
             }
-
+            
             var plistString: NSString?
-
+            
             scanner.scanUpTo("</plist>", into: &plistString)
-
+            
             plistString = plistString?.appending("</plist>") as NSString?
-
+            
             if let plistData = plistString?.data(using: String.Encoding.isoLatin1.rawValue) {
                 mobileProvision = try! PropertyListSerialization.propertyList(from: plistData, options: PropertyListSerialization.MutabilityOptions(), format: nil) as? NSDictionary
             }

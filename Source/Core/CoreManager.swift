@@ -12,22 +12,22 @@ import UIKit
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager {
 
-    private lazy var __once: () = {
+    private lazy var __once: (CoreManager, @escaping ((Bool) -> Void)) -> Void = { manager, handler in
 
-            CoreManager.completionHandler = handler
+            manager.completionHandler = handler
             Router.userToken = nil
             Router.appToken = nil
 
             Manager.network.startup { (success) -> Void in
 
                 if (!success) {
-                    handler?(false)
+                    handler(false)
                     return
                 }
 
                 let bundle = Bundle.main
 
-                if let path = bundle.path(forResource: CoreManager.configuration, ofType: "plist") {
+                if let path = bundle.path(forResource: manager.configuration, ofType: "plist") {
 
                     if let data = NSDictionary(contentsOfFile: path) {
                         let clientIdKey = CoreConstants.clientIdKey
@@ -37,18 +37,18 @@ open class CoreManager: NSObject, HaloManager {
                         let environmentKey = CoreConstants.environmentSettingKey
 
                         if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                            CoreManager.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                            manager.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
                         }
 
                         if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                            CoreManager.userCredentials = Credentials(username: username, password: password)
+                            manager.userCredentials = Credentials(username: username, password: password)
                         }
 
                         if let env = data[environmentKey] as? String {
                             self.setEnvironment(env)
                         }
 
-                        CoreManager.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
+                        manager.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
                     }
                 } else {
                     LogMessage(message: "No .plist found", level: .warning).print()
@@ -72,11 +72,11 @@ open class CoreManager: NSObject, HaloManager {
                             }
                         }
                     } else {
-                        CoreManager.completionHandler?(false)
+                        manager.completionHandler?(false)
                     }
                 }
             }
-        }()
+        }
 
     /// Delegate that will handle launching completion and other important steps in the flow
     open var delegate: ManagerDelegate?
@@ -198,7 +198,7 @@ open class CoreManager: NSObject, HaloManager {
                        level: .warning).print()
         }
 
-        _ = self.__once
+        self.__once(self, handler ?? { _ in })
     }
 
     fileprivate func setupAddons(completionHandler handler: @escaping ((Bool) -> Void)) -> Void {
@@ -481,7 +481,7 @@ open class CoreManager: NSObject, HaloManager {
     }
 
     @objc(application:didReceiveRemoteNotification:fetchCompletionHandler:)
-    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {

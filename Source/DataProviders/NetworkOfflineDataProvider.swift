@@ -16,7 +16,7 @@ open class NetworkOfflineDataProvider: NetworkDataProvider {
             switch result {
             case .success(let data, _):
                 if let d = data {
-                    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                         NSKeyedArchiver.archiveRootObject(d, toFile: OfflineDataProvider.modulesPath)
                     }
                 }
@@ -36,12 +36,12 @@ open class NetworkOfflineDataProvider: NetworkDataProvider {
 
         super.search(query: query) { response, result in
 
-            let path = OfflineDataProvider.filePath.appendingPathComponent("search-(\(query.hash))")!.path!
+            let path = OfflineDataProvider.filePath.appendingPathComponent("search-(\(query.hash))").path
 
             switch result {
             case .success(let data, _):
                 if let d = data {
-                    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                         NSKeyedArchiver.archiveRootObject(d, toFile: path)
                     }
                 }

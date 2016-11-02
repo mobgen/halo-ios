@@ -10,7 +10,7 @@ import Foundation
 
 extension NetworkManager {
 
-    func deviceParser(_ data: AnyObject) -> Halo.Device? {
+    func deviceParser(_ data: AnyObject?) -> Halo.Device? {
         if let dict = data as? [String: AnyObject] {
             return Device.fromDictionary(dict: dict)
         }
