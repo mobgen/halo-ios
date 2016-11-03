@@ -166,23 +166,23 @@ public final class Device: NSObject, NSCoding {
 
     - returns: Key-value dictionary containing the user details
     */
-    func toDictionary() -> [String: AnyObject] {
+    func toDictionary() -> [String: Any] {
 
-        var dict = [String: AnyObject]()
+        var dict = [String: Any]()
 
-        dict[Keys.Id] = self.id as AnyObject?
-        dict[Keys.AppId] = self.appId as AnyObject?
+        dict[Keys.Id] = self.id
+        dict[Keys.AppId] = self.appId
 
         if let email = self.email {
-            dict[Keys.Email] = email as AnyObject?
+            dict[Keys.Email] = email
         }
 
         if let alias = self.alias {
-            dict[Keys.Alias] = alias as AnyObject?
+            dict[Keys.Alias] = alias
         }
 
         if let info = self.info {
-            dict[Keys.Devices] = [info.toDictionary()] as AnyObject
+            dict[Keys.Devices] = [info.toDictionary()]
         }
 
         if let tags = self.tags {
@@ -190,8 +190,8 @@ public final class Device: NSObject, NSCoding {
             dict.updateValue(tagsList, forKey: Keys.Tags)
         }
 
-        dict[Keys.CreatedAt] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000 as AnyObject
-        dict[Keys.UpdatedAt] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000 as AnyObject
+        dict[Keys.UpdatedAt] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
+        dict[Keys.UpdatedAt] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000
 
         return dict
 
@@ -205,7 +205,7 @@ public final class Device: NSObject, NSCoding {
     - returns: The newly created user instance
     */
     @objc(fromDictionary:)
-    class func fromDictionary(dict: [String: AnyObject]) -> Halo.Device {
+    class func fromDictionary(dict: [String: Any]) -> Halo.Device {
 
         var device: Halo.Device
 
@@ -225,11 +225,11 @@ public final class Device: NSObject, NSCoding {
 
         device.email = dict[Keys.Email] as? String
         
-        if let info = dict[Keys.Devices] as? [[String: AnyObject]], let first = info.first {
+        if let info = dict[Keys.Devices] as? [[String: Any]], let first = info.first {
             device.info = DeviceInfo.fromDictionary(dict: first)
         }
         
-        if let tags = (dict[Keys.Tags] as? [[String: AnyObject]])?.map({ (dict: [String: AnyObject]) -> Halo.Tag in
+        if let tags = (dict[Keys.Tags] as? [[String: Any]])?.map({ (dict: [String: Any]) -> Halo.Tag in
             return Halo.Tag.fromDictionary(dict: dict)
         }) {
             device.tags = tags.reduce([:], { (dict, tag: Halo.Tag) -> [String: Halo.Tag] in

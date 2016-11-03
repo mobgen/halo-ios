@@ -26,9 +26,9 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     fileprivate var method: Halo.Method = .GET
     fileprivate var parameterEncoding: Halo.ParameterEncoding = .url
     fileprivate var headers: [String: String] = [:]
-    fileprivate var params: [String: AnyObject] = [:]
+    fileprivate var params: [String: Any] = [:]
 
-    open fileprivate(set) var responseParser: ((AnyObject?) -> T?)?
+    open fileprivate(set) var responseParser: ((Any?) -> T?)?
     open fileprivate(set) var authenticationMode: Halo.AuthenticationMode = .app
     open fileprivate(set) var offlinePolicy = Manager.core.defaultOfflinePolicy {
         didSet {
@@ -66,7 +66,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
 
         if self.include {
-            self.params["include"] = true as AnyObject?
+            self.params["include"] = true
         }
 
         let (request, _) = self.parameterEncoding.encode(request: req, parameters: self.params)
@@ -95,7 +95,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func responseParser(parser: @escaping (AnyObject?) -> T?) -> Halo.Request<T> {
+    open func responseParser(parser: @escaping (Any?) -> T?) -> Halo.Request<T> {
         self.responseParser = parser
         return self
     }
@@ -145,7 +145,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func params(params: [String : AnyObject]) -> Halo.Request<T> {
+    open func params(params: [String : Any]) -> Halo.Request<T> {
         params.forEach { self.params[$0] = $1 }
         return self
     }
@@ -158,20 +158,20 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
 
     @discardableResult
     open func paginate(page: Int, limit: Int) -> Halo.Request<T> {
-        self.params["page"] = page as AnyObject?
-        self.params["limit"] = limit as AnyObject?
+        self.params["page"] = page
+        self.params["limit"] = limit
         return self
     }
 
     @discardableResult
     open func skipPagination() -> Halo.Request<T> {
-        self.params["skip"] = "true" as AnyObject?
+        self.params["skip"] = "true"
         return self
     }
 
     @discardableResult
     open func fields(fields: [String]) -> Halo.Request<T> {
-        self.params["fields"] = fields as AnyObject?
+        self.params["fields"] = fields
         return self
     }
 
@@ -179,7 +179,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     open func tags(tags: [Halo.Tag]) -> Halo.Request<T> {
         tags.forEach { tag in
             let json = try! JSONSerialization.data(withJSONObject: tag.toDictionary(), options: [])
-            self.params["filter[tags][]"] = String(data: json, encoding: String.Encoding.utf8) as AnyObject?
+            self.params["filter[tags][]"] = String(data: json, encoding: String.Encoding.utf8)
         }
         return self
     }
@@ -208,13 +208,13 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func response(completionHandler handler: ((HTTPURLResponse?, Halo.Result<AnyObject?>) -> Void)? = nil) throws -> Halo.Request<T> {
+    open func response(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Any?>) -> Void)? = nil) throws -> Halo.Request<T> {
         
         try self.responseData { (response, result) -> Void in
             switch result {
             case .success(let data, _):
                 if let successHandler = handler {
-                    let json: AnyObject? = try? JSONSerialization.jsonObject(with: data, options: []) as AnyObject
+                    let json = try? JSONSerialization.jsonObject(with: data, options: [])
                     successHandler(response, .success(json, false))
                 }
             case .failure(let error):

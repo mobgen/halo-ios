@@ -50,7 +50,7 @@ public enum ParameterEncoding {
     case urlEncodedInURL
     case json
     case propertyList(PropertyListSerialization.PropertyListFormat, PropertyListSerialization.WriteOptions)
-    case custom((NSMutableURLRequest, [String: AnyObject]?) -> (NSMutableURLRequest, NSError?))
+    case custom((NSMutableURLRequest, [String: Any]?) -> (NSMutableURLRequest, NSError?))
 
     /**
      Creates a URL request by encoding parameters and applying them onto an existing request.
@@ -61,7 +61,7 @@ public enum ParameterEncoding {
      - returns: A tuple containing the constructed request and the error that occurred during parameter encoding,
      if any.
      */
-    public func encode(request: NSMutableURLRequest, parameters: [String: AnyObject]?) -> (NSMutableURLRequest, NSError?) {
+    public func encode(request: NSMutableURLRequest, parameters: [String: Any]?) -> (NSMutableURLRequest, NSError?) {
         var mutableURLRequest = request
 
         guard let parameters = parameters else { return (mutableURLRequest, nil) }
@@ -70,7 +70,7 @@ public enum ParameterEncoding {
 
         switch self {
         case .url, .urlEncodedInURL:
-            func query(_ parameters: [String: AnyObject]) -> String {
+            func query(_ parameters: [String: Any]) -> String {
                 var components: [(String, String)] = []
 
                 for key in parameters.keys.sorted(by: <) {
@@ -159,14 +159,14 @@ public enum ParameterEncoding {
 
      - returns: The percent-escaped, URL encoded query string components.
      */
-    public func queryComponents(key: String, _ value: AnyObject) -> [(String, String)] {
+    public func queryComponents(key: String, _ value: Any) -> [(String, String)] {
         var components: [(String, String)] = []
 
-        if let dictionary = value as? [String: AnyObject] {
+        if let dictionary = value as? [String: Any] {
             for (nestedKey, value) in dictionary {
                 components += queryComponents(key: "\(key)[\(nestedKey)]", value)
             }
-        } else if let array = value as? [AnyObject] {
+        } else if let array = value as? [Any] {
             for value in array {
                 components += queryComponents(key: "\(key)[]", value)
             }

@@ -67,7 +67,7 @@ public final class DeviceInfo: NSObject, NSCoding {
 
     - returns: The newly created user device
     */
-    class func fromDictionary(dict: [String: AnyObject]) -> Halo.DeviceInfo {
+    class func fromDictionary(dict: [String: Any]) -> Halo.DeviceInfo {
         return DeviceInfo(platform: dict[Keys.Platform] as! String, token: dict[Keys.Token] as! String)
     }
 }

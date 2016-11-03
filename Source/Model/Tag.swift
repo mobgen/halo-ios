@@ -66,21 +66,21 @@ public final class Tag: NSObject, NSCoding {
 
     - returns: A dictionary containing the representation of the object
     */
-    public func toDictionary() -> [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    public func toDictionary() -> [String: Any] {
+        var dict = [String: Any]()
 
         if let id = self.id {
-            dict["id"] = id as AnyObject?
+            dict["id"] = id
         }
 
-        dict["name"] = self.name as AnyObject?
+        dict["name"] = self.name
 
         if let val = self.value {
-            dict["value"] = val as AnyObject?
+            dict["value"] = val
         }
 
         if let type = self.type {
-            dict["tagType"] = type as AnyObject?
+            dict["tagType"] = type
         }
 
         return dict
@@ -93,7 +93,7 @@ public final class Tag: NSObject, NSCoding {
 
     - returns: The newly created user tag
     */
-    class func fromDictionary(dict: [String: AnyObject]) -> Halo.Tag {
+    class func fromDictionary(dict: [String: Any]) -> Halo.Tag {
         let tag = Tag(name: dict["name"] as! String, value: dict["value"] as! String, type: dict["tagType"] as? String)
         tag.id = dict["id"] as? String
 

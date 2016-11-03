@@ -19,16 +19,16 @@ public enum Router {
     static var appToken: Token?
     static var userToken: Token?
 
-    case oAuth(Credentials, [String: AnyObject])
+    case oAuth(Credentials, [String: Any])
     case modules
-    case generalContentInstances([String: AnyObject])
+    case generalContentInstances([String: Any])
     case generalContentInstance(String)
     case generalContentSearch
     case moduleSync
     case segmentationGetDevice(String)
-    case segmentationCreateDevice([String: AnyObject])
-    case segmentationUpdateDevice(String, [String: AnyObject])
-    case customRequest(Halo.Method, String, [String: AnyObject]?)
+    case segmentationCreateDevice([String: Any])
+    case segmentationUpdateDevice(String, [String: Any])
+    case customRequest(Halo.Method, String, [String: Any]?)
 
     /// Decide the HTTP method based on the specific request
     var method: Halo.Method {
@@ -118,7 +118,7 @@ public enum Router {
         }
     }
 
-    var params: [String: AnyObject]? {
+    var params: [String: Any]? {
 
         switch self {
         case .oAuth(_, let params): return params
@@ -126,7 +126,7 @@ public enum Router {
         case .segmentationCreateDevice(let params): return params
         case .segmentationUpdateDevice(_, let params):
             var newParams = params
-            newParams["replaceTokens"] = true as AnyObject?
+            newParams["replaceTokens"] = true
             return newParams
         case .customRequest(_, _, let params): return params
         default: return nil

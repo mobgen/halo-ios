@@ -155,7 +155,7 @@ open class HaloRequest: NSObject {
         return self
     }
 
-    open func response(success: @escaping ((HTTPURLResponse?, AnyObject?, Bool) -> Void), failure: @escaping ((HTTPURLResponse?, NSError) -> Void)) -> HaloRequest {
+    open func response(success: @escaping ((HTTPURLResponse?, Any?, Bool) -> Void), failure: @escaping ((HTTPURLResponse?, NSError) -> Void)) -> HaloRequest {
 
         do {
             try request?.response { (response, result) -> Void in

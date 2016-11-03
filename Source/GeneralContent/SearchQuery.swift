@@ -41,66 +41,73 @@ open class SearchQuery: NSObject {
     fileprivate(set) var moduleName: String?
     fileprivate(set) var moduleIds: [String]?
     fileprivate(set) var instanceIds: [String]?
-    fileprivate(set) var conditions: [String: AnyObject]?
-    fileprivate(set) var metaConditions: [String: AnyObject]?
+    fileprivate(set) var conditions: [String: Any]?
+    fileprivate(set) var metaConditions: [String: Any]?
     fileprivate(set) var fields: [String]?
     fileprivate(set) var populateFields: [String]?
     fileprivate(set) var tags: [Halo.Tag]?
-    fileprivate(set) var pagination: [String: AnyObject]?
+    fileprivate(set) var pagination: [String: Any]?
     fileprivate(set) var segmentWithDevice: Bool = false
     fileprivate(set) var segmentMode: SegmentMode = .partial
     fileprivate(set) var offlinePolicy: Halo.OfflinePolicy?
     fileprivate(set) var locale: Halo.Locale?
 
     open override var hash: Int {
-        let values: [String] = body.map { "\($0)-\($1.description!)" }
+        let values: [String] = body.map { key, value in
+            switch value {
+            case let v as AnyObject:
+                return "\(key)-\(v.description)"
+            default:
+                return ""
+            }
+        }
         return values.joined(separator: "+").hash
     }
 
-    open var body: [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    open var body: [String: Any] {
+        var dict = [String: Any]()
 
         if let modules = self.moduleIds {
-            dict.updateValue(modules as AnyObject, forKey: Keys.ModuleIds)
+            dict.updateValue(modules, forKey: Keys.ModuleIds)
         }
 
         if let moduleName = self.moduleName {
-            dict.updateValue(moduleName as AnyObject, forKey: Keys.ModuleName)
+            dict.updateValue(moduleName, forKey: Keys.ModuleName)
         }
         
         if let instances = self.instanceIds {
-            dict.updateValue(instances as AnyObject, forKey: Keys.InstanceIds)
+            dict.updateValue(instances, forKey: Keys.InstanceIds)
         }
 
         if let searchValues = self.conditions {
-            dict.updateValue(searchValues as AnyObject, forKey: Keys.SearchValues)
+            dict.updateValue(searchValues, forKey: Keys.SearchValues)
         }
 
         if let metaSearch = self.metaConditions {
-            dict.updateValue(metaSearch as AnyObject, forKey: Keys.MetaSearch)
+            dict.updateValue(metaSearch, forKey: Keys.MetaSearch)
         }
 
         if let fields = self.fields {
-            dict.updateValue(fields as AnyObject, forKey: Keys.Fields)
+            dict.updateValue(fields, forKey: Keys.Fields)
         }
 
         if let tags = self.tags {
-            let tagsList = tags.map { $0.toDictionary() } as AnyObject
+            let tagsList = tags.map { $0.toDictionary() }
             dict.updateValue(tagsList, forKey: Keys.Tags)
         }
 
         if let include = self.populateFields {
-            dict.updateValue(include as AnyObject, forKey: Keys.Include)
+            dict.updateValue(include, forKey: Keys.Include)
         }
 
         if let pagination = self.pagination {
-            dict.updateValue(pagination as AnyObject, forKey: Keys.Pagination)
+            dict.updateValue(pagination, forKey: Keys.Pagination)
         }
 
         if self.segmentWithDevice {
             if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
-                    dict.updateValue(tags.values.map { $0.toDictionary() } as AnyObject, forKey: Keys.SegmentTags)
+                    dict.updateValue(tags.values.map { $0.toDictionary() }, forKey: Keys.SegmentTags)
                 }
             }
         }
@@ -186,16 +193,16 @@ open class SearchQuery: NSObject {
     }
 
     open func skipPagination() -> Halo.SearchQuery {
-        self.pagination = ["skip": "true" as AnyObject]
+        self.pagination = ["skip": "true"]
         return self
     }
 
     @objc(paginationWithPage:limit:)
     open func pagination(page: Int, limit: Int) -> Halo.SearchQuery {
         self.pagination = [
-            "page"  : page as AnyObject,
-            "limit" : limit as AnyObject,
-            "skip"  : "false" as AnyObject
+            "page"  : page,
+            "limit" : limit,
+            "skip"  : "false"
         ]
         return self
     }

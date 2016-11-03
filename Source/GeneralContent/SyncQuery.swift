@@ -25,25 +25,25 @@ open class SyncQuery: NSObject {
     open fileprivate(set) var fromSync: Date?
     open fileprivate(set) var toSync: Date?
 
-    open var body: [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    open var body: [String: Any] {
+        var dict = [String: Any]()
 
-        dict[Keys.ModuleId] = moduleId as AnyObject?
+        dict[Keys.ModuleId] = moduleId
         
         if let name = moduleName {
-            dict[Keys.ModuleName] = name as AnyObject?
+            dict[Keys.ModuleName] = name
         }
         
         if let loc = locale {
-            dict[Keys.Locale] = loc.description as AnyObject?
+            dict[Keys.Locale] = loc.description
         }
 
         if let from = fromSync {
-            dict[Keys.FromSync] = from.timeIntervalSince1970 * 1000 as AnyObject
+            dict[Keys.FromSync] = from.timeIntervalSince1970 * 1000
         }
 
         if let to = toSync {
-            dict[Keys.ToSync] = to.timeIntervalSince1970 * 1000 as AnyObject
+            dict[Keys.ToSync] = to.timeIntervalSince1970 * 1000
         }
 
         return dict

@@ -33,27 +33,27 @@ open class SearchFilter: NSObject {
 
     var operation: String?
     var property: String?
-    var value: AnyObject?
+    var value: Any?
     var type: String?
 
-    open var body: [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    open var body: [String: Any] {
+        var dict = [String: Any]()
 
         if let
             cond = self.condition,
             let operands = self.operands {
-                dict["condition"] = cond as AnyObject?
-                dict["operands"] = operands.map { $0.body } as AnyObject
+                dict["condition"] = cond
+                dict["operands"] = operands.map { $0.body }
         }
 
         if let
             operation = self.operation,
             let property = self.property,
             let type = self.type {
-                dict["operation"] = operation as AnyObject?
-                dict["property"] = property as AnyObject?
+                dict["operation"] = operation
+                dict["property"] = property
                 dict["value"] = value ?? NSNull()
-                dict["type"] = type as AnyObject?
+                dict["type"] = type
         }
 
         return dict
@@ -63,7 +63,7 @@ open class SearchFilter: NSObject {
         super.init()
     }
 
-    init(operation: SearchFilterOperation, property: String, value: AnyObject?, type: String? = nil) {
+    init(operation: SearchFilterOperation, property: String, value: Any?, type: String? = nil) {
         self.operation = operation.description
         self.property = property
         self.value = value
