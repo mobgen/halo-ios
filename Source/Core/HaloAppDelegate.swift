@@ -41,7 +41,8 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject])
+        // Triggered when there is user interaction
+        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: true)
     }
 
     /**
@@ -52,7 +53,7 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter completionHandler: Handler to be executed once the fetch has finished
      */
     open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], fetchCompletionHandler: completionHandler)
+        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: false, fetchCompletionHandler: completionHandler)
     }
 
 }

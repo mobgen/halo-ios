@@ -475,17 +475,22 @@ open class CoreManager: NSObject, HaloManager {
         }
     }
 
-    @objc(application:didReceiveRemoteNotification:)
-    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        self.application(application: app, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { _ in })
+    @objc(application:didReceiveRemoteNotification:userInteraction:)
+    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool) {
+        
+        self.addons.forEach { (addon) in
+            if let notifAddon = addon as? Halo.NotificationsAddon {
+                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], core: self, userInteraction: user, fetchCompletionHandler: { _ in })
+            }
+        }
     }
 
-    @objc(application:didReceiveRemoteNotification:fetchCompletionHandler:)
-    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    @objc(application:didReceiveRemoteNotification:userInteraction:fetchCompletionHandler:)
+    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], core: self, fetchCompletionHandler: completionHandler)
+                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], core: self, userInteraction: user, fetchCompletionHandler: completionHandler)
             }
         }
     }
