@@ -41,7 +41,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo)
+        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: true)
     }
 
     /**
@@ -52,7 +52,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter completionHandler: Handler to be executed once the fetch has finished
      */
     public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)
+        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: false, fetchCompletionHandler: completionHandler)
     }
 
 }
