@@ -473,17 +473,23 @@ public class CoreManager: NSObject, HaloManager {
         }
     }
 
-    @objc(application:didReceiveRemoteNotification:)
-    public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        self.application(application: app, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: { _ in })
+    @objc(application:didReceiveRemoteNotification:userInteraction:)
+    public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], userInteraction user: Bool) {
+        
+        self.addons.forEach { (addon) in
+            if let notifAddon = addon as? Halo.NotificationsAddon {
+                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], core: self, userInteraction: user, fetchCompletionHandler: { _ in })
+            }
+        }
+        
     }
 
-    @objc(application:didReceiveRemoteNotification:fetchCompletionHandler:)
-    public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    @objc(application:didReceiveRemoteNotification:userInteraction:fetchCompletionHandler:)
+    public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], userInteraction user: Bool, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: completionHandler)
+                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: completionHandler)
             }
         }
     }
