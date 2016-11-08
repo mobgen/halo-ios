@@ -194,7 +194,7 @@ public class CloudinaryURL {
     }
 
     public func addFlags(flags flags: ImageFlag...) -> CloudinaryURL {
-        let arg = flags.map({ $0.rawValue }).joinWithSeparator(".")
+        let arg = flags.map { $0.rawValue }.joinWithSeparator(".")
         params.append("fl_\(arg)")
         return self
     }
