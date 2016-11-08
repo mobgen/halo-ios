@@ -17,7 +17,21 @@
                BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
                BuildableName = "Halo.framework"
                BlueprintName = "Halo"
-               ReferencedContainer = "container:HaloSDK.xcodeproj">
+               ReferencedContainer = "container:Halo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "004790F81C915C6C00C24741"
+               BuildableName = "HaloObjC.framework"
+               BlueprintName = "HaloObjC"
+               ReferencedContainer = "container:Halo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,24 +43,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "006A5FB61B318CAC0045395A"
-               BuildableName = "HaloTests.xctest"
-               BlueprintName = "HaloTests"
-               ReferencedContainer = "container:HaloSDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
-            BuildableName = "Halo.framework"
-            BlueprintName = "Halo"
-            ReferencedContainer = "container:HaloSDK.xcodeproj">
+            BlueprintIdentifier = "004790F81C915C6C00C24741"
+            BuildableName = "HaloObjC.framework"
+            BlueprintName = "HaloObjC"
+            ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,18 +69,13 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
-            BuildableName = "Halo.framework"
-            BlueprintName = "Halo"
-            ReferencedContainer = "container:HaloSDK.xcodeproj">
+            BlueprintIdentifier = "004790F81C915C6C00C24741"
+            BuildableName = "HaloObjC.framework"
+            BlueprintName = "HaloObjC"
+            ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -88,10 +87,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
-            BuildableName = "Halo.framework"
-            BlueprintName = "Halo"
-            ReferencedContainer = "container:HaloSDK.xcodeproj">
+            BlueprintIdentifier = "004790F81C915C6C00C24741"
+            BuildableName = "HaloObjC.framework"
+            BlueprintName = "HaloObjC"
+            ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

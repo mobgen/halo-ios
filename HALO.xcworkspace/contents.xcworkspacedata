@@ -2,15 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:HaloSDK.xcodeproj">
+      location = "group:/Users/borja/Documents/git/halo-sdk-ios/Halo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../halo-notifications-sdk-ios/HaloNotificationSDK.xcodeproj">
+      location = "group:../halo-analytics-sdk-ios/HaloAnalytics.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../halo-analytics-sdk-ios/HaloAnalyticsSDK.xcodeproj">
+      location = "group:../halo-notifications-sdk-ios/HaloNotifications.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../halo-persistence-sdk-ios/HaloPersistenceSDK.xcodeproj">
+      location = "group:../halo-social-sdk/HaloSocial.xcodeproj">
    </FileRef>
 </Workspace>

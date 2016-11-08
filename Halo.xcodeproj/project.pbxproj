@@ -588,7 +588,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 006A5F861B318C6E0045395A /* Build configuration list for PBXProject "HaloSDK" */;
+			buildConfigurationList = 006A5F861B318C6E0045395A /* Build configuration list for PBXProject "Halo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -961,7 +961,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5F861B318C6E0045395A /* Build configuration list for PBXProject "HaloSDK" */ = {
+		006A5F861B318C6E0045395A /* Build configuration list for PBXProject "Halo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FA01B318C6E0045395A /* Debug */,
