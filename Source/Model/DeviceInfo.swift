@@ -39,13 +39,13 @@ public final class DeviceInfo: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        platform = aDecoder.decodeObjectForKey(Keys.Platform) as! String
-        token = aDecoder.decodeObjectForKey(Keys.Token) as! String
+        platform = aDecoder.decodeObject(forKey: Keys.Platform) as! String
+        token = aDecoder.decodeObject(forKey: Keys.Token) as! String
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(platform, forKey: Keys.Platform)
-        aCoder.encodeObject(token, forKey: Keys.Token)
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(platform, forKey: Keys.Platform)
+        aCoder.encode(token, forKey: Keys.Token)
     }
 
     /**
@@ -55,8 +55,8 @@ public final class DeviceInfo: NSObject, NSCoding {
     */
     func toDictionary() -> [String: AnyObject] {
         return [
-            Keys.Platform  : self.platform,
-            Keys.Token     : self.token
+            Keys.Platform  : self.platform as AnyObject,
+            Keys.Token     : self.token as AnyObject
         ]
     }
 
@@ -67,7 +67,7 @@ public final class DeviceInfo: NSObject, NSCoding {
 
     - returns: The newly created user device
     */
-    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.DeviceInfo {
+    class func fromDictionary(dict: [String: Any]) -> Halo.DeviceInfo {
         return DeviceInfo(platform: dict[Keys.Platform] as! String, token: dict[Keys.Token] as! String)
     }
 }

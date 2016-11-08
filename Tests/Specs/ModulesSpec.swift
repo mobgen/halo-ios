@@ -23,7 +23,7 @@ class ModulesSpec : BaseSpec {
                 
                 beforeEach {
                     stub(isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("module_list_success_paginated.json", self.dynamicType)
+                        let fixture = OHPathForFile("module_list_success_paginated.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
                 }
@@ -79,7 +79,7 @@ class ModulesSpec : BaseSpec {
                 
                 beforeEach {
                     stub(isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("module_list_success_not_paginated.json", self.dynamicType)
+                        let fixture = OHPathForFile("module_list_success_not_paginated.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
                 }

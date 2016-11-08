@@ -9,27 +9,27 @@
 import Foundation
 
 enum CredentialType {
-    case App
-    case User
+    case app
+    case user
 }
 
 @objc(HaloCredentials)
-public class Credentials: NSObject {
+open class Credentials: NSObject {
 
     var username: String = ""
     var password: String = ""
-    var type: CredentialType = .App
+    var type: CredentialType = .app
 
     public init(username: String, password: String) {
         super.init()
-        self.type = .User
+        self.type = .user
         self.username = username
         self.password = password
     }
 
     public init(clientId: String, clientSecret: String) {
         super.init()
-        self.type = .App
+        self.type = .app
         self.username = clientId
         self.password = clientSecret
     }

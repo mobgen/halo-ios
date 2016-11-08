@@ -23,13 +23,13 @@ class SyncSpec: BaseSpec {
             
             let moduleId = "571f38b9bb7f372900a14cbc"
             let query = SyncQuery(moduleId: moduleId)
-            let syncDate = NSDate(timeIntervalSince1970: 1475046170088 / 1000)
+            let syncDate = Date(timeIntervalSince1970: 1475046170088 / 1000)
             
             context("requesting everything") {
                 
                 beforeEach {
                     stub(isPath("/api/generalcontent/instance/sync")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("full_sync.json", self.dynamicType)
+                        let fixture = OHPathForFile("full_sync.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Sync stub"
                     
@@ -71,17 +71,17 @@ class SyncSpec: BaseSpec {
             
             context("with updates and deletions") {
                 
-                let date = NSDate(timeIntervalSince1970: 1473686540)
+                let date = Date(timeIntervalSince1970: 1473686540)
                 
                 beforeEach {
                     stub(isPath("/api/generalcontent/instance/sync")) { (request) -> OHHTTPStubsResponse in
                         
-                        let params = try! NSJSONSerialization.JSONObjectWithData(request.OHHTTPStubs_HTTPBody(), options: .MutableContainers)
+                        let params = try! JSONSerialization.jsonObject(with: (request as NSURLRequest).ohhttpStubs_HTTPBody(), options: .mutableContainers)
                         
-                        var fixture = OHPathForFile("to_sync.json", self.dynamicType)
+                        var fixture = OHPathForFile("to_sync.json", type(of: self))
                         
                         if params["fromSync"] != nil && params["toSync"] == nil {
-                            fixture = OHPathForFile("from_sync.json", self.dynamicType)
+                            fixture = OHPathForFile("from_sync.json", type(of: self))
                         }
                         
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])

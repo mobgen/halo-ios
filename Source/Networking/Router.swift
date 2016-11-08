@@ -13,34 +13,34 @@ import Foundation
 public enum Router {
 
     /// Common base url of all the API endpoints
-    public static var baseURL = NSURL(string: "https://halo.mobgen.com")
+    public static var baseURL = URL(string: "https://halo.mobgen.com")
 
     /// Token to be used for authentication purposes
     static var appToken: Token?
     static var userToken: Token?
 
-    case OAuth(Credentials, [String: AnyObject])
-    case Modules
-    case GeneralContentInstances([String: AnyObject])
-    case GeneralContentInstance(String)
-    case GeneralContentSearch
-    case ModuleSync
-    case SegmentationGetDevice(String)
-    case SegmentationCreateDevice([String: AnyObject])
-    case SegmentationUpdateDevice(String, [String: AnyObject])
-    case CustomRequest(Halo.Method, String, [String: AnyObject]?)
+    case oAuth(Credentials, [String: Any])
+    case modules
+    case generalContentInstances([String: Any])
+    case generalContentInstance(String)
+    case generalContentSearch
+    case moduleSync
+    case segmentationGetDevice(String)
+    case segmentationCreateDevice([String: Any])
+    case segmentationUpdateDevice(String, [String: Any])
+    case customRequest(Halo.Method, String, [String: Any]?)
 
     /// Decide the HTTP method based on the specific request
     var method: Halo.Method {
         switch self {
-        case .OAuth(_, _),
-             .SegmentationCreateDevice(_),
-             .GeneralContentSearch,
-             .ModuleSync:
+        case .oAuth(_, _),
+             .segmentationCreateDevice(_),
+             .generalContentSearch,
+             .moduleSync:
             return .POST
-        case .SegmentationUpdateDevice(_):
+        case .segmentationUpdateDevice(_):
             return .PUT
-        case .CustomRequest(let method, _, _):
+        case .customRequest(let method, _, _):
             return method
         default:
             return .GET
@@ -50,30 +50,30 @@ public enum Router {
     /// Decide the URL based on the specific request
     var path: String {
         switch self {
-        case .OAuth(let cred, _):
+        case .oAuth(let cred, _):
             switch cred.type {
-            case .App:
+            case .app:
                 return "api/oauth/token?_app"
-            case .User:
+            case .user:
                 return "api/oauth/token?_user"
             }
-        case .Modules:
+        case .modules:
             return "api/generalcontent/module"
-        case .GeneralContentInstances(_):
+        case .generalContentInstances(_):
             return "api/generalcontent/instance"
-        case .GeneralContentInstance(let id):
+        case .generalContentInstance(let id):
             return "api/generalcontent/instance/\(id)"
-        case .ModuleSync:
+        case .moduleSync:
             return "api/generalcontent/instance/sync"
-        case .GeneralContentSearch:
+        case .generalContentSearch:
             return "api/generalcontent/instance/search"
-        case .SegmentationCreateDevice(_):
+        case .segmentationCreateDevice(_):
             return "api/segmentation/appuser"
-        case .SegmentationGetDevice(let id):
+        case .segmentationGetDevice(let id):
             return "api/segmentation/appuser/\(id)"
-        case .SegmentationUpdateDevice(let id, _):
+        case .segmentationUpdateDevice(let id, _):
             return "api/segmentation/appuser/\(id)"
-        case .CustomRequest(_, let url, _):
+        case .customRequest(_, let url, _):
             return "api/\(url)"
         }
     }
@@ -82,11 +82,11 @@ public enum Router {
         var h: [String: String] = [:]
 
         switch self {
-        case .OAuth(let cred, _):
-            if cred.type == .User {
+        case .oAuth(let cred, _):
+            if cred.type == .user {
                 let string = "\(cred.username):\(cred.password)"
-                if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
-                    let base64string = data.base64EncodedStringWithOptions([])
+                if let data = string.data(using: String.Encoding.utf8) {
+                    let base64string = data.base64EncodedString(options: [])
                     h["Authorization"] = "Basic \(base64string)"
                 }
             }
@@ -99,36 +99,36 @@ public enum Router {
 
     var parameterEncoding: Halo.ParameterEncoding {
         switch self {
-        case .OAuth(_, _):
-            return .URL
-        case .SegmentationCreateDevice(_),
-             .SegmentationUpdateDevice(_, _),
-             .GeneralContentSearch,
-             .ModuleSync:
-            return .JSON
-        case .CustomRequest(let method, _, _):
+        case .oAuth(_, _):
+            return .url
+        case .segmentationCreateDevice(_),
+             .segmentationUpdateDevice(_, _),
+             .generalContentSearch,
+             .moduleSync:
+            return .json
+        case .customRequest(let method, _, _):
             switch method {
             case .POST, .PUT:
-                return .JSON
+                return .json
             default:
-                return .URL
+                return .url
             }
         default:
-            return .URL
+            return .url
         }
     }
 
-    var params: [String: AnyObject]? {
+    var params: [String: Any]? {
 
         switch self {
-        case .OAuth(_, let params): return params
-        case .GeneralContentInstances(let params): return params
-        case .SegmentationCreateDevice(let params): return params
-        case .SegmentationUpdateDevice(_, let params):
+        case .oAuth(_, let params): return params
+        case .generalContentInstances(let params): return params
+        case .segmentationCreateDevice(let params): return params
+        case .segmentationUpdateDevice(_, let params):
             var newParams = params
             newParams["replaceTokens"] = true
             return newParams
-        case .CustomRequest(_, _, let params): return params
+        case .customRequest(_, _, let params): return params
         default: return nil
         }
 

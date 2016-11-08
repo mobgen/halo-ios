@@ -23,7 +23,7 @@ public protocol ManagerDelegate {
      - returns: The newly created user
      */
     @objc(managerWillSetupDevice:)
-    func managerWillSetupDevice(device: Halo.Device) -> Void
+    func managerWillSetupDevice(_ device: Halo.Device) -> Void
 
 }
 
@@ -65,13 +65,13 @@ public protocol Addon {
 public protocol NotificationsAddon: Addon {
 
     @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:core:)
-    func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: Halo.CoreManager) -> Void
+    func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: Halo.CoreManager) -> Void
     
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:core:)
     func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
 
     @objc(application:didReceiveRemoteNotification:core:userInteraction:fetchCompletionHandler:)
-    func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
+    func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
 
 }
 
@@ -79,10 +79,10 @@ public protocol NotificationsAddon: Addon {
 public protocol NetworkAddon: Addon {
 
     @objc(willPerformRequest:)
-    func willPerformRequest(request req: NSURLRequest) -> Void
+    func willPerformRequest(request req: URLRequest) -> Void
     
     @objc(didPerformRequest:time:response:)
-    func didPerformRequest(request req: NSURLRequest, time: NSTimeInterval, response: NSURLResponse?) -> Void
+    func didPerformRequest(request req: URLRequest, time: TimeInterval, response: URLResponse?) -> Void
 
 }
 
