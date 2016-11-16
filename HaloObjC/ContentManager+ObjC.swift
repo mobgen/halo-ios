@@ -13,7 +13,7 @@ public enum ContentFlags: Int {
     case none, includeArchived, includeUnpublished, includeArchivedAndUnpublished
 }
 
-extension ContentManager {
+public extension ContentManager {
     
     @objc(searchWithQuery:success:failure:)
     public func search(query: Halo.SearchQuery,

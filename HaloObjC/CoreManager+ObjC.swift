@@ -8,7 +8,7 @@
 
 import Halo
 
-extension CoreManager {
+public extension CoreManager {
 
     public var env: String {
         return self.environment.description
