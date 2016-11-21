@@ -20,6 +20,7 @@ public enum Router {
     static var userToken: Token?
 
     case oAuth(Credentials, [String: Any])
+    case versionCheck
     case modules
     case generalContentInstances([String: Any])
     case generalContentInstance(String)
@@ -57,6 +58,8 @@ public enum Router {
             case .user:
                 return "api/oauth/token?_user"
             }
+        case .versionCheck:
+            return "api/authentication/version"
         case .modules:
             return "api/generalcontent/module"
         case .generalContentInstances(_):
@@ -101,7 +104,8 @@ public enum Router {
         switch self {
         case .oAuth(_, _):
             return .url
-        case .segmentationCreateDevice(_),
+        case .versionCheck,
+             .segmentationCreateDevice(_),
              .segmentationUpdateDevice(_, _),
              .generalContentSearch,
              .moduleSync:
@@ -122,6 +126,7 @@ public enum Router {
 
         switch self {
         case .oAuth(_, let params): return params
+        case .versionCheck: return ["current": "true"]
         case .generalContentInstances(let params): return params
         case .segmentationCreateDevice(let params): return params
         case .segmentationUpdateDevice(_, let params):

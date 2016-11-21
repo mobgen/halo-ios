@@ -107,7 +107,7 @@ open class SearchQuery: NSObject {
         if self.segmentWithDevice {
             if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
-                    dict.updateValue(tags.values.map { $0.toDictionary() }, forKey: Keys.SegmentTags)
+                    dict.updateValue(tags.map { $1.toDictionary() }, forKey: Keys.SegmentTags)
                 }
             }
         }

@@ -507,7 +507,7 @@ open class CoreManager: NSObject, HaloManager {
 
     fileprivate func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
 
-        try! Request<Any>(path: "/api/authentication/version").params(params: ["current": "true" as AnyObject]).response { (_, result) in
+        try! Request<Any>(router: .versionCheck).response { (_, result) in
             switch result {
             case .success(let data as [[String: AnyObject]], _):
                 if let info = data.first, let minIOS = info["minIOS"] {
