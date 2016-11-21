@@ -62,7 +62,8 @@ public func and(elements: SearchFilter...) -> SearchFilter {
     return filter
 }
 
-public class SearchFilterHelper {
+@objc(HaloSearchFilterHelper)
+public class SearchFilterHelper: NSObject {
 
     public static func getDraftItems() -> SearchFilter {
         let condition1 = SearchFilter(operation: .Eq, property: "publishedAt", value: nil)
