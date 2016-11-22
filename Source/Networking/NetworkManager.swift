@@ -236,6 +236,8 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                             handler?(resp, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                         }
                         
+                        self.cachedTasks.removeAll()
+                        
                         self.isRefreshing = false
                         return
 
@@ -260,7 +262,7 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                         // Restart cached tasks
                         let cachedTasksCopy = self.cachedTasks
                         self.cachedTasks.removeAll()
-                        let _ = cachedTasksCopy.map { (task) -> Void in
+                        cachedTasksCopy.forEach { task in
                             self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
                         }
                     }
