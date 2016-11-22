@@ -101,7 +101,15 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                 
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     self.cachedTasks.append(cachedTask)
-                    self.authenticate(mode: urlRequest.authenticationMode)
+                    self.authenticate(mode: urlRequest.authenticationMode) { response, result in
+                        
+                        switch result {
+                        case .failure(let error):
+                            handler?(resp, .failure(error))
+                        default:
+                            break
+                        }
+                    }
                     return
                 }
                 
@@ -227,6 +235,9 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                         DispatchQueue.main.async {
                             handler?(resp, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                         }
+                        
+                        self.isRefreshing = false
+                        return
 
                     } else if let d = data {
 
@@ -244,15 +255,14 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                             handler?(resp, .success(token, false))
                         }
 
-                    }
-
-                    self.isRefreshing = false
-
-                    // Restart cached tasks
-                    let cachedTasksCopy = self.cachedTasks
-                    self.cachedTasks.removeAll()
-                    let _ = cachedTasksCopy.map { (task) -> Void in
-                        self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
+                        self.isRefreshing = false
+                        
+                        // Restart cached tasks
+                        let cachedTasksCopy = self.cachedTasks
+                        self.cachedTasks.removeAll()
+                        let _ = cachedTasksCopy.map { (task) -> Void in
+                            self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
+                        }
                     }
                 }
             }
