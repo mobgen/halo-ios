@@ -45,10 +45,7 @@ open class SyncLogEntry: NSObject, NSCoding {
         moduleId = aDecoder.decodeObject(forKey: Keys.ModuleId) as? String
         moduleName = aDecoder.decodeObject(forKey: Keys.ModuleName) as? String
         syncDate = aDecoder.decodeObject(forKey: Keys.SyncDate) as? Date
-
-        if let loc = aDecoder.decodeObject(forKey: Keys.Locale) as? Int {
-            locale = Locale(rawValue: loc)
-        }
+        locale = Locale(rawValue: aDecoder.decodeInteger(forKey: Keys.Locale))
 
         creations = aDecoder.decodeInteger(forKey: Keys.Creations)
         updates = aDecoder.decodeInteger(forKey: Keys.Updates)
@@ -62,8 +59,7 @@ open class SyncLogEntry: NSObject, NSCoding {
         aCoder.encode(moduleId, forKey: Keys.ModuleId)
         aCoder.encode(moduleName, forKey: Keys.ModuleName)
         aCoder.encode(syncDate, forKey: Keys.SyncDate)
-        aCoder.encode(locale?.rawValue, forKey: Keys.Locale)
-
+        
         if let loc = locale?.rawValue {
             aCoder.encode(loc, forKey: Keys.Locale)
         }

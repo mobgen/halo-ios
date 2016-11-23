@@ -52,11 +52,11 @@ open class PaginationInfo: NSObject, NSCoding {
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        page = aDecoder.decodeObject(forKey: Keys.Page) as? Int ?? 0
-        limit = aDecoder.decodeObject(forKey: Keys.Limit) as? Int ?? 0
-        offset = aDecoder.decodeObject(forKey: Keys.Offset) as? Int ?? 0
-        totalItems = aDecoder.decodeObject(forKey: Keys.TotalItems) as? Int ?? 0
-        totalPages = aDecoder.decodeObject(forKey: Keys.TotalPages) as? Int ?? 0
+        page = aDecoder.decodeInteger(forKey: Keys.Page)
+        limit = aDecoder.decodeInteger(forKey: Keys.Limit)
+        offset = aDecoder.decodeInteger(forKey: Keys.Offset)
+        totalItems = aDecoder.decodeInteger(forKey: Keys.TotalItems)
+        totalPages = aDecoder.decodeInteger(forKey: Keys.TotalPages)
         super.init()
     }
 

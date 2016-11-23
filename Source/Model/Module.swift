@@ -107,7 +107,7 @@ open class Module: NSObject, NSCoding {
     public required init?(coder aDecoder: NSCoder) {
         super.init()
         id = aDecoder.decodeObject(forKey: Keys.Id) as? String
-        customerId = aDecoder.decodeObject(forKey: Keys.Customer) as? Int
+        customerId = aDecoder.decodeInteger(forKey: Keys.Customer)
         name = aDecoder.decodeObject(forKey: Keys.Name) as? String
         isSingle = aDecoder.decodeObject(forKey: Keys.IsSingle) as? Bool ?? false
         createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String

@@ -56,10 +56,7 @@ open class SyncResult: NSObject, NSCoding {
         moduleName = aDecoder.decodeObject(forKey: Keys.ModuleName) as! String
         moduleId = aDecoder.decodeObject(forKey: Keys.ModuleId) as! String
         syncDate = aDecoder.decodeObject(forKey: Keys.SyncDate) as? Date
-        
-        if let loc = aDecoder.decodeObject(forKey: Keys.Locale) as? Int {
-            locale = Locale(rawValue: loc)
-        }
+        locale = Locale(rawValue: aDecoder.decodeInteger(forKey: Keys.Locale))
     }
     
     open func encode(with aCoder: NSCoder) {
