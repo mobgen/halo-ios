@@ -29,6 +29,8 @@ public enum Router {
     case segmentationGetDevice(String)
     case segmentationCreateDevice([String: Any])
     case segmentationUpdateDevice(String, [String: Any])
+    case registerUser([String: Any])
+    case loginUser([String: Any])
     case customRequest(Halo.Method, String, [String: Any]?)
 
     /// Decide the HTTP method based on the specific request
@@ -36,6 +38,8 @@ public enum Router {
         switch self {
         case .oAuth(_, _),
              .segmentationCreateDevice(_),
+             .registerUser(_),
+             .loginUser(_),
              .generalContentSearch,
              .moduleSync:
             return .POST
@@ -76,6 +80,10 @@ public enum Router {
             return "api/segmentation/appuser/\(id)"
         case .segmentationUpdateDevice(let id, _):
             return "api/segmentation/appuser/\(id)"
+        case .registerUser(_):
+            return "api/segmentation/identified/register"
+        case .loginUser(_):
+            return "api/segmentation/identified/login"
         case .customRequest(_, let url, _):
             return "api/\(url)"
         }
@@ -107,6 +115,8 @@ public enum Router {
         case .versionCheck,
              .segmentationCreateDevice(_),
              .segmentationUpdateDevice(_, _),
+             .registerUser(_),
+             .loginUser(_),
              .generalContentSearch,
              .moduleSync:
             return .json
@@ -133,6 +143,8 @@ public enum Router {
             var newParams = params
             newParams["replaceTokens"] = true
             return newParams
+        case .registerUser(let params): return params
+        case .loginUser(let params): return params
         case .customRequest(_, _, let params): return params
         default: return nil
         }

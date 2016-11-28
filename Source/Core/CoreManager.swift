@@ -524,7 +524,6 @@ open class CoreManager: NSObject, HaloManager {
                 break
             }
         }
-
     }
 
 }
