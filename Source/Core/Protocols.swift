@@ -27,6 +27,7 @@ public protocol ManagerDelegate {
 
 }
 
+@objc(HaloAddon)
 public protocol Addon: class {
 
     var addonName: String {get}
@@ -85,6 +86,7 @@ public extension Addon {
     
 }
 
+@objc(HaloNotificationsAddon)
 public protocol NotificationsAddon: Addon {
 
     func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: Halo.CoreManager) -> Void
@@ -105,6 +107,7 @@ public extension NotificationsAddon {
     
 }
 
+@objc(HaloNetworkAddon)
 public protocol NetworkAddon: Addon {
 
     func willPerformRequest(request req: URLRequest) -> Void
@@ -123,8 +126,10 @@ public extension NetworkAddon {
 
 /// Other protocols
 
+@objc
 public protocol HaloManager {
 
+    @objc(startup:)
     func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
 
 }
