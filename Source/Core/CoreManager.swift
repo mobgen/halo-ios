@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftKeychainWrapper
 
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager {
@@ -55,7 +56,7 @@ open class CoreManager: NSObject, HaloManager {
                 }
                 
                 // Check if there's a stored environment
-                if let env = UserDefaults.standard.object(forKey: CoreConstants.environmentSettingKey) as? String {
+                if let env = KeychainWrapper.standard.string(forKey: CoreConstants.environmentSettingKey) {
                     self.setEnvironment(env)
                 }
 
@@ -145,7 +146,7 @@ open class CoreManager: NSObject, HaloManager {
         self.environment = env
         
         // Save the environment
-        UserDefaults.standard.setValue(env.description, forKey: CoreConstants.environmentSettingKey)
+        KeychainWrapper.standard.set(env.description, forKey: CoreConstants.environmentSettingKey)
         
         self.completionHandler = handler
         self.configureDevice { success in
