@@ -67,7 +67,7 @@ public protocol Addon: class {
     
 }
 
-extension Addon {
+public extension Addon {
     
     func setup(haloCore core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void {}
     
@@ -111,7 +111,7 @@ public protocol NotificationsAddon: Addon {
 
 }
 
-extension NotificationsAddon {
+public extension NotificationsAddon {
     
     func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: Halo.CoreManager) -> Void {}
     
@@ -132,7 +132,7 @@ public protocol NetworkAddon: Addon {
 
 }
 
-extension NetworkAddon {
+public extension NetworkAddon {
     
     func willPerformRequest(request req: URLRequest) -> Void {}
     
