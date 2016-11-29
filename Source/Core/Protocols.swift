@@ -51,14 +51,21 @@ public protocol Addon {
     func didRegisterDevice(haloCore core: Halo.CoreManager) -> Void
 
     @objc(applicationDidFinishLaunching:core:)
-    func applicationDidFinishLaunching(application app: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidFinishLaunching(_ app: UIApplication, core: Halo.CoreManager) -> Void
     
     @objc(applicationDidEnterBackground:core:)
-    func applicationDidEnterBackground(application app: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidEnterBackground(_ app: UIApplication, core: Halo.CoreManager) -> Void
     
     @objc(applicationDidBecomeActive:core:)
-    func applicationDidBecomeActive(application app: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidBecomeActive(_ app: UIApplication, core: Halo.CoreManager) -> Void
 
+    @objc(application:openURL:options:)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
+    
+    @objc(application:openURL:sourceApplication:annotation:)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
+    
+    
 }
 
 @objc(HaloNotificationsAddon)

@@ -498,14 +498,22 @@ open class CoreManager: NSObject, HaloManager {
 
     @objc(applicationDidBecomeActive:)
     open func applicationDidBecomeActive(application app: UIApplication) {
-        self.addons.forEach { $0.applicationDidBecomeActive(application: app, core: self) }
+        self.addons.forEach { $0.applicationDidBecomeActive(app, core: self) }
     }
 
     @objc(applicationDidEnterBackground:)
     open func applicationDidEnterBackground(application app: UIApplication) {
-        self.addons.forEach { $0.applicationDidEnterBackground(application: app, core: self) }
+        self.addons.forEach { $0.applicationDidEnterBackground(app, core: self) }
     }
 
+    open func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return self.addons.reduce(false) { $0 || $1.application(app, open: url, options: options) }
+    }
+    
+    open func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return self.addons.reduce(false) { $0 || $1.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) }
+    }
+    
     fileprivate func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
 
         try! Request<Any>(router: .versionCheck).response { (_, result) in
