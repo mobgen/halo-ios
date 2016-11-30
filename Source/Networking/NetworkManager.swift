@@ -244,7 +244,7 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                     } else if let d = data {
 
                         let json = try! JSONSerialization.jsonObject(with: d, options: []) as! [String : AnyObject]
-                        let token = Token.fromDictionary(dict: json)
+                        let token = Token.fromDictionary(json)
 
                         switch req.authenticationMode {
                         case .app:
