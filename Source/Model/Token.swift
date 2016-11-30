@@ -53,7 +53,7 @@ open class Token: NSObject {
 
     - parameter dict: Dictionary containing all the token related information
     */
-    open static func fromDictionary(dict: [String: AnyObject]) -> Token {
+    open static func fromDictionary(dict: [String: Any]) -> Token {
 
         let token = Token()
 
