@@ -78,17 +78,17 @@ public enum OfflinePolicy: Int {
 }
 
 @objc(HaloManager)
-open class Manager: NSObject {
+public class Manager: NSObject {
     
-    open static let core: CoreManager = {
+    public static let core: CoreManager = {
         return CoreManager()
     }()
     
-    open static let content: ContentManager = {
+    public static let content: ContentManager = {
         return ContentManager()
     }()
     
-    open static let network: NetworkManager = {
+    public static let network: NetworkManager = {
         return NetworkManager()
     }()
     
