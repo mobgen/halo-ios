@@ -45,6 +45,7 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: true)
     }
     
+    @available(iOS 9.0, *)
     public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return Manager.core.application(app, open: url, options: options)
     }

@@ -74,6 +74,7 @@ public protocol LifecycleAddon: Addon {
 public protocol DeeplinkingAddon: Addon {
     
     @objc(application:openURL:options:)
+    @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
     
     @objc(application:openURL:sourceApplication:annotation:)
