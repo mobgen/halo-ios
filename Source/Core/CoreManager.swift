@@ -354,7 +354,7 @@ open class CoreManager: NSObject, HaloManager {
         if let device = self.device {
             self.device?.storeDevice(env: self.environment)
 
-            self.addons.forEach { $0.willRegisterDevice(haloCore: self) }
+            self.addons.forEach { ($0 as? DeviceAddon)?.willRegisterAddon(haloCore: self) }
             
             Manager.network.createUpdateDevice(device) { [weak self] (_, result) -> Void in
 
@@ -376,7 +376,7 @@ open class CoreManager: NSObject, HaloManager {
                         LogMessage(message: "Error creating/updating user", error: error).print()
                     }
 
-                    strongSelf.addons.forEach { $0.didRegisterDevice(haloCore: strongSelf) }
+                    strongSelf.addons.forEach { ($0 as? DeviceAddon)?.didRegisterDevice(haloCore: strongSelf) }
                     strongSelf.completionHandler?(success)
 
                 }
@@ -498,20 +498,20 @@ open class CoreManager: NSObject, HaloManager {
 
     @objc(applicationDidBecomeActive:)
     open func applicationDidBecomeActive(application app: UIApplication) {
-        self.addons.forEach { $0.applicationDidBecomeActive(app, core: self) }
+        self.addons.forEach { ($0 as? LifecycleAddon)?.applicationDidBecomeActive(app, core: self) }
     }
 
     @objc(applicationDidEnterBackground:)
     open func applicationDidEnterBackground(application app: UIApplication) {
-        self.addons.forEach { $0.applicationDidEnterBackground(app, core: self) }
+        self.addons.forEach { ($0 as? LifecycleAddon)?.applicationDidEnterBackground(app, core: self) }
     }
 
     open func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return self.addons.reduce(false) { $0 || $1.application(app, open: url, options: options) }
+        return self.addons.reduce(false) { $0 || ($1 as? DeeplinkingAddon)?.application(app, open: url, options: options) ?? false }
     }
     
     open func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return self.addons.reduce(false) { $0 || $1.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) }
+        return self.addons.reduce(false) { $0 || ($1 as? DeeplinkingAddon)?.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) ?? false }
     }
     
     fileprivate func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
