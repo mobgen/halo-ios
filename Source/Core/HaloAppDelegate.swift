@@ -11,7 +11,15 @@ import UIKit
 
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    open func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        return Manager.core.applicationWillFinishLaunching(application)
+    }
+    
+    open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        return Manager.core.applicationDidFinishLaunching(application)
+    }
+    
     /**
     Just pass through the configuration of the push notifications to the manager.
 
@@ -19,7 +27,7 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     - parameter deviceToken: Device token obtained in previous steps
     */
     open func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Manager.core.application(application: application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        Manager.core.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
     /**
@@ -29,20 +37,20 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter error:       Error thrown during the process
      */
     open func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        Manager.core.application(application: application, didFailToRegisterForRemoteNotificationsWithError: error as NSError)
+        Manager.core.application(application, didFailToRegisterForRemoteNotificationsWithError: error as NSError)
     }
 
     open func applicationDidBecomeActive(_ application: UIApplication) {
-        Manager.core.applicationDidBecomeActive(application: application)
+        Manager.core.applicationDidBecomeActive(application)
     }
 
     open func applicationDidEnterBackground(_ application: UIApplication) {
-        Manager.core.applicationDidEnterBackground(application: application)
+        Manager.core.applicationDidEnterBackground(application)
     }
 
     open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // Triggered when there is user interaction
-        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: true)
+        Manager.core.application(application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: true)
     }
     
     public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -61,7 +69,7 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter completionHandler: Handler to be executed once the fetch has finished
      */
     open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: application.applicationState == .inactive, fetchCompletionHandler: completionHandler)
+        Manager.core.application(application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: application.applicationState == .inactive, fetchCompletionHandler: completionHandler)
     }
 
 }

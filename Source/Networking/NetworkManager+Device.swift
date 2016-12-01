@@ -21,7 +21,7 @@ extension NetworkManager {
 
         if let id = device.id {
 
-            let request = Halo.Request<Halo.Device>(router: Router.segmentationGetDevice(id))
+            let request = Halo.Request<Halo.Device>(router: Router.segmentationGetDevice(id), bypassReadiness: true)
             try! request.responseParser(parser: self.deviceParser).responseObject(completionHandler: handler)
 
         } else {
@@ -36,15 +36,15 @@ extension NetworkManager {
     - parameter user:    User object containing all the information to be sent
     - parameter handler: Closure to be executed after the request has completed
     */
-    func createUpdateDevice(_ device: Halo.Device, completionHandler handler: ((HTTPURLResponse?, Halo.Result<Halo.Device?>) -> Void)? = nil) -> Void {
+    func createUpdateDevice(_ device: Halo.Device, bypassReadiness: Bool = false, completionHandler handler: ((HTTPURLResponse?, Halo.Result<Halo.Device?>) -> Void)? = nil) -> Void {
 
         /// Decide whether to create or update the user based on the presence of an id
         var request: Halo.Request<Halo.Device>
 
         if let id = device.id {
-            request = Halo.Request(router: Router.segmentationUpdateDevice(id, device.toDictionary()))
+            request = Halo.Request(router: Router.segmentationUpdateDevice(id, device.toDictionary()), bypassReadiness: bypassReadiness)
         } else {
-            request = Halo.Request(router: Router.segmentationCreateDevice(device.toDictionary()))
+            request = Halo.Request(router: Router.segmentationCreateDevice(device.toDictionary()), bypassReadiness: bypassReadiness)
         }
 
         try! request.responseParser(parser: self.deviceParser).responseObject(completionHandler: handler)

@@ -76,10 +76,12 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                               numberOfRetries: Int,
                               completionHandler handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) -> Void {
 
-        let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
-
-        if (self.isRefreshing) {
+        
+        
+        if (self.isRefreshing || (!Halo.Manager.core.isReady && !urlRequest.bypassReadiness)) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
+            let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
+            
             self.cachedTasks.append(cachedTask)
             return
         }
@@ -100,6 +102,8 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                 LogMessage(message: "\(urlRequest) [\(elapsed)ms]", level: .info).print()
                 
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
+                    let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
+                    
                     self.cachedTasks.append(cachedTask)
                     self.authenticate(mode: urlRequest.authenticationMode) { response, result in
                         
@@ -219,7 +223,7 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                 }
             }
 
-            let req = Halo.Request<Any>(router: Router.oAuth(cred, params)).authenticationMode(mode: mode)
+            let req = Halo.Request<Any>(router: Router.oAuth(cred, params), bypassReadiness: true).authenticationMode(mode: mode)
 
             let start = Date()
 
@@ -258,13 +262,7 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
                         }
 
                         self.isRefreshing = false
-                        
-                        // Restart cached tasks
-                        let cachedTasksCopy = self.cachedTasks
-                        self.cachedTasks.removeAll()
-                        cachedTasksCopy.forEach { task in
-                            self.startRequest(request: task.request, numberOfRetries: task.numberOfRetries, completionHandler: task.handler)
-                        }
+                        self.restartCachedTasks()
                     }
                 }
             }
@@ -279,6 +277,14 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
         }
     }
 
+    func restartCachedTasks() {
+        // Restart cached tasks
+        LogMessage(message: "Restarting enqueued tasks...", level: .info).print()
+        let cachedTasksCopy = self.cachedTasks
+        self.cachedTasks.removeAll()
+        cachedTasksCopy.forEach { self.startRequest(request: $0.request, numberOfRetries: $0.numberOfRetries, completionHandler: $0.handler) }
+    }
+    
     // MARK: SSL Pinning
 
     func evaluateServerTrust(serverTrust: SecTrust, isValidForHost host: String) -> Bool {

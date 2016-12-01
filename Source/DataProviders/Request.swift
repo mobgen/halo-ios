@@ -17,6 +17,7 @@ public protocol Requestable {
     var authenticationMode: Halo.AuthenticationMode { get }
     var offlinePolicy: Halo.OfflinePolicy { get }
     var numberOfRetries: Int? { get }
+    var bypassReadiness: Bool { get }
 }
 
 open class Request<T>: Requestable, CustomDebugStringConvertible {
@@ -27,6 +28,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     fileprivate var parameterEncoding: Halo.ParameterEncoding = .url
     fileprivate var headers: [String: String] = [:]
     fileprivate var params: [String: Any] = [:]
+    public internal(set) var bypassReadiness: Bool = false
 
     open fileprivate(set) var responseParser: ((Any?) -> T?)?
     open fileprivate(set) var authenticationMode: Halo.AuthenticationMode = .app
@@ -94,6 +96,11 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
     }
 
+    convenience init(router: Router, bypassReadiness: Bool) {
+        self.init(router: router)
+        self.bypassReadiness = bypassReadiness
+    }
+    
     @discardableResult
     open func responseParser(parser: @escaping (Any?) -> T?) -> Halo.Request<T> {
         self.responseParser = parser

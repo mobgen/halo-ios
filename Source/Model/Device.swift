@@ -51,7 +51,7 @@ public final class Device: NSObject, NSCoding {
     public internal(set) var updatedAt: Date?
 
     public override var description: String {
-        return "User\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tinfo:\(info)\n----"
+        return "Device\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tinfo:\(info)\n----"
     }
 
     public override init() {
