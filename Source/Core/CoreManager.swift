@@ -525,9 +525,9 @@ open class CoreManager: NSObject, HaloManager {
         return self.addons.reduce(true) { $0 && ($1 as? LifecycleAddon)?.applicationWillFinishLaunching(application, core: self) ?? true }
     }
     
-    @objc(applicationDidFinishLaunching:)
-    func applicationDidFinishLaunching(_ application: UIApplication) -> Bool {
-        return self.addons.reduce(true) { $0 && ($1 as? LifecycleAddon)?.applicationDidFinishLaunching(application, core: self) ?? true }
+    @objc(applicationDidFinishLaunching:launchOptions:)
+    func applicationDidFinishLaunching(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        return self.addons.reduce(true) { $0 && ($1 as? LifecycleAddon)?.applicationDidFinishLaunching(application, core: self, didFinishLaunchingWithOptions: launchOptions) ?? true }
     }
     
     @objc(applicationDidBecomeActive:)

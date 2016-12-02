@@ -63,8 +63,8 @@ public protocol LifecycleAddon: Addon {
     @objc(applicationWillFinishLaunching:core:)
     func applicationWillFinishLaunching(_ app: UIApplication, core: Halo.CoreManager) -> Bool
     
-    @objc(applicationDidFinishLaunching:core:)
-    func applicationDidFinishLaunching(_ app: UIApplication, core: Halo.CoreManager) -> Bool
+    @objc(applicationDidFinishLaunching:core:launchOptions:)
+    func applicationDidFinishLaunching(_ app: UIApplication, core: Halo.CoreManager, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool
     
     @objc(applicationDidEnterBackground:core:)
     func applicationDidEnterBackground(_ app: UIApplication, core: Halo.CoreManager) -> Void

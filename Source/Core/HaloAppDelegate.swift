@@ -17,7 +17,7 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        return Manager.core.applicationDidFinishLaunching(application)
+        return Manager.core.applicationDidFinishLaunching(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     /**
