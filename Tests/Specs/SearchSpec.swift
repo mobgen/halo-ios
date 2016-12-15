@@ -26,7 +26,7 @@ class SearchSpec: BaseSpec {
                 var paginated: PaginatedContentInstances?
                 
                 beforeEach {
-                    stub(isPath("/api/generalcontent/instance/search")) { (request) -> OHHTTPStubsResponse in
+                    stub(condition: isPath("/api/generalcontent/instance/search")) { (request) -> OHHTTPStubsResponse in
                         let fixture = OHPathForFile("simple_search_success.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Search stub"
@@ -35,7 +35,7 @@ class SearchSpec: BaseSpec {
                         cont.search(query: SearchQuery()) { response, result in
                             
                             switch result {
-                            case .Success(let data, _):
+                            case .success(let data, _):
                                 paginated = data
                             default: break
                             }

@@ -18,8 +18,8 @@ class ModelSpec: BaseSpec {
         
         describe("The device extension") {
             it("provides the right model name") {
-                expect(UIDevice.currentDevice().modelName).to(equal("Simulator"))
-                expect(UIDevice.currentDevice().modelName).toNot(equal("iPhone 6"))
+                expect(UIDevice.current.modelName).to(equal("Simulator"))
+                expect(UIDevice.current.modelName).toNot(equal("iPhone 6"))
             }
         }
         
@@ -27,7 +27,7 @@ class ModelSpec: BaseSpec {
             
             it("is built correctly") {
                 
-                let _ = SearchFilter(operation: .Eq, property: "test", value: "blah")
+                let _ = SearchFilter(operation: .eq, property: "test", value: "blah")
                 
             }
             

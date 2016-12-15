@@ -98,6 +98,9 @@
 		A545F8471E02C377004030B4 /* NetworkOfflineDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F8441E02C377004030B4 /* NetworkOfflineDataProvider.swift */; };
 		A545F8481E02C377004030B4 /* OfflineDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F8451E02C377004030B4 /* OfflineDataProvider.swift */; };
 		A545F84B1E02C7AE004030B4 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F84A1E02C7AE004030B4 /* AuthProvider.swift */; };
+		A58621631E02F0780031D1C7 /* login_success.json in Resources */ = {isa = PBXBuildFile; fileRef = A586215F1E02E8EC0031D1C7 /* login_success.json */; };
+		A58621641E02F0780031D1C7 /* register_success.json in Resources */ = {isa = PBXBuildFile; fileRef = A58621611E02E9010031D1C7 /* register_success.json */; };
+		A58621651E02F0AA0031D1C7 /* AuthSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A586215D1E02E8D10031D1C7 /* AuthSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +231,9 @@
 		A545F8441E02C377004030B4 /* NetworkOfflineDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkOfflineDataProvider.swift; path = Source/Providers/Network/NetworkOfflineDataProvider.swift; sourceTree = SOURCE_ROOT; };
 		A545F8451E02C377004030B4 /* OfflineDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OfflineDataProvider.swift; path = Source/Providers/Network/OfflineDataProvider.swift; sourceTree = SOURCE_ROOT; };
 		A545F84A1E02C7AE004030B4 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		A586215D1E02E8D10031D1C7 /* AuthSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSpec.swift; sourceTree = "<group>"; };
+		A586215F1E02E8EC0031D1C7 /* login_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_success.json; sourceTree = "<group>"; };
+		A58621611E02E9010031D1C7 /* register_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = register_success.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -515,6 +521,8 @@
 				00F1061E1D9960DB00557900 /* oauth_success.json */,
 				00F106471D9A87D100557900 /* segmentation_appuser_failure.json */,
 				00F106451D9A827900557900 /* segmentation_appuser_success.json */,
+				A586215F1E02E8EC0031D1C7 /* login_success.json */,
+				A58621611E02E9010031D1C7 /* register_success.json */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -537,6 +545,7 @@
 				00F106381D9A721000557900 /* SearchSpec.swift */,
 				00F106391D9A721000557900 /* SyncSpec.swift */,
 				00F106511D9CFD4C00557900 /* CloudinarySpec.swift */,
+				A586215D1E02E8D10031D1C7 /* AuthSpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -695,6 +704,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58621631E02F0780031D1C7 /* login_success.json in Resources */,
+				A58621641E02F0780031D1C7 /* register_success.json in Resources */,
 				00F106271D9960E200557900 /* oauth_failure.json in Resources */,
 				00F1064C1D9BA2B900557900 /* full_sync.json in Resources */,
 				00F106281D9960E200557900 /* oauth_success.json in Resources */,
@@ -793,6 +804,7 @@
 				00F1063E1D9A721000557900 /* ModelSpec.swift in Sources */,
 				00F106521D9CFD4C00557900 /* CloudinarySpec.swift in Sources */,
 				00F1063C1D9A721000557900 /* ModulesSpec.swift in Sources */,
+				A58621651E02F0AA0031D1C7 /* AuthSpec.swift in Sources */,
 				00F106401D9A721000557900 /* SyncSpec.swift in Sources */,
 				00F1063B1D9A721000557900 /* BaseSpec.swift in Sources */,
 			);

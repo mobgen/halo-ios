@@ -22,7 +22,7 @@ class ModulesSpec : BaseSpec {
             context("paginated") {
                 
                 beforeEach {
-                    stub(isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
+                    stub(condition: isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
                         let fixture = OHPathForFile("module_list_success_paginated.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
@@ -39,9 +39,9 @@ class ModulesSpec : BaseSpec {
                         
                         Halo.Manager.core.getModules { response, result in
                             switch result {
-                            case .Success(let data, _):
+                            case .success(let data, _):
                                 resp = data
-                            case .Failure(let e):
+                            case .failure(let e):
                                 NSLog("Error: \(e.localizedDescription)")
                             }
                             done()
@@ -78,7 +78,7 @@ class ModulesSpec : BaseSpec {
             context("not paginated") {
                 
                 beforeEach {
-                    stub(isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
+                    stub(condition: isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
                         let fixture = OHPathForFile("module_list_success_not_paginated.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
@@ -95,9 +95,9 @@ class ModulesSpec : BaseSpec {
                         
                         Halo.Manager.core.getModules { response, result in
                             switch result {
-                            case .Success(let data, _):
+                            case .success(let data, _):
                                 resp = data
-                            case .Failure(let e):
+                            case .failure(let e):
                                 NSLog("Error: \(e.localizedDescription)")
                             }
                             done()
