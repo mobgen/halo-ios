@@ -22,19 +22,20 @@ private struct CachedTask {
 
 }
 
-open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
+@objc(HaloNetworkManager)
+open class NetworkManager: NSObject, HaloManager {
 
-    fileprivate var isRefreshing = false
+    var isRefreshing = false
 
-    fileprivate var enableSSLpinning = true
+    var enableSSLpinning = true
 
     fileprivate var cachedTasks = [CachedTask]()
 
-    fileprivate var session: Foundation.URLSession!
+    var session: Foundation.URLSession!
 
-    fileprivate let unauthorizedResponseCodes = [401]
+    let unauthorizedResponseCodes = [401]
 
-    fileprivate var addons: [Halo.NetworkAddon] = []
+    var addons: [Halo.NetworkAddon] = []
 
     override init() {
         super.init()
@@ -284,74 +285,13 @@ open class NetworkManager: NSObject, HaloManager, URLSessionDelegate {
         self.cachedTasks.removeAll()
         cachedTasksCopy.forEach { self.startRequest(request: $0.request, numberOfRetries: $0.numberOfRetries, completionHandler: $0.handler) }
     }
+
+}
+
+public extension Manager {
     
-    // MARK: SSL Pinning
-
-    func evaluateServerTrust(serverTrust: SecTrust, isValidForHost host: String) -> Bool {
-        let policy = SecPolicyCreateSSL(true, host as CFString)
-        SecTrustSetPolicies(serverTrust, [policy] as AnyObject)
-
-        SecTrustSetAnchorCertificates(serverTrust, certificatesInBundle(bundle: Bundle(identifier: "com.mobgen.Halo")!) as CFArray)
-        SecTrustSetAnchorCertificatesOnly(serverTrust, true)
-
-        return trustIsValid(trust: serverTrust)
-    }
-
-
-    fileprivate func certificatesInBundle(bundle: Bundle = Bundle.main) -> [SecCertificate] {
-        var certificates: [SecCertificate] = []
-
-        let paths = Set([".cer", ".CER", ".crt", ".CRT", ".der", ".DER"].map { fileExtension in
-            bundle.paths(forResourcesOfType: fileExtension, inDirectory: nil)
-            }.joined())
-
-        for path in paths {
-            if let
-                certificateData = try? Data(contentsOf: URL(fileURLWithPath: path)),
-                let certificate = SecCertificateCreateWithData(nil, certificateData as CFData) {
-                certificates.append(certificate)
-            }
-        }
-
-        return certificates
-    }
-
-    fileprivate func trustIsValid(trust: SecTrust) -> Bool {
-        var isValid = false
-
-        var result = SecTrustResultType.invalid
-        let status = SecTrustEvaluate(trust, &result)
-
-        if status == errSecSuccess {
-            let unspecified = SecTrustResultType.unspecified
-            let proceed = SecTrustResultType.proceed
-
-            isValid = result == unspecified || result == proceed
-        }
-
-        return isValid
-    }
-
-    // MARK: NSURLSessionDelegate implementation
+    public static let network: NetworkManager = {
+        return NetworkManager()
+    }()
     
-    open func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        var disposition: Foundation.URLSession.AuthChallengeDisposition = .performDefaultHandling
-        var credential: URLCredential?
-
-        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            let host = challenge.protectionSpace.host
-
-            if let serverTrust = challenge.protectionSpace.serverTrust {
-                if !self.enableSSLpinning || evaluateServerTrust(serverTrust: serverTrust, isValidForHost: host) {
-                    disposition = .useCredential
-                    credential = URLCredential(trust: serverTrust)
-                } else {
-                    disposition = .cancelAuthenticationChallenge
-                }
-            }
-        }
-
-        completionHandler(disposition, credential)
-    }
-
 }

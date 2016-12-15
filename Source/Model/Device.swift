@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftKeychainWrapper
 
 /**
 Model representing a user within the Halo environment
@@ -146,14 +145,14 @@ public final class Device: NSObject, NSCoding {
     */
     func storeDevice(env: HaloEnvironment) -> Void {
         let encodedObject = NSKeyedArchiver.archivedData(withRootObject: self)
-        KeychainWrapper.standard.set(encodedObject, forKey: "\(CoreConstants.userDefaultsDeviceKey)-\(env.description)")
+        KeychainHelper.set(encodedObject, forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)")
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadDevice(env: HaloEnvironment) -> Halo.Device {
+    class func loadDevice(env: HaloEnvironment) -> Halo.Device? {
 
-        if let encodedObject = KeychainWrapper.standard.data(forKey: "\(CoreConstants.userDefaultsDeviceKey)-\(env.description)") {
-            return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as! Halo.Device
+        if let encodedObject = KeychainHelper.data(forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)") {
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? Halo.Device
         } else {
             return Device()
         }

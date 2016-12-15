@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SwiftKeychainWrapper
 
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager {
@@ -50,7 +49,9 @@ open class CoreManager: NSObject, HaloManager {
                         manager.userCredentials = Credentials(username: username, password: password)
                     }
                     
-                    manager.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
+                    if let tags = data[CoreConstants.enableSystemTags] as? Bool {
+                        manager.enableSystemTags = tags
+                    }                    
                 }
             } else {
                 LogMessage(message: "No .plist found", level: .warning).print()
@@ -146,7 +147,7 @@ open class CoreManager: NSObject, HaloManager {
         self.environment = env
         
         // Save the environment
-        KeychainWrapper.standard.set(env.description, forKey: CoreConstants.environmentSettingKey)
+        KeychainHelper.set(env.description, forKey: CoreConstants.environmentSettingKey)
         
         self.completionHandler = { success in
             handler?(success)
@@ -211,14 +212,14 @@ open class CoreManager: NSObject, HaloManager {
         }
         
         // Check if there's a stored environment
-        if let env = KeychainWrapper.standard.string(forKey: CoreConstants.environmentSettingKey) {
+        if let env = KeychainHelper.string(forKey: CoreConstants.environmentSettingKey) {
             self.setEnvironment(env)
         } else if let environ = env {
             self.setEnvironment(environ)
         }
         
         // Save the environment
-        KeychainWrapper.standard.set(self.environment.description, forKey: CoreConstants.environmentSettingKey)
+        KeychainHelper.set(self.environment.description, forKey: CoreConstants.environmentSettingKey)
         
         self.__once(self, handler ?? { success in
             self.isReady = true
@@ -281,6 +282,7 @@ open class CoreManager: NSObject, HaloManager {
     }
     
     fileprivate func configureDevice(completionHandler handler: ((Bool) -> Void)? = nil) {
+        
         self.device = Halo.Device.loadDevice(env: self.environment)
         
         if let device = self.device , device.id != nil {
@@ -570,5 +572,13 @@ open class CoreManager: NSObject, HaloManager {
             }
         }
     }
+    
+}
+
+public extension Manager {
+    
+    public static let core: CoreManager = {
+        return CoreManager()
+    }()
     
 }

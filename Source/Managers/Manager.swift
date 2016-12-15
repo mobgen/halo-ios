@@ -80,16 +80,4 @@ public enum OfflinePolicy: Int {
 @objc(HaloManager)
 public class Manager: NSObject {
     
-    public static let core: CoreManager = {
-        return CoreManager()
-    }()
-    
-    public static let content: ContentManager = {
-        return ContentManager()
-    }()
-    
-    public static let network: NetworkManager = {
-        return NetworkManager()
-    }()
-    
 }

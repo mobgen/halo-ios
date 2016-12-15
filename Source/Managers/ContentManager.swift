@@ -191,3 +191,11 @@ open class ContentManager: NSObject, HaloManager {
         } catch {}
     }
 }
+
+public extension Manager {
+    
+    public static let content: ContentManager = {
+        return ContentManager()
+    }()
+    
+}
