@@ -22,7 +22,9 @@ public extension AuthProvider {
             switch result {
             case .success(let user, _):
                 if let user = user {
-                    KeychainHelper.set(user, forKey: CoreConstants.keychainUserKey)
+                    if Manager.auth.stayLoggedIn {
+                        KeychainHelper.set(user, forKey: CoreConstants.keychainUserKey)
+                    }
                     LogMessage(message: "Login with Halo successful.", level: .info).print()
                 } else {
                     LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
