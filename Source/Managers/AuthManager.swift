@@ -46,11 +46,16 @@ public class AuthManager: NSObject, HaloManager {
     
     @objc(logout:)
     public func logout(completionHandler handler: ((Bool) -> Void)?) -> Void {
+        var result: Bool = false
         Manager.core.addons.forEach { addon in
             if let socialProviderAddon = addon as? AuthProvider {
-                socialProviderAddon.logout(completionHandler: handler)
+                result = result || socialProviderAddon.logout()
             }
         }
+        if result {
+            result = result || KeychainHelper.remove(forKey: CoreConstants.keychainUserKey)
+        }
+        handler?(result)
     }
     
     /**

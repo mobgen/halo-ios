@@ -11,7 +11,7 @@ import Foundation
 public protocol AuthProvider {
     
     func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void
-    func logout(completionHandler handler: ((Bool) -> Void)?) -> Void
+    func logout() -> Bool
 }
 
 public extension AuthProvider {
@@ -35,9 +35,8 @@ public extension AuthProvider {
         }
     }
     
-    func logout(completionHandler handler: ((Bool) -> Void)?) {
-        let result = KeychainHelper.remove(forKey: CoreConstants.keychainUserKey)
-        handler?(result)
+    func logout() -> Bool {
+        return KeychainHelper.remove(forKey: CoreConstants.keychainUserKey)
     }
     
     // MARK : Private methods.
