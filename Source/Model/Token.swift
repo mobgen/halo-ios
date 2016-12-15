@@ -23,7 +23,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 Class holding all the information related to the authentication token
  */
 @objc(HaloToken)
-open class Token: NSObject {
+open class Token: NSObject, NSCoding {
 
     struct Keys {
         static let AccessToken = "access_token"
@@ -44,8 +44,23 @@ open class Token: NSObject {
     /// Expiration date of this authentication token
     open var expirationDate: Date?
 
-    fileprivate override init() {
+    override init() {
         super.init()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init()
+        token = aDecoder.decodeObject(forKey: Keys.AccessToken) as? String
+        refreshToken = aDecoder.decodeObject(forKey: Keys.RefreshToken) as? String
+        tokenType = aDecoder.decodeObject(forKey: Keys.TokenType) as? String
+        expirationDate = aDecoder.decodeObject(forKey: Keys.ExpiresIn) as? Date
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(token, forKey: Keys.AccessToken)
+        aCoder.encode(refreshToken, forKey: Keys.RefreshToken)
+        aCoder.encode(tokenType, forKey: Keys.TokenType)
+        aCoder.encode(expirationDate, forKey: Keys.ExpiresIn)
     }
 
     /**

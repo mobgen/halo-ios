@@ -9,7 +9,7 @@
 import Foundation
 
 @objc(HaloUser)
-public class User: NSObject {
+public class User: NSObject, NSCoding {
     
     struct Keys {
         static let Token = "token"
@@ -27,6 +27,17 @@ public class User: NSObject {
         self.userProfile = profile
         self.token = token
         super.init()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        userProfile = aDecoder.decodeObject(forKey: Keys.UserProfile) as? UserProfile ?? UserProfile()
+        token = aDecoder.decodeObject(forKey: Keys.Token) as? Token ?? Token()
+        super.init()
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(userProfile, forKey: Keys.UserProfile)
+        aCoder.encode(token, forKey: Keys.Token)
     }
     
     public class func fromDictionary(_ dict: [String: Any]) -> User? {

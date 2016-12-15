@@ -11,6 +11,10 @@ import Foundation
 @objc(HaloAuthManager)
 public class AuthManager: NSObject, HaloManager {
     
+    struct Keys {
+        static let User = "User"
+    }
+    
     @objc(startup:)
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
@@ -30,12 +34,25 @@ public class AuthManager: NSObject, HaloManager {
         _ = try? request.responseParser(parser: userParser).responseObject { (_, result) in
             switch (result) {
             case .success(let user, _):
-                
-                LogMessage(message: "Login with Halo successful.", level: .info).print()
+                if let user = user {
+                    KeychainHelper.set(user, forKey: "user")
+                    LogMessage(message: "Login with Halo successful.", level: .info).print()
+                } else {
+                    LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
+                }
                 handler(user, nil)
             case .failure(let error):
                 LogMessage(message: "An error happened when trying to login with Halo.", error: error).print()
                 handler(nil, error)
+            }
+        }
+    }
+    
+    @objc(logout:)
+    public func logout(completionHandler handler: ((Bool) -> Void)?) -> Void {
+        Manager.core.addons.forEach { addon in
+            if let socialProviderAddon = addon as? AuthProvider {
+                socialProviderAddon.logout(completionHandler: handler)
             }
         }
     }

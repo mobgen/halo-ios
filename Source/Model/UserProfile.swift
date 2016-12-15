@@ -9,7 +9,7 @@
 import Foundation
 
 @objc(HaloUserProfile)
-public class UserProfile: NSObject {
+public class UserProfile: NSObject, NSCoding {
     
     struct Keys {
         static let Id = "id"
@@ -21,7 +21,7 @@ public class UserProfile: NSObject {
     }
     
     var identifiedId: String?
-    var email: String
+    var email: String = ""
     var profilePictureUrl: String?
     var _displayName: String?
     var displayName: String? {
@@ -32,11 +32,15 @@ public class UserProfile: NSObject {
             _displayName = newValue
         }
     }
-    var name: String
-    var surname: String
+    var name: String = ""
+    var surname: String = ""
     
     public override var debugDescription: String {
         return "[UserProfile] Id: \(identifiedId) | Email: \(email) | DisplayName: \(displayName)"
+    }
+    
+    override init() {
+        super.init()
     }
     
     public init(id: String?, email: String, name: String, surname: String, displayName: String?, profilePictureUrl: String?) {
@@ -47,6 +51,24 @@ public class UserProfile: NSObject {
         self.identifiedId = id
         self.displayName = displayName
         self.profilePictureUrl = profilePictureUrl
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        email = aDecoder.decodeObject(forKey: Keys.Email) as? String ?? ""
+        name = aDecoder.decodeObject(forKey: Keys.Name) as? String ?? ""
+        surname = aDecoder.decodeObject(forKey: Keys.Surname) as? String ?? ""
+        super.init()
+        displayName = aDecoder.decodeObject(forKey: Keys.DisplayName) as? String
+        profilePictureUrl = aDecoder.decodeObject(forKey: Keys.PhotoUrl) as? String
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(identifiedId, forKey: Keys.Id)
+        aCoder.encode(email, forKey: Keys.Email)
+        aCoder.encode(name, forKey: Keys.Name)
+        aCoder.encode(surname, forKey: Keys.Surname)
+        aCoder.encode(displayName, forKey: Keys.DisplayName)
+        aCoder.encode(profilePictureUrl, forKey: Keys.PhotoUrl)
     }
     
     class func fromDictionary(_ dict: [String: Any]) -> UserProfile {
