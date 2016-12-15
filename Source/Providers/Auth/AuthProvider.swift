@@ -22,7 +22,7 @@ public extension AuthProvider {
             switch result {
             case .success(let user, _):
                 if let user = user {
-                    KeychainHelper.set(user, forKey: AuthManager.Keys.User)
+                    KeychainHelper.set(user, forKey: CoreConstants.keychainUserKey)
                     LogMessage(message: "Login with Halo successful.", level: .info).print()
                 } else {
                     LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
@@ -36,7 +36,7 @@ public extension AuthProvider {
     }
     
     func logout(completionHandler handler: ((Bool) -> Void)?) {
-        let result = KeychainHelper.remove(forKey: AuthManager.Keys.User)
+        let result = KeychainHelper.remove(forKey: CoreConstants.keychainUserKey)
         handler?(result)
     }
     

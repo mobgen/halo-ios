@@ -11,10 +11,6 @@ import Foundation
 @objc(HaloAuthManager)
 public class AuthManager: NSObject, HaloManager {
     
-    public struct Keys {
-        static let User = "User"
-    }
-    
     @objc(startup:)
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
         
@@ -35,7 +31,7 @@ public class AuthManager: NSObject, HaloManager {
             switch (result) {
             case .success(let user, _):
                 if let user = user {
-                    KeychainHelper.set(user, forKey: "user")
+                    KeychainHelper.set(user, forKey: CoreConstants.keychainUserKey)
                     LogMessage(message: "Login with Halo successful.", level: .info).print()
                 } else {
                     LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
