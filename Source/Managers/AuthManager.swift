@@ -31,7 +31,7 @@ public class AuthManager: NSObject, HaloManager {
             switch (result) {
             case .success(let user, _):
                 if let user = user {
-                    KeychainHelper.set(user, forKey: CoreConstants.keychainUserKey)
+                    KeychainHelper.set(user, forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
                     LogMessage(message: "Login with Halo successful.", level: .info).print()
                 } else {
                     LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
@@ -53,7 +53,7 @@ public class AuthManager: NSObject, HaloManager {
             }
         }
         if result {
-            result = result || KeychainHelper.remove(forKey: CoreConstants.keychainUserKey)
+            result = result || KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
         }
         handler?(result)
     }

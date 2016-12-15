@@ -22,7 +22,7 @@ public extension AuthProvider {
             switch result {
             case .success(let user, _):
                 if let user = user {
-                    KeychainHelper.set(user, forKey: CoreConstants.keychainUserKey)
+                    KeychainHelper.set(user, forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
                     LogMessage(message: "Login with Halo successful.", level: .info).print()
                 } else {
                     LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
@@ -36,7 +36,7 @@ public extension AuthProvider {
     }
     
     func logout() -> Bool {
-        return KeychainHelper.remove(forKey: CoreConstants.keychainUserKey)
+        return KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
     }
     
     // MARK : Private methods.
