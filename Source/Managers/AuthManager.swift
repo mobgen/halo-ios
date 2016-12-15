@@ -11,7 +11,7 @@ import Foundation
 @objc(HaloAuthManager)
 public class AuthManager: NSObject, HaloManager {
     
-    struct Keys {
+    public struct Keys {
         static let User = "User"
     }
     
