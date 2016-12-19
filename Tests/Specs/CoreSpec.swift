@@ -32,9 +32,9 @@ class CoreSpec: BaseSpec {
             context("when the startup process succeeds") {
             
                 beforeEach {
-                    stub(condition: pathStartsWith("/api/segmentation/appuser")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("segmentation_appuser_success.json", type(of: self))
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                    stub(condition: pathStartsWith("/api/segmentation/appuser")) { _ in
+                        let filePath = OHPathForFile("segmentation_appuser_success.json", type(of: self))
+                        return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful appuser stub"
                 }
                 
@@ -53,13 +53,41 @@ class CoreSpec: BaseSpec {
                 }
             }
             
+            context("when the authentication returns a 401 error") {
+                
+                beforeEach {
+                    stub(condition: pathStartsWith("/api/oauth/token")) { _ in
+                        let filePath = OHPathForFile("oauth_failure.json", type(of: self))
+                        return fixture(filePath: filePath!, status: 401, headers: ["Content-Type": "application/json"])
+                    }.name = "Failed oauth stub"
+                }
+                
+                it("returns an error") {
+                    waitUntil { done in
+                        mgr.authenticate(authMode: .app) { (response, result) in
+                            
+                            switch result {
+                            case .success(_, _):
+                                XCTFail("Expected Failure, got<\(result)")
+                                break
+                            default:
+                                break
+                            }
+                            
+                            done()
+                        }
+                    }
+                }
+                
+            }
+            
             context("when saving the user fails") {
                 
                 beforeEach {
-                    stub(condition: pathStartsWith("/api/segmentation/appuser")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("segmentation_appuser_failure.json", type(of: self))
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 400, headers: ["Content-Type": "application/json"])
-                    }.name = "Successful appuser stub"
+                    stub(condition: pathStartsWith("/api/segmentation/appuser")) { _ in
+                        let filePath = OHPathForFile("segmentation_appuser_failure.json", type(of: self))
+                        return fixture(filePath: filePath!, status: 400, headers: ["Content-Type": "application/json"])
+                    }.name = "Failed appuser stub"
                 }
                 
                 it("user has not changed") {
@@ -112,9 +140,9 @@ class CoreSpec: BaseSpec {
             context("with the right credentials") {
                 
                 beforeEach {
-                    stub(condition: isPath("/api/oauth/token")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("oauth_success.json", type(of: self))
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                    stub(condition: isPath("/api/oauth/token")) { _ in
+                        let stubPath = OHPathForFile("oauth_success.json", type(of: self))
+                        return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
                     }.name = "Successful OAuth stub"
                     
                     waitUntil { done in
@@ -138,9 +166,9 @@ class CoreSpec: BaseSpec {
             context("with the wrong credentials") {
                 
                 beforeEach {
-                    stub(condition: isPath("/api/oauth/token")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("oauth_failure.json", type(of: self))
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 403, headers: ["Content-Type": "application/json"])
+                    stub(condition: isPath("/api/oauth/token")) { _ in
+                        let stubPath = OHPathForFile("oauth_failure.json", type(of: self))
+                        return fixture(filePath: stubPath!, status: 401, headers: ["Content-Type":"application/json"])
                     }.name = "Failed OAuth stub"
                                         
                     waitUntil { done in
