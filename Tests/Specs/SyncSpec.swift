@@ -33,9 +33,9 @@ class SyncSpec: BaseSpec {
             context("requesting everything") {
                 
                 beforeEach {
-                    stub(condition: isPath("/api/generalcontent/instance/sync")) { (request) -> OHHTTPStubsResponse in
-                        let stubPath = OHPathForFile("full_sync.json", type(of: self))
-                        return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type": "application/json"])
+                    stub(condition: isPath("/api/generalcontent/instance/sync")) { _ in
+                        let filePath = OHPathForFile("full_sync.json", type(of: self))
+                        return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Sync stub"
                     
                     content.removeSyncedInstances(moduleId)
@@ -83,13 +83,13 @@ class SyncSpec: BaseSpec {
                         
                         let params = try! JSONSerialization.jsonObject(with: (request as NSURLRequest).ohhttpStubs_HTTPBody(), options: .mutableContainers) as! [String: Any?]
                         
-                        var fixture = OHPathForFile("to_sync.json", type(of: self))
+                        var filePath = OHPathForFile("to_sync.json", type(of: self))
                         
                         if params["fromSync"] != nil && params["toSync"] == nil {
-                            fixture = OHPathForFile("from_sync.json", type(of: self))
+                            filePath = OHPathForFile("from_sync.json", type(of: self))
                         }
                         
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                        return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Sync stub"
                     
                     content.removeSyncedInstances(moduleId)

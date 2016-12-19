@@ -22,9 +22,9 @@ class ModulesSpec : BaseSpec {
             context("paginated") {
                 
                 beforeEach {
-                    stub(condition: isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("module_list_success_paginated.json", type(of: self))
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                    stub(condition: isPath("/api/generalcontent/module")) { _ in
+                        let filePath = OHPathForFile("module_list_success_paginated.json", type(of: self))
+                        return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
                 }
                 
@@ -78,9 +78,9 @@ class ModulesSpec : BaseSpec {
             context("not paginated") {
                 
                 beforeEach {
-                    stub(condition: isPath("/api/generalcontent/module")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("module_list_success_not_paginated.json", type(of: self))
-                        return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
+                    stub(condition: isPath("/api/generalcontent/module")) { _ in
+                        let filePath = OHPathForFile("module_list_success_not_paginated.json", type(of: self))
+                        return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
                 }
                 
