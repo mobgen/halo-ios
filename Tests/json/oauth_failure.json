@@ -1,6 +1,7 @@
 {
     "error": {
-        "message": "Client not found",
-        "extra": {}
+        "message": "Client not found or invalid secret",
+        "extra": {},
+        "type": "HaloError"
     }
 }
