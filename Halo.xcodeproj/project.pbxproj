@@ -539,13 +539,13 @@
 			isa = PBXGroup;
 			children = (
 				00F106341D9A721000557900 /* BaseSpec.swift */,
-				00F106351D9A721000557900 /* ModulesSpec.swift */,
+				A586215D1E02E8D10031D1C7 /* AuthSpec.swift */,
+				00F106511D9CFD4C00557900 /* CloudinarySpec.swift */,
 				00F106361D9A721000557900 /* CoreSpec.swift */,
 				00F106371D9A721000557900 /* ModelSpec.swift */,
+				00F106351D9A721000557900 /* ModulesSpec.swift */,
 				00F106381D9A721000557900 /* SearchSpec.swift */,
 				00F106391D9A721000557900 /* SyncSpec.swift */,
-				00F106511D9CFD4C00557900 /* CloudinarySpec.swift */,
-				A586215D1E02E8D10031D1C7 /* AuthSpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";

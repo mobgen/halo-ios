@@ -56,6 +56,8 @@ class CoreSpec: BaseSpec {
             context("when the authentication returns a 401 error") {
                 
                 beforeEach {
+                    mgr.startup()
+                    
                     stub(condition: pathStartsWith("/api/oauth/token")) { _ in
                         let filePath = OHPathForFile("oauth_failure.json", type(of: self))
                         return fixture(filePath: filePath!, status: 401, headers: ["Content-Type": "application/json"])
@@ -63,19 +65,21 @@ class CoreSpec: BaseSpec {
                 }
                 
                 it("returns an error") {
+                    var res: Result<Token>?
                     waitUntil { done in
                         mgr.authenticate(authMode: .app) { (response, result) in
-                            
-                            switch result {
-                            case .success(_, _):
-                                XCTFail("Expected Failure, got<\(result)")
-                                break
-                            default:
-                                break
-                            }
-                            
+                            res = result
                             done()
                         }
+                    }
+                    
+                    expect(res).toNot(beNil())
+                    switch res! {
+                    case .success(_, _):
+                        XCTFail("Expected Failure, got<\(res)")
+                        break
+                    default:
+                        break
                     }
                 }
                 

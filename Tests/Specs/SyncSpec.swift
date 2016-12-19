@@ -76,7 +76,7 @@ class SyncSpec: BaseSpec {
             
             context("with updates and deletions") {
                 
-                _ = Date(timeIntervalSince1970: 1473686540)
+                let date = Date(timeIntervalSince1970: 1473686540)
                 
                 beforeEach {
                     stub(condition: isPath("/api/generalcontent/instance/sync")) { (request) -> OHHTTPStubsResponse in
@@ -100,7 +100,6 @@ class SyncSpec: BaseSpec {
                     OHHTTPStubs.removeAllStubs()
                 }
                 
-                /* TODO: Rewrite test
                 it("works") {
                     
                     let firstSyncQuery = SyncQuery(moduleId: moduleId).toSync(date: date)
@@ -117,7 +116,16 @@ class SyncSpec: BaseSpec {
                     
                     expect(instances.count).to(equal(924))
                     
-                    var logEntry = content.getSyncLog(moduleId).maxElement( { $0.0.syncDate < $0.1.syncDate } )!
+                    var logEntry = content.getSyncLog(moduleId).max(by: {
+                        guard
+                            let firstSyncDate = $0.0.syncDate,
+                            let secondSyncDate = $0.1.syncDate
+                        else {
+                            return false
+                        }
+                        
+                        return firstSyncDate.compare(secondSyncDate) == .orderedAscending
+                    } )!
                     
                     expect(logEntry.creations).to(equal(924))
                     expect(logEntry.updates).to(equal(0))
@@ -135,14 +143,21 @@ class SyncSpec: BaseSpec {
                     expect(instances.count).to(equal(949))
                     
                     // Check the log
-                    logEntry = content.getSyncLog(moduleId).maxElement( { $0.0.syncDate < $0.1.syncDate } )!
+                    logEntry = content.getSyncLog(moduleId).max(by: {
+                        guard
+                            let firstSyncDate = $0.0.syncDate,
+                            let secondSyncDate = $0.1.syncDate
+                            else {
+                                return false
+                        }
+                        
+                        return firstSyncDate.compare(secondSyncDate) == .orderedAscending
+                    } )!
                     
                     expect(logEntry.creations).to(equal(25))
-                    // TODO: Pending fixes in the backend
-                    //expect(logEntry.updates).to(equal(0))
-                    //expect(logEntry.deletions).to(equal(0))
+                    expect(logEntry.updates).to(equal(1))
+                    expect(logEntry.deletions).to(equal(244))
                 }
-                */
                 
             }
         }

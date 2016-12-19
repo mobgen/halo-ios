@@ -33,7 +33,6 @@ class AuthSpec: BaseSpec {
         super.spec()
         
         beforeSuite {
-            Manager.core.logLevel = .info
             Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
             Manager.core.startup()
         }
@@ -49,6 +48,10 @@ class AuthSpec: BaseSpec {
         
         describe("Login with Halo") {
             
+            afterEach {
+                OHHTTPStubs.removeAllStubs()
+            }
+            
             context("using email and password") {
                 
                 beforeEach {
@@ -60,26 +63,25 @@ class AuthSpec: BaseSpec {
                     
                 }
                 
-                afterEach {
-                    OHHTTPStubs.removeAllStubs()
-                }
-                
                 it("logs in successfully") {
                     
                     waitUntil(timeout: 2) { done in
                         
                         Manager.auth.login(authProfile: self.testAuthProfile) { (userResponse, error) in
                             
+                            // error == nil.
                             expect(error).to(beNil())
                             
                             let token = userResponse?.token
-                            
+                            // token != nil.
                             expect(token).notTo(beNil())
+                            // token is valid.
                             expect(token?.isValid()).to(beTrue())
+                            // token is not expired.
                             expect(token?.isExpired()).to(beFalse())
                             
                             let userProfile = userResponse?.userProfile
-                            
+                            // email is still the same.
                             expect(userProfile?.email).to(equal(self.testAuthProfile.email))
                             
                             done()
@@ -100,6 +102,10 @@ class AuthSpec: BaseSpec {
         
         describe("Register with Halo") {
             
+            afterEach {
+                OHHTTPStubs.removeAllStubs()
+            }
+            
             beforeEach {
                 
                 stub(condition: isPath("/api/segmentation/identified/register")) { _ in
@@ -109,10 +115,6 @@ class AuthSpec: BaseSpec {
                 
             }
             
-            afterEach {
-                OHHTTPStubs.removeAllStubs()
-            }
-            
             it("registers successfuly") {
                 
                 waitUntil { done in
@@ -120,9 +122,13 @@ class AuthSpec: BaseSpec {
                     Manager.auth
                         .register(authProfile: self.testAuthProfile, userProfile: self.testUserProfile) { (userProfileResponse, error) in
                         
+                        // error == nil.
                         expect(error).to(beNil())
+                        // userProfileResponse != nil.
                         expect(userProfileResponse).notTo(beNil())
+                        // identifiedId != nil.
                         expect(userProfileResponse?.identifiedId).notTo(beNil())
+                        // email is still the same.
                         expect(userProfileResponse?.email).to(equal(self.testAuthProfile.email))
                         
                         done()
