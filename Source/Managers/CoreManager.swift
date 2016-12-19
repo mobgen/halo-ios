@@ -112,7 +112,7 @@ open class CoreManager: NSObject, HaloManager {
         }
     }
     
-    open var numberOfRetries: Int = 0
+    open var numberOfRetries: Int = 1
     
     open var appCredentials: Credentials?
     open var userCredentials: Credentials?
