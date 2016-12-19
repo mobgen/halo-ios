@@ -120,7 +120,7 @@ open class NetworkManager: NSObject, HaloManager {
                 
                 if resp.statusCode > 399 {
                     if numberOfRetries > 0 {
-                        self.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1)
+                        self.startRequest(request: urlRequest, numberOfRetries: numberOfRetries - 1, completionHandler: handler)
                     } else {
                         var message: String
                         
