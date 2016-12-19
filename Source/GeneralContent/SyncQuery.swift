@@ -19,7 +19,7 @@ open class SyncQuery: NSObject {
         static let ToSync = "toSync"
     }
 
-    open fileprivate(set) var locale: Locale?
+    open fileprivate(set) var locale: Locale? = Locale(locale: NSLocale.preferredLanguages[0])
     open fileprivate(set) var moduleName: String?
     open fileprivate(set) var moduleId: String = ""
     open fileprivate(set) var fromSync: Date?

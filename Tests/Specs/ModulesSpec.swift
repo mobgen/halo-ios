@@ -37,7 +37,7 @@ class ModulesSpec : BaseSpec {
                     
                     waitUntil { done in
                         
-                        Halo.Manager.core.getModules { response, result in
+                        Manager.core.getModules { response, result in
                             switch result {
                             case .success(let data, _):
                                 resp = data

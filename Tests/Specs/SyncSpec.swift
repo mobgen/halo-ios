@@ -52,7 +52,7 @@ class SyncSpec: BaseSpec {
                     
                     expect(instances).to(beEmpty())
                     
-                    waitUntil(timeout: 5) { done in
+                    waitUntil(timeout: 2) { done in
                         content.sync(query: query) { moduleId, error in
                             done()
                         }
