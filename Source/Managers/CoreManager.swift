@@ -12,27 +12,27 @@ import UIKit
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager {
     
-    private lazy var __once: (CoreManager, @escaping ((Bool) -> Void)) -> Void = { manager, handler in
+    private lazy var __once: (CoreManager, ((Bool) -> Void)?) -> Void = { mgr, handler in
         
-        manager.completionHandler = { success in
-            handler(success)
-            manager.isReady = success
+        mgr.completionHandler = { success in
+            mgr.isReady = success
             Halo.Manager.network.restartCachedTasks()
+            handler?(success)
         }
         
         Router.userToken = nil
         Router.appToken = nil
         
-        Manager.network.startup { (success) -> Void in
+        Manager.network.startup { success in
             
-            if (!success) {
-                manager.completionHandler?(false)
+            if !success {
+                mgr.completionHandler?(false)
                 return
             }
             
             let bundle = Bundle.main
             
-            if let path = bundle.path(forResource: manager.configuration, ofType: "plist") {
+            if let path = bundle.path(forResource: mgr.configuration, ofType: "plist") {
                 
                 if let data = NSDictionary(contentsOfFile: path) {
                     let clientIdKey = CoreConstants.clientIdKey
@@ -42,59 +42,43 @@ open class CoreManager: NSObject, HaloManager {
                     let environmentKey = CoreConstants.environmentSettingKey
                     
                     if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        manager.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                        mgr.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
                     }
                     
                     if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                        manager.userCredentials = Credentials(username: username, password: password)
+                        mgr.userCredentials = Credentials(username: username, password: password)
                     }
                     
                     if let tags = data[CoreConstants.enableSystemTags] as? Bool {
-                        manager.enableSystemTags = tags
+                        mgr.enableSystemTags = tags
                     }                    
                 }
             } else {
-                LogMessage(message: "No .plist found", level: .warning).print()
+                LogMessage(message: "No configuration .plist found", level: .warning).print()
             }
             
             self.checkNeedsUpdate()
-            
-            self.configureDevice { success in
-                
-                if success {
-                    // Configure all the registered addons
-                    self.setupAddons { _ in
-                        
-                        self.startupAddons { _ in
-                            self.registerDevice { success in
-                                manager.completionHandler?(success)
-                            }
-                        }
-                    }
-                } else {
-                    manager.completionHandler?(false)
-                }
-            }
+            self.setup(manager: mgr)
         }
     }
     
     /// Delegate that will handle launching completion and other important steps in the flow
-    open var delegate: ManagerDelegate?
+    public var delegate: ManagerDelegate?
     
-    open internal(set) var isReady: Bool = false
+    public internal(set) var isReady: Bool = false
     
-    open internal(set) var dataProvider: DataProvider = DataProviderManager.online
+    public internal(set) var dataProvider: DataProvider = DataProviderManager.online
     
     ///
-    open var logLevel: LogLevel = .warning
+    public var logLevel: LogLevel = .warning
     
     /// Token used to make sure the startup process is done only once
     fileprivate var token: Int = 0
     
     ///
-    fileprivate let lockQueue = DispatchQueue(label: "com.mobgen.halo.lockQueue", attributes: [])
+    let lockQueue = DispatchQueue(label: "com.mobgen.halo.lockQueue", attributes: [])
     
-    open fileprivate(set) var environment: HaloEnvironment = .prod {
+    public fileprivate(set) var environment: HaloEnvironment = .prod {
         didSet {
             Router.baseURL = environment.baseUrl
             Router.userToken = nil
@@ -102,7 +86,7 @@ open class CoreManager: NSObject, HaloManager {
         }
     }
     
-    open var defaultOfflinePolicy: OfflinePolicy = .none {
+    public var defaultOfflinePolicy: OfflinePolicy = .none {
         didSet {
             switch defaultOfflinePolicy {
             case .none: self.dataProvider = DataProviderManager.online
@@ -112,28 +96,33 @@ open class CoreManager: NSObject, HaloManager {
         }
     }
     
-    open var numberOfRetries: Int = 1
+    open var numberOfRetries: Int = 0
     
-    open var appCredentials: Credentials?
-    open var userCredentials: Credentials?
+    public var appCredentials: Credentials?
+    public var userCredentials: Credentials?
     
-    open var frameworkVersion: String {
+    public var frameworkVersion: String {
         return Bundle(identifier: "com.mobgen.Halo")!.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
-    open var configuration = "Halo"
+    public var configuration = "Halo"
     
     /// Variable to decide whether to enable system tags or not
-    open var enableSystemTags: Bool = false
+    public var enableSystemTags: Bool = false
     
-    /// Instance holding all the user-related information
-    open var device: Device?
+    /// Instance holding all the device-related information
+    public var device: Device?
     
-    open fileprivate(set) var addons: [Halo.Addon] = []
+    ///
+    public var user: User?
+    
+    public internal(set) var addons: [Halo.Addon] = []
     
     fileprivate var completionHandler: ((Bool) -> Void)?
     
-    override init() {}
+    fileprivate override init() {
+        super.init()
+    }
     
     /**
      Allows changing the current environment against which the connections are made. It will imply a setup process again
@@ -149,24 +138,48 @@ open class CoreManager: NSObject, HaloManager {
         // Save the environment
         KeychainHelper.set(env.description, forKey: CoreConstants.environmentSettingKey)
         
-        self.completionHandler = { success in
-            handler?(success)
-            self.isReady = true
-            Halo.Manager.network.restartCachedTasks()
+        self.completionHandler = handler
+        self.setup(manager: self)
+    }
+    
+    fileprivate func setup(manager: CoreManager) {
+        
+        let handler: (Bool) -> Void = { success in
+            
+            if !success {
+                manager.completionHandler?(false)
+                return
+            }
+            
+            if let authProfile = AuthProfile.loadProfile(env: manager.environment) {
+                // Login and get user details (in case there have been updates)
+                Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { _, error in
+                    manager.completionHandler?(error == nil)
+                    return
+                }
+            }
+            
+            manager.completionHandler?(true)
         }
         
-        self.configureDevice { success in
+        // Configure device
+        manager.configureDevice { success in
             if success {
                 // Configure all the registered addons
-                self.setupAddons { _ in
-                    self.startupAddons { _ in
-                        self.registerDevice { success in
-                            self.completionHandler?(success)
+                manager.setupAndStartAddons { success in
+                    if success {
+                        manager.registerDevice { success in
+                            handler(success)
+                            return
                         }
+                    } else {
+                        handler(false)
+                        return
                     }
                 }
             } else {
-                self.completionHandler?(false)
+                handler(false)
+                return
             }
         }
     }
@@ -179,18 +192,6 @@ open class CoreManager: NSObject, HaloManager {
         case "stage": self.environment = .stage
         default: self.environment = .custom(env)
         }
-    }
-    
-    /**
-     Allows registering an add-on within the Core Manager.
-     
-     - parameter addon: Add-on implementation
-     */
-    @objc(registerAddon:)
-    open func registerAddon(addon a: Halo.Addon) -> Void {
-        a.willRegisterAddon(haloCore: self)
-        self.addons.append(a)
-        a.didRegisterAddon(haloCore: self)
     }
     
     @objc(startup:)
@@ -221,249 +222,7 @@ open class CoreManager: NSObject, HaloManager {
         // Save the environment
         KeychainHelper.set(self.environment.description, forKey: CoreConstants.environmentSettingKey)
         
-        self.__once(self, handler ?? { success in
-            self.isReady = true
-            Manager.network.restartCachedTasks()
-        })
-    }
-    
-    fileprivate func setupAddons(completionHandler handler: @escaping ((Bool) -> Void)) -> Void {
-        
-        if self.addons.isEmpty {
-            handler(true)
-            return
-        }
-        
-        var counter = 0
-        
-        self.addons.forEach { $0.setup(haloCore: self) { (addon, success) in
-            
-            if success {
-                LogMessage(message: "Successfully set up the \(addon.addonName) addon", level: .info).print()
-            } else {
-                LogMessage(message: "There has been an error setting up the \(addon.addonName) addon", level: .info).print()
-            }
-            
-            counter += 1
-            
-            if counter == self.addons.count {
-                handler(true)
-            }
-            }
-        }
-        
-    }
-    
-    fileprivate func startupAddons(completionHandler handler: @escaping ((Bool) -> Void)) -> Void {
-        
-        if self.addons.isEmpty {
-            handler(true)
-            return
-        }
-        
-        var counter = 0
-        
-        self.addons.forEach { $0.startup(haloCore: self) { (addon, success) in
-            
-            if success {
-                LogMessage(message: "Successfully started the \(addon.addonName) addon", level: .info).print()
-            } else {
-                LogMessage(message: "There has been an error starting the \(addon.addonName) addon", level: .info).print()
-            }
-            
-            counter += 1
-            
-            if counter == self.addons.count {
-                handler(true)
-            }
-            
-            }
-        }
-    }
-    
-    fileprivate func configureDevice(completionHandler handler: ((Bool) -> Void)? = nil) {
-        
-        self.device = Halo.Device.loadDevice(env: self.environment)
-        
-        if let device = self.device , device.id != nil {
-            // Update the user
-            Manager.network.getDevice(device) { (_, result) -> Void in
-                switch result {
-                case .success(let device, _):
-                    self.device = device
-                    
-                    if self.enableSystemTags {
-                        self.setupDefaultSystemTags(completionHandler: handler)
-                    } else {
-                        handler?(true)
-                    }
-                case .failure(let error):
-                    
-                    LogMessage(message: "Error retrieving user from server", error: error).print()
-                    
-                    if self.enableSystemTags {
-                        self.setupDefaultSystemTags(completionHandler: handler)
-                    } else {
-                        handler?(false)
-                    }
-                }
-            }
-            
-        } else {
-            self.device = Halo.Device()
-            self.delegate?.managerWillSetupDevice(self.device!)
-            
-            if self.enableSystemTags {
-                self.setupDefaultSystemTags(completionHandler: handler)
-            } else {
-                handler?(true)
-            }
-        }
-    }
-    
-    fileprivate func setupDefaultSystemTags(completionHandler handler: ((Bool) -> Void)? = nil) {
-        
-        if let device = self.device {
-            
-            device.addSystemTag(name: CoreConstants.tagPlatformNameKey, value: "ios")
-            
-            let version = ProcessInfo.processInfo.operatingSystemVersion
-            var versionString = "\(version.majorVersion).\(version.minorVersion)"
-            
-            if (version.patchVersion > 0) {
-                versionString = versionString + ".\(version.patchVersion)"
-            }
-            
-            device.addSystemTag(name: CoreConstants.tagPlatformVersionKey, value: versionString)
-            
-            if let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") {
-                device.addSystemTag(name: CoreConstants.tagApplicationNameKey, value: (appName as AnyObject).description)
-            }
-            
-            if let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
-                device.addSystemTag(name: CoreConstants.tagApplicationVersionKey, value: (appVersion as AnyObject).description)
-            }
-            
-            device.addSystemTag(name: CoreConstants.tagDeviceManufacturerKey, value: "Apple")
-            device.addSystemTag(name: CoreConstants.tagDeviceModelKey, value: UIDevice.current.modelName)
-            device.addSystemTag(name: CoreConstants.tagDeviceTypeKey, value: UIDevice.current.deviceType)
-            
-            device.addSystemTag(name: CoreConstants.tagBLESupportKey, value: "true")
-            
-            //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
-            
-            let screen = UIScreen.main
-            let bounds = screen.bounds
-            let (width, height) = (bounds.width * screen.scale, round(bounds.height * screen.scale))
-            
-            device.addSystemTag(name: CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
-            
-            switch self.environment {
-            case .int, .stage, .qa:
-                device.addSystemTag(name: CoreConstants.tagTestDeviceKey, value: "true")
-            default:
-                break
-            }
-            
-            // Get APNs environment
-            device.addSystemTag(name: "apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercased())
-            
-            handler?(true)
-        } else {
-            handler?(false)
-        }
-        
-    }
-    
-    fileprivate func registerDevice(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
-        
-        if let device = self.device {
-            self.device?.storeDevice(env: self.environment)
-            
-            self.addons.forEach { ($0 as? DeviceAddon)?.willRegisterAddon(haloCore: self) }
-            
-            Manager.network.createUpdateDevice(device, bypassReadiness: true) { [weak self] (_, result) -> Void in
-                
-                var success = false
-                
-                if let strongSelf = self {
-                    
-                    switch result {
-                    case .success(let device, _):
-                        strongSelf.device = device
-                        strongSelf.device?.storeDevice(env: strongSelf.environment)
-                        
-                        if let u = device {
-                            LogMessage(message: u.description, level: .info).print()
-                        }
-                        
-                        success = true
-                    case .failure(let error):
-                        LogMessage(message: "Error creating/updating user", error: error).print()
-                    }
-                    
-                    strongSelf.addons.forEach { ($0 as? DeviceAddon)?.didRegisterDevice(haloCore: strongSelf) }
-                    handler?(success)
-                    
-                }
-            }
-        } else {
-            handler?(false)
-        }
-    }
-    
-    /**
-     By calling this function, the current user handled by the Core Manager will be saved in the server.
-     
-     - parameter handler: Closure to be executed once the request has finished, providing a result.
-     */
-    open func saveDevice(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Halo.Device?>) -> Void)? = nil) -> Void {
-        
-        /**
-         *  Make sure no 'saveUser' are executed concurrently. That could lead to some inconsistencies in the server (several users
-         *  created for the same device).
-         */
-        lockQueue.sync {
-            
-            if let device = self.device {
-                
-                Manager.network.createUpdateDevice(device, bypassReadiness: true) { [weak self] (response, result) in
-                    
-                    if let strongSelf = self {
-                        
-                        switch result {
-                        case .success(let device, _):
-                            strongSelf.device = device
-                            
-                            if let u = device {
-                                LogMessage(message: u.description, level: .info).print()
-                            }
-                            
-                        case .failure(let error):
-                            LogMessage(message: "Error saving user", error: error).print()
-                        }
-                        
-                        handler?(response, result)
-                        
-                    }
-                    
-                }
-            }
-        }
-    }
-    
-    /**
-     Authenticate against the server using the provided mode and the stored credentials. No authentication is needed under normal
-     circumnstances. The system will take care of everything, but this could become handy if the authentication wants to be forced for
-     some reason.
-     
-     - parameter mode:    Authentication mode to be used
-     - parameter handler: Closure to be executed once the authentication has finished
-     */
-    open func authenticate(authMode mode: Halo.AuthenticationMode = .app, completionHandler handler: ((HTTPURLResponse?, Halo.Result<Halo.Token>) -> Void)? = nil) -> Void {
-        Manager.network.authenticate(mode: mode) { (response, result) in
-            handler?(response, result)
-        }
+        self.__once(self, handler)
     }
     
     /**

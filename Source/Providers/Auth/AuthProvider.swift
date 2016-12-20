@@ -21,9 +21,9 @@ public extension AuthProvider {
         try! request.responseParser(parser: userParser).responseObject { (_, result) in
             switch result {
             case .success(let user, _):
-                if let user = user {
+                if user != nil {
                     if Manager.auth.stayLoggedIn {
-                        KeychainHelper.set(user, forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
+                        KeychainHelper.set(authProfile, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")
                     }
                     LogMessage(message: "Login with Halo successful.", level: .info).print()
                 } else {
@@ -38,7 +38,7 @@ public extension AuthProvider {
     }
     
     func logout() -> Bool {
-        return KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
+        return true
     }
     
     // MARK : Private methods.

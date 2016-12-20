@@ -21,6 +21,7 @@ class CoreSpec: BaseSpec {
         
         beforeSuite {
             mgr.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+            mgr.logLevel = .info
         }
         
         describe("The core manager") {

@@ -34,7 +34,7 @@ open class CoreConstants {
     // MARK: User defaults keys
 
     /// Key which identifies the existing user tags into the user defaults
-    static let keychainUserKey = "HALO_USER"
+    static let keychainUserAuthKey = "HALO_USER_AUTH"
     
     static let keychainDeviceKey = "HALO_DEVICE"
 

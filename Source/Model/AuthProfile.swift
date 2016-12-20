@@ -24,7 +24,7 @@ public enum Network: Int {
 }
 
 @objc(HaloAuthProfile)
-public class AuthProfile: NSObject {
+public class AuthProfile: NSObject, NSCoding {
     
     struct Keys {
         static let DeviceId = "deviceId"
@@ -72,6 +72,44 @@ public class AuthProfile: NSObject {
         self.network = network.description
         self.deviceId = deviceId
         super.init()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        deviceId = aDecoder.decodeObject(forKey: Keys.DeviceId) as? String ?? ""
+        network = aDecoder.decodeObject(forKey: Keys.Network) as? String ?? ""
+        email = aDecoder.decodeObject(forKey: Keys.Email) as? String
+        password = aDecoder.decodeObject(forKey: Keys.Password) as? String
+        token = aDecoder.decodeObject(forKey: Keys.Token) as? String
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(deviceId, forKey: Keys.DeviceId)
+        aCoder.encode(network, forKey: Keys.Network)
+        
+        if email != nil && password != nil {
+            aCoder.encode(email, forKey: Keys.Email)
+            aCoder.encode(password, forKey: Keys.Password)
+        }
+        
+        if token != nil {
+            aCoder.encode(token, forKey: Keys.Token)
+        }
+    }
+    
+    // MARK: Utility methods
+    
+    func storeProfile(env: HaloEnvironment) -> Void {
+        let encodedObject = NSKeyedArchiver.archivedData(withRootObject: self)
+        KeychainHelper.set(encodedObject, forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)")
+    }
+    
+    /// Retrieve and deserialize a stored user from the user preferences
+    class func loadProfile(env: HaloEnvironment) -> Halo.AuthProfile? {
+        
+        if let encodedObject = KeychainHelper.data(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)") {
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? AuthProfile
+        }
+        return nil
     }
     
     public func toDictionary() -> [String: String] {

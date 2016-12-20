@@ -40,6 +40,8 @@ public class User: NSObject, NSCoding {
         aCoder.encode(token, forKey: Keys.Token)
     }
     
+    // MARK: Class functions
+    
     public class func fromDictionary(_ dict: [String: Any]) -> User? {
         var t: Token
         if let tokenDict = dict[Keys.Token] as? [String: Any] {

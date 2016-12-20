@@ -65,6 +65,8 @@
 		00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
 		00BBE04F1CBD2B1500B118AF /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBE04E1CBD2B1500B118AF /* Locale.swift */; };
 		00C2F3351D635A2E002C1125 /* LogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C2F3341D635A2E002C1125 /* LogMessage.swift */; };
+		00D92E0C1E07E923000F17E2 /* CoreManager+Addons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D92E0B1E07E923000F17E2 /* CoreManager+Addons.swift */; };
+		00D92E0E1E07EA28000F17E2 /* CoreManager+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D92E0D1E07EA28000F17E2 /* CoreManager+Auth.swift */; };
 		00DD96C21BD02F0200AF65CA /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 006238251BCE5B8900E614B3 /* halo.cer */; };
 		00E17A951D75BE8400C3217D /* TranslationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E17A941D75BE8400C3217D /* TranslationsHelper.swift */; };
 		00E508391CB691EB00B4B5AE /* SearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E508381CB691EB00B4B5AE /* SearchFilter.swift */; };
@@ -200,6 +202,8 @@
 		00A409211D0FE72F005D4FB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00BBE04E1CBD2B1500B118AF /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		00C2F3341D635A2E002C1125 /* LogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogMessage.swift; sourceTree = "<group>"; };
+		00D92E0B1E07E923000F17E2 /* CoreManager+Addons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+Addons.swift"; sourceTree = "<group>"; };
+		00D92E0D1E07EA28000F17E2 /* CoreManager+Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+Auth.swift"; sourceTree = "<group>"; };
 		00E17A941D75BE8400C3217D /* TranslationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslationsHelper.swift; path = Source/Helpers/TranslationsHelper.swift; sourceTree = "<group>"; };
 		00E508381CB691EB00B4B5AE /* SearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
 		00EC9D361C43F72F00A3291D /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
@@ -276,12 +280,14 @@
 				001EB86E1E029C4700E9D196 /* AuthManager.swift */,
 				001EB86F1E029C4700E9D196 /* ContentManager.swift */,
 				001EB8701E029C4700E9D196 /* CoreManager.swift */,
+				00D92E0B1E07E923000F17E2 /* CoreManager+Addons.swift */,
+				00D92E0D1E07EA28000F17E2 /* CoreManager+Auth.swift */,
 				001EB8711E029C4700E9D196 /* CoreManager+Modules.swift */,
 				001EB8721E029C4700E9D196 /* Manager.swift */,
 				001EB8731E029C4700E9D196 /* NetworkManager.swift */,
 				001EB8741E029C4700E9D196 /* NetworkManager+Device.swift */,
-				001EB87C1E029DCD00E9D196 /* NetworkManager+SSLPinning.swift */,
 				001EB87E1E029E0200E9D196 /* NetworkManager+NSURLSessionDelegate.swift */,
+				001EB87C1E029DCD00E9D196 /* NetworkManager+SSLPinning.swift */,
 			);
 			name = Managers;
 			path = Source/Managers;
@@ -757,7 +763,9 @@
 				001EB87A1E029C4700E9D196 /* NetworkManager.swift in Sources */,
 				001EB87F1E029E0200E9D196 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
 				001EB8791E029C4700E9D196 /* Manager.swift in Sources */,
+				00D92E0C1E07E923000F17E2 /* CoreManager+Addons.swift in Sources */,
 				A545F8411E02C368004030B4 /* DataProvider.swift in Sources */,
+				00D92E0E1E07EA28000F17E2 /* CoreManager+Auth.swift in Sources */,
 				A545F8481E02C377004030B4 /* OfflineDataProvider.swift in Sources */,
 				A545F84B1E02C7AE004030B4 /* AuthProvider.swift in Sources */,
 				00396E4B1D5328B300594D0A /* PaginatedContentInstances.swift in Sources */,

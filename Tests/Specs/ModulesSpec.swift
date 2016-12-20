@@ -17,7 +17,7 @@ class ModulesSpec : BaseSpec {
         
         super.spec()
         
-        describe("Retrieving all modules") {
+        describe("Retrieving all modules") {    
             
             context("paginated") {
                 

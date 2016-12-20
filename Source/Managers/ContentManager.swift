@@ -22,7 +22,7 @@ open class ContentManager: NSObject, HaloManager {
         return manager.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
     
-    override init() {
+    fileprivate override init() {
         super.init()
     }
 

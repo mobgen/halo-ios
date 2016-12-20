@@ -67,7 +67,7 @@ class AuthSpec: BaseSpec {
                     
                     waitUntil(timeout: 2) { done in
                         
-                        Manager.auth.login(authProfile: self.testAuthProfile) { (userResponse, error) in
+                        Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: false) { (userResponse, error) in
                             
                             // error == nil.
                             expect(error).to(beNil())

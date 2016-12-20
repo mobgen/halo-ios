@@ -37,7 +37,7 @@ open class NetworkManager: NSObject, HaloManager {
 
     var addons: [Halo.NetworkAddon] = []
 
-    override init() {
+    fileprivate override init() {
         super.init()
         let sessionConfig = URLSessionConfiguration.default
         self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
@@ -284,6 +284,10 @@ open class NetworkManager: NSObject, HaloManager {
         let cachedTasksCopy = self.cachedTasks
         self.cachedTasks.removeAll()
         cachedTasksCopy.forEach { self.startRequest(request: $0.request, numberOfRetries: $0.numberOfRetries, completionHandler: $0.handler) }
+    }
+    
+    func clearCachedTasks() {
+        self.cachedTasks.removeAll()
     }
 
 }

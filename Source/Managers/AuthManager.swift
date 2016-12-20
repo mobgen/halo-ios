@@ -12,6 +12,11 @@ import Foundation
 public class AuthManager: NSObject, HaloManager {
     
     public var stayLoggedIn: Bool = false
+    public var currentUser: User?
+    
+    fileprivate override init() {
+        super.init()
+    }
     
     @objc(startup:)
     public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
@@ -24,17 +29,18 @@ public class AuthManager: NSObject, HaloManager {
      - parameter authProfile:       AuthProfile with email, password, deviceId and network.
      - parameter completionHandler: Closure to be called after completion
      */
-    @objc(loginWithAuthProfile:completionHandler:)
-    public func login(authProfile: AuthProfile, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void {
+    //@objc(loginWithAuthProfile:stayLoggedIn:completionHandler:)
+    public func login(authProfile: AuthProfile, stayLoggedIn: Bool?, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void {
         
         let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
         
         _ = try? request.responseParser(parser: userParser).responseObject { (_, result) in
             switch (result) {
             case .success(let user, _):
-                if let user = user {
-                    if self.stayLoggedIn {
-                        KeychainHelper.set(user, forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
+                self.currentUser = user
+                if user != nil {
+                    if stayLoggedIn ?? self.stayLoggedIn {
+                        KeychainHelper.set(authProfile, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")
                     }
                     LogMessage(message: "Login with Halo successful.", level: .info).print()
                 } else {
@@ -49,17 +55,25 @@ public class AuthManager: NSObject, HaloManager {
     }
     
     @objc(logout:)
-    public func logout(completionHandler handler: ((Bool) -> Void)?) -> Void {
-        var result: Bool = false
+    public func logout(completionHandler handler: @escaping (Bool) -> Void) -> Void {
+        
+        var result: Bool = true
+        
         Manager.core.addons.forEach { addon in
             if let socialProviderAddon = addon as? AuthProvider {
-                result = result || socialProviderAddon.logout()
+                result = result && socialProviderAddon.logout()
             }
         }
+        
         if result {
-            result = result || KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserKey)-\(Manager.core.environment.description)")
+            if KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)") {
+                self.currentUser = nil
+            } else {
+                result = false
+            }
         }
-        handler?(result)
+        
+        handler(result)
     }
     
     /**
