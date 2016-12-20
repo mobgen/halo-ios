@@ -22,11 +22,11 @@ class BaseSpec: QuickSpec {
         }
         
         beforeSuite {
-            NSLog("-- Executing before suite")
+            NSLog("BaseSpec -- Executing before suite")
         }
         
         afterSuite {
-            NSLog("-- Executing after suite")
+            NSLog("BaseSpec -- Executing after suite")
         }
     
     }

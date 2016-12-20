@@ -103,6 +103,7 @@
 		A58621631E02F0780031D1C7 /* login_success.json in Resources */ = {isa = PBXBuildFile; fileRef = A586215F1E02E8EC0031D1C7 /* login_success.json */; };
 		A58621641E02F0780031D1C7 /* register_success.json in Resources */ = {isa = PBXBuildFile; fileRef = A58621611E02E9010031D1C7 /* register_success.json */; };
 		A58621651E02F0AA0031D1C7 /* AuthSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A586215D1E02E8D10031D1C7 /* AuthSpec.swift */; };
+		A5DA1E5D1E093438001C7C8F /* content_instance.json in Resources */ = {isa = PBXBuildFile; fileRef = A5DA1E5C1E093438001C7C8F /* content_instance.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		A586215D1E02E8D10031D1C7 /* AuthSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSpec.swift; sourceTree = "<group>"; };
 		A586215F1E02E8EC0031D1C7 /* login_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_success.json; sourceTree = "<group>"; };
 		A58621611E02E9010031D1C7 /* register_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = register_success.json; sourceTree = "<group>"; };
+		A5DA1E5C1E093438001C7C8F /* content_instance.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = content_instance.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -515,6 +517,7 @@
 		00F106191D9960DB00557900 /* json */ = {
 			isa = PBXGroup;
 			children = (
+				A5DA1E5E1E09343D001C7C8F /* models */,
 				00F1064D1D9BBC3B00557900 /* from_sync.json */,
 				00F1064E1D9BBC3B00557900 /* to_sync.json */,
 				00F1064B1D9BA2B900557900 /* full_sync.json */,
@@ -574,6 +577,14 @@
 			name = Auth;
 			path = Source/Providers/Auth;
 			sourceTree = SOURCE_ROOT;
+		};
+		A5DA1E5E1E09343D001C7C8F /* models */ = {
+			isa = PBXGroup;
+			children = (
+				A5DA1E5C1E093438001C7C8F /* content_instance.json */,
+			);
+			name = models;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -711,6 +722,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58621631E02F0780031D1C7 /* login_success.json in Resources */,
+				A5DA1E5D1E093438001C7C8F /* content_instance.json in Resources */,
 				A58621641E02F0780031D1C7 /* register_success.json in Resources */,
 				00F106271D9960E200557900 /* oauth_failure.json in Resources */,
 				00F1064C1D9BA2B900557900 /* full_sync.json in Resources */,
