@@ -98,18 +98,17 @@ public class AuthProfile: NSObject, NSCoding {
     
     // MARK: Utility methods
     
-    func storeProfile(env: HaloEnvironment) -> Void {
-        let encodedObject = NSKeyedArchiver.archivedData(withRootObject: self)
-        KeychainHelper.set(encodedObject, forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)")
+    func storeProfile(env: HaloEnvironment = Manager.core.environment) -> Void {
+        KeychainHelper.set(self, forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)")
     }
     
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadProfile(env: HaloEnvironment) -> Halo.AuthProfile? {
-        
-        if let encodedObject = KeychainHelper.data(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)") {
-            return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? AuthProfile
-        }
-        return nil
+    class func loadProfile(env: HaloEnvironment = Manager.core.environment) -> Halo.AuthProfile? {        
+        return KeychainHelper.object(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)") as? AuthProfile
+    }
+    
+    func removeProfile(env: HaloEnvironment = Manager.core.environment) -> Bool {
+        return KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)")
     }
     
     public func toDictionary() -> [String: String] {

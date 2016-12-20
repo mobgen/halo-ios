@@ -30,7 +30,7 @@ public class AuthManager: NSObject, HaloManager {
      - parameter completionHandler: Closure to be called after completion
      */
     //@objc(loginWithAuthProfile:stayLoggedIn:completionHandler:)
-    public func login(authProfile: AuthProfile, stayLoggedIn: Bool?, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void {
+    public func login(authProfile: AuthProfile, stayLoggedIn: Bool? = nil, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void {
         
         let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
         
@@ -38,15 +38,23 @@ public class AuthManager: NSObject, HaloManager {
             switch (result) {
             case .success(let user, _):
                 self.currentUser = user
-                if user != nil {
-                    if stayLoggedIn ?? self.stayLoggedIn {
-                        KeychainHelper.set(authProfile, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")
-                    }
-                    LogMessage(message: "Login with Halo successful.", level: .info).print()
-                } else {
-                    LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
+                
+                guard
+                    let user = user
+                else {
+                    let msg = "An error happened when trying to login with Halo."
+                    LogMessage(message: msg, level: .error).print()
+                    handler(nil, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: msg]))
+                    return
                 }
+                
+                if stayLoggedIn ?? self.stayLoggedIn {
+                    authProfile.storeProfile()
+                }
+                
+                LogMessage(message: "Login with Halo successful.", level: .info).print()
                 handler(user, nil)
+                
             case .failure(let error):
                 LogMessage(message: "An error happened when trying to login with Halo.", error: error).print()
                 handler(nil, error)
@@ -66,10 +74,14 @@ public class AuthManager: NSObject, HaloManager {
         }
         
         if result {
-            if KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)") {
-                self.currentUser = nil
+            if let currentAuthProfile = AuthProfile.loadProfile() {
+                if currentAuthProfile.removeProfile() {
+                    self.currentUser = nil
+                } else {
+                    result = false
+                }
             } else {
-                result = false
+                self.currentUser = nil
             }
         }
         

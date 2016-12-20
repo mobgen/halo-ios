@@ -1,0 +1,7 @@
+{
+    "error": {
+        "message": "Error message from Halo",
+        "extra": {},
+        "type": "HaloError"
+    }
+}

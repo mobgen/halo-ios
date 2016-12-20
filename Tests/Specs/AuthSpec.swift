@@ -9,14 +9,15 @@
 import Quick
 import Nimble
 import OHHTTPStubs
+import Foundation
 @testable import Halo
 
 class AuthSpec: BaseSpec {
     
-    lazy var testAuthProfile: AuthProfile = {
-        return AuthProfile(email: "account@mobgen.com",
-                           password: "password123",
-                           deviceId: "randomdevicealias")
+    lazy var testAuthProfile: MockAuthProfile = {
+        return MockAuthProfile(email: "account@mobgen.com",
+                               password: "password123",
+                               deviceId: "randomdevicealias")
     }()
     
     lazy var testUserProfile: UserProfile = {
@@ -33,17 +34,26 @@ class AuthSpec: BaseSpec {
         super.spec()
         
         beforeSuite {
+            stub(condition: isPath("/api/segmentation/appuser")) { _ in
+                let stubPath = OHPathForFile("segmentation_appuser_success.json", type(of: self))
+                return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+            }.name = "Successful segmentation stub"
+            
+            stub(condition: isPath("/api/oauth/token")) { _ in
+                let stubPath = OHPathForFile("oauth_success.json", type(of: self))
+                return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+            }.name = "Successful oauth stub"
+            
             Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+            Manager.core.logLevel = .info
             Manager.core.startup()
+            
+            UserDefaults.standard.set(nil, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")
+            UserDefaults.standard.synchronize()
         }
         
-        // MARK: TODO - Write test for recovering user.
-        xdescribe("User exists already in keychain") {
-            
-            it("recover user") {
-                
-            }
-            
+        afterSuite {
+            OHHTTPStubs.removeAllStubs()
         }
         
         describe("Login with Halo") {
@@ -52,52 +62,216 @@ class AuthSpec: BaseSpec {
                 OHHTTPStubs.removeAllStubs()
             }
             
-            context("using email and password") {
+            context("when user is registered") {
+                context("and server returns a successful response") {
+                    var user: User?
+                    var error: NSError?
+                    var authProfileStored: AuthProfile?
+                    
+                    beforeEach {
+                        stub(condition: isPath("/api/segmentation/identified/login")) { _ in
+                            let stubPath = OHPathForFile("login_success.json", type(of: self))
+                            return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+                            }.name = "Successful login stub"
+                        
+                        waitUntil { done in
+                            Manager.auth.login(authProfile: self.testAuthProfile) { (userResponse, errorResponse) in
+                                user = userResponse
+                                error = errorResponse
+                                authProfileStored = MockAuthProfile.loadProfile()
+                                done()
+                            }
+                        }
+                    }
+                    
+                    it("returns a User with valid Token and UserProfile with same email") {
+                        expect(user).toNot(beNil())
+                        
+                        let token = user?.token
+                        expect(token).notTo(beNil())
+                        expect(token?.isValid()).to(beTrue())
+                        expect(token?.isExpired()).to(beFalse())
+                        
+                        let userProfile = user?.userProfile
+                        expect(userProfile?.email).to(equal(self.testAuthProfile.email))
+                    }
+                    
+                    it("user is logged in") {
+                        expect(Manager.auth.currentUser).toNot(beNil())
+                    }
+                    
+                    it("returns a nil error") {
+                        expect(error).to(beNil())
+                    }
+                    
+                    it("does not store AuthProfile") {
+                        expect(authProfileStored).to(beNil())
+                    }
+                }
+                
+                context("and server returns a successful response but a nil user") {
+                    var user: User?
+                    var error: NSError?
+                    var authProfileStored: AuthProfile?
+                    
+                    beforeEach {
+                        stub(condition: isPath("/api/segmentation/identified/login")) { _ in
+                            let stubPath = OHPathForFile("login_success_nil_user.json", type(of: self))
+                            return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+                            }.name = "Successful login stub"
+                        
+                        waitUntil { done in
+                            Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: false) { (userResponse, errorResponse) in
+                                user = userResponse
+                                error = errorResponse
+                                authProfileStored = MockAuthProfile.loadProfile()
+                                done()
+                            }
+                        }
+                    }
+                    
+                    it("returns a nil User") {
+                        expect(user).to(beNil())
+                    }
+                    
+                    it("returns an error") {
+                        expect(error).toNot(beNil())
+                    }
+                    
+                    it("no user is logged in") {
+                        expect(Manager.auth.currentUser).to(beNil())
+                    }
+                    
+                    it("does not store AuthProfile") {
+                        expect(authProfileStored).to(beNil())
+                    }
+                }
+            }
+            
+            context("with a registered user and stayLoggedIn is true") {
+                var authProfileStored: AuthProfile?
                 
                 beforeEach {
-                    
                     stub(condition: isPath("/api/segmentation/identified/login")) { _ in
                         let stubPath = OHPathForFile("login_success.json", type(of: self))
                         return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
                     }.name = "Successful login stub"
-                    
                 }
                 
-                it("logs in successfully") {
+                context("using stayLoggedIn from method") {
+                    beforeEach {
+                        waitUntil { done in
+                            Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (_, _) in
+                                authProfileStored = MockAuthProfile.loadProfile()
+                                done()
+                            }
+                        }
+                    }
                     
-                    waitUntil(timeout: 2) { done in
-                        
-                        Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: false) { (userResponse, error) in
-                            
-                            // error == nil.
-                            expect(error).to(beNil())
-                            
-                            let token = userResponse?.token
-                            // token != nil.
-                            expect(token).notTo(beNil())
-                            // token is valid.
-                            expect(token?.isValid()).to(beTrue())
-                            // token is not expired.
-                            expect(token?.isExpired()).to(beFalse())
-                            
-                            let userProfile = userResponse?.userProfile
-                            // email is still the same.
-                            expect(userProfile?.email).to(equal(self.testAuthProfile.email))
-                            
-                            done()
+                    it("stores AuthProfile with same email") {
+                        expect(authProfileStored).toNot(beNil())
+                        expect(authProfileStored?.email).to(equal(self.testAuthProfile.email))
+                    }
+                }
+                
+                context("using stayLoggedIn property of AuthManager") {
+                    beforeEach {
+                        Manager.auth.stayLoggedIn = true
+                        waitUntil { done in
+                            Manager.auth.login(authProfile: self.testAuthProfile) { (_, _) in
+                                authProfileStored = MockAuthProfile.loadProfile()
+                                done()
+                            }
                         }
                     }
                     
                 }
-                
-                // MARK: TODO - Write test for saving user after login.
-                it("saves user in keychain") {
-                    
-                    
+            }
+        
+            context("with a user not registered") {
+                beforeEach {
+                    stub(condition: isPath("/api/segmentation/identified/login")) { _ in
+                        let stubPath = OHPathForFile("login_error.json", type(of: self))
+                        return fixture(filePath: stubPath!, status: 400, headers: ["Content-Type":"application/json"])
+                    }.name = "Failed login stub"
                 }
                 
+                it("displays an error") {
+                    var user: User?
+                    var error: Error?
+                    
+                    waitUntil { done in
+                        Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: false) { (userResponse, errorResponse) in
+                            user = userResponse
+                            error = errorResponse
+                            done()
+                        }
+                    }
+                    
+                    expect(user).to(beNil())
+                    expect(error).toNot(beNil())
+                }
+            }
+        }
+        
+        describe("Logout") {
+            
+            context("when user credentials are stored") {
+                var authProfileStored: AuthProfile?
+                
+                beforeEach {
+                    stub(condition: isPath("/api/segmentation/identified/login")) { _ in
+                        let stubPath = OHPathForFile("login_success.json", type(of: self))
+                        return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+                        }.name = "Successful login stub"
+                    
+                    waitUntil { done in
+                        Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (_, _) in
+                            done()
+                        }
+                    }
+                    
+                    waitUntil { done in
+                        Manager.auth.logout { success in
+                            authProfileStored = AuthProfile.loadProfile()
+                            done()
+                        }
+                    }
+                }
+                
+                it("removes user credentials from storage") {
+                    expect(authProfileStored).to(beNil())
+                }
+                
+                it("removes user") {
+                    expect(Manager.auth.currentUser).to(beNil())
+                }
             }
             
+            context("when user credentials are not stored") {
+                beforeEach {
+                    stub(condition: isPath("/api/segmentation/identified/login")) { _ in
+                        let stubPath = OHPathForFile("login_success.json", type(of: self))
+                        return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+                        }.name = "Successful login stub"
+                    
+                    waitUntil { done in
+                        Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (_, _) in
+                            done()
+                        }
+                    }
+                    
+                    waitUntil { done in
+                        Manager.auth.logout { success in
+                            done()
+                        }
+                    }
+                }
+                
+                it("removes user") {
+                    expect(Manager.auth.currentUser).to(beNil())
+                }
+            }
         }
         
         describe("Register with Halo") {
@@ -106,51 +280,65 @@ class AuthSpec: BaseSpec {
                 OHHTTPStubs.removeAllStubs()
             }
             
-            beforeEach {
+            context("with a right AuthProfile and right UserProfile") {
+                var userProfile: UserProfile?
+                var error: NSError?
                 
-                stub(condition: isPath("/api/segmentation/identified/register")) { _ in
-                    let stubPath = OHPathForFile("register_success.json", type(of: self))
-                    return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
-                }.name = "Successful register stub"
-                
-            }
-            
-            it("registers successfuly") {
-                
-                waitUntil { done in
+                beforeEach {
+                    stub(condition: isPath("/api/segmentation/identified/register")) { _ in
+                        let stubPath = OHPathForFile("register_success.json", type(of: self))
+                        return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+                    }.name = "Successful register stub"
                     
-                    Manager.auth
-                        .register(authProfile: self.testAuthProfile, userProfile: self.testUserProfile) { (userProfileResponse, error) in
-                        
-                        // error == nil.
-                        expect(error).to(beNil())
-                        // userProfileResponse != nil.
-                        expect(userProfileResponse).notTo(beNil())
-                        // identifiedId != nil.
-                        expect(userProfileResponse?.identifiedId).notTo(beNil())
-                        // email is still the same.
-                        expect(userProfileResponse?.email).to(equal(self.testAuthProfile.email))
-                        
-                        done()
+                    waitUntil { done in
+                        Manager.auth.register(authProfile: self.testAuthProfile,
+                                              userProfile: self.testUserProfile) { (userProfileResponse, errorResponse) in
+                            userProfile = userProfileResponse
+                            error = errorResponse
+                            done()
+                        }
                     }
                 }
                 
-            }
-            
-            // MARK: TODO - Write test for saving user after registration.
-            xit("saves user in keychain") {
+                it("returns a valid UserProfile with same email") {
+                    expect(userProfile).toNot(beNil())
+                    expect(userProfile?.identifiedId).notTo(beNil())
+                    expect(userProfile?.email).to(equal(self.testUserProfile.email))
+                }
                 
+                it("returns a nil error") {
+                    expect(error).to(beNil())
+                }
             }
             
-        }
-        
-        // MARK: TODO - Write test for removing user after logout.
-        xdescribe("Logout") {
-            
-            it("removes user from keychain") {
+            context("with a wrong AuthProfile or wrong UserProfile") {
+                var userProfile: UserProfile?
+                var error: NSError?
                 
+                beforeEach {
+                    stub(condition: isPath("/api/segmentation/identified/register")) { _ in
+                        let stubPath = OHPathForFile("register_error.json", type(of: self))
+                        return fixture(filePath: stubPath!, status: 400, headers: ["Content-Type":"application/json"])
+                    }.name = "Failed register stub"
+                    
+                    waitUntil { done in
+                        Manager.auth.register(authProfile: self.testAuthProfile,
+                                              userProfile: self.testUserProfile) { (userProfileResponse, errorResponse) in
+                                                userProfile = userProfileResponse
+                                                error = errorResponse
+                                                done()
+                        }
+                    }
+                }
+                
+                it("returns a nil UserProfile") {
+                    expect(userProfile).to(beNil())
+                }
+                
+                it("returns an error") {
+                    expect(error).toNot(beNil())
+                }
             }
-            
         }
     }
     

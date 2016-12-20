@@ -94,12 +94,16 @@
 		00F106501D9BBC3B00557900 /* to_sync.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F1064E1D9BBC3B00557900 /* to_sync.json */; };
 		00F106521D9CFD4C00557900 /* CloudinarySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F106511D9CFD4C00557900 /* CloudinarySpec.swift */; };
 		00FF95621B4547D200E751E3 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF95611B4547D200E751E3 /* CoreConstants.swift */; };
+		A50479EF1E094FD7001EB6BA /* login_error.json in Resources */ = {isa = PBXBuildFile; fileRef = A50479ED1E094F20001EB6BA /* login_error.json */; };
+		A50479F21E096223001EB6BA /* MockAuthProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50479F11E096223001EB6BA /* MockAuthProfile.swift */; };
 		A545F8411E02C368004030B4 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F83F1E02C368004030B4 /* DataProvider.swift */; };
 		A545F8421E02C368004030B4 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F8401E02C368004030B4 /* Request.swift */; };
 		A545F8461E02C377004030B4 /* NetworkDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F8431E02C377004030B4 /* NetworkDataProvider.swift */; };
 		A545F8471E02C377004030B4 /* NetworkOfflineDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F8441E02C377004030B4 /* NetworkOfflineDataProvider.swift */; };
 		A545F8481E02C377004030B4 /* OfflineDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F8451E02C377004030B4 /* OfflineDataProvider.swift */; };
 		A545F84B1E02C7AE004030B4 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F84A1E02C7AE004030B4 /* AuthProvider.swift */; };
+		A585F8901E098326002934CA /* register_error.json in Resources */ = {isa = PBXBuildFile; fileRef = A585F88E1E0982D2002934CA /* register_error.json */; };
+		A585F8931E0985BB002934CA /* login_success_nil_user.json in Resources */ = {isa = PBXBuildFile; fileRef = A585F8921E0985BB002934CA /* login_success_nil_user.json */; };
 		A58621631E02F0780031D1C7 /* login_success.json in Resources */ = {isa = PBXBuildFile; fileRef = A586215F1E02E8EC0031D1C7 /* login_success.json */; };
 		A58621641E02F0780031D1C7 /* register_success.json in Resources */ = {isa = PBXBuildFile; fileRef = A58621611E02E9010031D1C7 /* register_success.json */; };
 		A58621651E02F0AA0031D1C7 /* AuthSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A586215D1E02E8D10031D1C7 /* AuthSpec.swift */; };
@@ -230,12 +234,16 @@
 		00F1064E1D9BBC3B00557900 /* to_sync.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = to_sync.json; sourceTree = "<group>"; };
 		00F106511D9CFD4C00557900 /* CloudinarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudinarySpec.swift; sourceTree = "<group>"; };
 		00FF95611B4547D200E751E3 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
+		A50479ED1E094F20001EB6BA /* login_error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_error.json; sourceTree = "<group>"; };
+		A50479F11E096223001EB6BA /* MockAuthProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockAuthProfile.swift; path = Mocks/MockAuthProfile.swift; sourceTree = "<group>"; };
 		A545F83F1E02C368004030B4 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataProvider.swift; path = Source/Providers/DataProvider.swift; sourceTree = SOURCE_ROOT; };
 		A545F8401E02C368004030B4 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Providers/Request.swift; sourceTree = SOURCE_ROOT; };
 		A545F8431E02C377004030B4 /* NetworkDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkDataProvider.swift; path = Source/Providers/Network/NetworkDataProvider.swift; sourceTree = SOURCE_ROOT; };
 		A545F8441E02C377004030B4 /* NetworkOfflineDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkOfflineDataProvider.swift; path = Source/Providers/Network/NetworkOfflineDataProvider.swift; sourceTree = SOURCE_ROOT; };
 		A545F8451E02C377004030B4 /* OfflineDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OfflineDataProvider.swift; path = Source/Providers/Network/OfflineDataProvider.swift; sourceTree = SOURCE_ROOT; };
 		A545F84A1E02C7AE004030B4 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		A585F88E1E0982D2002934CA /* register_error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = register_error.json; sourceTree = "<group>"; };
+		A585F8921E0985BB002934CA /* login_success_nil_user.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_success_nil_user.json; sourceTree = "<group>"; };
 		A586215D1E02E8D10031D1C7 /* AuthSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSpec.swift; sourceTree = "<group>"; };
 		A586215F1E02E8EC0031D1C7 /* login_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_success.json; sourceTree = "<group>"; };
 		A58621611E02E9010031D1C7 /* register_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = register_success.json; sourceTree = "<group>"; };
@@ -428,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				00F106311D9A721000557900 /* Classes */,
+				A585F88D1E097987002934CA /* Mocks */,
 				00F106331D9A721000557900 /* Specs */,
 				00F106191D9960DB00557900 /* json */,
 				006A5FBC1B318CAC0045395A /* Supporting Files */,
@@ -532,6 +541,9 @@
 				00F106451D9A827900557900 /* segmentation_appuser_success.json */,
 				A586215F1E02E8EC0031D1C7 /* login_success.json */,
 				A58621611E02E9010031D1C7 /* register_success.json */,
+				A50479ED1E094F20001EB6BA /* login_error.json */,
+				A585F88E1E0982D2002934CA /* register_error.json */,
+				A585F8921E0985BB002934CA /* login_success_nil_user.json */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -577,6 +589,14 @@
 			name = Auth;
 			path = Source/Providers/Auth;
 			sourceTree = SOURCE_ROOT;
+		};
+		A585F88D1E097987002934CA /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A50479F11E096223001EB6BA /* MockAuthProfile.swift */,
+			);
+			name = Mocks;
+			sourceTree = "<group>";
 		};
 		A5DA1E5E1E09343D001C7C8F /* models */ = {
 			isa = PBXGroup;
@@ -723,6 +743,7 @@
 			files = (
 				A58621631E02F0780031D1C7 /* login_success.json in Resources */,
 				A5DA1E5D1E093438001C7C8F /* content_instance.json in Resources */,
+				A585F8901E098326002934CA /* register_error.json in Resources */,
 				A58621641E02F0780031D1C7 /* register_success.json in Resources */,
 				00F106271D9960E200557900 /* oauth_failure.json in Resources */,
 				00F1064C1D9BA2B900557900 /* full_sync.json in Resources */,
@@ -730,7 +751,9 @@
 				00F106501D9BBC3B00557900 /* to_sync.json in Resources */,
 				00F106421D9A74CC00557900 /* search_success_paginated.json in Resources */,
 				00F106441D9A75D600557900 /* search_success_not_paginated.json in Resources */,
+				A585F8931E0985BB002934CA /* login_success_nil_user.json in Resources */,
 				00F106251D9960E200557900 /* module_list_success_not_paginated.json in Resources */,
+				A50479EF1E094FD7001EB6BA /* login_error.json in Resources */,
 				00F1064A1D9ABF2F00557900 /* simple_search_success.json in Resources */,
 				00F106261D9960E200557900 /* module_list_success_paginated.json in Resources */,
 				00F106461D9A827900557900 /* segmentation_appuser_success.json in Resources */,
@@ -827,6 +850,7 @@
 				A58621651E02F0AA0031D1C7 /* AuthSpec.swift in Sources */,
 				00F106401D9A721000557900 /* SyncSpec.swift in Sources */,
 				00F1063B1D9A721000557900 /* BaseSpec.swift in Sources */,
+				A50479F21E096223001EB6BA /* MockAuthProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

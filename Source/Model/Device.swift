@@ -143,13 +143,13 @@ public final class Device: NSObject, NSCoding {
     /**
     Store a serialized version of the current device inside the keychain
     */
-    func storeDevice(env: HaloEnvironment) -> Void {
+    func storeDevice(env: HaloEnvironment = Manager.core.environment) -> Void {
         let encodedObject = NSKeyedArchiver.archivedData(withRootObject: self)
         KeychainHelper.set(encodedObject, forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)")
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadDevice(env: HaloEnvironment) -> Halo.Device? {
+    class func loadDevice(env: HaloEnvironment = Manager.core.environment) -> Halo.Device? {
 
         if let encodedObject = KeychainHelper.data(forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)") {
             return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? Halo.Device
