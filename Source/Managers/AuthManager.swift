@@ -65,6 +65,14 @@ public class AuthManager: NSObject, HaloManager {
     @objc(logout:)
     public func logout(completionHandler handler: @escaping (Bool) -> Void) -> Void {
         
+        // If user not logged in, you can't logout.
+        guard
+            let _ = self.currentUser
+        else {
+            handler(false)
+            return
+        }
+        
         var result: Bool = true
         
         Manager.core.addons.forEach { addon in
