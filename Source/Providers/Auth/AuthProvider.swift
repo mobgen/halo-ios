@@ -11,7 +11,7 @@ import Foundation
 public protocol AuthProvider {
     
     func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void
-    func logout() -> Bool
+    func logout()
 }
 
 public extension AuthProvider {
@@ -35,10 +35,6 @@ public extension AuthProvider {
                 handler(nil, error)
             }
         }
-    }
-    
-    func logout() -> Bool {
-        return true
     }
     
     // MARK : Private methods.

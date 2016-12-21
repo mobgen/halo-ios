@@ -77,20 +77,18 @@ public class AuthManager: NSObject, HaloManager {
         
         Manager.core.addons.forEach { addon in
             if let socialProviderAddon = addon as? AuthProvider {
-                result = result && socialProviderAddon.logout()
+                socialProviderAddon.logout()
             }
         }
         
-        if result {
-            if let currentAuthProfile = AuthProfile.loadProfile() {
-                if currentAuthProfile.removeProfile() {
-                    self.currentUser = nil
-                } else {
-                    result = false
-                }
-            } else {
+        if let currentAuthProfile = AuthProfile.loadProfile() {
+            if currentAuthProfile.removeProfile() {
                 self.currentUser = nil
+            } else {
+                result = false
             }
+        } else {
+            self.currentUser = nil
         }
         
         handler(result)
