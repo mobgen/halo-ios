@@ -1,4 +1,4 @@
-//
+ //
 //  SyncSpec.swift
 //  HaloSDK
 //
@@ -105,7 +105,7 @@ class SyncSpec: BaseSpec {
                     let firstSyncQuery = SyncQuery(moduleId: moduleId).toSync(date: date)
                     let secondSyncQuery = SyncQuery(moduleId: moduleId).fromSync(date: date)
                     
-                    waitUntil(timeout: 10) { done in
+                    waitUntil(timeout: 20) { done in
                         content.sync(query: firstSyncQuery) { _ in
                             done()
                         }

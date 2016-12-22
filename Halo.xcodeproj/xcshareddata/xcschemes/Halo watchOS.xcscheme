@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "004612991E0BE26A00B9B306"
                BuildableName = "Halo.framework"
-               BlueprintName = "Halo watchOS"
+               BlueprintName = "Halo-watchOS"
                ReferencedContainer = "container:Halo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,7 +47,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "004612991E0BE26A00B9B306"
             BuildableName = "Halo.framework"
-            BlueprintName = "Halo watchOS"
+            BlueprintName = "Halo-watchOS"
             ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,7 +65,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "004612991E0BE26A00B9B306"
             BuildableName = "Halo.framework"
-            BlueprintName = "Halo watchOS"
+            BlueprintName = "Halo-watchOS"
             ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

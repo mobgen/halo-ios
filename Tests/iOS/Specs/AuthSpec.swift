@@ -63,22 +63,30 @@ class AuthSpec: BaseSpec {
             }
             
             context("when user is registered") {
+                var user: User?
+                var error: NSError?
+                var authProfileStored: AuthProfile?
+                
                 context("and server returns a successful response") {
-                    var user: User?
-                    var error: NSError?
-                    var authProfileStored: AuthProfile?
-                    
                     beforeEach {
                         stub(condition: isPath("/api/segmentation/identified/login")) { _ in
                             let stubPath = OHPathForFile("login_success.json", type(of: self))
                             return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
-                            }.name = "Successful login stub"
+                        }.name = "Successful login stub"
                         
                         waitUntil { done in
                             Manager.auth.login(authProfile: self.testAuthProfile) { (userResponse, errorResponse) in
                                 user = userResponse
                                 error = errorResponse
                                 authProfileStored = MockAuthProfile.loadProfile()
+                                done()
+                            }
+                        }
+                    }
+                    
+                    afterEach {
+                        waitUntil { done in
+                            Manager.auth.logout { success in
                                 done()
                             }
                         }
@@ -110,10 +118,6 @@ class AuthSpec: BaseSpec {
                 }
                 
                 context("and server returns a successful response but a nil user") {
-                    var user: User?
-                    var error: NSError?
-                    var authProfileStored: AuthProfile?
-                    
                     beforeEach {
                         stub(condition: isPath("/api/segmentation/identified/login")) { _ in
                             let stubPath = OHPathForFile("login_success_nil_user.json", type(of: self))
@@ -125,6 +129,14 @@ class AuthSpec: BaseSpec {
                                 user = userResponse
                                 error = errorResponse
                                 authProfileStored = MockAuthProfile.loadProfile()
+                                done()
+                            }
+                        }
+                    }
+                    
+                    afterEach {
+                        waitUntil { done in
+                            Manager.auth.logout { success in
                                 done()
                             }
                         }
@@ -149,6 +161,7 @@ class AuthSpec: BaseSpec {
             }
             
             context("with a registered user and stayLoggedIn is true") {
+                var user: User?
                 var authProfileStored: AuthProfile?
                 
                 beforeEach {
@@ -161,11 +174,24 @@ class AuthSpec: BaseSpec {
                 context("using stayLoggedIn from method") {
                     beforeEach {
                         waitUntil { done in
-                            Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (_, _) in
+                            Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (userResponse, _) in
+                                user = userResponse
                                 authProfileStored = MockAuthProfile.loadProfile()
                                 done()
                             }
                         }
+                    }
+                    
+                    afterEach {
+                        waitUntil { done in
+                            Manager.auth.logout { success in
+                                done()
+                            }
+                        }
+                    }
+                    
+                    it("sets currentUser with user logged in") {
+                        expect(Manager.auth.currentUser).to(equal(user))
                     }
                     
                     it("stores AuthProfile with same email") {
@@ -178,27 +204,42 @@ class AuthSpec: BaseSpec {
                     beforeEach {
                         Manager.auth.stayLoggedIn = true
                         waitUntil { done in
-                            Manager.auth.login(authProfile: self.testAuthProfile) { (_, _) in
+                            Manager.auth.login(authProfile: self.testAuthProfile) { (userResponse, _) in
+                                user = userResponse
                                 authProfileStored = MockAuthProfile.loadProfile()
                                 done()
                             }
                         }
                     }
                     
+                    afterEach {
+                        waitUntil { done in
+                            Manager.auth.logout { success in
+                                done()
+                            }
+                        }
+                    }
+                    
+                    it("sets currentUser with user logged in") {
+                        expect(Manager.auth.currentUser).to(equal(user))
+                    }
+                    
+                    it("stores AuthProfile with same email") {
+                        expect(authProfileStored).toNot(beNil())
+                        expect(authProfileStored?.email).to(equal(self.testAuthProfile.email))
+                    }
                 }
             }
         
             context("with a user not registered") {
+                var user: User?
+                var error: Error?
+                
                 beforeEach {
                     stub(condition: isPath("/api/segmentation/identified/login")) { _ in
                         let stubPath = OHPathForFile("login_error.json", type(of: self))
                         return fixture(filePath: stubPath!, status: 400, headers: ["Content-Type":"application/json"])
                     }.name = "Failed login stub"
-                }
-                
-                it("displays an error") {
-                    var user: User?
-                    var error: Error?
                     
                     waitUntil { done in
                         Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: false) { (userResponse, errorResponse) in
@@ -207,7 +248,17 @@ class AuthSpec: BaseSpec {
                             done()
                         }
                     }
-                    
+                }
+                
+                afterEach {
+                    waitUntil { done in
+                        Manager.auth.logout { success in
+                            done()
+                        }
+                    }
+                }
+                
+                it("displays an error") {                    
                     expect(user).to(beNil())
                     expect(error).toNot(beNil())
                 }
@@ -216,15 +267,34 @@ class AuthSpec: BaseSpec {
         
         describe("Logout") {
             
-            context("when user credentials are stored") {
+            beforeEach {
+                stub(condition: isPath("/api/segmentation/identified/login")) { _ in
+                    let stubPath = OHPathForFile("login_success.json", type(of: self))
+                    return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+                }.name = "Successful login stub"
+            }
+            
+            context("where user is not logged in") {
+                var result: Bool?
+                
+                beforeEach {
+                    waitUntil { done in
+                        Manager.auth.logout { success in
+                            result = success
+                            done()
+                        }
+                    }
+                }
+                
+                it("returns false") {
+                    expect(result).to(beFalse())
+                }
+            }
+            
+            context("when user is logged in and credentials are stored") {
                 var authProfileStored: AuthProfile?
                 
                 beforeEach {
-                    stub(condition: isPath("/api/segmentation/identified/login")) { _ in
-                        let stubPath = OHPathForFile("login_success.json", type(of: self))
-                        return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
-                        }.name = "Successful login stub"
-                    
                     waitUntil { done in
                         Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (_, _) in
                             done()
@@ -248,13 +318,8 @@ class AuthSpec: BaseSpec {
                 }
             }
             
-            context("when user credentials are not stored") {
+            context("when user is logged in and credentials are not stored") {
                 beforeEach {
-                    stub(condition: isPath("/api/segmentation/identified/login")) { _ in
-                        let stubPath = OHPathForFile("login_success.json", type(of: self))
-                        return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
-                        }.name = "Successful login stub"
-                    
                     waitUntil { done in
                         Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (_, _) in
                             done()

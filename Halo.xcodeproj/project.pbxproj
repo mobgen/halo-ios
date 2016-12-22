@@ -68,7 +68,6 @@
 		004612931E0BE21400B9B306 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 004612911E0BE21400B9B306 /* halo.cer */; };
 		004612B81E0BE29A00B9B306 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004612A71E0BE27B00B9B306 /* Halo.framework */; };
 		004612E31E0BE49F00B9B306 /* DummyAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612C01E0BE49000B9B306 /* DummyAddon.swift */; };
-		004612E41E0BE4A300B9B306 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 004612C11E0BE49000B9B306 /* Info.plist */; };
 		004612E51E0BE4A700B9B306 /* content_instance.json in Resources */ = {isa = PBXBuildFile; fileRef = 004612C31E0BE49000B9B306 /* content_instance.json */; };
 		004612E61E0BE4A700B9B306 /* from_sync.json in Resources */ = {isa = PBXBuildFile; fileRef = 004612C41E0BE49000B9B306 /* from_sync.json */; };
 		004612E71E0BE4A700B9B306 /* full_sync.json in Resources */ = {isa = PBXBuildFile; fileRef = 004612C51E0BE49000B9B306 /* full_sync.json */; };
@@ -216,7 +215,7 @@
 		004612911E0BE21400B9B306 /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.cer; sourceTree = "<group>"; };
 		0046129A1E0BE26A00B9B306 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		004612A71E0BE27B00B9B306 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		004612B31E0BE29A00B9B306 /* Halo_tvOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Halo_tvOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		004612B31E0BE29A00B9B306 /* Halo-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Halo-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		004612C01E0BE49000B9B306 /* DummyAddon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyAddon.swift; sourceTree = "<group>"; };
 		004612C11E0BE49000B9B306 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		004612C31E0BE49000B9B306 /* content_instance.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = content_instance.json; sourceTree = "<group>"; };
@@ -261,7 +260,7 @@
 		004FEC711BCFB788004216EE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		005034B11C92B11300362A8F /* HaloRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloRequest.swift; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		006A5FB71B318CAC0045395A /* Halo_iOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Halo_iOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006A5FB71B318CAC0045395A /* Halo-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Halo-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		008E2B021C51320C00FACAB2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		008E2B581C524D7F00FACAB2 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -618,11 +617,11 @@
 			isa = PBXGroup;
 			children = (
 				006A5FAD1B318CAC0045395A /* Halo.framework */,
-				006A5FB71B318CAC0045395A /* Halo_iOS_Tests.xctest */,
+				006A5FB71B318CAC0045395A /* Halo-iOSTests.xctest */,
 				004790F91C915C6C00C24741 /* HaloObjC.framework */,
 				0046129A1E0BE26A00B9B306 /* Halo.framework */,
 				004612A71E0BE27B00B9B306 /* Halo.framework */,
-				004612B31E0BE29A00B9B306 /* Halo_tvOS_Tests.xctest */,
+				004612B31E0BE29A00B9B306 /* Halo-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -675,9 +674,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		004612991E0BE26A00B9B306 /* Halo watchOS */ = {
+		004612991E0BE26A00B9B306 /* Halo-watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0046129F1E0BE26A00B9B306 /* Build configuration list for PBXNativeTarget "Halo watchOS" */;
+			buildConfigurationList = 0046129F1E0BE26A00B9B306 /* Build configuration list for PBXNativeTarget "Halo-watchOS" */;
 			buildPhases = (
 				004612951E0BE26A00B9B306 /* Sources */,
 				004612961E0BE26A00B9B306 /* Frameworks */,
@@ -688,14 +687,14 @@
 			);
 			dependencies = (
 			);
-			name = "Halo watchOS";
+			name = "Halo-watchOS";
 			productName = "Halo watchOS";
 			productReference = 0046129A1E0BE26A00B9B306 /* Halo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		004612A61E0BE27B00B9B306 /* Halo tvOS */ = {
+		004612A61E0BE27B00B9B306 /* Halo-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 004612AC1E0BE27C00B9B306 /* Build configuration list for PBXNativeTarget "Halo tvOS" */;
+			buildConfigurationList = 004612AC1E0BE27C00B9B306 /* Build configuration list for PBXNativeTarget "Halo-tvOS" */;
 			buildPhases = (
 				004612A21E0BE27B00B9B306 /* Sources */,
 				004612A31E0BE27B00B9B306 /* Frameworks */,
@@ -706,14 +705,14 @@
 			);
 			dependencies = (
 			);
-			name = "Halo tvOS";
+			name = "Halo-tvOS";
 			productName = "Halo tvOS";
 			productReference = 004612A71E0BE27B00B9B306 /* Halo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		004612B21E0BE29A00B9B306 /* Halo tvOS Tests */ = {
+		004612B21E0BE29A00B9B306 /* Halo-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 004612BB1E0BE29A00B9B306 /* Build configuration list for PBXNativeTarget "Halo tvOS Tests" */;
+			buildConfigurationList = 004612BB1E0BE29A00B9B306 /* Build configuration list for PBXNativeTarget "Halo-tvOSTests" */;
 			buildPhases = (
 				004612AF1E0BE29A00B9B306 /* Sources */,
 				004612B01E0BE29A00B9B306 /* Frameworks */,
@@ -724,14 +723,14 @@
 			dependencies = (
 				004612BA1E0BE29A00B9B306 /* PBXTargetDependency */,
 			);
-			name = "Halo tvOS Tests";
+			name = "Halo-tvOSTests";
 			productName = "Halo tvOS Tests";
-			productReference = 004612B31E0BE29A00B9B306 /* Halo_tvOS_Tests.xctest */;
+			productReference = 004612B31E0BE29A00B9B306 /* Halo-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		004790F81C915C6C00C24741 /* HaloObjC */ = {
+		004790F81C915C6C00C24741 /* Halo-ObjC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 004790FE1C915C6C00C24741 /* Build configuration list for PBXNativeTarget "HaloObjC" */;
+			buildConfigurationList = 004790FE1C915C6C00C24741 /* Build configuration list for PBXNativeTarget "Halo-ObjC" */;
 			buildPhases = (
 				004790F41C915C6C00C24741 /* Sources */,
 				004790F51C915C6C00C24741 /* Frameworks */,
@@ -742,14 +741,14 @@
 			dependencies = (
 				0047913C1C9179F000C24741 /* PBXTargetDependency */,
 			);
-			name = HaloObjC;
+			name = "Halo-ObjC";
 			productName = HaloObjC;
 			productReference = 004790F91C915C6C00C24741 /* HaloObjC.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		006A5FAC1B318CAC0045395A /* Halo iOS */ = {
+		006A5FAC1B318CAC0045395A /* Halo-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo iOS" */;
+			buildConfigurationList = 006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo-iOS" */;
 			buildPhases = (
 				006A5FA81B318CAC0045395A /* Sources */,
 				006A5FA91B318CAC0045395A /* Frameworks */,
@@ -760,14 +759,14 @@
 			);
 			dependencies = (
 			);
-			name = "Halo iOS";
+			name = "Halo-iOS";
 			productName = MoMOSCore;
 			productReference = 006A5FAD1B318CAC0045395A /* Halo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		006A5FB61B318CAC0045395A /* Halo iOS Tests */ = {
+		006A5FB61B318CAC0045395A /* Halo-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo iOS Tests" */;
+			buildConfigurationList = 006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo-iOSTests" */;
 			buildPhases = (
 				006A5FB31B318CAC0045395A /* Sources */,
 				006A5FB41B318CAC0045395A /* Frameworks */,
@@ -779,9 +778,9 @@
 			dependencies = (
 				0091C0151B779CDE0054EA75 /* PBXTargetDependency */,
 			);
-			name = "Halo iOS Tests";
+			name = "Halo-iOSTests";
 			productName = MoMOSCoreTests;
-			productReference = 006A5FB71B318CAC0045395A /* Halo_iOS_Tests.xctest */;
+			productReference = 006A5FB71B318CAC0045395A /* Halo-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -836,12 +835,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				006A5FAC1B318CAC0045395A /* Halo iOS */,
-				004612991E0BE26A00B9B306 /* Halo watchOS */,
-				004612A61E0BE27B00B9B306 /* Halo tvOS */,
-				006A5FB61B318CAC0045395A /* Halo iOS Tests */,
-				004612B21E0BE29A00B9B306 /* Halo tvOS Tests */,
-				004790F81C915C6C00C24741 /* HaloObjC */,
+				006A5FAC1B318CAC0045395A /* Halo-iOS */,
+				004612991E0BE26A00B9B306 /* Halo-watchOS */,
+				004612A61E0BE27B00B9B306 /* Halo-tvOS */,
+				006A5FB61B318CAC0045395A /* Halo-iOSTests */,
+				004612B21E0BE29A00B9B306 /* Halo-tvOSTests */,
+				004790F81C915C6C00C24741 /* Halo-ObjC */,
 			);
 		};
 /* End PBXProject section */
@@ -882,7 +881,6 @@
 			files = (
 				004612E51E0BE4A700B9B306 /* content_instance.json in Resources */,
 				004612E71E0BE4A700B9B306 /* full_sync.json in Resources */,
-				004612E41E0BE4A300B9B306 /* Info.plist in Resources */,
 				004612EE1E0BE4A700B9B306 /* oauth_success.json in Resources */,
 				004612F01E0BE4A700B9B306 /* register_success.json in Resources */,
 				004612F51E0BE4A700B9B306 /* simple_search_success.json in Resources */,
@@ -1020,17 +1018,17 @@
 /* Begin PBXTargetDependency section */
 		004612BA1E0BE29A00B9B306 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 004612A61E0BE27B00B9B306 /* Halo tvOS */;
+			target = 004612A61E0BE27B00B9B306 /* Halo-tvOS */;
 			targetProxy = 004612B91E0BE29A00B9B306 /* PBXContainerItemProxy */;
 		};
 		0047913C1C9179F000C24741 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 006A5FAC1B318CAC0045395A /* Halo iOS */;
+			target = 006A5FAC1B318CAC0045395A /* Halo-iOS */;
 			targetProxy = 0047913B1C9179F000C24741 /* PBXContainerItemProxy */;
 		};
 		0091C0151B779CDE0054EA75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 006A5FAC1B318CAC0045395A /* Halo iOS */;
+			target = 006A5FAC1B318CAC0045395A /* Halo-iOS */;
 			targetProxy = 0091C0141B779CDE0054EA75 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1150,7 +1148,7 @@
 				INFOPLIST_FILE = Tests/tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.Halo-tvOSTests";
-				PRODUCT_NAME = Halo_tvOS_Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
@@ -1167,7 +1165,7 @@
 				INFOPLIST_FILE = Tests/tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.Halo-tvOSTests";
-				PRODUCT_NAME = Halo_tvOS_Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 10.1;
@@ -1189,7 +1187,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloObjC;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HaloObjC;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1210,7 +1208,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloObjC;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HaloObjC;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1380,7 +1378,7 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = Tests/iOS/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.Halo-iOSTests";
-				PRODUCT_NAME = Halo_iOS_Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1399,7 +1397,7 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = Tests/iOS/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mobgen.Halo-iOSTests";
-				PRODUCT_NAME = Halo_iOS_Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1407,7 +1405,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0046129F1E0BE26A00B9B306 /* Build configuration list for PBXNativeTarget "Halo watchOS" */ = {
+		0046129F1E0BE26A00B9B306 /* Build configuration list for PBXNativeTarget "Halo-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				004612A01E0BE26A00B9B306 /* Debug */,
@@ -1416,7 +1414,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		004612AC1E0BE27C00B9B306 /* Build configuration list for PBXNativeTarget "Halo tvOS" */ = {
+		004612AC1E0BE27C00B9B306 /* Build configuration list for PBXNativeTarget "Halo-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				004612AD1E0BE27C00B9B306 /* Debug */,
@@ -1425,7 +1423,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		004612BB1E0BE29A00B9B306 /* Build configuration list for PBXNativeTarget "Halo tvOS Tests" */ = {
+		004612BB1E0BE29A00B9B306 /* Build configuration list for PBXNativeTarget "Halo-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				004612BC1E0BE29A00B9B306 /* Debug */,
@@ -1434,7 +1432,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		004790FE1C915C6C00C24741 /* Build configuration list for PBXNativeTarget "HaloObjC" */ = {
+		004790FE1C915C6C00C24741 /* Build configuration list for PBXNativeTarget "Halo-ObjC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				004790FF1C915C6C00C24741 /* Debug */,
@@ -1452,7 +1450,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo iOS" */ = {
+		006A5FC01B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FC11B318CAC0045395A /* Debug */,
@@ -1461,7 +1459,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo iOS Tests" */ = {
+		006A5FC31B318CAC0045395A /* Build configuration list for PBXNativeTarget "Halo-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006A5FC41B318CAC0045395A /* Debug */,

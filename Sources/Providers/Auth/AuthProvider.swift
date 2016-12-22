@@ -11,7 +11,7 @@ import Foundation
 public protocol AuthProvider {
     
     func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void
-    func logout() -> Bool
+    func logout()
 }
 
 public extension AuthProvider {
@@ -21,6 +21,8 @@ public extension AuthProvider {
         try! request.responseParser(parser: userParser).responseObject { (_, result) in
             switch result {
             case .success(let user, _):
+                Manager.auth.currentUser = user
+                
                 if user != nil {
                     if Manager.auth.stayLoggedIn {
                         KeychainHelper.set(authProfile, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")
@@ -35,10 +37,6 @@ public extension AuthProvider {
                 handler(nil, error)
             }
         }
-    }
-    
-    func logout() -> Bool {
-        return true
     }
     
     // MARK : Private methods.

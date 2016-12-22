@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
                BuildableName = "Halo.framework"
-               BlueprintName = "Halo iOS"
+               BlueprintName = "Halo-iOS"
                ReferencedContainer = "container:Halo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "004790F81C915C6C00C24741"
                BuildableName = "HaloObjC.framework"
-               BlueprintName = "HaloObjC"
+               BlueprintName = "Halo-ObjC"
                ReferencedContainer = "container:Halo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,7 +49,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "004790F81C915C6C00C24741"
             BuildableName = "HaloObjC.framework"
-            BlueprintName = "HaloObjC"
+            BlueprintName = "Halo-ObjC"
             ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -71,7 +71,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "004790F81C915C6C00C24741"
             BuildableName = "HaloObjC.framework"
-            BlueprintName = "HaloObjC"
+            BlueprintName = "Halo-ObjC"
             ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -89,7 +89,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "004790F81C915C6C00C24741"
             BuildableName = "HaloObjC.framework"
-            BlueprintName = "HaloObjC"
+            BlueprintName = "Halo-ObjC"
             ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
