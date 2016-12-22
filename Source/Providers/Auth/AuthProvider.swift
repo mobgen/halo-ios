@@ -21,6 +21,8 @@ public extension AuthProvider {
         try! request.responseParser(parser: userParser).responseObject { (_, result) in
             switch result {
             case .success(let user, _):
+                Manager.auth.currentUser = user
+                
                 if user != nil {
                     if Manager.auth.stayLoggedIn {
                         KeychainHelper.set(authProfile, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")

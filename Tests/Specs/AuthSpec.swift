@@ -63,11 +63,11 @@ class AuthSpec: BaseSpec {
             }
             
             context("when user is registered") {
+                var user: User?
+                var error: NSError?
+                var authProfileStored: AuthProfile?
+                
                 context("and server returns a successful response") {
-                    var user: User?
-                    var error: NSError?
-                    var authProfileStored: AuthProfile?
-                    
                     beforeEach {
                         stub(condition: isPath("/api/segmentation/identified/login")) { _ in
                             let stubPath = OHPathForFile("login_success.json", type(of: self))
@@ -118,10 +118,6 @@ class AuthSpec: BaseSpec {
                 }
                 
                 context("and server returns a successful response but a nil user") {
-                    var user: User?
-                    var error: NSError?
-                    var authProfileStored: AuthProfile?
-                    
                     beforeEach {
                         stub(condition: isPath("/api/segmentation/identified/login")) { _ in
                             let stubPath = OHPathForFile("login_success_nil_user.json", type(of: self))
@@ -165,6 +161,7 @@ class AuthSpec: BaseSpec {
             }
             
             context("with a registered user and stayLoggedIn is true") {
+                var user: User?
                 var authProfileStored: AuthProfile?
                 
                 beforeEach {
@@ -177,7 +174,8 @@ class AuthSpec: BaseSpec {
                 context("using stayLoggedIn from method") {
                     beforeEach {
                         waitUntil { done in
-                            Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (_, _) in
+                            Manager.auth.login(authProfile: self.testAuthProfile, stayLoggedIn: true) { (userResponse, _) in
+                                user = userResponse
                                 authProfileStored = MockAuthProfile.loadProfile()
                                 done()
                             }
@@ -190,6 +188,10 @@ class AuthSpec: BaseSpec {
                                 done()
                             }
                         }
+                    }
+                    
+                    it("sets currentUser with user logged in") {
+                        expect(Manager.auth.currentUser).to(equal(user))
                     }
                     
                     it("stores AuthProfile with same email") {
@@ -202,7 +204,8 @@ class AuthSpec: BaseSpec {
                     beforeEach {
                         Manager.auth.stayLoggedIn = true
                         waitUntil { done in
-                            Manager.auth.login(authProfile: self.testAuthProfile) { (_, _) in
+                            Manager.auth.login(authProfile: self.testAuthProfile) { (userResponse, _) in
+                                user = userResponse
                                 authProfileStored = MockAuthProfile.loadProfile()
                                 done()
                             }
@@ -215,6 +218,10 @@ class AuthSpec: BaseSpec {
                                 done()
                             }
                         }
+                    }
+                    
+                    it("sets currentUser with user logged in") {
+                        expect(Manager.auth.currentUser).to(equal(user))
                     }
                     
                     it("stores AuthProfile with same email") {

@@ -64,7 +64,6 @@ public class AuthManager: NSObject, HaloManager {
     
     @objc(logout:)
     public func logout(completionHandler handler: @escaping (Bool) -> Void) -> Void {
-        
         // If user not logged in, you can't logout.
         guard
             let _ = self.currentUser

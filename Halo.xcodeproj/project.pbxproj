@@ -158,7 +158,6 @@
 		001EB87C1E029DCD00E9D196 /* NetworkManager+SSLPinning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+SSLPinning.swift"; sourceTree = "<group>"; };
 		001EB87E1E029E0200E9D196 /* NetworkManager+NSURLSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+NSURLSessionDelegate.swift"; sourceTree = "<group>"; };
 		001EB8801E029FDD00E9D196 /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = Source/Helpers/KeychainHelper.swift; sourceTree = "<group>"; };
-		002EDCFB1DED77AE0022F96D /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		0033A1341D958A630003C2B2 /* SyncLogEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncLogEntry.swift; sourceTree = "<group>"; };
 		00396E3A1D51E9EE00594D0A /* MobileProvisionParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MobileProvisionParser.swift; path = Source/Helpers/MobileProvisionParser.swift; sourceTree = "<group>"; };
 		00396E461D53253600594D0A /* PaginatedModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedModules.swift; sourceTree = "<group>"; };
@@ -366,7 +365,6 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				002EDCFB1DED77AE0022F96D /* SwiftKeychainWrapper.framework */,
 				00F106141D9946B700557900 /* XCTest.framework */,
 				00A409211D0FE72F005D4FB0 /* Foundation.framework */,
 				008E2B5A1C524DAB00FACAB2 /* libz.tbd */,
