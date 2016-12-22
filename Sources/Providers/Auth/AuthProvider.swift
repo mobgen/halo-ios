@@ -17,26 +17,7 @@ public protocol AuthProvider {
 public extension AuthProvider {
     
     func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, NSError?) -> Void) {
-        let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
-        try! request.responseParser(parser: userParser).responseObject { (_, result) in
-            switch result {
-            case .success(let user, _):
-                Manager.auth.currentUser = user
-                
-                if user != nil {
-                    if Manager.auth.stayLoggedIn {
-                        KeychainHelper.set(authProfile, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")
-                    }
-                    LogMessage(message: "Login with Halo successful.", level: .info).print()
-                } else {
-                    LogMessage(message: "An error happened when trying to login with Halo.", level: .error).print()
-                }
-                handler(user, nil)
-            case .failure(let error):
-                LogMessage(message: "An error happened trying to authenticate the user with Halo.", error: error).print()
-                handler(nil, error)
-            }
-        }
+        Manager.auth.login(authProfile: authProfile, completionHandler: handler)
     }
     
     // MARK : Private methods.

@@ -12,7 +12,7 @@ import OHHTTPStubs
 import Foundation
 @testable import Halo
 
-class AuthSpec: BaseSpec {
+class AuthManagerSpec: BaseSpec {
     
     lazy var testAuthProfile: MockAuthProfile = {
         return MockAuthProfile(email: "account@mobgen.com",
@@ -54,6 +54,7 @@ class AuthSpec: BaseSpec {
         
         afterSuite {
             OHHTTPStubs.removeAllStubs()
+
         }
         
         describe("Login with Halo") {

@@ -44,6 +44,13 @@ class ModelSpec: BaseSpec {
                 contentInstance = ContentInstance.fromDictionary(dict: dict)
             }
             
+            describe("its getValue method") {
+                it("returns the expected value") {
+                    let realValue = contentInstance.getValue(key: "CXJP2HJ Boolean") as? Bool
+                    expect(realValue).to(equal(true))
+                }
+            }
+            
             describe("its isRemoved method") {
                 context("when removedAt is nil") {
                     it("returns false") {

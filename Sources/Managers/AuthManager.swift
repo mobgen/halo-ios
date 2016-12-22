@@ -29,8 +29,8 @@ public class AuthManager: NSObject, HaloManager {
      - parameter authProfile:       AuthProfile with email, password, deviceId and network.
      - parameter completionHandler: Closure to be called after completion
      */
-    //@objc(loginWithAuthProfile:stayLoggedIn:completionHandler:)
-    public func login(authProfile: AuthProfile, stayLoggedIn: Bool? = nil, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void {
+    @objc(loginWithAuthProfile:stayLoggedIn:completionHandler:)
+    public func login(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void {
         
         let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
         
@@ -48,7 +48,7 @@ public class AuthManager: NSObject, HaloManager {
                     return
                 }
                 
-                if stayLoggedIn ?? self.stayLoggedIn {
+                if stayLoggedIn {
                     authProfile.storeProfile()
                 }
                 

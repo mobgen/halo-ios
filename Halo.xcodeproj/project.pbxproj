@@ -87,7 +87,6 @@
 		004612F51E0BE4A700B9B306 /* simple_search_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 004612D31E0BE49000B9B306 /* simple_search_success.json */; };
 		004612F61E0BE4A700B9B306 /* to_sync.json in Resources */ = {isa = PBXBuildFile; fileRef = 004612D41E0BE49000B9B306 /* to_sync.json */; };
 		004612F71E0BE4AD00B9B306 /* MockAuthProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612D61E0BE49000B9B306 /* MockAuthProfile.swift */; };
-		004612F81E0BE4B100B9B306 /* AuthSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612D81E0BE49000B9B306 /* AuthSpec.swift */; };
 		004612F91E0BE4B100B9B306 /* BaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612D91E0BE49000B9B306 /* BaseSpec.swift */; };
 		004612FA1E0BE4B100B9B306 /* CloudinarySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612DA1E0BE49000B9B306 /* CloudinarySpec.swift */; };
 		004612FB1E0BE4B100B9B306 /* CoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612DB1E0BE49000B9B306 /* CoreSpec.swift */; };
@@ -113,6 +112,9 @@
 		00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5D97F351E0C143600003597 /* NetworkManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F341E0C143600003597 /* NetworkManagerSpec.swift */; };
+		A5D97F371E0C145200003597 /* AuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F361E0C145200003597 /* AuthManagerSpec.swift */; };
+		A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,7 +239,6 @@
 		004612D31E0BE49000B9B306 /* simple_search_success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = simple_search_success.json; sourceTree = "<group>"; };
 		004612D41E0BE49000B9B306 /* to_sync.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = to_sync.json; sourceTree = "<group>"; };
 		004612D61E0BE49000B9B306 /* MockAuthProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthProfile.swift; sourceTree = "<group>"; };
-		004612D81E0BE49000B9B306 /* AuthSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSpec.swift; sourceTree = "<group>"; };
 		004612D91E0BE49000B9B306 /* BaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSpec.swift; sourceTree = "<group>"; };
 		004612DA1E0BE49000B9B306 /* CloudinarySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudinarySpec.swift; sourceTree = "<group>"; };
 		004612DB1E0BE49000B9B306 /* CoreSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSpec.swift; sourceTree = "<group>"; };
@@ -267,6 +268,9 @@
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		00A409211D0FE72F005D4FB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A5D97F341E0C143600003597 /* NetworkManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerSpec.swift; sourceTree = "<group>"; };
+		A5D97F361E0C145200003597 /* AuthManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerSpec.swift; sourceTree = "<group>"; };
+		A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkAddon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				004612D61E0BE49000B9B306 /* MockAuthProfile.swift */,
+				A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -550,7 +555,7 @@
 		004612D71E0BE49000B9B306 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				004612D81E0BE49000B9B306 /* AuthSpec.swift */,
+				A5D97F381E0C146200003597 /* Managers */,
 				004612D91E0BE49000B9B306 /* BaseSpec.swift */,
 				004612DA1E0BE49000B9B306 /* CloudinarySpec.swift */,
 				004612DB1E0BE49000B9B306 /* CoreSpec.swift */,
@@ -633,6 +638,15 @@
 				004612E01E0BE49000B9B306 /* tvOS */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		A5D97F381E0C146200003597 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A5D97F361E0C145200003597 /* AuthManagerSpec.swift */,
+				A5D97F341E0C143600003597 /* NetworkManagerSpec.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1000,12 +1014,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5D97F371E0C145200003597 /* AuthManagerSpec.swift in Sources */,
+				A5D97F351E0C143600003597 /* NetworkManagerSpec.swift in Sources */,
 				004612FD1E0BE4B100B9B306 /* ModulesSpec.swift in Sources */,
-				004612F81E0BE4B100B9B306 /* AuthSpec.swift in Sources */,
 				004612FA1E0BE4B100B9B306 /* CloudinarySpec.swift in Sources */,
 				004612E31E0BE49F00B9B306 /* DummyAddon.swift in Sources */,
 				004612FC1E0BE4B100B9B306 /* ModelSpec.swift in Sources */,
 				004612F71E0BE4AD00B9B306 /* MockAuthProfile.swift in Sources */,
+				A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */,
 				004612FE1E0BE4B100B9B306 /* SearchSpec.swift in Sources */,
 				004612FF1E0BE4B100B9B306 /* SyncSpec.swift in Sources */,
 				004612F91E0BE4B100B9B306 /* BaseSpec.swift in Sources */,

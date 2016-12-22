@@ -273,6 +273,7 @@ open class NetworkManager: NSObject, HaloManager {
             }
 
         } else {
+            self.isRefreshing = false
             LogMessage(message: "No credentials found", level: .error).print()
             handler?(nil, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
         }

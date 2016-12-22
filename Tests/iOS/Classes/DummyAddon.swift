@@ -35,29 +35,4 @@ class DummyAddon: NSObject, Addon {
         
     }
     
-    @objc(willRegisterDevice:)
-    func willRegisterDevice(haloCore core: Halo.CoreManager) -> Void {
-        
-    }
-    
-    @objc(didRegisterDevice:)
-    func didRegisterDevice(haloCore core: Halo.CoreManager) -> Void {
-        
-    }
-    
-    @objc(applicationDidFinishLaunching:core:)
-    func applicationDidFinishLaunching(application app: UIApplication, core: Halo.CoreManager) -> Void {
-        
-    }
-    
-    @objc(applicationDidEnterBackground:core:)
-    func applicationDidEnterBackground(application app: UIApplication, core: Halo.CoreManager) -> Void {
-        
-    }
-    
-    @objc(applicationDidBecomeActive:core:)
-    func applicationDidBecomeActive(application app: UIApplication, core: Halo.CoreManager) -> Void {
-        
-    }
-    
 }
