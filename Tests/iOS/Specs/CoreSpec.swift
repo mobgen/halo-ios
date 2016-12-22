@@ -30,6 +30,44 @@ class CoreSpec: BaseSpec {
                 OHHTTPStubs.removeAllStubs()
             }
             
+            context("when setting a .none defaultOfflinePolicy") {
+                beforeEach {
+                    mgr.defaultOfflinePolicy = .none
+                }
+                
+                it("set DataProviderManager.online as the dataProvider") {
+                    expect(mgr.dataProvider).to(be(DataProviderManager.online))
+                }
+            }
+            
+            context("when setting a .loadAndStoreLocalData defaultOfflinePolicy") {
+                beforeEach {
+                    mgr.defaultOfflinePolicy = .loadAndStoreLocalData
+                }
+                
+                afterEach {
+                    mgr.defaultOfflinePolicy = .none
+                }
+                
+                it("set DataProviderManager.onlineOffline as the dataProvider") {
+                    expect(mgr.dataProvider).to(be(DataProviderManager.onlineOffline))
+                }
+            }
+            
+            context("when setting a .returnLocalDataDontLoad defaultOfflinePolicy") {
+                beforeEach {
+                    mgr.defaultOfflinePolicy = .returnLocalDataDontLoad
+                }
+                
+                afterEach {
+                    mgr.defaultOfflinePolicy = .none
+                }
+                
+                it("set DataProviderManager.offline as the dataProvider") {
+                    expect(mgr.dataProvider).to(be(DataProviderManager.offline))
+                }
+            }
+            
             context("when the startup process succeeds") {
             
                 beforeEach {

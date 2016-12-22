@@ -27,6 +27,10 @@ class NetworkManagerSpec : BaseSpec {
                 let stubPath = OHPathForFile("oauth_success.json", type(of: self))
                 return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
             }.name = "Successful oauth stub"
+            
+            Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+            Manager.core.logLevel = .info
+            Manager.core.startup()
         }
         
         afterSuite {
@@ -34,11 +38,6 @@ class NetworkManagerSpec : BaseSpec {
         }
         
         describe("NetworkManager") {
-            beforeEach {
-                Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
-                Manager.core.logLevel = .info
-                Manager.core.startup()
-            }
             
             context("its registerAddon method") {
                 let testNetworkAddon = MockNetworkAddon()

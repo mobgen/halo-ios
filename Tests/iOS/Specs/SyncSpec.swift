@@ -24,7 +24,7 @@ class SyncSpec: BaseSpec {
             Manager.core.startup()
         }
         
-        xdescribe("The sync process") {
+        describe("The sync process") {
             
             let moduleId = "571f38b9bb7f372900a14cbc"
             let query = SyncQuery(moduleId: moduleId)

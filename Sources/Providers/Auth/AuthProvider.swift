@@ -20,14 +20,5 @@ public extension AuthProvider {
         Manager.auth.login(authProfile: authProfile, completionHandler: handler)
     }
     
-    // MARK : Private methods.
-    
-    private func userParser(_ data: Any?) -> User? {
-        if let dict = data as? [String: Any] {
-            return User.fromDictionary(dict)
-        }
-        return nil
-    }
-    
 }
 

@@ -118,8 +118,8 @@ public final class Device: NSObject, NSCoding {
     - parameter tags: collection of tags
     */
     @objc(addTags:)
-    public func addTags(tags: [String: String]) {
-        tags.forEach { self.addTag(name: $0, value: $1) }
+    public func addTags(tags: [[String: String]]) {
+        tags.forEach { return $0.forEach { self.addTag(name: $0, value: $1) } }
     }
 
     /**
