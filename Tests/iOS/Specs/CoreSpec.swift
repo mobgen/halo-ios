@@ -112,7 +112,7 @@ class CoreSpec: BaseSpec {
         
         describe("Framework version") {
             it("is correct") {
-                expect(mgr.frameworkVersion).to(equal("2.0.1"))
+                expect(mgr.frameworkVersion).to(equal("2.2"))
             }
         }
         

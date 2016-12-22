@@ -18,8 +18,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "006A5FB61B318CAC0045395A"
-               BuildableName = "HaloTests.xctest"
-               BlueprintName = "HaloTests"
+               BuildableName = "Halo iOS Tests.xctest"
+               BlueprintName = "Halo iOS Tests"
                ReferencedContainer = "container:Halo.xcodeproj">
             </BuildableReference>
          </TestableReference>
