@@ -130,12 +130,11 @@ public final class Device: NSObject, NSCoding {
      - returns: Returns the removed tag or nil if no tag was found and removed
      */
     public func removeTag(name: String) -> Halo.Tag? {
-
         if let _ = self.tags {
             return tags!.removeValue(forKey: name)
-        } else {
-            return nil
         }
+        
+        return nil
     }
 
     // MARK: Storing and loading device
@@ -150,12 +149,11 @@ public final class Device: NSObject, NSCoding {
 
     /// Retrieve and deserialize a stored user from the user preferences
     class func loadDevice(env: HaloEnvironment = Manager.core.environment) -> Halo.Device? {
-
         if let encodedObject = KeychainHelper.data(forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)") {
             return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? Halo.Device
-        } else {
-            return Device()
         }
+        
+        return Device()
     }
 
     /**
@@ -187,7 +185,7 @@ public final class Device: NSObject, NSCoding {
             dict.updateValue(tagsList, forKey: Keys.Tags)
         }
 
-        dict[Keys.UpdatedAt] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
+        dict[Keys.CreatedAt] = ((self.createdAt?.timeIntervalSince1970) ?? 0) * 1000
         dict[Keys.UpdatedAt] = ((self.updatedAt?.timeIntervalSince1970) ?? 0) * 1000
 
         return dict
