@@ -161,13 +161,13 @@ class DeviceSpec: BaseSpec {
             
             describe("its addTags method") {
                 let numberOfTags = 3
-                var manyTags: [[String: String]] = []
+                var manyTags: [String: String] = [:]
                 var i = 0
                 
                 beforeEach {
                     device = Device()
                     while i < numberOfTags {
-                        manyTags.append(["\(DeviceSpec.TestNameTag)\(i)": "\(DeviceSpec.TestValueTag)\(i)"])
+                        manyTags["\(DeviceSpec.TestNameTag)\(i)"] = "\(DeviceSpec.TestValueTag)\(i)"
                         i += 1
                     }
                     device.addTags(tags: manyTags)
