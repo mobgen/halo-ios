@@ -12,18 +12,6 @@ import Nimble
 
 class SearchFilterSpec : BaseSpec {
     
-    static let TestOperation: SearchFilterOperation = .eq
-    static let TestProperty = "testProperty"
-    static let TestValueString = "testValueString"
-    static let TestValueNumber = NSNumber(value: true)
-    static let TestValueEmptyArray: [Any] = []
-    static let TestValueArrayOfString = [SearchFilterSpec.TestValueString]
-    static let TestValueArrayOfNumber = [SearchFilterSpec.TestValueNumber]
-    static let TestValueArrayOfOther = [["test": "test"]]
-    static let TestValueAny: Any? = nil
-    static let TestType = "string"
-    static let TestCondition = "testCondition"
-    
     override func spec() {
         super.spec()
         
@@ -34,21 +22,21 @@ class SearchFilterSpec : BaseSpec {
             describe("its constructor method") {
                 context("when type is not nil") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueString, type: SearchFilterSpec.TestType)
+                        searchFilter = MockSearchFilter.createSearchFilter()
                     }
                     
                     it("works") {
                         expect(searchFilter).toNot(beNil())
-                        expect(searchFilter.operation).to(equal(SearchFilterSpec.TestOperation.description))
-                        expect(searchFilter.property).to(equal(SearchFilterSpec.TestProperty))
-                        expect(searchFilter.value as? String).to(equal(SearchFilterSpec.TestValueString))
-                        expect(searchFilter.type).to(equal(SearchFilterSpec.TestType))
+                        expect(searchFilter.operation).to(equal(MockSearchFilter.TestOperation.description))
+                        expect(searchFilter.property).to(equal(MockSearchFilter.TestProperty))
+                        expect(searchFilter.value as? String).to(equal(MockSearchFilter.TestValueString))
+                        expect(searchFilter.type).to(equal(MockSearchFilter.TestType))
                     }
                 }
                 
                 context("when type is nil and value is a string") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueString)
+                        searchFilter = MockSearchFilter.createSearchFilterWithoutType()
                     }
                     
                     it("type is string") {
@@ -59,7 +47,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when type is nil and value is a NSNumber") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueNumber)
+                        searchFilter = MockSearchFilter.createSearchFilterWithValueNumberWithoutType()
                     }
                     
                     it("type is number") {
@@ -70,7 +58,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when type is nil and value is a NSArray of String") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueArrayOfString)
+                        searchFilter = MockSearchFilter.createSearchFilterWithValueArrayOfStringWithoutType()
                     }
                     
                     it("type is string") {
@@ -81,7 +69,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when type is nil and value is a NSArray of NSNumber") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueArrayOfNumber)
+                        searchFilter = MockSearchFilter.createSearchFilterWithValueArrayOfNumberWithoutType()
                     }
                     
                     it("type is number") {
@@ -92,7 +80,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when type is nil and value is a NSArray of other type") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueArrayOfOther)
+                        searchFilter = MockSearchFilter.createSearchFilterWithValueArrayOfOtherWithoutType()
                     }
                     
                     it("type is null") {
@@ -103,7 +91,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when type is nil and value is an empty NSArray") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueEmptyArray)
+                        searchFilter = MockSearchFilter.createSearchFilterWithValueEmptyArrayWithoutType()
                     }
                     
                     it("type is string") {
@@ -114,7 +102,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when type is nil and value is type Any") {
                     beforeEach {
-                        searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueAny)
+                        searchFilter = MockSearchFilter.createSearchFilterWithoutType(value: MockSearchFilter.TestValueAny)
                     }
                     
                     it("type is null") {
@@ -126,12 +114,12 @@ class SearchFilterSpec : BaseSpec {
             
             describe("its type property") {
                 beforeEach {
-                    searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: nil)
+                    searchFilter = MockSearchFilter.createSearchFilterWithoutType(value: nil)
                 }
                 
                 context("when value is set with a string") {
                     beforeEach {
-                        searchFilter.value = SearchFilterSpec.TestValueString
+                        searchFilter.value = MockSearchFilter.TestValueString
                     }
                     
                     it("returns string") {
@@ -142,7 +130,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when value is set with a NSNumber") {
                     beforeEach {
-                        searchFilter.value = SearchFilterSpec.TestValueNumber
+                        searchFilter.value = MockSearchFilter.TestValueNumber
                     }
                     
                     it("returns number") {
@@ -153,7 +141,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when value is set with a NSArray of String") {
                     beforeEach {
-                        searchFilter.value = SearchFilterSpec.TestValueArrayOfString
+                        searchFilter.value = MockSearchFilter.TestValueArrayOfString
                     }
                     
                     it("returns string") {
@@ -164,7 +152,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when value is set with a NSArray of Number") {
                     beforeEach {
-                        searchFilter.value = SearchFilterSpec.TestValueArrayOfNumber
+                        searchFilter.value = MockSearchFilter.TestValueArrayOfNumber
                     }
                     
                     it("returns number") {
@@ -175,7 +163,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when value is set with a NSArray of other types") {
                     beforeEach {
-                        searchFilter.value = SearchFilterSpec.TestValueArrayOfOther
+                        searchFilter.value = MockSearchFilter.TestValueArrayOfOther
                     }
                     
                     it("returns null") {
@@ -186,7 +174,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when value is set with an empty NSArray") {
                     beforeEach {
-                        searchFilter.value = SearchFilterSpec.TestValueEmptyArray
+                        searchFilter.value = MockSearchFilter.TestValueEmptyArray
                     }
                     
                     it("returns string") {
@@ -197,7 +185,7 @@ class SearchFilterSpec : BaseSpec {
                 
                 context("when value is set with type Any") {
                     beforeEach {
-                        searchFilter.value = SearchFilterSpec.TestValueAny
+                        searchFilter.value = MockSearchFilter.TestValueAny
                     }
                     
                     it("returns null") {
@@ -211,39 +199,39 @@ class SearchFilterSpec : BaseSpec {
                 var dictReturnedByBody: [String: Any]!
                 
                 beforeEach {
-                    searchFilter = SearchFilter(operation: SearchFilterSpec.TestOperation, property: SearchFilterSpec.TestProperty, value: SearchFilterSpec.TestValueString, type: SearchFilterSpec.TestType)
+                    searchFilter = MockSearchFilter.createSearchFilter()
                 }
                 
                 context("when value is not nil") {
                     beforeEach {
-                        searchFilter.condition = SearchFilterSpec.TestCondition
+                        searchFilter.condition = MockSearchFilter.TestCondition
                         searchFilter.operands = [SearchFilter()]
                         dictReturnedByBody = searchFilter.body
                     }
                     
                     it("works") {
-                        expect(dictReturnedByBody["condition"] as? String).to(equal(SearchFilterSpec.TestCondition))
+                        expect(dictReturnedByBody["condition"] as? String).to(equal(MockSearchFilter.TestCondition))
                         expect((dictReturnedByBody["operands"] as? [[String: Any]])?.count).to(equal(1))
-                        expect(dictReturnedByBody["operation"] as? String).to(equal(SearchFilterSpec.TestOperation.description))
-                        expect(dictReturnedByBody["property"] as? String).to(equal(SearchFilterSpec.TestProperty))
-                        expect(dictReturnedByBody["value"] as? String).to(equal(SearchFilterSpec.TestValueString))
-                        expect(dictReturnedByBody["type"] as? String).to(equal(SearchFilterSpec.TestType))
+                        expect(dictReturnedByBody["operation"] as? String).to(equal(MockSearchFilter.TestOperation.description))
+                        expect(dictReturnedByBody["property"] as? String).to(equal(MockSearchFilter.TestProperty))
+                        expect(dictReturnedByBody["value"] as? String).to(equal(MockSearchFilter.TestValueString))
+                        expect(dictReturnedByBody["type"] as? String).to(equal(MockSearchFilter.TestType))
                     }
                 }
                 
                 context("when value is nil") {
                     beforeEach {
                         searchFilter.value = nil
-                        searchFilter.condition = SearchFilterSpec.TestCondition
+                        searchFilter.condition = MockSearchFilter.TestCondition
                         searchFilter.operands = [SearchFilter()]
                         dictReturnedByBody = searchFilter.body
                     }
                     
                     it("works") {
-                        expect(dictReturnedByBody["condition"] as? String).to(equal(SearchFilterSpec.TestCondition))
+                        expect(dictReturnedByBody["condition"] as? String).to(equal(MockSearchFilter.TestCondition))
                         expect((dictReturnedByBody["operands"] as? [[String: Any]])?.count).to(equal(1))
-                        expect(dictReturnedByBody["operation"] as? String).to(equal(SearchFilterSpec.TestOperation.description))
-                        expect(dictReturnedByBody["property"] as? String).to(equal(SearchFilterSpec.TestProperty))
+                        expect(dictReturnedByBody["operation"] as? String).to(equal(MockSearchFilter.TestOperation.description))
+                        expect(dictReturnedByBody["property"] as? String).to(equal(MockSearchFilter.TestProperty))
                         expect(dictReturnedByBody["value"] as? NSNull).to(equal(NSNull()))
                         expect(dictReturnedByBody["type"] as? String).to(equal("null"))
                     }

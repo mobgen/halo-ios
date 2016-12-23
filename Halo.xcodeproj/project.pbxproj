@@ -112,6 +112,8 @@
 		00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */; };
+		A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C501E0D4958009F237A /* MockSearchFilter.swift */; };
 		A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */; };
 		A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */; };
 		A5D97F3C1E0C1AA200003597 /* MockAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F3B1E0C1AA200003597 /* MockAuthProvider.swift */; };
@@ -273,6 +275,8 @@
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		00A409211D0FE72F005D4FB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchQuerySpec.swift; path = GeneralContent/SearchQuerySpec.swift; sourceTree = "<group>"; };
+		A51B8C501E0D4958009F237A /* MockSearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSearchFilter.swift; sourceTree = "<group>"; };
 		A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFilterSpec.swift; path = GeneralContent/SearchFilterSpec.swift; sourceTree = "<group>"; };
 		A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkAddon.swift; sourceTree = "<group>"; };
 		A5D97F3B1E0C1AA200003597 /* MockAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAuthProvider.swift; sourceTree = "<group>"; };
@@ -559,6 +563,7 @@
 				004612D61E0BE49000B9B306 /* MockAuthProfile.swift */,
 				A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */,
 				A5D97F3B1E0C1AA200003597 /* MockAuthProvider.swift */,
+				A51B8C501E0D4958009F237A /* MockSearchFilter.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -658,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */,
+				A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */,
 			);
 			name = GeneralContent;
 			sourceTree = "<group>";
@@ -1053,6 +1059,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */,
 				004612F91E0BE4B100B9B306 /* BaseSpec.swift in Sources */,
 				A5D97F471E0C353600003597 /* AuthProfileSpec.swift in Sources */,
 				004612FE1E0BE4B100B9B306 /* SearchSpec.swift in Sources */,
@@ -1064,6 +1071,7 @@
 				A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */,
 				A5D97F4A1E0C354100003597 /* AuthProviderSpec.swift in Sources */,
 				004612FC1E0BE4B100B9B306 /* ModelSpec.swift in Sources */,
+				A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */,
 				004612F71E0BE4AD00B9B306 /* MockAuthProfile.swift in Sources */,
 				A5D97F3C1E0C1AA200003597 /* MockAuthProvider.swift in Sources */,
 				A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */,
