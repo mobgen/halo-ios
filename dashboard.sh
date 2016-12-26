@@ -11,7 +11,7 @@ rm -rf sloc.tmp
 # Report the lines
 echo "Total lines: "$TOTAL "Source lines: "$SOURCE "Comment lines: "$COMMENTS
 
-COVERAGE=$(slather coverage --scheme Halo --show Halo.xcodeproj | grep 'Test Coverage' | awk '{print $3}' | sed -e 's/\%//g')
+COVERAGE=$(slather coverage --scheme 'Halo iOS' --show Halo.xcodeproj | grep 'Test Coverage' | awk '{print $3}' | sed -e 's/\%//g')
 
 echo "Code coverage: "$COVERAGE
 
