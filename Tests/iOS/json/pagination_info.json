@@ -1,0 +1,7 @@
+{
+    "page": 2,
+    "limit": 20,
+    "offset": 20,
+    "totalItems": 100,
+    "totalPages": 5
+}

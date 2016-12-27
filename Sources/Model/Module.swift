@@ -79,7 +79,6 @@ open class Module: NSObject, NSCoding {
         module.isSingle = dict[Keys.IsSingle] as? Bool ?? false
         module.createdBy = dict[Keys.CreatedBy] as? String
         module.updatedBy = dict[Keys.UpdatedBy] as? String
-        module.deletedAt = dict[Keys.DeletedAt] as? Date
         module.deletedBy = dict[Keys.DeletedBy] as? String
         module.tags = [:]
 
@@ -100,6 +99,10 @@ open class Module: NSObject, NSCoding {
         if let updated = dict[Keys.UpdatedAt] as? Double {
             module.updatedAt = Date(timeIntervalSince1970: updated/1000)
         }
+        
+        if let deleted = dict[Keys.DeletedAt] as? Double {
+            module.deletedAt = Date(timeIntervalSince1970: deleted/1000)
+        }
 
         return module
     }
@@ -107,12 +110,12 @@ open class Module: NSObject, NSCoding {
     public required init?(coder aDecoder: NSCoder) {
         super.init()
         id = aDecoder.decodeObject(forKey: Keys.Id) as? String
-        customerId = aDecoder.decodeInteger(forKey: Keys.Customer)
+        customerId = aDecoder.decodeObject(forKey: Keys.Customer) as? Int
         name = aDecoder.decodeObject(forKey: Keys.Name) as? String
         isSingle = aDecoder.decodeObject(forKey: Keys.IsSingle) as? Bool ?? false
         createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String
         updatedBy = aDecoder.decodeObject(forKey: Keys.UpdatedBy) as? String
-        tags = aDecoder.decodeObject(forKey: Keys.Tags) as? [String: Halo.Tag] ?? [:]
+        tags = aDecoder.decodeObject(forKey: Keys.Tags) as! [String: Halo.Tag]
         createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date
         updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
         deletedAt = aDecoder.decodeObject(forKey: Keys.DeletedAt) as? Date

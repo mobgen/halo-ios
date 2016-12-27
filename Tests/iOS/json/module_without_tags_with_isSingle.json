@@ -1,0 +1,16 @@
+{
+    "name": "testModule",
+    "externalId": 1,
+    "isSingle": false,
+    "customerId": 2,
+    "createdBy": "testAdmin",
+    "pushTemplates": [],
+    "importers": [],
+    "exporters": [],
+    "deletedAt": 1474063320249,
+    "updatedBy": "undefined",
+    "deletedBy": "testAdmin2",
+    "createdAt": 1474036570134,
+    "updatedAt": 1474063790249,
+    "id": "000000000000000000000004"
+}
