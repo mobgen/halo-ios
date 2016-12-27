@@ -25,8 +25,9 @@ class MockModule : Module {
     static let TestUpdatedAt = Date(timeIntervalSince1970: 1474063790249/1000)
     static let TestDeletedAt = Date(timeIntervalSince1970: 1474063320249/1000)
     
-    class func createFromJson(_ filePath: String) -> Module? {
+    class func createFromJson(_ filePath: String? = OHPathForFileInBundle("module_without_tags_with_isSingle.json", Bundle.init(for: MockModule.classForCoder()))) -> Module? {
         guard
+            let filePath = filePath,
             let jsonData = NSData(contentsOfFile: filePath) as? Data,
             let jsonResult = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]),
             let dict = jsonResult as? [String: AnyObject]

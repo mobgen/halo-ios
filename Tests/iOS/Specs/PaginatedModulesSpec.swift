@@ -27,7 +27,7 @@ class PaginatedModulesSpec : BaseSpec {
                         // Save to temp file.
                         let path = NSTemporaryDirectory()
                         let locToSave = path.appending("testPaginatedModule")
-                        paginatedModule = PaginatedModules(paginationInfo: MockPaginationInfo.createPaginationInfo(), modules: [MockModule.createFromJson(OHPathForFile("module_without_tags_with_isSingle.json", type(of: self))!)!])
+                        paginatedModule = PaginatedModules(paginationInfo: MockPaginationInfo.createPaginationInfo(), modules: [MockModule.createFromJson()!])
                         NSKeyedArchiver.archiveRootObject(paginatedModule, toFile: locToSave)
                         paginatedModuleRestored = NSKeyedUnarchiver.unarchiveObject(withFile: locToSave) as? PaginatedModules
                     }

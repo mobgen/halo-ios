@@ -37,16 +37,7 @@ class PaginationInfoSpec : BaseSpec {
                 
                 context("with a dictionary with values") {
                     beforeEach {
-                        guard
-                            let filePath = OHPathForFile("pagination_info.json", type(of: self)),
-                            let jsonData = NSData(contentsOfFile: filePath) as? Data,
-                            let jsonResult = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]),
-                            let dict = jsonResult as? [String: AnyObject]
-                            else {
-                                XCTFail("The creation of fake PaginationInfo fails.")
-                                return
-                        }
-                        paginationInfo = PaginationInfo.fromDictionary(dict: dict)
+                        paginationInfo = MockPaginationInfo.createFromJson()
                     }
                     
                     it("works") {
