@@ -890,7 +890,10 @@
             "publishedAt": null,
             "createdBy": "Name updated Super Admin",
             "customerId": 1,
-            "values": {},
+            "values": {
+                "testKeyField": "key",
+                "testValueField": "value"
+            },
             "pushSchedule": null,
             "externalId": null,
             "revision": 0,

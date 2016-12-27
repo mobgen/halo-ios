@@ -19,15 +19,11 @@ class CoreSpec: BaseSpec {
         
         let mgr = Halo.Manager.core
         
-        beforeSuite {
-            mgr.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
-            mgr.logLevel = .info
-        }
-        
         describe("The core manager") {
             
-            afterEach {
-                OHHTTPStubs.removeAllStubs()
+            beforeEach {
+                mgr.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+                mgr.logLevel = .info
             }
             
             context("when setting a .none defaultOfflinePolicy") {
@@ -77,6 +73,10 @@ class CoreSpec: BaseSpec {
                     }.name = "Successful appuser stub"
                 }
                 
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
+                }
+                
                 it("has been initialised properly") {
                     expect(mgr).toNot(beNil())
                 }
@@ -101,6 +101,10 @@ class CoreSpec: BaseSpec {
                         let filePath = OHPathForFile("oauth_failure.json", type(of: self))
                         return fixture(filePath: filePath!, status: 401, headers: ["Content-Type": "application/json"])
                     }.name = "Failed oauth stub"
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("returns an error") {
@@ -131,6 +135,10 @@ class CoreSpec: BaseSpec {
                         let filePath = OHPathForFile("segmentation_appuser_failure.json", type(of: self))
                         return fixture(filePath: filePath!, status: 400, headers: ["Content-Type": "application/json"])
                     }.name = "Failed appuser stub"
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("user has not changed") {
@@ -195,6 +203,10 @@ class CoreSpec: BaseSpec {
                     }
                 }
                 
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
+                }
+                
                 it("succeeds") {
                     expect(Halo.Router.appToken).toNot(beNil())
                 }
@@ -219,6 +231,10 @@ class CoreSpec: BaseSpec {
                             done()
                         }
                     }
+                }
+                
+                afterEach {
+                    OHHTTPStubs.removeAllStubs()
                 }
                 
                 it("fails") {

@@ -115,16 +115,22 @@
 		A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */; };
 		A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C501E0D4958009F237A /* MockSearchFilter.swift */; };
 		A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */; };
-		A587765A1E126C550090E8C3 /* PaginatedModulesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776581E126C220090E8C3 /* PaginatedModulesSpec.swift */; };
-		A587765C1E126CAC0090E8C3 /* PaginationInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587765B1E126CAC0090E8C3 /* PaginationInfoSpec.swift */; };
 		A587765F1E126D3E0090E8C3 /* pagination_info.json in Resources */ = {isa = PBXBuildFile; fileRef = A587765E1E126D3E0090E8C3 /* pagination_info.json */; };
 		A58776611E126D7D0090E8C3 /* MockPaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776601E126D7D0090E8C3 /* MockPaginationInfo.swift */; };
 		A58776631E1273290090E8C3 /* module_without_tags_with_isSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = A58776621E1273290090E8C3 /* module_without_tags_with_isSingle.json */; };
 		A58776651E1273540090E8C3 /* MockModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776641E1273540090E8C3 /* MockModule.swift */; };
-		A58776671E12759C0090E8C3 /* ModuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776661E12759C0090E8C3 /* ModuleSpec.swift */; };
 		A58776691E127F390090E8C3 /* module_with_tags_without_isSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = A58776681E127F390090E8C3 /* module_with_tags_without_isSingle.json */; };
-		A587766B1E128B560090E8C3 /* ContentInstanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587766A1E128B560090E8C3 /* ContentInstanceSpec.swift */; };
 		A587766D1E128CF20090E8C3 /* MockContentInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587766C1E128CF20090E8C3 /* MockContentInstance.swift */; };
+		A58776781E1290F20090E8C3 /* ContentInstanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776721E1290F20090E8C3 /* ContentInstanceSpec.swift */; };
+		A58776791E1290F20090E8C3 /* ModuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776731E1290F20090E8C3 /* ModuleSpec.swift */; };
+		A587767A1E1290F20090E8C3 /* PaginatedContentInstancesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776741E1290F20090E8C3 /* PaginatedContentInstancesSpec.swift */; };
+		A587767B1E1290F20090E8C3 /* PaginatedModulesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776751E1290F20090E8C3 /* PaginatedModulesSpec.swift */; };
+		A587767C1E1290F20090E8C3 /* PaginationInfoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776761E1290F20090E8C3 /* PaginationInfoSpec.swift */; };
+		A587767D1E1290F20090E8C3 /* TokenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776771E1290F20090E8C3 /* TokenSpec.swift */; };
+		A587767F1E1291590090E8C3 /* token.json in Resources */ = {isa = PBXBuildFile; fileRef = A587767E1E1291590090E8C3 /* token.json */; };
+		A58776811E12925A0090E8C3 /* MockToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776801E12925A0090E8C3 /* MockToken.swift */; };
+		A5C65F3B1E1298C90055E667 /* TranslationsHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C65F391E12989F0055E667 /* TranslationsHelperSpec.swift */; };
+		A5C65F3D1E1299340055E667 /* MockTranslationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C65F3C1E1299340055E667 /* MockTranslationsHelper.swift */; };
 		A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */; };
 		A5D97F3C1E0C1AA200003597 /* MockAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F3B1E0C1AA200003597 /* MockAuthProvider.swift */; };
 		A5D97F471E0C353600003597 /* AuthProfileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F451E0C353600003597 /* AuthProfileSpec.swift */; };
@@ -288,16 +294,22 @@
 		A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchQuerySpec.swift; path = GeneralContent/SearchQuerySpec.swift; sourceTree = "<group>"; };
 		A51B8C501E0D4958009F237A /* MockSearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSearchFilter.swift; sourceTree = "<group>"; };
 		A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFilterSpec.swift; path = GeneralContent/SearchFilterSpec.swift; sourceTree = "<group>"; };
-		A58776581E126C220090E8C3 /* PaginatedModulesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedModulesSpec.swift; sourceTree = "<group>"; };
-		A587765B1E126CAC0090E8C3 /* PaginationInfoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationInfoSpec.swift; sourceTree = "<group>"; };
 		A587765E1E126D3E0090E8C3 /* pagination_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pagination_info.json; sourceTree = "<group>"; };
 		A58776601E126D7D0090E8C3 /* MockPaginationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockPaginationInfo.swift; sourceTree = "<group>"; };
 		A58776621E1273290090E8C3 /* module_without_tags_with_isSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = module_without_tags_with_isSingle.json; sourceTree = "<group>"; };
 		A58776641E1273540090E8C3 /* MockModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockModule.swift; sourceTree = "<group>"; };
-		A58776661E12759C0090E8C3 /* ModuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleSpec.swift; sourceTree = "<group>"; };
 		A58776681E127F390090E8C3 /* module_with_tags_without_isSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = module_with_tags_without_isSingle.json; sourceTree = "<group>"; };
-		A587766A1E128B560090E8C3 /* ContentInstanceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentInstanceSpec.swift; sourceTree = "<group>"; };
 		A587766C1E128CF20090E8C3 /* MockContentInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockContentInstance.swift; sourceTree = "<group>"; };
+		A58776721E1290F20090E8C3 /* ContentInstanceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentInstanceSpec.swift; path = Model/ContentInstanceSpec.swift; sourceTree = "<group>"; };
+		A58776731E1290F20090E8C3 /* ModuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModuleSpec.swift; path = Model/ModuleSpec.swift; sourceTree = "<group>"; };
+		A58776741E1290F20090E8C3 /* PaginatedContentInstancesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaginatedContentInstancesSpec.swift; path = Model/PaginatedContentInstancesSpec.swift; sourceTree = "<group>"; };
+		A58776751E1290F20090E8C3 /* PaginatedModulesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaginatedModulesSpec.swift; path = Model/PaginatedModulesSpec.swift; sourceTree = "<group>"; };
+		A58776761E1290F20090E8C3 /* PaginationInfoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaginationInfoSpec.swift; path = Model/PaginationInfoSpec.swift; sourceTree = "<group>"; };
+		A58776771E1290F20090E8C3 /* TokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenSpec.swift; path = Model/TokenSpec.swift; sourceTree = "<group>"; };
+		A587767E1E1291590090E8C3 /* token.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = token.json; sourceTree = "<group>"; };
+		A58776801E12925A0090E8C3 /* MockToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockToken.swift; sourceTree = "<group>"; };
+		A5C65F391E12989F0055E667 /* TranslationsHelperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslationsHelperSpec.swift; path = Helpers/TranslationsHelperSpec.swift; sourceTree = "<group>"; };
+		A5C65F3C1E1299340055E667 /* MockTranslationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTranslationsHelper.swift; sourceTree = "<group>"; };
 		A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkAddon.swift; sourceTree = "<group>"; };
 		A5D97F3B1E0C1AA200003597 /* MockAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAuthProvider.swift; sourceTree = "<group>"; };
 		A5D97F451E0C353600003597 /* AuthProfileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthProfileSpec.swift; path = Model/AuthProfileSpec.swift; sourceTree = "<group>"; };
@@ -587,6 +599,8 @@
 				A58776601E126D7D0090E8C3 /* MockPaginationInfo.swift */,
 				A58776641E1273540090E8C3 /* MockModule.swift */,
 				A587766C1E128CF20090E8C3 /* MockContentInstance.swift */,
+				A58776801E12925A0090E8C3 /* MockToken.swift */,
+				A5C65F3C1E1299340055E667 /* MockTranslationsHelper.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -594,6 +608,7 @@
 		004612D71E0BE49000B9B306 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				A5C65F361E1298270055E667 /* Helpers */,
 				A54661751E0D35AB00D550A7 /* GeneralContent */,
 				A5D97F401E0C201800003597 /* Model */,
 				A5D97F3D1E0C1AF500003597 /* Providers */,
@@ -698,8 +713,17 @@
 				A587765E1E126D3E0090E8C3 /* pagination_info.json */,
 				A58776621E1273290090E8C3 /* module_without_tags_with_isSingle.json */,
 				A58776681E127F390090E8C3 /* module_with_tags_without_isSingle.json */,
+				A587767E1E1291590090E8C3 /* token.json */,
 			);
 			name = models;
+			sourceTree = "<group>";
+		};
+		A5C65F361E1298270055E667 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A5C65F391E12989F0055E667 /* TranslationsHelperSpec.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		A5D97F381E0C146200003597 /* Managers */ = {
@@ -724,10 +748,12 @@
 			children = (
 				A5D97F451E0C353600003597 /* AuthProfileSpec.swift */,
 				A5D97F461E0C353600003597 /* DeviceSpec.swift */,
-				A58776581E126C220090E8C3 /* PaginatedModulesSpec.swift */,
-				A587765B1E126CAC0090E8C3 /* PaginationInfoSpec.swift */,
-				A58776661E12759C0090E8C3 /* ModuleSpec.swift */,
-				A587766A1E128B560090E8C3 /* ContentInstanceSpec.swift */,
+				A58776721E1290F20090E8C3 /* ContentInstanceSpec.swift */,
+				A58776731E1290F20090E8C3 /* ModuleSpec.swift */,
+				A58776741E1290F20090E8C3 /* PaginatedContentInstancesSpec.swift */,
+				A58776751E1290F20090E8C3 /* PaginatedModulesSpec.swift */,
+				A58776761E1290F20090E8C3 /* PaginationInfoSpec.swift */,
+				A58776771E1290F20090E8C3 /* TokenSpec.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -991,6 +1017,7 @@
 				004612EC1E0BE4A700B9B306 /* module_list_success_paginated.json in Resources */,
 				004612E91E0BE4A700B9B306 /* login_success.json in Resources */,
 				A58776691E127F390090E8C3 /* module_with_tags_without_isSingle.json in Resources */,
+				A587767F1E1291590090E8C3 /* token.json in Resources */,
 				004612E81E0BE4A700B9B306 /* login_error.json in Resources */,
 				004612EF1E0BE4A700B9B306 /* register_error.json in Resources */,
 				004612ED1E0BE4A700B9B306 /* oauth_failure.json in Resources */,
@@ -1100,27 +1127,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58776811E12925A0090E8C3 /* MockToken.swift in Sources */,
 				A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */,
 				A58776651E1273540090E8C3 /* MockModule.swift in Sources */,
-				A587766B1E128B560090E8C3 /* ContentInstanceSpec.swift in Sources */,
 				004612F91E0BE4B100B9B306 /* BaseSpec.swift in Sources */,
-				A587765A1E126C550090E8C3 /* PaginatedModulesSpec.swift in Sources */,
 				A5D97F471E0C353600003597 /* AuthProfileSpec.swift in Sources */,
+				A587767A1E1290F20090E8C3 /* PaginatedContentInstancesSpec.swift in Sources */,
 				004612FE1E0BE4B100B9B306 /* SearchSpec.swift in Sources */,
+				A587767D1E1290F20090E8C3 /* TokenSpec.swift in Sources */,
+				A587767B1E1290F20090E8C3 /* PaginatedModulesSpec.swift in Sources */,
 				A5D97F4E1E0C354B00003597 /* NetworkManagerSpec.swift in Sources */,
-				A587765C1E126CAC0090E8C3 /* PaginationInfoSpec.swift in Sources */,
 				A5D97F481E0C353600003597 /* DeviceSpec.swift in Sources */,
 				004612FD1E0BE4B100B9B306 /* ModulesSpec.swift in Sources */,
 				A58776611E126D7D0090E8C3 /* MockPaginationInfo.swift in Sources */,
 				004612FA1E0BE4B100B9B306 /* CloudinarySpec.swift in Sources */,
-				A58776671E12759C0090E8C3 /* ModuleSpec.swift in Sources */,
 				004612E31E0BE49F00B9B306 /* DummyAddon.swift in Sources */,
 				A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */,
+				A58776791E1290F20090E8C3 /* ModuleSpec.swift in Sources */,
 				A587766D1E128CF20090E8C3 /* MockContentInstance.swift in Sources */,
+				A5C65F3B1E1298C90055E667 /* TranslationsHelperSpec.swift in Sources */,
 				A5D97F4A1E0C354100003597 /* AuthProviderSpec.swift in Sources */,
+				A58776781E1290F20090E8C3 /* ContentInstanceSpec.swift in Sources */,
 				004612FC1E0BE4B100B9B306 /* ModelSpec.swift in Sources */,
 				A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */,
 				004612F71E0BE4AD00B9B306 /* MockAuthProfile.swift in Sources */,
+				A5C65F3D1E1299340055E667 /* MockTranslationsHelper.swift in Sources */,
+				A587767C1E1290F20090E8C3 /* PaginationInfoSpec.swift in Sources */,
 				A5D97F3C1E0C1AA200003597 /* MockAuthProvider.swift in Sources */,
 				A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */,
 				A5D97F4D1E0C354B00003597 /* AuthManagerSpec.swift in Sources */,

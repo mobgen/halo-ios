@@ -131,7 +131,6 @@ open class TranslationsHelper: NSObject {
             instances.forEach { item in
                 if let key = item.values[keyField] as? String,
                     let value = item.values[valueField] as? String {
-                    
                     self.translationsMap.updateValue(value, forKey: key)
                 }
             }

@@ -19,16 +19,16 @@ class SyncSpec: BaseSpec {
         
         let content = Halo.Manager.content
         
-        beforeSuite {
-            Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
-            Manager.core.startup()
-        }
-        
         describe("The sync process") {
             
             let moduleId = "571f38b9bb7f372900a14cbc"
             let query = SyncQuery(moduleId: moduleId)
             let syncDate = Date(timeIntervalSince1970: 1475046170088 / 1000)
+            
+            beforeEach {                
+                Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+                Manager.core.startup()
+            }
             
             context("requesting everything") {
                 

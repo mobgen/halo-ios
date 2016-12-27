@@ -87,7 +87,7 @@ open class ContentManager: NSObject, HaloManager {
                 self.processSyncResult(query, syncResult: syncResult, wasFirstSync: isFirstSync, completionHandler: handler)
             case .failure(let e):
                 LogMessage(error: e).print()
-                handler(query.moduleId, nil)
+                handler(query.moduleId, e)
             }
         }
     }
