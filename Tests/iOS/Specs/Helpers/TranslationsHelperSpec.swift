@@ -214,12 +214,12 @@ class TranslationsHelperSpec : BaseSpec {
                 }
             }
             
-            xcontext("while already loading another sync") {
+            context("while already loading another sync") {
                 beforeEach {
                     stub(condition: isPath("/api/generalcontent/instance/sync")) { _ in
                         let filePath = OHPathForFile("full_sync.json", type(of: self))
-                        return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"]).requestTime(1, responseTime: 3)
-                    }.name = "Successful sync stub with 1 second of request time and 3 seconds of response time"
+                        return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"]).requestTime(1, responseTime: 1)
+                    }.name = "Successful sync stub with 1 second of request time and 1 second of response time"
                     
                     Manager.content.removeSyncedInstances(MockTranslationsHelper.TestModuleId)
                     Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
@@ -234,31 +234,52 @@ class TranslationsHelperSpec : BaseSpec {
                 describe("its getText method") {
                     var result: String?
                     
-                    beforeEach {
-                        waitUntil(timeout: 10) { done in
-                            translationsHelper.addCompletionHandler { _ in
-                                done()
+                    context("when asking for a key before loading is set to false") {
+                        beforeEach {
+                            waitUntil { done in
+                                translationsHelper
+                                    .loadingText(text: MockTranslationsHelper.TestLoadingText)
+                                    .load()
+                                translationsHelper.getText(key: "key") { resultResponse in
+                                    result = resultResponse
+                                    done()
+                                }
                             }
-                            translationsHelper
-                                .loadingText(text: MockTranslationsHelper.TestLoadingText)
-                                .load()
                         }
                         
-                        waitUntil(timeout: 3) { done in
-                            translationsHelper.getText(key: "key") { resultResponse in
-                                result = resultResponse
-                                done()
-                            }
+                        afterEach {
+                            OHHTTPStubs.removeAllStubs()
+                        }
+                        
+                        it("returns the loadingText") {
+                            expect(result).toNot(beNil())
+                            expect(result).to(equal(MockTranslationsHelper.TestLoadingText))
                         }
                     }
                     
-                    afterEach {
-                        OHHTTPStubs.removeAllStubs()
-                    }
-                    
-                    it("returns the loadingText") {
-                        expect(result).toNot(beNil())
-                        expect(result).to(equal(MockTranslationsHelper.TestLoadingText))
+                    context("when asking for a key after loading is set to false") {
+                        beforeEach {
+                            waitUntil(timeout: 15) { done in
+                                translationsHelper
+                                    .loadingText(text: MockTranslationsHelper.TestLoadingText)
+                                    .load()
+                                translationsHelper.getText(key: "key") { resultResponse in
+                                    result = resultResponse
+                                    if resultResponse == "value" {
+                                        done()
+                                    }
+                                }
+                            }
+                        }
+                        
+                        afterEach {
+                            OHHTTPStubs.removeAllStubs()
+                        }
+                        
+                        it("returns the loadingText") {
+                            expect(result).toNot(beNil())
+                            expect(result).to(equal("value"))
+                        }
                     }
                 }
             }
