@@ -117,6 +117,8 @@
 		A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */; };
 		A5562EA41E155AC100261749 /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5562EA21E155AA200261749 /* UserSpec.swift */; };
 		A5562EA71E155B7B00261749 /* MockUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5562EA51E155B2500261749 /* MockUser.swift */; };
+		A5562EA91E155F8D00261749 /* TagSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5562EA81E155F8D00261749 /* TagSpec.swift */; };
+		A5562EAB1E155FEE00261749 /* MockTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5562EAA1E155FEE00261749 /* MockTag.swift */; };
 		A587765F1E126D3E0090E8C3 /* pagination_info.json in Resources */ = {isa = PBXBuildFile; fileRef = A587765E1E126D3E0090E8C3 /* pagination_info.json */; };
 		A58776611E126D7D0090E8C3 /* MockPaginationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776601E126D7D0090E8C3 /* MockPaginationInfo.swift */; };
 		A58776631E1273290090E8C3 /* module_without_tags_with_isSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = A58776621E1273290090E8C3 /* module_without_tags_with_isSingle.json */; };
@@ -301,6 +303,8 @@
 		A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFilterSpec.swift; path = GeneralContent/SearchFilterSpec.swift; sourceTree = "<group>"; };
 		A5562EA21E155AA200261749 /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSpec.swift; path = Model/UserSpec.swift; sourceTree = "<group>"; };
 		A5562EA51E155B2500261749 /* MockUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUser.swift; sourceTree = "<group>"; };
+		A5562EA81E155F8D00261749 /* TagSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagSpec.swift; path = Model/TagSpec.swift; sourceTree = "<group>"; };
+		A5562EAA1E155FEE00261749 /* MockTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTag.swift; sourceTree = "<group>"; };
 		A587765E1E126D3E0090E8C3 /* pagination_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pagination_info.json; sourceTree = "<group>"; };
 		A58776601E126D7D0090E8C3 /* MockPaginationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockPaginationInfo.swift; sourceTree = "<group>"; };
 		A58776621E1273290090E8C3 /* module_without_tags_with_isSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = module_without_tags_with_isSingle.json; sourceTree = "<group>"; };
@@ -613,6 +617,7 @@
 				A5C65F3C1E1299340055E667 /* MockTranslationsHelper.swift */,
 				A5BE28E11E1541FB00D35804 /* MockUserProfile.swift */,
 				A5562EA51E155B2500261749 /* MockUser.swift */,
+				A5562EAA1E155FEE00261749 /* MockTag.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -769,6 +774,7 @@
 				A58776771E1290F20090E8C3 /* TokenSpec.swift */,
 				A5BE28DF1E15413500D35804 /* UserProfileSpec.swift */,
 				A5562EA21E155AA200261749 /* UserSpec.swift */,
+				A5562EA81E155F8D00261749 /* TagSpec.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1145,6 +1151,7 @@
 				A5BE28E21E1541FB00D35804 /* MockUserProfile.swift in Sources */,
 				A58776811E12925A0090E8C3 /* MockToken.swift in Sources */,
 				A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */,
+				A5562EA91E155F8D00261749 /* TagSpec.swift in Sources */,
 				A58776651E1273540090E8C3 /* MockModule.swift in Sources */,
 				004612F91E0BE4B100B9B306 /* BaseSpec.swift in Sources */,
 				A5D97F471E0C353600003597 /* AuthProfileSpec.swift in Sources */,
@@ -1161,6 +1168,7 @@
 				004612FA1E0BE4B100B9B306 /* CloudinarySpec.swift in Sources */,
 				004612E31E0BE49F00B9B306 /* DummyAddon.swift in Sources */,
 				A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */,
+				A5562EAB1E155FEE00261749 /* MockTag.swift in Sources */,
 				A58776791E1290F20090E8C3 /* ModuleSpec.swift in Sources */,
 				A587766D1E128CF20090E8C3 /* MockContentInstance.swift in Sources */,
 				A5C65F3B1E1298C90055E667 /* TranslationsHelperSpec.swift in Sources */,
