@@ -17,6 +17,13 @@ class MockToken : Token {
     static let TestTokenType = "Bearer"
     static let TestExpiresIn = NSNumber(value: 1478875644666)
     
+    static let TestDict: [String: Any] = [
+        Token.Keys.AccessToken: MockToken.TestAccessToken,
+        Token.Keys.RefreshToken: MockToken.TestRefreshToken,
+        Token.Keys.TokenType: MockToken.TestTokenType,
+        Token.Keys.ExpiresIn: MockToken.TestExpiresIn
+    ]
+    
     class func createFromJson(_ filePath: String? = OHPathForFileInBundle("token.json", Bundle.init(for: MockToken.classForCoder()))) -> Token? {
         guard
             let filePath = filePath,

@@ -58,6 +58,7 @@ public class UserProfile: NSObject, NSCoding {
         name = aDecoder.decodeObject(forKey: Keys.Name) as? String ?? ""
         surname = aDecoder.decodeObject(forKey: Keys.Surname) as? String ?? ""
         super.init()
+        identifiedId = aDecoder.decodeObject(forKey: Keys.Id) as? String
         displayName = aDecoder.decodeObject(forKey: Keys.DisplayName) as? String
         profilePictureUrl = aDecoder.decodeObject(forKey: Keys.PhotoUrl) as? String
     }
