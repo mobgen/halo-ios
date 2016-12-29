@@ -241,14 +241,12 @@ class TranslationsHelperSpec : BaseSpec {
                                     .loadingText(text: MockTranslationsHelper.TestLoadingText)
                                     .load()
                                 translationsHelper.getText(key: "key") { resultResponse in
-                                    result = resultResponse
-                                    done()
+                                    if resultResponse == MockTranslationsHelper.TestLoadingText {
+                                        result = resultResponse
+                                        done()
+                                    }
                                 }
                             }
-                        }
-                        
-                        afterEach {
-                            OHHTTPStubs.removeAllStubs()
                         }
                         
                         it("returns the loadingText") {
@@ -259,21 +257,17 @@ class TranslationsHelperSpec : BaseSpec {
                     
                     context("when asking for a key after loading is set to false") {
                         beforeEach {
-                            waitUntil(timeout: 15) { done in
+                            waitUntil(timeout: 10) { done in
                                 translationsHelper
                                     .loadingText(text: MockTranslationsHelper.TestLoadingText)
                                     .load()
                                 translationsHelper.getText(key: "key") { resultResponse in
-                                    result = resultResponse
                                     if resultResponse == "value" {
+                                        result = resultResponse
                                         done()
                                     }
                                 }
                             }
-                        }
-                        
-                        afterEach {
-                            OHHTTPStubs.removeAllStubs()
                         }
                         
                         it("returns the loadingText") {

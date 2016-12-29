@@ -131,6 +131,7 @@
 		A58776811E12925A0090E8C3 /* MockToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58776801E12925A0090E8C3 /* MockToken.swift */; };
 		A5C65F3B1E1298C90055E667 /* TranslationsHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C65F391E12989F0055E667 /* TranslationsHelperSpec.swift */; };
 		A5C65F3D1E1299340055E667 /* MockTranslationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C65F3C1E1299340055E667 /* MockTranslationsHelper.swift */; };
+		A5D176301E13C5F50068CCC1 /* SearchFilterHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D1762E1E13C5CB0068CCC1 /* SearchFilterHelperSpec.swift */; };
 		A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */; };
 		A5D97F3C1E0C1AA200003597 /* MockAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F3B1E0C1AA200003597 /* MockAuthProvider.swift */; };
 		A5D97F471E0C353600003597 /* AuthProfileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D97F451E0C353600003597 /* AuthProfileSpec.swift */; };
@@ -310,6 +311,7 @@
 		A58776801E12925A0090E8C3 /* MockToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockToken.swift; sourceTree = "<group>"; };
 		A5C65F391E12989F0055E667 /* TranslationsHelperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranslationsHelperSpec.swift; path = Helpers/TranslationsHelperSpec.swift; sourceTree = "<group>"; };
 		A5C65F3C1E1299340055E667 /* MockTranslationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTranslationsHelper.swift; sourceTree = "<group>"; };
+		A5D1762E1E13C5CB0068CCC1 /* SearchFilterHelperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFilterHelperSpec.swift; path = Helpers/SearchFilterHelperSpec.swift; sourceTree = "<group>"; };
 		A5D97F391E0C147E00003597 /* MockNetworkAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNetworkAddon.swift; sourceTree = "<group>"; };
 		A5D97F3B1E0C1AA200003597 /* MockAuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAuthProvider.swift; sourceTree = "<group>"; };
 		A5D97F451E0C353600003597 /* AuthProfileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthProfileSpec.swift; path = Model/AuthProfileSpec.swift; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 			isa = PBXGroup;
 			children = (
 				A5C65F391E12989F0055E667 /* TranslationsHelperSpec.swift */,
+				A5D1762E1E13C5CB0068CCC1 /* SearchFilterHelperSpec.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1157,6 +1160,7 @@
 				A5D97F3A1E0C147E00003597 /* MockNetworkAddon.swift in Sources */,
 				A5D97F4D1E0C354B00003597 /* AuthManagerSpec.swift in Sources */,
 				004612FF1E0BE4B100B9B306 /* SyncSpec.swift in Sources */,
+				A5D176301E13C5F50068CCC1 /* SearchFilterHelperSpec.swift in Sources */,
 				004612FB1E0BE4B100B9B306 /* CoreSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
