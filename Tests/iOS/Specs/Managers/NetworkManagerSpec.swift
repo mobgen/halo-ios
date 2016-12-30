@@ -17,27 +17,18 @@ class NetworkManagerSpec : BaseSpec {
     override func spec() {
         super.spec()
         
-        beforeSuite {
-            stub(condition: isPath("/api/segmentation/appuser")) { _ in
-                let stubPath = OHPathForFile("segmentation_appuser_success.json", type(of: self))
-                return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
-            }.name = "Successful segmentation stub"
-            
-            stub(condition: isPath("/api/oauth/token")) { _ in
-                let stubPath = OHPathForFile("oauth_success.json", type(of: self))
-                return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
-            }.name = "Successful oauth stub"
-            
-            Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
-            Manager.core.logLevel = .info
-            Manager.core.startup()
-        }
-        
-        afterSuite {
-            OHHTTPStubs.removeAllStubs()
-        }
-        
         describe("NetworkManager") {
+            
+            beforeEach {
+                Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+                Manager.core.logLevel = .info
+                Manager.core.startup()
+            }
+            
+            afterEach {                
+                Router.appToken = nil
+                Router.userToken = nil
+            }
             
             context("its registerAddon method") {
                 let testNetworkAddon = MockNetworkAddon()

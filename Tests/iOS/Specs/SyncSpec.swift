@@ -30,6 +30,11 @@ class SyncSpec: BaseSpec {
                 Manager.core.startup()
             }
             
+            afterEach {                
+                Router.appToken = nil
+                Router.userToken = nil
+            }
+            
             context("requesting everything") {
                 
                 beforeEach {

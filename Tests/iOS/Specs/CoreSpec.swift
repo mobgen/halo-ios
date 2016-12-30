@@ -71,10 +71,19 @@ class CoreSpec: BaseSpec {
                         let filePath = OHPathForFile("segmentation_appuser_success.json", type(of: self))
                         return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful appuser stub"
+                    
+                    waitUntil { done in
+                        mgr.startup { success in
+                            done()
+                        }
+                    }
                 }
                 
                 afterEach {
                     OHHTTPStubs.removeAllStubs()
+                    
+                    Router.appToken = nil
+                    Router.userToken = nil
                 }
                 
                 it("has been initialised properly") {
@@ -82,12 +91,6 @@ class CoreSpec: BaseSpec {
                 }
                 
                 it("starts properly") {
-                    waitUntil { done in
-                        mgr.startup { success in
-                            done()
-                        }
-                    }
-                    
                     expect(mgr.device).toNot(beNil())
                 }
             }
@@ -95,16 +98,19 @@ class CoreSpec: BaseSpec {
             context("when the authentication returns a 401 error") {
                 
                 beforeEach {
-                    mgr.startup()
-                    
                     stub(condition: pathStartsWith("/api/oauth/token")) { _ in
                         let filePath = OHPathForFile("oauth_failure.json", type(of: self))
                         return fixture(filePath: filePath!, status: 401, headers: ["Content-Type": "application/json"])
                     }.name = "Failed oauth stub"
+                    
+                    mgr.startup()
                 }
                 
                 afterEach {
                     OHHTTPStubs.removeAllStubs()
+                    
+                    Router.appToken = nil
+                    Router.userToken = nil
                 }
                 
                 it("returns an error") {

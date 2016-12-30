@@ -17,15 +17,38 @@ class ModulesSpec : BaseSpec {
         
         super.spec()
         
-        describe("Retrieving all modules") {    
+        describe("Retrieving all modules") {
+            var resp: PaginatedModules?
             
-            context("paginated") {
-                
+            beforeEach {
+                Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
+                Manager.core.logLevel = .info
+                Manager.core.startup()
+            }
+            
+            afterEach {
+                Router.appToken = nil
+                Router.userToken = nil
+            }
+            
+            context("when pagination is on") {
                 beforeEach {
                     stub(condition: isPath("/api/generalcontent/module")) { _ in
                         let filePath = OHPathForFile("module_list_success_paginated.json", type(of: self))
                         return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
+                    
+                    waitUntil { done in
+                        Manager.core.getModules { (_, result) in
+                            switch result {
+                            case .success(let data, _):
+                                resp = data
+                            default:
+                                break
+                            }
+                            done()
+                        }
+                    }
                 }
                 
                 afterEach {
@@ -33,21 +56,6 @@ class ModulesSpec : BaseSpec {
                 }
                 
                 it("works") {
-                    var resp: PaginatedModules?
-                    
-                    waitUntil { done in
-                        
-                        Manager.core.getModules { response, result in
-                            switch result {
-                            case .success(let data, _):
-                                resp = data
-                            case .failure(let e):
-                                NSLog("Error: \(e.localizedDescription)")
-                            }
-                            done()
-                        }
-                    }
-                    
                     expect(resp).toNot(beNil())
                     
                     // Check pagination
@@ -60,9 +68,8 @@ class ModulesSpec : BaseSpec {
                     
                     expect(resp?.modules.count).to(equal(2))
                     
-                    let module: Halo.Module? = resp?.modules.first!
-                    
                     // Check some parsed values of the first module
+                    let module: Halo.Module? = resp?.modules.first!
                     expect(module?.id).to(equal("000000000000000000000004"))
                     expect(module?.customerId).to(equal(1))
                     expect(module?.name).to(equal("News"))
@@ -71,17 +78,27 @@ class ModulesSpec : BaseSpec {
                     expect(module?.updatedBy).to(equal("undefined"))
                     expect(module?.deletedAt).to(beNil())
                     expect(module?.deletedBy).to(beNil())
-                    
                 }
             }
             
-            context("not paginated") {
-                
+            context("when pagination is off") {
                 beforeEach {
                     stub(condition: isPath("/api/generalcontent/module")) { _ in
                         let filePath = OHPathForFile("module_list_success_not_paginated.json", type(of: self))
                         return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful get modules stub"
+                    
+                    waitUntil { done in
+                        Halo.Manager.core.getModules { response, result in
+                            switch result {
+                            case .success(let data, _):
+                                resp = data
+                            default:
+                                break
+                            }
+                            done()
+                        }
+                    }
                 }
                 
                 afterEach {
@@ -89,26 +106,10 @@ class ModulesSpec : BaseSpec {
                 }
                 
                 it("works") {
-                    var resp: PaginatedModules?
-                    
-                    waitUntil { done in
-                        
-                        Halo.Manager.core.getModules { response, result in
-                            switch result {
-                            case .success(let data, _):
-                                resp = data
-                            case .failure(let e):
-                                NSLog("Error: \(e.localizedDescription)")
-                            }
-                            done()
-                        }
-                    }
-                    
                     expect(resp).toNot(beNil())
                     
                     // Check pagination
                     let pag: PaginationInfo? = resp?.paginationInfo
-                    
                     expect(pag?.page).to(equal(1))
                     expect(pag?.limit).to(equal(2))
                     expect(pag?.offset).to(equal(0))
@@ -117,10 +118,8 @@ class ModulesSpec : BaseSpec {
                     
                     expect(resp?.modules.count).to(equal(2))
                 }
-                
             }
         }
-        
     }
     
 }

@@ -22,11 +22,23 @@ class BaseSpec: QuickSpec {
         }
         
         beforeSuite {
-            NSLog("BaseSpec -- Executing before suite")
+            // NSLog("BaseSpec -- Executing before suite")
+            
+            stub(condition: isPath("/api/segmentation/appuser")) { _ in
+                let stubPath = OHPathForFile("segmentation_appuser_success.json", type(of: self))
+                return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+            }.name = "Successful segmentation stub"
+            
+            stub(condition: isPath("/api/oauth/token")) { _ in
+                let stubPath = OHPathForFile("oauth_success.json", type(of: self))
+                return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
+            }.name = "Successful oauth stub"
         }
         
         afterSuite {
-            NSLog("BaseSpec -- Executing after suite")
+            // NSLog("BaseSpec -- Executing after suite")
+            
+            OHHTTPStubs.removeAllStubs()
         }
     
     }

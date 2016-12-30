@@ -55,6 +55,9 @@ class AuthManagerSpec: BaseSpec {
             
             afterEach {
                 OHHTTPStubs.removeAllStubs()
+                
+                Router.appToken = nil
+                Router.userToken = nil
             }
             
             context("when user is registered") {
@@ -285,6 +288,13 @@ class AuthManagerSpec: BaseSpec {
                 UserDefaults.standard.synchronize()
             }
             
+            afterEach {
+                OHHTTPStubs.removeAllStubs()
+                
+                Router.appToken = nil
+                Router.userToken = nil
+            }
+            
             context("where user is not logged in") {
                 var result: Bool?
                 
@@ -372,6 +382,9 @@ class AuthManagerSpec: BaseSpec {
             
             afterEach {
                 OHHTTPStubs.removeAllStubs()
+                
+                Router.appToken = nil
+                Router.userToken = nil
             }
             
             context("with a right AuthProfile and right UserProfile") {
