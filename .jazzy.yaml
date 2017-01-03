@@ -6,9 +6,8 @@ module_version: 2.2.0
 output: docs
 xcodebuild_arguments: [-project, ../Halo.xcodeproj, -scheme, Halo iOS]
 source_directory: Sources
-copyright: '2016 MOBGEN Technology'
+copyright: '© 2017 MOBGEN Technology'
 github_url: https://github.com/mobgen/halo-ios
 github_file_prefix: https://github.com/mobgen/halo-ios/tree/2.2.0
 skip_undocumented: true
 hide_documentation_coverage: true
-theme: fullwidth
