@@ -16,7 +16,7 @@ public class User: NSObject, NSCoding {
         static let UserProfile = "user"
     }
     
-    var userProfile: UserProfile
+    internal (set) public var userProfile: UserProfile
     internal (set) public var token: Token
     
     public override var debugDescription: String {
