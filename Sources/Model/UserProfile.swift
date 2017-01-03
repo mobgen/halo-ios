@@ -20,11 +20,11 @@ public class UserProfile: NSObject, NSCoding {
         static let PhotoUrl = "photoUrl"
     }
     
-    var identifiedId: String?
-    var email: String = ""
-    var profilePictureUrl: String?
+    internal (set) public var identifiedId: String?
+    internal (set) public var email: String = ""
+    internal (set) public var profilePictureUrl: String?
     var _displayName: String?
-    var displayName: String? {
+    internal (set) public var displayName: String? {
         get {
             return _displayName ?? self.name
         }
@@ -32,8 +32,8 @@ public class UserProfile: NSObject, NSCoding {
             _displayName = newValue
         }
     }
-    var name: String = ""
-    var surname: String = ""
+    internal (set) public var name: String = ""
+    internal (set) public var surname: String = ""
     
     public override var debugDescription: String {
         return "[UserProfile] Id: \(identifiedId) | Email: \(email) | DisplayName: \(displayName)"
