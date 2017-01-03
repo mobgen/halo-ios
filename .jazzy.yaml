@@ -4,7 +4,7 @@ author_url: 'https://mobgen.com'
 module: 'Halo'
 module_version: 2.2.0
 output: docs
-xcodebuild_arguments: [-workspace, ../HALO.xcworkspace, -scheme, Halo iOS]
+xcodebuild_arguments: [-project, ../Halo.xcodeproj, -scheme, Halo iOS]
 source_directory: Sources
 copyright: '2016 MOBGEN Technology'
 github_url: https://github.com/mobgen/halo-ios
