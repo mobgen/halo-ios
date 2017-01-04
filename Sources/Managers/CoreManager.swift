@@ -53,7 +53,7 @@ open class CoreManager: NSObject, HaloManager {
                         mgr.enableSystemTags = tags
                     }
                     
-                    if let env = data[CoreConstants.environmentKey] as? String {
+                    if let env = data[environmentKey] as? String {
                         mgr.setEnvironment(env)
                     }
                 }
