@@ -51,7 +51,11 @@ open class CoreManager: NSObject, HaloManager {
                     
                     if let tags = data[CoreConstants.enableSystemTags] as? Bool {
                         mgr.enableSystemTags = tags
-                    }                    
+                    }
+                    
+                    if let env = data[CoreConstants.environmentKey] as? String {
+                        mgr.setEnvironment(env)
+                    }
                 }
             } else {
                 LogMessage(message: "No configuration .plist found", level: .warning).print()
@@ -71,9 +75,6 @@ open class CoreManager: NSObject, HaloManager {
     
     ///
     public var logLevel: LogLevel = .warning
-    
-    /// Token used to make sure the startup process is done only once
-    fileprivate var token: Int = 0
     
     ///
     let lockQueue = DispatchQueue(label: "com.mobgen.halo.lockQueue", attributes: [])
@@ -132,7 +133,7 @@ open class CoreManager: NSObject, HaloManager {
      - parameter environment:   The new environment to be set
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
-    open func setEnvironment(environment env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
+    public func setEnvironment(environment env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = env
         
         // Save the environment
@@ -192,37 +193,21 @@ open class CoreManager: NSObject, HaloManager {
         case "stage": self.environment = .stage
         default: self.environment = .custom(env)
         }
+        
+        // Save the environment
+        KeychainHelper.set(self.environment.description, forKey: CoreConstants.environmentSettingKey)
     }
     
     @objc(startup:)
     public func startup(completionHandler handler: ((Bool) -> Void)? = nil) {
-        self.startupWithEnvironment("prod", completionHandler: handler)
-    }
-    
-    /**
-     Function to be executed to start the configuration and setup process of the HALO Framework
-     
-     - parameter handler: Closure to be executed once the process has finished. The parameter will provide information about whether the process has succeeded or not
-     */
-    @objc(startupWithEnvironment:completionHandler:)
-    open func startupWithEnvironment(_ env: String? = "prod", completionHandler handler: ((Bool) -> Void)?) -> Void {
-        
-        if (token != 0) {
-            LogMessage(message: "Startup method is being called more than once. No side-effects are caused by this, but you should probably double check that.",
-                       level: .warning).print()
-        }
-        
+                
         // Check if there's a stored environment
         if let env = KeychainHelper.string(forKey: CoreConstants.environmentSettingKey) {
             self.setEnvironment(env)
-        } else if let environ = env {
-            self.setEnvironment(environ)
         }
         
-        // Save the environment
-        KeychainHelper.set(self.environment.description, forKey: CoreConstants.environmentSettingKey)
-        
         self.__once(self, handler)
+        
     }
     
     /**
