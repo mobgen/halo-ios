@@ -114,9 +114,6 @@ open class CoreManager: NSObject, HaloManager {
     /// Instance holding all the device-related information
     public var device: Device?
     
-    ///
-    public var user: User?
-    
     public internal(set) var addons: [Halo.Addon] = []
     
     fileprivate var completionHandler: ((Bool) -> Void)?

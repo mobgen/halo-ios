@@ -108,6 +108,11 @@
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		009CD8961E1E4D9A005168D7 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 004612911E0BE21400B9B306 /* halo.cer */; };
+		009CD8971E1E4D9A005168D7 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 004612911E0BE21400B9B306 /* halo.cer */; };
+		009CD89C1E1E4DB8005168D7 /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 009CD89B1E1E4DB8005168D7 /* mobgen.cer */; };
+		009CD89D1E1E4DB8005168D7 /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 009CD89B1E1E4DB8005168D7 /* mobgen.cer */; };
+		009CD89E1E1E4DB8005168D7 /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 009CD89B1E1E4DB8005168D7 /* mobgen.cer */; };
 		00A409221D0FE72F005D4FB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A409211D0FE72F005D4FB0 /* Foundation.framework */; };
 		00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
@@ -297,6 +302,7 @@
 		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		008E2B581C524D7F00FACAB2 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		009CD89B1E1E4DB8005168D7 /* mobgen.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobgen.cer; sourceTree = "<group>"; };
 		00A409211D0FE72F005D4FB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchQuerySpec.swift; path = GeneralContent/SearchQuerySpec.swift; sourceTree = "<group>"; };
@@ -551,6 +557,7 @@
 		004612901E0BE21400B9B306 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				009CD89B1E1E4DB8005168D7 /* mobgen.cer */,
 				004613051E0BE86500B9B306 /* Halo.h */,
 				004612911E0BE21400B9B306 /* halo.cer */,
 				004613001E0BE55000B9B306 /* Info-iOS.plist */,
@@ -997,6 +1004,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009CD89D1E1E4DB8005168D7 /* mobgen.cer in Resources */,
+				009CD8961E1E4D9A005168D7 /* halo.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1004,6 +1013,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009CD89E1E1E4DB8005168D7 /* mobgen.cer in Resources */,
+				009CD8971E1E4D9A005168D7 /* halo.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1018,6 +1029,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009CD89C1E1E4DB8005168D7 /* mobgen.cer in Resources */,
 				004612931E0BE21400B9B306 /* halo.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
