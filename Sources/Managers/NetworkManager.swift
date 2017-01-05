@@ -65,7 +65,7 @@ open class NetworkManager: NSObject, HaloManager {
         if let path = bundle.path(forResource: Manager.core.configuration, ofType: "plist") {
 
             if let data = NSDictionary(contentsOfFile: path) {
-                let disable = data[CoreConstants.disableSSLpinning] as? Bool ?? true
+                let disable = data[CoreConstants.disableSSLpinning] as? Bool ?? false
                 self.enableSSLpinning = !disable
             }
         }
