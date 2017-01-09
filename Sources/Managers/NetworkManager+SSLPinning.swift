@@ -23,7 +23,7 @@ extension NetworkManager {
     }
     
     
-    fileprivate func certificatesInBundle(bundle: Bundle? = nil) -> [SecCertificate] {
+    fileprivate func certificatesInBundle(bundle: Bundle?) -> [SecCertificate] {
         var certificates: [SecCertificate] = []
         
         let main = Bundle.main
@@ -31,7 +31,7 @@ extension NetworkManager {
         
         var paths: [String] = fileExtensions.flatMap { main.paths(forResourcesOfType: $0, inDirectory: nil) }
         
-        if bundle != nil {
+        if let bundle = bundle {
             paths.append(contentsOf: fileExtensions.flatMap { bundle.paths(forResourcesOfType: $0, inDirectory: nil) })
         }
         
