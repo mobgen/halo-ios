@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
-public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
+open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
 
     /**
     Just pass through the configuration of the push notifications to the manager.
@@ -18,7 +18,7 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     - parameter application: Application being configured
     - parameter deviceToken: Device token obtained in previous steps
     */
-    public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    open func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Manager.core.application(application: application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
 
@@ -28,20 +28,29 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter application: Application being configured
      - parameter error:       Error thrown during the process
      */
-    public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        Manager.core.application(application: application, didFailToRegisterForRemoteNotificationsWithError: error)
+    open func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        Manager.core.application(application: application, didFailToRegisterForRemoteNotificationsWithError: error as NSError)
     }
 
-    public func applicationDidBecomeActive(application: UIApplication) {
+    open func applicationDidBecomeActive(_ application: UIApplication) {
         Manager.core.applicationDidBecomeActive(application: application)
     }
 
-    public func applicationDidEnterBackground(application: UIApplication) {
+    open func applicationDidEnterBackground(_ application: UIApplication) {
         Manager.core.applicationDidEnterBackground(application: application)
     }
 
-    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        // Triggered when there is user interaction
         Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: true)
+    }
+    
+    public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return Manager.core.application(app, open: url, options: options)
+    }
+    
+    public func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return Manager.core.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     /**
@@ -51,8 +60,8 @@ public class HaloAppDelegate: UIResponder, UIApplicationDelegate {
      - parameter userInfo:          Dictionary containing all the information about the notification
      - parameter completionHandler: Handler to be executed once the fetch has finished
      */
-    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: application.applicationState == .Inactive, fetchCompletionHandler: completionHandler)
+    open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        Manager.core.application(application: application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: application.applicationState == .inactive, fetchCompletionHandler: completionHandler)
     }
 
 }

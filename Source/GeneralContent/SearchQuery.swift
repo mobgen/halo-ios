@@ -10,18 +10,18 @@ import Foundation
 
 @objc
 public enum SegmentMode: Int {
-    case Total, Partial
+    case total, partial
 
     public var description: String {
         switch self {
-        case .Total: return "total"
-        case .Partial: return "partial"
+        case .total: return "total"
+        case .partial: return "partial"
         }
     }
 }
 
 @objc(HaloSearchQuery)
-public class SearchQuery: NSObject {
+open class SearchQuery: NSObject {
 
     struct Keys {
         static let ModuleName = "moduleName"
@@ -38,27 +38,34 @@ public class SearchQuery: NSObject {
         static let Locale = "locale"
     }
 
-    private(set) var moduleName: String?
-    private(set) var moduleIds: [String]?
-    private(set) var instanceIds: [String]?
-    private(set) var conditions: [String: AnyObject]?
-    private(set) var metaConditions: [String: AnyObject]?
-    private(set) var fields: [String]?
-    private(set) var populateFields: [String]?
-    private(set) var tags: [Halo.Tag]?
-    private(set) var pagination: [String: AnyObject]?
-    private(set) var segmentWithDevice: Bool = false
-    private(set) var segmentMode: SegmentMode = .Partial
-    private(set) var offlinePolicy: Halo.OfflinePolicy?
-    private(set) var locale: Halo.Locale?
+    fileprivate(set) var moduleName: String?
+    fileprivate(set) var moduleIds: [String]?
+    fileprivate(set) var instanceIds: [String]?
+    fileprivate(set) var conditions: [String: Any]?
+    fileprivate(set) var metaConditions: [String: Any]?
+    fileprivate(set) var fields: [String]?
+    fileprivate(set) var populateFields: [String]?
+    fileprivate(set) var tags: [Halo.Tag]?
+    fileprivate(set) var pagination: [String: Any]?
+    fileprivate(set) var segmentWithDevice: Bool = false
+    fileprivate(set) var segmentMode: SegmentMode = .partial
+    fileprivate(set) var offlinePolicy: Halo.OfflinePolicy?
+    fileprivate(set) var locale: Halo.Locale?
 
-    public override var hash: Int {
-        let values: [String] = body.map { "\($0)-\($1.description!)" }
-        return values.joinWithSeparator("+").hash
+    open override var hash: Int {
+        let values: [String] = body.map { key, value in
+            switch value {
+            case let v as AnyObject:
+                return "\(key)-\(v.description)"
+            default:
+                return ""
+            }
+        }
+        return values.joined(separator: "+").hash
     }
 
-    public var body: [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    open var body: [String: Any] {
+        var dict = [String: Any]()
 
         if let modules = self.moduleIds {
             dict.updateValue(modules, forKey: Keys.ModuleIds)
@@ -85,7 +92,8 @@ public class SearchQuery: NSObject {
         }
 
         if let tags = self.tags {
-            dict.updateValue(tags.map { $0.toDictionary() }, forKey: Keys.Tags)
+            let tagsList = tags.map { $0.toDictionary() }
+            dict.updateValue(tagsList, forKey: Keys.Tags)
         }
 
         if let include = self.populateFields {
@@ -99,98 +107,98 @@ public class SearchQuery: NSObject {
         if self.segmentWithDevice {
             if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
-                    dict.updateValue(tags.values.map { $0.toDictionary() }, forKey: Keys.SegmentTags)
+                    dict.updateValue(tags.map { $1.toDictionary() }, forKey: Keys.SegmentTags)
                 }
             }
         }
 
-        dict[Keys.SegmentMode] = self.segmentMode.description
+        dict[Keys.SegmentMode] = self.segmentMode.description as AnyObject?
 
         if let locale = self.locale {
-            dict[Keys.Locale] = locale.description
+            dict[Keys.Locale] = locale.description as AnyObject?
         }
 
         return dict
     }
 
     @objc(searchFilter:)
-    public func searchFilter(filter filter: SearchFilter) -> Halo.SearchQuery {
+    open func searchFilter(filter: SearchFilter) -> Halo.SearchQuery {
         self.conditions = filter.body
         return self
     }
 
     @objc(metaFilter:)
-    public func metaFilter(filter filter: SearchFilter) -> Halo.SearchQuery {
+    open func metaFilter(filter: SearchFilter) -> Halo.SearchQuery {
         self.metaConditions = filter.body
         return self
     }
 
     @objc(fields:)
-    public func fields(fields fields: [String]) -> Halo.SearchQuery {
+    open func fields(fields: [String]) -> Halo.SearchQuery {
         self.fields = fields
         return self
     }
 
     @objc(tags:)
-    public func tags(tags tags: [Halo.Tag]) -> Halo.SearchQuery {
+    open func tags(tags: [Halo.Tag]) -> Halo.SearchQuery {
         self.tags = tags
         return self
     }
 
     @objc(moduleIds:)
-    public func moduleIds(ids ids: [String]) -> Halo.SearchQuery {
+    open func moduleIds(ids: [String]) -> Halo.SearchQuery {
         self.moduleIds = ids
         return self
     }
 
     @objc(moduleName:)
-    public func moduleName(name name: String) -> Halo.SearchQuery {
+    open func moduleName(name: String) -> Halo.SearchQuery {
         self.moduleName = name
         return self
     }
     
     @objc(instanceIds:)
-    public func instanceIds(ids ids: [String]) -> Halo.SearchQuery {
+    open func instanceIds(ids: [String]) -> Halo.SearchQuery {
         self.instanceIds = ids
         return self
     }
 
     @objc(populateFields:)
-    public func populateFields(fields fields: [String]) -> Halo.SearchQuery {
+    open func populateFields(fields: [String]) -> Halo.SearchQuery {
         self.populateFields = fields
         return self
     }
 
-    public func populateAll() -> Halo.SearchQuery {
+    open func populateAll() -> Halo.SearchQuery {
         self.populateFields = ["all"]
         return self
     }
 
     @objc(segmentWithDevice:)
-    public func segmentWithDevice(segment segment: Bool) -> Halo.SearchQuery {
+    open func segmentWithDevice(segment: Bool) -> Halo.SearchQuery {
         self.segmentWithDevice = segment
         return self
     }
 
     @objc(segmentMode:)
-    public func segmentMode(mode mode: SegmentMode) -> Halo.SearchQuery {
+    open func segmentMode(mode: SegmentMode) -> Halo.SearchQuery {
         self.segmentMode = mode
         return self
     }
 
     @objc(locale:)
-    public func locale(locale locale: Halo.Locale) -> Halo.SearchQuery {
+    open func locale(locale: Halo.Locale) -> Halo.SearchQuery {
         self.locale = locale
         return self
     }
 
-    public func skipPagination() -> Halo.SearchQuery {
+    open func skipPagination() -> Halo.SearchQuery {
         self.pagination = ["skip": "true"]
         return self
     }
 
     @objc(paginationWithPage:limit:)
-    public func pagination(page page: Int, limit: Int) -> Halo.SearchQuery {
+    open func pagination(page: Int, limit: Int) -> Halo.SearchQuery {
         self.pagination = [
             "page"  : page,
             "limit" : limit,

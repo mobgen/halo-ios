@@ -9,7 +9,7 @@
 import Foundation
 
 @objc(HaloSyncLogEntry)
-public class SyncLogEntry: NSObject, NSCoding {
+open class SyncLogEntry: NSObject, NSCoding {
 
     struct Keys {
         static let ModuleId = "moduleId"
@@ -21,18 +21,18 @@ public class SyncLogEntry: NSObject, NSCoding {
         static let Deletions = "deletions"
     }
 
-    public internal(set) var moduleId: String?
-    public internal(set) var moduleName: String?
-    public internal(set) var syncDate: NSDate?
-    public internal(set) var locale: Locale?
-    public internal(set) var creations: Int = 0
-    public internal(set) var updates: Int = 0
-    public internal(set) var deletions: Int = 0
+    open internal(set) var moduleId: String?
+    open internal(set) var moduleName: String?
+    open internal(set) var syncDate: Date?
+    open internal(set) var locale: Locale?
+    open internal(set) var creations: Int = 0
+    open internal(set) var updates: Int = 0
+    open internal(set) var deletions: Int = 0
 
     public init(result: SyncResult) {
         moduleId = result.moduleId
         moduleName = result.moduleName
-        syncDate = result.syncDate
+        syncDate = result.syncDate as Date?
         locale = result.locale
         creations = result.created.count
         updates = result.updated.count
@@ -42,35 +42,31 @@ public class SyncLogEntry: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
 
-        moduleId = aDecoder.decodeObjectForKey(Keys.ModuleId) as? String
-        moduleName = aDecoder.decodeObjectForKey(Keys.ModuleName) as? String
-        syncDate = aDecoder.decodeObjectForKey(Keys.SyncDate) as? NSDate
+        moduleId = aDecoder.decodeObject(forKey: Keys.ModuleId) as? String
+        moduleName = aDecoder.decodeObject(forKey: Keys.ModuleName) as? String
+        syncDate = aDecoder.decodeObject(forKey: Keys.SyncDate) as? Date
+        locale = Locale(rawValue: aDecoder.decodeInteger(forKey: Keys.Locale))
 
-        if let loc = aDecoder.decodeObjectForKey(Keys.Locale) as? Int {
-            locale = Locale(rawValue: loc)
-        }
-
-        creations = aDecoder.decodeIntegerForKey(Keys.Creations)
-        updates = aDecoder.decodeIntegerForKey(Keys.Updates)
-        deletions = aDecoder.decodeIntegerForKey(Keys.Deletions)
+        creations = aDecoder.decodeInteger(forKey: Keys.Creations)
+        updates = aDecoder.decodeInteger(forKey: Keys.Updates)
+        deletions = aDecoder.decodeInteger(forKey: Keys.Deletions)
 
         super.init()
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
+    open func encode(with aCoder: NSCoder) {
 
-        aCoder.encodeObject(moduleId, forKey: Keys.ModuleId)
-        aCoder.encodeObject(moduleName, forKey: Keys.ModuleName)
-        aCoder.encodeObject(syncDate, forKey: Keys.SyncDate)
-        aCoder.encodeObject(locale?.rawValue, forKey: Keys.Locale)
-
+        aCoder.encode(moduleId, forKey: Keys.ModuleId)
+        aCoder.encode(moduleName, forKey: Keys.ModuleName)
+        aCoder.encode(syncDate, forKey: Keys.SyncDate)
+        
         if let loc = locale?.rawValue {
-            aCoder.encodeObject(loc, forKey: Keys.Locale)
+            aCoder.encode(loc, forKey: Keys.Locale)
         }
 
-        aCoder.encodeInteger(creations, forKey: Keys.Creations)
-        aCoder.encodeInteger(updates, forKey: Keys.Updates)
-        aCoder.encodeInteger(deletions, forKey: Keys.Deletions)
+        aCoder.encode(creations, forKey: Keys.Creations)
+        aCoder.encode(updates, forKey: Keys.Updates)
+        aCoder.encode(deletions, forKey: Keys.Deletions)
 
     }
 }

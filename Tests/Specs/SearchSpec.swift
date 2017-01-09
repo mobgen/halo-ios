@@ -27,7 +27,7 @@ class SearchSpec: BaseSpec {
                 
                 beforeEach {
                     stub(isPath("/api/generalcontent/instance/search")) { (request) -> OHHTTPStubsResponse in
-                        let fixture = OHPathForFile("simple_search_success.json", self.dynamicType)
+                        let fixture = OHPathForFile("simple_search_success.json", type(of: self))
                         return OHHTTPStubsResponse(fileAtPath: fixture!, statusCode: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Search stub"
                     

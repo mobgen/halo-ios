@@ -8,49 +8,49 @@
 
 import Foundation
 
-public class NetworkOfflineDataProvider: NetworkDataProvider {
+open class NetworkOfflineDataProvider: NetworkDataProvider {
 
-    public override func getModules(completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
+    open override func getModules(completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
         super.getModules { response, result in
             switch result {
-            case .Success(let data, _):
+            case .success(let data, _):
                 if let d = data {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                         NSKeyedArchiver.archiveRootObject(d, toFile: OfflineDataProvider.modulesPath)
                     }
                 }
-                handler(response, .Success(data, false))
-            case .Failure(_):
-                if let modules = NSKeyedUnarchiver.unarchiveObjectWithFile(OfflineDataProvider.modulesPath) as? PaginatedModules {
-                    handler(response, .Success(modules, true))
+                handler(response, .success(data, false))
+            case .failure(_):
+                if let modules = NSKeyedUnarchiver.unarchiveObject(withFile: OfflineDataProvider.modulesPath) as? PaginatedModules {
+                    handler(response, .success(modules, true))
                 } else {
-                    handler(response, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                    handler(response, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                 }
             }
         }
 
     }
 
-    public override func search(query query: Halo.SearchQuery, completionHandler handler: (NSHTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    open override func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
         super.search(query: query) { response, result in
 
-            let path = OfflineDataProvider.filePath.URLByAppendingPathComponent("search-(\(query.hash))")!.path!
+            let path = OfflineDataProvider.filePath.appendingPathComponent("search-(\(query.hash))").path
 
             switch result {
-            case .Success(let data, _):
+            case .success(let data, _):
                 if let d = data {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                         NSKeyedArchiver.archiveRootObject(d, toFile: path)
                     }
                 }
-                handler(response, .Success(data, false))
-            case .Failure(_):
-                if let instances = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? PaginatedContentInstances {
-                    handler(response, .Success(instances, true))
+                handler(response, .success(data, false))
+            case .failure(_):
+                if let instances = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? PaginatedContentInstances {
+                    handler(response, .success(instances, true))
                 } else {
-                    handler(response, .Failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                    handler(response, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
                 }
             }
 

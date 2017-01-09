@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0810"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,7 +17,7 @@
                BlueprintIdentifier = "006A5FAC1B318CAC0045395A"
                BuildableName = "Halo.framework"
                BlueprintName = "Halo"
-               ReferencedContainer = "container:HaloSDK.xcodeproj">
+               ReferencedContainer = "container:Halo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "004790F81C915C6C00C24741"
                BuildableName = "HaloObjC.framework"
                BlueprintName = "HaloObjC"
-               ReferencedContainer = "container:HaloSDK.xcodeproj">
+               ReferencedContainer = "container:Halo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,7 +50,7 @@
             BlueprintIdentifier = "004790F81C915C6C00C24741"
             BuildableName = "HaloObjC.framework"
             BlueprintName = "HaloObjC"
-            ReferencedContainer = "container:HaloSDK.xcodeproj">
+            ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -72,7 +72,7 @@
             BlueprintIdentifier = "004790F81C915C6C00C24741"
             BuildableName = "HaloObjC.framework"
             BlueprintName = "HaloObjC"
-            ReferencedContainer = "container:HaloSDK.xcodeproj">
+            ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -90,7 +90,7 @@
             BlueprintIdentifier = "004790F81C915C6C00C24741"
             BuildableName = "HaloObjC.framework"
             BlueprintName = "HaloObjC"
-            ReferencedContainer = "container:HaloSDK.xcodeproj">
+            ReferencedContainer = "container:Halo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

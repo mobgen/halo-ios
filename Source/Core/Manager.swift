@@ -19,62 +19,62 @@ Enumeration holding the different environment options available
 - Custom: Custom environment (providing the full url)
 */
 public enum HaloEnvironment {
-    case Int
-    case QA
-    case Stage
-    case Prod
-    case Custom(String)
+    case int
+    case qa
+    case stage
+    case prod
+    case custom(String)
 
     public init(rawValue: String) {
-        switch (rawValue.lowercaseString) {
-        case "int": self = .Int
-        case "qa": self = .QA
-        case "stage": self = .Stage
-        case "prod": self = .Prod
-        default: self = .Custom(rawValue)
+        switch (rawValue.lowercased()) {
+        case "int": self = .int
+        case "qa": self = .qa
+        case "stage": self = .stage
+        case "prod": self = .prod
+        default: self = .custom(rawValue)
         }
     }
 
-    var baseUrl: NSURL {
+    var baseUrl: URL {
         switch self {
-        case .Int:
-            return NSURL(string: "https://halo-int.mobgen.com")!
-        case .QA:
-            return NSURL(string: "https://halo-qa.mobgen.com")!
-        case .Stage:
-            return NSURL(string: "https://halo-stage.mobgen.com")!
-        case .Prod:
-            return NSURL(string: "https://halo.mobgen.com")!
-        case .Custom(let url):
-            return NSURL(string: url)!
+        case .int:
+            return URL(string: "https://halo-int.mobgen.com")!
+        case .qa:
+            return URL(string: "https://halo-qa.mobgen.com")!
+        case .stage:
+            return URL(string: "https://halo-stage.mobgen.com")!
+        case .prod:
+            return URL(string: "https://halo.mobgen.com")!
+        case .custom(let url):
+            return URL(string: url)!
         }
     }
 
     public var description: String {
         switch self {
-        case .Int:
+        case .int:
             return "Int"
-        case .QA:
+        case .qa:
             return "QA"
-        case .Stage:
+        case .stage:
             return "Stage"
-        case .Prod:
+        case .prod:
             return "Prod"
-        case .Custom(let url):
+        case .custom(let url):
             return url
         }
     }
 
     public var baseUrlString: String {
         get {
-            return self.baseUrl.absoluteString!
+            return self.baseUrl.absoluteString
         }
     }
 }
 
 @objc
 public enum OfflinePolicy: Int {
-    case None, LoadAndStoreLocalData, ReturnLocalDataDontLoad
+    case none, loadAndStoreLocalData, returnLocalDataDontLoad
 }
 
 @objc(HaloManager)

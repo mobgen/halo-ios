@@ -16,7 +16,7 @@ class BaseSpec: QuickSpec {
     override func spec() {
         
         OHHTTPStubs.onStubActivation() { request, stub, response in
-            if let url = request.URL, name = stub.name {
+            if let url = request.url, let name = stub.name {
                 print("\(url) stubbed by \"\(name).\"")
             }
         }

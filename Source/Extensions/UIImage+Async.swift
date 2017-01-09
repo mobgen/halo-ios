@@ -11,14 +11,14 @@ import UIKit
 
 extension UIImage {
 
-    static func loadFromUrl(url url: NSURL, completionHandler handler: (UIImage?) -> Void) {
+    static func loadFromUrl(url: URL, completionHandler handler: @escaping (UIImage?) -> Void) {
 
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
 
-        dispatch_async(queue) { () -> Void in
-            if let imageData = NSData(contentsOfURL: url) {
+        queue.async { () -> Void in
+            if let imageData = try? Data(contentsOf: url) {
                 let image = UIImage(data: imageData)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     handler(image)
                 })
             } else {
@@ -31,11 +31,11 @@ extension UIImage {
 
 extension UIImageView {
 
-    public func setImageWithURL(url url: NSURL, completionHandler handler: ((UIImageView) -> Void)? = nil) {
+    public func setImageWithURL(url: URL, completionHandler handler: ((UIImageView) -> Void)? = nil) {
         self.setImageWithURL(url, placeholderImage: nil, completionHandler: handler)
     }
 
-    public func setImageWithURL(url: NSURL, placeholderImage placeholder: UIImage?, completionHandler handler: ((UIImageView) -> Void)? = nil) {
+    public func setImageWithURL(_ url: URL, placeholderImage placeholder: UIImage?, completionHandler handler: ((UIImageView) -> Void)? = nil) {
 
         if let p = placeholder {
             self.image = p

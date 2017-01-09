@@ -23,14 +23,14 @@ public protocol ManagerDelegate {
      - returns: The newly created user
      */
     @objc(managerWillSetupDevice:)
-    func managerWillSetupDevice(device: Halo.Device) -> Void
+    func managerWillSetupDevice(_ device: Halo.Device) -> Void
 
 }
 
 @objc(HaloAddon)
 public protocol Addon {
 
-    var addonName: String {get}
+    var addonName: String { get }
 
     @objc(setup:completionHandler:)
     func setup(haloCore core: Halo.CoreManager, completionHandler handler: ((Halo.Addon, Bool) -> Void)?) -> Void
@@ -44,34 +44,55 @@ public protocol Addon {
     @objc(didRegisterAddon:)
     func didRegisterAddon(haloCore core: Halo.CoreManager) -> Void
 
+}
+
+@objc(HaloDeviceAddon)
+public protocol DeviceAddon: Addon {
+    
     @objc(willRegisterDevice:)
     func willRegisterDevice(haloCore core: Halo.CoreManager) -> Void
     
     @objc(didRegisterDevice:)
     func didRegisterDevice(haloCore core: Halo.CoreManager) -> Void
 
+}
+
+@objc(HaloLifecycleAddon)
+public protocol LifecycleAddon: Addon {
+    
     @objc(applicationDidFinishLaunching:core:)
-    func applicationDidFinishLaunching(application app: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidFinishLaunching(_ app: UIApplication, core: Halo.CoreManager) -> Void
     
     @objc(applicationDidEnterBackground:core:)
-    func applicationDidEnterBackground(application app: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidEnterBackground(_ app: UIApplication, core: Halo.CoreManager) -> Void
     
     @objc(applicationDidBecomeActive:core:)
-    func applicationDidBecomeActive(application app: UIApplication, core: Halo.CoreManager) -> Void
+    func applicationDidBecomeActive(_ app: UIApplication, core: Halo.CoreManager) -> Void
+}
+
+@objc(HaloDeeplinkingAddon)
+public protocol DeeplinkingAddon: Addon {
+    
+    @objc(application:openURL:options:)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
+    
+    @objc(application:openURL:sourceApplication:annotation:)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
 
 }
+
 
 @objc(HaloNotificationsAddon)
 public protocol NotificationsAddon: Addon {
 
     @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:core:)
-    func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: Halo.CoreManager) -> Void
+    func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: Halo.CoreManager) -> Void
     
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:core:)
     func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
 
     @objc(application:didReceiveRemoteNotification:core:userInteraction:fetchCompletionHandler:)
-    func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) -> Void
+    func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
 
 }
 
@@ -79,10 +100,10 @@ public protocol NotificationsAddon: Addon {
 public protocol NetworkAddon: Addon {
 
     @objc(willPerformRequest:)
-    func willPerformRequest(request req: NSURLRequest) -> Void
+    func willPerformRequest(request req: URLRequest) -> Void
     
     @objc(didPerformRequest:time:response:)
-    func didPerformRequest(request req: NSURLRequest, time: NSTimeInterval, response: NSURLResponse?) -> Void
+    func didPerformRequest(request req: URLRequest, time: TimeInterval, response: URLResponse?) -> Void
 
 }
 

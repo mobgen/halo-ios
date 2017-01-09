@@ -33,7 +33,7 @@ public final class Tag: NSObject, NSCoding {
 
     public internal(set) var type: String?
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 
@@ -48,17 +48,17 @@ public final class Tag: NSObject, NSCoding {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        id = aDecoder.decodeObjectForKey(Keys.Id) as? String
-        name = aDecoder.decodeObjectForKey(Keys.Name) as! String
-        value = aDecoder.decodeObjectForKey(Keys.Value) as? String
-        type = aDecoder.decodeObjectForKey(Keys.TagType) as? String
+        id = aDecoder.decodeObject(forKey: Keys.Id) as? String
+        name = aDecoder.decodeObject(forKey: Keys.Name) as! String
+        value = aDecoder.decodeObject(forKey: Keys.Value) as? String
+        type = aDecoder.decodeObject(forKey: Keys.TagType) as? String
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: Keys.Id)
-        aCoder.encodeObject(name, forKey: Keys.Name)
-        aCoder.encodeObject(value, forKey: Keys.Value)
-        aCoder.encodeObject(type, forKey: Keys.TagType)
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: Keys.Id)
+        aCoder.encode(name, forKey: Keys.Name)
+        aCoder.encode(value, forKey: Keys.Value)
+        aCoder.encode(type, forKey: Keys.TagType)
     }
 
     /**
@@ -66,8 +66,8 @@ public final class Tag: NSObject, NSCoding {
 
     - returns: A dictionary containing the representation of the object
     */
-    public func toDictionary() -> [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    public func toDictionary() -> [String: Any] {
+        var dict = [String: Any]()
 
         if let id = self.id {
             dict["id"] = id
@@ -93,15 +93,15 @@ public final class Tag: NSObject, NSCoding {
 
     - returns: The newly created user tag
     */
-    class func fromDictionary(dict dict: [String: AnyObject]) -> Halo.Tag {
+    class func fromDictionary(dict: [String: Any]) -> Halo.Tag {
         let tag = Tag(name: dict["name"] as! String, value: dict["value"] as! String, type: dict["tagType"] as? String)
         tag.id = dict["id"] as? String
 
         return tag
     }
 
-    public override func isEqual(object: AnyObject?) -> Bool {
-        if object.dynamicType != self.dynamicType {
+    public override func isEqual(_ object: Any?) -> Bool {
+        if type(of: object) != type(of: self) {
             return false
         } else {
             let other = object as! Halo.Tag

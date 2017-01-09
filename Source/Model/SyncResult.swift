@@ -9,7 +9,7 @@
 import Foundation
 
 @objc(HaloSyncResult)
-public class SyncResult: NSObject, NSCoding {
+open class SyncResult: NSObject, NSCoding {
     
     struct Keys {
         static let ModuleId = "moduleId"
@@ -23,20 +23,20 @@ public class SyncResult: NSObject, NSCoding {
     
     var moduleName: String = ""
     var moduleId: String = ""
-    public internal(set) var syncDate: NSDate?
-    public internal(set) var created: [ContentInstance] = []
-    public internal(set) var updated: [ContentInstance] = []
-    public internal(set) var deleted: [String] = [] // Store only the ids that will be used for deletion
-    public internal(set) var locale: Locale?
+    open internal(set) var syncDate: Date?
+    open internal(set) var created: [ContentInstance] = []
+    open internal(set) var updated: [ContentInstance] = []
+    open internal(set) var deleted: [String] = [] // Store only the ids that will be used for deletion
+    open internal(set) var locale: Locale?
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
     init(data: [String: AnyObject]) {
         
         super.init()
-        syncDate = NSDate(timeIntervalSince1970: (data[Keys.SyncDate] as? Double ?? 0)/1000)
+        syncDate = Date(timeIntervalSince1970: (data[Keys.SyncDate] as? Double ?? 0)/1000)
         
         if let created = data[Keys.Created] as? [[String: AnyObject]] {
             created.forEach { self.created.append(ContentInstance.fromDictionary(dict: $0)) }
@@ -53,22 +53,19 @@ public class SyncResult: NSObject, NSCoding {
     
     public required init?(coder aDecoder: NSCoder) {
         super.init()
-        moduleName = aDecoder.decodeObjectForKey(Keys.ModuleName) as! String
-        moduleId = aDecoder.decodeObjectForKey(Keys.ModuleId) as! String
-        syncDate = aDecoder.decodeObjectForKey(Keys.SyncDate) as? NSDate
-        
-        if let loc = aDecoder.decodeObjectForKey(Keys.Locale) as? Int {
-            locale = Locale(rawValue: loc)
-        }
+        moduleName = aDecoder.decodeObject(forKey: Keys.ModuleName) as! String
+        moduleId = aDecoder.decodeObject(forKey: Keys.ModuleId) as! String
+        syncDate = aDecoder.decodeObject(forKey: Keys.SyncDate) as? Date
+        locale = Locale(rawValue: aDecoder.decodeInteger(forKey: Keys.Locale))
     }
     
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(moduleName, forKey: Keys.ModuleName)
-        aCoder.encodeObject(moduleId, forKey: Keys.ModuleId)
-        aCoder.encodeObject(syncDate, forKey: Keys.SyncDate)
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(moduleName, forKey: Keys.ModuleName)
+        aCoder.encode(moduleId, forKey: Keys.ModuleId)
+        aCoder.encode(syncDate, forKey: Keys.SyncDate)
         
         if let loc = locale?.rawValue {
-            aCoder.encodeObject(loc, forKey: Keys.Locale)
+            aCoder.encode(loc, forKey: Keys.Locale)
         }
     }
 }

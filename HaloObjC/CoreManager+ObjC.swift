@@ -8,24 +8,24 @@
 
 import Halo
 
-extension CoreManager {
+public extension CoreManager {
 
     public var env: String {
         return self.environment.description
     }
     
     @objc(modulesWithSuccess:failure:)
-    public func modules(success: (NSHTTPURLResponse?, PaginatedModules) -> Void,
-                        failure: (NSHTTPURLResponse?, NSError) -> Void) -> Void {
+    public func modules(_ success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
+                        failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
 
         self.getModules { (response, result) in
 
             switch result {
-            case .Success(let data, _):
+            case .success(let data, _):
                 if let modules = data {
                     success(response, modules)
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 failure(response, error)
             }
         }
@@ -36,17 +36,17 @@ extension CoreManager {
         
         var envir: HaloEnvironment!
         
-        switch env.lowercaseString {
+        switch env.lowercased() {
         case "int":
-            envir = .Int
+            envir = .int
         case "prod":
-            envir = .Prod
+            envir = .prod
         case "stage":
-            envir = .Stage
+            envir = .stage
         case "qa":
-            envir = .QA
+            envir = .qa
         default:
-            envir = .Custom(env)
+            envir = .custom(env)
         }
         
         self.setEnvironment(environment: envir, completionHandler: handler)

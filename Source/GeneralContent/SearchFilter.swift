@@ -9,35 +9,35 @@
 import Foundation
 
 enum SearchFilterOperation {
-    case Eq, Neq, Gt, Lt, Gte, Lte, In, NotIn
+    case eq, neq, gt, lt, gte, lte, `in`, notIn
 
     var description: String {
         switch  self {
-        case .Eq: return "="
-        case .Neq: return "!="
-        case .Gt: return ">"
-        case .Lt: return "<"
-        case .Gte: return ">="
-        case .Lte: return "<="
-        case .In: return "in"
-        case .NotIn: return "!in"
+        case .eq: return "="
+        case .neq: return "!="
+        case .gt: return ">"
+        case .lt: return "<"
+        case .gte: return ">="
+        case .lte: return "<="
+        case .in: return "in"
+        case .notIn: return "!in"
         }
     }
 }
 
 @objc(HaloSearchFilter)
-public class SearchFilter: NSObject {
+open class SearchFilter: NSObject {
 
     var condition: String?
     var operands: [SearchFilter]?
 
     var operation: String?
     var property: String?
-    var value: AnyObject?
+    var value: Any?
     var type: String?
 
-    public var body: [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    open var body: [String: Any] {
+        var dict = [String: Any]()
 
         if let
             cond = self.condition,
@@ -63,7 +63,7 @@ public class SearchFilter: NSObject {
         super.init()
     }
 
-    init(operation: SearchFilterOperation, property: String, value: AnyObject?, type: String? = nil) {
+    init(operation: SearchFilterOperation, property: String, value: Any?, type: String? = nil) {
         self.operation = operation.description
         self.property = property
         self.value = value
