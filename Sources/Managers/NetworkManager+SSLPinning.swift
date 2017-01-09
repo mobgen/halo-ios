@@ -23,12 +23,17 @@ extension NetworkManager {
     }
     
     
-    fileprivate func certificatesInBundle(bundle: Bundle = Bundle.main) -> [SecCertificate] {
+    fileprivate func certificatesInBundle(bundle: Bundle? = nil) -> [SecCertificate] {
         var certificates: [SecCertificate] = []
         
-        let paths = Set([".cer", ".CER", ".crt", ".CRT", ".der", ".DER"].map { fileExtension in
-            bundle.paths(forResourcesOfType: fileExtension, inDirectory: nil)
-            }.joined())
+        let main = Bundle.main
+        let fileExtensions = [".cer", ".CER", ".crt", ".CRT", ".der", ".DER"]
+        
+        var paths: [String] = fileExtensions.flatMap { main.paths(forResourcesOfType: $0, inDirectory: nil) }
+        
+        if bundle != nil {
+            paths.append(contentsOf: fileExtensions.flatMap { bundle.paths(forResourcesOfType: $0, inDirectory: nil) })
+        }
         
         for path in paths {
             if let
