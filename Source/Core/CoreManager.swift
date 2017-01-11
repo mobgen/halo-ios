@@ -46,7 +46,7 @@ open class CoreManager: NSObject, HaloManager {
                         }
 
                         if let env = data[environmentKey] as? String {
-                            manager.setEnvironment(env)
+                            self.setEnvironment(env)
                         }
 
                         manager.enableSystemTags = (data[CoreConstants.enableSystemTags] as? Bool) ?? false
@@ -142,7 +142,7 @@ open class CoreManager: NSObject, HaloManager {
      - parameter environment:   The new environment to be set
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
-    open func setEnvironment(environment env: HaloEnvironment, completionHandler handler: @escaping ((Bool) -> Void)) {
+    open func setEnvironment(environment env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = env
         
         // Save the environment
@@ -159,12 +159,12 @@ open class CoreManager: NSObject, HaloManager {
                     }
                 }
             } else {
-                handler(false)
+                handler?(false)
             }
         }
     }
 
-    func setEnvironment(_ env: String) {
+    fileprivate func setEnvironment(_ env: String) {
         switch env.lowercased() {
         case "int": self.environment = .int
         case "qa": self.environment = .qa
