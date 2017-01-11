@@ -97,7 +97,6 @@
 		004613061E0BE86500B9B306 /* Halo.h in Headers */ = {isa = PBXBuildFile; fileRef = 004613051E0BE86500B9B306 /* Halo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004613071E0BE86500B9B306 /* Halo.h in Headers */ = {isa = PBXBuildFile; fileRef = 004613051E0BE86500B9B306 /* Halo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004613081E0BE86500B9B306 /* Halo.h in Headers */ = {isa = PBXBuildFile; fileRef = 004613051E0BE86500B9B306 /* Halo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		004613091E0BE86500B9B306 /* Halo.h in Headers */ = {isa = PBXBuildFile; fileRef = 004613051E0BE86500B9B306 /* Halo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004790FC1C915C6C00C24741 /* HaloObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 004790FB1C915C6C00C24741 /* HaloObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		004791011C915C8000C24741 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		004791051C915D1100C24741 /* CoreManager+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004791041C915D1100C24741 /* CoreManager+ObjC.swift */; };
@@ -812,7 +811,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				004613091E0BE86500B9B306 /* Halo.h in Headers */,
 				004790FC1C915C6C00C24741 /* HaloObjC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
