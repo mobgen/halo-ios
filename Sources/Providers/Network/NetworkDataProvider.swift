@@ -40,7 +40,7 @@ open class NetworkDataProvider: DataProvider {
 
     open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
-        let request = Halo.Request<PaginatedContentInstances>(router: Router.generalContentSearch).params(params: query.body).responseParser { data in
+        let request = Halo.Request<PaginatedContentInstances>(router: Router.instanceSearch).params(params: query.body).responseParser { data in
 
             var result: PaginatedContentInstances? = nil
 

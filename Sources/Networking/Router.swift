@@ -22,9 +22,10 @@ public enum Router {
     case oAuth(Credentials, [String: Any])
     case versionCheck
     case modules
-    case generalContentInstances([String: Any])
-    case generalContentInstance(String)
-    case generalContentSearch
+    case instanceCreate([String: Any])
+    case instanceUpdate([String: Any])
+    case instanceDelete(String)
+    case instanceSearch
     case moduleSync
     case segmentationGetDevice(String)
     case segmentationCreateDevice([String: Any])
@@ -40,11 +41,15 @@ public enum Router {
              .segmentationCreateDevice(_),
              .registerUser(_),
              .loginUser(_),
-             .generalContentSearch,
+             .instanceSearch,
+             .instanceCreate(_),
              .moduleSync:
             return .POST
-        case .segmentationUpdateDevice(_):
+        case .segmentationUpdateDevice(_),
+             .instanceUpdate(_):
             return .PUT
+        case .instanceDelete(_):
+            return .DELETE
         case .customRequest(let method, _, _):
             return method
         default:
@@ -66,19 +71,19 @@ public enum Router {
             return "api/authentication/version"
         case .modules:
             return "api/generalcontent/module"
-        case .generalContentInstances(_):
+        case .instanceCreate(_),
+             .instanceUpdate(_):
             return "api/generalcontent/instance"
-        case .generalContentInstance(let id):
+        case .instanceDelete(let id):
             return "api/generalcontent/instance/\(id)"
         case .moduleSync:
             return "api/generalcontent/instance/sync"
-        case .generalContentSearch:
+        case .instanceSearch:
             return "api/generalcontent/instance/search"
         case .segmentationCreateDevice(_):
             return "api/segmentation/appuser"
-        case .segmentationGetDevice(let id):
-            return "api/segmentation/appuser/\(id)"
-        case .segmentationUpdateDevice(let id, _):
+        case .segmentationGetDevice(let id),
+             .segmentationUpdateDevice(let id, _):
             return "api/segmentation/appuser/\(id)"
         case .registerUser(_):
             return "api/segmentation/identified/register"
@@ -110,14 +115,14 @@ public enum Router {
 
     var parameterEncoding: Halo.ParameterEncoding {
         switch self {
-        case .oAuth(_, _):
-            return .url
         case .versionCheck,
              .segmentationCreateDevice(_),
              .segmentationUpdateDevice(_, _),
              .registerUser(_),
              .loginUser(_),
-             .generalContentSearch,
+             .instanceSearch,
+             .instanceCreate(_),
+             .instanceUpdate(_),
              .moduleSync:
             return .json
         case .customRequest(let method, _, _):
@@ -135,16 +140,18 @@ public enum Router {
     var params: [String: Any]? {
 
         switch self {
-        case .oAuth(_, let params): return params
+        case .oAuth(_, let params),
+             .instanceCreate(let params),
+             .instanceUpdate(let params),
+             .segmentationCreateDevice(let params),
+             .registerUser(let params),
+             .loginUser(let params):
+            return params
         case .versionCheck: return ["current": "true"]
-        case .generalContentInstances(let params): return params
-        case .segmentationCreateDevice(let params): return params
         case .segmentationUpdateDevice(_, let params):
             var newParams = params
             newParams["replaceTokens"] = true
             return newParams
-        case .registerUser(let params): return params
-        case .loginUser(let params): return params
         case .customRequest(_, _, let params): return params
         default: return nil
         }
