@@ -54,7 +54,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
 
         switch self.authenticationMode {
         case .app:
-            token = Router.appToken
+            token = Manager.auth.currentUser?.token ?? Router.appToken
         case .user:
             token = Router.userToken
         }
