@@ -44,4 +44,8 @@ public enum HaloError: Error, Hashable {
         return self.description.hashValue
     }
     
+    public static func ==(lhs: HaloError, rhs: HaloError) -> Bool {
+        return lhs.description == rhs.description
+    }
+
 }
