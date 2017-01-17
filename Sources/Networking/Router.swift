@@ -23,9 +23,9 @@ public enum Router {
     case versionCheck
     case modules
     case instanceCreate([String: Any])
-    case instanceUpdate([String: Any])
+    case instanceUpdate(String, [String: Any])
     case instanceDelete(String)
-    case instanceSearch
+    case instanceSearch([String: Any])
     case moduleSync
     case segmentationGetDevice(String)
     case segmentationCreateDevice([String: Any])
@@ -41,7 +41,7 @@ public enum Router {
              .segmentationCreateDevice(_),
              .registerUser(_),
              .loginUser(_),
-             .instanceSearch,
+             .instanceSearch(_),
              .instanceCreate(_),
              .moduleSync:
             return .POST
@@ -71,14 +71,14 @@ public enum Router {
             return "api/authentication/version"
         case .modules:
             return "api/generalcontent/module"
-        case .instanceCreate(_),
-             .instanceUpdate(_):
+        case .instanceCreate(_):
             return "api/generalcontent/instance"
-        case .instanceDelete(let id):
+        case .instanceUpdate(let id, _),
+             .instanceDelete(let id):
             return "api/generalcontent/instance/\(id)"
         case .moduleSync:
             return "api/generalcontent/instance/sync"
-        case .instanceSearch:
+        case .instanceSearch(_):
             return "api/generalcontent/instance/search"
         case .segmentationCreateDevice(_):
             return "api/segmentation/appuser"
@@ -120,7 +120,7 @@ public enum Router {
              .segmentationUpdateDevice(_, _),
              .registerUser(_),
              .loginUser(_),
-             .instanceSearch,
+             .instanceSearch(_),
              .instanceCreate(_),
              .instanceUpdate(_),
              .moduleSync:
@@ -141,8 +141,9 @@ public enum Router {
 
         switch self {
         case .oAuth(_, let params),
+             .instanceSearch(let params),
              .instanceCreate(let params),
-             .instanceUpdate(let params),
+             .instanceUpdate(_, let params),
              .segmentationCreateDevice(let params),
              .registerUser(let params),
              .loginUser(let params):

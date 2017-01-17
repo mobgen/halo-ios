@@ -28,26 +28,26 @@ public enum LogLevel: Int {
 @objc(HaloLogMessage)
 open class LogMessage: NSObject {
 
-    fileprivate var message: String = ""
-    fileprivate var level: LogLevel = .error
+    var message: String = ""
+    var level: LogLevel = .error
 
     open override var debugDescription: String {
         return "<HALO/\(self.level.description)>: \(self.message)"
     }
-
+    
     public init(message: String, level: LogLevel) {
         super.init()
         self.message = message
         self.level = level
     }
 
-    public init(message: String? = nil, error: NSError) {
+    public init(message: String? = nil, error: HaloError) {
         super.init()
 
         if let msg = message {
-            self.message = "\(msg): \(error.localizedDescription)"
+            self.message = "\(msg): \(error.description)"
         } else {
-            self.message = error.localizedDescription
+            self.message = error.description
         }
 
         self.level = .error

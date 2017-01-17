@@ -10,13 +10,13 @@ import Foundation
 
 public protocol AuthProvider {
     
-    func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void
+    func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, HaloError?) -> Void) -> Void
     func logout()
 }
 
 public extension AuthProvider {
     
-    func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, NSError?) -> Void) {
+    func authenticate(authProfile: AuthProfile, completionHandler handler: @escaping (User?, HaloError?) -> Void) {
         Manager.auth.login(authProfile: authProfile, completionHandler: handler)
     }
     

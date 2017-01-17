@@ -26,8 +26,24 @@ public extension ContentManager {
                     success(response, instances)
                 }
             case .failure(let error):
-                failure(response, error)
+                failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
             }
+        }
+    }
+    
+    @objc(syncWithQuery:completionHandler:)
+    public func syncObjC(query: SyncQuery, completionHandler handler: @escaping (String, NSError?) -> Void) -> Void {
+        
+        self.sync(query: query) { (moduleId, error) in
+            
+            var info: [AnyHashable: String]? = nil
+            
+            if let error = error {
+                info = [NSLocalizedDescriptionKey: error.description]
+            }
+            
+            handler(moduleId, NSError(domain: "com.mobgen.halo", code: -1, userInfo: info))
+            
         }
     }
     

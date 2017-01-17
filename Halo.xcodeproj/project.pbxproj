@@ -209,6 +209,11 @@
 		004FEC721BCFB788004216EE /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; };
 		004FEC731BCFB788004216EE /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; };
 		004FEC741BCFB788004216EE /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; };
+		0051DFA31E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051DFA21E2CDF66005AA4C7 /* ContentManager+Sync.swift */; };
+		0051DFA41E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051DFA21E2CDF66005AA4C7 /* ContentManager+Sync.swift */; };
+		0051DFA51E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051DFA21E2CDF66005AA4C7 /* ContentManager+Sync.swift */; };
+		0051DFA71E2E3857005AA4C7 /* AuthManager+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051DFA61E2E3857005AA4C7 /* AuthManager+ObjC.swift */; };
+		0051DFA91E2E452A005AA4C7 /* LogMessage+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051DFA81E2E452A005AA4C7 /* LogMessage+ObjC.swift */; };
 		008E2B071C5132DC00FACAB2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */; };
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -401,6 +406,9 @@
 		004FEC701BCFB788004216EE /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		004FEC711BCFB788004216EE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		005034B11C92B11300362A8F /* HaloRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloRequest.swift; sourceTree = "<group>"; };
+		0051DFA21E2CDF66005AA4C7 /* ContentManager+Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentManager+Sync.swift"; sourceTree = "<group>"; };
+		0051DFA61E2E3857005AA4C7 /* AuthManager+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AuthManager+ObjC.swift"; sourceTree = "<group>"; };
+		0051DFA81E2E452A005AA4C7 /* LogMessage+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LogMessage+ObjC.swift"; sourceTree = "<group>"; };
 		006A5FAD1B318CAC0045395A /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		006A5FB71B318CAC0045395A /* Halo-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Halo-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		008E2B021C51320C00FACAB2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -570,15 +578,16 @@
 			children = (
 				0046122F1E0BE20000B9B306 /* AuthManager.swift */,
 				004612301E0BE20000B9B306 /* ContentManager.swift */,
+				0051DFA21E2CDF66005AA4C7 /* ContentManager+Sync.swift */,
+				004612341E0BE20000B9B306 /* CoreManager.swift */,
 				004612311E0BE20000B9B306 /* CoreManager+Addons.swift */,
 				004612321E0BE20000B9B306 /* CoreManager+Auth.swift */,
 				004612331E0BE20000B9B306 /* CoreManager+Modules.swift */,
-				004612341E0BE20000B9B306 /* CoreManager.swift */,
 				004612351E0BE20000B9B306 /* Manager.swift */,
+				004612391E0BE20000B9B306 /* NetworkManager.swift */,
 				004612361E0BE20000B9B306 /* NetworkManager+Device.swift */,
 				004612371E0BE20000B9B306 /* NetworkManager+NSURLSessionDelegate.swift */,
 				004612381E0BE20000B9B306 /* NetworkManager+SSLPinning.swift */,
-				004612391E0BE20000B9B306 /* NetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -771,6 +780,8 @@
 				004791041C915D1100C24741 /* CoreManager+ObjC.swift */,
 				004791061C915D4A00C24741 /* ContentManager+ObjC.swift */,
 				005034B11C92B11300362A8F /* HaloRequest.swift */,
+				0051DFA61E2E3857005AA4C7 /* AuthManager+ObjC.swift */,
+				0051DFA81E2E452A005AA4C7 /* LogMessage+ObjC.swift */,
 			);
 			name = ObjC;
 			path = HaloObjC;
@@ -1198,6 +1209,7 @@
 				000F32391E27787300059909 /* OfflineDataProvider.swift in Sources */,
 				000F31F31E27784D00059909 /* CloudinaryURL.swift in Sources */,
 				000F31F61E27784D00059909 /* MobileProvisionParser.swift in Sources */,
+				0051DFA41E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */,
 				000F32151E27785C00059909 /* AuthProfile.swift in Sources */,
 				000F31D81E2776FC00059909 /* Credentials.swift in Sources */,
 				000F31DC1E2776FC00059909 /* Protocols.swift in Sources */,
@@ -1258,6 +1270,7 @@
 				000F323F1E27787300059909 /* OfflineDataProvider.swift in Sources */,
 				000F31F91E27784E00059909 /* CloudinaryURL.swift in Sources */,
 				000F31FC1E27784E00059909 /* MobileProvisionParser.swift in Sources */,
+				0051DFA51E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */,
 				000F32231E27785C00059909 /* AuthProfile.swift in Sources */,
 				000F31DF1E2776FD00059909 /* Credentials.swift in Sources */,
 				000F31E31E2776FD00059909 /* Protocols.swift in Sources */,
@@ -1303,7 +1316,9 @@
 			files = (
 				004791051C915D1100C24741 /* CoreManager+ObjC.swift in Sources */,
 				00396E5C1D535BF300594D0A /* HaloRequest.swift in Sources */,
+				0051DFA91E2E452A005AA4C7 /* LogMessage+ObjC.swift in Sources */,
 				00396E5B1D535BF300594D0A /* ContentManager+ObjC.swift in Sources */,
+				0051DFA71E2E3857005AA4C7 /* AuthManager+ObjC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1345,6 +1360,7 @@
 				0046127B1E0BE20000B9B306 /* PaginationInfo.swift in Sources */,
 				0046127E1E0BE20000B9B306 /* Tag.swift in Sources */,
 				004612731E0BE20000B9B306 /* NetworkManager.swift in Sources */,
+				0051DFA31E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */,
 				004612791E0BE20000B9B306 /* PaginatedContentInstances.swift in Sources */,
 				0046126F1E0BE20000B9B306 /* Manager.swift in Sources */,
 				0046126E1E0BE20000B9B306 /* CoreManager.swift in Sources */,

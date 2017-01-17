@@ -11,6 +11,6 @@ import Foundation
 public enum Result<Value> {
 
     case success(Value, Bool)
-    case failure(NSError)
+    case failure(HaloError)
 
 }

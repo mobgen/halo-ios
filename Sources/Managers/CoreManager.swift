@@ -234,7 +234,7 @@ open class CoreManager: NSObject, HaloManager {
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:)
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         
-        LogMessage(message: "Failed registering for remote notifications", error: error).print()
+        LogMessage(error: .failedToRegisterForRemoteNotifications(error.localizedDescription)).print()
         
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {

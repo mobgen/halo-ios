@@ -21,11 +21,11 @@ open class NetworkOfflineDataProvider: NetworkDataProvider {
                     }
                 }
                 handler(response, .success(data, false))
-            case .failure(_):
+            case .failure(let e):
                 if let modules = NSKeyedUnarchiver.unarchiveObject(withFile: OfflineDataProvider.modulesPath) as? PaginatedModules {
                     handler(response, .success(modules, true))
                 } else {
-                    handler(response, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                    handler(response, .failure(e))
                 }
             }
         }
@@ -46,11 +46,11 @@ open class NetworkOfflineDataProvider: NetworkDataProvider {
                     }
                 }
                 handler(response, .success(data, false))
-            case .failure(_):
+            case .failure(let e):
                 if let instances = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? PaginatedContentInstances {
                     handler(response, .success(instances, true))
                 } else {
-                    handler(response, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                    handler(response, .failure(e))
                 }
             }
 

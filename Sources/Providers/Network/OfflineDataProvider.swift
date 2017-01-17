@@ -24,7 +24,7 @@ open class OfflineDataProvider: DataProvider {
         if let modules = NSKeyedUnarchiver.unarchiveObject(withFile: OfflineDataProvider.modulesPath) as? PaginatedModules {
             handler(nil, .success(modules, true))
         } else {
-            handler(nil, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+            handler(nil, .failure(.noCachedContent))
         }
     }
 
@@ -33,9 +33,17 @@ open class OfflineDataProvider: DataProvider {
         if let instances = NSKeyedUnarchiver.unarchiveObject(withFile: query.description) as? PaginatedContentInstances {
             handler(nil, .success(instances, true))
         } else {
-            handler(nil, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+            handler(nil, .failure(.noCachedContent))
         }
 
+    }
+    
+    public func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) {
+        // TODO
+    }
+    
+    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) {
+        // TODO
     }
 
 }

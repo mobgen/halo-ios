@@ -13,7 +13,7 @@ public enum AuthenticationMode: Int {
 }
 
 public protocol Requestable {
-    var URLRequest: URLRequest { get }
+    var urlRequest: URLRequest { get }
     var authenticationMode: Halo.AuthenticationMode { get }
     var offlinePolicy: Halo.OfflinePolicy { get }
     var numberOfRetries: Int? { get }
@@ -45,8 +45,8 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     
     fileprivate(set) var dataProvider: DataProvider = Manager.core.dataProvider
 
-    open var URLRequest: URLRequest {
-        let req = NSMutableURLRequest(url: self.url!)
+    open var urlRequest: URLRequest {
+        var req = URLRequest(url: self.url!)
 
         req.httpMethod = self.method.rawValue
 
@@ -78,7 +78,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     open var debugDescription: String {
-        return self.URLRequest.curlRequest + "\n"
+        return self.urlRequest.curlRequest + "\n"
     }
 
     public init(path: String, relativeToURL: URL? = Router.baseURL) {
@@ -193,8 +193,8 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
 
     open func hash() -> Int {
 
-        let bodyHash = (URLRequest.httpBody as NSData?)?.hash ?? 0
-        let urlHash = (URLRequest.url as NSURL?)?.hash ?? 0
+        let bodyHash = (urlRequest.httpBody as NSData?)?.hash ?? 0
+        let urlHash = (urlRequest.url as NSURL?)?.hash ?? 0
 
         return bodyHash + urlHash
     }

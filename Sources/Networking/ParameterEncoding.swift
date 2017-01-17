@@ -50,7 +50,7 @@ public enum ParameterEncoding {
     case urlEncodedInURL
     case json
     case propertyList(PropertyListSerialization.PropertyListFormat, PropertyListSerialization.WriteOptions)
-    case custom((NSMutableURLRequest, [String: Any]?) -> (NSMutableURLRequest, NSError?))
+    case custom((URLRequest, [String: Any]?) -> (URLRequest, HaloError?))
 
     /**
      Creates a URL request by encoding parameters and applying them onto an existing request.
@@ -61,12 +61,12 @@ public enum ParameterEncoding {
      - returns: A tuple containing the constructed request and the error that occurred during parameter encoding,
      if any.
      */
-    public func encode(request: NSMutableURLRequest, parameters: [String: Any]?) -> (NSMutableURLRequest, NSError?) {
+    public func encode(request: URLRequest, parameters: [String: Any]?) -> (URLRequest, HaloError?) {
         var mutableURLRequest = request
 
         guard let parameters = parameters else { return (mutableURLRequest, nil) }
 
-        var encodingError: NSError? = nil
+        var encodingError: HaloError? = nil
 
         switch self {
         case .url, .urlEncodedInURL:
@@ -97,7 +97,7 @@ public enum ParameterEncoding {
                 }
             }
 
-            if let method = Method(rawValue: mutableURLRequest.httpMethod) , encodesParametersInURL(method) {
+            if let method = Method(rawValue: mutableURLRequest.httpMethod!) , encodesParametersInURL(method) {
                 if var URLComponents = URLComponents(url: mutableURLRequest.url!, resolvingAgainstBaseURL: false)
                     , !parameters.isEmpty {
                     let percentEncodedQuery = (URLComponents.percentEncodedQuery.map { $0 + "&" } ?? "") + query(parameters)
@@ -127,7 +127,7 @@ public enum ParameterEncoding {
 
                 mutableURLRequest.httpBody = data
             } catch {
-                encodingError = error as NSError
+                encodingError = .encodingError(error.localizedDescription)
             }
         case .propertyList(let format, let options):
             do {
@@ -142,7 +142,7 @@ public enum ParameterEncoding {
 
                 mutableURLRequest.httpBody = data
             } catch {
-                encodingError = error as NSError
+                encodingError = .encodingError(error.localizedDescription)
             }
         case .custom(let closure):
             (mutableURLRequest, encodingError) = closure(mutableURLRequest, parameters)

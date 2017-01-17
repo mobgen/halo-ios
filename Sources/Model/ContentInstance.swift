@@ -36,16 +36,16 @@ open class ContentInstance: NSObject, NSCoding {
     open internal(set) var id: String?
 
     /// Id of the module to which this instance belongs
-    open internal(set) var moduleId: String?
+    open internal(set) var moduleId: String = ""
 
     /// Name of the instance
-    open internal(set) var name: String?
+    open internal(set) var name: String = ""
 
     /// Collection of key-value pairs which make up the information of this instance
-    open internal(set) var values: [String: AnyObject] = [:]
+    open internal(set) var values: [String: Any] = [:]
 
     /// Date in which the content was created
-    open internal(set) var createdAt: Date?
+    open internal(set) var createdAt: Date
 
     /// Most recent date in which the content was updated
     open internal(set) var updatedAt: Date?
@@ -61,27 +61,39 @@ open class ContentInstance: NSObject, NSCoding {
     open internal(set) var archivedAt: Date?
     
     /// Name of the creator of the content
-    open var createdBy: String?
+    open internal(set) var createdBy: String?
 
-    open var updatedBy: String?
+    open internal(set) var updatedBy: String?
     
-    open var deletedBy: String?
+    open internal(set) var deletedBy: String?
     
     
     /// Dictionary of tags associated to this general content instance
     open var tags: [String: Halo.Tag] = [:]
 
     fileprivate override init() {
+        createdAt = Date()
         super.init()
     }
 
-    open static func fromDictionary(dict: [String: AnyObject]) -> ContentInstance {
+    public convenience init(name: String, moduleId: String, values: [String: Any] = [:], tags: [Halo.Tag] = []) {
+        self.init()
+        
+        self.name = name
+        self.moduleId = moduleId
+        self.values = values
+        
+        tags.forEach { self.tags[$0.name] = $0 }
+    }
+    
+    static func fromDictionary(dict: [String: Any]) -> ContentInstance {
 
         let instance = ContentInstance()
 
         instance.id = dict[Keys.Id] as? String
-        instance.moduleId = dict[Keys.Module] as? String
-        instance.name = dict[Keys.Name] as? String
+        
+        instance.moduleId = dict[Keys.Module] as? String ?? ""
+        instance.name = dict[Keys.Name] as? String ?? ""
 
         instance.createdBy = dict[Keys.CreatedBy] as? String
         instance.deletedBy = dict[Keys.DeletedBy] as? String
@@ -127,16 +139,59 @@ open class ContentInstance: NSObject, NSCoding {
 
     }
 
+    func toDictionary() -> [String: Any] {
+        
+        var dict: [String: Any] = [:]
+        
+        if let id = self.id {
+            dict[Keys.Id] = id
+        }
+        
+        dict[Keys.Module] = self.moduleId
+        dict[Keys.Name] = self.name
+        dict[Keys.CreatedAt] = self.createdAt.timeIntervalSince1970 * 1000
+        
+        if let publishedAt = self.publishedAt {
+            dict[Keys.PublishedAt] = publishedAt.timeIntervalSince1970 * 1000
+        }
+        
+        if let updatedAt = self.updatedAt {
+            dict[Keys.UpdatedAt] = updatedAt.timeIntervalSince1970 * 1000
+        }
+        
+        if let removedAt = self.removedAt {
+            dict[Keys.RemovedAt] = removedAt.timeIntervalSince1970 * 1000
+        }
+        
+        if let deletedAt = self.deletedAt {
+            dict[Keys.DeletedAt] = deletedAt.timeIntervalSince1970 * 1000
+        }
+        
+        if let archivedAt = self.archivedAt {
+            dict[Keys.ArchivedAt] = archivedAt.timeIntervalSince1970 * 1000
+        }
+        
+        // Set values
+        dict[Keys.Values] = self.values
+        
+        // Set tags (if any)
+        dict[Keys.Tags] = self.tags.map { $1.toDictionary() }
+        
+        return dict
+    }
+    
     public required init?(coder aDecoder: NSCoder) {
+        moduleId = aDecoder.decodeObject(forKey: Keys.Module) as? String ?? ""
+        name = aDecoder.decodeObject(forKey: Keys.Name) as? String ?? ""
+        createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date ?? Date()
+        
         super.init()
+        
         id = aDecoder.decodeObject(forKey: Keys.Id) as? String
-        name = aDecoder.decodeObject(forKey: Keys.Name) as? String
-        moduleId = aDecoder.decodeObject(forKey: Keys.Module) as? String
         values = aDecoder.decodeObject(forKey: Keys.Values) as! [String: AnyObject]
         createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String
         updatedBy = aDecoder.decodeObject(forKey: Keys.UpdatedBy) as? String
         deletedBy = aDecoder.decodeObject(forKey: Keys.DeletedBy) as? String
-        createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date
         publishedAt = aDecoder.decodeObject(forKey: Keys.PublishedAt) as? Date
         removedAt = aDecoder.decodeObject(forKey: Keys.RemovedAt) as? Date
         updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
@@ -196,7 +251,7 @@ open class ContentInstance: NSObject, NSCoding {
         return false
     }
 
-    open func getValue(key: String) -> AnyObject? {
+    open func getValue(key: String) -> Any? {
         return self.values[key]
     }
 

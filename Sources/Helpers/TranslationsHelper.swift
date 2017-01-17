@@ -21,7 +21,7 @@ open class TranslationsHelper: NSObject {
     fileprivate var syncQuery: SyncQuery!
     fileprivate var locale: Locale!
     
-    fileprivate var completionHandlers: [(NSError?) -> Void] = []
+    fileprivate var completionHandlers: [(Error?) -> Void] = []
 
     fileprivate override init() {
         super.init()
@@ -36,7 +36,7 @@ open class TranslationsHelper: NSObject {
         self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale: locale)
     }
 
-    open func addCompletionHandler(handler: @escaping (NSError?) -> Void) -> Void {
+    open func addCompletionHandler(handler: @escaping (Error?) -> Void) -> Void {
         completionHandlers.append(handler)
     }
     
@@ -113,7 +113,7 @@ open class TranslationsHelper: NSObject {
         }
     }
     
-    fileprivate func processSyncResult(moduleId: String, error: NSError?) {
+    fileprivate func processSyncResult(moduleId: String, error: HaloError?) {
         
         self.isLoading = false
         

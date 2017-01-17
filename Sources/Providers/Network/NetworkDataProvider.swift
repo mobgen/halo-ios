@@ -40,7 +40,7 @@ open class NetworkDataProvider: DataProvider {
 
     open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
-        let request = Halo.Request<PaginatedContentInstances>(router: Router.instanceSearch).params(params: query.body).responseParser { data in
+        let request = Halo.Request<PaginatedContentInstances>(router: Router.instanceSearch(query.body)).responseParser { data in
 
             var result: PaginatedContentInstances? = nil
 
@@ -68,4 +68,31 @@ open class NetworkDataProvider: DataProvider {
 
     }
 
+    public func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) {
+        
+        var router: Router
+        
+        if let id = instance.id {
+            router = Router.instanceUpdate(id, instance.toDictionary())
+        } else {
+            router = Router.instanceCreate(instance.toDictionary())
+        }
+        
+        let request = Halo.Request<ContentInstance>(router: router).responseParser { data in
+            
+            return nil
+        }
+        
+        do {
+            try request.responseObject(completionHandler: handler)
+        } catch HaloError.notImplementedResponseParser {
+            handler(nil, .failure(HaloError.notImplementedResponseParser))
+        } catch {}
+        
+    }
+    
+    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) {
+        
+    }
+    
 }

@@ -8,9 +8,36 @@
 
 import Foundation
 
-@objc
-public enum HaloError: Int, Error {
+public enum HaloError: Error {
 
-    case notImplementedResponseParser, notImplementedOfflinePolicy
-
+    case notImplementedResponseParser
+    case notImplementedOfflinePolicy
+    case failedToRegisterForRemoteNotifications(String)
+    case noCachedContent
+    case noInternetConnection
+    case parsingError(String)
+    case encodingError(String)
+    case noDataReceived
+    case noResponseReceived
+    case noValidCredentialsFound
+    case errorResponse(Int)
+    case loginError(String?)
+    
+    public var description: String {
+        switch self {
+        case .notImplementedResponseParser: return "No response parser has been implemented"
+        case .notImplementedOfflinePolicy: return "No offline policy has been implemented"
+        case .failedToRegisterForRemoteNotifications(let message): return "Failed to register for remote notifications (\(message))"
+        case .noCachedContent: return "No cached content for the current request"
+        case .noInternetConnection: return "There is no internet connection available. Please try again later"
+        case .parsingError(let message): return "Error parsing response. \(message)"
+        case .encodingError(let message): return "An error has occurred when encoding the request (\(message))"
+        case .noDataReceived: return "No data received from server"
+        case .noResponseReceived: return "No response received from server"
+        case .noValidCredentialsFound: return "No valid credentials were found"
+        case .errorResponse(let code): return "An error has occurred (code \(code))"
+        case .loginError(let message): return "An error has occurred while trying to log in (\(message))"
+        }
+    }
+    
 }

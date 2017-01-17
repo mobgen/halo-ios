@@ -29,8 +29,7 @@ public class AuthManager: NSObject, HaloManager {
      - parameter authProfile:       AuthProfile with email, password, deviceId and network.
      - parameter completionHandler: Closure to be called after completion
      */
-    @objc(loginWithAuthProfile:stayLoggedIn:completionHandler:)
-    public func login(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn, completionHandler handler: @escaping (User?, NSError?) -> Void) -> Void {
+    public func login(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn, completionHandler handler: @escaping (User?, HaloError?) -> Void) -> Void {
         
         let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
         
@@ -42,9 +41,9 @@ public class AuthManager: NSObject, HaloManager {
                 guard
                     let user = user
                 else {
-                    let msg = "An error happened when trying to login with Halo."
-                    LogMessage(message: msg, level: .error).print()
-                    handler(nil, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: msg]))
+                    let e: HaloError = .loginError("No user returned from server")
+                    LogMessage(error: e).print()
+                    handler(nil, e)
                     return
                 }
                 
@@ -56,7 +55,7 @@ public class AuthManager: NSObject, HaloManager {
                 handler(user, nil)
                 
             case .failure(let error):
-                LogMessage(message: "An error happened when trying to login with Halo.", error: error).print()
+                LogMessage(error: .loginError(error.localizedDescription)).print()
                 handler(nil, error)
             }
         }
@@ -100,8 +99,7 @@ public class AuthManager: NSObject, HaloManager {
      - parameter userProfile:       UserProfile with at least email, name and surname.
      - parameter completionHandler: Closure to be called after completion
      */
-    @objc(registerWithAuthProfile:userProfile:completionHandler:)
-    public func register(authProfile: AuthProfile, userProfile: UserProfile, completionHandler handler: @escaping (UserProfile?, NSError?) -> Void) -> Void {
+    public func register(authProfile: AuthProfile, userProfile: UserProfile, completionHandler handler: @escaping (UserProfile?, HaloError?) -> Void) -> Void {
         
         let request = Halo.Request<UserProfile>(router: Router.registerUser(["auth": authProfile.toDictionary(), "profile": userProfile.toDictionary()]))
         

@@ -145,7 +145,7 @@ open class HaloRequest: NSObject {
                 case .success(let data, let cached):
                     success(response, data, cached)
                 case .failure(let error):
-                    failure(response, error)
+                    failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
                 }
             }
         } catch _ {
@@ -163,7 +163,7 @@ open class HaloRequest: NSObject {
                 case .success(let data, let cached):
                     success(response, data, cached)
                 case .failure(let error):
-                    failure(response, error)
+                    failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
                 }
             }
         } catch _ {

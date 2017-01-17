@@ -87,7 +87,7 @@ open class NetworkManager: NSObject, HaloManager {
             return
         }
 
-        let request = urlRequest.URLRequest as URLRequest
+        let request = urlRequest.urlRequest
 
         self.addons.forEach { $0.willPerformRequest(request: request) }
 
@@ -135,7 +135,7 @@ open class NetworkManager: NSObject, HaloManager {
                         }
                         
                         DispatchQueue.main.async {
-                            handler?(resp, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey : message])))
+                            handler?(resp, .failure(.parsingError(message)))
                         }
                         
                     }
@@ -145,13 +145,13 @@ open class NetworkManager: NSObject, HaloManager {
                     }
                 } else {
                     DispatchQueue.main.async {
-                        handler?(resp, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                        handler?(resp, .failure(.noDataReceived))
                     }
                 }
                 
             } else {
                 DispatchQueue.main.async {
-                    handler?(nil, .failure(NSError(domain: "com.mobgen.halo", code: -1009, userInfo: [NSLocalizedDescriptionKey : "No response received from server"])))
+                    handler?(nil, .failure(.noResponseReceived))
                 }
             }
             
@@ -228,7 +228,7 @@ open class NetworkManager: NSObject, HaloManager {
 
             let start = Date()
 
-            let task = self.session.dataTask(with: req.URLRequest) { (data, response, error) -> Void in
+            let task = self.session.dataTask(with: req.urlRequest) { (data, response, error) -> Void in
 
                 if let resp = response as? HTTPURLResponse {
 
@@ -238,7 +238,7 @@ open class NetworkManager: NSObject, HaloManager {
                     if resp.statusCode > 399 {
 
                         DispatchQueue.main.async {
-                            handler?(resp, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+                            handler?(resp, .failure(.errorResponse(resp.statusCode)))
                         }
                         
                         self.cachedTasks.removeAll()
@@ -275,7 +275,7 @@ open class NetworkManager: NSObject, HaloManager {
         } else {
             self.isRefreshing = false
             LogMessage(message: "No credentials found", level: .error).print()
-            handler?(nil, .failure(NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil)))
+            handler?(nil, .failure(.noValidCredentialsFound))
         }
     }
 
