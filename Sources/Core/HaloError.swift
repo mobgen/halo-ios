@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum HaloError: Error {
+public enum HaloError: Error, Hashable {
 
     case notImplementedResponseParser
     case notImplementedOfflinePolicy
@@ -38,6 +38,10 @@ public enum HaloError: Error {
         case .errorResponse(let code): return "An error has occurred (code \(code))"
         case .loginError(let message): return "An error has occurred while trying to log in (\(message))"
         }
+    }
+    
+    public var hashValue: Int {
+        return self.description.hashValue
     }
     
 }
