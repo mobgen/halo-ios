@@ -38,12 +38,12 @@ open class OfflineDataProvider: DataProvider {
 
     }
     
-    public func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) {
-        // TODO
+    public func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
+        handler(nil, .failure(.noInternetConnection))
     }
     
-    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) {
-        // TODO
+    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) -> Void {
+        handler(nil, .failure(.noInternetConnection))
     }
 
 }

@@ -47,30 +47,86 @@ open class ContentInstance: NSObject, NSCoding {
     /// Date in which the content was created
     open internal(set) var createdAt: Date
 
+    /// Date in which the content was (or is going to be) published
+    open internal(set) var publishedAt: Date?
+    
     /// Most recent date in which the content was updated
     open internal(set) var updatedAt: Date?
     
+    /// Date in which the content was (or is going to be) deleted
     open internal(set) var deletedAt: Date?
     
     /// Date in which the content was (or is going to be) removed
     open internal(set) var removedAt: Date?
     
-    /// Date in which the content was (or is going to be) published
-    open internal(set) var publishedAt: Date?
-
+    /// Date in which the content was (or is going to be) archived
     open internal(set) var archivedAt: Date?
     
     /// Name of the creator of the content
     open internal(set) var createdBy: String?
 
+    /// Name of the last user updating the content
     open internal(set) var updatedBy: String?
     
+    /// Name of the user who has deleted the content
     open internal(set) var deletedBy: String?
-    
     
     /// Dictionary of tags associated to this general content instance
     open var tags: [String: Halo.Tag] = [:]
 
+    static func fromDictionary(dict: [String: Any]) -> ContentInstance {
+        
+        let instance = ContentInstance()
+        
+        instance.id = dict[Keys.Id] as? String
+        
+        instance.moduleId = dict[Keys.Module] as? String ?? ""
+        instance.name = dict[Keys.Name] as? String ?? ""
+        
+        instance.createdBy = dict[Keys.CreatedBy] as? String
+        instance.deletedBy = dict[Keys.DeletedBy] as? String
+        instance.updatedBy = dict[Keys.UpdatedBy] as? String
+        
+        if let valuesList = dict[Keys.Values] as? [String: AnyObject] {
+            instance.values = valuesList
+        }
+        
+        if let tagsList = dict[Keys.Tags] as? [[String: AnyObject]] {
+            instance.tags = tagsList.map { Halo.Tag.fromDictionary(dict: $0) }.reduce([:]) { (tagsDict, tag: Halo.Tag) -> [String: Halo.Tag] in
+                var varDict = tagsDict
+                varDict[tag.name] = tag
+                return varDict
+            }
+        }
+        
+        if let created = dict[Keys.CreatedAt] as? Double {
+            instance.createdAt = Date(timeIntervalSince1970: created/1000)
+        }
+        
+        if let updated = dict[Keys.UpdatedAt] as? Double {
+            instance.updatedAt = Date(timeIntervalSince1970: updated/1000)
+        }
+        
+        if let published = dict[Keys.PublishedAt] as? Double {
+            instance.publishedAt = Date(timeIntervalSince1970: published/1000)
+        }
+        
+        if let removed = dict[Keys.RemovedAt] as? Double {
+            instance.removedAt = Date(timeIntervalSince1970: removed/1000)
+        }
+        
+        if let deleted = dict[Keys.DeletedAt] as? Double {
+            instance.deletedAt = Date(timeIntervalSince1970: deleted/1000)
+        }
+        
+        if let archived = dict[Keys.ArchivedAt] as? Double {
+            instance.archivedAt = Date(timeIntervalSince1970: archived/1000)
+        }
+        
+        return instance
+        
+    }
+    
     fileprivate override init() {
         createdAt = Date()
         super.init()
@@ -86,59 +142,66 @@ open class ContentInstance: NSObject, NSCoding {
         tags.forEach { self.tags[$0.name] = $0 }
     }
     
-    static func fromDictionary(dict: [String: Any]) -> ContentInstance {
-
-        let instance = ContentInstance()
-
-        instance.id = dict[Keys.Id] as? String
-        
-        instance.moduleId = dict[Keys.Module] as? String ?? ""
-        instance.name = dict[Keys.Name] as? String ?? ""
-
-        instance.createdBy = dict[Keys.CreatedBy] as? String
-        instance.deletedBy = dict[Keys.DeletedBy] as? String
-        instance.updatedBy = dict[Keys.UpdatedBy] as? String
-
-        if let valuesList = dict[Keys.Values] as? [String: AnyObject] {
-            instance.values = valuesList
-        }
-
-        if let tagsList = dict[Keys.Tags] as? [[String: AnyObject]] {
-            instance.tags = tagsList.map { Halo.Tag.fromDictionary(dict: $0) }.reduce([:]) { (tagsDict, tag: Halo.Tag) -> [String: Halo.Tag] in
-                var varDict = tagsDict
-                varDict[tag.name] = tag
-                return varDict
-            }
-        }
-
-        if let created = dict[Keys.CreatedAt] as? Double {
-            instance.createdAt = Date(timeIntervalSince1970: created/1000)
-        }
-
-        if let updated = dict[Keys.UpdatedAt] as? Double {
-            instance.updatedAt = Date(timeIntervalSince1970: updated/1000)
-        }
-
-        if let published = dict[Keys.PublishedAt] as? Double {
-            instance.publishedAt = Date(timeIntervalSince1970: published/1000)
-        }
-
-        if let removed = dict[Keys.RemovedAt] as? Double {
-            instance.removedAt = Date(timeIntervalSince1970: removed/1000)
-        }
-        
-        if let deleted = dict[Keys.DeletedAt] as? Double {
-            instance.deletedAt = Date(timeIntervalSince1970: deleted/1000)
-        }
-        
-        if let archived = dict[Keys.ArchivedAt] as? Double {
-            instance.archivedAt = Date(timeIntervalSince1970: archived/1000)
-        }
-
-        return instance
-
+    @discardableResult
+    public func publishedAt(_ date: Date) -> ContentInstance {
+        self.publishedAt = date
+        return self
+    }
+    
+    @discardableResult
+    public func updatedAt(_ date: Date) -> ContentInstance {
+        self.updatedAt = date
+        return self
     }
 
+    @discardableResult
+    public func deletedAt(_ date: Date) -> ContentInstance {
+        self.deletedAt = date
+        return self
+    }
+    
+    @discardableResult
+    public func removedAt(_ date: Date) -> ContentInstance {
+        self.removedAt = date
+        return self
+    }
+    
+    @discardableResult
+    public func archivedAt(_ date: Date) -> ContentInstance {
+        self.archivedAt = date
+        return self
+    }
+    
+    @discardableResult
+    public func createdBy(_ str: String) -> ContentInstance {
+        self.createdBy = str
+        return self
+    }
+    
+    @discardableResult
+    public func updatedBy(_ str: String) -> ContentInstance {
+        self.updatedBy = str
+        return self
+    }
+    
+    @discardableResult
+    public func deletedBy(_ str: String) -> ContentInstance {
+        self.deletedBy = str
+        return self
+    }
+    
+    @discardableResult
+    public func addTag(_ tag: Halo.Tag) -> ContentInstance {
+        self.tags[tag.name] = tag
+        return self
+    }
+    
+    @discardableResult
+    public func removeTag(_ name: String) -> ContentInstance {
+        self.tags.removeValue(forKey: name)
+        return self
+    }
+    
     func toDictionary() -> [String: Any] {
         
         var dict: [String: Any] = [:]

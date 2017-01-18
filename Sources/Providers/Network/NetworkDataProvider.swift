@@ -80,7 +80,7 @@ open class NetworkDataProvider: DataProvider {
 
     }
 
-    public func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) {
+    public func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
         
         var router: Router
         
@@ -109,8 +109,9 @@ open class NetworkDataProvider: DataProvider {
         
     }
     
-    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) {
-        
+    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) -> Void {
+        // TODO: Not implemented yet
+        handler(nil, .success(true, false))
     }
     
 }

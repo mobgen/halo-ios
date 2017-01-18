@@ -40,17 +40,12 @@ open class ContentManager: NSObject, HaloManager {
 
     // MARK: Content manipulation
     
-    open func saveContent(_ instance: ContentInstance) -> ContentInstance? {
-        
-        
-        
-        return nil
+    open func save(_ instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<ContentInstance?>) -> Void) -> Void {
+        Manager.core.dataProvider.save(instance: instance, completionHandler: handler)
     }
     
-    open func deleteContent(id: String) -> Bool {
-        
-        
-        return true
+    open func delete(instanceId: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) -> Void {
+        Manager.core.dataProvider.delete(id: instanceId, completionHandler: handler)
     }
 }
 
