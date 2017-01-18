@@ -34,7 +34,13 @@ open class NetworkDataProvider: DataProvider {
             return result
         }
 
-        _ = try? request.responseObject(completionHandler: handler)
+        do {
+            try request.responseObject(completionHandler: handler)
+        } catch let e where e is HaloError {
+            handler(nil, .failure(e as! HaloError))
+        } catch {
+            handler(nil, .failure(.unknownError(error)))
+        }
 
     }
 
@@ -63,7 +69,13 @@ open class NetworkDataProvider: DataProvider {
 
         }
 
-        _ = try? request.responseObject(completionHandler: handler)
+        do {
+            try request.responseObject(completionHandler: handler)
+        } catch let e where e is HaloError {
+            handler(nil, .failure(e as! HaloError))
+        } catch {
+            handler(nil, .failure(.unknownError(error)))
+        }
 
 
     }
@@ -80,14 +92,20 @@ open class NetworkDataProvider: DataProvider {
         
         let request = Halo.Request<ContentInstance>(router: router).responseParser { data in
             
-            return nil
+            guard let d = data as? [String: Any] else {
+                return nil
+            }
+            
+            return ContentInstance.fromDictionary(dict: d)
         }
         
         do {
             try request.responseObject(completionHandler: handler)
-        } catch HaloError.notImplementedResponseParser {
-            handler(nil, .failure(HaloError.notImplementedResponseParser))
-        } catch {}
+        } catch let e where e is HaloError {
+            handler(nil, .failure(e as! HaloError))
+        } catch {
+            handler(nil, .failure(.unknownError(error)))
+        }
         
     }
     

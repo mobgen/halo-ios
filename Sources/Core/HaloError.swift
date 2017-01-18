@@ -22,6 +22,7 @@ public enum HaloError: Error, Hashable {
     case noValidCredentialsFound
     case errorResponse(Int)
     case loginError(String?)
+    case unknownError(Error?)
     
     public var description: String {
         switch self {
@@ -37,6 +38,12 @@ public enum HaloError: Error, Hashable {
         case .noValidCredentialsFound: return "No valid credentials were found"
         case .errorResponse(let code): return "An error has occurred (code \(code))"
         case .loginError(let message): return "An error has occurred while trying to log in (\(message))"
+        case .unknownError(let error):
+            if let e = error {
+                return "An unknown error occurred (\(e.localizedDescription))"
+            } else {
+                return "An unknown error ocurred"
+            }
         }
     }
     
