@@ -27,7 +27,7 @@ open class SyncResult: NSObject, NSCoding {
     open internal(set) var created: [ContentInstance] = []
     open internal(set) var updated: [ContentInstance] = []
     open internal(set) var deleted: [String] = [] // Store only the ids that will be used for deletion
-    open internal(set) var locale: Locale?
+    open internal(set) var locale: Locale? = Manager.content.defaultLocale
     
     fileprivate override init() {
         super.init()
@@ -56,7 +56,10 @@ open class SyncResult: NSObject, NSCoding {
         moduleName = aDecoder.decodeObject(forKey: Keys.ModuleName) as! String
         moduleId = aDecoder.decodeObject(forKey: Keys.ModuleId) as! String
         syncDate = aDecoder.decodeObject(forKey: Keys.SyncDate) as? Date
-        locale = Locale(rawValue: aDecoder.decodeInteger(forKey: Keys.Locale))
+
+        if let loc = aDecoder.decodeObject(forKey: Keys.Locale) as? Int {
+            locale = Locale(rawValue: loc)
+        }
     }
     
     open func encode(with aCoder: NSCoder) {

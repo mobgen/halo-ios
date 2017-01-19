@@ -24,7 +24,7 @@ open class SyncLogEntry: NSObject, NSCoding {
     open internal(set) var moduleId: String?
     open internal(set) var moduleName: String?
     open internal(set) var syncDate: Date?
-    open internal(set) var locale: Locale?
+    open internal(set) var locale: Locale? = Manager.content.defaultLocale
     open internal(set) var creations: Int = 0
     open internal(set) var updates: Int = 0
     open internal(set) var deletions: Int = 0
@@ -45,7 +45,10 @@ open class SyncLogEntry: NSObject, NSCoding {
         moduleId = aDecoder.decodeObject(forKey: Keys.ModuleId) as? String
         moduleName = aDecoder.decodeObject(forKey: Keys.ModuleName) as? String
         syncDate = aDecoder.decodeObject(forKey: Keys.SyncDate) as? Date
-        locale = Locale(rawValue: aDecoder.decodeInteger(forKey: Keys.Locale))
+        
+        if let loc = aDecoder.decodeObject(forKey: Keys.Locale) as? Int {
+            locale = Locale(rawValue: loc)
+        }
 
         creations = aDecoder.decodeInteger(forKey: Keys.Creations)
         updates = aDecoder.decodeInteger(forKey: Keys.Updates)
