@@ -14,7 +14,7 @@ import Foundation
 @objc(HaloContentManager)
 open class ContentManager: NSObject, HaloManager {
 
-    open var defaultLocale: Halo.Locale?
+    open var defaultLocale: Halo.Locale = .englishUnitedStates
     
     let serverCachingTime = "86400000"
     
