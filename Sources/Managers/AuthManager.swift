@@ -52,6 +52,9 @@ public class AuthManager: NSObject, HaloManager {
                 }
                 
                 LogMessage(message: "Login with Halo successful.", level: .info).print()
+                
+                Manager.core.defaultAuthenticationMode = .appPlus
+                
                 handler(user, nil)
                 
             case .failure(let error):
@@ -88,6 +91,8 @@ public class AuthManager: NSObject, HaloManager {
         } else {
             self.currentUser = nil
         }
+        
+        Manager.core.defaultAuthenticationMode = .app
         
         handler(result)
     }

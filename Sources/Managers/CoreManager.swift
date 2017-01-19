@@ -97,6 +97,8 @@ open class CoreManager: NSObject, HaloManager {
         }
     }
     
+    public var defaultAuthenticationMode: AuthenticationMode = .app
+    
     open var numberOfRetries: Int = 0
     
     public var appCredentials: Credentials?

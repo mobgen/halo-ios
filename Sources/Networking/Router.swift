@@ -19,6 +19,10 @@ public enum Router {
     static var appToken: Token?
     static var userToken: Token?
 
+    static var appPlusToken: Token? {
+        return Manager.auth.currentUser?.token
+    }
+    
     case oAuth(Credentials, [String: Any])
     case versionCheck
     case modules

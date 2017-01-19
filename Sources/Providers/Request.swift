@@ -9,7 +9,7 @@
 import Foundation
 
 public enum AuthenticationMode: Int {
-    case app, user
+    case app, appPlus, user
 }
 
 public protocol Requestable {
@@ -31,7 +31,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     public internal(set) var bypassReadiness: Bool = false
 
     open fileprivate(set) var responseParser: ((Any?) -> T?)?
-    open fileprivate(set) var authenticationMode: Halo.AuthenticationMode = .app
+    open fileprivate(set) var authenticationMode: Halo.AuthenticationMode = Manager.core.defaultAuthenticationMode
     open fileprivate(set) var offlinePolicy = Manager.core.defaultOfflinePolicy {
         didSet {
             switch offlinePolicy {
@@ -54,7 +54,9 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
 
         switch self.authenticationMode {
         case .app:
-            token = Manager.auth.currentUser?.token ?? Router.appToken
+            token = Router.appToken
+        case .appPlus:
+            token = Router.appPlusToken
         case .user:
             token = Router.userToken
         }

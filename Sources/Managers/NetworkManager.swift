@@ -48,12 +48,14 @@ open class NetworkManager: NSObject, HaloManager {
         self.addons.append(addon)
     }
 
-    fileprivate func getCredentials(mode: Halo.AuthenticationMode = .app) -> Halo.Credentials? {
+    fileprivate func getCredentials(mode: Halo.AuthenticationMode = Manager.core.defaultAuthenticationMode) -> Halo.Credentials? {
         switch mode {
         case .app:
             return Manager.core.appCredentials
         case .user:
             return Manager.core.userCredentials
+        default:
+            return nil
         }
     }
 
@@ -177,108 +179,170 @@ open class NetworkManager: NSObject, HaloManager {
     func authenticate(mode: Halo.AuthenticationMode, completionHandler handler: ((HTTPURLResponse?, Halo.Result<Halo.Token>) -> Void)? = nil) -> Void {
 
         self.isRefreshing = true
-        var params: [String : AnyObject]
-
-        if let cred = getCredentials(mode: mode) {
-
-            var tok: Token?
-
-            switch cred.type {
-            case .app:
-                tok = Router.appToken
-            case .user:
-                tok = Router.userToken
-            }
-
-            if let token = tok {
-
-                params = [
-                    "grant_type"    : "refresh_token" as AnyObject,
-                    "refresh_token" : token.refreshToken! as AnyObject
-                ]
-
-                switch cred.type {
-                case .app:
-                    params["client_id"] = cred.username as AnyObject?
-                    params["client_secret"] = cred.password as AnyObject?
-                case .user:
-                    params["username"] = cred.username as AnyObject?
-                    params["password"] = cred.password as AnyObject?
-                }
-
-            } else {
-
-                switch cred.type {
-                case .app:
-                    params = [
-                        "grant_type" : "client_credentials" as AnyObject,
-                        "client_id" : cred.username as AnyObject,
-                        "client_secret" : cred.password as AnyObject
-                    ]
-                case .user:
-                    params = [
-                        "grant_type" : "password" as AnyObject,
-                        "username" : cred.username as AnyObject,
-                        "password" : cred.password as AnyObject
-                    ]
-                }
-            }
-
-            let req = Halo.Request<Any>(router: Router.oAuth(cred, params), bypassReadiness: true).authenticationMode(mode)
-
-            let start = Date()
-
-            let task = self.session.dataTask(with: req.urlRequest) { (data, response, error) -> Void in
-
-                if let resp = response as? HTTPURLResponse {
-
-                    let elapsed = Date().timeIntervalSince(start) * 1000
-                    LogMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info).print()
-
-                    if resp.statusCode > 399 {
-
-                        DispatchQueue.main.async {
-                            handler?(resp, .failure(.errorResponse(resp.statusCode)))
-                        }
+        var params: [String: Any]
+        var task: URLSessionDataTask
+        
+        switch mode {
+            
+        case .appPlus:
+            if let profile = AuthProfile.loadProfile() {
+                
+                let req = Halo.Request<User>(router: Router.loginUser(profile.toDictionary()), bypassReadiness: true).authenticationMode(mode)
+                
+                let start = Date()
+                
+                task = self.session.dataTask(with: req.urlRequest) { (data, response, error) in
+                    
+                    if let resp = response as? HTTPURLResponse {
                         
-                        self.cachedTasks.removeAll()
+                        let elapsed = Date().timeIntervalSince(start) * 1000
+                        LogMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info).print()
                         
-                        self.isRefreshing = false
-                        return
-
-                    } else if let d = data {
-
-                        let json = try! JSONSerialization.jsonObject(with: d, options: []) as! [String : AnyObject]
-                        let token = Token.fromDictionary(json)
-
-                        switch req.authenticationMode {
-                        case .app:
-                            Router.appToken = token
-                        case .user:
-                            Router.userToken = token
+                        if resp.statusCode > 399 {
+                            
+                            DispatchQueue.main.async {
+                                handler?(resp, .failure(.errorResponse(resp.statusCode)))
+                            }
+                            
+                            self.cachedTasks.removeAll()
+                            
+                            self.isRefreshing = false
+                            return
+                            
+                        } else if let d = data {
+                            
+                            let json = try! JSONSerialization.jsonObject(with: d, options: []) as! [String: Any]
+                            
+                            Manager.auth.currentUser = User.fromDictionary(json)
+                            
+                            DispatchQueue.main.async {
+                                if let user = Manager.auth.currentUser {
+                                    handler?(resp, .success(user.token, false))
+                                } else {
+                                    // No user? Fail
+                                    handler?(resp, .failure(.loginError("No user returned from server")))
+                                }
+                            }
+                            
+                            self.isRefreshing = false
+                            self.restartCachedTasks()
                         }
-
-                        DispatchQueue.main.async {
-                            handler?(resp, .success(token, false))
-                        }
-
-                        self.isRefreshing = false
-                        self.restartCachedTasks()
                     }
                 }
+                
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    task.resume()
+                }
+                
+            } else {
+                self.isRefreshing = false
+                LogMessage(message: "No credentials found", level: .error).print()
+                handler?(nil, .failure(.noValidCredentialsFound))
             }
-
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                task.resume()
+        case .app, .user:
+            if let cred = getCredentials(mode: mode) {
+                
+                var tok: Token?
+                
+                switch cred.type {
+                case .app:
+                    tok = Router.appToken
+                case .user:
+                    tok = Router.userToken
+                }
+                
+                if let token = tok {
+                    
+                    params = [
+                        "grant_type"    : "refresh_token",
+                        "refresh_token" : token.refreshToken!
+                    ]
+                    
+                    switch cred.type {
+                    case .app:
+                        params["client_id"] = cred.username
+                        params["client_secret"] = cred.password
+                    case .user:
+                        params["username"] = cred.username
+                        params["password"] = cred.password
+                    }
+                    
+                } else {
+                    
+                    switch cred.type {
+                    case .app:
+                        params = [
+                            "grant_type" : "client_credentials",
+                            "client_id" : cred.username,
+                            "client_secret" : cred.password
+                        ]
+                    case .user:
+                        params = [
+                            "grant_type" : "password",
+                            "username" : cred.username,
+                            "password" : cred.password
+                        ]
+                    }
+                }
+                
+                let req = Halo.Request<Any>(router: Router.oAuth(cred, params), bypassReadiness: true).authenticationMode(mode)
+                
+                let start = Date()
+                
+                let task = self.session.dataTask(with: req.urlRequest) { (data, response, error) -> Void in
+                    
+                    if let resp = response as? HTTPURLResponse {
+                        
+                        let elapsed = Date().timeIntervalSince(start) * 1000
+                        LogMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info).print()
+                        
+                        if resp.statusCode > 399 {
+                            
+                            DispatchQueue.main.async {
+                                handler?(resp, .failure(.errorResponse(resp.statusCode)))
+                            }
+                            
+                            self.cachedTasks.removeAll()
+                            
+                            self.isRefreshing = false
+                            return
+                            
+                        } else if let d = data {
+                            
+                            let json = try! JSONSerialization.jsonObject(with: d, options: []) as! [String : AnyObject]
+                            let token = Token.fromDictionary(json)
+                            
+                            switch req.authenticationMode {
+                            case .app:
+                                Router.appToken = token
+                            case .user:
+                                Router.userToken = token
+                            default:
+                                break
+                            }
+                            
+                            DispatchQueue.main.async {
+                                handler?(resp, .success(token, false))
+                            }
+                            
+                            self.isRefreshing = false
+                            self.restartCachedTasks()
+                        }
+                    }
+                }
+                
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    task.resume()
+                }
+                
+            } else {
+                self.isRefreshing = false
+                LogMessage(message: "No credentials found", level: .error).print()
+                handler?(nil, .failure(.noValidCredentialsFound))
             }
-
-        } else {
-            self.isRefreshing = false
-            LogMessage(message: "No credentials found", level: .error).print()
-            handler?(nil, .failure(.noValidCredentialsFound))
         }
     }
-
+    
     func restartCachedTasks() {
         // Restart cached tasks
         LogMessage(message: "Restarting enqueued tasks...", level: .info).print()
