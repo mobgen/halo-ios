@@ -33,7 +33,7 @@ public class AuthManager: NSObject, HaloManager {
         
         let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
         
-        _ = try? request.responseParser(parser: userParser).responseObject { (_, result) in
+        _ = try? request.responseParser(userParser).responseObject { (_, result) in
             switch (result) {
             case .success(let user, _):
                 self.currentUser = user
@@ -103,7 +103,7 @@ public class AuthManager: NSObject, HaloManager {
         
         let request = Halo.Request<UserProfile>(router: Router.registerUser(["auth": authProfile.toDictionary(), "profile": userProfile.toDictionary()]))
         
-        _ = try? request.responseParser(parser: userProfileParser).responseObject { (_, result) in
+        _ = try? request.responseParser(userProfileParser).responseObject { (_, result) in
             switch result {
             case .success(let userProfile, _):
                 LogMessage(message: "Registration with Halo successful.", level: .info).print()

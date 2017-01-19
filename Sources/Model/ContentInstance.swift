@@ -132,6 +132,26 @@ open class ContentInstance: NSObject, NSCoding {
         super.init()
     }
 
+    public required init?(coder aDecoder: NSCoder) {
+        moduleId = aDecoder.decodeObject(forKey: Keys.Module) as? String ?? ""
+        name = aDecoder.decodeObject(forKey: Keys.Name) as? String ?? ""
+        createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date ?? Date()
+        
+        super.init()
+        
+        id = aDecoder.decodeObject(forKey: Keys.Id) as? String
+        values = aDecoder.decodeObject(forKey: Keys.Values) as! [String: AnyObject]
+        createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String
+        updatedBy = aDecoder.decodeObject(forKey: Keys.UpdatedBy) as? String
+        deletedBy = aDecoder.decodeObject(forKey: Keys.DeletedBy) as? String
+        publishedAt = aDecoder.decodeObject(forKey: Keys.PublishedAt) as? Date
+        removedAt = aDecoder.decodeObject(forKey: Keys.RemovedAt) as? Date
+        updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
+        deletedAt = aDecoder.decodeObject(forKey: Keys.DeletedAt) as? Date
+        archivedAt = aDecoder.decodeObject(forKey: Keys.ArchivedAt) as? Date
+        tags = aDecoder.decodeObject(forKey: Keys.Tags) as! [String: Halo.Tag]
+    }
+    
     public convenience init(name: String, moduleId: String, values: [String: Any] = [:], tags: [Halo.Tag] = []) {
         self.init()
         
@@ -143,61 +163,61 @@ open class ContentInstance: NSObject, NSCoding {
     }
     
     @discardableResult
-    public func publishedAt(_ date: Date) -> ContentInstance {
+    open func publishedAt(_ date: Date) -> ContentInstance {
         self.publishedAt = date
         return self
     }
     
     @discardableResult
-    public func updatedAt(_ date: Date) -> ContentInstance {
+    open func updatedAt(_ date: Date) -> ContentInstance {
         self.updatedAt = date
         return self
     }
 
     @discardableResult
-    public func deletedAt(_ date: Date) -> ContentInstance {
+    open func deletedAt(_ date: Date) -> ContentInstance {
         self.deletedAt = date
         return self
     }
     
     @discardableResult
-    public func removedAt(_ date: Date) -> ContentInstance {
+    open func removedAt(_ date: Date) -> ContentInstance {
         self.removedAt = date
         return self
     }
     
     @discardableResult
-    public func archivedAt(_ date: Date) -> ContentInstance {
+    open func archivedAt(_ date: Date) -> ContentInstance {
         self.archivedAt = date
         return self
     }
     
     @discardableResult
-    public func createdBy(_ str: String) -> ContentInstance {
+    open func createdBy(_ str: String) -> ContentInstance {
         self.createdBy = str
         return self
     }
     
     @discardableResult
-    public func updatedBy(_ str: String) -> ContentInstance {
+    open func updatedBy(_ str: String) -> ContentInstance {
         self.updatedBy = str
         return self
     }
     
     @discardableResult
-    public func deletedBy(_ str: String) -> ContentInstance {
+    open func deletedBy(_ str: String) -> ContentInstance {
         self.deletedBy = str
         return self
     }
     
     @discardableResult
-    public func addTag(_ tag: Halo.Tag) -> ContentInstance {
+    open func addTag(_ tag: Halo.Tag) -> ContentInstance {
         self.tags[tag.name] = tag
         return self
     }
     
     @discardableResult
-    public func removeTag(_ name: String) -> ContentInstance {
+    open func removeTag(_ name: String) -> ContentInstance {
         self.tags.removeValue(forKey: name)
         return self
     }
@@ -243,26 +263,6 @@ open class ContentInstance: NSObject, NSCoding {
         return dict
     }
     
-    public required init?(coder aDecoder: NSCoder) {
-        moduleId = aDecoder.decodeObject(forKey: Keys.Module) as? String ?? ""
-        name = aDecoder.decodeObject(forKey: Keys.Name) as? String ?? ""
-        createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date ?? Date()
-        
-        super.init()
-        
-        id = aDecoder.decodeObject(forKey: Keys.Id) as? String
-        values = aDecoder.decodeObject(forKey: Keys.Values) as! [String: AnyObject]
-        createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String
-        updatedBy = aDecoder.decodeObject(forKey: Keys.UpdatedBy) as? String
-        deletedBy = aDecoder.decodeObject(forKey: Keys.DeletedBy) as? String
-        publishedAt = aDecoder.decodeObject(forKey: Keys.PublishedAt) as? Date
-        removedAt = aDecoder.decodeObject(forKey: Keys.RemovedAt) as? Date
-        updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
-        deletedAt = aDecoder.decodeObject(forKey: Keys.DeletedAt) as? Date
-        archivedAt = aDecoder.decodeObject(forKey: Keys.ArchivedAt) as? Date
-        tags = aDecoder.decodeObject(forKey: Keys.Tags) as! [String: Halo.Tag]
-    }
-
     open func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: Keys.Id)
         aCoder.encode(name, forKey: Keys.Name)
@@ -280,11 +280,9 @@ open class ContentInstance: NSObject, NSCoding {
         aCoder.encode(tags, forKey: Keys.Tags)
     }
 
-    /**
-    Provides information about whether the general content instance is removed or not
-
-    - returns: Boolean determining if the instance is removed
-    */
+    /// Provides information about whether the content instance is removed or not
+    ///
+    /// - Returns: Boolean determining if the instance is removed
     open func isRemoved() -> Bool {
         if let removed = self.removedAt {
             return removed < Date()
@@ -293,11 +291,9 @@ open class ContentInstance: NSObject, NSCoding {
         return false
     }
 
-    /**
-    Provides information about whether the general content instance is published or not
-
-    - returns: Boolean determining if the instance is published
-    */
+    /// Provides information about whether the content instance is published or not
+    ///
+    /// - Returns: Boolean determining if the instance is published
     open func isPublished() -> Bool {
         if let published = self.publishedAt {
             return published < Date()
@@ -306,6 +302,9 @@ open class ContentInstance: NSObject, NSCoding {
         return false
     }
     
+    /// Provides information about whether the content instance is deleted or not
+    ///
+    /// - Returns: Boolean determining if the instance is deleted
     open func isDeleted() -> Bool {
         if let deleted = self.deletedAt {
             return deleted < Date()
@@ -313,7 +312,11 @@ open class ContentInstance: NSObject, NSCoding {
         
         return false
     }
-
+    
+    /// Helper function to directly retrieve a value given the key
+    ///
+    /// - Parameter key: Key of the value to be retrieved
+    /// - Returns: Value of the instance corresponding to the given key
     open func getValue(key: String) -> Any? {
         return self.values[key]
     }

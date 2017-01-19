@@ -44,7 +44,7 @@ open class ContentManager: NSObject, HaloManager {
         Manager.core.dataProvider.save(instance: instance, completionHandler: handler)
     }
     
-    open func delete(instanceId: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) -> Void {
+    open func delete(instanceId: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
         Manager.core.dataProvider.delete(id: instanceId, completionHandler: handler)
     }
 }

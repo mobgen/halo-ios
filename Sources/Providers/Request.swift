@@ -102,37 +102,37 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
     
     @discardableResult
-    open func responseParser(parser: @escaping (Any?) -> T?) -> Halo.Request<T> {
+    open func responseParser(_ parser: @escaping (Any?) -> T?) -> Halo.Request<T> {
         self.responseParser = parser
         return self
     }
 
     @discardableResult
-    open func offlinePolicy(policy: Halo.OfflinePolicy) -> Halo.Request<T> {
+    open func offlinePolicy(_ policy: Halo.OfflinePolicy) -> Halo.Request<T> {
         self.offlinePolicy = policy
         return self
     }
 
     @discardableResult
-    open func numberOfRetries(retries: Int) -> Halo.Request<T> {
+    open func numberOfRetries(_ retries: Int) -> Halo.Request<T> {
         self.numberOfRetries = retries
         return self
     }
     
     @discardableResult
-    open func method(method: Halo.Method) -> Halo.Request<T> {
+    open func method(_ method: Halo.Method) -> Halo.Request<T> {
         self.method = method
         return self
     }
 
     @discardableResult
-    open func authenticationMode(mode: Halo.AuthenticationMode) -> Halo.Request<T> {
+    open func authenticationMode(_ mode: Halo.AuthenticationMode) -> Halo.Request<T> {
         self.authenticationMode = mode
         return self
     }
 
     @discardableResult
-    open func parameterEncoding(encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
+    open func parameterEncoding(_ encoding: Halo.ParameterEncoding) -> Halo.Request<T> {
         self.parameterEncoding = encoding
         return self
     }
@@ -144,7 +144,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func addHeaders(headers: [String : String]) -> Halo.Request<T> {
+    open func addHeaders(_ headers: [String : String]) -> Halo.Request<T> {
         headers.forEach { (key, value) -> Void in
             let _ = self.addHeader(field: key, value: value)
         }
@@ -152,7 +152,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func params(params: [String : Any]) -> Halo.Request<T> {
+    open func params(_ params: [String : Any]) -> Halo.Request<T> {
         params.forEach { self.params[$0] = $1 }
         return self
     }
@@ -177,13 +177,13 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func fields(fields: [String]) -> Halo.Request<T> {
+    open func fields(_ fields: [String]) -> Halo.Request<T> {
         self.params["fields"] = fields
         return self
     }
 
     @discardableResult
-    open func tags(tags: [Halo.Tag]) -> Halo.Request<T> {
+    open func tags(_ tags: [Halo.Tag]) -> Halo.Request<T> {
         tags.forEach { tag in
             let json = try! JSONSerialization.data(withJSONObject: tag.toDictionary(), options: [])
             self.params["filter[tags][]"] = String(data: json, encoding: String.Encoding.utf8)

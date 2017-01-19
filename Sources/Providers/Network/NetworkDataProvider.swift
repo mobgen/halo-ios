@@ -10,6 +10,14 @@ import Foundation
 
 open class NetworkDataProvider: DataProvider {
 
+    fileprivate let instanceParser: (Any?) -> ContentInstance? = { data in
+        guard let d = data as? [String: Any] else {
+            return nil
+        }
+        
+        return ContentInstance.fromDictionary(dict: d)
+    }
+    
     open func getModules(completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
         let request = Halo.Request<PaginatedModules>(router: Router.modules).skipPagination().responseParser { (data) in
@@ -90,14 +98,7 @@ open class NetworkDataProvider: DataProvider {
             router = Router.instanceCreate(instance.toDictionary())
         }
         
-        let request = Halo.Request<ContentInstance>(router: router).responseParser { data in
-            
-            guard let d = data as? [String: Any] else {
-                return nil
-            }
-            
-            return ContentInstance.fromDictionary(dict: d)
-        }
+        let request = Halo.Request<ContentInstance>(router: router).responseParser(instanceParser)
         
         do {
             try request.responseObject(completionHandler: handler)
@@ -109,9 +110,16 @@ open class NetworkDataProvider: DataProvider {
         
     }
     
-    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) -> Void {
-        // TODO: Not implemented yet
-        handler(nil, .success(true, false))
+    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
+        let request = Halo.Request<ContentInstance>(router: Router.instanceDelete(id)).responseParser(instanceParser)
+        
+        do {
+            try request.responseObject(completionHandler: handler)
+        } catch let e where e is HaloError {
+            handler(nil, .failure(e as! HaloError))
+        } catch {
+            handler(nil, .failure(.unknownError(error)))
+        }
     }
     
 }

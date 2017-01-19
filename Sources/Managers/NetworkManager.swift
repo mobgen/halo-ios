@@ -224,7 +224,7 @@ open class NetworkManager: NSObject, HaloManager {
                 }
             }
 
-            let req = Halo.Request<Any>(router: Router.oAuth(cred, params), bypassReadiness: true).authenticationMode(mode: mode)
+            let req = Halo.Request<Any>(router: Router.oAuth(cred, params), bypassReadiness: true).authenticationMode(mode)
 
             let start = Date()
 

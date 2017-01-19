@@ -42,7 +42,7 @@ open class OfflineDataProvider: DataProvider {
         handler(nil, .failure(.noInternetConnection))
     }
     
-    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<Bool>) -> Void) -> Void {
+    public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
         handler(nil, .failure(.noInternetConnection))
     }
 
