@@ -122,49 +122,49 @@ open class SearchQuery: NSObject {
     }
 
     @objc(searchFilter:)
-    open func searchFilter(filter: SearchFilter) -> Halo.SearchQuery {
+    open func searchFilter(_ filter: SearchFilter) -> Halo.SearchQuery {
         self.conditions = filter.body
         return self
     }
 
     @objc(metaFilter:)
-    open func metaFilter(filter: SearchFilter) -> Halo.SearchQuery {
+    open func metaFilter(_ filter: SearchFilter) -> Halo.SearchQuery {
         self.metaConditions = filter.body
         return self
     }
 
     @objc(fields:)
-    open func fields(fields: [String]) -> Halo.SearchQuery {
+    open func fields(_ fields: [String]) -> Halo.SearchQuery {
         self.fields = fields
         return self
     }
 
     @objc(tags:)
-    open func tags(tags: [Halo.Tag]) -> Halo.SearchQuery {
+    open func tags(_ tags: [Halo.Tag]) -> Halo.SearchQuery {
         self.tags = tags
         return self
     }
 
     @objc(moduleIds:)
-    open func moduleIds(ids: [String]) -> Halo.SearchQuery {
+    open func moduleIds(_ ids: [String]) -> Halo.SearchQuery {
         self.moduleIds = ids
         return self
     }
 
     @objc(moduleName:)
-    open func moduleName(name: String) -> Halo.SearchQuery {
+    open func moduleName(_ name: String) -> Halo.SearchQuery {
         self.moduleName = name
         return self
     }
     
     @objc(instanceIds:)
-    open func instanceIds(ids: [String]) -> Halo.SearchQuery {
+    open func instanceIds(_ ids: [String]) -> Halo.SearchQuery {
         self.instanceIds = ids
         return self
     }
 
     @objc(populateFields:)
-    open func populateFields(fields: [String]) -> Halo.SearchQuery {
+    open func populateFields(_ fields: [String]) -> Halo.SearchQuery {
         self.populateFields = fields
         return self
     }
@@ -175,19 +175,19 @@ open class SearchQuery: NSObject {
     }
 
     @objc(segmentWithDevice:)
-    open func segmentWithDevice(segment: Bool) -> Halo.SearchQuery {
+    open func segmentWithDevice(_ segment: Bool) -> Halo.SearchQuery {
         self.segmentWithDevice = segment
         return self
     }
 
     @objc(segmentMode:)
-    open func segmentMode(mode: SegmentMode) -> Halo.SearchQuery {
+    open func segmentMode(_ mode: SegmentMode) -> Halo.SearchQuery {
         self.segmentMode = mode
         return self
     }
 
     @objc(locale:)
-    open func locale(locale: Halo.Locale) -> Halo.SearchQuery {
+    open func locale(_ locale: Halo.Locale) -> Halo.SearchQuery {
         self.locale = locale
         return self
     }

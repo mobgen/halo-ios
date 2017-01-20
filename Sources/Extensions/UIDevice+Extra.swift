@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 public extension UIDevice {
 
     /// Get the model name as a more readable string
