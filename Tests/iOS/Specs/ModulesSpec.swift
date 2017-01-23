@@ -15,8 +15,6 @@ class ModulesSpec : BaseSpec {
 
     override func spec() {
         
-        super.spec()
-        
         describe("Retrieving all modules") {
             var resp: PaginatedModules?
             

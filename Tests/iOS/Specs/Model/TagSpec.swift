@@ -13,8 +13,6 @@ import Nimble
 class TagSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         var tag: Tag?
         
         describe("A Tag") {

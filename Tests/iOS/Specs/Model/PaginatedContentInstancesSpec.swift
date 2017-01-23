@@ -13,8 +13,6 @@ import Nimble
 class PaginatedContentInstancesSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         describe("its constructor method") {
             var paginatedContentInstances: PaginatedContentInstances!
             

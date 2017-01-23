@@ -14,8 +14,6 @@ import OHHTTPStubs
 class ModuleSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         describe("A Module") {
             var module: Module!
             

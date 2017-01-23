@@ -14,8 +14,6 @@ import OHHTTPStubs
 class PaginatedModulesSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         describe("A PaginatedModule") {
             var paginatedModule: PaginatedModules!
             

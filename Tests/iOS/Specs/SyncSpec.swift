@@ -15,8 +15,6 @@ class SyncSpec: BaseSpec {
  
     override func spec() {
         
-        super.spec()
-        
         let content = Halo.Manager.content
         
         describe("The sync process") {
