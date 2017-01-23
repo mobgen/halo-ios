@@ -36,9 +36,6 @@ class DeviceSpec: BaseSpec {
     static let TestValueUpdatedTag = "testValueUpdatedTag"
     
     override func spec() {
-        
-        super.spec()
-        
         describe("A device") {
             var device: Device!
             

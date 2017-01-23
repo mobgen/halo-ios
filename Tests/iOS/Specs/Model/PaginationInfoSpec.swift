@@ -14,8 +14,6 @@ import OHHTTPStubs
 class PaginationInfoSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         describe("A PaginationInfo") {
             var paginationInfo: PaginationInfo!
             

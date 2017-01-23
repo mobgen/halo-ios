@@ -15,8 +15,6 @@ class CoreSpec: BaseSpec {
     
     override func spec() {
         
-        super.spec()
-        
         let mgr = Halo.Manager.core
         
         describe("The core manager") {
@@ -164,7 +162,7 @@ class CoreSpec: BaseSpec {
         
         describe("Framework version") {
             it("is correct") {
-                expect(mgr.frameworkVersion).to(equal("2.2"))
+                expect(mgr.frameworkVersion).to(equal("2.2.0"))
             }
         }
         

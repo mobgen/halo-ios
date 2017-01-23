@@ -14,8 +14,6 @@ import OHHTTPStubs
 class TokenSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         describe("A Token") {
             var token: Token!
             

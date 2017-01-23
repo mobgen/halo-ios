@@ -9,7 +9,7 @@
 import Foundation
 
 enum SearchFilterOperation {
-    case eq, neq, gt, lt, gte, lte, `in`, notIn
+    case eq, neq, gt, lt, gte, lte, `in`, notIn, like
 
     var description: String {
         switch  self {
@@ -21,6 +21,7 @@ enum SearchFilterOperation {
         case .lte: return "<="
         case .in: return "in"
         case .notIn: return "!in"
+        case .like: return "like"
         }
     }
 }

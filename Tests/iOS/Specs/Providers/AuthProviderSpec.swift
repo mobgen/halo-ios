@@ -20,7 +20,6 @@ class AuthProviderSpec : BaseSpec {
     }()
     
     override func spec() {
-        super.spec()
         
         let mockAuthProvider = MockAuthProvider()
         
@@ -50,7 +49,7 @@ class AuthProviderSpec : BaseSpec {
             
             describe("its authenticate method") {
                 var user: User?
-                var error: NSError?
+                var error: HaloError?
                 
                 context("when a valid authProfile is sent") {
                     beforeEach {

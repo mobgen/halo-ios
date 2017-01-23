@@ -21,7 +21,6 @@ class AuthProfileSpec: BaseSpec {
     static let TestPassword = "testpassword"
     
     override func spec() {
-        super.spec()
         
         describe("an AuthProfile") {
             var authProfile: AuthProfile!

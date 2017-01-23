@@ -31,8 +31,6 @@ class AuthManagerSpec: BaseSpec {
     
     override func spec() {
         
-        super.spec()
-        
         describe("Login with Halo") {
             beforeEach {
                 stub(condition: isPath("/api/segmentation/appuser")) { _ in
@@ -62,7 +60,7 @@ class AuthManagerSpec: BaseSpec {
             
             context("when user is registered") {
                 var user: User?
-                var error: NSError?
+                var error: HaloError?
                 var authProfileStored: AuthProfile?
                 
                 context("and server returns a successful response") {
@@ -389,7 +387,7 @@ class AuthManagerSpec: BaseSpec {
             
             context("with a right AuthProfile and right UserProfile") {
                 var userProfile: UserProfile?
-                var error: NSError?
+                var error: HaloError?
                 
                 beforeEach {
                     stub(condition: isPath("/api/segmentation/identified/register")) { _ in
@@ -420,7 +418,7 @@ class AuthManagerSpec: BaseSpec {
             
             context("with a wrong AuthProfile or wrong UserProfile") {
                 var userProfile: UserProfile?
-                var error: NSError?
+                var error: HaloError?
                 
                 beforeEach {
                     stub(condition: isPath("/api/segmentation/identified/register")) { _ in

@@ -15,7 +15,6 @@ class ManagerSpec : BaseSpec {
     static let TestCustomValue = "testValue"
     
     override func spec() {
-        super.spec()
         
         describe("A HaloEnvironment enum") {
             var env: HaloEnvironment?

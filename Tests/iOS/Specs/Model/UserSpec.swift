@@ -13,8 +13,6 @@ import Nimble
 class UserSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         var user: User?
         
         describe("A User") {

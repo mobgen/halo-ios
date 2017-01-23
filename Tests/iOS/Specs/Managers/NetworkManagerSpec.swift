@@ -15,7 +15,6 @@ import OHHTTPStubs
 class NetworkManagerSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
         
         describe("NetworkManager") {
             

@@ -13,8 +13,6 @@ import Nimble
 class SearchFilterSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         var searchFilter: SearchFilter!
         
         describe("A SearchFilter") {

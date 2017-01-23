@@ -42,6 +42,10 @@ public func valueNotIn(property: String, value: Any?, type: String? = nil) -> Se
     return SearchFilter(operation: .notIn, property: property, value: value, type: type)
 }
 
+public func like(property: String, value: String) -> SearchFilter {
+    return SearchFilter(operation: .like, property: property, value: value)
+}
+
 public func or(_ elements: SearchFilter...) -> SearchFilter {
 
     let filter = SearchFilter()

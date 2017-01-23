@@ -15,8 +15,6 @@ class SearchSpec: BaseSpec {
     
     override func spec() {
         
-        super.spec()
-        
         let cont = Halo.Manager.content
         
         describe("The search call") {

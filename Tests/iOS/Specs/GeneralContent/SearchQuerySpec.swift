@@ -28,8 +28,6 @@ class SearchQuerySpec : BaseSpec {
     static let TestLimit = 20
     
     override func spec() {
-        super.spec()
-        
         var searchQuery: SearchQuery!
         var searchQueryReturned: SearchQuery? = nil
 
@@ -42,7 +40,7 @@ class SearchQuerySpec : BaseSpec {
                 let searchFilter = MockSearchFilter.createSearchFilter()
                 
                 beforeEach {
-                    searchQueryReturned = searchQuery.searchFilter(filter: searchFilter)
+                    searchQueryReturned = searchQuery.searchFilter(searchFilter)
                 }
                 
                 it("works") {
@@ -62,7 +60,7 @@ class SearchQuerySpec : BaseSpec {
                 let searchFilter = MockSearchFilter.createSearchFilter()
                 
                 beforeEach {
-                    searchQueryReturned = searchQuery.metaFilter(filter: searchFilter)
+                    searchQueryReturned = searchQuery.metaFilter(searchFilter)
                 }
                 
                 it("works") {
@@ -80,7 +78,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its fields method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.fields(fields: SearchQuerySpec.TestFields)
+                    searchQueryReturned = searchQuery.fields(SearchQuerySpec.TestFields)
                 }
                 
                 it("works") {
@@ -92,7 +90,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its tags method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.tags(tags: SearchQuerySpec.TestTags)
+                    searchQueryReturned = searchQuery.tags(SearchQuerySpec.TestTags)
                 }
                 
                 it("works") {
@@ -104,7 +102,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its moduleIds method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.moduleIds(ids: SearchQuerySpec.TestModuleIds)
+                    searchQueryReturned = searchQuery.moduleIds(SearchQuerySpec.TestModuleIds)
                 }
                 
                 it("works") {
@@ -116,7 +114,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its moduleName method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.moduleName(name: SearchQuerySpec.TestModuleName)
+                    searchQueryReturned = searchQuery.moduleName(SearchQuerySpec.TestModuleName)
                 }
                 
                 it("works") {
@@ -127,7 +125,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its instanceIds method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.instanceIds(ids: SearchQuerySpec.TestInstanceIds)
+                    searchQueryReturned = searchQuery.instanceIds(SearchQuerySpec.TestInstanceIds)
                 }
                 
                 it("works") {
@@ -139,7 +137,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its populateFields method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.populateFields(fields: SearchQuerySpec.TestPopulateFields)
+                    searchQueryReturned = searchQuery.populateFields(SearchQuerySpec.TestPopulateFields)
                 }
                 
                 it("works") {
@@ -164,7 +162,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its segmentWithDevice method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.segmentWithDevice(segment: SearchQuerySpec.TestSegmentWithDevice)
+                    searchQueryReturned = searchQuery.segmentWithDevice(SearchQuerySpec.TestSegmentWithDevice)
                 }
                 
                 it("works") {
@@ -176,7 +174,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its segmentWithDevice method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.segmentMode(mode: SearchQuerySpec.TestSegmentMode)
+                    searchQueryReturned = searchQuery.segmentMode(SearchQuerySpec.TestSegmentMode)
                 }
                 
                 it("works") {
@@ -187,7 +185,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its locale method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.locale(locale: SearchQuerySpec.TestLocale)
+                    searchQueryReturned = searchQuery.locale(SearchQuerySpec.TestLocale)
                 }
                 
                 it("works") {
@@ -233,18 +231,18 @@ class SearchQuerySpec : BaseSpec {
                 beforeEach {
                     Manager.core.device = device
                     
-                    searchQueryReturned = searchQuery.moduleIds(ids: SearchQuerySpec.TestModuleIds)
-                    .moduleName(name: SearchQuerySpec.TestModuleName)
-                    .instanceIds(ids: SearchQuerySpec.TestModuleIds)
-                    .searchFilter(filter: searchFilter)
-                    .metaFilter(filter: searchFilter)
-                    .fields(fields: SearchQuerySpec.TestFields)
-                    .tags(tags: SearchQuerySpec.TestTags)
-                    .populateFields(fields: SearchQuerySpec.TestPopulateFields)
+                    searchQueryReturned = searchQuery.moduleIds(SearchQuerySpec.TestModuleIds)
+                    .moduleName(SearchQuerySpec.TestModuleName)
+                    .instanceIds(SearchQuerySpec.TestModuleIds)
+                    .searchFilter(searchFilter)
+                    .metaFilter(searchFilter)
+                    .fields(SearchQuerySpec.TestFields)
+                    .tags(SearchQuerySpec.TestTags)
+                    .populateFields(SearchQuerySpec.TestPopulateFields)
                     .pagination(page: SearchQuerySpec.TestPage, limit: SearchQuerySpec.TestLimit)
-                    .segmentWithDevice(segment: SearchQuerySpec.TestSegmentWithDevice)
-                    .segmentMode(mode: SearchQuerySpec.TestSegmentMode)
-                    .locale(locale: SearchQuerySpec.TestLocale)
+                    .segmentWithDevice(SearchQuerySpec.TestSegmentWithDevice)
+                    .segmentMode(SearchQuerySpec.TestSegmentMode)
+                    .locale(SearchQuerySpec.TestLocale)
                     dictReturnedByBody = searchQueryReturned?.body
                 }
                 
@@ -306,18 +304,18 @@ class SearchQuerySpec : BaseSpec {
                 beforeEach {
                     Manager.core.device = device
                     
-                    searchQueryReturned = searchQuery.moduleIds(ids: SearchQuerySpec.TestModuleIds)
-                        .moduleName(name: SearchQuerySpec.TestModuleName)
-                        .instanceIds(ids: SearchQuerySpec.TestModuleIds)
-                        .searchFilter(filter: searchFilter)
-                        .metaFilter(filter: searchFilter)
-                        .fields(fields: SearchQuerySpec.TestFields)
-                        .tags(tags: SearchQuerySpec.TestTags)
-                        .populateFields(fields: SearchQuerySpec.TestPopulateFields)
+                    searchQueryReturned = searchQuery.moduleIds(SearchQuerySpec.TestModuleIds)
+                        .moduleName(SearchQuerySpec.TestModuleName)
+                        .instanceIds(SearchQuerySpec.TestModuleIds)
+                        .searchFilter(searchFilter)
+                        .metaFilter(searchFilter)
+                        .fields(SearchQuerySpec.TestFields)
+                        .tags(SearchQuerySpec.TestTags)
+                        .populateFields(SearchQuerySpec.TestPopulateFields)
                         .pagination(page: SearchQuerySpec.TestPage, limit: SearchQuerySpec.TestLimit)
-                        .segmentWithDevice(segment: SearchQuerySpec.TestSegmentWithDevice)
-                        .segmentMode(mode: SearchQuerySpec.TestSegmentMode)
-                        .locale(locale: SearchQuerySpec.TestLocale)
+                        .segmentWithDevice(SearchQuerySpec.TestSegmentWithDevice)
+                        .segmentMode(SearchQuerySpec.TestSegmentMode)
+                        .locale(SearchQuerySpec.TestLocale)
                     IntReturnedByHash = searchQueryReturned?.hash
                 }
                 

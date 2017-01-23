@@ -18,8 +18,6 @@ class SearchFilterHelperSpec : BaseSpec {
     static let TestType = "testType"
     
     override func spec() {
-        super.spec()
-        
         var searchFilter: SearchFilter?
         var searchFilterBis: SearchFilter?
         
@@ -166,6 +164,22 @@ class SearchFilterHelperSpec : BaseSpec {
                 expect(searchFilterAnd).toNot(beNil())
                 expect(searchFilterAnd?.condition).to(equal("and"))
                 expect(searchFilterAnd?.operands?.count).to(equal(2))
+            }
+        }
+        
+        describe("The \"like\" method helper") {
+            var searchFilterLike: SearchFilter?
+            
+            beforeEach {
+                searchFilterLike = like(property: SearchFilterHelperSpec.TestProperty, value: SearchFilterHelperSpec.TestValue)
+            }
+            
+            it ("returns a correct SearchFilter") {
+                expect(searchFilterLike).toNot(beNil())
+                expect(searchFilterLike?.operation?.description).to(equal(SearchFilterOperation.like.description))
+                expect(searchFilterLike?.property).to(equal(SearchFilterHelperSpec.TestProperty))
+                expect(searchFilterLike?.value as? String).to(equal(SearchFilterHelperSpec.TestValue))
+                expect(searchFilterLike?.type).to(equal("string"))
             }
         }
         

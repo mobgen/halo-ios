@@ -14,8 +14,6 @@ import OHHTTPStubs
 class ContentInstanceSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         describe("A ContentInstance") {
             var contentInstance: ContentInstance!
             

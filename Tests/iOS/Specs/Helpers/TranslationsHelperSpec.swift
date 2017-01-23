@@ -14,8 +14,6 @@ import OHHTTPStubs
 class TranslationsHelperSpec : BaseSpec {
     
     override func spec() {
-        super.spec()
-        
         describe("A TranslationsHelper") {
             var translationsHelper: TranslationsHelper!
             
@@ -196,7 +194,7 @@ class TranslationsHelperSpec : BaseSpec {
                 }
                 
                 describe("load method") {
-                    var error: NSError?
+                    var error: Error?
                     
                     beforeEach {
                         waitUntil(timeout: 3) { done in
