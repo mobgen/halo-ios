@@ -33,26 +33,26 @@ open class TranslationsHelper: NSObject {
         self.locale = locale
         self.keyField = keyField
         self.valueField = valueField
-        self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale: locale)
+        self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
     }
 
     open func addCompletionHandler(handler: @escaping (Error?) -> Void) -> Void {
         completionHandlers.append(handler)
     }
     
-    open func locale(locale: Locale) -> TranslationsHelper {
+    open func locale(_ locale: Locale) -> TranslationsHelper {
         self.locale = locale
-        self.syncQuery.locale(locale: locale)
+        self.syncQuery.locale(locale)
         load()
         return self
     }
 
-    open func defaultText(text: String) -> TranslationsHelper {
+    open func defaultText(_ text: String) -> TranslationsHelper {
         self.defaultText = text
         return self
     }
 
-    open func loadingText(text: String) -> TranslationsHelper {
+    open func loadingText(_ text: String) -> TranslationsHelper {
         self.loadingText = text
         return self
     }

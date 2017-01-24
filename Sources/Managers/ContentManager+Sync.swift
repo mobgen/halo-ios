@@ -23,9 +23,9 @@ extension ContentManager {
         // Check whether we just sync or re-sync all the content (locale changed)
         if let sync = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? SyncResult, let from = sync.syncDate {
             if sync.locale != query.locale {
-                query.fromSync(date: nil)
+                query.fromSync(nil)
             } else if query.fromSync == nil {
-                query.fromSync(date: from)
+                query.fromSync(from)
             }
         }
         
@@ -109,7 +109,7 @@ extension ContentManager {
                 if wasFirstSync {
                     // Sync again. The first sync might be cached so we need to resync in case there have been changes
                     let query = syncQuery
-                    query.fromSync(date: result.syncDate)
+                    query.fromSync(result.syncDate)
                     self.sync(query: query, completionHandler: handler)
                 } else {
                     DispatchQueue.main.async {
@@ -137,15 +137,12 @@ extension ContentManager {
         let path = getPath(file: "sync-\(moduleId)")
         
         if let instanceIds = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Set<String> {
-            do {
-                try instanceIds.forEach { instanceId in
-                    try FileManager.default.removeItem(atPath: self.getPath(file: instanceId))
-                }
-                try FileManager.default.removeItem(atPath: path)
-                try FileManager.default.removeItem(atPath: self.getPath(file: "synctimestamp-\(moduleId)"))
-            } catch {
-                
+            instanceIds.forEach { instanceId in
+                try? FileManager.default.removeItem(atPath: self.getPath(file: instanceId))
             }
+            try? FileManager.default.removeItem(atPath: path)
+            try? FileManager.default.removeItem(atPath: self.getPath(file: "synctimestamp-\(moduleId)"))
+            
         }
     }
     

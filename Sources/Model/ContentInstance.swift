@@ -140,7 +140,7 @@ open class ContentInstance: NSObject, NSCoding {
         super.init()
         
         id = aDecoder.decodeObject(forKey: Keys.Id) as? String
-        values = aDecoder.decodeObject(forKey: Keys.Values) as! [String: AnyObject]
+        values = aDecoder.decodeObject(forKey: Keys.Values) as? [String: AnyObject] ?? [:]
         createdBy = aDecoder.decodeObject(forKey: Keys.CreatedBy) as? String
         updatedBy = aDecoder.decodeObject(forKey: Keys.UpdatedBy) as? String
         deletedBy = aDecoder.decodeObject(forKey: Keys.DeletedBy) as? String
@@ -149,7 +149,7 @@ open class ContentInstance: NSObject, NSCoding {
         updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
         deletedAt = aDecoder.decodeObject(forKey: Keys.DeletedAt) as? Date
         archivedAt = aDecoder.decodeObject(forKey: Keys.ArchivedAt) as? Date
-        tags = aDecoder.decodeObject(forKey: Keys.Tags) as! [String: Halo.Tag]
+        tags = aDecoder.decodeObject(forKey: Keys.Tags) as? [String: Halo.Tag] ?? [:]
     }
     
     public convenience init(name: String, moduleId: String, values: [String: Any] = [:], tags: [Halo.Tag] = []) {

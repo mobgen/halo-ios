@@ -59,31 +59,31 @@ open class SyncQuery: NSObject {
     }
     
     @discardableResult
-    open func moduleName(name: String?) -> SyncQuery {
+    open func moduleName(_ name: String?) -> SyncQuery {
         self.moduleName = name
         return self
     }
 
     @discardableResult
-    open func moduleId(id: String) -> SyncQuery {
+    open func moduleId(_ id: String) -> SyncQuery {
         self.moduleId = id
         return self
     }
     
     @discardableResult
-    open func locale(locale: Locale) -> SyncQuery {
+    open func locale(_ locale: Locale) -> SyncQuery {
         self.locale = locale
         return self
     }
     
     @discardableResult
-    open func fromSync(date: Date?) -> SyncQuery {
+    open func fromSync(_ date: Date?) -> SyncQuery {
         self.fromSync = date
         return self
     }
     
     @discardableResult
-    open func toSync(date: Date?) -> SyncQuery {
+    open func toSync(_ date: Date?) -> SyncQuery {
         self.toSync = date
         return self
     }

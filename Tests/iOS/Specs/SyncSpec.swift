@@ -105,8 +105,8 @@ class SyncSpec: BaseSpec {
                 
                 it("works") {
                     
-                    let firstSyncQuery = SyncQuery(moduleId: moduleId).toSync(date: date)
-                    let secondSyncQuery = SyncQuery(moduleId: moduleId).fromSync(date: date)
+                    let firstSyncQuery = SyncQuery(moduleId: moduleId).toSync(date)
+                    let secondSyncQuery = SyncQuery(moduleId: moduleId).fromSync(date)
                     
                     waitUntil(timeout: 20) { done in
                         content.sync(query: firstSyncQuery) { _ in

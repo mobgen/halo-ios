@@ -25,14 +25,15 @@ class TranslationsHelperSpec : BaseSpec {
             context("with a successful sync stub") {
                 beforeEach {
                     stub(condition: isPath("/api/generalcontent/instance/sync")) { _ in
+                        
                         let filePath = OHPathForFile("full_sync.json", type(of: self))
                         return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Successful sync stub"
                     
+                    translationsHelper = MockTranslationsHelper.createTranslationsHelper()
+                    
                     Manager.content.removeSyncedInstances(MockTranslationsHelper.TestModuleId)
                     Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
-                    
-                    translationsHelper = MockTranslationsHelper.createTranslationsHelper()
                 }
                 
                 afterEach {
@@ -41,16 +42,12 @@ class TranslationsHelperSpec : BaseSpec {
             
                 describe("its constructor method and getAllTexts method") {
                     beforeEach {
-                        waitUntil(timeout: 3) { done in
+                        waitUntil(timeout: 5) { done in
                             translationsHelper.addCompletionHandler { (error) in
                                 done()
                             }
                             translationsHelper.load()
                         }
-                    }
-                    
-                    afterEach {
-                        OHHTTPStubs.removeAllStubs()
                     }
                     
                     it("works") {
@@ -66,12 +63,8 @@ class TranslationsHelperSpec : BaseSpec {
                             translationsHelper.addCompletionHandler { (error) in
                                 done()
                             }
-                            translationsHelper = translationsHelper.locale(locale: .englishUnitedStates)
+                            //translationsHelper = translationsHelper.locale(.englishUnitedStates)
                         }
-                    }
-                    
-                    afterEach {
-                        OHHTTPStubs.removeAllStubs()
                     }
                     
                     it("works") {
@@ -107,7 +100,7 @@ class TranslationsHelperSpec : BaseSpec {
                         beforeEach {
                             waitUntil(timeout: 3) { done in
                                 translationsHelper
-                                    .defaultText(text: MockTranslationsHelper.TestDefaultText)
+                                    .defaultText(MockTranslationsHelper.TestDefaultText)
                                     .addCompletionHandler { (error) in
                                     translationsHelper.getText(key: "invalid key") { (result) in
                                         valueResult = result
@@ -146,7 +139,7 @@ class TranslationsHelperSpec : BaseSpec {
                         beforeEach {
                             waitUntil(timeout: 3) { done in
                                 translationsHelper
-                                    .defaultText(text: MockTranslationsHelper.TestDefaultText)
+                                    .defaultText(MockTranslationsHelper.TestDefaultText)
                                     .addCompletionHandler { (error) in
                                         done()
                                     }
@@ -178,6 +171,7 @@ class TranslationsHelperSpec : BaseSpec {
                         expect(texts.count).to(equal(0))
                     }
                 }
+ 
             }
             
             context("with a failed sync stub") {
@@ -236,7 +230,7 @@ class TranslationsHelperSpec : BaseSpec {
                         beforeEach {
                             waitUntil { done in
                                 translationsHelper
-                                    .loadingText(text: MockTranslationsHelper.TestLoadingText)
+                                    .loadingText(MockTranslationsHelper.TestLoadingText)
                                     .load()
                                 translationsHelper.getText(key: "key") { resultResponse in
                                     if resultResponse == MockTranslationsHelper.TestLoadingText {
@@ -257,7 +251,7 @@ class TranslationsHelperSpec : BaseSpec {
                         beforeEach {
                             waitUntil(timeout: 10) { done in
                                 translationsHelper
-                                    .loadingText(text: MockTranslationsHelper.TestLoadingText)
+                                    .loadingText(MockTranslationsHelper.TestLoadingText)
                                     .load()
                                 translationsHelper.getText(key: "key") { resultResponse in
                                     if resultResponse == "value" {

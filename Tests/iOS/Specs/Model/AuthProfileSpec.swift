@@ -14,7 +14,7 @@ import OHHTTPStubs
 class AuthProfileSpec: BaseSpec {
     
     static let TestToken = "testtoken"
-    static let TestNetwork = Network.Facebook
+    static let TestNetwork = Network.facebook
     static let TestDeviceId = "testdeviceid"
     
     static let TestEmail = "test@mobgen.com"

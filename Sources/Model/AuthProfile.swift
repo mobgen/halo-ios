@@ -9,15 +9,15 @@
 import Foundation
 
 public enum Network: Int {
-    case Halo, Facebook, Google
+    case halo, facebook, google
     
     var description: String {
         switch self {
-        case .Halo:
+        case .halo:
             return "halo"
-        case .Facebook:
+        case .facebook:
             return "facebook"
-        case .Google:
+        case .google:
             return "google"
         }
     }
@@ -52,11 +52,11 @@ public class AuthProfile: NSObject, NSCoding {
      *  @param  password    String  Password.
      *  @param  deviceId    String  DeviceId.
      **/
-    public init(email: String, password: String, deviceId: String) {
+    public init(email: String, password: String, deviceId: String? = Manager.core.device?.alias) {
         self.email = email
         self.password = password
-        self.deviceId = deviceId
-        self.network = Network.Halo.description
+        self.deviceId = deviceId ?? ""
+        self.network = Network.halo.description
         super.init()
     }
     
@@ -67,10 +67,10 @@ public class AuthProfile: NSObject, NSCoding {
      *  @param  network     String  Social network to use.
      *  @param  deviceId    String  DeviceId.
      **/
-    public init(token: String, network: Network, deviceId: String) {
+    public init(token: String, network: Network, deviceId: String? = Manager.core.device?.alias) {
         self.token = token
         self.network = network.description
-        self.deviceId = deviceId
+        self.deviceId = deviceId ?? ""
         super.init()
     }
     
