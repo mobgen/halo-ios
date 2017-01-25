@@ -22,8 +22,13 @@ open class FileLogger: NSObject, Logger {
     
     public func logMessage(message: String, level: LogLevel) {
         
-        if let path = filePath {
-            try? message.data(using: .utf8)?.write(to: path, options: .atomic)
+        if let path = filePath,
+            let fileHandle = try? FileHandle(forWritingTo: path),
+            let data = "\(message)\n".data(using: .utf8)
+        {
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(data)
+            fileHandle.closeFile()
         }
         
     }
