@@ -42,7 +42,7 @@ public class AuthManager: NSObject, HaloManager {
                     let user = user
                 else {
                     let e: HaloError = .loginError("No user returned from server")
-                    LogMessage(error: e).print()
+                    Manager.core.logMessage(message: e.description, level: .error)
                     handler(nil, e)
                     return
                 }
@@ -51,14 +51,13 @@ public class AuthManager: NSObject, HaloManager {
                     authProfile.storeProfile()
                 }
                 
-                LogMessage(message: "Login with Halo successful.", level: .info).print()
-                
+                Manager.core.logMessage(message: "Login with Halo successful.", level: .info)
                 Manager.core.defaultAuthenticationMode = .appPlus
                 
                 handler(user, nil)
                 
             case .failure(let error):
-                LogMessage(error: .loginError(error.localizedDescription)).print()
+                Manager.core.logMessage(message: HaloError.loginError(error.description).description, level: .error)
                 handler(nil, error)
             }
         }
@@ -111,10 +110,10 @@ public class AuthManager: NSObject, HaloManager {
         _ = try? request.responseParser(userProfileParser).responseObject { (_, result) in
             switch result {
             case .success(let userProfile, _):
-                LogMessage(message: "Registration with Halo successful.", level: .info).print()
+                Manager.core.logMessage(message: "Registration with Halo successful.", level: .info)
                 handler(userProfile, nil)
             case .failure(let error):
-                LogMessage(message: "An error happened when trying to register a new user with Halo .", error: error).print()
+                Manager.core.logMessage(message: "An error happened when trying to register a new user with Halo (\(error.description)).", level: .error)
                 handler(nil, error)
             }
         }

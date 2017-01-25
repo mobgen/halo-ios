@@ -46,9 +46,9 @@ public extension CoreManager {
         self.addons.forEach { $0.setup(haloCore: self) { (addon, success) in
             
             if success {
-                LogMessage(message: "Successfully set up the \(addon.addonName) addon", level: .info).print()
+                self.logMessage(message: "Successfully set up the \(addon.addonName) addon", level: .info)
             } else {
-                LogMessage(message: "There has been an error setting up the \(addon.addonName) addon", level: .info).print()
+                self.logMessage(message: "There has been an error setting up the \(addon.addonName) addon", level: .info)
             }
             
             counter += 1
@@ -73,9 +73,9 @@ public extension CoreManager {
         self.addons.forEach { $0.startup(haloCore: self) { (addon, success) in
             
             if success {
-                LogMessage(message: "Successfully started the \(addon.addonName) addon", level: .info).print()
+                self.logMessage(message: "Successfully started the \(addon.addonName) addon", level: .info)
             } else {
-                LogMessage(message: "There has been an error starting the \(addon.addonName) addon", level: .info).print()
+                self.logMessage(message: "There has been an error starting the \(addon.addonName) addon", level: .info)
             }
             
             counter += 1

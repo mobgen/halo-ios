@@ -58,7 +58,7 @@ extension ContentManager {
             case .success(let syncResult, _):
                 self.processSyncResult(query, syncResult: syncResult, wasFirstSync: isFirstSync, completionHandler: handler)
             case .failure(let e):
-                LogMessage(error: e).print()
+                Manager.core.logMessage(message: e.description, level: .error)
                 handler(query.moduleId, e)
             }
         }
@@ -92,7 +92,7 @@ extension ContentManager {
                     do {
                         try FileManager.default.removeItem(atPath: self.getPath(file: instanceId))
                     } catch {
-                        LogMessage(message: "Error deleting instance \(instanceId)", level: .error).print()
+                        Manager.core.logMessage(message: "Error deleting instance \(instanceId)", level: .error)
                     }
                 }
                 

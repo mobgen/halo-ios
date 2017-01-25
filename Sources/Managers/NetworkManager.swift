@@ -102,8 +102,8 @@ open class NetworkManager: NSObject, HaloManager {
             
             if let resp = response as? HTTPURLResponse {
                 
-                LogMessage(message: "\(urlRequest) [\(elapsed)ms]", level: .info).print()
-                LogMessage(message: "Response object: \(resp.debugDescription)", level: .info).print()
+                Manager.core.logMessage(message: "\(urlRequest) [\(elapsed)ms]", level: .info)
+                Manager.core.logMessage(message: "Response object: \(resp.debugDescription)", level: .info)
                 
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
@@ -197,7 +197,7 @@ open class NetworkManager: NSObject, HaloManager {
                     if let resp = response as? HTTPURLResponse {
                         
                         let elapsed = Date().timeIntervalSince(start) * 1000
-                        LogMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info).print()
+                        Manager.core.logMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info)
                         
                         if resp.statusCode > 399 {
                             
@@ -237,7 +237,7 @@ open class NetworkManager: NSObject, HaloManager {
                 
             } else {
                 self.isRefreshing = false
-                LogMessage(message: "No credentials found", level: .error).print()
+                Manager.core.logMessage(message: "No credentials found", level: .error)
                 handler?(nil, .failure(.noValidCredentialsFound))
             }
         case .app, .user:
@@ -295,7 +295,7 @@ open class NetworkManager: NSObject, HaloManager {
                     if let resp = response as? HTTPURLResponse {
                         
                         let elapsed = Date().timeIntervalSince(start) * 1000
-                        LogMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info).print()
+                        Manager.core.logMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info)
                         
                         if resp.statusCode > 399 {
                             
@@ -338,7 +338,7 @@ open class NetworkManager: NSObject, HaloManager {
                 
             } else {
                 self.isRefreshing = false
-                LogMessage(message: "No credentials found", level: .error).print()
+                Manager.core.logMessage(message: "No credentials found", level: .error)
                 handler?(nil, .failure(.noValidCredentialsFound))
             }
         }
@@ -346,7 +346,7 @@ open class NetworkManager: NSObject, HaloManager {
     
     func restartCachedTasks() {
         // Restart cached tasks
-        LogMessage(message: "Restarting enqueued tasks...", level: .info).print()
+        Manager.core.logMessage(message: "Restarting enqueued tasks...", level: .info)
         let cachedTasksCopy = self.cachedTasks
         self.cachedTasks.removeAll()
         cachedTasksCopy.forEach { self.startRequest(request: $0.request, numberOfRetries: $0.numberOfRetries, completionHandler: $0.handler) }

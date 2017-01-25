@@ -224,7 +224,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
             case .success(let data, _):
                 if let successHandler = handler {
                     let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                    LogMessage(message: "Response body: \(json.debugDescription)", level: .info).print()
+                    Manager.core.logMessage(message: "Response body: \(json.debugDescription)", level: .info)
                     successHandler(response, .success(json, false))
                 }
             case .failure(let error):

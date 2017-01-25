@@ -118,7 +118,7 @@ open class TranslationsHelper: NSObject {
         self.isLoading = false
         
         if let e = error {
-            LogMessage(error: e).print()
+            Manager.core.logMessage(message: e.description, level: .error)
             return
         }
         

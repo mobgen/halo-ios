@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @objc(HaloCoreManager)
-open class CoreManager: NSObject, HaloManager {
+open class CoreManager: NSObject, HaloManager, Logger {
     
     private lazy var __once: (CoreManager, ((Bool) -> Void)?) -> Void = { mgr, handler in
         
@@ -58,7 +58,7 @@ open class CoreManager: NSObject, HaloManager {
                     }
                 }
             } else {
-                LogMessage(message: "No configuration .plist found", level: .warning).print()
+                self.logMessage(message: "No configuration .plist found", level: .warning)
             }
             
             self.checkNeedsUpdate()
@@ -68,6 +68,8 @@ open class CoreManager: NSObject, HaloManager {
     
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
+    
+    public internal(set) var loggers: [Logger] = []
     
     public internal(set) var isReady: Bool = false
     
@@ -218,7 +220,7 @@ open class CoreManager: NSObject, HaloManager {
     @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:)
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        LogMessage(message: "Successfully registered for remote notifications with token \(deviceToken.description)", level: .info).print()
+        Manager.core.logMessage(message: "Successfully registered for remote notifications with token \(deviceToken.description)", level: .info)
         
         self.addons.forEach { [weak self] addon in
             if let notifAddon = addon as? Halo.NotificationsAddon, let strongSelf = self {
@@ -236,7 +238,7 @@ open class CoreManager: NSObject, HaloManager {
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:)
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         
-        LogMessage(error: .failedToRegisterForRemoteNotifications(error.localizedDescription)).print()
+        logMessage(message: HaloError.failedToRegisterForRemoteNotifications(error.localizedDescription).description, level: .error)
         
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
@@ -304,7 +306,7 @@ open class CoreManager: NSObject, HaloManager {
                     if minIOS.compare(self.frameworkVersion, options: .numeric) == .orderedDescending {
                         let changelog = info["iosChangeLog"] as! String
                         
-                        LogMessage(message: "The version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)", level: .warning).print()
+                        self.logMessage(message: "The version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)", level: .warning)
                     }
                 }
                 handler?(true)
@@ -313,6 +315,23 @@ open class CoreManager: NSObject, HaloManager {
             default:
                 break
             }
+        }
+    }
+    
+    public func addLogger(_ logger: Logger) {
+        self.loggers.append(logger)
+    }
+    
+    public func addLoggers(_ loggers: [Logger]) {
+        self.loggers.append(contentsOf: loggers)
+    }
+    
+    // MARK: Logger protocol
+    
+    public func logMessage(message: String, level: LogLevel) {
+        
+        if self.logLevel.rawValue >= level.rawValue {
+            self.loggers.forEach { $0.logMessage(message: message, level: level) }
         }
     }
     

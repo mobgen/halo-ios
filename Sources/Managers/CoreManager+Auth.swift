@@ -29,7 +29,7 @@ extension CoreManager {
                     }
                 case .failure(let error):
                     
-                    LogMessage(message: "Error retrieving device from server", error: error).print()
+                    self.logMessage(message: "Error retrieving device from server (\(error.description))", level: .error)
                     
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags(completionHandler: handler)
@@ -124,12 +124,12 @@ extension CoreManager {
                         strongSelf.device?.storeDevice(env: strongSelf.environment)
                         
                         if let u = device {
-                            LogMessage(message: u.description, level: .info).print()
+                            Manager.core.logMessage(message: u.description, level: .info)
                         }
                         
                         success = true
                     case .failure(let error):
-                        LogMessage(message: "Error creating/updating user", error: error).print()
+                        Manager.core.logMessage(message: "Error creating/updating user (\(error.description))", level: .error)
                     }
                     
                     strongSelf.addons.forEach { ($0 as? DeviceAddon)?.didRegisterDevice(haloCore: strongSelf) }
@@ -166,11 +166,11 @@ extension CoreManager {
                             strongSelf.device = device
                             
                             if let u = device {
-                                LogMessage(message: u.description, level: .info).print()
+                                strongSelf.logMessage(message: u.description, level: .info)
                             }
                             
                         case .failure(let error):
-                            LogMessage(message: "Error saving user", error: error).print()
+                            strongSelf.logMessage(message: "Error saving user (\(error.description))", level: .error)
                         }
                         
                         handler?(response, result)
