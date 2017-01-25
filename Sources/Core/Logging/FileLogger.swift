@@ -12,7 +12,7 @@ import Foundation
 open class FileLogger: NSObject, Logger {
     
     let dir: URL? = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-    var filePath: URL?
+    public var filePath: URL?
     
     override public init() {
         super.init()
