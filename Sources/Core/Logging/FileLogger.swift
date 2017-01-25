@@ -14,7 +14,7 @@ open class FileLogger: NSObject, Logger {
     let dir: URL? = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     var filePath: URL?
     
-    override init() {
+    override public init() {
         super.init()
         let filename = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName"))-\(NSDate().timeIntervalSince1970).txt"
         filePath = dir?.appendingPathComponent(filename)
