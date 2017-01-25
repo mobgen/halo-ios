@@ -22,16 +22,17 @@ open class FileLogger: NSObject, Logger {
     
     public func logMessage(message: String, level: LogLevel) {
         
-        if let path = filePath, let data = "\(message)\n".data(using: .utf8) {
-            if FileManager.default.fileExists(atPath: path.absoluteString) {
-                if let fileHandle = try? FileHandle(forWritingTo: path) {
-                    fileHandle.seekToEndOfFile()
-                    fileHandle.write(data)
-                    fileHandle.closeFile()
-                }
+        if let file = filePath, let data = "\(message)\n".data(using: .utf8) {
+            if FileManager.default.fileExists(atPath: file.path),
+                let fileHandle = FileHandle(forWritingAtPath: file.path) {
+                
+                fileHandle.seekToEndOfFile()
+                fileHandle.write(data)
+                fileHandle.closeFile()
             } else {
-                try? data.write(to: path, options: .atomic)
+                try? data.write(to: file, options: .atomic)
             }
         }
     }
+    
 }
