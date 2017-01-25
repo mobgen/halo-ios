@@ -103,6 +103,7 @@ open class NetworkManager: NSObject, HaloManager {
             if let resp = response as? HTTPURLResponse {
                 
                 LogMessage(message: "\(urlRequest) [\(elapsed)ms]", level: .info).print()
+                LogMessage(message: "Response object: \(resp.debugDescription)", level: .info).print()
                 
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
