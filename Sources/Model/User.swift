@@ -20,7 +20,7 @@ public class User: NSObject, NSCoding {
     internal (set) public var token: Token
     
     public override var debugDescription: String {
-        return "[User] Email: \(userProfile.email)"
+        return "[User]\tEmail: \(userProfile.email)\n\tName: \(userProfile.name)\n\tSurname: \(userProfile.surname)"
     }
     
     init(profile: UserProfile, token: Token) {
