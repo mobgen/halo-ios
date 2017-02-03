@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name             = 'HALO-SDK'
+  spec.name             = 'HALO'
   spec.module_name      = 'Halo'
   spec.version          = '2.2.0'
   spec.summary          = 'HALO iOS SDK'
@@ -7,21 +7,11 @@ Pod::Spec.new do |spec|
   spec.license          = 'Apache License, Version 2.0'
   spec.author           = { 'Borja Santos-Diez' => 'borja.santos@mobgen.com' }
   spec.source           = { :git => 'https://github.com/mobgen/halo-ios.git', :tag => '2.2.0' }
+  spec.source_files     = 'Sources/**/*.swift', 'Libraries/**/*.swift'
 
   spec.platforms        = { :ios => '8.0' }
   spec.requires_arc     = true
-
-  spec.frameworks       = 'Foundation'
-  spec.default_subspec  = 'Swift'
-
-  spec.subspec 'Swift' do |swift|
-    swift.source_files  = 'Sources/**/*.swift', 'Libraries/**/*.swift' 
-  end
-
-  spec.subspec 'ObjC' do |objc|
-    objc.dependency 'HALO-SDK/Swift'
-    objc.source_files         = 'HaloObjC/**/*.{h,swift}'
-    objc.public_header_files  = 'HaloObjC/**/*.h'
-  end
+  spec.frameworks       = 'Foundation', 'SystemConfiguration'
+  spec.libraries        = 'sqlite3', 'z'
 
 end
