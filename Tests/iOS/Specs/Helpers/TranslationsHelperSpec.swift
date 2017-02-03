@@ -63,7 +63,7 @@ class TranslationsHelperSpec : BaseSpec {
                             translationsHelper.addCompletionHandler { (error) in
                                 done()
                             }
-                            //translationsHelper = translationsHelper.locale(.englishUnitedStates)
+                            translationsHelper = translationsHelper.locale(.englishUnitedStates)
                         }
                     }
                     
