@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name             = 'HALO'
+  spec.name             = 'HaloSDK'
   spec.module_name      = 'Halo'
   spec.version          = '2.2.0'
   spec.summary          = 'HALO iOS SDK'

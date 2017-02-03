@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name             = 'HALO-ObjC'
+  spec.name             = 'HaloObjCSDK'
   spec.module_name      = 'Halo'
   spec.version          = '2.2.0'
   spec.summary          = 'HALO iOS SDK (Objective-C)'
@@ -14,6 +14,6 @@ Pod::Spec.new do |spec|
   spec.source_files         = 'HaloObjC/**/*.{h,swift}'
   spec.public_header_files  = 'HaloObjC/**/*.h'
  
-  spec.dependency 'HALO'
+  spec.dependency 'HaloSDK'
 
 end
