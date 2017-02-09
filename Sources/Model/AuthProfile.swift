@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc
 public enum Network: Int {
     case halo, facebook, google
     
@@ -64,10 +65,10 @@ public class AuthProfile: NSObject, NSCoding {
      *  Constructor for AuthProfile with social network.
      *
      *  @param  token       String  Token from social network.
-     *  @param  network     String  Social network to use.
+     *  @param  network     Int     Social network to use.
      *  @param  deviceId    String  DeviceId.
      **/
-    public init(token: String, network: Network, deviceId: String? = Manager.core.device?.alias) {
+    public init(token: String, network: Network = .halo, deviceId: String? = Manager.core.device?.alias) {
         self.token = token
         self.network = network.description
         self.deviceId = deviceId ?? ""
