@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'HaloObjCSDK'
-  spec.module_name      = 'Halo'
+  spec.module_name      = 'HaloObjC'
   spec.version          = '2.2.0'
   spec.summary          = 'HALO iOS SDK (Objective-C)'
   spec.homepage         = 'https://mobgen.github.io/halo-documentation/ios_home.html'
