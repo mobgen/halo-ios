@@ -1,0 +1,27 @@
+{
+    "name": "testModule",
+    "externalId": 1,
+    "customerId": 2,
+    "createdBy": "testAdmin",
+    "tags": [
+        {
+            "name": "testNameTag1",
+            "value": "testValueTag1",
+            "type": "testTypeTag1"
+        },
+        {
+             "name": "testNameTag2",
+             "value": "testValueTag2",
+             "type": "testTypeTag2"
+        },
+    ],
+    "pushTemplates": [],
+    "importers": [],
+    "exporters": [],
+    "deletedAt": 1474063320249,
+    "updatedBy": "undefined",
+    "deletedBy": "testAdmin2",
+    "createdAt": 1474036570134,
+    "updatedAt": 1474063790249,
+    "id": "000000000000000000000004"
+}

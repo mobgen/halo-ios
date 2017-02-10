@@ -1,0 +1,7 @@
+{
+    "error": {
+        "message": "Credentials are not valid",
+        "extra": {},
+        "type": "HaloError"
+    }
+}

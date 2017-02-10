@@ -1,0 +1,146 @@
+//
+//  SocialManager.swift
+//  HaloSocial
+//
+//  Created by Borja Santos-Díez on 18/11/16.
+//  Copyright © 2016 Mobgen Technology. All rights reserved.
+//
+
+import Foundation
+
+@objc(HaloAuthManager)
+public class AuthManager: NSObject, HaloManager {
+    
+    public var stayLoggedIn: Bool = false
+    public var currentUser: User?
+    
+    fileprivate override init() {
+        super.init()
+    }
+    
+    @objc(startup:)
+    public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+        
+    }
+    
+    /**
+     Call this method to start the login with Halo.
+     
+     - parameter authProfile:       AuthProfile with email, password, deviceId and network.
+     - parameter completionHandler: Closure to be called after completion
+     */
+    public func login(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn, completionHandler handler: @escaping (User?, HaloError?) -> Void) -> Void {
+        
+        let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
+        
+        _ = try? request.responseParser(userParser).responseObject { (_, result) in
+            switch (result) {
+            case .success(let user, _):
+                self.currentUser = user
+                
+                guard
+                    let user = user
+                else {
+                    let e: HaloError = .loginError("No user returned from server")
+                    Manager.core.logMessage(message: e.description, level: .error)
+                    handler(nil, e)
+                    return
+                }
+                
+                if stayLoggedIn {
+                    authProfile.storeProfile()
+                }
+                
+                Manager.core.logMessage(message: "Login with Halo successful.", level: .info)
+                Manager.core.defaultAuthenticationMode = .appPlus
+                
+                handler(user, nil)
+                
+            case .failure(let error):
+                Manager.core.logMessage(message: HaloError.loginError(error.description).description, level: .error)
+                handler(nil, error)
+            }
+        }
+    }
+    
+    @objc(logout:)
+    public func logout(completionHandler handler: @escaping (Bool) -> Void) -> Void {
+        // If user not logged in, you can't logout.
+        guard
+            let _ = self.currentUser
+        else {
+            handler(false)
+            return
+        }
+        
+        var result: Bool = true
+        
+        Manager.core.addons.forEach { addon in
+            if let socialProviderAddon = addon as? AuthProvider {
+                socialProviderAddon.logout()
+            }
+        }
+        
+        if let currentAuthProfile = AuthProfile.loadProfile() {
+            if currentAuthProfile.removeProfile() {
+                self.currentUser = nil
+            } else {
+                result = false
+            }
+        } else {
+            self.currentUser = nil
+        }
+        
+        Manager.core.defaultAuthenticationMode = .app
+        
+        handler(result)
+    }
+    
+    /**
+     Call this method to start the registration with Halo.
+     
+     - parameter authProfile:       AuthProfile with email, password, deviceId and network.
+     - parameter userProfile:       UserProfile with at least email, name and surname.
+     - parameter completionHandler: Closure to be called after completion
+     */
+    public func register(authProfile: AuthProfile, userProfile: UserProfile, completionHandler handler: @escaping (UserProfile?, HaloError?) -> Void) -> Void {
+        
+        let request = Halo.Request<UserProfile>(router: Router.registerUser(["auth": authProfile.toDictionary(), "profile": userProfile.toDictionary()]))
+        
+        _ = try? request.responseParser(userProfileParser).responseObject { (_, result) in
+            switch result {
+            case .success(let userProfile, _):
+                Manager.core.logMessage(message: "Registration with Halo successful.", level: .info)
+                handler(userProfile, nil)
+            case .failure(let error):
+                Manager.core.logMessage(message: "An error happened when trying to register a new user with Halo (\(error.description)).", level: .error)
+                handler(nil, error)
+            }
+        }
+    }
+    
+    // MARK : Private methods.
+    
+    private func userParser(_ data: Any?) -> User? {
+        if let dict = data as? [String: Any] {
+            return User.fromDictionary(dict)
+        }
+        return nil
+    }
+    
+    private func userProfileParser(_ data: Any?) -> UserProfile? {
+        if let dict = data as? [String: Any] {
+            return UserProfile.fromDictionary(dict)
+        }
+        return nil
+    }
+    
+}
+
+public extension Manager {
+    
+    public static let auth: AuthManager = {
+        return AuthManager()
+    }()
+    
+}

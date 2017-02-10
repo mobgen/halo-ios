@@ -16,7 +16,7 @@ public extension CoreManager {
     
     @objc(modulesWithSuccess:failure:)
     public func modules(_ success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
-                        failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
+                        failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
 
         self.getModules { (response, result) in
 

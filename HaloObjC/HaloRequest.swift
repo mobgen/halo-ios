@@ -54,7 +54,7 @@ open class HaloRequest: NSObject {
         case .returnLocalDataDontLoad: newPolicy = .returnLocalDataDontLoad
         }
 
-        request?.offlinePolicy(policy: newPolicy)
+        request?.offlinePolicy(newPolicy)
         return self
     }
 
@@ -75,7 +75,7 @@ open class HaloRequest: NSObject {
         case .trace: newMethod = .TRACE
         }
 
-        request?.method(method: newMethod)
+        request?.method(newMethod)
         return self
     }
 
@@ -90,7 +90,7 @@ open class HaloRequest: NSObject {
         case .urlEncodedInURL: newEncoding = .urlEncodedInURL
         }
 
-        request?.parameterEncoding(encoding: newEncoding)
+        request?.parameterEncoding(newEncoding)
         return self
     }
 
@@ -101,13 +101,13 @@ open class HaloRequest: NSObject {
 
     @objc(addHeaders:)
     open func addHeaders(_ headers: [String : String]) -> HaloRequest {
-        request?.addHeaders(headers: headers)
+        request?.addHeaders(headers)
         return self
     }
 
     @objc(params:)
     open func params(_ params: [String : AnyObject]) -> HaloRequest {
-        request?.params(params: params)
+        request?.params(params)
         return self
     }
 
@@ -128,12 +128,12 @@ open class HaloRequest: NSObject {
 
     @objc(fields:)
     open func fields(_ fields: [String]) -> HaloRequest {
-        request?.fields(fields: fields)
+        request?.fields(fields)
         return self
     }
 
     open func tags(_ tags: [Halo.Tag]) -> HaloRequest {
-        request?.tags(tags: tags)
+        request?.tags(tags)
         return self
     }
 
@@ -145,11 +145,11 @@ open class HaloRequest: NSObject {
                 case .success(let data, let cached):
                     success(response, data, cached)
                 case .failure(let error):
-                    failure(response, error)
+                    failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
                 }
             }
         } catch _ {
-            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .error).print()
+            Manager.core.logMessage(message: "Error performing request: \(self.debugDescription)", level: .error)
         }
 
         return self
@@ -163,11 +163,11 @@ open class HaloRequest: NSObject {
                 case .success(let data, let cached):
                     success(response, data, cached)
                 case .failure(let error):
-                    failure(response, error)
+                    failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
                 }
             }
         } catch _ {
-            LogMessage(message: "Error performing request: \(self.debugDescription)", level: .error).print()
+            Manager.core.logMessage(message: "Error performing request: \(self.debugDescription)", level: .error)
         }
 
         return self
