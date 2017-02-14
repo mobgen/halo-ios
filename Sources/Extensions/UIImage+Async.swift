@@ -11,7 +11,7 @@ import UIKit
 
 extension UIImage {
 
-    static func loadFromUrl(url: URL, completionHandler handler: @escaping (UIImage?) -> Void) {
+    static func loadFromUrl(_ url: URL, completionHandler handler: @escaping (UIImage?) -> Void) {
 
         let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
 
@@ -31,7 +31,7 @@ extension UIImage {
 
 extension UIImageView {
 
-    public func setImageWithURL(url: URL, completionHandler handler: ((UIImageView) -> Void)? = nil) {
+    public func setImageWithURL(_ url: URL, completionHandler handler: ((UIImageView) -> Void)? = nil) {
         self.setImageWithURL(url, placeholderImage: nil, completionHandler: handler)
     }
 
@@ -41,7 +41,7 @@ extension UIImageView {
             self.image = p
         }
 
-        UIImage.loadFromUrl(url: url) { (image) -> Void in
+        UIImage.loadFromUrl(url) { (image) -> Void in
             if let img = image {
                 self.image = img
             }

@@ -74,9 +74,9 @@ public class UserProfile: NSObject, NSCoding {
     
     class func fromDictionary(_ dict: [String: Any]) -> UserProfile {
         
-        var emailString: String = ""
-        var nameString: String = ""
-        var surnameString: String = ""
+        var emailString = String()
+        var nameString = String()
+        var surnameString = String()
         
         if let email = dict[Keys.Email] as? String {
             emailString = email

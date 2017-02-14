@@ -18,7 +18,7 @@ open class NetworkDataProvider: DataProvider {
         return ContentInstance.fromDictionary(dict: d)
     }
     
-    open func getModules(completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
+    open func getModules(_ handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
         let request = Halo.Request<PaginatedModules>(router: Router.modules).skipPagination().responseParser { (data) in
 

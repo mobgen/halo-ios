@@ -19,7 +19,7 @@ open class OfflineDataProvider: DataProvider {
         return OfflineDataProvider.filePath.appendingPathComponent("modules").path
     }
 
-    open func getModules(completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
+    open func getModules(_ handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
         if let modules = NSKeyedUnarchiver.unarchiveObject(withFile: OfflineDataProvider.modulesPath) as? PaginatedModules {
             handler(nil, .success(modules, true))

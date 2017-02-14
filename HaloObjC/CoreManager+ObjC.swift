@@ -15,7 +15,7 @@ public extension CoreManager {
     }
     
     @objc(modulesWithSuccess:failure:)
-    public func modules(_ success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
+    public func modules(success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
                         failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
 
         self.getModules { (response, result) in
@@ -32,7 +32,7 @@ public extension CoreManager {
     }
     
     @objc(setEnvironment:withCompletionHandler:)
-    public func setEnvironment(environment env: String, completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
+    public func setEnvironment(env: String, completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
         
         var envir: HaloEnvironment!
         
@@ -49,7 +49,7 @@ public extension CoreManager {
             envir = .custom(env)
         }
         
-        self.setEnvironment(environment: envir, completionHandler: handler)
+        self.setEnvironment(envir, completionHandler: handler)
         
     }
 }

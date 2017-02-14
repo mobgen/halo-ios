@@ -89,13 +89,13 @@ public protocol DeeplinkingAddon: Addon {
 public protocol NotificationsAddon: Addon {
 
     @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:core:)
-    func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: Halo.CoreManager) -> Void
+    func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: Halo.CoreManager) -> Void
     
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:core:)
-    func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
+    func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
 
     @objc(application:didReceiveRemoteNotification:core:userInteraction:fetchCompletionHandler:)
-    func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
+    func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
 
 }
 
@@ -103,10 +103,10 @@ public protocol NotificationsAddon: Addon {
 public protocol NetworkAddon: Addon {
 
     @objc(willPerformRequest:)
-    func willPerformRequest(request req: URLRequest) -> Void
+    func willPerformRequest(_ req: URLRequest) -> Void
     
     @objc(didPerformRequest:time:response:)
-    func didPerformRequest(request req: URLRequest, time: TimeInterval, response: URLResponse?) -> Void
+    func didPerformRequest(_ req: URLRequest, time: TimeInterval, response: URLResponse?) -> Void
 
 }
 
@@ -116,6 +116,6 @@ public protocol NetworkAddon: Addon {
 public protocol HaloManager {
 
     @objc(startup:)
-    func startup(completionHandler handler: ((Bool) -> Void)?) -> Void
+    func startup(_ handler: ((Bool) -> Void)?) -> Void
 
 }

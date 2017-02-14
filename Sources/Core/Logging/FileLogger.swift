@@ -22,7 +22,7 @@ open class FileLogger: NSObject, Logger {
         filePath = dir?.appendingPathComponent(filename)
     }
     
-    public func logMessage(message: String, level: LogLevel) {
+    public func logMessage(_ message: String, level: LogLevel) {
         
         if let file = filePath {
             

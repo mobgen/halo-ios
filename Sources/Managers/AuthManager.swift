@@ -19,7 +19,7 @@ public class AuthManager: NSObject, HaloManager {
     }
     
     @objc(startup:)
-    public func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    public func startup(_ handler: ((Bool) -> Void)?) -> Void {
         
     }
     
@@ -42,7 +42,7 @@ public class AuthManager: NSObject, HaloManager {
                     let user = user
                 else {
                     let e: HaloError = .loginError("No user returned from server")
-                    Manager.core.logMessage(message: e.description, level: .error)
+                    Manager.core.logMessage(e.description, level: .error)
                     handler(nil, e)
                     return
                 }
@@ -51,20 +51,20 @@ public class AuthManager: NSObject, HaloManager {
                     authProfile.storeProfile()
                 }
                 
-                Manager.core.logMessage(message: "Login with Halo successful.", level: .info)
+                Manager.core.logMessage("Login with Halo successful.", level: .info)
                 Manager.core.defaultAuthenticationMode = .appPlus
                 
                 handler(user, nil)
                 
             case .failure(let error):
-                Manager.core.logMessage(message: HaloError.loginError(error.description).description, level: .error)
+                Manager.core.logMessage(HaloError.loginError(error.description).description, level: .error)
                 handler(nil, error)
             }
         }
     }
     
     @objc(logout:)
-    public func logout(completionHandler handler: @escaping (Bool) -> Void) -> Void {
+    public func logout(_ handler: @escaping (Bool) -> Void) -> Void {
         // If user not logged in, you can't logout.
         guard
             let _ = self.currentUser
@@ -110,10 +110,10 @@ public class AuthManager: NSObject, HaloManager {
         _ = try? request.responseParser(userProfileParser).responseObject { (_, result) in
             switch result {
             case .success(let userProfile, _):
-                Manager.core.logMessage(message: "Registration with Halo successful.", level: .info)
+                Manager.core.logMessage("Registration with Halo successful.", level: .info)
                 handler(userProfile, nil)
             case .failure(let error):
-                Manager.core.logMessage(message: "An error happened when trying to register a new user with Halo (\(error.description)).", level: .error)
+                Manager.core.logMessage("An error happened when trying to register a new user with Halo (\(error.description)).", level: .error)
                 handler(nil, error)
             }
         }

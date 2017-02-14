@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc(HaloAuthenticationMode)
 public enum AuthenticationMode: Int {
     case app, appPlus, user
 }
@@ -224,7 +225,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
             case .success(let data, _):
                 if let successHandler = handler {
                     let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                    Manager.core.logMessage(message: "Response body: \(json.debugDescription)", level: .info)
+                    Manager.core.logMessage("Response body: \(json.debugDescription)", level: .info)
                     successHandler(response, .success(json, false))
                 }
             case .failure(let error):

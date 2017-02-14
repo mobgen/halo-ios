@@ -58,7 +58,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     }
                 }
             } else {
-                self.logMessage(message: "No configuration .plist found", level: .warning)
+                self.logMessage("No configuration .plist found", level: .warning)
             }
             
             self.checkNeedsUpdate()
@@ -134,7 +134,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
      - parameter environment:   The new environment to be set
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
-    public func setEnvironment(environment env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
+    public func setEnvironment(_ env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
         self.environment = env
         
         // Save the environment
@@ -143,6 +143,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         self.completionHandler = handler
         self.setup(manager: self)
     }
+    
     
     fileprivate func setup(manager: CoreManager) {
         
@@ -200,7 +201,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     }
     
     @objc(startup:)
-    public func startup(completionHandler handler: ((Bool) -> Void)? = nil) {
+    public func startup(_ handler: ((Bool) -> Void)? = nil) {
                 
         // Check if there's a stored environment
         if let env = KeychainHelper.string(forKey: CoreConstants.environmentSettingKey) {
@@ -220,11 +221,11 @@ open class CoreManager: NSObject, HaloManager, Logger {
     @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:)
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        Manager.core.logMessage(message: "Successfully registered for remote notifications with token \(deviceToken.description)", level: .info)
+        Manager.core.logMessage("Successfully registered for remote notifications with token \(deviceToken.description)", level: .info)
         
         self.addons.forEach { [weak self] addon in
             if let notifAddon = addon as? Halo.NotificationsAddon, let strongSelf = self {
-                notifAddon.application(application: app, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: strongSelf)
+                notifAddon.application(app, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: strongSelf)
             }
         }
     }
@@ -238,11 +239,11 @@ open class CoreManager: NSObject, HaloManager, Logger {
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:)
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         
-        logMessage(message: HaloError.failedToRegisterForRemoteNotifications(error.localizedDescription).description, level: .error)
+        logMessage(HaloError.failedToRegisterForRemoteNotifications(error.localizedDescription).description, level: .error)
         
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application: app, didFailToRegisterForRemoteNotificationsWithError: error, core: self)
+                notifAddon.application(app, didFailToRegisterForRemoteNotificationsWithError: error, core: self)
             }
         }
     }
@@ -252,7 +253,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: { _ in })
+                notifAddon.application(app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: { _ in })
             }
         }
     }
@@ -262,7 +263,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: completionHandler)
+                notifAddon.application(app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: completionHandler)
             }
         }
     }
@@ -297,7 +298,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         return self.addons.reduce(false) { $0 || ($1 as? DeeplinkingAddon)?.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) ?? false }
     }
     
-    fileprivate func checkNeedsUpdate(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
+    fileprivate func checkNeedsUpdate(_ handler: ((Bool) -> Void)? = nil) -> Void {
         
         try! Request<Any>(router: .versionCheck).response { (_, result) in
             switch result {
@@ -306,7 +307,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     if minIOS.compare(self.frameworkVersion, options: .numeric) == .orderedDescending {
                         let changelog = info["iosChangeLog"] as! String
                         
-                        self.logMessage(message: "The version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)", level: .warning)
+                        self.logMessage("The version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)", level: .warning)
                     }
                 }
                 handler?(true)
@@ -328,10 +329,10 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     // MARK: Logger protocol
     
-    public func logMessage(message: String, level: LogLevel) {
+    public func logMessage(_ message: String, level: LogLevel) {
         
         if self.logLevel.rawValue >= level.rawValue {
-            self.loggers.forEach { $0.logMessage(message: message, level: level) }
+            self.loggers.forEach { $0.logMessage(message, level: level) }
         }
     }
     

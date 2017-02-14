@@ -149,7 +149,7 @@ open class HaloRequest: NSObject {
                 }
             }
         } catch _ {
-            Manager.core.logMessage(message: "Error performing request: \(self.debugDescription)", level: .error)
+            Manager.core.logMessage("Error performing request: \(self.debugDescription)", level: .error)
         }
 
         return self
@@ -167,7 +167,7 @@ open class HaloRequest: NSObject {
                 }
             }
         } catch _ {
-            Manager.core.logMessage(message: "Error performing request: \(self.debugDescription)", level: .error)
+            Manager.core.logMessage("Error performing request: \(self.debugDescription)", level: .error)
         }
 
         return self

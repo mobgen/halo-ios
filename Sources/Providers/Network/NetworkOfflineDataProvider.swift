@@ -10,7 +10,7 @@ import Foundation
 
 open class NetworkOfflineDataProvider: NetworkDataProvider {
 
-    open override func getModules(completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
+    open override func getModules(_ handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
         super.getModules { response, result in
             switch result {
