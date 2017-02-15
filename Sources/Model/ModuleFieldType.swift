@@ -26,7 +26,7 @@ class ModuleFieldType {
     var createdAt: Date?
     var updatedAt: Date?
 
-    class func fromDictionary(_ dict: [String: Any]) -> ModuleFieldType {
+    class func fromDictionary(_ dict: [String: Any?]) -> ModuleFieldType {
         
         let fieldType = ModuleFieldType()
         
