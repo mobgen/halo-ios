@@ -21,12 +21,11 @@ class ModuleInfo {
     var fields: [ModuleField] = []
     
     var debugDescription: String {
-        return ["----------------------",
-                "MODULE NAME: \(moduleName)",
+        return ["MODULE NAME: \(moduleName)",
                 "MODULE ID  : \(moduleId)",
                 "FIELDS     :",
-                "\(fields.map { "\t\($0.debugDescription)" }.joined(separator: "\n\t----------------------\n"))",
-                "----------------------"].joined(separator: "\n")
+                "\(fields.map { "\($0.debugDescription)" }.joined(separator: "\n\t----------------------\n"))"
+            ].joined(separator: "\n")
     }
     
     class func fromDictionary(_ dict: [String: Any?]) -> ModuleInfo {
