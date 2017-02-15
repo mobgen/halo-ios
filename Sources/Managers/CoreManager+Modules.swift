@@ -34,7 +34,9 @@ extension CoreManager {
             try request.responseObject { response, result in
                 switch result {
                 case .success(let data, _):
-                    Manager.core.logMessage(data.debugDescription, level: .info)
+                    if let data = data {
+                        Manager.core.logMessage(data.map { $0.debugDescription }.joined(separator: "----------------------\n"), level: .info)
+                    }
                 case .failure(let error):
                     Manager.core.logMessage(error.description, level: .error)
                 }
@@ -60,7 +62,9 @@ extension CoreManager {
              
                 switch result {
                 case .success(let info, _):
-                    Manager.core.logMessage(info.debugDescription, level: .info)
+                    if let info = info {
+                        Manager.core.logMessage(info.debugDescription, level: .info)
+                    }
                 case .failure(let error):
                     Manager.core.logMessage(error.description, level: .error)
                 }
