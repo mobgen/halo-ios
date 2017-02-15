@@ -20,7 +20,7 @@ class ModuleField {
     var module: String?
     var name: String?
     
-    class func fromDictionary(_ dict: [String: Any]) -> ModuleField {
+    class func fromDictionary(_ dict: [String: Any?]) -> ModuleField {
         
         let field = ModuleField()
         
