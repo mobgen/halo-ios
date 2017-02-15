@@ -40,6 +40,7 @@ open class TranslationsHelper: NSObject {
         completionHandlers.append(handler)
     }
     
+    @discardableResult
     open func locale(_ locale: Locale) -> TranslationsHelper {
         self.locale = locale
         self.syncQuery.locale(locale)
@@ -47,11 +48,13 @@ open class TranslationsHelper: NSObject {
         return self
     }
 
+    @discardableResult
     open func defaultText(_ text: String) -> TranslationsHelper {
         self.defaultText = text
         return self
     }
 
+    @discardableResult
     open func loadingText(_ text: String) -> TranslationsHelper {
         self.loadingText = text
         return self
