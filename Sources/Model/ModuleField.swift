@@ -25,7 +25,7 @@ class ModuleField {
     var debugDescription: String {
         return [
             "\tFIELD NAME : \(name)",
-            "\tDESCRIPTION: \(description ?? "-")",
+            "\tDESCRIPTION: \(description)",
             "\tFIELD TYPE : \(fieldType?.name ?? "-")",
             "\tRULES      : \(fieldType?.rules.map { $0.debugDescription }.joined(separator: ", "))"
         ].joined(separator: "\n")

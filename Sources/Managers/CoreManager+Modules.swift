@@ -35,7 +35,7 @@ extension CoreManager {
                 switch result {
                 case .success(let data, _):
                     if let data = data {
-                        Manager.core.logMessage(data.map { $0.debugDescription }.joined(separator: "----------------------\n"), level: .info)
+                        Manager.core.logMessage(data.map { $0.debugDescription }.joined(separator: "\n----------------------\n"), level: .info)
                     }
                 case .failure(let error):
                     Manager.core.logMessage(error.description, level: .error)
