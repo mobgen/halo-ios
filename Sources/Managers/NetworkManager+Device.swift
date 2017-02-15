@@ -22,7 +22,7 @@ extension NetworkManager {
         if let id = device.id {
 
             let request = Halo.Request<Halo.Device>(router: Router.segmentationGetDevice(id), bypassReadiness: true)
-            try! request.responseParser(self.deviceParser).responseObject(completionHandler: handler)
+            try! request.responseParser(self.deviceParser).responseObject(handler)
 
         } else {
             handler?(nil, .success(device, false))
@@ -47,6 +47,6 @@ extension NetworkManager {
             request = Halo.Request(router: Router.segmentationCreateDevice(device.toDictionary()), bypassReadiness: bypassReadiness)
         }
 
-        try! request.responseParser(self.deviceParser).responseObject(completionHandler: handler)
+        try! request.responseParser(self.deviceParser).responseObject(handler)
     }
 }

@@ -43,7 +43,7 @@ open class NetworkDataProvider: DataProvider {
         }
 
         do {
-            try request.responseObject(completionHandler: handler)
+            try request.responseObject(handler)
         } catch let e where e is HaloError {
             handler(nil, .failure(e as! HaloError))
         } catch {
@@ -78,7 +78,7 @@ open class NetworkDataProvider: DataProvider {
         }
 
         do {
-            try request.responseObject(completionHandler: handler)
+            try request.responseObject(handler)
         } catch let e where e is HaloError {
             handler(nil, .failure(e as! HaloError))
         } catch {
@@ -101,7 +101,7 @@ open class NetworkDataProvider: DataProvider {
         let request = Halo.Request<ContentInstance>(router: router).responseParser(instanceParser)
         
         do {
-            try request.responseObject(completionHandler: handler)
+            try request.responseObject(handler)
         } catch let e where e is HaloError {
             handler(nil, .failure(e as! HaloError))
         } catch {
@@ -114,7 +114,7 @@ open class NetworkDataProvider: DataProvider {
         let request = Halo.Request<ContentInstance>(router: Router.instanceDelete(id)).responseParser(instanceParser)
         
         do {
-            try request.responseObject(completionHandler: handler)
+            try request.responseObject(handler)
         } catch let e where e is HaloError {
             handler(nil, .failure(e as! HaloError))
         } catch {

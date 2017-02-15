@@ -26,11 +26,12 @@ public enum Router {
     case oAuth(Credentials, [String: Any])
     case versionCheck
     case modules
+    case module(String)
+    case moduleSync
     case instanceCreate([String: Any])
     case instanceUpdate(String, [String: Any])
     case instanceDelete(String)
     case instanceSearch([String: Any])
-    case moduleSync
     case segmentationGetDevice(String)
     case segmentationCreateDevice([String: Any])
     case segmentationUpdateDevice(String, [String: Any])
@@ -75,6 +76,8 @@ public enum Router {
             return "api/authentication/version"
         case .modules:
             return "api/generalcontent/module"
+        case .module(let id):
+            return "api/generalcontent/module/\(id)"
         case .instanceCreate(_):
             return "api/generalcontent/instance"
         case .instanceUpdate(let id, _),

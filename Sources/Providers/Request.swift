@@ -203,7 +203,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func responseData(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) throws -> Halo.Request<T> {
+    open func responseData(_ handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         switch self.offlinePolicy {
         case .none:
@@ -218,7 +218,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func response(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Any?>) -> Void)? = nil) throws -> Halo.Request<T> {
+    open func response(_ handler: ((HTTPURLResponse?, Halo.Result<Any?>) -> Void)? = nil) throws -> Halo.Request<T> {
         
         try self.responseData { (response, result) -> Void in
             switch result {
@@ -237,7 +237,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func responseObject(completionHandler handler: ((HTTPURLResponse?, Halo.Result<T?>) -> Void)? = nil) throws -> Halo.Request<T> {
+    open func responseObject(_ handler: ((HTTPURLResponse?, Halo.Result<T?>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         guard let parser = self.responseParser else {
             throw HaloError.notImplementedResponseParser
