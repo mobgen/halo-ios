@@ -18,6 +18,10 @@ class ModuleFieldTypeRule {
     var params: [String] = []
     var error: String?
     
+    var debugDescription: String {
+        return rule ?? "-"
+    }
+    
     class func fromDictionary(_ dict: [String: Any?]) -> ModuleFieldTypeRule {
         
         let fieldRule = ModuleFieldTypeRule()

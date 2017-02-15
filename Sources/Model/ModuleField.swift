@@ -13,12 +13,23 @@ class ModuleField {
         static let FieldType = "fieldType"
         static let Module = "module"
         static let Name = "name"
+        static let Description = "description"
     }
     
     var id: String?
     var fieldType: ModuleFieldType?
     var module: String?
     var name: String?
+    var description: String?
+    
+    var debugDescription: String {
+        return [
+            "\tFIELD NAME : \(name)",
+            "\tDESCRIPTION: \(description ?? "-")",
+            "\tFIELD TYPE : \(fieldType?.name ?? "-")",
+            "\tRULES      : \(fieldType?.rules.map { $0.debugDescription }.joined(separator: ", "))"
+        ].joined(separator: "\n")
+    }
     
     class func fromDictionary(_ dict: [String: Any?]) -> ModuleField {
         
@@ -32,6 +43,7 @@ class ModuleField {
         
         field.module = dict[Keys.Module] as? String
         field.name = dict[Keys.Name] as? String
+        field.description = dict[Keys.Description] as? String
         
         return field
     }

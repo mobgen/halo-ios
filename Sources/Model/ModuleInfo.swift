@@ -20,6 +20,15 @@ class ModuleInfo {
     var moduleId: String?
     var fields: [ModuleField] = []
     
+    var debugDescription: String {
+        return ["----------------------",
+                "MODULE NAME: \(moduleName)",
+                "MODULE ID  : \(moduleId)",
+                "FIELDS     :",
+                "\(fields.map { "\t\($0.debugDescription)" }.joined(separator: "\n\t----------------------\n"))",
+                "----------------------"].joined(separator: "\n")
+    }
+    
     class func fromDictionary(_ dict: [String: Any?]) -> ModuleInfo {
         
         let info = ModuleInfo()

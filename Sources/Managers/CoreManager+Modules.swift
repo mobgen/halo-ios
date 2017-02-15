@@ -29,7 +29,6 @@ extension CoreManager {
             
             return nil
         }
-
         
         do {
             try request.responseObject { response, result in
