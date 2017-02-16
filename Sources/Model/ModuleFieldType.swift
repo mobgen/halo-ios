@@ -18,8 +18,8 @@ class ModuleFieldType {
         static let DeletedAt = "deletedAt"
     }
     
-    var id: String?
-    var name: String?
+    var id: String = "-"
+    var name: String = "-"
     var rules: [ModuleFieldTypeRule] = []
     var isLongValue: Bool = false
     var deletedAt: Date?
@@ -30,8 +30,8 @@ class ModuleFieldType {
         
         let fieldType = ModuleFieldType()
         
-        fieldType.id = dict[Keys.Id] as? String
-        fieldType.name = dict[Keys.Name] as? String
+        fieldType.id = dict[Keys.Id] as? String ?? "-"
+        fieldType.name = dict[Keys.Name] as? String ?? "-"
         
         if let rules = dict[Keys.Rules] as? [[String: Any?]] {
             fieldType.rules = rules.map { ModuleFieldTypeRule.fromDictionary($0) }

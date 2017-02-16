@@ -16,8 +16,8 @@ class ModuleInfo {
         static let Fields = "fields"
     }
     
-    var moduleName: String?
-    var moduleId: String?
+    var moduleName: String = "-"
+    var moduleId: String = "-"
     var fields: [ModuleField] = []
     
     var debugDescription: String {
@@ -32,8 +32,8 @@ class ModuleInfo {
         
         let info = ModuleInfo()
         
-        info.moduleName = dict[Keys.Name] as? String
-        info.moduleId = dict[Keys.Id] as? String
+        info.moduleName = dict[Keys.Name] as? String ?? "-"
+        info.moduleId = dict[Keys.Id] as? String ?? "-"
         
         if let fields = dict[Keys.Fields] as? [[String: Any?]] {
             info.fields = fields.map { ModuleField.fromDictionary($0) }

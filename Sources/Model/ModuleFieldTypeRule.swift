@@ -14,21 +14,21 @@ class ModuleFieldTypeRule {
         static let Error = "error"
     }
     
-    var rule: String?
+    var rule: String = "-"
     var params: [String] = []
-    var error: String?
+    var error: String = "-"
     
     var debugDescription: String {
-        return rule ?? "-"
+        return rule
     }
     
     class func fromDictionary(_ dict: [String: Any?]) -> ModuleFieldTypeRule {
         
         let fieldRule = ModuleFieldTypeRule()
         
-        fieldRule.rule = dict[Keys.Rule] as? String
+        fieldRule.rule = dict[Keys.Rule] as? String ?? "-"
         fieldRule.params = dict[Keys.Params] as? [String] ?? []
-        fieldRule.error = dict[Keys.Error] as? String
+        fieldRule.error = dict[Keys.Error] as? String ?? "-"
         
         return fieldRule
     }
