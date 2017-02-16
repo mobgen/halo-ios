@@ -16,11 +16,11 @@ class ModuleField {
         static let Description = "description"
     }
     
-    var id: String?
+    var id: String = "-"
     var fieldType: ModuleFieldType?
-    var module: String?
-    var name: String?
-    var description: String?
+    var module: String = "-"
+    var name: String = "-"
+    var description: String = "-"
     
     var debugDescription: String {
         return [
@@ -35,15 +35,15 @@ class ModuleField {
         
         let field = ModuleField()
         
-        field.id = dict[Keys.Id] as? String
+        field.id = dict[Keys.Id] as? String ?? "-"
         
         if let type = dict[Keys.FieldType] as? [String: Any?] {
             field.fieldType = ModuleFieldType.fromDictionary(type)
         }
         
-        field.module = dict[Keys.Module] as? String
-        field.name = dict[Keys.Name] as? String
-        field.description = dict[Keys.Description] as? String
+        field.module = dict[Keys.Module] as? String ?? "-"
+        field.name = dict[Keys.Name] as? String ?? "-"
+        field.description = dict[Keys.Description] as? String ?? "-"
         
         return field
     }
