@@ -41,7 +41,7 @@ class SyncSpec: BaseSpec {
                         return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Sync stub"
                     
-                    content.removeSyncedInstances(moduleId)
+                    content.removeSyncedInstances(moduleId: moduleId)
                     content.clearSyncLog(moduleId)
                 }
                 
@@ -51,7 +51,7 @@ class SyncSpec: BaseSpec {
                 
                 it("works") {
                     
-                    var instances = content.getSyncedInstances(moduleId)
+                    var instances = content.getSyncedInstances(moduleId: moduleId)
                     
                     expect(instances).to(beEmpty())
                     
@@ -61,12 +61,12 @@ class SyncSpec: BaseSpec {
                         }
                     }
                     
-                    instances = content.getSyncedInstances(moduleId)
+                    instances = content.getSyncedInstances(moduleId: moduleId)
                     
                     expect(instances.count).to(equal(949))
                     
                     // Check the log
-                    let syncLog = content.getSyncLog(moduleId)
+                    let syncLog = content.getSyncLog(moduleId: moduleId)
                     let entry = syncLog.last
                     
                     expect(entry?.creations).to(equal(949))
@@ -95,7 +95,7 @@ class SyncSpec: BaseSpec {
                         return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"])
                     }.name = "Sync stub"
                     
-                    content.removeSyncedInstances(moduleId)
+                    content.removeSyncedInstances(moduleId: moduleId)
                     content.clearSyncLog(moduleId)
                 }
                 
@@ -115,11 +115,11 @@ class SyncSpec: BaseSpec {
                     }
                     
                     // Check intermediate state
-                    var instances = content.getSyncedInstances(moduleId)
+                    var instances = content.getSyncedInstances(moduleId: moduleId)
                     
                     expect(instances.count).to(equal(924))
                     
-                    var logEntry = content.getSyncLog(moduleId).max(by: {
+                    var logEntry = content.getSyncLog(moduleId: moduleId).max(by: {
                         guard
                             let firstSyncDate = $0.0.syncDate,
                             let secondSyncDate = $0.1.syncDate
@@ -140,13 +140,13 @@ class SyncSpec: BaseSpec {
                         }
                     }
                     
-                    instances = content.getSyncedInstances(moduleId)
+                    instances = content.getSyncedInstances(moduleId: moduleId)
                     
                     // Check final state
                     expect(instances.count).to(equal(949))
                     
                     // Check the log
-                    logEntry = content.getSyncLog(moduleId).max(by: {
+                    logEntry = content.getSyncLog(moduleId: moduleId).max(by: {
                         guard
                             let firstSyncDate = $0.0.syncDate,
                             let secondSyncDate = $0.1.syncDate

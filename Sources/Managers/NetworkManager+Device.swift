@@ -22,12 +22,16 @@ extension NetworkManager {
         if let id = device.id {
 
             let request = Halo.Request<Halo.Device>(router: Router.segmentationGetDevice(id), bypassReadiness: true)
-            try! request.responseParser(self.deviceParser).responseObject(handler)
+            
+            do {
+                try request.responseParser(self.deviceParser).responseObject(handler)
+            } catch {
+                Manager.core.logMessage(error.localizedDescription, level: .error)
+            }
 
         } else {
             handler?(nil, .success(device, false))
         }
-
     }
 
     /**

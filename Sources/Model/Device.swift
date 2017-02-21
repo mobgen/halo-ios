@@ -23,6 +23,7 @@ public final class Device: NSObject, NSCoding {
         static let Tags = "tags"
         static let CreatedAt = "createdAt"
         static let UpdatedAt = "updatedAt"
+        static let CredentialsHash = "credentialsHash"
     }
 
     /// Unique identifier of the user
@@ -49,6 +50,8 @@ public final class Device: NSObject, NSCoding {
     /// Date of the last update
     public internal(set) var updatedAt: Date?
 
+    var credentialsHash: Int?
+    
     public override var description: String {
         return "Device\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tinfo:\(info)\n----"
     }
@@ -69,6 +72,7 @@ public final class Device: NSObject, NSCoding {
         self.tags = aDecoder.decodeObject(forKey: Keys.Tags) as? [String: Halo.Tag]
         self.createdAt = aDecoder.decodeObject(forKey: Keys.CreatedAt) as? Date
         self.updatedAt = aDecoder.decodeObject(forKey: Keys.UpdatedAt) as? Date
+        self.credentialsHash = aDecoder.decodeObject(forKey: Keys.CredentialsHash) as? Int
     }
 
     public func encode(with aCoder: NSCoder) {
@@ -80,6 +84,7 @@ public final class Device: NSObject, NSCoding {
         aCoder.encode(tags, forKey: Keys.Tags)
         aCoder.encode(createdAt, forKey: Keys.CreatedAt)
         aCoder.encode(updatedAt, forKey: Keys.UpdatedAt)
+        aCoder.encode(credentialsHash, forKey: Keys.CredentialsHash)
     }
 
     // MARK: User tags management
@@ -143,17 +148,33 @@ public final class Device: NSObject, NSCoding {
     Store a serialized version of the current device inside the keychain
     */
     func storeDevice(env: HaloEnvironment = Manager.core.environment) -> Void {
+        
+        // Set the current credentials for later comparison...
+        self.credentialsHash = Manager.core.appCredentials?.hashValue
+        
         let encodedObject = NSKeyedArchiver.archivedData(withRootObject: self)
         KeychainHelper.set(encodedObject, forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)")
     }
 
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadDevice(env: HaloEnvironment = Manager.core.environment) -> Halo.Device? {
+    class func loadDevice(env: HaloEnvironment = Manager.core.environment) -> Halo.Device {
         if let encodedObject = KeychainHelper.data(forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)") {
-            return NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? Halo.Device
+            
+            // Check if credentials match...
+            if let device = NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? Halo.Device,
+                let hash = Manager.core.appCredentials?.hashValue,
+                let deviceHash = device.credentialsHash {
+                    return (hash == deviceHash) ? device : Device()
+            }
+            
+            return Device()
         }
         
         return Device()
+    }
+    
+    class func removeDevice(env: HaloEnvironment = Manager.core.environment) -> Bool {
+        return KeychainHelper.remove(forKey: "\(CoreConstants.keychainDeviceKey)-\(env.description)")
     }
 
     /**

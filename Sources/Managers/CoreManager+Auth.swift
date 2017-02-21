@@ -13,7 +13,7 @@ extension CoreManager {
     
     func configureDevice(_ handler: ((Bool) -> Void)? = nil) {
         
-        self.device = Halo.Device.loadDevice(env: self.environment)
+        self.device = Device.loadDevice(env: self.environment)
         
         if let device = self.device, device.id != nil {
             // Update the user
@@ -30,6 +30,7 @@ extension CoreManager {
                 case .failure(let error):
                     
                     self.logMessage("Error retrieving device from server (\(error.description))", level: .error)
+                    self.device = Device()
                     
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags(handler)
@@ -40,7 +41,7 @@ extension CoreManager {
             }
             
         } else {
-            self.device = Halo.Device()
+            self.device = Device()
             self.delegate?.managerWillSetupDevice(self.device!)
             
             if self.enableSystemTags {
@@ -49,6 +50,14 @@ extension CoreManager {
                 handler?(true)
             }
         }
+    }
+    
+    public func removeDevice() -> Bool {
+        if Device.removeDevice() {
+            self.device = nil
+        }
+        
+        return self.device == nil
     }
     
     fileprivate func setupDefaultSystemTags(_ handler: ((Bool) -> Void)? = nil) {

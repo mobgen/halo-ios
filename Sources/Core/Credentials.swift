@@ -19,7 +19,11 @@ open class Credentials: NSObject {
     var username: String = ""
     var password: String = ""
     var type: CredentialType = .app
-
+    
+    open override var hashValue: Int {
+        return "\(username):\(password)".hashValue
+    }
+    
     public init(username: String, password: String) {
         super.init()
         self.type = .user
