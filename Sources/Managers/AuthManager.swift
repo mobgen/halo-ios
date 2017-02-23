@@ -81,8 +81,8 @@ public class AuthManager: NSObject, HaloManager {
             }
         }
         
-        if let currentAuthProfile = AuthProfile.loadProfile() {
-            if currentAuthProfile.removeProfile() {
+        if let _ = AuthProfile.loadProfile() {
+            if AuthProfile.removeProfile() {
                 self.currentUser = nil
             } else {
                 result = false
