@@ -86,6 +86,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
             Router.baseURL = environment.baseUrl
             Router.userToken = nil
             Router.appToken = nil
+            Manager.auth.currentUser = nil
+            AuthProfile.removeProfile()
         }
     }
     

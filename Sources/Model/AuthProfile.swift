@@ -108,7 +108,8 @@ public class AuthProfile: NSObject, NSCoding {
         return KeychainHelper.object(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)") as? AuthProfile
     }
     
-    func removeProfile(env: HaloEnvironment = Manager.core.environment) -> Bool {
+    @discardableResult
+    class func removeProfile(env: HaloEnvironment = Manager.core.environment) -> Bool {
         return KeychainHelper.remove(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)")
     }
     
