@@ -35,6 +35,6 @@ extension URLRequest {
 
 
     fileprivate func escapeString(_ str: String) -> String {
-        return str.replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "%", with: "%%")
+        return str.replacingOccurrences(of: "\"", with: "\\\"")
     }
 }
