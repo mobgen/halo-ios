@@ -252,21 +252,15 @@ open class NetworkManager: NSObject, HaloManager {
                     tok = Router.userToken
                 }
                 
-                if let token = tok {
+                if let token = tok, cred.type == .app {
                     
                     params = [
                         "grant_type"    : "refresh_token",
                         "refresh_token" : token.refreshToken!
                     ]
                     
-                    switch cred.type {
-                    case .app:
-                        params["client_id"] = cred.username
-                        params["client_secret"] = cred.password
-                    case .user:
-                        params["username"] = cred.username
-                        params["password"] = cred.password
-                    }
+                    params["client_id"] = cred.username
+                    params["client_secret"] = cred.password
                     
                 } else {
                     
