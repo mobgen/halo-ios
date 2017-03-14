@@ -25,6 +25,9 @@ private struct CachedTask {
 @objc(HaloNetworkManager)
 open class NetworkManager: NSObject, HaloManager {
 
+    public static var timeoutIntervalForRequest: TimeInterval?
+    public static var timeoutIntervalForResource: TimeInterval?
+    
     var isRefreshing = false
 
     var enableSSLpinning = true
@@ -40,6 +43,15 @@ open class NetworkManager: NSObject, HaloManager {
     fileprivate override init() {
         super.init()
         let sessionConfig = URLSessionConfiguration.default
+        
+        if let requestTimeout = NetworkManager.timeoutIntervalForRequest {
+            sessionConfig.timeoutIntervalForRequest = requestTimeout
+        }
+        
+        if let resourceTimeout = NetworkManager.timeoutIntervalForResource {
+            sessionConfig.timeoutIntervalForResource = resourceTimeout
+        }
+        
         self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
 
