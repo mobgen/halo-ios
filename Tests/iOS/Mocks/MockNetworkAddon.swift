@@ -16,11 +16,11 @@ class MockNetworkAddon : DummyAddon, NetworkAddon {
         addonName = "MockNetworkAddon"
     }
     
-    func willPerformRequest(request req: URLRequest) {
+    func willPerformRequest(_ req: URLRequest) {
         
     }
     
-    func didPerformRequest(request req: URLRequest, time: TimeInterval, response: URLResponse?) {
+    func didPerformRequest(_ req: URLRequest, time: TimeInterval, response: URLResponse?) {
         
     }
 }

@@ -32,7 +32,7 @@ class TranslationsHelperSpec : BaseSpec {
                     
                     translationsHelper = MockTranslationsHelper.createTranslationsHelper()
                     
-                    Manager.content.removeSyncedInstances(MockTranslationsHelper.TestModuleId)
+                    Manager.content.removeSyncedInstances(moduleId: MockTranslationsHelper.TestModuleId)
                     Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
                 }
                 
@@ -181,7 +181,7 @@ class TranslationsHelperSpec : BaseSpec {
                         return fixture(filePath: filePath!, status: 400, headers: ["Content-Type": "application/json"])
                     }.name = "Successful sync stub"
                     
-                    Manager.content.removeSyncedInstances(MockTranslationsHelper.TestModuleId)
+                    Manager.content.removeSyncedInstances(moduleId: MockTranslationsHelper.TestModuleId)
                     Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
                     
                     translationsHelper = MockTranslationsHelper.createTranslationsHelper()
@@ -213,7 +213,7 @@ class TranslationsHelperSpec : BaseSpec {
                         return fixture(filePath: filePath!, status: 200, headers: ["Content-Type": "application/json"]).requestTime(1, responseTime: 1)
                     }.name = "Successful sync stub with 1 second of request time and 1 second of response time"
                     
-                    Manager.content.removeSyncedInstances(MockTranslationsHelper.TestModuleId)
+                    Manager.content.removeSyncedInstances(moduleId: MockTranslationsHelper.TestModuleId)
                     Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
                     
                     translationsHelper = MockTranslationsHelper.createTranslationsHelper()

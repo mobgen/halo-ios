@@ -28,6 +28,7 @@ public enum LogLevel: Int {
 @objc(HaloLogger)
 public protocol Logger {
     
-    func logMessage(message: String, level: LogLevel)
+    @objc(logMessage:withLevel:)
+    func logMessage(_ message: String, level: LogLevel)
     
 }

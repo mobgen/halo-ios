@@ -11,9 +11,9 @@ import UIKit
 
 extension CoreManager {
     
-    func configureDevice(completionHandler handler: ((Bool) -> Void)? = nil) {
+    func configureDevice(_ handler: ((Bool) -> Void)? = nil) {
         
-        self.device = Halo.Device.loadDevice(env: self.environment)
+        self.device = Device.loadDevice(env: self.environment)
         
         if let device = self.device, device.id != nil {
             // Update the user
@@ -23,16 +23,17 @@ extension CoreManager {
                     self.device = device
                     
                     if self.enableSystemTags {
-                        self.setupDefaultSystemTags(completionHandler: handler)
+                        self.setupDefaultSystemTags(handler)
                     } else {
                         handler?(true)
                     }
                 case .failure(let error):
                     
-                    self.logMessage(message: "Error retrieving device from server (\(error.description))", level: .error)
+                    self.logMessage("Error retrieving device from server (\(error.description))", level: .error)
+                    self.device = Device()
                     
                     if self.enableSystemTags {
-                        self.setupDefaultSystemTags(completionHandler: handler)
+                        self.setupDefaultSystemTags(handler)
                     } else {
                         handler?(false)
                     }
@@ -40,18 +41,26 @@ extension CoreManager {
             }
             
         } else {
-            self.device = Halo.Device()
+            self.device = Device()
             self.delegate?.managerWillSetupDevice(self.device!)
             
             if self.enableSystemTags {
-                self.setupDefaultSystemTags(completionHandler: handler)
+                self.setupDefaultSystemTags(handler)
             } else {
                 handler?(true)
             }
         }
     }
     
-    fileprivate func setupDefaultSystemTags(completionHandler handler: ((Bool) -> Void)? = nil) {
+    public func removeDevice() -> Bool {
+        if Device.removeDevice() {
+            self.device = nil
+        }
+        
+        return self.device == nil
+    }
+    
+    fileprivate func setupDefaultSystemTags(_ handler: ((Bool) -> Void)? = nil) {
         
         if let device = self.device {
             
@@ -105,7 +114,7 @@ extension CoreManager {
         
     }
     
-    func registerDevice(completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
+    func registerDevice(_ handler: ((Bool) -> Void)? = nil) -> Void {
         
         if let device = self.device {
             self.device?.storeDevice(env: self.environment)
@@ -124,12 +133,12 @@ extension CoreManager {
                         strongSelf.device?.storeDevice(env: strongSelf.environment)
                         
                         if let u = device {
-                            Manager.core.logMessage(message: u.description, level: .info)
+                            Manager.core.logMessage(u.description, level: .info)
                         }
                         
                         success = true
                     case .failure(let error):
-                        Manager.core.logMessage(message: "Error creating/updating user (\(error.description))", level: .error)
+                        Manager.core.logMessage("Error creating/updating device (\(error.description))", level: .error)
                     }
                     
                     strongSelf.addons.forEach { ($0 as? DeviceAddon)?.didRegisterDevice(haloCore: strongSelf) }
@@ -147,7 +156,7 @@ extension CoreManager {
      
      - parameter handler: Closure to be executed once the request has finished, providing a result.
      */
-    public func saveDevice(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Halo.Device?>) -> Void)? = nil) -> Void {
+    public func saveDevice(_ handler: ((HTTPURLResponse?, Halo.Result<Halo.Device?>) -> Void)? = nil) -> Void {
         
         /**
          *  Make sure no 'saveUser' are executed concurrently. That could lead to some inconsistencies in the server (several users
@@ -166,11 +175,11 @@ extension CoreManager {
                             strongSelf.device = device
                             
                             if let u = device {
-                                strongSelf.logMessage(message: u.description, level: .info)
+                                strongSelf.logMessage(u.description, level: .info)
                             }
                             
                         case .failure(let error):
-                            strongSelf.logMessage(message: "Error saving user (\(error.description))", level: .error)
+                            strongSelf.logMessage("Error saving device (\(error.description))", level: .error)
                         }
                         
                         handler?(response, result)

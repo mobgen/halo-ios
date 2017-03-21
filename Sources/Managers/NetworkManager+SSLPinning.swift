@@ -59,6 +59,12 @@ extension NetworkManager {
             isValid = result == unspecified || result == proceed
         }
         
+        if isValid {
+            Manager.core.logMessage("A valid certificate for the SSL pinning has been found", level: .info)
+        } else {
+            Manager.core.logMessage("No valid certificate was found within the main bundle", level: .error)
+        }
+        
         return isValid
     }
     

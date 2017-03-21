@@ -40,6 +40,7 @@ open class TranslationsHelper: NSObject {
         completionHandlers.append(handler)
     }
     
+    @discardableResult
     open func locale(_ locale: Locale) -> TranslationsHelper {
         self.locale = locale
         self.syncQuery.locale(locale)
@@ -47,11 +48,13 @@ open class TranslationsHelper: NSObject {
         return self
     }
 
+    @discardableResult
     open func defaultText(_ text: String) -> TranslationsHelper {
         self.defaultText = text
         return self
     }
 
+    @discardableResult
     open func loadingText(_ text: String) -> TranslationsHelper {
         self.loadingText = text
         return self
@@ -96,7 +99,7 @@ open class TranslationsHelper: NSObject {
 
     open func clearAllTexts() -> Void {
         translationsMap.removeAll()
-        Manager.content.removeSyncedInstances(moduleId)
+        Manager.content.removeSyncedInstances(moduleId: moduleId)
     }
     
     open func load() -> Void {
@@ -118,11 +121,11 @@ open class TranslationsHelper: NSObject {
         self.isLoading = false
         
         if let e = error {
-            Manager.core.logMessage(message: e.description, level: .error)
+            Manager.core.logMessage(e.description, level: .error)
             return
         }
         
-        let instances = Manager.content.getSyncedInstances(moduleId)
+        let instances = Manager.content.getSyncedInstances(moduleId: moduleId)
         
         if let keyField = self.keyField, let valueField = self.valueField {
             

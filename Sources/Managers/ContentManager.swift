@@ -28,7 +28,7 @@ open class ContentManager: NSObject, HaloManager {
     }
 
     @objc(startup:)
-    open func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    open func startup(_ handler: ((Bool) -> Void)?) -> Void {
         handler?(true)
     }
 

@@ -22,11 +22,11 @@ public extension CoreManager {
         a.didRegisterAddon(haloCore: self)
     }
     
-    func setupAndStartAddons(completionHandler handler: @escaping (Bool) -> Void) -> Void {
+    func setupAndStartAddons(_ handler: @escaping (Bool) -> Void) -> Void {
         
         setupAddons { success in
             if success {
-                self.startupAddons(completionHandler: handler)
+                self.startupAddons(handler)
             } else {
                 handler(success)
             }
@@ -34,7 +34,7 @@ public extension CoreManager {
         
     }
     
-    fileprivate func setupAddons(completionHandler handler: @escaping ((Bool) -> Void)) -> Void {
+    fileprivate func setupAddons(_ handler: @escaping ((Bool) -> Void)) -> Void {
         
         if self.addons.isEmpty {
             handler(true)
@@ -46,9 +46,9 @@ public extension CoreManager {
         self.addons.forEach { $0.setup(haloCore: self) { (addon, success) in
             
             if success {
-                self.logMessage(message: "Successfully set up the \(addon.addonName) addon", level: .info)
+                self.logMessage("Successfully set up the \(addon.addonName) addon", level: .info)
             } else {
-                self.logMessage(message: "There has been an error setting up the \(addon.addonName) addon", level: .info)
+                self.logMessage("There has been an error setting up the \(addon.addonName) addon", level: .info)
             }
             
             counter += 1
@@ -61,7 +61,7 @@ public extension CoreManager {
         
     }
     
-    fileprivate func startupAddons(completionHandler handler: @escaping ((Bool) -> Void)) -> Void {
+    fileprivate func startupAddons(_ handler: @escaping ((Bool) -> Void)) -> Void {
         
         if self.addons.isEmpty {
             handler(true)
@@ -73,9 +73,9 @@ public extension CoreManager {
         self.addons.forEach { $0.startup(haloCore: self) { (addon, success) in
             
             if success {
-                self.logMessage(message: "Successfully started the \(addon.addonName) addon", level: .info)
+                self.logMessage("Successfully started the \(addon.addonName) addon", level: .info)
             } else {
-                self.logMessage(message: "There has been an error starting the \(addon.addonName) addon", level: .info)
+                self.logMessage("There has been an error starting the \(addon.addonName) addon", level: .info)
             }
             
             counter += 1

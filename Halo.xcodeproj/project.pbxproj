@@ -114,6 +114,19 @@
 		001C96C91D268F9C00126DD9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B021C51320C00FACAB2 /* libsqlite3.tbd */; };
 		00396E5B1D535BF300594D0A /* ContentManager+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004791061C915D4A00C24741 /* ContentManager+ObjC.swift */; };
 		00396E5C1D535BF300594D0A /* HaloRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005034B11C92B11300362A8F /* HaloRequest.swift */; };
+		003CC0C61E5463BD008B0532 /* ModuleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0C51E5463BD008B0532 /* ModuleField.swift */; };
+		003CC0C71E5463BD008B0532 /* ModuleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0C51E5463BD008B0532 /* ModuleField.swift */; };
+		003CC0C81E5463BD008B0532 /* ModuleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0C51E5463BD008B0532 /* ModuleField.swift */; };
+		003CC0CA1E54675D008B0532 /* ModuleFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0C91E54675D008B0532 /* ModuleFieldType.swift */; };
+		003CC0CB1E54675D008B0532 /* ModuleFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0C91E54675D008B0532 /* ModuleFieldType.swift */; };
+		003CC0CC1E54675D008B0532 /* ModuleFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0C91E54675D008B0532 /* ModuleFieldType.swift */; };
+		003CC0CE1E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */; };
+		003CC0CF1E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */; };
+		003CC0D01E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */; };
+		003CC0D21E546D8B008B0532 /* ModuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0D11E546D8B008B0532 /* ModuleInfo.swift */; };
+		003CC0D31E546D8B008B0532 /* ModuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0D11E546D8B008B0532 /* ModuleInfo.swift */; };
+		003CC0D41E546D8B008B0532 /* ModuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0D11E546D8B008B0532 /* ModuleInfo.swift */; };
+		003CC0D61E55D5F3008B0532 /* ContentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CC0D51E55D5F3008B0532 /* ContentSpec.swift */; };
 		004612551E0BE20000B9B306 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612171E0BE20000B9B306 /* CoreConstants.swift */; };
 		004612561E0BE20000B9B306 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612181E0BE20000B9B306 /* Credentials.swift */; };
 		004612571E0BE20000B9B306 /* HaloAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612191E0BE20000B9B306 /* HaloAppDelegate.swift */; };
@@ -221,6 +234,9 @@
 		009CD8A61E1E99A3005168D7 /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 009CD89B1E1E4DB8005168D7 /* mobgen.cer */; };
 		00A409221D0FE72F005D4FB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A409211D0FE72F005D4FB0 /* Foundation.framework */; };
 		00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
+		00CC8FC31E5C57E3006BE149 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */; };
+		00CC8FC41E5C57E3006BE149 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */; };
+		00CC8FC51E5C57E3006BE149 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */; };
 		00CD29A41E38BB5D00CCFB2D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29A31E38BB5D00CCFB2D /* Logger.swift */; };
 		00CD29A51E38BB5D00CCFB2D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29A31E38BB5D00CCFB2D /* Logger.swift */; };
 		00CD29A61E38BB5D00CCFB2D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29A31E38BB5D00CCFB2D /* Logger.swift */; };
@@ -310,6 +326,11 @@
 
 /* Begin PBXFileReference section */
 		003CA6BD1B84C3DE00819611 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		003CC0C51E5463BD008B0532 /* ModuleField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleField.swift; sourceTree = "<group>"; };
+		003CC0C91E54675D008B0532 /* ModuleFieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleFieldType.swift; sourceTree = "<group>"; };
+		003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleFieldTypeRule.swift; sourceTree = "<group>"; };
+		003CC0D11E546D8B008B0532 /* ModuleInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleInfo.swift; sourceTree = "<group>"; };
+		003CC0D51E55D5F3008B0532 /* ContentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSpec.swift; sourceTree = "<group>"; };
 		004612171E0BE20000B9B306 /* CoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 		004612181E0BE20000B9B306 /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		004612191E0BE20000B9B306 /* HaloAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloAppDelegate.swift; sourceTree = "<group>"; };
@@ -420,6 +441,7 @@
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		009CD89B1E1E4DB8005168D7 /* mobgen.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobgen.cer; sourceTree = "<group>"; };
 		00A409211D0FE72F005D4FB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		00CD29A31E38BB5D00CCFB2D /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		00CD29A71E38BB7400CCFB2D /* FileLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
@@ -551,6 +573,7 @@
 				0046121F1E0BE20000B9B306 /* NSURLRequest+cURL.swift */,
 				004612201E0BE20000B9B306 /* UIDevice+Extra.swift */,
 				004612211E0BE20000B9B306 /* UIImage+Async.swift */,
+				00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -615,6 +638,10 @@
 				004612461E0BE20000B9B306 /* Token.swift */,
 				004612471E0BE20000B9B306 /* User.swift */,
 				004612481E0BE20000B9B306 /* UserProfile.swift */,
+				003CC0C51E5463BD008B0532 /* ModuleField.swift */,
+				003CC0C91E54675D008B0532 /* ModuleFieldType.swift */,
+				003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */,
+				003CC0D11E546D8B008B0532 /* ModuleInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -755,7 +782,7 @@
 			isa = PBXGroup;
 			children = (
 				A5C65F361E1298270055E667 /* Helpers */,
-				A54661751E0D35AB00D550A7 /* GeneralContent */,
+				A54661751E0D35AB00D550A7 /* Content */,
 				A5D97F401E0C201800003597 /* Model */,
 				A5D97F3D1E0C1AF500003597 /* Providers */,
 				A5D97F381E0C146200003597 /* Managers */,
@@ -854,13 +881,14 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
-		A54661751E0D35AB00D550A7 /* GeneralContent */ = {
+		A54661751E0D35AB00D550A7 /* Content */ = {
 			isa = PBXGroup;
 			children = (
 				A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */,
 				A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */,
+				003CC0D51E55D5F3008B0532 /* ContentSpec.swift */,
 			);
-			name = GeneralContent;
+			name = Content;
 			sourceTree = "<group>";
 		};
 		A587765D1E126D240090E8C3 /* models */ = {
@@ -1211,6 +1239,7 @@
 				000F32381E27787300059909 /* NetworkOfflineDataProvider.swift in Sources */,
 				000F32031E27785300059909 /* CoreManager+Modules.swift in Sources */,
 				000F31E51E27771B00059909 /* NSURLRequest+cURL.swift in Sources */,
+				003CC0CF1E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */,
 				000F31DA1E2776FC00059909 /* HaloError.swift in Sources */,
 				000F31D91E2776FC00059909 /* HaloAppDelegate.swift in Sources */,
 				00CD29A91E38BB7400CCFB2D /* FileLogger.swift in Sources */,
@@ -1223,6 +1252,7 @@
 				000F32071E27785300059909 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
 				000F32221E27785C00059909 /* UserProfile.swift in Sources */,
 				000F32391E27787300059909 /* OfflineDataProvider.swift in Sources */,
+				003CC0C71E5463BD008B0532 /* ModuleField.swift in Sources */,
 				000F31F31E27784D00059909 /* CloudinaryURL.swift in Sources */,
 				000F31F61E27784D00059909 /* MobileProvisionParser.swift in Sources */,
 				0051DFA41E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */,
@@ -1239,9 +1269,12 @@
 				000F32041E27785300059909 /* CoreManager.swift in Sources */,
 				000F32321E27786300059909 /* Router.swift in Sources */,
 				000F31F81E27784D00059909 /* TranslationsHelper.swift in Sources */,
+				003CC0CB1E54675D008B0532 /* ModuleFieldType.swift in Sources */,
 				000F32001E27785300059909 /* ContentManager.swift in Sources */,
 				000F32211E27785C00059909 /* User.swift in Sources */,
 				000F321D1E27785C00059909 /* SyncLogEntry.swift in Sources */,
+				00CC8FC41E5C57E3006BE149 /* UIColor+Hex.swift in Sources */,
+				003CC0D31E546D8B008B0532 /* ModuleInfo.swift in Sources */,
 				000F31E71E27771B00059909 /* UIImage+Async.swift in Sources */,
 				000F32081E27785300059909 /* NetworkManager+SSLPinning.swift in Sources */,
 				000F32191E27785C00059909 /* Module.swift in Sources */,
@@ -1274,6 +1307,7 @@
 				000F323E1E27787300059909 /* NetworkOfflineDataProvider.swift in Sources */,
 				000F320E1E27785400059909 /* CoreManager+Modules.swift in Sources */,
 				000F31E81E27771C00059909 /* NSURLRequest+cURL.swift in Sources */,
+				003CC0D01E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */,
 				000F31E11E2776FD00059909 /* HaloError.swift in Sources */,
 				000F31E01E2776FD00059909 /* HaloAppDelegate.swift in Sources */,
 				00CD29AA1E38BB7400CCFB2D /* FileLogger.swift in Sources */,
@@ -1286,6 +1320,7 @@
 				000F32121E27785400059909 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
 				000F32301E27785D00059909 /* UserProfile.swift in Sources */,
 				000F323F1E27787300059909 /* OfflineDataProvider.swift in Sources */,
+				003CC0C81E5463BD008B0532 /* ModuleField.swift in Sources */,
 				000F31F91E27784E00059909 /* CloudinaryURL.swift in Sources */,
 				000F31FC1E27784E00059909 /* MobileProvisionParser.swift in Sources */,
 				0051DFA51E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */,
@@ -1302,9 +1337,12 @@
 				000F320F1E27785400059909 /* CoreManager.swift in Sources */,
 				000F32341E27786300059909 /* Router.swift in Sources */,
 				000F31FE1E27784E00059909 /* TranslationsHelper.swift in Sources */,
+				003CC0CC1E54675D008B0532 /* ModuleFieldType.swift in Sources */,
 				000F320B1E27785400059909 /* ContentManager.swift in Sources */,
 				000F322F1E27785D00059909 /* User.swift in Sources */,
 				000F322B1E27785C00059909 /* SyncLogEntry.swift in Sources */,
+				00CC8FC51E5C57E3006BE149 /* UIColor+Hex.swift in Sources */,
+				003CC0D41E546D8B008B0532 /* ModuleInfo.swift in Sources */,
 				000F31EA1E27771C00059909 /* UIImage+Async.swift in Sources */,
 				000F32131E27785400059909 /* NetworkManager+SSLPinning.swift in Sources */,
 				000F32271E27785C00059909 /* Module.swift in Sources */,
@@ -1365,6 +1403,7 @@
 				004612611E0BE20000B9B306 /* SearchQuery.swift in Sources */,
 				004612771E0BE20000B9B306 /* DeviceInfo.swift in Sources */,
 				004612711E0BE20000B9B306 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
+				00CC8FC31E5C57E3006BE149 /* UIColor+Hex.swift in Sources */,
 				00CD29A81E38BB7400CCFB2D /* FileLogger.swift in Sources */,
 				004612811E0BE20000B9B306 /* UserProfile.swift in Sources */,
 				00CD29AC1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */,
@@ -1373,6 +1412,7 @@
 				0046128E1E0BE20C00B9B306 /* KeychainItemAccessibility.swift in Sources */,
 				004612661E0BE20000B9B306 /* MobileProvisionParser.swift in Sources */,
 				004612741E0BE20000B9B306 /* AuthProfile.swift in Sources */,
+				003CC0D21E546D8B008B0532 /* ModuleInfo.swift in Sources */,
 				004612561E0BE20000B9B306 /* Credentials.swift in Sources */,
 				0046125A1E0BE20000B9B306 /* Protocols.swift in Sources */,
 				0046127A1E0BE20000B9B306 /* PaginatedModules.swift in Sources */,
@@ -1396,9 +1436,12 @@
 				0046126B1E0BE20000B9B306 /* CoreManager+Addons.swift in Sources */,
 				004612841E0BE20000B9B306 /* AuthProvider.swift in Sources */,
 				004612551E0BE20000B9B306 /* CoreConstants.swift in Sources */,
+				003CC0CE1E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */,
 				004612641E0BE20000B9B306 /* CloudinaryURLOptions.swift in Sources */,
+				003CC0C61E5463BD008B0532 /* ModuleField.swift in Sources */,
 				004612851E0BE20000B9B306 /* DataProvider.swift in Sources */,
 				0046125D1E0BE20000B9B306 /* UIDevice+Extra.swift in Sources */,
+				003CC0CA1E54675D008B0532 /* ModuleFieldType.swift in Sources */,
 				0046127D1E0BE20000B9B306 /* SyncResult.swift in Sources */,
 				004612651E0BE20000B9B306 /* KeychainHelper.swift in Sources */,
 				004612861E0BE20000B9B306 /* NetworkDataProvider.swift in Sources */,
@@ -1411,6 +1454,7 @@
 			files = (
 				A5BE28E21E1541FB00D35804 /* MockUserProfile.swift in Sources */,
 				A5A059651E3A1DBA00D7A3C4 /* TranslationsHelperSpec.swift in Sources */,
+				003CC0D61E55D5F3008B0532 /* ContentSpec.swift in Sources */,
 				A58776811E12925A0090E8C3 /* MockToken.swift in Sources */,
 				A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */,
 				A5562EA91E155F8D00261749 /* TagSpec.swift in Sources */,
@@ -1768,10 +1812,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info-iOS.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
@@ -1791,10 +1832,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info-iOS.plist";
 				OTHER_LDFLAGS = "-ObjC";

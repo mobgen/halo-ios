@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc(HaloAuthenticationMode)
 public enum AuthenticationMode: Int {
     case app, appPlus, user
 }
@@ -202,7 +203,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func responseData(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) throws -> Halo.Request<T> {
+    open func responseData(_ handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         switch self.offlinePolicy {
         case .none:
@@ -217,14 +218,14 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func response(completionHandler handler: ((HTTPURLResponse?, Halo.Result<Any?>) -> Void)? = nil) throws -> Halo.Request<T> {
+    open func response(_ handler: ((HTTPURLResponse?, Halo.Result<Any?>) -> Void)? = nil) throws -> Halo.Request<T> {
         
         try self.responseData { (response, result) -> Void in
             switch result {
             case .success(let data, _):
                 if let successHandler = handler {
                     let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                    Manager.core.logMessage(message: "Response body: \(json.debugDescription)", level: .info)
+                    Manager.core.logMessage("Response body: \(json.debugDescription)", level: .info)
                     successHandler(response, .success(json, false))
                 }
             case .failure(let error):
@@ -236,7 +237,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    open func responseObject(completionHandler handler: ((HTTPURLResponse?, Halo.Result<T?>) -> Void)? = nil) throws -> Halo.Request<T> {
+    open func responseObject(_ handler: ((HTTPURLResponse?, Halo.Result<T?>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         guard let parser = self.responseParser else {
             throw HaloError.notImplementedResponseParser

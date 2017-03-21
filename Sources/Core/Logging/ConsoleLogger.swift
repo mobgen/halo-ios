@@ -11,7 +11,7 @@ import Foundation
 @objc(HaloConsoleLogger)
 open class ConsoleLogger: NSObject, Logger {
     
-    public func logMessage(message: String, level: LogLevel) {
+    public func logMessage(_ message: String, level: LogLevel) {
         NSLog("<HALO/\(level.description)>: \(message)")
     }
     

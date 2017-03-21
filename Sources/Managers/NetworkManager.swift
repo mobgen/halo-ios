@@ -25,6 +25,9 @@ private struct CachedTask {
 @objc(HaloNetworkManager)
 open class NetworkManager: NSObject, HaloManager {
 
+    public static var timeoutIntervalForRequest: TimeInterval?
+    public static var timeoutIntervalForResource: TimeInterval?
+    
     var isRefreshing = false
 
     var enableSSLpinning = true
@@ -40,6 +43,15 @@ open class NetworkManager: NSObject, HaloManager {
     fileprivate override init() {
         super.init()
         let sessionConfig = URLSessionConfiguration.default
+        
+        if let requestTimeout = NetworkManager.timeoutIntervalForRequest {
+            sessionConfig.timeoutIntervalForRequest = requestTimeout
+        }
+        
+        if let resourceTimeout = NetworkManager.timeoutIntervalForResource {
+            sessionConfig.timeoutIntervalForResource = resourceTimeout
+        }
+        
         self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
 
@@ -60,7 +72,7 @@ open class NetworkManager: NSObject, HaloManager {
     }
 
     @objc(startup:)
-    open func startup(completionHandler handler: ((Bool) -> Void)?) -> Void {
+    open func startup(_ handler: ((Bool) -> Void)?) -> Void {
 
         let bundle = Bundle.main
 
@@ -91,7 +103,7 @@ open class NetworkManager: NSObject, HaloManager {
 
         let request = urlRequest.urlRequest
 
-        self.addons.forEach { $0.willPerformRequest(request: request) }
+        self.addons.forEach { $0.willPerformRequest(request) }
 
         let start = Date()
         var elapsed: TimeInterval = 0
@@ -102,8 +114,8 @@ open class NetworkManager: NSObject, HaloManager {
             
             if let resp = response as? HTTPURLResponse {
                 
-                Manager.core.logMessage(message: "\(urlRequest) [\(elapsed)ms]", level: .info)
-                Manager.core.logMessage(message: "Response object: \(resp.debugDescription)", level: .info)
+                Manager.core.logMessage("\(urlRequest) [\(elapsed)ms]", level: .info)
+                Manager.core.logMessage("Response object: \(resp.debugDescription)", level: .info)
                 
                 if self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
@@ -158,7 +170,7 @@ open class NetworkManager: NSObject, HaloManager {
                 }
             }
             
-            self.addons.forEach { $0.didPerformRequest(request: request, time: elapsed, response: response) }
+            self.addons.forEach { $0.didPerformRequest(request, time: elapsed, response: response) }
             
         }
         
@@ -197,7 +209,7 @@ open class NetworkManager: NSObject, HaloManager {
                     if let resp = response as? HTTPURLResponse {
                         
                         let elapsed = Date().timeIntervalSince(start) * 1000
-                        Manager.core.logMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info)
+                        Manager.core.logMessage("\(req.debugDescription) [\(elapsed)ms]", level: .info)
                         
                         if resp.statusCode > 399 {
                             
@@ -237,7 +249,7 @@ open class NetworkManager: NSObject, HaloManager {
                 
             } else {
                 self.isRefreshing = false
-                Manager.core.logMessage(message: "No credentials found", level: .error)
+                Manager.core.logMessage("No credentials found", level: .error)
                 handler?(nil, .failure(.noValidCredentialsFound))
             }
         case .app, .user:
@@ -252,21 +264,15 @@ open class NetworkManager: NSObject, HaloManager {
                     tok = Router.userToken
                 }
                 
-                if let token = tok {
+                if let token = tok, cred.type == .app {
                     
                     params = [
                         "grant_type"    : "refresh_token",
                         "refresh_token" : token.refreshToken!
                     ]
                     
-                    switch cred.type {
-                    case .app:
-                        params["client_id"] = cred.username
-                        params["client_secret"] = cred.password
-                    case .user:
-                        params["username"] = cred.username
-                        params["password"] = cred.password
-                    }
+                    params["client_id"] = cred.username
+                    params["client_secret"] = cred.password
                     
                 } else {
                     
@@ -295,7 +301,7 @@ open class NetworkManager: NSObject, HaloManager {
                     if let resp = response as? HTTPURLResponse {
                         
                         let elapsed = Date().timeIntervalSince(start) * 1000
-                        Manager.core.logMessage(message: "\(req.debugDescription) [\(elapsed)ms]", level: .info)
+                        Manager.core.logMessage("\(req.debugDescription) [\(elapsed)ms]", level: .info)
                         
                         if resp.statusCode > 399 {
                             
@@ -338,7 +344,7 @@ open class NetworkManager: NSObject, HaloManager {
                 
             } else {
                 self.isRefreshing = false
-                Manager.core.logMessage(message: "No credentials found", level: .error)
+                Manager.core.logMessage("No credentials found", level: .error)
                 handler?(nil, .failure(.noValidCredentialsFound))
             }
         }
@@ -346,7 +352,7 @@ open class NetworkManager: NSObject, HaloManager {
     
     func restartCachedTasks() {
         // Restart cached tasks
-        Manager.core.logMessage(message: "Restarting enqueued tasks...", level: .info)
+        Manager.core.logMessage("Restarting enqueued tasks...", level: .info)
         let cachedTasksCopy = self.cachedTasks
         self.cachedTasks.removeAll()
         cachedTasksCopy.forEach { self.startRequest(request: $0.request, numberOfRetries: $0.numberOfRetries, completionHandler: $0.handler) }
