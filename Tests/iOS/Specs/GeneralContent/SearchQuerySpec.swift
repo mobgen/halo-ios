@@ -20,6 +20,8 @@ class SearchQuerySpec : BaseSpec {
     static let TestModuleIds = ["testModuleId1", "testModuleId2"]
     static let TestModuleName = "testModuleName"
     static let TestInstanceIds = ["testInstanceId1", "testInstanceId2"]
+    static let RelatedToFieldName = "relatedToField"
+    static let RelatedToInstanceIds = ["instanceId1", "instanceId2"]
     static let TestPopulateFields = ["testPopulateField1", "testPopulateField2"]
     static let TestSegmentWithDevice = true
     static let TestSegmentMode: SegmentMode = .total
@@ -132,6 +134,18 @@ class SearchQuerySpec : BaseSpec {
                     expect(searchQueryReturned).toNot(beNil())
                     expect(searchQuery.instanceIds).toNot(beNil())
                     expect(searchQuery.instanceIds?.count).to(equal(SearchQuerySpec.TestInstanceIds.count))
+                }
+            }
+            
+            describe("its relatedTo method") {
+                beforeEach {
+                    searchQueryReturned = searchQuery.addRelatedTo(fieldName: SearchQuerySpec.RelatedToFieldName, instanceIds: SearchQuerySpec.RelatedToInstanceIds)
+                }
+                
+                it("works") {
+                    expect(searchQueryReturned).toNot(beNil())
+                    expect(searchQueryReturned?.relatedTo).toNot(beNil())
+                    expect(searchQueryReturned?.relatedTo.count).to(equal(SearchQuerySpec.RelatedToInstanceIds.count))
                 }
             }
             

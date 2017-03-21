@@ -104,8 +104,8 @@ open class SearchFilterHelper: NSObject {
     open static func getPublishedItems() -> SearchFilter {
         let now = Date().timeIntervalSince1970 * 1000
 
-        let condition1 = lte(property: "publishedAt", value: now as AnyObject?, type: "date")
-        let condition2 = gt(property: "removedAt", value: now as AnyObject?, type: "date")
+        let condition1 = lte(property: "publishedAt", value: now, type: "date")
+        let condition2 = gt(property: "removedAt", value: now, type: "date")
         let condition3 = eq(property: "removedAt", value: nil)
         let notDeleted = eq(property: "deletedAt", value: nil)
 

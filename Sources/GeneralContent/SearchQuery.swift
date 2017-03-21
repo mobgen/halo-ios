@@ -27,6 +27,9 @@ open class SearchQuery: NSObject {
         static let ModuleName = "moduleName"
         static let ModuleIds = "moduleIds"
         static let InstanceIds = "instanceIds"
+        static let RelatedTo = "relatedTo"
+        static let RelatedToFieldName = "fieldName"
+        static let RelatedToInstanceIds = "instanceIds"
         static let SearchValues = "searchValues"
         static let MetaSearch = "metaSearch"
         static let Fields = "fields"
@@ -41,6 +44,7 @@ open class SearchQuery: NSObject {
     fileprivate(set) var moduleName: String?
     fileprivate(set) var moduleIds: [String]?
     fileprivate(set) var instanceIds: [String]?
+    fileprivate(set) var relatedTo: [[String: Any]] = []
     fileprivate(set) var conditions: [String: Any]?
     fileprivate(set) var metaConditions: [String: Any]?
     fileprivate(set) var fields: [String]?
@@ -68,54 +72,58 @@ open class SearchQuery: NSObject {
         var dict = [String: Any]()
 
         if let modules = self.moduleIds {
-            dict.updateValue(modules, forKey: Keys.ModuleIds)
+            dict[Keys.ModuleIds] = modules
         }
 
         if let moduleName = self.moduleName {
-            dict.updateValue(moduleName, forKey: Keys.ModuleName)
+            dict[Keys.ModuleName] = moduleName
         }
         
         if let instances = self.instanceIds {
-            dict.updateValue(instances, forKey: Keys.InstanceIds)
+            dict[Keys.InstanceIds] = instances
         }
 
+        if self.relatedTo.count > 0 {
+            dict[Keys.RelatedTo] = self.relatedTo
+        }
+        
         if let searchValues = self.conditions {
-            dict.updateValue(searchValues, forKey: Keys.SearchValues)
+            dict[Keys.SearchValues] = searchValues
         }
 
         if let metaSearch = self.metaConditions {
-            dict.updateValue(metaSearch, forKey: Keys.MetaSearch)
+            dict[Keys.MetaSearch] = metaSearch
         }
 
         if let fields = self.fields {
-            dict.updateValue(fields, forKey: Keys.Fields)
+            dict[Keys.Fields] = fields
         }
 
         if let tags = self.tags {
             let tagsList = tags.map { $0.toDictionary() }
-            dict.updateValue(tagsList, forKey: Keys.Tags)
+            dict[Keys.Tags] = tagsList
         }
 
         if let include = self.populateFields {
-            dict.updateValue(include, forKey: Keys.Include)
+            dict[Keys.Include] = include
         }
 
         if let pagination = self.pagination {
-            dict.updateValue(pagination, forKey: Keys.Pagination)
+            dict[Keys.Pagination] = pagination
         }
 
         if self.segmentWithDevice {
             if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
-                    dict.updateValue(tags.map { $1.toDictionary() }, forKey: Keys.SegmentTags)
+                    dict[Keys.SegmentTags] = tags.map { $1.toDictionary() }
                 }
             }
         }
 
-        dict[Keys.SegmentMode] = self.segmentMode.description as AnyObject?
+        dict[Keys.SegmentMode] = self.segmentMode.description
 
         if let locale = self.locale {
-            dict[Keys.Locale] = locale.description as AnyObject?
+            dict[Keys.Locale] = locale.description
         }
 
         return dict
@@ -151,6 +159,15 @@ open class SearchQuery: NSObject {
         return self
     }
 
+    @objc(addRelatedToWithFieldName:instanceIds:)
+    open func addRelatedTo(fieldName: String, instanceIds: [String]) -> Halo.SearchQuery {
+        self.relatedTo.append([
+            Keys.RelatedToFieldName: fieldName,
+            Keys.RelatedToInstanceIds: instanceIds
+        ])
+        return self
+    }
+    
     @objc(moduleName:)
     open func moduleName(_ name: String) -> Halo.SearchQuery {
         self.moduleName = name
