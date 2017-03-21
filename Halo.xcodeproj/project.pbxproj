@@ -248,6 +248,8 @@
 		00CD29AE1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		283EBEE31E81606400C9C86C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */; };
+		283EBEE41E81606500C9C86C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */; };
 		A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */; };
 		A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C501E0D4958009F237A /* MockSearchFilter.swift */; };
 		A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */; };
@@ -1243,6 +1245,7 @@
 				000F31DA1E2776FC00059909 /* HaloError.swift in Sources */,
 				000F31D91E2776FC00059909 /* HaloAppDelegate.swift in Sources */,
 				00CD29A91E38BB7400CCFB2D /* FileLogger.swift in Sources */,
+				283EBEE31E81606400C9C86C /* KeychainWrapper.swift in Sources */,
 				000F32201E27785C00059909 /* Token.swift in Sources */,
 				000F32161E27785C00059909 /* ContentInstance.swift in Sources */,
 				000F31EE1E27772400059909 /* SyncQuery.swift in Sources */,
@@ -1311,6 +1314,7 @@
 				000F31E11E2776FD00059909 /* HaloError.swift in Sources */,
 				000F31E01E2776FD00059909 /* HaloAppDelegate.swift in Sources */,
 				00CD29AA1E38BB7400CCFB2D /* FileLogger.swift in Sources */,
+				283EBEE41E81606500C9C86C /* KeychainWrapper.swift in Sources */,
 				000F322E1E27785D00059909 /* Token.swift in Sources */,
 				000F32241E27785C00059909 /* ContentInstance.swift in Sources */,
 				000F31F21E27772400059909 /* SyncQuery.swift in Sources */,

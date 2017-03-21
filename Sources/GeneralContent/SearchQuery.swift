@@ -159,11 +159,20 @@ open class SearchQuery: NSObject {
         return self
     }
 
-    @objc(addRelatedToWithFieldName:instanceIds:)
-    open func addRelatedTo(fieldName: String, instanceIds: [String]) -> Halo.SearchQuery {
+    @objc(addRelatedInstancesWithFieldName:instanceIds:)
+    open func addRelatedInstances(fieldName: String, instanceIds: [String]) -> Halo.SearchQuery {
         self.relatedTo.append([
             Keys.RelatedToFieldName: fieldName,
             Keys.RelatedToInstanceIds: instanceIds
+        ])
+        return self
+    }
+    
+    @objc(addAllRelatedInstancesWithFieldName:)
+    open func addAllRelatedInstances(fieldName: String) -> Halo.SearchQuery {
+        self.relatedTo.append([
+            Keys.RelatedToFieldName: fieldName,
+            Keys.RelatedToInstanceIds: ["*"]
         ])
         return self
     }
