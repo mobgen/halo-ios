@@ -25,8 +25,8 @@ private struct CachedTask {
 @objc(HaloNetworkManager)
 open class NetworkManager: NSObject, HaloManager {
 
-    public static var timeoutIntervalForRequest: TimeInterval?
-    public static var timeoutIntervalForResource: TimeInterval?
+    public var timeoutIntervalForRequest: TimeInterval?
+    public var timeoutIntervalForResource: TimeInterval?
     
     var isRefreshing = false
 
@@ -34,7 +34,25 @@ open class NetworkManager: NSObject, HaloManager {
 
     fileprivate var cachedTasks = [CachedTask]()
 
-    var session: Foundation.URLSession!
+    fileprivate var _session: URLSession?
+
+    var session: URLSession {
+        if _session == nil {
+            let sessionConfig = URLSessionConfiguration.default
+
+            if let requestTimeout = timeoutIntervalForRequest {
+                sessionConfig.timeoutIntervalForRequest = requestTimeout
+            }
+
+            if let resourceTimeout = timeoutIntervalForResource {
+                sessionConfig.timeoutIntervalForResource = resourceTimeout
+            }
+
+            _session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+        }
+
+        return _session!
+    }
 
     let unauthorizedResponseCodes = [401]
 
@@ -42,17 +60,6 @@ open class NetworkManager: NSObject, HaloManager {
 
     fileprivate override init() {
         super.init()
-        let sessionConfig = URLSessionConfiguration.default
-        
-        if let requestTimeout = NetworkManager.timeoutIntervalForRequest {
-            sessionConfig.timeoutIntervalForRequest = requestTimeout
-        }
-        
-        if let resourceTimeout = NetworkManager.timeoutIntervalForResource {
-            sessionConfig.timeoutIntervalForResource = resourceTimeout
-        }
-        
-        self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
 
     @objc(registerAddon:)
