@@ -30,6 +30,16 @@ public class AuthManager: NSObject, HaloManager {
         
     }
     
+    public func addObserver(_ observer: AuthManagerObserver) -> Void {
+        observers.append(observer)
+    }
+    
+    public func removeObserver(_ observer: AuthManagerObserver) -> Void {
+        if let idx = observers.index(where: { $0 === observer }) {
+            observers.remove(at: idx)
+        }
+    }
+    
     /**
      Call this method to start the login with Halo.
      
