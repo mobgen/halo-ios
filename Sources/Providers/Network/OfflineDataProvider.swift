@@ -19,7 +19,7 @@ open class OfflineDataProvider: DataProvider {
         return OfflineDataProvider.filePath.appendingPathComponent("modules").path
     }
 
-    open func getModules(_ handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
+    public func getModules(_ handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
         if let modules = NSKeyedUnarchiver.unarchiveObject(withFile: OfflineDataProvider.modulesPath) as? PaginatedModules {
             handler(nil, .success(modules, true))
@@ -28,7 +28,7 @@ open class OfflineDataProvider: DataProvider {
         }
     }
 
-    open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    public func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
         if let instances = NSKeyedUnarchiver.unarchiveObject(withFile: query.description) as? PaginatedContentInstances {
             handler(nil, .success(instances, true))
@@ -37,7 +37,17 @@ open class OfflineDataProvider: DataProvider {
         }
 
     }
-    
+
+    public func searchAsData(query: SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Result<Data>) -> Void) {
+
+        if let instances = NSKeyedUnarchiver.unarchiveObject(withFile: query.description) as? Data {
+            handler(nil, .success(instances, true))
+        } else {
+            handler(nil, .failure(.noCachedContent))
+        }
+
+    }
+
     public func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
         handler(nil, .failure(.noInternetConnection))
     }

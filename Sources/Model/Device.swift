@@ -53,7 +53,7 @@ public final class Device: NSObject, NSCoding {
     var credentialsHash: Int?
     
     public override var description: String {
-        return "Device\n----\n\tid: \(id ?? "-")\n\temail: \(email)\n\talias:\(alias)\n\tinfo:\(info)\n----"
+        return "Device\n----\n\tid: \(id ?? "-")\n\temail: \(email as String?)\n\talias:\(alias as String?)\n\tinfo:\(info as DeviceInfo?)\n----"
     }
 
     public override init() {

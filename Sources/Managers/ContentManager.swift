@@ -38,8 +38,8 @@ open class ContentManager: NSObject, HaloManager {
         Manager.core.dataProvider.search(query: query, completionHandler: handler)
     }
 
-    public func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<Data?>) -> Void) -> Void {
-    
+    public func searchAsData(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<Data>) -> Void) -> Void {
+        Manager.core.dataProvider.searchAsData(query: query, completionHandler: handler)
     }
     
     // MARK: Content manipulation

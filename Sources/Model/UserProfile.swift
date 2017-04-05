@@ -36,7 +36,7 @@ public class UserProfile: NSObject, NSCoding {
     internal (set) public var surname: String = ""
     
     public override var debugDescription: String {
-        return "[UserProfile] Id: \(identifiedId) | Email: \(email) | DisplayName: \(displayName)"
+        return "[UserProfile] Id: \(identifiedId as String?) | Email: \(email) | DisplayName: \(displayName as String?)"
     }
     
     override init() {

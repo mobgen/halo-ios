@@ -18,8 +18,11 @@ open class FileLogger: NSObject, Logger {
     override public init() {
         super.init()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
-        let filename = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName"))-\(NSDate().timeIntervalSince1970).txt"
-        filePath = dir?.appendingPathComponent(filename)
+
+        if let bundleName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") {
+            let filename = "\(bundleName)-\(NSDate().timeIntervalSince1970).txt"
+            filePath = dir?.appendingPathComponent(filename)
+        }
     }
     
     public func logMessage(_ message: String, level: LogLevel) {
