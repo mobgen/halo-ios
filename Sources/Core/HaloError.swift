@@ -37,7 +37,7 @@ public enum HaloError: Error, Hashable {
         case .noResponseReceived: return "No response received from server"
         case .noValidCredentialsFound: return "No valid credentials were found"
         case .errorResponse(let code): return "An error has occurred (code \(code))"
-        case .loginError(let message): return "An error has occurred while trying to log in (\(message))"
+        case .loginError(let message): return "An error has occurred while trying to log in (\(message as String?))"
         case .unknownError(let error):
             if let e = error {
                 return "An unknown error occurred (\(e.localizedDescription))"
