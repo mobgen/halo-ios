@@ -142,7 +142,7 @@ extension ContentManager {
             }
             try? FileManager.default.removeItem(atPath: path)
             try? FileManager.default.removeItem(atPath: self.getPath(file: "synctimestamp-\(moduleId)"))
-            clearSyncLog(moduleId)
+            clearSyncLog(moduleId: moduleId)
         }
     }
     
@@ -153,7 +153,7 @@ extension ContentManager {
     }
     
     @objc(clearSyncLogForModule:)
-    public func clearSyncLog(_ moduleId: String) -> Void {
+    public func clearSyncLog(moduleId: String) -> Void {
         let path = self.getPath(file: "synclog-\(moduleId)")
         
         try? FileManager.default.removeItem(atPath: path)
