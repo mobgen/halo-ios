@@ -37,14 +37,14 @@ open class SearchFilter: NSObject {
     var value: Any? {
         didSet {
             switch value {
-            case _ as String:
+            case _ as String, _ as Bool:
                 self.type = "string"
             case _ as NSNumber:
                 self.type = "number"
             case let data as NSArray:
                 if let element = data.firstObject {
                     switch element {
-                    case _ as String:
+                    case _ as String, _ as Bool:
                         self.type = "string"
                     case _ as NSNumber:
                         self.type = "number"
@@ -97,14 +97,14 @@ open class SearchFilter: NSObject {
             self.type = valueType
         } else {
             switch value {
-            case _ as String:
+            case _ as String, _ as Bool:
                 self.type = "string"
             case _ as NSNumber:
                 self.type = "number"
             case let data as NSArray:
                 if let element = data.firstObject {
                     switch element {
-                    case _ as String:
+                    case _ as String, _ as Bool:
                         self.type = "string"
                     case _ as NSNumber:
                         self.type = "number"
