@@ -19,7 +19,8 @@ public extension ContentManager {
     public func search(query: Halo.SearchQuery,
                              success: @escaping (HTTPURLResponse?, PaginatedContentInstances) -> Void,
                              failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
-        Manager.core.dataProvider.search(query: query) { (response, result) in
+        
+        self.search(query: query) { (response, result) in
             switch result {
             case .success(let data, _):
                 if let instances = data {
@@ -29,6 +30,23 @@ public extension ContentManager {
                 failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
             }
         }
+    }
+    
+    @objc(searchAsDataWithQuery:success:failure:)
+    public func searchAsData(query: Halo.SearchQuery,
+                             success: @escaping (HTTPURLResponse?, NSData) -> Void,
+                             failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
+    
+        self.searchAsData(query: query) { (response, result) in
+            
+            switch result {
+            case .success(let data, _):
+                success(response, data as NSData)
+            case .failure(let error):
+                failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
+            }
+        }
+        
     }
     
     @objc(syncWithQuery:completionHandler:)
