@@ -43,7 +43,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
     }
     open fileprivate(set) var numberOfRetries: Int?
-    
+
     fileprivate(set) var dataProvider: DataProvider = Manager.core.dataProvider
 
     open var urlRequest: URLRequest {
@@ -103,7 +103,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         self.init(router: router)
         self.bypassReadiness = bypassReadiness
     }
-    
+
     @discardableResult
     open func responseParser(_ parser: @escaping (Any?) -> T?) -> Halo.Request<T> {
         self.responseParser = parser
@@ -121,7 +121,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         self.numberOfRetries = retries
         return self
     }
-    
+
     @discardableResult
     open func method(_ method: Halo.Method) -> Halo.Request<T> {
         self.method = method
@@ -219,17 +219,23 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
 
     @discardableResult
     open func response(_ handler: ((HTTPURLResponse?, Halo.Result<Any?>) -> Void)? = nil) throws -> Halo.Request<T> {
-        
+
         try self.responseData { (response, result) -> Void in
-            switch result {
-            case .success(let data, _):
-                if let successHandler = handler {
-                    let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                    Manager.core.logMessage("Response body: \(json.debugDescription)", level: .info)
-                    successHandler(response, .success(json, false))
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                switch result {
+                case .success(let data, _):
+                    if let successHandler = handler {
+                        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                        Manager.core.logMessage("Response body: \(json.debugDescription)", level: .info)
+                        DispatchQueue.main.async {
+                            successHandler(response, .success(json, false))
+                        }
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        handler?(response, .failure(error))
+                    }
                 }
-            case .failure(let error):
-                handler?(response, .failure(error))
             }
         }
 
@@ -244,15 +250,22 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
 
         try self.response { (response, result) in
-            switch result {
-            case .success(let data, _):
-                handler?(response, .success(parser(data), false))
-            case .failure(let error):
-                handler?(response, .failure(error))
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                switch result {
+                case .success(let data, _):
+                    let parsedData = parser(data)
+                    DispatchQueue.main.async {
+                        handler?(response, .success(parsedData, false))
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        handler?(response, .failure(error))
+                    }
+                }
             }
         }
-
+        
         return self
     }
-
+    
 }
