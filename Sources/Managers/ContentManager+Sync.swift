@@ -16,7 +16,7 @@ extension ContentManager {
     
     // MARK: Sync instances from a module
     
-    open func sync(query: SyncQuery, completionHandler handler: @escaping (String, HaloError?) -> Void) -> Void {
+    public func sync(query: SyncQuery, completionHandler handler: @escaping (String, HaloError?) -> Void) -> Void {
         
         let path = getPath(file: "synctimestamp-\(query.moduleId)")
         
@@ -121,7 +121,7 @@ extension ContentManager {
     }
     
     @objc(syncedInstancesForModule:)
-    open func getSyncedInstances(moduleId: String) -> [ContentInstance] {
+    public func getSyncedInstances(moduleId: String) -> [ContentInstance] {
         
         // Get the ids of the instances for the given module
         if let instanceIds = NSKeyedUnarchiver.unarchiveObject(withFile: getPath(file: "sync-\(moduleId)")) as? Set<String> {
@@ -133,7 +133,7 @@ extension ContentManager {
     }
     
     @objc(removeSyncedInstancesForModule:)
-    open func removeSyncedInstances(moduleId: String) -> Void {
+    public func removeSyncedInstances(moduleId: String) -> Void {
         let path = getPath(file: "sync-\(moduleId)")
         
         if let instanceIds = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Set<String> {
@@ -142,22 +142,21 @@ extension ContentManager {
             }
             try? FileManager.default.removeItem(atPath: path)
             try? FileManager.default.removeItem(atPath: self.getPath(file: "synctimestamp-\(moduleId)"))
-            
+            clearSyncLog(moduleId: moduleId)
         }
     }
     
     @objc(syncLogForModule:)
-    open func getSyncLog(moduleId: String) -> [SyncLogEntry] {
+    public func getSyncLog(moduleId: String) -> [SyncLogEntry] {
         let path = self.getPath(file: "synclog-\(moduleId)")
         return NSKeyedUnarchiver.unarchiveObject(withFile: path) as? [SyncLogEntry] ?? []
     }
     
-    func clearSyncLog(_ moduleId: String) -> Void {
+    @objc(clearSyncLogForModule:)
+    public func clearSyncLog(moduleId: String) -> Void {
         let path = self.getPath(file: "synclog-\(moduleId)")
         
-        do {
-            try FileManager.default.removeItem(atPath: path)
-        } catch {}
+        try? FileManager.default.removeItem(atPath: path)
     }
     
 }

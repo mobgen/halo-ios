@@ -42,8 +42,8 @@ public class AuthProfile: NSObject, NSCoding {
     var token: String?
     
     public override var debugDescription: String {
-        return "[AuthProfile] Email: \(email) | Password: \(password) | DeviceId: \(deviceId)"
-            + "| Token \(token) | Network: \(network)"
+        return "[AuthProfile] Email: \(email as String?) | Password: \(password as String?) | DeviceId: \(deviceId)"
+            + "| Token \(token as String?) | Network: \(network)"
     }
     
     /**

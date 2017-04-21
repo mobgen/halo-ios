@@ -320,5 +320,15 @@ open class ContentInstance: NSObject, NSCoding {
     open func getValue(key: String) -> Any? {
         return self.values[key]
     }
+    
+    
+    /// Helper function to directly set a value for the given key
+    ///
+    /// - Parameters:
+    ///   - key: Key of the value to be stored
+    ///   - value: Actual value to be stored
+    open func setValue(key: String, value: Any?) -> Void {
+        self.values[key] = value
+    }
 
 }

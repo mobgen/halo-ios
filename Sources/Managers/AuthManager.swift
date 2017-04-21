@@ -8,11 +8,18 @@
 
 import Foundation
 
+@objc
+public protocol AuthManagerObserver {
+    func userDidLogIn(_ user: User)
+    func userDidLogOut()
+}
+
 @objc(HaloAuthManager)
 public class AuthManager: NSObject, HaloManager {
     
     public var stayLoggedIn: Bool = false
     public var currentUser: User?
+    fileprivate var observers: [AuthManagerObserver] = []
     
     fileprivate override init() {
         super.init()
@@ -23,6 +30,16 @@ public class AuthManager: NSObject, HaloManager {
         
     }
     
+    public func addObserver(_ observer: AuthManagerObserver) -> Void {
+        observers.append(observer)
+    }
+    
+    public func removeObserver(_ observer: AuthManagerObserver) -> Void {
+        if let idx = observers.index(where: { $0 === observer }) {
+            observers.remove(at: idx)
+        }
+    }
+    
     /**
      Call this method to start the login with Halo.
      
@@ -31,7 +48,7 @@ public class AuthManager: NSObject, HaloManager {
      */
     public func login(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn, completionHandler handler: @escaping (User?, HaloError?) -> Void) -> Void {
         
-        let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()))
+        let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()), bypassReadiness: true)
         
         _ = try? request.responseParser(userParser).responseObject { (_, result) in
             switch (result) {
@@ -53,6 +70,9 @@ public class AuthManager: NSObject, HaloManager {
                 
                 Manager.core.logMessage("Login with Halo successful.", level: .info)
                 Manager.core.defaultAuthenticationMode = .appPlus
+                
+                // Notify observers
+                self.observers.forEach { $0.userDidLogIn(user) }
                 
                 handler(user, nil)
                 
@@ -92,6 +112,9 @@ public class AuthManager: NSObject, HaloManager {
         }
         
         Manager.core.defaultAuthenticationMode = .app
+        
+        // Notify observers
+        self.observers.forEach { $0.userDidLogOut() }
         
         handler(result)
     }

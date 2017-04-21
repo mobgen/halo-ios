@@ -52,7 +52,7 @@ open class NetworkDataProvider: DataProvider {
 
     }
 
-    open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    public func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
         let request = Halo.Request<PaginatedContentInstances>(router: Router.instanceSearch(query.body)).responseParser { data in
 
@@ -85,6 +85,20 @@ open class NetworkDataProvider: DataProvider {
             handler(nil, .failure(.unknownError(error)))
         }
 
+
+    }
+
+    public func searchAsData(query: SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Result<Data>) -> Void) {
+
+        let request = Halo.Request<Any>(router: Router.instanceSearch(query.body))
+
+        do {
+            try request.responseData(handler)
+        } catch let e where e is HaloError {
+            handler(nil, .failure(e as! HaloError))
+        } catch {
+            handler(nil, .failure(.unknownError(error)))
+        }
 
     }
 

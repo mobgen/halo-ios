@@ -34,17 +34,21 @@ open class ContentManager: NSObject, HaloManager {
 
     // MARK: Get instances
 
-    open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    public func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
         Manager.core.dataProvider.search(query: query, completionHandler: handler)
     }
 
+    public func searchAsData(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<Data>) -> Void) -> Void {
+        Manager.core.dataProvider.searchAsData(query: query, completionHandler: handler)
+    }
+    
     // MARK: Content manipulation
     
     open func save(_ instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<ContentInstance?>) -> Void) -> Void {
         Manager.core.dataProvider.save(instance: instance, completionHandler: handler)
     }
     
-    open func delete(instanceId: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
+    open func delete(instanceId: String, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<ContentInstance?>) -> Void) -> Void {
         Manager.core.dataProvider.delete(id: instanceId, completionHandler: handler)
     }
 }
