@@ -32,6 +32,7 @@ public enum Router {
     case instanceUpdate(String, [String: Any])
     case instanceDelete(String)
     case instanceSearch([String: Any])
+    case instanceBatch([String: Any])
     case segmentationGetDevice(String)
     case segmentationCreateDevice([String: Any])
     case segmentationUpdateDevice(String, [String: Any])
@@ -48,6 +49,7 @@ public enum Router {
              .loginUser(_),
              .instanceSearch(_),
              .instanceCreate(_),
+             .instanceBatch(_),
              .moduleSync:
             return .POST
         case .segmentationUpdateDevice(_),
@@ -87,6 +89,8 @@ public enum Router {
             return "api/generalcontent/instance/sync"
         case .instanceSearch(_):
             return "api/generalcontent/instance/search"
+        case .instanceBatch(_):
+            return "api/generalcontent/instance/batch"
         case .segmentationCreateDevice(_):
             return "api/segmentation/appuser"
         case .segmentationGetDevice(let id),
@@ -130,6 +134,7 @@ public enum Router {
              .instanceSearch(_),
              .instanceCreate(_),
              .instanceUpdate(_),
+             .instanceBatch(_),
              .moduleSync:
             return .json
         case .customRequest(let method, _, _):
@@ -151,6 +156,7 @@ public enum Router {
              .instanceSearch(let params),
              .instanceCreate(let params),
              .instanceUpdate(_, let params),
+             .instanceBatch(let params),
              .segmentationCreateDevice(let params),
              .registerUser(let params),
              .loginUser(let params):

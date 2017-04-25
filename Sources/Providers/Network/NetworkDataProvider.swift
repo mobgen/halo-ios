@@ -15,7 +15,15 @@ open class NetworkDataProvider: DataProvider {
             return nil
         }
         
-        return ContentInstance.fromDictionary(dict: d)
+        return ContentInstance.fromDictionary(d)
+    }
+    
+    fileprivate let batchResultParser: (Any?) -> BatchResult? = { data in
+        guard let d = data as? [String: Any] else {
+            return nil
+        }
+        
+        return BatchResult.fromDictionary(d)
     }
     
     open func getModules(_ handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
@@ -62,11 +70,11 @@ open class NetworkDataProvider: DataProvider {
             case let d as [String: AnyObject]: // Paginated response
                 if let pag = d["pagination"] as? [String: AnyObject], let items = d["items"] as? [[String: AnyObject]] {
                     let paginationInfo = PaginationInfo.fromDictionary(dict: pag)
-                    let items = items.map { Halo.ContentInstance.fromDictionary(dict: $0) }
+                    let items = items.map { Halo.ContentInstance.fromDictionary($0) }
                     result = PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
                 }
             case let d as [[String: AnyObject]]: // Non-paginated response
-                let items = d.map { Halo.ContentInstance.fromDictionary(dict: $0) }
+                let items = d.map { Halo.ContentInstance.fromDictionary($0) }
                 let paginationInfo = PaginationInfo(page: 1, limit: items.count, offset: 0, totalItems: items.count, totalPages: 1)
                 result = PaginatedContentInstances(paginationInfo: paginationInfo, instances: items)
             default: // Everything else
@@ -125,6 +133,7 @@ open class NetworkDataProvider: DataProvider {
     }
     
     public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
+        
         let request = Halo.Request<ContentInstance>(router: Router.instanceDelete(id)).responseParser(instanceParser)
         
         do {
@@ -134,6 +143,20 @@ open class NetworkDataProvider: DataProvider {
         } catch {
             handler(nil, .failure(.unknownError(error)))
         }
+    }
+    
+    public func batch(operations: BatchOperations, completionHandler handler: @escaping (HTTPURLResponse?, Result<BatchResult?>) -> Void) {
+        
+        let request = Halo.Request<BatchResult>(router: Router.instanceBatch(operations.body)).responseParser(batchResultParser)
+        
+        do {
+            try request.responseObject(handler)
+        } catch let e where e is HaloError {
+            handler(nil, .failure(e as! HaloError))
+        } catch {
+            handler(nil, .failure(.unknownError(error)))
+        }
+        
     }
     
 }

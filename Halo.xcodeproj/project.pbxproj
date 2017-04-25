@@ -250,6 +250,12 @@
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		283EBEE31E81606400C9C86C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */; };
 		283EBEE41E81606500C9C86C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */; };
+		2855C04F1EAF5F02004C0280 /* BatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2855C04E1EAF5F02004C0280 /* BatchResult.swift */; };
+		2855C0501EAF5F06004C0280 /* BatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */; };
+		2855C0511EAF5F06004C0280 /* BatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2855C04E1EAF5F02004C0280 /* BatchResult.swift */; };
+		2855C0521EAF5F07004C0280 /* BatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */; };
+		2855C0531EAF5F07004C0280 /* BatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2855C04E1EAF5F02004C0280 /* BatchResult.swift */; };
+		28B6A3EB1EAF4AFF002B7059 /* BatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */; };
 		A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */; };
 		A51B8C511E0D4958009F237A /* MockSearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C501E0D4958009F237A /* MockSearchFilter.swift */; };
 		A546617A1E0D35FF00D550A7 /* SearchFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */; };
@@ -448,6 +454,8 @@
 		00CD29A71E38BB7400CCFB2D /* FileLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2855C04E1EAF5F02004C0280 /* BatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResult.swift; sourceTree = "<group>"; };
+		28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchOperations.swift; sourceTree = "<group>"; };
 		A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchQuerySpec.swift; path = GeneralContent/SearchQuerySpec.swift; sourceTree = "<group>"; };
 		A51B8C501E0D4958009F237A /* MockSearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSearchFilter.swift; sourceTree = "<group>"; };
 		A54661791E0D35FF00D550A7 /* SearchFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFilterSpec.swift; path = GeneralContent/SearchFilterSpec.swift; sourceTree = "<group>"; };
@@ -644,6 +652,8 @@
 				003CC0C91E54675D008B0532 /* ModuleFieldType.swift */,
 				003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */,
 				003CC0D11E546D8B008B0532 /* ModuleInfo.swift */,
+				28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */,
+				2855C04E1EAF5F02004C0280 /* BatchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1243,6 +1253,7 @@
 				000F31E51E27771B00059909 /* NSURLRequest+cURL.swift in Sources */,
 				003CC0CF1E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */,
 				000F31DA1E2776FC00059909 /* HaloError.swift in Sources */,
+				2855C0511EAF5F06004C0280 /* BatchResult.swift in Sources */,
 				000F31D91E2776FC00059909 /* HaloAppDelegate.swift in Sources */,
 				00CD29A91E38BB7400CCFB2D /* FileLogger.swift in Sources */,
 				283EBEE31E81606400C9C86C /* KeychainWrapper.swift in Sources */,
@@ -1288,6 +1299,7 @@
 				00CD29AD1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */,
 				00CD29A51E38BB5D00CCFB2D /* Logger.swift in Sources */,
 				000F32361E27787300059909 /* DataProvider.swift in Sources */,
+				2855C0501EAF5F06004C0280 /* BatchOperations.swift in Sources */,
 				000F31E61E27771B00059909 /* UIDevice+Extra.swift in Sources */,
 				000F321E1E27785C00059909 /* SyncResult.swift in Sources */,
 				000F31F51E27784D00059909 /* KeychainHelper.swift in Sources */,
@@ -1312,6 +1324,7 @@
 				000F31E81E27771C00059909 /* NSURLRequest+cURL.swift in Sources */,
 				003CC0D01E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */,
 				000F31E11E2776FD00059909 /* HaloError.swift in Sources */,
+				2855C0531EAF5F07004C0280 /* BatchResult.swift in Sources */,
 				000F31E01E2776FD00059909 /* HaloAppDelegate.swift in Sources */,
 				00CD29AA1E38BB7400CCFB2D /* FileLogger.swift in Sources */,
 				283EBEE41E81606500C9C86C /* KeychainWrapper.swift in Sources */,
@@ -1357,6 +1370,7 @@
 				00CD29AE1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */,
 				00CD29A61E38BB5D00CCFB2D /* Logger.swift in Sources */,
 				000F323C1E27787300059909 /* DataProvider.swift in Sources */,
+				2855C0521EAF5F07004C0280 /* BatchOperations.swift in Sources */,
 				000F31E91E27771C00059909 /* UIDevice+Extra.swift in Sources */,
 				000F322C1E27785C00059909 /* SyncResult.swift in Sources */,
 				000F31FB1E27784E00059909 /* KeychainHelper.swift in Sources */,
@@ -1440,6 +1454,7 @@
 				0046126B1E0BE20000B9B306 /* CoreManager+Addons.swift in Sources */,
 				004612841E0BE20000B9B306 /* AuthProvider.swift in Sources */,
 				004612551E0BE20000B9B306 /* CoreConstants.swift in Sources */,
+				28B6A3EB1EAF4AFF002B7059 /* BatchOperations.swift in Sources */,
 				003CC0CE1E54677C008B0532 /* ModuleFieldTypeRule.swift in Sources */,
 				004612641E0BE20000B9B306 /* CloudinaryURLOptions.swift in Sources */,
 				003CC0C61E5463BD008B0532 /* ModuleField.swift in Sources */,
@@ -1449,6 +1464,7 @@
 				0046127D1E0BE20000B9B306 /* SyncResult.swift in Sources */,
 				004612651E0BE20000B9B306 /* KeychainHelper.swift in Sources */,
 				004612861E0BE20000B9B306 /* NetworkDataProvider.swift in Sources */,
+				2855C04F1EAF5F02004C0280 /* BatchResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
