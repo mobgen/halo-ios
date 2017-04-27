@@ -9,11 +9,11 @@
 @objc(HaloBatchOperations)
 public class BatchOperations: NSObject {
     
-    public private(set) var create: [ContentInstance] = []
-    public private(set) var update: [ContentInstance] = []
-    public private(set) var createOrUpdate: [ContentInstance] = []
-    public private(set) var delete: [String] = []
-    public private(set) var truncate: [String] = []
+    private(set) var create: [ContentInstance] = []
+    private(set) var update: [ContentInstance] = []
+    private(set) var createOrUpdate: [ContentInstance] = []
+    private(set) var delete: [String] = []
+    private(set) var truncate: [String] = []
     
     struct Keys {
         static let Create = "created"
@@ -23,7 +23,7 @@ public class BatchOperations: NSObject {
         static let Truncate = "truncated"
     }
     
-    internal var body: [String: Any] {
+    var body: [String: Any] {
         
         var result: [String: Any] = [:]
         
@@ -50,24 +50,29 @@ public class BatchOperations: NSObject {
         return result
     }
     
-    open func create(_ instances: [ContentInstance]) {
+    open func create(_ instances: [ContentInstance]) -> BatchOperations {
         create.append(contentsOf: instances)
+        return self
     }
     
-    open func update(_ instances: [ContentInstance]) {
+    open func update(_ instances: [ContentInstance]) -> BatchOperations {
         update.append(contentsOf: instances)
+        return self
     }
     
-    open func createOrUpdate(_ instances: [ContentInstance]) {
+    open func createOrUpdate(_ instances: [ContentInstance]) -> BatchOperations {
         createOrUpdate.append(contentsOf: instances)
+        return self
     }
     
-    open func delete(instanceIds: [String]) {
+    open func delete(instanceIds: [String]) -> BatchOperations {
         delete.append(contentsOf: instanceIds)
+        return self
     }
     
-    open func truncate(moduleIds: [String]) {
+    open func truncate(moduleIds: [String]) -> BatchOperations {
         truncate.append(contentsOf: moduleIds)
+        return self
     }
     
     
