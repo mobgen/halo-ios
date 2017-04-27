@@ -6,8 +6,40 @@
 //  Copyright © 2017 MOBGEN Technology. All rights reserved.
 //
 
+@objc(HaloBatchOperationType)
+public enum BatchOperationType: Int {
+    case create, update, createOrUpdate, delete, truncate
+    
+    var description: String {
+        switch self {
+        case .create: return "create"
+        case .update: return "update"
+        case .delete: return "delete"
+        case .createOrUpdate: return "createOrUpdate"
+        case .truncate: return "truncate"
+        }
+    }
+    
+    init(string: String?) {
+        
+        guard let string = string else {
+            self = .create
+            return
+        }
+        
+        switch string {
+        case "create": self = .create
+        case "update": self = .update
+        case "delete": self = .delete
+        case "createOrUpdate": self = .createOrUpdate
+        case "truncate": self = .truncate
+        default: self = .create
+        }
+    }
+}
+
 @objc(HaloBatchOperations)
-public class BatchOperations: NSObject {
+open class BatchOperations: NSObject {
     
     private(set) var create: [ContentInstance] = []
     private(set) var update: [ContentInstance] = []

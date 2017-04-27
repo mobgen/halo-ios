@@ -7,11 +7,13 @@
 //
 
 @objc(HaloBatchResult)
-public class BatchResult: NSObject {
+open class BatchResult: NSObject {
     
-    class func fromDictionary(_ dict: [String: Any]) -> BatchResult {
+    class func fromDictionary(_ dict: [String: Any?]) -> BatchResult {
         
         return BatchResult()
     }
+    
+    
     
 }
