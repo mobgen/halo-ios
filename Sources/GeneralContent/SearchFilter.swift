@@ -8,6 +8,64 @@
 
 import Foundation
 
+// MARK: Operations
+
+public func eq(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .eq, property: property, value: value, type: type)
+}
+
+public func neq(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .neq, property: property, value: value, type: type)
+}
+
+public func gt(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .gt, property: property, value: value, type: type)
+}
+
+public func lt(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .lt, property: property, value: value, type: type)
+}
+
+public func gte(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .gte, property: property, value: value, type: type)
+}
+
+public func lte(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .lte, property: property, value: value, type: type)
+}
+
+public func valueIn(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .in, property: property, value: value, type: type)
+}
+
+public func valueNotIn(property: String, value: Any?, type: String? = nil) -> SearchFilter {
+    return SearchFilter(operation: .notIn, property: property, value: value, type: type)
+}
+
+public func like(property: String, value: String) -> SearchFilter {
+    return SearchFilter(operation: .like, property: property, value: value)
+}
+
+public func or(_ elements: SearchFilter...) -> SearchFilter {
+    
+    let filter = SearchFilter()
+    
+    filter.condition = "or"
+    filter.operands = elements
+    
+    return filter
+}
+
+public func and(_ elements: SearchFilter...) -> SearchFilter {
+    
+    let filter = SearchFilter()
+    
+    filter.condition = "and"
+    filter.operands = elements
+    
+    return filter
+}
+
 enum SearchFilterOperation {
     case eq, neq, gt, lt, gte, lte, `in`, notIn, like
 
