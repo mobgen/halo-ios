@@ -9,11 +9,25 @@
 @objc(HaloBatchResult)
 open class BatchResult: NSObject {
     
-    class func fromDictionary(_ dict: [String: Any?]) -> BatchResult {
-        
-        return BatchResult()
+    struct Keys {
+        static let Operations = "operations"
     }
     
+    public var operations: [BatchResultOperation] = []
     
+    /// Create a BatchResult from a dictionary
+    ///
+    /// - Parameter dict: Dictionary providing the content of the instance to be created
+    /// - Returns: The newly created BatchResult instance
+    class func fromDictionary(_ dict: [String: Any?]) -> BatchResult {
+        
+        let result = BatchResult()
+        
+        if let operations = dict[Keys.Operations] as? [[String: Any?]] {
+            result.operations = operations.map { BatchResultOperation.fromDictionary($0) }
+        }
+        
+        return result
+    }
     
 }

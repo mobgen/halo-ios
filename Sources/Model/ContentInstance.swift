@@ -74,7 +74,7 @@ open class ContentInstance: NSObject, NSCoding {
     /// Dictionary of tags associated to this general content instance
     open var tags: [String: Halo.Tag] = [:]
 
-    class func fromDictionary(_ dict: [String: Any]) -> ContentInstance {
+    class func fromDictionary(_ dict: [String: Any?]) -> ContentInstance {
         
         let instance = ContentInstance()
         
