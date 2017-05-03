@@ -34,11 +34,11 @@ open class ContentManager: NSObject, HaloManager {
 
     // MARK: Get instances
 
-    public func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
+    open func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
         Manager.core.dataProvider.search(query: query, completionHandler: handler)
     }
 
-    public func searchAsData(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<Data>) -> Void) -> Void {
+    open func searchAsData(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<Data>) -> Void) -> Void {
         Manager.core.dataProvider.searchAsData(query: query, completionHandler: handler)
     }
     
@@ -50,6 +50,12 @@ open class ContentManager: NSObject, HaloManager {
     
     open func delete(instanceId: String, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<ContentInstance?>) -> Void) -> Void {
         Manager.core.dataProvider.delete(id: instanceId, completionHandler: handler)
+    }
+    
+    // MARK: Batch operations
+    
+    open func batch(operations: BatchOperations, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<BatchResult?>) -> Void) -> Void {
+        Manager.core.dataProvider.batch(operations: operations, completionHandler: handler)
     }
 }
 

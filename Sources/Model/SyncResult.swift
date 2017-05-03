@@ -39,11 +39,11 @@ open class SyncResult: NSObject, NSCoding {
         syncDate = Date(timeIntervalSince1970: (data[Keys.SyncDate] as? Double ?? 0)/1000)
         
         if let created = data[Keys.Created] as? [[String: AnyObject]] {
-            created.forEach { self.created.append(ContentInstance.fromDictionary(dict: $0)) }
+            created.forEach { self.created.append(ContentInstance.fromDictionary($0)) }
         }
         
         if let updated = data[Keys.Updated] as? [[String: AnyObject]] {
-            updated.forEach { self.updated.append(ContentInstance.fromDictionary(dict: $0)) }
+            updated.forEach { self.updated.append(ContentInstance.fromDictionary($0)) }
         }
         
         if let deleted = data[Keys.Deleted] as? [[String: AnyObject]] {

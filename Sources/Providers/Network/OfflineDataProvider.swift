@@ -56,4 +56,7 @@ open class OfflineDataProvider: DataProvider {
         handler(nil, .failure(.noInternetConnection))
     }
 
+    public func batch(operations: BatchOperations, completionHandler handler: @escaping (HTTPURLResponse?, Result<BatchResult?>) -> Void) {
+        handler(nil, .failure(.noInternetConnection))
+    }
 }

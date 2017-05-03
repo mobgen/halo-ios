@@ -15,7 +15,8 @@ public protocol DataProvider {
     func searchAsData(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<Data>) -> Void) -> Void
     func save(instance: ContentInstance, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<ContentInstance?>) -> Void) -> Void
     func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<ContentInstance?>) -> Void) -> Void
-
+    func batch(operations: BatchOperations, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<BatchResult?>) -> Void) -> Void
+    
 }
 
 struct DataProviderManager {

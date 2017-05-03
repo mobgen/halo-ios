@@ -271,12 +271,12 @@ open class CoreManager: NSObject, HaloManager, Logger {
     }
     
     @objc(applicationWillFinishLaunching:)
-    func applicationWillFinishLaunching(_ application: UIApplication) -> Bool {
+    open func applicationWillFinishLaunching(_ application: UIApplication) -> Bool {
         return self.addons.reduce(true) { $0 && ($1 as? LifecycleAddon)?.applicationWillFinishLaunching(application, core: self) ?? true }
     }
     
     @objc(applicationDidFinishLaunching:launchOptions:)
-    func applicationDidFinishLaunching(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    open func applicationDidFinishLaunching(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         return self.addons.reduce(true) { $0 && ($1 as? LifecycleAddon)?.applicationDidFinishLaunching(application, core: self, didFinishLaunchingWithOptions: launchOptions) ?? true }
     }
     
