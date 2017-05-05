@@ -94,8 +94,8 @@ public protocol NotificationsAddon: Addon {
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:core:)
     func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: Halo.CoreManager) -> Void
 
-    @objc(application:didReceiveRemoteNotification:core:userInteraction:fetchCompletionHandler:)
-    func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
+    @objc(application:didReceiveRemoteNotification:core:fetchCompletionHandler:)
+    func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
 
 }
 
