@@ -247,22 +247,22 @@ open class CoreManager: NSObject, HaloManager, Logger {
         }
     }
     
-    @objc(application:didReceiveRemoteNotification:userInteraction:)
-    open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool) {
+    @objc(application:didReceiveRemoteNotification:)
+    open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: { _ in })
+                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: { _ in })
             }
         }
     }
     
-    @objc(application:didReceiveRemoteNotification:userInteraction:fetchCompletionHandler:)
-    open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    @objc(application:didReceiveRemoteNotification:fetchCompletionHandler:)
+    open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? Halo.NotificationsAddon {
-                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: completionHandler)
+                notifAddon.application(application: app, didReceiveRemoteNotification: userInfo, core: self, fetchCompletionHandler: completionHandler)
             }
         }
     }

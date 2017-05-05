@@ -50,7 +50,7 @@ public final class Device: NSObject, NSCoding {
     public internal(set) var updatedAt: Date?
 
     public override var description: String {
-        return "Device\n----\n\tid: \(id)\n\temail: \(email)\n\talias:\(alias)\n\tinfo:\(info)\n----"
+        return "Device\n----\n\tid: \(String(describing: id))\n\temail: \(String(describing: email))\n\talias:\(String(describing: alias))\n\tinfo:\(String(describing: info))\n----"
     }
 
     public override init() {
