@@ -36,11 +36,14 @@ open class TranslationsHelper: NSObject {
         self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
     }
 
+    @objc(addCompletionHandler:)
     open func addCompletionHandler(handler: @escaping (Error?) -> Void) -> Void {
         completionHandlers.append(handler)
     }
     
+
     @discardableResult
+    @objc(locale:)
     open func locale(_ locale: Locale) -> TranslationsHelper {
         self.locale = locale
         self.syncQuery.locale(locale)
@@ -49,38 +52,49 @@ open class TranslationsHelper: NSObject {
     }
 
     @discardableResult
+    @objc(defaultText:)
     open func defaultText(_ text: String) -> TranslationsHelper {
         self.defaultText = text
         return self
     }
 
     @discardableResult
+    @objc(loadingText:)
     open func loadingText(_ text: String) -> TranslationsHelper {
         self.loadingText = text
         return self
     }
     
-    open func getText(key: String, completionHandler handler: ((String?) -> Void)? = nil) -> Void {
+    @objc(getTextForKey:completionHandler:)
+    open func getText(key: String, completionHandler handler: @escaping (String?) -> Void) -> Void {
         if self.isLoading {
-            if let h = handler {
                 self.completionHandlers.append { _ in
-                    h(self.translationsMap[key])
+                    handler(self.translationsMap[key])
                 }
-            }
-            handler?(self.loadingText)
+            handler(self.loadingText)
         } else {
             if let value = self.translationsMap[key] {
-                handler?(value)
+                handler(value)
             } else {
-                handler?(self.defaultText)
+                handler(self.defaultText)
             }
         }
     }
 
-    open func getTexts(keys: String...) -> [String: String?] {
+    open func getTexts(keys: String..., completionHandler handler: @escaping ([String: String?]) -> Void) -> Void {
 
+        if self.isLoading {
+                self.completionHandlers.append { _ in
+                    handler(self.getTexts(keys: keys))
+                }
+        } else {
+            handler(self.getTexts(keys: keys))
+        }
+    }
+    
+    fileprivate func getTexts(keys: [String]) -> [String: String?] {
         var values: [String: String?] = [:]
-
+        
         keys.forEach { key in
             if let value = translationsMap[key] {
                 values[key] = value
@@ -88,13 +102,19 @@ open class TranslationsHelper: NSObject {
                 values[key] = self.defaultText
             }
         }
-
+        
         return values
-
     }
 
-    open func getAllTexts() -> [String: String] {
-        return translationsMap
+    open func getAllTexts(completionHandler handler: @escaping ([String: String?]) -> Void) -> Void {
+        
+        if self.isLoading {
+            self.completionHandlers.append { _ in
+                handler(self.translationsMap)
+            }
+        } else {
+            handler(translationsMap)
+        }
     }
 
     open func clearAllTexts() -> Void {
