@@ -55,7 +55,7 @@ open class NetworkManager: NSObject, HaloManager {
     }
 
     let unauthorizedResponseCodes = [401]
-
+    
     var addons: [Halo.NetworkAddon] = []
 
     fileprivate override init() {
@@ -124,7 +124,7 @@ open class NetworkManager: NSObject, HaloManager {
                 Manager.core.logMessage("\(urlRequest) [\(elapsed)ms]", level: .info)
                 Manager.core.logMessage("Response object: \(resp.debugDescription)", level: .info)
                 
-                if self.unauthorizedResponseCodes.contains(resp.statusCode) {
+                if urlRequest.checkUnauthorised && self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
                     
                     self.cachedTasks.append(cachedTask)
