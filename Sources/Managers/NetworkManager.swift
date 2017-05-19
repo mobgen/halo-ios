@@ -207,7 +207,7 @@ open class NetworkManager: NSObject, HaloManager {
         case .appPlus:
             if let profile = AuthProfile.loadProfile() {
                 
-                let req = Halo.Request<User>(router: Router.loginUser(profile.toDictionary()), bypassReadiness: true).authenticationMode(mode)
+                let req = Halo.Request<User>(router: Router.loginUser(profile.toDictionary()), bypassReadiness: true, checkUnauthorised: false).authenticationMode(mode)
                 
                 let start = Date()
                 

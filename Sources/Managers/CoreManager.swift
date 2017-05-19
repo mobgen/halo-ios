@@ -12,10 +12,10 @@ import UIKit
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager, Logger {
     
-    private lazy var __once: (CoreManager, ((Bool) -> Void)?) -> Void = { mgr, handler in
+    private lazy var __once: (((Bool) -> Void)?) -> Void = { handler in
         
-        mgr.completionHandler = { success in
-            mgr.isReady = success
+        self.completionHandler = { success in
+            self.isReady = true
             Halo.Manager.network.restartCachedTasks()
             handler?(success)
         }
@@ -26,13 +26,13 @@ open class CoreManager: NSObject, HaloManager, Logger {
         Manager.network.startup { success in
             
             if !success {
-                mgr.completionHandler?(false)
+                self.completionHandler?(false)
                 return
             }
             
             let bundle = Bundle.main
             
-            if let path = bundle.path(forResource: mgr.configuration, ofType: "plist") {
+            if let path = bundle.path(forResource: self.configuration, ofType: "plist") {
                 
                 if let data = NSDictionary(contentsOfFile: path) {
                     let clientIdKey = CoreConstants.clientIdKey
@@ -42,19 +42,19 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     let environmentKey = CoreConstants.environmentSettingKey
                     
                     if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        mgr.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
                     }
                     
                     if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                        mgr.userCredentials = Credentials(username: username, password: password)
+                        self.userCredentials = Credentials(username: username, password: password)
                     }
                     
                     if let tags = data[CoreConstants.enableSystemTags] as? Bool {
-                        mgr.enableSystemTags = tags
+                        self.enableSystemTags = tags
                     }
                     
                     if let env = data[environmentKey] as? String {
-                        mgr.setEnvironment(env)
+                        self.setEnvironment(env)
                     }
                 }
             } else {
@@ -62,12 +62,13 @@ open class CoreManager: NSObject, HaloManager, Logger {
             }
             
             self.checkNeedsUpdate()
-            self.setup(manager: mgr)
+            self.setup()
         }
     }
     
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
+    
     
     public internal(set) var loggers: [Logger] = []
     
@@ -143,48 +144,44 @@ open class CoreManager: NSObject, HaloManager, Logger {
         KeychainHelper.set(env.description, forKey: CoreConstants.environmentSettingKey)
         
         self.completionHandler = handler
-        self.setup(manager: self)
+        self.setup()
     }
     
     
-    fileprivate func setup(manager: CoreManager) {
+    fileprivate func setup() {
         
         let handler: (Bool) -> Void = { success in
             
             if !success {
-                manager.completionHandler?(false)
+                self.completionHandler?(false)
                 return
             }
             
-            if let authProfile = AuthProfile.loadProfile(env: manager.environment) {
+            if let authProfile = AuthProfile.loadProfile() {
                 // Login and get user details (in case there have been updates)
                 Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { _, error in
-                    manager.completionHandler?(error == nil)
-                    return
+                    self.completionHandler?(error == nil)
                 }
+            } else {
+                self.completionHandler?(true)
             }
-            
-            manager.completionHandler?(true)
         }
         
         // Configure device
-        manager.configureDevice { success in
+        self.configureDevice { success in
             if success {
                 // Configure all the registered addons
-                manager.setupAndStartAddons { success in
+                self.setupAndStartAddons { success in
                     if success {
-                        manager.registerDevice { success in
+                        self.registerDevice { success in
                             handler(success)
-                            return
                         }
                     } else {
                         handler(false)
-                        return
                     }
                 }
             } else {
                 handler(false)
-                return
             }
         }
     }
@@ -210,7 +207,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
             self.setEnvironment(env)
         }
         
-        self.__once(self, handler)
+        self.__once(handler)
         
     }
     
