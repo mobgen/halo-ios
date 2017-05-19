@@ -109,8 +109,10 @@ public class AuthProfile: NSObject, NSCoding {
     }
     
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadProfile(env: HaloEnvironment = Manager.core.environment) -> Halo.AuthProfile? {        
-        return KeychainHelper.object(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)") as? AuthProfile
+    class func loadProfile(env: HaloEnvironment = Manager.core.environment) -> Halo.AuthProfile? {
+        let key = "\(CoreConstants.keychainUserAuthKey)-\(env.description)"
+        Manager.core.logMessage("Loading auth profile for key \(key)", level: .info)
+        return KeychainHelper.object(forKey: key) as? AuthProfile
     }
     
     @discardableResult
