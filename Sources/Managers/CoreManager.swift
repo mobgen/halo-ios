@@ -158,11 +158,13 @@ open class CoreManager: NSObject, HaloManager, Logger {
             }
             
             if let authProfile = AuthProfile.loadProfile() {
+                Manager.core.logMessage("Loading stored auth profile for this environment", level: .info)
                 // Login and get user details (in case there have been updates)
                 Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { _, error in
                     self.completionHandler?(error == nil)
                 }
             } else {
+                Manager.core.logMessage("No stored auth profile found for this environment", level: .info)
                 self.completionHandler?(true)
             }
         }
