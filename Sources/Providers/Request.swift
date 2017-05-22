@@ -19,6 +19,7 @@ public protocol Requestable {
     var offlinePolicy: Halo.OfflinePolicy { get }
     var numberOfRetries: Int? { get }
     var bypassReadiness: Bool { get }
+    var checkUnauthorised: Bool { get }
 }
 
 open class Request<T>: Requestable, CustomDebugStringConvertible {
@@ -30,6 +31,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     fileprivate var headers: [String: String] = [:]
     fileprivate var params: [String: Any] = [:]
     public internal(set) var bypassReadiness: Bool = false
+    public internal(set) var checkUnauthorised: Bool = true
 
     open fileprivate(set) var responseParser: ((Any?) -> T?)?
     open fileprivate(set) var authenticationMode: Halo.AuthenticationMode = Manager.core.defaultAuthenticationMode
@@ -99,9 +101,10 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
     }
 
-    convenience init(router: Router, bypassReadiness: Bool) {
+    convenience init(router: Router, bypassReadiness: Bool = false, checkUnauthorised: Bool = true) {
         self.init(router: router)
         self.bypassReadiness = bypassReadiness
+        self.checkUnauthorised = checkUnauthorised
     }
 
     @discardableResult

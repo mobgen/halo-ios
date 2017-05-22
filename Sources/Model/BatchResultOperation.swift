@@ -13,8 +13,8 @@ public class BatchResultOperation: NSObject {
     public internal(set) var position: Int = 0
     public internal(set) var success: Bool = false
     public internal(set) var contentInstance: ContentInstance?
+    public internal(set) var truncatedInstances: Int = 0
     public internal(set) var moduleId: String?
-    public internal(set) var moduleIds: [String]?
     public internal(set) var error: HaloError?
     
     struct Keys {
@@ -23,6 +23,7 @@ public class BatchResultOperation: NSObject {
         static let Success = "success"
         static let Module = "module"
         static let Data = "data"
+        static let DeletedInstances = "deletedInstances"
         static let Error = "\(Keys.Data).error"
         static let ErrorStatus = "\(Keys.Error).status"
         static let ErrorMessage = "\(Keys.Error).message"
@@ -78,8 +79,9 @@ public class BatchResultOperation: NSObject {
         
         result.moduleId = dict[Keys.Module] as? String
         
-        if let data = dict[Keys.Data] as? [[String: String]] {
-            result.moduleIds = data.map { $0["id"]! }
+        if let data = dict[Keys.Data] as? [String: Int],
+            let instances = data[Keys.DeletedInstances] {
+            result.truncatedInstances = instances
         }
         
     }

@@ -100,12 +100,19 @@ public class AuthProfile: NSObject, NSCoding {
     // MARK: Utility methods
     
     func storeProfile(env: HaloEnvironment = Manager.core.environment) -> Void {
-        KeychainHelper.set(self, forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)")
+        let key = "\(CoreConstants.keychainUserAuthKey)-\(env.description)"
+        if KeychainHelper.set(self, forKey: key) {
+            Manager.core.logMessage("Auth profile successfully stored for key \(key)", level: .info)
+        } else {
+            Manager.core.logMessage("There was an error storing auth profile for key \(key)", level: .error)
+        }
     }
     
     /// Retrieve and deserialize a stored user from the user preferences
-    class func loadProfile(env: HaloEnvironment = Manager.core.environment) -> Halo.AuthProfile? {        
-        return KeychainHelper.object(forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)") as? AuthProfile
+    class func loadProfile(env: HaloEnvironment = Manager.core.environment) -> Halo.AuthProfile? {
+        let key = "\(CoreConstants.keychainUserAuthKey)-\(env.description)"
+        Manager.core.logMessage("Loading auth profile for key \(key)", level: .info)
+        return KeychainHelper.object(forKey: key) as? AuthProfile
     }
     
     @discardableResult

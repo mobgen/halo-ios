@@ -25,7 +25,7 @@ class MockAuthProfile : AuthProfile {
         return nil
     }
     
-    override func removeProfile(env: HaloEnvironment = Manager.core.environment) -> Bool {
+    override class func removeProfile(env: HaloEnvironment = Manager.core.environment) -> Bool {
         UserDefaults.standard.set(nil, forKey: "\(CoreConstants.keychainUserAuthKey)-\(env.description)")
         UserDefaults.standard.synchronize()
         return true

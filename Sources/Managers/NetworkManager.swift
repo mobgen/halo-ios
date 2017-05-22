@@ -55,15 +55,15 @@ open class NetworkManager: NSObject, HaloManager {
     }
 
     let unauthorizedResponseCodes = [401]
-
-    var addons: [Halo.NetworkAddon] = []
+    
+    var addons: [HaloNetworkAddon] = []
 
     fileprivate override init() {
         super.init()
     }
 
     @objc(registerAddon:)
-    open func registerAddon(addon: Halo.NetworkAddon) -> Void {
+    open func registerAddon(addon: HaloNetworkAddon) -> Void {
         self.addons.append(addon)
     }
 
@@ -124,7 +124,7 @@ open class NetworkManager: NSObject, HaloManager {
                 Manager.core.logMessage("\(urlRequest) [\(elapsed)ms]", level: .info)
                 Manager.core.logMessage("Response object: \(resp.debugDescription)", level: .info)
                 
-                if self.unauthorizedResponseCodes.contains(resp.statusCode) {
+                if urlRequest.checkUnauthorised && self.unauthorizedResponseCodes.contains(resp.statusCode) {
                     let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
                     
                     self.cachedTasks.append(cachedTask)
@@ -207,7 +207,7 @@ open class NetworkManager: NSObject, HaloManager {
         case .appPlus:
             if let profile = AuthProfile.loadProfile() {
                 
-                let req = Halo.Request<User>(router: Router.loginUser(profile.toDictionary()), bypassReadiness: true).authenticationMode(mode)
+                let req = Halo.Request<User>(router: Router.loginUser(profile.toDictionary()), bypassReadiness: true, checkUnauthorised: false).authenticationMode(mode)
                 
                 let start = Date()
                 
