@@ -22,6 +22,10 @@ public extension CoreManager {
         a.didRegisterAddon(haloCore: self)
     }
     
+    public func getAddons<T: Addon>(type: T.Type) -> [T] {
+        return self.addons.filter { $0 is T } as! [T]
+    }
+    
     func setupAndStartAddons(_ handler: @escaping (Bool) -> Void) -> Void {
         
         setupAddons { success in
