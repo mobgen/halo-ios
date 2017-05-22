@@ -56,14 +56,14 @@ open class NetworkManager: NSObject, HaloManager {
 
     let unauthorizedResponseCodes = [401]
     
-    var addons: [Halo.NetworkAddon] = []
+    var addons: [HaloNetworkAddon] = []
 
     fileprivate override init() {
         super.init()
     }
 
     @objc(registerAddon:)
-    open func registerAddon(addon: Halo.NetworkAddon) -> Void {
+    open func registerAddon(addon: HaloNetworkAddon) -> Void {
         self.addons.append(addon)
     }
 

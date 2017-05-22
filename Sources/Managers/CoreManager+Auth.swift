@@ -119,7 +119,7 @@ extension CoreManager {
         if let device = self.device {
             self.device?.storeDevice(env: self.environment)
             
-            self.addons.forEach { ($0 as? DeviceAddon)?.willRegisterAddon(haloCore: self) }
+            self.addons.forEach { ($0 as? HaloDeviceAddon)?.willRegisterAddon(haloCore: self) }
             
             Manager.network.createUpdateDevice(device, bypassReadiness: true) { [weak self] (_, result) -> Void in
                 
@@ -141,7 +141,7 @@ extension CoreManager {
                         Manager.core.logMessage("Error creating/updating device (\(error.description))", level: .error)
                     }
                     
-                    strongSelf.addons.forEach { ($0 as? DeviceAddon)?.didRegisterDevice(haloCore: strongSelf) }
+                    strongSelf.addons.forEach { ($0 as? HaloDeviceAddon)?.didRegisterDevice(haloCore: strongSelf) }
                     handler?(success)
                     
                 }

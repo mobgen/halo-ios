@@ -121,7 +121,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     /// Instance holding all the device-related information
     public var device: Device?
     
-    public internal(set) var addons: [Halo.Addon] = []
+    public internal(set) var addons: [HaloAddon] = []
     
     fileprivate var completionHandler: ((Bool) -> Void)?
     
@@ -225,7 +225,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         Manager.core.logMessage("Successfully registered for remote notifications with token \(deviceToken.description)", level: .info)
         
         self.addons.forEach { [weak self] addon in
-            if let notifAddon = addon as? Halo.NotificationsAddon, let strongSelf = self {
+            if let notifAddon = addon as? HaloNotificationsAddon, let strongSelf = self {
                 notifAddon.application(app, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, core: strongSelf)
             }
         }
@@ -243,7 +243,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         logMessage(HaloError.failedToRegisterForRemoteNotifications(error.localizedDescription).description, level: .error)
         
         self.addons.forEach { (addon) in
-            if let notifAddon = addon as? Halo.NotificationsAddon {
+            if let notifAddon = addon as? HaloNotificationsAddon {
                 notifAddon.application(app, didFailToRegisterForRemoteNotificationsWithError: error, core: self)
             }
         }
@@ -253,7 +253,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool) {
         
         self.addons.forEach { (addon) in
-            if let notifAddon = addon as? Halo.NotificationsAddon {
+            if let notifAddon = addon as? HaloNotificationsAddon {
                 notifAddon.application(app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: { _ in })
             }
         }
@@ -263,7 +263,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         self.addons.forEach { (addon) in
-            if let notifAddon = addon as? Halo.NotificationsAddon {
+            if let notifAddon = addon as? HaloNotificationsAddon {
                 notifAddon.application(app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: completionHandler)
             }
         }
@@ -271,32 +271,32 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     @objc(applicationWillFinishLaunching:)
     open func applicationWillFinishLaunching(_ application: UIApplication) -> Bool {
-        return self.addons.reduce(true) { $0 && ($1 as? LifecycleAddon)?.applicationWillFinishLaunching(application, core: self) ?? true }
+        return self.addons.reduce(true) { $0 && ($1 as? HaloLifecycleAddon)?.applicationWillFinishLaunching(application, core: self) ?? true }
     }
     
     @objc(applicationDidFinishLaunching:launchOptions:)
     open func applicationDidFinishLaunching(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        return self.addons.reduce(true) { $0 && ($1 as? LifecycleAddon)?.applicationDidFinishLaunching(application, core: self, didFinishLaunchingWithOptions: launchOptions) ?? true }
+        return self.addons.reduce(true) { $0 && ($1 as? HaloLifecycleAddon)?.applicationDidFinishLaunching(application, core: self, didFinishLaunchingWithOptions: launchOptions) ?? true }
     }
     
     @objc(applicationDidBecomeActive:)
     open func applicationDidBecomeActive(_ app: UIApplication) {
-        self.addons.forEach { ($0 as? LifecycleAddon)?.applicationDidBecomeActive(app, core: self) }
+        self.addons.forEach { ($0 as? HaloLifecycleAddon)?.applicationDidBecomeActive(app, core: self) }
     }
     
     @objc(applicationDidEnterBackground:)
     open func applicationDidEnterBackground(_ app: UIApplication) {
-        self.addons.forEach { ($0 as? LifecycleAddon)?.applicationDidEnterBackground(app, core: self) }
+        self.addons.forEach { ($0 as? HaloLifecycleAddon)?.applicationDidEnterBackground(app, core: self) }
     }
     
     @objc(application:openURL:options:)
     open func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return self.addons.reduce(false) { $0 || ($1 as? DeeplinkingAddon)?.application(app, open: url, options: options) ?? false }
+        return self.addons.reduce(false) { $0 || ($1 as? HaloDeeplinkingAddon)?.application(app, open: url, options: options) ?? false }
     }
     
     @objc(application:openURL:sourceApplication:annotation:)
     open func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return self.addons.reduce(false) { $0 || ($1 as? DeeplinkingAddon)?.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) ?? false }
+        return self.addons.reduce(false) { $0 || ($1 as? HaloDeeplinkingAddon)?.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) ?? false }
     }
     
     fileprivate func checkNeedsUpdate(_ handler: ((Bool) -> Void)? = nil) -> Void {
