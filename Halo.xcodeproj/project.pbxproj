@@ -254,6 +254,7 @@
 		283CDB281EB20D00007C6098 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283CDB271EB20D00007C6098 /* KeyPath.swift */; };
 		283EBEE31E81606400C9C86C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */; };
 		283EBEE41E81606500C9C86C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */; };
+		284FEEF31EE029F90048E664 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 284FEEF21EE029F90048E664 /* UserNotifications.framework */; };
 		2855C04F1EAF5F02004C0280 /* BatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2855C04E1EAF5F02004C0280 /* BatchResult.swift */; };
 		2855C0501EAF5F06004C0280 /* BatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */; };
 		2855C0511EAF5F06004C0280 /* BatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2855C04E1EAF5F02004C0280 /* BatchResult.swift */; };
@@ -460,6 +461,7 @@
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResultOperation.swift; sourceTree = "<group>"; };
 		283CDB271EB20D00007C6098 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
+		284FEEF21EE029F90048E664 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2855C04E1EAF5F02004C0280 /* BatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResult.swift; sourceTree = "<group>"; };
 		28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchOperations.swift; sourceTree = "<group>"; };
 		A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchQuerySpec.swift; path = GeneralContent/SearchQuerySpec.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				284FEEF31EE029F90048E664 /* UserNotifications.framework in Frameworks */,
 				001C96C91D268F9C00126DD9 /* libsqlite3.tbd in Frameworks */,
 				00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */,
 				00A409221D0FE72F005D4FB0 /* Foundation.framework in Frameworks */,
@@ -830,6 +833,7 @@
 		005C577F1B5CE6BF0018839D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				284FEEF21EE029F90048E664 /* UserNotifications.framework */,
 				00F106141D9946B700557900 /* XCTest.framework */,
 				00A409211D0FE72F005D4FB0 /* Foundation.framework */,
 				008E2B5A1C524DAB00FACAB2 /* libz.tbd */,
