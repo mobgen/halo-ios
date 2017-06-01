@@ -102,7 +102,7 @@ public protocol HaloNotificationsAddon: HaloAddon {
     func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void)
     
     @available(iOS 10.0, *)
-    func serviceExtensionTimeWillExpire()
+    func serviceExtensionTimeWillExpire(bestAttemptContent: UNMutableNotificationContent?, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) -> Void
 }
 
 @objc
