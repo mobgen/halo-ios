@@ -641,25 +641,15 @@
 		0046123A1E0BE20000B9B306 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				283CDB261EB1EA1E007C6098 /* InstanceBatch */,
-				0046123B1E0BE20000B9B306 /* AuthProfile.swift */,
-				0046123C1E0BE20000B9B306 /* ContentInstance.swift */,
+				287E534F1ED5CD9D00BAC7F8 /* Content */,
+				287E53511ED5CDC000BAC7F8 /* ContentSync */,
 				0046123D1E0BE20000B9B306 /* Device.swift */,
 				0046123E1E0BE20000B9B306 /* DeviceInfo.swift */,
-				0046123F1E0BE20000B9B306 /* Module.swift */,
-				004612401E0BE20000B9B306 /* PaginatedContentInstances.swift */,
-				004612411E0BE20000B9B306 /* PaginatedModules.swift */,
-				004612421E0BE20000B9B306 /* PaginationInfo.swift */,
-				004612431E0BE20000B9B306 /* SyncLogEntry.swift */,
-				004612441E0BE20000B9B306 /* SyncResult.swift */,
+				283CDB261EB1EA1E007C6098 /* InstanceBatch */,
+				287E534E1ED5CD7500BAC7F8 /* Login */,
+				287E53501ED5CDAF00BAC7F8 /* ModuleInfo */,
 				004612451E0BE20000B9B306 /* Tag.swift */,
 				004612461E0BE20000B9B306 /* Token.swift */,
-				004612471E0BE20000B9B306 /* User.swift */,
-				004612481E0BE20000B9B306 /* UserProfile.swift */,
-				003CC0C51E5463BD008B0532 /* ModuleField.swift */,
-				003CC0C91E54675D008B0532 /* ModuleFieldType.swift */,
-				003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */,
-				003CC0D11E546D8B008B0532 /* ModuleInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -907,6 +897,48 @@
 				283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */,
 			);
 			name = InstanceBatch;
+			sourceTree = "<group>";
+		};
+		287E534E1ED5CD7500BAC7F8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0046123B1E0BE20000B9B306 /* AuthProfile.swift */,
+				004612471E0BE20000B9B306 /* User.swift */,
+				004612481E0BE20000B9B306 /* UserProfile.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		287E534F1ED5CD9D00BAC7F8 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				0046123C1E0BE20000B9B306 /* ContentInstance.swift */,
+				0046123F1E0BE20000B9B306 /* Module.swift */,
+				004612401E0BE20000B9B306 /* PaginatedContentInstances.swift */,
+				004612411E0BE20000B9B306 /* PaginatedModules.swift */,
+				004612421E0BE20000B9B306 /* PaginationInfo.swift */,
+			);
+			name = Content;
+			sourceTree = "<group>";
+		};
+		287E53501ED5CDAF00BAC7F8 /* ModuleInfo */ = {
+			isa = PBXGroup;
+			children = (
+				003CC0C51E5463BD008B0532 /* ModuleField.swift */,
+				003CC0C91E54675D008B0532 /* ModuleFieldType.swift */,
+				003CC0CD1E54677C008B0532 /* ModuleFieldTypeRule.swift */,
+				003CC0D11E546D8B008B0532 /* ModuleInfo.swift */,
+			);
+			name = ModuleInfo;
+			sourceTree = "<group>";
+		};
+		287E53511ED5CDC000BAC7F8 /* ContentSync */ = {
+			isa = PBXGroup;
+			children = (
+				004612431E0BE20000B9B306 /* SyncLogEntry.swift */,
+				004612441E0BE20000B9B306 /* SyncResult.swift */,
+			);
+			name = ContentSync;
 			sourceTree = "<group>";
 		};
 		A54661751E0D35AB00D550A7 /* Content */ = {
