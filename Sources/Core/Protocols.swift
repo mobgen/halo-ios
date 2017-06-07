@@ -12,6 +12,7 @@
  */
 
 import Foundation
+import UserNotifications
 import UIKit
 
 @objc(HaloManagerDelegate)
@@ -96,7 +97,6 @@ public protocol HaloNotificationsAddon: HaloAddon {
 
     @objc(application:didReceiveRemoteNotification:core:userInteraction:fetchCompletionHandler:)
     func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
-
 }
 
 @objc
