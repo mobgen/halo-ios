@@ -175,6 +175,11 @@ open class CoreManager: NSObject, HaloManager, Logger {
                 // Configure all the registered addons
                 self.setupAndStartAddons { success in
                     if success {
+                        
+                        if let device = self.device {
+                            self.delegate?.managerWillSetupDevice(device)
+                        }
+                        
                         self.registerDevice { success in
                             handler(success)
                         }
