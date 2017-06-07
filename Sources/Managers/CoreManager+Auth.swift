@@ -106,8 +106,6 @@ extension CoreManager {
             // Get APNs environment
             device.addSystemTag(name: "apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercased())
             
-            self.delegate?.managerWillSetupDevice(self.device!)
-            
             handler?(true)
         } else {
             handler?(false)
