@@ -83,12 +83,16 @@ open class CoreManager: NSObject, HaloManager, Logger {
     let lockQueue = DispatchQueue(label: "com.mobgen.halo.lockQueue", attributes: [])
     
     public fileprivate(set) var environment: HaloEnvironment = .prod {
+        willSet {
+            self.getAddons(type: HaloLifecycleAddon.self).forEach { $0.applicationWillChangeEnvironment(UIApplication.shared, core: self) }
+        }
         didSet {
             Router.baseURL = environment.baseUrl
             Router.userToken = nil
             Router.appToken = nil
             Manager.auth.currentUser = nil
             AuthProfile.removeProfile()
+            self.getAddons(type: HaloLifecycleAddon.self).forEach { $0.applicationDidChangeEnvironment(UIApplication.shared, core: self) }
         }
     }
     
@@ -138,6 +142,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
     public func setEnvironment(_ env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
+        
         self.environment = env
         
         // Save the environment
