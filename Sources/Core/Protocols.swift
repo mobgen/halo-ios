@@ -72,6 +72,12 @@ public protocol HaloLifecycleAddon: HaloAddon {
     
     @objc(applicationDidBecomeActive:core:)
     func applicationDidBecomeActive(_ app: UIApplication, core: Halo.CoreManager) -> Void
+    
+    @objc(applicationWillChangeEnvironment:core:)
+    func applicationWillChangeEnvironment(_ app: UIApplication, core: Halo.CoreManager) -> Void
+    
+    @objc(applicationDidChangeEnvironment:core:)
+    func applicationDidChangeEnvironment(_ app: UIApplication, core: Halo.CoreManager) -> Void
 }
 
 @objc
