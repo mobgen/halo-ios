@@ -55,4 +55,8 @@ public class KeychainHelper: NSObject {
     public static func remove(forKey: String) -> Bool {
         return KeychainWrapper.standard.removeObject(forKey: forKey)
     }
+    
+    public static func removeAllKeys() -> Bool {
+        return KeychainWrapper.standard.removeAllKeys()
+    }
 }
