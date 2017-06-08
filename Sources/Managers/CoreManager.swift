@@ -143,8 +143,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         // Save the environment
         KeychainHelper.set(env.description, forKey: CoreConstants.environmentSettingKey)
         
-        self.completionHandler = handler
-        self.setup()
+        self.__once(handler)
     }
     
     
