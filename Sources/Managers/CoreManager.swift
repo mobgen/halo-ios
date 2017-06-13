@@ -69,7 +69,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
-    
     public internal(set) var loggers: [Logger] = []
     
     public internal(set) var isReady: Bool = false
