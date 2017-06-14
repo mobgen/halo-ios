@@ -74,7 +74,12 @@ public extension CoreManager {
         
         var counter = 0
         
-        self.addons.forEach { $0.startup(haloCore: self) { (addon, success) in
+        guard let app = self.app else {
+            handler(false)
+            return
+        }
+        
+        self.addons.forEach { $0.startup(app: app, haloCore: self) { (addon, success) in
             
             if success {
                 self.logMessage("Successfully started the \(addon.addonName) addon", level: .info)

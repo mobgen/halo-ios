@@ -25,8 +25,8 @@ public class AuthManager: NSObject, HaloManager {
         super.init()
     }
     
-    @objc(startup:)
-    public func startup(_ handler: ((Bool) -> Void)?) -> Void {
+    @objc(startup:completionHandler:)
+    public func startup(_ app: UIApplication, completionHandler handler: ((Bool) -> Void)?) -> Void {
         
     }
     
