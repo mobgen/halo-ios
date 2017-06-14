@@ -12,7 +12,9 @@ import UIKit
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager, Logger {
     
-    private lazy var __once: (((Bool) -> Void)?) -> Void = { handler in
+    var app: UIApplication?
+    
+    private lazy var __once: (UIApplication, ((Bool) -> Void)?) -> Void = { app, handler in
         
         self.completionHandler = { success in
             self.isReady = true
@@ -23,7 +25,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         Router.userToken = nil
         Router.appToken = nil
         
-        Manager.network.startup { success in
+        Manager.network.startup(app) { success in
             
             if !success {
                 self.completionHandler?(false)
@@ -69,7 +71,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
-    
     public internal(set) var loggers: [Logger] = []
     
     public internal(set) var isReady: Bool = false
@@ -83,12 +84,21 @@ open class CoreManager: NSObject, HaloManager, Logger {
     let lockQueue = DispatchQueue(label: "com.mobgen.halo.lockQueue", attributes: [])
     
     public fileprivate(set) var environment: HaloEnvironment = .prod {
+        willSet {
+            if let app = self.app {
+                self.getAddons(type: HaloLifecycleAddon.self).forEach { $0.applicationWillChangeEnvironment(app, core: self) }
+            }
+        }
         didSet {
             Router.baseURL = environment.baseUrl
             Router.userToken = nil
             Router.appToken = nil
             Manager.auth.currentUser = nil
             AuthProfile.removeProfile()
+            
+            if let app = self.app {
+                self.getAddons(type: HaloLifecycleAddon.self).forEach { $0.applicationDidChangeEnvironment(app, core: self) }
+            }
         }
     }
     
@@ -138,6 +148,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
     public func setEnvironment(_ env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
+        
         self.environment = env
         
         // Save the environment
@@ -206,15 +217,17 @@ open class CoreManager: NSObject, HaloManager, Logger {
         KeychainHelper.set(self.environment.description, forKey: CoreConstants.environmentSettingKey)
     }
     
-    @objc(startup:)
-    public func startup(_ handler: ((Bool) -> Void)? = nil) {
-                
+    @objc(startup:completionHandler:)
+    public func startup(_ app: UIApplication, completionHandler handler: ((Bool) -> Void)? = nil) {
+        
+        self.app = app
+        
         // Check if there's a stored environment
         if let env = KeychainHelper.string(forKey: CoreConstants.environmentSettingKey) {
             self.setEnvironment(env)
         }
         
-        self.__once(handler)
+        self.__once(app, handler)
         
     }
     

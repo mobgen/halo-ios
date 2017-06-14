@@ -36,8 +36,8 @@ public protocol HaloAddon {
     @objc(setup:completionHandler:)
     func setup(haloCore core: Halo.CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)?) -> Void
     
-    @objc(startup:completionHandler:)
-    func startup(haloCore core: Halo.CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)?) -> Void
+    @objc(startup:core:completionHandler:)
+    func startup(app: UIApplication, haloCore core: Halo.CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)?) -> Void
 
     @objc(willRegisterAddon:)
     func willRegisterAddon(haloCore core: Halo.CoreManager) -> Void
@@ -72,6 +72,12 @@ public protocol HaloLifecycleAddon: HaloAddon {
     
     @objc(applicationDidBecomeActive:core:)
     func applicationDidBecomeActive(_ app: UIApplication, core: Halo.CoreManager) -> Void
+    
+    @objc(applicationWillChangeEnvironment:core:)
+    func applicationWillChangeEnvironment(_ app: UIApplication, core: Halo.CoreManager) -> Void
+    
+    @objc(applicationDidChangeEnvironment:core:)
+    func applicationDidChangeEnvironment(_ app: UIApplication, core: Halo.CoreManager) -> Void
 }
 
 @objc
@@ -115,7 +121,7 @@ public protocol HaloNetworkAddon: HaloAddon {
 @objc
 public protocol HaloManager {
 
-    @objc(startup:)
-    func startup(_ handler: ((Bool) -> Void)?) -> Void
+    @objc(startup:completionHandler:)
+    func startup(_ app: UIApplication, completionHandler handler: ((Bool) -> Void)?) -> Void
 
 }

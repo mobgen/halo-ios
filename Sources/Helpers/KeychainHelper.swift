@@ -52,7 +52,14 @@ public class KeychainHelper: NSObject {
         return KeychainWrapper.standard.object(forKey: forKey)
     }
     
+    @discardableResult
+    @objc(removeForKey:)
     public static func remove(forKey: String) -> Bool {
         return KeychainWrapper.standard.removeObject(forKey: forKey)
+    }
+    
+    @discardableResult
+    public static func removeAllKeys() -> Bool {
+        return KeychainWrapper.standard.removeAllKeys()
     }
 }

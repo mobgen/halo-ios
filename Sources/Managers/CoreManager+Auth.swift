@@ -115,12 +115,12 @@ extension CoreManager {
     
     func registerDevice(_ handler: ((Bool) -> Void)? = nil) -> Void {
         
-        if let device = self.device {
+        if let _ = self.device {
             self.device?.storeDevice(env: self.environment)
             
-            self.addons.forEach { ($0 as? HaloDeviceAddon)?.willRegisterAddon(haloCore: self) }
+            self.addons.forEach { ($0 as? HaloDeviceAddon)?.willRegisterDevice(haloCore: self) }
             
-            Manager.network.createUpdateDevice(device, bypassReadiness: true) { [weak self] (_, result) -> Void in
+            self.saveDevice() { [weak self] (_, result) -> Void in
                 
                 var success = false
                 

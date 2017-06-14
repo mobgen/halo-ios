@@ -78,8 +78,8 @@ open class NetworkManager: NSObject, HaloManager {
         }
     }
 
-    @objc(startup:)
-    open func startup(_ handler: ((Bool) -> Void)?) -> Void {
+    @objc(startup:completionHandler:)
+    open func startup(_ app: UIApplication, completionHandler handler: ((Bool) -> Void)?) -> Void {
 
         let bundle = Bundle.main
 
