@@ -35,7 +35,7 @@ extension CoreManager {
                     if self.enableSystemTags {
                         self.setupDefaultSystemTags(handler)
                     } else {
-                        handler?(false)
+                        handler?(true)
                     }
                 }
             }
