@@ -15,8 +15,8 @@ extension CoreManager {
      
      - parameter offlinePolicy: Offline policy to be considered when retrieving data
      */
-    public func getModules(_ handler: @escaping (HTTPURLResponse?, Result<PaginatedModules?>) -> Void) -> Void {
-        return dataProvider.getModules(handler)
+    public func getModules(query: ModulesQuery, completionHandler handler: @escaping (HTTPURLResponse?, Result<PaginatedModules?>) -> Void) -> Void {
+        return dataProvider.getModules(query: query, completionHandler: handler)
     }
     
     public func printModulesMetaData() -> Void {

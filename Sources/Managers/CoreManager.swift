@@ -319,7 +319,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     fileprivate func checkNeedsUpdate(_ handler: ((Bool) -> Void)? = nil) -> Void {
         
-        try! Request<Any>(router: .versionCheck).response { (_, result) in
+        let _ = try? Request<Any>(router: .versionCheck).serverCache(86400).response { (_, result) in
             switch result {
             case .success(let data as [[String: AnyObject]], _):
                 if let info = data.first, let minIOS = info["minIOS"] {

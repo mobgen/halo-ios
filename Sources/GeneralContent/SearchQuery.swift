@@ -41,20 +41,21 @@ open class SearchQuery: NSObject {
         static let Locale = "locale"
     }
 
-    fileprivate(set) var moduleName: String?
-    fileprivate(set) var moduleIds: [String]?
-    fileprivate(set) var instanceIds: [String]?
-    fileprivate(set) var relatedTo: [[String: Any]] = []
-    fileprivate(set) var conditions: [String: Any]?
-    fileprivate(set) var metaConditions: [String: Any]?
-    fileprivate(set) var fields: [String]?
-    fileprivate(set) var populateFields: [String]?
-    fileprivate(set) var tags: [Halo.Tag]?
-    fileprivate(set) var pagination: [String: Any]?
-    fileprivate(set) var segmentWithDevice: Bool = false
-    fileprivate(set) var segmentMode: SegmentMode = .partial
-    fileprivate(set) var offlinePolicy: Halo.OfflinePolicy?
-    fileprivate(set) var locale: Halo.Locale?
+    private(set) var moduleName: String?
+    private(set) var moduleIds: [String]?
+    private(set) var instanceIds: [String]?
+    private(set) var relatedTo: [[String: Any]] = []
+    private(set) var conditions: [String: Any]?
+    private(set) var metaConditions: [String: Any]?
+    private(set) var fields: [String]?
+    private(set) var populateFields: [String]?
+    private(set) var tags: [Halo.Tag]?
+    private(set) var pagination: [String: Any]?
+    private(set) var segmentWithDevice: Bool = false
+    private(set) var segmentMode: SegmentMode = .partial
+    private(set) var offlinePolicy: Halo.OfflinePolicy?
+    private(set) var locale: Halo.Locale?
+    private(set) var serverCache: Int = 0
 
     open override var hash: Int {
         let values: [String] = body.map { key, value in
@@ -230,6 +231,12 @@ open class SearchQuery: NSObject {
             "limit" : limit,
             "skip"  : "false"
         ]
+        return self
+    }
+    
+    @objc(serverCache:)
+    open func serverCache(_ seconds: Int) -> Halo.SearchQuery {
+        self.serverCache = seconds
         return self
     }
 }
