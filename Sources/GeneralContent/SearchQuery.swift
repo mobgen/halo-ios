@@ -235,7 +235,7 @@ open class SearchQuery: NSObject {
     }
     
     @objc(serverCache:)
-    open func serverCache(_ seconds: Int) -> Halo.SearchQuery {
+    open func serverCache(seconds: Int) -> Halo.SearchQuery {
         self.serverCache = seconds
         return self
     }

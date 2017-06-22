@@ -28,7 +28,7 @@ open class NetworkDataProvider: DataProvider {
     
     open func getModules(query: ModulesQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
-        let request = Halo.Request<PaginatedModules>(router: Router.modules).skipPagination().serverCache(query.serverCache).responseParser { (data) in
+        let request = Halo.Request<PaginatedModules>(router: Router.modules).skipPagination().serverCache(seconds: query.serverCache).responseParser { (data) in
 
             var result: PaginatedModules? = nil
 
@@ -62,7 +62,7 @@ open class NetworkDataProvider: DataProvider {
 
     public func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
-        let request = Halo.Request<PaginatedContentInstances>(router: Router.instanceSearch(query.body)).serverCache(query.serverCache).responseParser { data in
+        let request = Halo.Request<PaginatedContentInstances>(router: Router.instanceSearch(query.body)).serverCache(seconds: query.serverCache).responseParser { data in
 
             var result: PaginatedContentInstances? = nil
 

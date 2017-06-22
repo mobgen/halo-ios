@@ -89,7 +89,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     public init(path: String, relativeToURL: URL? = Router.baseURL) {
         self.url = URL(string: path, relativeTo: relativeToURL)
         // Set no cache by default
-        self.serverCache(0)
+        self.serverCache(seconds: 0)
     }
 
     public init(router: Router) {
@@ -160,7 +160,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     }
 
     @discardableResult
-    func serverCache(_ seconds: Int) -> Halo.Request<T> {
+    func serverCache(seconds: Int) -> Halo.Request<T> {
         return self.addHeader(field: "to-cache", value: seconds.description)
     }
     

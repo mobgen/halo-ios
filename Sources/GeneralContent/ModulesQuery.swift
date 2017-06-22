@@ -11,7 +11,7 @@ open class ModulesQuery: NSObject {
     private(set) var serverCache: Int = 0
     
     @objc(serverCache:)
-    open func serverCache(_ seconds: Int) -> ModulesQuery {
+    open func serverCache(seconds: Int) -> ModulesQuery {
         self.serverCache = seconds
         return self
     }
