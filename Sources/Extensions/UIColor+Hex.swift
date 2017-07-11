@@ -122,7 +122,7 @@ extension UIColor {
     /**
      Hex string of a UIColor instance.
      
-     - parameter rgba: Whether the alpha should be included.
+     - parameter includeAlpha: Whether the alpha should be included.
      */
     public func hexString(_ includeAlpha: Bool) -> String {
         var r: CGFloat = 0
