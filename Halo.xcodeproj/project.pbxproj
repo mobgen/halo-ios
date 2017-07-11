@@ -248,6 +248,7 @@
 		00CD29AE1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		282A5CEE1EFC13AE00EFB996 /* ModulesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A5CED1EFC13AE00EFB996 /* ModulesQuery.swift */; };
 		283CDB231EB1E9B2007C6098 /* BatchResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */; };
 		283CDB241EB1E9B5007C6098 /* BatchResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */; };
 		283CDB251EB1E9B5007C6098 /* BatchResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */; };
@@ -457,6 +458,7 @@
 		00CD29A71E38BB7400CCFB2D /* FileLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		282A5CED1EFC13AE00EFB996 /* ModulesQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesQuery.swift; sourceTree = "<group>"; };
 		283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResultOperation.swift; sourceTree = "<group>"; };
 		283CDB271EB20D00007C6098 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
 		2855C04E1EAF5F02004C0280 /* BatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResult.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				004612241E0BE20000B9B306 /* SearchFilter.swift */,
 				004612251E0BE20000B9B306 /* SearchQuery.swift */,
 				004612261E0BE20000B9B306 /* SyncQuery.swift */,
+				282A5CED1EFC13AE00EFB996 /* ModulesQuery.swift */,
 			);
 			path = GeneralContent;
 			sourceTree = "<group>";
@@ -1472,6 +1475,7 @@
 				00CC8FC31E5C57E3006BE149 /* UIColor+Hex.swift in Sources */,
 				00CD29A81E38BB7400CCFB2D /* FileLogger.swift in Sources */,
 				004612811E0BE20000B9B306 /* UserProfile.swift in Sources */,
+				282A5CEE1EFC13AE00EFB996 /* ModulesQuery.swift in Sources */,
 				00CD29AC1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */,
 				004612881E0BE20000B9B306 /* OfflineDataProvider.swift in Sources */,
 				004612631E0BE20000B9B306 /* CloudinaryURL.swift in Sources */,
@@ -1754,7 +1758,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1910,7 +1913,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-ObjC";

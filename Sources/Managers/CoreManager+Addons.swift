@@ -13,7 +13,7 @@ public extension CoreManager {
     /**
      Allows registering an add-on within the Core Manager.
      
-     - parameter addon: Add-on implementation
+     - parameter a: Add-on implementation
      */
     @objc(registerAddon:)
     public func registerAddon(addon a: HaloAddon) -> Void {

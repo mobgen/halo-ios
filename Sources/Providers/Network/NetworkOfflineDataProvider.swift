@@ -10,9 +10,9 @@ import Foundation
 
 open class NetworkOfflineDataProvider: NetworkDataProvider {
 
-    open override func getModules(_ handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
+    open override func getModules(query: ModulesQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
-        super.getModules { response, result in
+        super.getModules(query: query) { response, result in
             switch result {
             case .success(let data, _):
                 if let d = data {

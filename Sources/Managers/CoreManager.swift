@@ -144,7 +144,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
      and that is why a completion handler can be provided. Once the process has finished and the environment is
      properly configured, it will be called.
      
-     - parameter environment:   The new environment to be set
+     - parameter env:   The new environment to be set
      - parameter handler:       Closure to be executed once the setup is done again and the environment is properly configured
      */
     public func setEnvironment(_ env: HaloEnvironment, completionHandler handler: ((Bool) -> Void)? = nil) {
@@ -234,7 +234,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     /**
      Pass through the push notifications setup. To be called within the method in the app delegate.
      
-     - parameter application: Application being configured
+     - parameter app: Application being configured
      - parameter deviceToken: Token obtained for the current device
      */
     @objc(application:didRegisterForRemoteNotificationsWithDeviceToken:)
@@ -252,8 +252,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
     /**
      Pass through the push notifications setup. To be called within the method in the app delegate.
      
-     - parameter application: Application being configured
-     - parameter error:       Error thrown during the process
+     - parameter app: Application being configured
+     - parameter error: Error thrown during the process
      */
     @objc(application:didFailToRegisterForRemoteNotificationsWithError:)
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -319,7 +319,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     fileprivate func checkNeedsUpdate(_ handler: ((Bool) -> Void)? = nil) -> Void {
         
-        try! Request<Any>(router: .versionCheck).response { (_, result) in
+        let _ = try? Request<Any>(router: .versionCheck).serverCache(seconds: 86400).response { (_, result) in
             switch result {
             case .success(let data as [[String: AnyObject]], _):
                 if let info = data.first, let minIOS = info["minIOS"] {

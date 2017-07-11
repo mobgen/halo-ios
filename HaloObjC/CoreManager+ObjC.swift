@@ -14,11 +14,11 @@ public extension CoreManager {
         return self.environment.description
     }
     
-    @objc(modulesWithSuccess:failure:)
-    public func modules(success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
+    @objc(modulesWithQuery:success:failure:)
+    public func modules(query: ModulesQuery, success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
                         failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
 
-        self.getModules { (response, result) in
+        self.getModules(query: query) { (response, result) in
 
             switch result {
             case .success(let data, _):

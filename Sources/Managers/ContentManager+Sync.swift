@@ -48,7 +48,7 @@ extension ContentManager {
         let isFirstSync = (query.fromSync == nil)
         
         if isFirstSync {
-            request.addHeader(field: "to-cache", value: serverCachingTime)
+            request.serverCache(seconds: serverCachingTime)
         }
         
         // Perform the request

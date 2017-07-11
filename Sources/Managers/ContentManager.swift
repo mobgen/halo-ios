@@ -16,7 +16,7 @@ open class ContentManager: NSObject, HaloManager {
 
     open var defaultLocale: Halo.Locale = .englishUnitedStates
     
-    let serverCachingTime = "86400000"
+    let serverCachingTime: Int = 86400
     
     static var filePath: URL {
         let manager = FileManager.default
