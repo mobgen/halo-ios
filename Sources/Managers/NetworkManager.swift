@@ -33,8 +33,8 @@ open class NetworkManager: NSObject, HaloManager {
     var enableSSLpinning = true
 
     fileprivate var cachedTasks = [CachedTask]()
-
     fileprivate var _session: URLSession?
+    fileprivate var reachability = Reachability()!
 
     var session: URLSession {
         if _session == nil {
@@ -60,6 +60,26 @@ open class NetworkManager: NSObject, HaloManager {
 
     fileprivate override init() {
         super.init()
+        
+        let core = Halo.Manager.core
+        
+        reachability.whenReachable = { _ in
+            
+            if !core.isReady {
+                core.startup(core.app!) { success in
+                    core.completionHandler?(success)
+                }
+            } else {
+                self.restartCachedTasks()
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            core.logMessage("Unable to start reachability notifier", level: .error)
+        }
+        
     }
 
     @objc(registerAddon:)
@@ -103,14 +123,7 @@ open class NetworkManager: NSObject, HaloManager {
         if (self.isRefreshing || (!core.isReady && !urlRequest.bypassReadiness)) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
             let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
-            
             self.cachedTasks.append(cachedTask)
-            
-            if !core.isReady && !urlRequest.bypassReadiness && self.isInternetAvailable() {
-                core.startup(core.app!) { success in
-                    core.completionHandler?(success)
-                }
-            }
             
             return
         }
