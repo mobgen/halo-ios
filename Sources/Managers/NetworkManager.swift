@@ -66,9 +66,7 @@ open class NetworkManager: NSObject, HaloManager {
         reachability.whenReachable = { _ in
             
             if !core.isReady {
-                core.startup(core.app!) { success in
-                    core.completionHandler?(success)
-                }
+                core.startup(core.app!)
             } else {
                 self.restartCachedTasks()
             }
@@ -120,11 +118,10 @@ open class NetworkManager: NSObject, HaloManager {
 
         let core = Halo.Manager.core
         
-        if (self.isRefreshing || (!core.isReady && !urlRequest.bypassReadiness)) {
+        if (self.isRefreshing || (!core.isReady && !urlRequest.bypassReadiness) || !reachability.isReachable ) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
             let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
             self.cachedTasks.append(cachedTask)
-            
             return
         }
 
