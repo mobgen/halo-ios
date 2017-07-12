@@ -106,7 +106,7 @@ open class NetworkManager: NSObject, HaloManager {
             
             self.cachedTasks.append(cachedTask)
             
-            if !core.isReady && !urlRequest.bypassReadiness {
+            if !core.isReady && !urlRequest.bypassReadiness && self.isInternetAvailable() {
                 core.startup(core.app!) { success in
                     core.completionHandler?(success)
                 }
