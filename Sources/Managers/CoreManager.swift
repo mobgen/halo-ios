@@ -13,11 +13,12 @@ import UIKit
 open class CoreManager: NSObject, HaloManager, Logger {
     
     var app: UIApplication?
+    var completionHandler: ((Bool) -> Void)?
     
     private lazy var __once: (UIApplication, ((Bool) -> Void)?) -> Void = { app, handler in
         
         self.completionHandler = { success in
-            self.isReady = true
+            self.isReady = success
             Halo.Manager.network.restartCachedTasks()
             handler?(success)
         }
@@ -133,8 +134,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     public internal(set) var addons: [HaloAddon] = []
     
-    fileprivate var completionHandler: ((Bool) -> Void)?
-    
     fileprivate override init() {
         super.init()
     }
@@ -221,6 +220,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public func startup(_ app: UIApplication, completionHandler handler: ((Bool) -> Void)? = nil) {
         
         self.app = app
+        self.completionHandler = handler
         
         // Check if there's a stored environment
         if let env = KeychainHelper.string(forKey: CoreConstants.environmentSettingKey) {

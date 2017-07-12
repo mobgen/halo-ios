@@ -98,13 +98,20 @@ open class NetworkManager: NSObject, HaloManager {
                               numberOfRetries: Int,
                               completionHandler handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) -> Void {
 
+        let core = Halo.Manager.core
         
-        
-        if (self.isRefreshing || (!Halo.Manager.core.isReady && !urlRequest.bypassReadiness)) {
+        if (self.isRefreshing || (!core.isReady && !urlRequest.bypassReadiness)) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
             let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
             
             self.cachedTasks.append(cachedTask)
+            
+            if !core.isReady && !urlRequest.bypassReadiness {
+                core.startup(core.app!) { success in
+                    core.completionHandler?(success)
+                }
+            }
+            
             return
         }
 
