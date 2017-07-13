@@ -116,7 +116,7 @@ extension CoreManager {
     func registerDevice(_ handler: ((Bool) -> Void)? = nil) -> Void {
         
         if let _ = self.device {
-            self.device?.storeDevice(env: self.environment)
+            self.device?.storeDevice()
             
             self.addons.forEach { ($0 as? HaloDeviceAddon)?.willRegisterDevice(haloCore: self) }
             
@@ -125,24 +125,16 @@ extension CoreManager {
                 var success = false
                 
                 if let strongSelf = self {
-                    
+
                     switch result {
-                    case .success(let device, _):
-                        strongSelf.device = device
-                        strongSelf.device?.storeDevice(env: strongSelf.environment)
-                        
-                        if let u = device {
-                            Manager.core.logMessage(u.description, level: .info)
-                        }
-                        
+                    case .success(_, _):
                         success = true
-                    case .failure(let error):
-                        Manager.core.logMessage("Error creating/updating device (\(error.description))", level: .error)
+                    default:
+                        success = false
                     }
-                    
+
                     strongSelf.addons.forEach { ($0 as? HaloDeviceAddon)?.didRegisterDevice(haloCore: strongSelf) }
                     handler?(success)
-                    
                 }
             }
         } else {
@@ -172,7 +164,8 @@ extension CoreManager {
                         switch result {
                         case .success(let device, _):
                             strongSelf.device = device
-                            
+                            strongSelf.device?.storeDevice()
+
                             if let u = device {
                                 strongSelf.logMessage(u.description, level: .info)
                             }
