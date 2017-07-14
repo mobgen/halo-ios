@@ -46,9 +46,12 @@ public extension CoreManager {
         }
         
         var counter = 0
+        var globalSuccess = true
         
         self.addons.forEach { $0.setup(haloCore: self) { (addon, success) in
-            
+
+            globalSuccess = globalSuccess && success
+
             if success {
                 self.logMessage("Successfully set up the \(addon.addonName) addon", level: .info)
             } else {
@@ -58,7 +61,7 @@ public extension CoreManager {
             counter += 1
             
             if counter == self.addons.count {
-                handler(true)
+                handler(globalSuccess)
             }
             }
         }
@@ -78,9 +81,13 @@ public extension CoreManager {
             handler(false)
             return
         }
-        
+
+        var globalSuccess = true
+
         self.addons.forEach { $0.startup(app: app, haloCore: self) { (addon, success) in
-            
+
+            globalSuccess = globalSuccess && success
+
             if success {
                 self.logMessage("Successfully started the \(addon.addonName) addon", level: .info)
             } else {
@@ -90,7 +97,7 @@ public extension CoreManager {
             counter += 1
             
             if counter == self.addons.count {
-                handler(true)
+                handler(globalSuccess)
             }
             
             }

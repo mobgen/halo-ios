@@ -21,6 +21,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public internal(set) var loggers: [Logger] = []
     
     public internal(set) var isReady: Bool = false
+
+    public internal(set) var isStarting: Bool = false
     
     public internal(set) var dataProvider: DataProvider = DataProviderManager.online
     
@@ -84,6 +86,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
 
         self.completionHandler = { success in
             self.isReady = success
+            self.isStarting = false
             Halo.Manager.network.restartCachedTasks()
             handler?(success)
         }
@@ -175,7 +178,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
                 }
             } else {
                 Manager.core.logMessage("No stored auth profile found for this environment", level: .info)
-                self.completionHandler?(true)
+                self.completionHandler?(success)
             }
         }
         
@@ -226,7 +229,9 @@ open class CoreManager: NSObject, HaloManager, Logger {
         if let env = KeychainHelper.string(forKey: CoreConstants.environmentSettingKey) {
             self.setEnvironment(env)
         }
-        
+
+        self.isStarting = true
+
         self.__once(app, handler)
         
     }

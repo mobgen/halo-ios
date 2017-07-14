@@ -65,9 +65,9 @@ open class NetworkManager: NSObject, HaloManager {
         
         reachability.whenReachable = { _ in
             
-            if !core.isReady {
+            if !core.isReady && !core.isStarting {
                 core.startup(core.app!)
-            } else {
+            } else if !core.isStarting {
                 self.restartCachedTasks()
             }
         }
