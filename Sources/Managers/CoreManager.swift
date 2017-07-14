@@ -15,60 +15,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
     var app: UIApplication?
     var completionHandler: ((Bool) -> Void)?
     
-    private lazy var __once: (UIApplication, ((Bool) -> Void)?) -> Void = { app, handler in
-        
-        self.completionHandler = { success in
-            self.isReady = success
-            Halo.Manager.network.restartCachedTasks()
-            handler?(success)
-        }
-        
-        Router.userToken = nil
-        Router.appToken = nil
-        
-        Manager.network.startup(app) { success in
-            
-            if !success {
-                self.completionHandler?(false)
-                return
-            }
-            
-            let bundle = Bundle.main
-            
-            if let path = bundle.path(forResource: self.configuration, ofType: "plist") {
-                
-                if let data = NSDictionary(contentsOfFile: path) {
-                    let clientIdKey = CoreConstants.clientIdKey
-                    let clientSecretKey = CoreConstants.clientSecretKey
-                    let usernameKey = CoreConstants.usernameKey
-                    let passwordKey = CoreConstants.passwordKey
-                    let environmentKey = CoreConstants.environmentSettingKey
-                    
-                    if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
-                    }
-                    
-                    if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                        self.userCredentials = Credentials(username: username, password: password)
-                    }
-                    
-                    if let tags = data[CoreConstants.enableSystemTags] as? Bool {
-                        self.enableSystemTags = tags
-                    }
-                    
-                    if let env = data[environmentKey] as? String {
-                        self.setEnvironment(env)
-                    }
-                }
-            } else {
-                self.logMessage("No configuration .plist found", level: .warning)
-            }
-            
-            self.checkNeedsUpdate()
-            self.setup()
-        }
-    }
-    
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
     
@@ -133,7 +79,61 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public var device: Device?
     
     public internal(set) var addons: [HaloAddon] = []
-    
+
+    private lazy var __once: (UIApplication, ((Bool) -> Void)?) -> Void = { app, handler in
+
+        self.completionHandler = { success in
+            self.isReady = success
+            Halo.Manager.network.restartCachedTasks()
+            handler?(success)
+        }
+
+        Router.userToken = nil
+        Router.appToken = nil
+
+        Manager.network.startup(app) { success in
+
+            if !success {
+                self.completionHandler?(false)
+                return
+            }
+
+            let bundle = Bundle.main
+
+            if let path = bundle.path(forResource: self.configuration, ofType: "plist") {
+
+                if let data = NSDictionary(contentsOfFile: path) {
+                    let clientIdKey = CoreConstants.clientIdKey
+                    let clientSecretKey = CoreConstants.clientSecretKey
+                    let usernameKey = CoreConstants.usernameKey
+                    let passwordKey = CoreConstants.passwordKey
+                    let environmentKey = CoreConstants.environmentSettingKey
+
+                    if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
+                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                    }
+
+                    if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
+                        self.userCredentials = Credentials(username: username, password: password)
+                    }
+
+                    if let tags = data[CoreConstants.enableSystemTags] as? Bool {
+                        self.enableSystemTags = tags
+                    }
+
+                    if let env = data[environmentKey] as? String {
+                        self.setEnvironment(env)
+                    }
+                }
+            } else {
+                self.logMessage("No configuration .plist found", level: .warning)
+            }
+
+            self.checkNeedsUpdate()
+            self.setup()
+        }
+    }
+
     fileprivate override init() {
         super.init()
     }
