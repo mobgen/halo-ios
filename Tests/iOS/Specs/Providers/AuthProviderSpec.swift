@@ -37,7 +37,7 @@ class AuthProviderSpec : BaseSpec {
                 
                 Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
                 Manager.core.logLevel = .info
-                Manager.core.startup()
+                Manager.core.startup(UIApplication())
                 
                 UserDefaults.standard.set(nil, forKey: "\(CoreConstants.keychainUserAuthKey)-\(Manager.core.environment.description)")
                 UserDefaults.standard.synchronize()

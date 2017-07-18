@@ -95,15 +95,15 @@ public final class Device: NSObject, NSCoding {
     - parameter name:  Name of the tag to be added
     - parameter value: Value of the tag to be added
     */
-    public func addTag(name: String, value: String) -> Void {
-        self.addTag(name: name, value: value, type: "000000000000000000000002")
+    public func setTag(name: String, value: String) -> Void {
+        self.setTag(name: name, value: value, type: "000000000000000000000002")
     }
 
-    func addSystemTag(name: String, value: String) -> Void {
-        self.addTag(name: name, value: value, type: "000000000000000000000001")
+    func setSystemTag(name: String, value: String) -> Void {
+        self.setTag(name: name, value: value, type: "000000000000000000000001")
     }
 
-    fileprivate func addTag(name: String, value: String, type: String) -> Void {
+    fileprivate func setTag(name: String, value: String, type: String) -> Void {
         let tag = Halo.Tag(name: name, value: value, type: type)
 
         if let tags = self.tags {
@@ -123,8 +123,8 @@ public final class Device: NSObject, NSCoding {
     - parameter tags: collection of tags
     */
     @objc(addTags:)
-    public func addTags(tags: [String: String]) {
-        tags.forEach { self.addTag(name: $0, value: $1) }
+    public func setTags(tags: [String: String]) {
+        tags.forEach { self.setTag(name: $0, value: $1) }
     }
 
     /**

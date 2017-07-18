@@ -63,7 +63,7 @@ extension CoreManager {
         
         if let device = self.device {
             
-            device.addSystemTag(name: CoreConstants.tagPlatformNameKey, value: "ios")
+            device.setSystemTag(name: CoreConstants.tagPlatformNameKey, value: "ios")
             
             let version = ProcessInfo.processInfo.operatingSystemVersion
             var versionString = "\(version.majorVersion).\(version.minorVersion)"
@@ -72,21 +72,21 @@ extension CoreManager {
                 versionString = versionString + ".\(version.patchVersion)"
             }
             
-            device.addSystemTag(name: CoreConstants.tagPlatformVersionKey, value: versionString)
+            device.setSystemTag(name: CoreConstants.tagPlatformVersionKey, value: versionString)
             
             if let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") {
-                device.addSystemTag(name: CoreConstants.tagApplicationNameKey, value: (appName as AnyObject).description)
+                device.setSystemTag(name: CoreConstants.tagApplicationNameKey, value: (appName as AnyObject).description)
             }
             
             if let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
-                device.addSystemTag(name: CoreConstants.tagApplicationVersionKey, value: (appVersion as AnyObject).description)
+                device.setSystemTag(name: CoreConstants.tagApplicationVersionKey, value: (appVersion as AnyObject).description)
             }
             
-            device.addSystemTag(name: CoreConstants.tagDeviceManufacturerKey, value: "Apple")
-            device.addSystemTag(name: CoreConstants.tagDeviceModelKey, value: UIDevice.current.modelName)
-            device.addSystemTag(name: CoreConstants.tagDeviceTypeKey, value: UIDevice.current.deviceType)
+            device.setSystemTag(name: CoreConstants.tagDeviceManufacturerKey, value: "Apple")
+            device.setSystemTag(name: CoreConstants.tagDeviceModelKey, value: UIDevice.current.modelName)
+            device.setSystemTag(name: CoreConstants.tagDeviceTypeKey, value: UIDevice.current.deviceType)
             
-            device.addSystemTag(name: CoreConstants.tagBLESupportKey, value: "true")
+            device.setSystemTag(name: CoreConstants.tagBLESupportKey, value: "true")
             
             //user.addTag(CoreConstants.tagNFCSupportKey, value: "false")
             
@@ -94,17 +94,17 @@ extension CoreManager {
             let bounds = screen.bounds
             let (width, height) = (bounds.width * screen.scale, round(bounds.height * screen.scale))
             
-            device.addSystemTag(name: CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
+            device.setSystemTag(name: CoreConstants.tagDeviceScreenSizeKey, value: "\(Int(width))x\(Int(height))")
             
             switch self.environment {
             case .int, .stage, .qa:
-                device.addSystemTag(name: CoreConstants.tagTestDeviceKey, value: "true")
+                device.setSystemTag(name: CoreConstants.tagTestDeviceKey, value: "true")
             default:
                 break
             }
             
             // Get APNs environment
-            device.addSystemTag(name: "apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercased())
+            device.setSystemTag(name: "apns", value: MobileProvisionParser.applicationReleaseMode().rawValue.lowercased())
             
             handler?(true)
         } else {

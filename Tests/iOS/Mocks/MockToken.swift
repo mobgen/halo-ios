@@ -15,7 +15,7 @@ class MockToken : Token {
     static let TestAccessToken = "9aCH1pgfgnonimCE7pUxIPOecjw7k7kqvi67PyIG"
     static let TestRefreshToken = "54kBFdhtSQhccyRp6ppZ2CpnCDTJfypWEDMaK5Ot"
     static let TestTokenType = "Bearer"
-    static let TestExpiresIn = NSNumber(value: 1478875644666)
+    static let TestExpiresIn = NSNumber(value: 1478875644)
     
     static let TestDict: [String: Any] = [
         Token.Keys.AccessToken: MockToken.TestAccessToken,
@@ -27,7 +27,7 @@ class MockToken : Token {
     class func createFromJson(_ filePath: String? = OHPathForFileInBundle("token.json", Bundle.init(for: MockToken.classForCoder()))) -> Token? {
         guard
             let filePath = filePath,
-            let jsonData = NSData(contentsOfFile: filePath) as? Data,
+            let jsonData = NSData(contentsOfFile: filePath) as Data?,
             let jsonResult = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]),
             let dict = jsonResult as? [String: AnyObject]
         else {
