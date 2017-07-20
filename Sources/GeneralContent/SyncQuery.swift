@@ -34,9 +34,7 @@ open class SyncQuery: NSObject {
             dict[Keys.ModuleName] = name
         }
         
-        if let loc = locale {
-            dict[Keys.Locale] = loc.description
-        }
+        dict[Keys.Locale] = locale.description
 
         if let from = fromSync {
             dict[Keys.FromSync] = from.timeIntervalSince1970 * 1000
