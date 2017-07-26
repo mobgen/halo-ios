@@ -67,7 +67,7 @@ extension ContentManager {
     fileprivate func processSyncResult(_ syncQuery: SyncQuery, syncResult: SyncResult?, wasFirstSync: Bool, completionHandler handler: @escaping (String, HaloError?) -> Void) -> Void {
         if let result = syncResult {
             
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            DispatchQueue.global(qos: .background).async {
                 var path = self.getPath(file: "synctimestamp-\(result.moduleId)")
                 
                 // Get the "old" sync info

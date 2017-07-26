@@ -231,7 +231,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
     open func response(_ handler: ((HTTPURLResponse?, Halo.Result<Any?>) -> Void)? = nil) throws -> Halo.Request<T> {
 
         try self.responseData { (response, result) -> Void in
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            DispatchQueue.global(qos: .background).async {
                 switch result {
                 case .success(let data, _):
                     if let successHandler = handler {
@@ -260,7 +260,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
 
         try self.response { (response, result) in
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            DispatchQueue.global(qos: .background).async {
                 switch result {
                 case .success(let data, _):
                     let parsedData = parser(data)

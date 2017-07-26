@@ -267,7 +267,7 @@ open class NetworkManager: NSObject, HaloManager {
                     }
                 }
                 
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                DispatchQueue.global(qos: .background).async {
                     task.resume()
                 }
                 
@@ -362,7 +362,7 @@ open class NetworkManager: NSObject, HaloManager {
                     }
                 }
                 
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                DispatchQueue.global(qos: .background).async {
                     task.resume()
                 }
                 

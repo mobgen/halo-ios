@@ -97,7 +97,9 @@ open class CoreManager: NSObject, HaloManager, Logger {
         Manager.network.startup(app) { success in
 
             if !success {
-                self.completionHandler?(false)
+                DispatchQueue.main.async {
+                    self.completionHandler?(false)
+                }
                 return
             }
 
@@ -166,7 +168,9 @@ open class CoreManager: NSObject, HaloManager, Logger {
         let handler: (Bool) -> Void = { success in
             
             if !success {
-                self.completionHandler?(false)
+                DispatchQueue.main.async {
+                    self.completionHandler?(false)
+                }
                 return
             }
             
@@ -174,11 +178,15 @@ open class CoreManager: NSObject, HaloManager, Logger {
                 Manager.core.logMessage("Loading stored auth profile for the current environment", level: .info)
                 // Login and get user details (in case there have been updates)
                 Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { _, error in
-                    self.completionHandler?(error == nil)
+                    DispatchQueue.main.async {
+                        self.completionHandler?(error == nil)
+                    }
                 }
             } else {
                 Manager.core.logMessage("No stored auth profile found for this environment", level: .info)
-                self.completionHandler?(success)
+                DispatchQueue.main.async {
+                    self.completionHandler?(success)
+                }
             }
         }
         
@@ -232,7 +240,9 @@ open class CoreManager: NSObject, HaloManager, Logger {
 
         self.isStarting = true
 
-        self.__once(app, handler)
+        DispatchQueue.global(qos: .background).async {
+            self.__once(app, handler)
+        }
         
     }
     
