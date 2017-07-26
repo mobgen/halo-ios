@@ -153,7 +153,7 @@ extension CoreManager {
          *  Make sure no 'saveUser' are executed concurrently. That could lead to some inconsistencies in the server (several users
          *  created for the same device).
          */
-        lockQueue.sync {
+        DispatchQueue.global(qos: .background).sync {
             
             if let device = self.device {
                 
@@ -174,10 +174,10 @@ extension CoreManager {
                             strongSelf.logMessage("Error saving device (\(error.description))", level: .error)
                         }
                         
-                        handler?(response, result)
-                        
+                        DispatchQueue.main.async {
+                            handler?(response, result)
+                        }
                     }
-                    
                 }
             }
         }
