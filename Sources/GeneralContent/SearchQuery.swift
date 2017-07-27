@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc
+@objc(HaloSegmentMode)
 public enum SegmentMode: Int {
     case total, partial
 
@@ -16,6 +16,35 @@ public enum SegmentMode: Int {
         switch self {
         case .total: return "total"
         case .partial: return "partial"
+        }
+    }
+}
+
+@objc(HaloSortBy)
+public enum SortBy: Int {
+    case name, createdAt, updatedAt, publishedAt, removedAt, archivedAt, deletedAt
+    
+    public var description: String {
+        switch self {
+        case .name: return "name"
+        case .createdAt: return "createdAt"
+        case .updatedAt: return "updatedAt"
+        case .publishedAt: return "publishedAt"
+        case .removedAt: return "removedAt"
+        case .archivedAt: return "archivedAt"
+        case .deletedAt: return "deletedAt"
+        }
+    }
+}
+
+@objc(HaloSortingOrder)
+public enum SortingOrder: Int {
+    case ascending, descending
+    
+    public var description: String {
+        switch self {
+        case .ascending: return "asc"
+        case .descending: return "desc"
         }
     }
 }
@@ -38,6 +67,7 @@ open class SearchQuery: NSObject {
         static let Pagination = "pagination"
         static let SegmentTags = "segmentTags"
         static let SegmentMode = "segmentMode"
+        static let Sort = "sort"
         static let Locale = "locale"
     }
 
@@ -53,6 +83,7 @@ open class SearchQuery: NSObject {
     private(set) var pagination: [String: Any]?
     private(set) var segmentWithDevice: Bool = false
     private(set) var segmentMode: SegmentMode = .partial
+    private(set) var sortingParams: [String] = []
     private(set) var offlinePolicy: Halo.OfflinePolicy?
     private(set) var locale: Halo.Locale?
     private(set) var serverCache: Int = 0
@@ -123,6 +154,10 @@ open class SearchQuery: NSObject {
 
         dict[Keys.SegmentMode] = self.segmentMode.description
 
+        if self.sortingParams.count > 0 {
+            dict[Keys.Sort] = self.sortingParams.joined(separator: ",")
+        }
+        
         if let locale = self.locale {
             dict[Keys.Locale] = locale.description
         }
@@ -231,6 +266,12 @@ open class SearchQuery: NSObject {
             "limit" : limit,
             "skip"  : "false"
         ]
+        return self
+    }
+    
+    @objc(addSortByField:order:)
+    open func addSortBy(field: SortBy, order: SortingOrder) -> Halo.SearchQuery {
+        self.sortingParams.append("\(field.description) \(order.description)")
         return self
     }
     
