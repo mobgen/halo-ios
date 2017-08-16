@@ -103,9 +103,10 @@ public enum Router {
             return "api/segmentation/identified/register"
         case .loginUser(_):
             return "api/segmentation/identified/login"
-        case .getPocket,
-             .savePocket(_):
+        case .getPocket:
             return "/api/segmentation/identified-pocket/self"
+        case .savePocket(_):
+            return "/api/segmentation/identified-pocket"
         case .customRequest(_, let url, _):
             return "api/\(url)"
         }
