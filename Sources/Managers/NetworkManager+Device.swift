@@ -27,6 +27,7 @@ extension NetworkManager {
                 try request.responseParser(self.deviceParser).responseObject(handler)
             } catch {
                 Manager.core.logMessage(error.localizedDescription, level: .error)
+                handler?(nil, .failure(.unknownError(error)))
             }
 
         } else {
