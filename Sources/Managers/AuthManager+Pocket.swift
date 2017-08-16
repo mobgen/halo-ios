@@ -12,7 +12,7 @@ extension AuthManager {
     public func getPocket(completionHandler handler: @escaping (Pocket?) -> Void) -> Void {
         
         do {
-            try Request<Pocket>(Router.getPocket).authenticationMode(.user).responseParser(pocketParser).responseObject { response, result in
+            try Request<Pocket>(Router.getPocket).authenticationMode(.appPlus).responseParser(pocketParser).responseObject { response, result in
                 
                 switch result {
                 case .success(let pocket, _):
@@ -32,7 +32,7 @@ extension AuthManager {
     public func savePocket(_ pocket: Pocket, completionHandler handler: @escaping (Pocket?) -> Void) -> Void {
         
         do {
-            try Request<Pocket>(Router.savePocket(pocket.toDictionary())).authenticationMode(.user).responseParser(pocketParser).responseObject { response, result in
+            try Request<Pocket>(Router.savePocket(pocket.toDictionary())).authenticationMode(.appPlus).responseParser(pocketParser).responseObject { response, result in
                 
                 switch result {
                 case .success(let pocket, _):
