@@ -21,7 +21,7 @@ extension CoreManager {
     
     public func printModulesMetaData() -> Void {
         
-        let request = Halo.Request<[ModuleInfo]>(router: Router.modules).skipPagination().params(["withFields": true]).responseParser { data in
+        let request = Halo.Request<[ModuleInfo]>(Router.modules).skipPagination().params(["withFields": true]).responseParser { data in
             
             if let collection = data as? [[String: Any?]] {
                 return collection.map { ModuleInfo.fromDictionary($0) }
@@ -48,7 +48,7 @@ extension CoreManager {
     
     public func printModuleMetaData(moduleId: String) -> Void {
         
-        let request = Halo.Request<ModuleInfo>(router: Router.module(moduleId)).params(["withFields": true]).responseParser { data in
+        let request = Halo.Request<ModuleInfo>(Router.module(moduleId)).params(["withFields": true]).responseParser { data in
             
             if let dict = data as? [String: Any?] {
                 return ModuleInfo.fromDictionary(dict)

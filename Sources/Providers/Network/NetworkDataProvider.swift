@@ -28,7 +28,7 @@ open class NetworkDataProvider: DataProvider {
     
     open func getModules(query: ModulesQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedModules?>) -> Void) -> Void {
 
-        let request = Halo.Request<PaginatedModules>(router: Router.modules).skipPagination().serverCache(seconds: query.serverCache).responseParser { (data) in
+        let request = Halo.Request<PaginatedModules>(Router.modules).skipPagination().serverCache(seconds: query.serverCache).responseParser { (data) in
 
             var result: PaginatedModules? = nil
 
@@ -62,7 +62,7 @@ open class NetworkDataProvider: DataProvider {
 
     public func search(query: Halo.SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Halo.Result<PaginatedContentInstances?>) -> Void) -> Void {
 
-        let request = Halo.Request<PaginatedContentInstances>(router: Router.instanceSearch(query.body)).serverCache(seconds: query.serverCache).responseParser { data in
+        let request = Halo.Request<PaginatedContentInstances>(Router.instanceSearch(query.body)).serverCache(seconds: query.serverCache).responseParser { data in
 
             var result: PaginatedContentInstances? = nil
 
@@ -98,7 +98,7 @@ open class NetworkDataProvider: DataProvider {
 
     public func searchAsData(query: SearchQuery, completionHandler handler: @escaping (HTTPURLResponse?, Result<Data>) -> Void) {
 
-        let request = Halo.Request<Any>(router: Router.instanceSearch(query.body))
+        let request = Halo.Request<Any>(Router.instanceSearch(query.body))
 
         do {
             try request.responseData(handler)
@@ -120,7 +120,7 @@ open class NetworkDataProvider: DataProvider {
             router = Router.instanceCreate(instance.toDictionary())
         }
         
-        let request = Halo.Request<ContentInstance>(router: router).responseParser(instanceParser)
+        let request = Halo.Request<ContentInstance>(router).responseParser(instanceParser)
         
         do {
             try request.responseObject(handler)
@@ -134,7 +134,7 @@ open class NetworkDataProvider: DataProvider {
     
     public func delete(id: String, completionHandler handler: @escaping (HTTPURLResponse?, Result<ContentInstance?>) -> Void) -> Void {
         
-        let request = Halo.Request<ContentInstance>(router: Router.instanceDelete(id)).responseParser(instanceParser)
+        let request = Halo.Request<ContentInstance>(Router.instanceDelete(id)).responseParser(instanceParser)
         
         do {
             try request.responseObject(handler)
@@ -147,7 +147,7 @@ open class NetworkDataProvider: DataProvider {
     
     public func batch(operations: BatchOperations, completionHandler handler: @escaping (HTTPURLResponse?, Result<BatchResult?>) -> Void) {
         
-        let request = Halo.Request<BatchResult>(router: Router.instanceBatch(operations.body)).responseParser(batchResultParser)
+        let request = Halo.Request<BatchResult>(Router.instanceBatch(operations.body)).responseParser(batchResultParser)
         
         do {
             try request.responseObject(handler)

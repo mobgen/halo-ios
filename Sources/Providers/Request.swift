@@ -92,7 +92,7 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         self.serverCache(seconds: 0)
     }
 
-    public init(router: Router) {
+    public init(_ router: Router) {
         self.url = URL(string: router.path, relativeTo: Router.baseURL as URL?)
         self.method = router.method
         self.parameterEncoding = router.parameterEncoding
@@ -103,8 +103,8 @@ open class Request<T>: Requestable, CustomDebugStringConvertible {
         }
     }
 
-    convenience init(router: Router, bypassReadiness: Bool = false, checkUnauthorised: Bool = true) {
-        self.init(router: router)
+    convenience init(_ router: Router, bypassReadiness: Bool = false, checkUnauthorised: Bool = true) {
+        self.init(router)
         self.bypassReadiness = bypassReadiness
         self.checkUnauthorised = checkUnauthorised
     }

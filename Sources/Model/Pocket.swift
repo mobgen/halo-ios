@@ -9,6 +9,11 @@
 @objc(HaloPocket)
 public class Pocket: NSObject {
     
+    struct Keys {
+        static let References = "references"
+        static let Data = "data"
+    }
+    
     internal(set) public var references: [String: [String]?] = [:]
     internal(set) public var data: [String: Any?] = [:]
     
@@ -19,7 +24,13 @@ public class Pocket: NSObject {
             references[key] = []
         }
         
-        references[key]??.append(value)
+        // Do not append duplicated values
+        if let list = references[key], let referencesList = list {
+            if referencesList.index(of: value) == nil {
+                references[key]??.append(value)
+            }
+        }
+        
     }
     
     @objc(removeReferenceWithKey:value:)
@@ -45,5 +56,21 @@ public class Pocket: NSObject {
     @objc(setData:)
     public func setData(_ data: [String: Any]) -> Void {
         self.data = data
+    }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            Keys.References: references,
+            Keys.Data: data
+        ]
+    }
+    
+    class func fromDictionary(_ dict: [String: Any?]) -> Pocket {
+        
+        let pocket = Pocket()
+        pocket.references = dict[Keys.References] as? [String: [String]?] ?? [:]
+        pocket.data = dict[Keys.Data] as? [String: Any?] ?? [:]
+        
+        return pocket
     }
 }

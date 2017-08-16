@@ -29,7 +29,7 @@ extension ContentManager {
             }
         }
         
-        let request = Halo.Request<SyncResult>(router: Router.moduleSync).params(query.body).responseParser { any in
+        let request = Halo.Request<SyncResult>(Router.moduleSync).params(query.body).responseParser { any in
             
             var result: SyncResult? = nil
             

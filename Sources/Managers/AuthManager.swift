@@ -48,7 +48,7 @@ public class AuthManager: NSObject, HaloManager {
      */
     public func login(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn, completionHandler handler: @escaping (User?, HaloError?) -> Void) -> Void {
         
-        let request = Halo.Request<User>(router: Router.loginUser(authProfile.toDictionary()), bypassReadiness: true, checkUnauthorised: false)
+        let request = Halo.Request<User>(Router.loginUser(authProfile.toDictionary()), bypassReadiness: true, checkUnauthorised: false)
         
         _ = try? request.responseParser(userParser).responseObject { (_, result) in
             switch (result) {
@@ -128,7 +128,7 @@ public class AuthManager: NSObject, HaloManager {
      */
     public func register(authProfile: AuthProfile, userProfile: UserProfile, completionHandler handler: @escaping (UserProfile?, HaloError?) -> Void) -> Void {
         
-        let request = Halo.Request<UserProfile>(router: Router.registerUser(["auth": authProfile.toDictionary(), "profile": userProfile.toDictionary()]))
+        let request = Halo.Request<UserProfile>(Router.registerUser(["auth": authProfile.toDictionary(), "profile": userProfile.toDictionary()]))
         
         _ = try? request.responseParser(userProfileParser).responseObject { (_, result) in
             switch result {

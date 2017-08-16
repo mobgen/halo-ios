@@ -265,6 +265,9 @@
 		285B8AF41F442B2E00ABE570 /* Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AF21F442B2E00ABE570 /* Pocket.swift */; };
 		285B8AF51F442B2E00ABE570 /* Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AF21F442B2E00ABE570 /* Pocket.swift */; };
 		285B8AFA1F443F5000ABE570 /* TranslationsHelper+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AF61F443F4100ABE570 /* TranslationsHelper+ObjC.swift */; };
+		285B8AFC1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AFB1F445ADD00ABE570 /* AuthManager+Pocket.swift */; };
+		285B8AFD1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AFB1F445ADD00ABE570 /* AuthManager+Pocket.swift */; };
+		285B8AFE1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AFB1F445ADD00ABE570 /* AuthManager+Pocket.swift */; };
 		28B3EAC51F33271300FC7832 /* SearchFilter+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B3EAC41F33271300FC7832 /* SearchFilter+ObjC.swift */; };
 		28B6A3EB1EAF4AFF002B7059 /* BatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */; };
 		A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */; };
@@ -471,6 +474,7 @@
 		2855C04E1EAF5F02004C0280 /* BatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResult.swift; sourceTree = "<group>"; };
 		285B8AF21F442B2E00ABE570 /* Pocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pocket.swift; sourceTree = "<group>"; };
 		285B8AF61F443F4100ABE570 /* TranslationsHelper+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TranslationsHelper+ObjC.swift"; sourceTree = "<group>"; };
+		285B8AFB1F445ADD00ABE570 /* AuthManager+Pocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AuthManager+Pocket.swift"; sourceTree = "<group>"; };
 		28B3EAC41F33271300FC7832 /* SearchFilter+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchFilter+ObjC.swift"; sourceTree = "<group>"; };
 		28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchOperations.swift; sourceTree = "<group>"; };
 		A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchQuerySpec.swift; path = GeneralContent/SearchQuerySpec.swift; sourceTree = "<group>"; };
@@ -635,6 +639,7 @@
 			isa = PBXGroup;
 			children = (
 				0046122F1E0BE20000B9B306 /* AuthManager.swift */,
+				285B8AFB1F445ADD00ABE570 /* AuthManager+Pocket.swift */,
 				004612301E0BE20000B9B306 /* ContentManager.swift */,
 				0051DFA21E2CDF66005AA4C7 /* ContentManager+Sync.swift */,
 				004612341E0BE20000B9B306 /* CoreManager.swift */,
@@ -645,8 +650,8 @@
 				004612391E0BE20000B9B306 /* NetworkManager.swift */,
 				004612361E0BE20000B9B306 /* NetworkManager+Device.swift */,
 				004612371E0BE20000B9B306 /* NetworkManager+NSURLSessionDelegate.swift */,
-				004612381E0BE20000B9B306 /* NetworkManager+SSLPinning.swift */,
 				281DE8BC1F1662D0005DD8B0 /* NetworkManager+Reachability.swift */,
+				004612381E0BE20000B9B306 /* NetworkManager+SSLPinning.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1327,6 +1332,7 @@
 				000F32061E27785300059909 /* NetworkManager+Device.swift in Sources */,
 				000F31ED1E27772400059909 /* SearchQuery.swift in Sources */,
 				000F32181E27785C00059909 /* DeviceInfo.swift in Sources */,
+				285B8AFD1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */,
 				000F32071E27785300059909 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
 				000F32221E27785C00059909 /* UserProfile.swift in Sources */,
 				000F32391E27787300059909 /* OfflineDataProvider.swift in Sources */,
@@ -1400,6 +1406,7 @@
 				000F32111E27785400059909 /* NetworkManager+Device.swift in Sources */,
 				000F31F11E27772400059909 /* SearchQuery.swift in Sources */,
 				000F32261E27785C00059909 /* DeviceInfo.swift in Sources */,
+				285B8AFE1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */,
 				000F32121E27785400059909 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
 				000F32301E27785D00059909 /* UserProfile.swift in Sources */,
 				000F323F1E27787300059909 /* OfflineDataProvider.swift in Sources */,
@@ -1488,6 +1495,7 @@
 				004612621E0BE20000B9B306 /* SyncQuery.swift in Sources */,
 				004612701E0BE20000B9B306 /* NetworkManager+Device.swift in Sources */,
 				004612611E0BE20000B9B306 /* SearchQuery.swift in Sources */,
+				285B8AFC1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */,
 				004612771E0BE20000B9B306 /* DeviceInfo.swift in Sources */,
 				004612711E0BE20000B9B306 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
 				285B8AF31F442B2E00ABE570 /* Pocket.swift in Sources */,
