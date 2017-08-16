@@ -261,6 +261,10 @@
 		2855C0511EAF5F06004C0280 /* BatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2855C04E1EAF5F02004C0280 /* BatchResult.swift */; };
 		2855C0521EAF5F07004C0280 /* BatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */; };
 		2855C0531EAF5F07004C0280 /* BatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2855C04E1EAF5F02004C0280 /* BatchResult.swift */; };
+		285B8AF31F442B2E00ABE570 /* Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AF21F442B2E00ABE570 /* Pocket.swift */; };
+		285B8AF41F442B2E00ABE570 /* Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AF21F442B2E00ABE570 /* Pocket.swift */; };
+		285B8AF51F442B2E00ABE570 /* Pocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AF21F442B2E00ABE570 /* Pocket.swift */; };
+		285B8AFA1F443F5000ABE570 /* TranslationsHelper+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285B8AF61F443F4100ABE570 /* TranslationsHelper+ObjC.swift */; };
 		28B3EAC51F33271300FC7832 /* SearchFilter+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B3EAC41F33271300FC7832 /* SearchFilter+ObjC.swift */; };
 		28B6A3EB1EAF4AFF002B7059 /* BatchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */; };
 		A51B8C4F1E0D4858009F237A /* SearchQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */; };
@@ -465,6 +469,8 @@
 		283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResultOperation.swift; sourceTree = "<group>"; };
 		283CDB271EB20D00007C6098 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
 		2855C04E1EAF5F02004C0280 /* BatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResult.swift; sourceTree = "<group>"; };
+		285B8AF21F442B2E00ABE570 /* Pocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pocket.swift; sourceTree = "<group>"; };
+		285B8AF61F443F4100ABE570 /* TranslationsHelper+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TranslationsHelper+ObjC.swift"; sourceTree = "<group>"; };
 		28B3EAC41F33271300FC7832 /* SearchFilter+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchFilter+ObjC.swift"; sourceTree = "<group>"; };
 		28B6A3EA1EAF4AFF002B7059 /* BatchOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchOperations.swift; sourceTree = "<group>"; };
 		A51B8C4E1E0D4858009F237A /* SearchQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchQuerySpec.swift; path = GeneralContent/SearchQuerySpec.swift; sourceTree = "<group>"; };
@@ -653,7 +659,7 @@
 				0046123D1E0BE20000B9B306 /* Device.swift */,
 				0046123E1E0BE20000B9B306 /* DeviceInfo.swift */,
 				283CDB261EB1EA1E007C6098 /* InstanceBatch */,
-				287E534E1ED5CD7500BAC7F8 /* Login */,
+				287E534E1ED5CD7500BAC7F8 /* User */,
 				287E53501ED5CDAF00BAC7F8 /* ModuleInfo */,
 				004612451E0BE20000B9B306 /* Tag.swift */,
 				004612461E0BE20000B9B306 /* Token.swift */,
@@ -830,6 +836,7 @@
 				005034B11C92B11300362A8F /* HaloRequest.swift */,
 				0051DFA61E2E3857005AA4C7 /* AuthManager+ObjC.swift */,
 				28B3EAC41F33271300FC7832 /* SearchFilter+ObjC.swift */,
+				285B8AF61F443F4100ABE570 /* TranslationsHelper+ObjC.swift */,
 			);
 			name = ObjC;
 			path = HaloObjC;
@@ -906,14 +913,15 @@
 			name = InstanceBatch;
 			sourceTree = "<group>";
 		};
-		287E534E1ED5CD7500BAC7F8 /* Login */ = {
+		287E534E1ED5CD7500BAC7F8 /* User */ = {
 			isa = PBXGroup;
 			children = (
 				0046123B1E0BE20000B9B306 /* AuthProfile.swift */,
 				004612471E0BE20000B9B306 /* User.swift */,
 				004612481E0BE20000B9B306 /* UserProfile.swift */,
+				285B8AF21F442B2E00ABE570 /* Pocket.swift */,
 			);
-			name = Login;
+			name = User;
 			sourceTree = "<group>";
 		};
 		287E534F1ED5CD9D00BAC7F8 /* Content */ = {
@@ -1340,6 +1348,7 @@
 				000F32321E27786300059909 /* Router.swift in Sources */,
 				000F31F81E27784D00059909 /* TranslationsHelper.swift in Sources */,
 				003CC0CB1E54675D008B0532 /* ModuleFieldType.swift in Sources */,
+				285B8AF41F442B2E00ABE570 /* Pocket.swift in Sources */,
 				000F32001E27785300059909 /* ContentManager.swift in Sources */,
 				000F32211E27785C00059909 /* User.swift in Sources */,
 				000F321D1E27785C00059909 /* SyncLogEntry.swift in Sources */,
@@ -1412,6 +1421,7 @@
 				000F32341E27786300059909 /* Router.swift in Sources */,
 				000F31FE1E27784E00059909 /* TranslationsHelper.swift in Sources */,
 				003CC0CC1E54675D008B0532 /* ModuleFieldType.swift in Sources */,
+				285B8AF51F442B2E00ABE570 /* Pocket.swift in Sources */,
 				000F320B1E27785400059909 /* ContentManager.swift in Sources */,
 				000F322F1E27785D00059909 /* User.swift in Sources */,
 				000F322B1E27785C00059909 /* SyncLogEntry.swift in Sources */,
@@ -1451,6 +1461,7 @@
 				28B3EAC51F33271300FC7832 /* SearchFilter+ObjC.swift in Sources */,
 				00396E5B1D535BF300594D0A /* ContentManager+ObjC.swift in Sources */,
 				0051DFA71E2E3857005AA4C7 /* AuthManager+ObjC.swift in Sources */,
+				285B8AFA1F443F5000ABE570 /* TranslationsHelper+ObjC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1479,6 +1490,7 @@
 				004612611E0BE20000B9B306 /* SearchQuery.swift in Sources */,
 				004612771E0BE20000B9B306 /* DeviceInfo.swift in Sources */,
 				004612711E0BE20000B9B306 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
+				285B8AF31F442B2E00ABE570 /* Pocket.swift in Sources */,
 				00CC8FC31E5C57E3006BE149 /* UIColor+Hex.swift in Sources */,
 				00CD29A81E38BB7400CCFB2D /* FileLogger.swift in Sources */,
 				004612811E0BE20000B9B306 /* UserProfile.swift in Sources */,

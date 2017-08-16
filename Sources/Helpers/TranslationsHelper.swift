@@ -81,7 +81,7 @@ open class TranslationsHelper: NSObject {
         }
     }
 
-    open func getTexts(keys: String..., completionHandler handler: @escaping ([String: String?]) -> Void) -> Void {
+    open func getTexts(keys: [String], completionHandler handler: @escaping ([String: String?]) -> Void) -> Void {
 
         if self.isLoading {
                 self.completionHandlers.append { _ in

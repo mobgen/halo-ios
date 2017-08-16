@@ -16,8 +16,8 @@ public class User: NSObject, NSCoding {
         static let UserProfile = "user"
     }
     
-    internal (set) public var userProfile: UserProfile
-    internal (set) public var token: Token
+    internal(set) public var userProfile: UserProfile
+    internal(set) public var token: Token
     
     public override var debugDescription: String {
         return "[User]\tEmail: \(userProfile.email)\n\tName: \(userProfile.name)\n\tSurname: \(userProfile.surname)"
