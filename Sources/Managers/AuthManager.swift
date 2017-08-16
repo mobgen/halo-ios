@@ -50,36 +50,45 @@ public class AuthManager: NSObject, HaloManager {
         
         let request = Halo.Request<User>(Router.loginUser(authProfile.toDictionary()), bypassReadiness: true, checkUnauthorised: false)
         
-        _ = try? request.responseParser(userParser).responseObject { (_, result) in
-            switch (result) {
-            case .success(let user, _):
-                self.currentUser = user
+        do {
+            
+            try request.responseParser(userParser).responseObject { _, result in
                 
-                guard
-                    let user = user
-                else {
-                    let e: HaloError = .loginError("No user returned from server")
-                    Manager.core.logMessage(e.description, level: .error)
-                    handler(nil, e)
-                    return
+                switch result {
+                case .success(let user, _):
+                    self.currentUser = user
+                    
+                    guard
+                        let user = user
+                        else {
+                            let e: HaloError = .loginError("No user returned from server")
+                            Manager.core.logMessage(e.description, level: .error)
+                            handler(nil, e)
+                            return
+                    }
+                    
+                    if stayLoggedIn {
+                        authProfile.storeProfile()
+                    }
+                    
+                    Manager.core.logMessage("Login with Halo successful.", level: .info)
+                    Manager.core.defaultAuthenticationMode = .appPlus
+                    
+                    // Notify observers
+                    self.observers.forEach { $0.userDidLogIn(user) }
+                    
+                    handler(user, nil)
+                    
+                case .failure(let error):
+                    Manager.core.logMessage(HaloError.loginError(error.description).description, level: .error)
+                    handler(nil, error)
                 }
-                
-                if stayLoggedIn {
-                    authProfile.storeProfile()
-                }
-                
-                Manager.core.logMessage("Login with Halo successful.", level: .info)
-                Manager.core.defaultAuthenticationMode = .appPlus
-                
-                // Notify observers
-                self.observers.forEach { $0.userDidLogIn(user) }
-                
-                handler(user, nil)
-                
-            case .failure(let error):
-                Manager.core.logMessage(HaloError.loginError(error.description).description, level: .error)
-                handler(nil, error)
             }
+        } catch {
+            let haloError = HaloError.loginError(error.localizedDescription)
+            
+            Manager.core.logMessage(haloError.description, level: .error)
+            handler(nil, haloError)
         }
     }
     
@@ -88,9 +97,9 @@ public class AuthManager: NSObject, HaloManager {
         // If user not logged in, you can't logout.
         guard
             let _ = self.currentUser
-        else {
-            handler(false)
-            return
+            else {
+                handler(false)
+                return
         }
         
         var result: Bool = true
@@ -130,15 +139,23 @@ public class AuthManager: NSObject, HaloManager {
         
         let request = Halo.Request<UserProfile>(Router.registerUser(["auth": authProfile.toDictionary(), "profile": userProfile.toDictionary()]))
         
-        _ = try? request.responseParser(userProfileParser).responseObject { (_, result) in
-            switch result {
-            case .success(let userProfile, _):
-                Manager.core.logMessage("Registration with Halo successful.", level: .info)
-                handler(userProfile, nil)
-            case .failure(let error):
-                Manager.core.logMessage("An error happened when trying to register a new user with Halo (\(error.description)).", level: .error)
-                handler(nil, error)
+        do {
+            
+            try request.responseParser(userProfileParser).responseObject { (_, result) in
+                switch result {
+                case .success(let userProfile, _):
+                    Manager.core.logMessage("Registration with Halo successful.", level: .info)
+                    handler(userProfile, nil)
+                case .failure(let error):
+                    Manager.core.logMessage("An error happened when trying to register a new user with Halo (\(error.description)).", level: .error)
+                    handler(nil, error)
+                }
             }
+        } catch {
+            let haloError = HaloError.unknownError(error)
+            
+            Manager.core.logMessage("An error happened when trying to register a new user with Halo (\(haloError.description)).", level: .error)
+            handler(nil, haloError)
         }
     }
     

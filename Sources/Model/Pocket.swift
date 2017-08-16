@@ -48,9 +48,14 @@ public class Pocket: NSObject {
         return false
     }
     
-    @objc(setReferenceWithKey:values:)
-    public func setReference(key: String, values: [String]?) {
+    @objc(setReferencesWithKey:values:)
+    public func setReferences(key: String, values: [String]?) {
         references[key] = values
+    }
+    
+    @objc(removeReferencesForKey:)
+    public func removeReferences(key: String) {
+        self.setReferences(key: key, values: nil)
     }
     
     @objc(setData:)
