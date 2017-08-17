@@ -8,43 +8,41 @@
 
 extension AuthManager {
     
-    @objc(getPocket:)
-    public func getPocket(completionHandler handler: @escaping (Pocket?) -> Void) -> Void {
+    public func getPocket(completionHandler handler: @escaping (HTTPURLResponse?, Result<Pocket?>) -> Void) -> Void {
         
         do {
             try Request<Pocket>(Router.getPocket).authenticationMode(.appPlus).responseParser(pocketParser).responseObject { response, result in
                 
                 switch result {
                 case .success(let pocket, _):
-                    handler(pocket)
+                    handler(response, .success(pocket, false))
                 case .failure(let error):
                     Manager.core.logMessage("There was an error retrieving the pocket: \(error.localizedDescription)", level: .error)
-                    handler(nil)
+                    handler(response, .failure(error))
                 }
             }
         } catch {
             Manager.core.logMessage("There was an error retrieving the pocket: \(error.localizedDescription)", level: .error)
-            handler(nil)
+            handler(nil, .failure(.unknownError(error)))
         }
     }
     
-    @objc(savePocket:completionHandler:)
-    public func savePocket(_ pocket: Pocket, completionHandler handler: @escaping (Pocket?) -> Void) -> Void {
+    public func savePocket(_ pocket: Pocket, completionHandler handler: @escaping (HTTPURLResponse?, Result<Pocket?>) -> Void) -> Void {
         
         do {
             try Request<Pocket>(Router.savePocket(pocket.toDictionary())).authenticationMode(.appPlus).responseParser(pocketParser).responseObject { response, result in
                 
                 switch result {
                 case .success(let pocket, _):
-                    handler(pocket)
+                    handler(response, .success(pocket, false))
                 case .failure(let error):
                     Manager.core.logMessage("There was an error saving the pocket: \(error.localizedDescription)", level: .error)
-                    handler(nil)
+                    handler(nil, .failure(error))
                 }
             }
         } catch {
             Manager.core.logMessage("There was an error saving the pocket: \(error.localizedDescription)", level: .error)
-            handler(nil)
+            handler(nil, .failure(.unknownError(error)))
         }
         
     }

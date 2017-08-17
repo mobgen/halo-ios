@@ -18,13 +18,15 @@ public extension ContentManager {
     @objc(searchWithQuery:success:failure:)
     public func search(query: Halo.SearchQuery,
                              success: @escaping (HTTPURLResponse?, PaginatedContentInstances) -> Void,
-                             failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
+                             failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
         
         self.search(query: query) { (response, result) in
             switch result {
             case .success(let data, _):
                 if let instances = data {
                     success(response, instances)
+                } else {
+                    failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received from server"]))
                 }
             case .failure(let error):
                 failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
@@ -34,14 +36,14 @@ public extension ContentManager {
     
     @objc(searchAsDataWithQuery:success:failure:)
     public func searchAsData(query: Halo.SearchQuery,
-                             success: @escaping (HTTPURLResponse?, NSData) -> Void,
-                             failure: @escaping (HTTPURLResponse?, NSError) -> Void) -> Void {
+                             success: @escaping (HTTPURLResponse?, Data) -> Void,
+                             failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
     
         self.searchAsData(query: query) { (response, result) in
             
             switch result {
             case .success(let data, _):
-                success(response, data as NSData)
+                success(response, data)
             case .failure(let error):
                 failure(response, NSError(domain: "com.mobgen.halo", code: -1, userInfo: [NSLocalizedDescriptionKey: error.description]))
             }
@@ -50,7 +52,7 @@ public extension ContentManager {
     }
     
     @objc(syncWithQuery:completionHandler:)
-    public func syncObjC(query: SyncQuery, completionHandler handler: @escaping (String, NSError?) -> Void) -> Void {
+    public func syncObjC(query: SyncQuery, completionHandler handler: @escaping (String, Error?) -> Void) -> Void {
         
         self.sync(query: query) { (moduleId, error) in
             

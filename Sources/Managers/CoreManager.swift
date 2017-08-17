@@ -177,9 +177,17 @@ open class CoreManager: NSObject, HaloManager, Logger {
             if let authProfile = AuthProfile.loadProfile() {
                 Manager.core.logMessage("Loading stored auth profile for the current environment", level: .info)
                 // Login and get user details (in case there have been updates)
-                Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { _, error in
+                Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { response, result in
+                    
+                    var success = true
+                    
+                    switch result {
+                    case .success(_, _): break
+                    case .failure(_): success = false
+                    }
+                    
                     DispatchQueue.main.async {
-                        self.completionHandler?(error == nil)
+                        self.completionHandler?(success)
                     }
                 }
             } else {
