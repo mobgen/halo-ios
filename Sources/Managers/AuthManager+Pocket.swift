@@ -8,7 +8,7 @@
 
 extension AuthManager {
     
-    public func getPocket(filterReferences: [String]?, completionHandler handler: @escaping (HTTPURLResponse?, Result<Pocket?>) -> Void) -> Void {
+    public func getPocket(filterReferences: [String]? = nil, completionHandler handler: @escaping (HTTPURLResponse?, Result<Pocket?>) -> Void) -> Void {
         
         do {
             let request = Request<Pocket>(Router.getPocket).authenticationMode(.appPlus).responseParser(pocketParser)
