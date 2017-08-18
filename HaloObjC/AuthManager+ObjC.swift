@@ -56,11 +56,11 @@ public extension AuthManager {
     
     // MARK: Pocket
     
-    @objc(getPocketWithSuccess:failure:)
-    public func getPocketWithSuccess(_ success: @escaping (HTTPURLResponse?, Pocket) -> Void,
+    @objc(getPocketWithFilter:success:failure:)
+    public func getPocketWithSuccess(_ filterReferences: [String]?, success: @escaping (HTTPURLResponse?, Pocket) -> Void,
                                      failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
         
-        self.getPocket { response, result in
+        self.getPocket(filterReferences: filterReferences) { response, result in
             
             switch result {
             case .success(let pocket, _):

@@ -8,10 +8,16 @@
 
 extension AuthManager {
     
-    public func getPocket(completionHandler handler: @escaping (HTTPURLResponse?, Result<Pocket?>) -> Void) -> Void {
+    public func getPocket(filterReferences: [String]?, completionHandler handler: @escaping (HTTPURLResponse?, Result<Pocket?>) -> Void) -> Void {
         
         do {
-            try Request<Pocket>(Router.getPocket).authenticationMode(.appPlus).responseParser(pocketParser).responseObject { response, result in
+            let request = Request<Pocket>(Router.getPocket).authenticationMode(.appPlus).responseParser(pocketParser)
+            
+            if let filter = filterReferences {
+                request.params(["filterReferences": filter])
+            }
+            
+            try request.responseObject { response, result in
                 
                 switch result {
                 case .success(let pocket, _):
