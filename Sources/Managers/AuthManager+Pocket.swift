@@ -11,12 +11,15 @@ extension AuthManager {
     public func getPocket(filterReferences: [String]? = nil, completionHandler handler: @escaping (HTTPURLResponse?, Result<Pocket?>) -> Void) -> Void {
         
         do {
-            let request = Request<Pocket>(Router.getPocket).authenticationMode(.appPlus).responseParser(pocketParser)
+            
+            var params: [String: Any]? = nil
             
             if let filter = filterReferences {
-                request.params(["filterReferences": filter])
+                params = ["filterReferences": filter]
             }
             
+            let request = Request<Pocket>(Router.getPocket(params)).authenticationMode(.appPlus).responseParser(pocketParser)
+                
             try request.responseObject { response, result in
                 
                 switch result {

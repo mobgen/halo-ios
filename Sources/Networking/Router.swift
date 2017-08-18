@@ -38,7 +38,7 @@ public enum Router {
     case segmentationUpdateDevice(String, [String: Any])
     case registerUser([String: Any])
     case loginUser([String: Any])
-    case getPocket
+    case getPocket([String: Any]?)
     case savePocket([String: Any])
     case customRequest(Halo.Method, String, [String: Any]?)
 
@@ -169,6 +169,8 @@ public enum Router {
              .registerUser(let params),
              .loginUser(let params),
              .savePocket(let params):
+            return params
+        case .getPocket(let params):
             return params
         case .versionCheck: return ["current": "true"]
         case .segmentationUpdateDevice(_, let params):
