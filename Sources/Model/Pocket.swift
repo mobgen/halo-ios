@@ -49,12 +49,12 @@ public class Pocket: NSObject {
     }
     
     @objc(setReferencesWithKey:values:)
-    public func setReferences(key: String, values: [String]?) {
+    public func setReferences(key: String, values: [String]?) -> Void {
         references[key] = values
     }
     
     @objc(removeReferencesForKey:)
-    public func removeReferences(key: String) {
+    public func removeReferences(key: String) -> Void {
         self.setReferences(key: key, values: nil)
     }
     
