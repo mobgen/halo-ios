@@ -14,8 +14,8 @@ public class Pocket: NSObject {
         static let Data = "data"
     }
     
-    internal(set) public var references: [String: [String]?] = [:]
-    internal(set) public var data: [String: Any?] = [:]
+    private(set) public var references: [String: [String]?] = [:]
+    public var data: [String: Any] = [:]
     
     @objc(addReferenceWithKey:value:)
     public func addReference(key: String, value: String) -> Void {
@@ -58,11 +58,6 @@ public class Pocket: NSObject {
         self.setReferences(key: key, values: nil)
     }
     
-    @objc(setData:)
-    public func setData(_ data: [String: Any]) -> Void {
-        self.data = data
-    }
-    
     func toDictionary() -> [String: Any] {
         return [
             Keys.References: references,
@@ -74,7 +69,7 @@ public class Pocket: NSObject {
         
         let pocket = Pocket()
         pocket.references = dict[Keys.References] as? [String: [String]?] ?? [:]
-        pocket.data = dict[Keys.Data] as? [String: Any?] ?? [:]
+        pocket.data = dict[Keys.Data] as? [String: Any] ?? [:]
         
         return pocket
     }
