@@ -9,11 +9,7 @@
 import Foundation
 import UIKit
 
-/// Helper class intended to be used as superclass by any AppDelegate (Swift only)
-@objc
-public protocol HaloAppDelegate: UIApplicationDelegate {}
-
-extension HaloAppDelegate {
+extension UIApplicationDelegate {
     public func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         return Manager.core.applicationWillFinishLaunching(application)
     }
