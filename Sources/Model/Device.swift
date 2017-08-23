@@ -96,22 +96,18 @@ public final class Device: NSObject, NSCoding {
     - parameter value: Value of the tag to be added
     */
     public func setTag(name: String, value: String) -> Void {
-        self.setTag(name: name, value: value, type: "000000000000000000000002")
+        self.addTag(name: name, value: value, type: "000000000000000000000002")
     }
 
     func setSystemTag(name: String, value: String) -> Void {
-        self.setTag(name: name, value: value, type: "000000000000000000000001")
+        self.addTag(name: name, value: value, type: "000000000000000000000001")
     }
 
-    fileprivate func setTag(name: String, value: String, type: String) -> Void {
+    fileprivate func addTag(name: String, value: String, type: String) -> Void {
         let tag = Halo.Tag(name: name, value: value, type: type)
 
-        if let tags = self.tags {
-            if let tag = tags[name] {
-                tag.value = value
-            } else {
-                self.tags![name] = tag
-            }
+        if self.tags != nil {
+            self.tags![name] = tag
         } else {
             self.tags = [name: tag]
         }
@@ -123,7 +119,7 @@ public final class Device: NSObject, NSCoding {
     - parameter tags: collection of tags
     */
     @objc(addTags:)
-    public func setTags(tags: [String: String]) {
+    public func addTags(tags: [String: String]) {
         tags.forEach { self.setTag(name: $0, value: $1) }
     }
 
@@ -134,12 +130,18 @@ public final class Device: NSObject, NSCoding {
 
      - returns: Returns the removed tag or nil if no tag was found and removed
      */
+    @discardableResult
     public func removeTag(name: String) -> Halo.Tag? {
         if let _ = self.tags {
             return tags!.removeValue(forKey: name)
         }
         
         return nil
+    }
+    
+    @discardableResult
+    public func removeTags(names: [String]) -> [Halo.Tag?] {
+        return names.map { self.removeTag(name: $0) }
     }
 
     // MARK: Storing and loading device
