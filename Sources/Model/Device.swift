@@ -95,11 +95,11 @@ public final class Device: NSObject, NSCoding {
     - parameter name:  Name of the tag to be added
     - parameter value: Value of the tag to be added
     */
-    public func setTag(name: String, value: String) -> Void {
+    public func addTag(name: String, value: String) -> Void {
         self.addTag(name: name, value: value, type: "000000000000000000000002")
     }
 
-    func setSystemTag(name: String, value: String) -> Void {
+    func addSystemTag(name: String, value: String) -> Void {
         self.addTag(name: name, value: value, type: "000000000000000000000001")
     }
 
@@ -120,7 +120,7 @@ public final class Device: NSObject, NSCoding {
     */
     @objc(addTags:)
     public func addTags(tags: [String: String]) {
-        tags.forEach { self.setTag(name: $0, value: $1) }
+        tags.forEach { self.addTag(name: $0, value: $1) }
     }
 
     /**
