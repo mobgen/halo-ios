@@ -21,15 +21,15 @@ open class SearchFilterHelper: NSObject {
     }
 
     open static func getLastUpdatedItems(from: Date) -> SearchFilter {
-        let condition1 = gte(property: "updatedAt", value: Int(from.timeIntervalSince1970 * 1000), type: "date")
-        let condition2 = lte(property: "updatedAt", value: Int(Date().timeIntervalSince1970 * 1000), type: "date")
+        let condition1 = gte(property: "updatedAt", value: from.timeIntervalSince1970 * 1000, type: "date")
+        let condition2 = lte(property: "updatedAt", value: Date().timeIntervalSince1970 * 1000, type: "date")
         let notDeleted = eq(property: "deletedAt", value: nil)
 
         return and(condition1, condition2, notDeleted)
     }
 
     open static func getArchivedItems() -> SearchFilter {
-        let condition1 = lte(property: "archivedAt", value: Int(Date().timeIntervalSince1970 * 1000), type: "date")
+        let condition1 = lte(property: "archivedAt", value: Date().timeIntervalSince1970 * 1000, type: "date")
         let condition2 = eq(property: "removedAt", value: nil)
         let notDeleted = eq(property: "deletedAt", value: nil)
 
@@ -37,14 +37,14 @@ open class SearchFilterHelper: NSObject {
     }
 
     open static func getExpiredItems() -> SearchFilter {
-        let condition1 = lte(property: "removedAt", value: Int(Date().timeIntervalSince1970 * 1000), type: "date")
+        let condition1 = lte(property: "removedAt", value: Date().timeIntervalSince1970 * 1000, type: "date")
         let notDeleted = eq(property: "deletedAt", value: nil)
 
         return and(condition1, notDeleted)
     }
 
     open static func getPublishedItems() -> SearchFilter {
-        let now = Int(Date().timeIntervalSince1970 * 1000)
+        let now = Date().timeIntervalSince1970 * 1000
 
         let condition1 = lte(property: "publishedAt", value: now, type: "date")
         let condition2 = gt(property: "removedAt", value: now, type: "date")
