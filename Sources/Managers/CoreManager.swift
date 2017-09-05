@@ -13,60 +13,7 @@ import UIKit
 open class CoreManager: NSObject, HaloManager, Logger {
     
     var app: UIApplication?
-    
-    private lazy var __once: (UIApplication, ((Bool) -> Void)?) -> Void = { app, handler in
-        
-        self.completionHandler = { success in
-            self.isReady = true
-            Halo.Manager.network.restartCachedTasks()
-            handler?(success)
-        }
-        
-        Router.userToken = nil
-        Router.appToken = nil
-        
-        Manager.network.startup(app) { success in
-            
-            if !success {
-                self.completionHandler?(false)
-                return
-            }
-            
-            let bundle = Bundle.main
-            
-            if let path = bundle.path(forResource: self.configuration, ofType: "plist") {
-                
-                if let data = NSDictionary(contentsOfFile: path) {
-                    let clientIdKey = CoreConstants.clientIdKey
-                    let clientSecretKey = CoreConstants.clientSecretKey
-                    let usernameKey = CoreConstants.usernameKey
-                    let passwordKey = CoreConstants.passwordKey
-                    let environmentKey = CoreConstants.environmentSettingKey
-                    
-                    if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
-                    }
-                    
-                    if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                        self.userCredentials = Credentials(username: username, password: password)
-                    }
-                    
-                    if let tags = data[CoreConstants.enableSystemTags] as? Bool {
-                        self.enableSystemTags = tags
-                    }
-                    
-                    if let env = data[environmentKey] as? String {
-                        self.setEnvironment(env)
-                    }
-                }
-            } else {
-                self.logMessage("No configuration .plist found", level: .warning)
-            }
-            
-            self.checkNeedsUpdate()
-            self.setup()
-        }
-    }
+    var completionHandler: ((Bool) -> Void)?
     
     /// Delegate that will handle launching completion and other important steps in the flow
     public var delegate: ManagerDelegate?
@@ -74,6 +21,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public internal(set) var loggers: [Logger] = []
     
     public internal(set) var isReady: Bool = false
+    
+    public internal(set) var isStarting: Bool = false
     
     public internal(set) var dataProvider: DataProvider = DataProviderManager.online
     
@@ -133,7 +82,62 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     public internal(set) var addons: [HaloAddon] = []
     
-    fileprivate var completionHandler: ((Bool) -> Void)?
+    private lazy var __once: (UIApplication, ((Bool) -> Void)?) -> Void = { app, handler in
+        
+        self.completionHandler = { success in
+            self.isReady = success
+            self.isStarting = false
+            Halo.Manager.network.restartCachedTasks()
+            handler?(success)
+        }
+        
+        Router.userToken = nil
+        Router.appToken = nil
+        
+        Manager.network.startup(app) { success in
+            
+            if !success {
+                DispatchQueue.main.async {
+                    self.completionHandler?(false)
+                }
+                return
+            }
+            
+            let bundle = Bundle.main
+            
+            if let path = bundle.path(forResource: self.configuration, ofType: "plist") {
+                
+                if let data = NSDictionary(contentsOfFile: path) {
+                    let clientIdKey = CoreConstants.clientIdKey
+                    let clientSecretKey = CoreConstants.clientSecretKey
+                    let usernameKey = CoreConstants.usernameKey
+                    let passwordKey = CoreConstants.passwordKey
+                    let environmentKey = CoreConstants.environmentSettingKey
+                    
+                    if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
+                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                    }
+                    
+                    if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
+                        self.userCredentials = Credentials(username: username, password: password)
+                    }
+                    
+                    if let tags = data[CoreConstants.enableSystemTags] as? Bool {
+                        self.enableSystemTags = tags
+                    }
+                    
+                    if let env = data[environmentKey] as? String {
+                        self.setEnvironment(env)
+                    }
+                }
+            } else {
+                self.logMessage("No configuration .plist found", level: .warning)
+            }
+            
+            self.checkNeedsUpdate()
+            self.setup()
+        }
+    }
     
     fileprivate override init() {
         super.init()
@@ -164,19 +168,33 @@ open class CoreManager: NSObject, HaloManager, Logger {
         let handler: (Bool) -> Void = { success in
             
             if !success {
-                self.completionHandler?(false)
+                DispatchQueue.main.async {
+                    self.completionHandler?(false)
+                }
                 return
             }
             
             if let authProfile = AuthProfile.loadProfile() {
                 Manager.core.logMessage("Loading stored auth profile for the current environment", level: .info)
                 // Login and get user details (in case there have been updates)
-                Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { _, error in
-                    self.completionHandler?(error == nil)
+                Manager.auth.login(authProfile: authProfile, stayLoggedIn: true) { response, result in
+                    
+                    var success = true
+                    
+                    switch result {
+                    case .success(_, _): break
+                    case .failure(_): success = false
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.completionHandler?(success)
+                    }
                 }
             } else {
                 Manager.core.logMessage("No stored auth profile found for this environment", level: .info)
-                self.completionHandler?(true)
+                DispatchQueue.main.async {
+                    self.completionHandler?(success)
+                }
             }
         }
         
@@ -221,13 +239,18 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public func startup(_ app: UIApplication, completionHandler handler: ((Bool) -> Void)? = nil) {
         
         self.app = app
+        self.completionHandler = handler
         
         // Check if there's a stored environment
         if let env = KeychainHelper.string(forKey: CoreConstants.environmentSettingKey) {
             self.setEnvironment(env)
         }
         
-        self.__once(app, handler)
+        self.isStarting = true
+        
+        DispatchQueue.global(qos: .background).async {
+            self.__once(app, handler)
+        }
         
     }
     
@@ -319,22 +342,27 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     fileprivate func checkNeedsUpdate(_ handler: ((Bool) -> Void)? = nil) -> Void {
         
-        let _ = try? Request<Any>(router: .versionCheck).serverCache(seconds: 86400).response { (_, result) in
-            switch result {
-            case .success(let data as [[String: AnyObject]], _):
-                if let info = data.first, let minIOS = info["minIOS"] {
-                    if minIOS.compare(self.frameworkVersion, options: .numeric) == .orderedDescending {
-                        let changelog = info["iosChangeLog"] as! String
-                        
-                        self.logMessage("The version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)", level: .warning)
+        do {
+            try Request<Any>(.versionCheck).serverCache(seconds: 86400).response { (_, result) in
+                switch result {
+                case .success(let data as [[String: AnyObject]], _):
+                    if let info = data.first, let minIOS = info["minIOS"] {
+                        if minIOS.compare(self.frameworkVersion, options: .numeric) == .orderedDescending {
+                            let changelog = info["iosChangeLog"] as! String
+                            
+                            self.logMessage("The version of the Halo SDK you are using is outdated. Please update to ensure there are no breaking changes. Minimum version: \(minIOS). Version changelog: \(changelog)", level: .warning)
+                        }
                     }
+                    handler?(true)
+                case .failure(_):
+                    handler?(false)
+                default:
+                    break
                 }
-                handler?(true)
-            case .failure(_):
-                handler?(false)
-            default:
-                break
             }
+        } catch {
+            self.logMessage("There was an error checking the current version \(error.localizedDescription)", level: .error)
+            handler?(false)
         }
     }
     

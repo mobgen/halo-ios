@@ -16,7 +16,7 @@ open class NetworkOfflineDataProvider: NetworkDataProvider {
             switch result {
             case .success(let data, _):
                 if let d = data {
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    DispatchQueue.global(qos: .background).async {
                         NSKeyedArchiver.archiveRootObject(d, toFile: OfflineDataProvider.modulesPath)
                     }
                 }
@@ -41,7 +41,7 @@ open class NetworkOfflineDataProvider: NetworkDataProvider {
             switch result {
             case .success(let data, _):
                 if let d = data {
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    DispatchQueue.global(qos: .background).async {
                         NSKeyedArchiver.archiveRootObject(d, toFile: path)
                     }
                 }

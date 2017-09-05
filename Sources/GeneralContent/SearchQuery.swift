@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc
+@objc(HaloSegmentMode)
 public enum SegmentMode: Int {
     case total, partial
 
@@ -16,6 +16,35 @@ public enum SegmentMode: Int {
         switch self {
         case .total: return "total"
         case .partial: return "partial"
+        }
+    }
+}
+
+@objc(HaloSortBy)
+public enum SortBy: Int {
+    case name, createdAt, updatedAt, publishedAt, removedAt, archivedAt, deletedAt
+    
+    public var description: String {
+        switch self {
+        case .name: return "name"
+        case .createdAt: return "createdAt"
+        case .updatedAt: return "updatedAt"
+        case .publishedAt: return "publishedAt"
+        case .removedAt: return "removedAt"
+        case .archivedAt: return "archivedAt"
+        case .deletedAt: return "deletedAt"
+        }
+    }
+}
+
+@objc(HaloSortingOrder)
+public enum SortingOrder: Int {
+    case ascending, descending
+    
+    public var description: String {
+        switch self {
+        case .ascending: return "asc"
+        case .descending: return "desc"
         }
     }
 }
@@ -38,6 +67,7 @@ open class SearchQuery: NSObject {
         static let Pagination = "pagination"
         static let SegmentTags = "segmentTags"
         static let SegmentMode = "segmentMode"
+        static let Sort = "sort"
         static let Locale = "locale"
     }
 
@@ -53,6 +83,7 @@ open class SearchQuery: NSObject {
     private(set) var pagination: [String: Any]?
     private(set) var segmentWithDevice: Bool = false
     private(set) var segmentMode: SegmentMode = .partial
+    private(set) var sortingParams: [String] = []
     private(set) var offlinePolicy: Halo.OfflinePolicy?
     private(set) var locale: Halo.Locale?
     private(set) var serverCache: Int = 0
@@ -123,6 +154,10 @@ open class SearchQuery: NSObject {
 
         dict[Keys.SegmentMode] = self.segmentMode.description
 
+        if self.sortingParams.count > 0 {
+            dict[Keys.Sort] = self.sortingParams.joined(separator: ",")
+        }
+        
         if let locale = self.locale {
             dict[Keys.Locale] = locale.description
         }
@@ -130,37 +165,55 @@ open class SearchQuery: NSObject {
         return dict
     }
 
+    // MARK: Setters
+    
+    @objc(addAllRelatedInstancesWithFieldName:)
+    @discardableResult
+    open func addAllRelatedInstances(fieldName: String) -> Halo.SearchQuery {
+        self.relatedTo.append([
+            Keys.RelatedToFieldName: fieldName,
+            Keys.RelatedToInstanceIds: ["*"]
+            ])
+        return self
+    }
+    
     @objc(searchFilter:)
+    @discardableResult
     open func searchFilter(_ filter: SearchFilter) -> Halo.SearchQuery {
         self.conditions = filter.body
         return self
     }
 
     @objc(metaFilter:)
+    @discardableResult
     open func metaFilter(_ filter: SearchFilter) -> Halo.SearchQuery {
         self.metaConditions = filter.body
         return self
     }
 
     @objc(fields:)
+    @discardableResult
     open func fields(_ fields: [String]) -> Halo.SearchQuery {
         self.fields = fields
         return self
     }
 
     @objc(tags:)
+    @discardableResult
     open func tags(_ tags: [Halo.Tag]) -> Halo.SearchQuery {
         self.tags = tags
         return self
     }
 
     @objc(moduleIds:)
+    @discardableResult
     open func moduleIds(_ ids: [String]) -> Halo.SearchQuery {
         self.moduleIds = ids
         return self
     }
 
     @objc(addRelatedInstancesWithFieldName:instanceIds:)
+    @discardableResult
     open func addRelatedInstances(fieldName: String, instanceIds: [String]) -> Halo.SearchQuery {
         self.relatedTo.append([
             Keys.RelatedToFieldName: fieldName,
@@ -169,62 +222,64 @@ open class SearchQuery: NSObject {
         return self
     }
     
-    @objc(addAllRelatedInstancesWithFieldName:)
-    open func addAllRelatedInstances(fieldName: String) -> Halo.SearchQuery {
-        self.relatedTo.append([
-            Keys.RelatedToFieldName: fieldName,
-            Keys.RelatedToInstanceIds: ["*"]
-        ])
-        return self
-    }
-    
     @objc(moduleName:)
+    @discardableResult
     open func moduleName(_ name: String) -> Halo.SearchQuery {
         self.moduleName = name
         return self
     }
     
     @objc(instanceIds:)
+    @discardableResult
     open func instanceIds(_ ids: [String]) -> Halo.SearchQuery {
         self.instanceIds = ids
         return self
     }
 
     @objc(populateFields:)
+    @discardableResult
     open func populateFields(_ fields: [String]) -> Halo.SearchQuery {
         self.populateFields = fields
         return self
     }
 
+    @objc(populateAll)
+    @discardableResult
     open func populateAll() -> Halo.SearchQuery {
         self.populateFields = ["all"]
         return self
     }
 
     @objc(segmentWithDevice:)
+    @discardableResult
     open func segmentWithDevice(_ segment: Bool) -> Halo.SearchQuery {
         self.segmentWithDevice = segment
         return self
     }
 
     @objc(segmentMode:)
+    @discardableResult
     open func segmentMode(_ mode: SegmentMode) -> Halo.SearchQuery {
         self.segmentMode = mode
         return self
     }
 
     @objc(locale:)
+    @discardableResult
     open func locale(_ locale: Halo.Locale) -> Halo.SearchQuery {
         self.locale = locale
         return self
     }
 
+    @objc(skipPagination)
+    @discardableResult
     open func skipPagination() -> Halo.SearchQuery {
         self.pagination = ["skip": "true"]
         return self
     }
 
     @objc(paginationWithPage:limit:)
+    @discardableResult
     open func pagination(page: Int, limit: Int) -> Halo.SearchQuery {
         self.pagination = [
             "page"  : page,
@@ -234,7 +289,15 @@ open class SearchQuery: NSObject {
         return self
     }
     
+    @objc(addSortByField:order:)
+    @discardableResult
+    open func addSortBy(field: SortBy, order: SortingOrder) -> Halo.SearchQuery {
+        self.sortingParams.append("\(field.description) \(order.description)")
+        return self
+    }
+    
     @objc(serverCache:)
+    @discardableResult
     open func serverCache(seconds: Int) -> Halo.SearchQuery {
         self.serverCache = seconds
         return self

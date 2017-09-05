@@ -25,7 +25,7 @@ class MockPaginationInfo : PaginationInfo {
     class func createFromJson(_ filePath: String? = OHPathForFileInBundle("pagination_info.json", Bundle.init(for: MockPaginationInfo.classForCoder()))) -> PaginationInfo? {
         guard
             let filePath = filePath,
-            let jsonData = NSData(contentsOfFile: filePath) as? Data,
+            let jsonData = NSData(contentsOfFile: filePath) as Data?,
             let jsonResult = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]),
             let dict = jsonResult as? [String: AnyObject]
         else {

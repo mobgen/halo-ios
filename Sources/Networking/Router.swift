@@ -38,6 +38,8 @@ public enum Router {
     case segmentationUpdateDevice(String, [String: Any])
     case registerUser([String: Any])
     case loginUser([String: Any])
+    case getPocket([String: Any]?)
+    case savePocket([String: Any])
     case customRequest(Halo.Method, String, [String: Any]?)
 
     /// Decide the HTTP method based on the specific request
@@ -53,7 +55,8 @@ public enum Router {
              .moduleSync:
             return .POST
         case .segmentationUpdateDevice(_),
-             .instanceUpdate(_):
+             .instanceUpdate(_),
+             .savePocket(_):
             return .PUT
         case .instanceDelete(_):
             return .DELETE
@@ -100,6 +103,10 @@ public enum Router {
             return "api/segmentation/identified/register"
         case .loginUser(_):
             return "api/segmentation/identified/login"
+        case .getPocket:
+            return "/api/segmentation/identified-pocket/self"
+        case .savePocket(_):
+            return "/api/segmentation/identified-pocket"
         case .customRequest(_, let url, _):
             return "api/\(url)"
         }
@@ -135,7 +142,8 @@ public enum Router {
              .instanceCreate(_),
              .instanceUpdate(_),
              .instanceBatch(_),
-             .moduleSync:
+             .moduleSync,
+             .savePocket(_):
             return .json
         case .customRequest(let method, _, _):
             switch method {
@@ -159,7 +167,10 @@ public enum Router {
              .instanceBatch(let params),
              .segmentationCreateDevice(let params),
              .registerUser(let params),
-             .loginUser(let params):
+             .loginUser(let params),
+             .savePocket(let params):
+            return params
+        case .getPocket(let params):
             return params
         case .versionCheck: return ["current": "true"]
         case .segmentationUpdateDevice(_, let params):

@@ -29,7 +29,7 @@ extension ContentManager {
             }
         }
         
-        let request = Halo.Request<SyncResult>(router: Router.moduleSync).params(query.body).responseParser { any in
+        let request = Halo.Request<SyncResult>(Router.moduleSync).params(query.body).responseParser { any in
             
             var result: SyncResult? = nil
             
@@ -67,7 +67,7 @@ extension ContentManager {
     fileprivate func processSyncResult(_ syncQuery: SyncQuery, syncResult: SyncResult?, wasFirstSync: Bool, completionHandler handler: @escaping (String, HaloError?) -> Void) -> Void {
         if let result = syncResult {
             
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            DispatchQueue.global(qos: .background).async {
                 var path = self.getPath(file: "synctimestamp-\(result.moduleId)")
                 
                 // Get the "old" sync info

@@ -28,7 +28,7 @@ class MockModule : Module {
     class func createFromJson(_ filePath: String? = OHPathForFileInBundle("module_without_tags_with_isSingle.json", Bundle.init(for: MockModule.classForCoder()))) -> Module? {
         guard
             let filePath = filePath,
-            let jsonData = NSData(contentsOfFile: filePath) as? Data,
+            let jsonData = NSData(contentsOfFile: filePath) as Data?,
             let jsonResult = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]),
             let dict = jsonResult as? [String: AnyObject]
             else {

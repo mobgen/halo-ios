@@ -33,8 +33,8 @@ open class NetworkManager: NSObject, HaloManager {
     var enableSSLpinning = true
 
     fileprivate var cachedTasks = [CachedTask]()
-
     fileprivate var _session: URLSession?
+    fileprivate var reachability = Reachability()!
 
     var session: URLSession {
         if _session == nil {
@@ -60,6 +60,24 @@ open class NetworkManager: NSObject, HaloManager {
 
     fileprivate override init() {
         super.init()
+        
+        let core = Halo.Manager.core
+        
+        reachability.whenReachable = { _ in
+            
+            if !core.isReady && !core.isStarting {
+                core.startup(core.app!)
+            } else if !core.isStarting {
+                self.restartCachedTasks()
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            core.logMessage("Unable to start reachability notifier", level: .error)
+        }
+        
     }
 
     @objc(registerAddon:)
@@ -98,12 +116,11 @@ open class NetworkManager: NSObject, HaloManager {
                               numberOfRetries: Int,
                               completionHandler handler: ((HTTPURLResponse?, Halo.Result<Data>) -> Void)? = nil) -> Void {
 
+        let core = Halo.Manager.core
         
-        
-        if (self.isRefreshing || (!Halo.Manager.core.isReady && !urlRequest.bypassReadiness)) {
+        if (self.isRefreshing || (!core.isReady && !urlRequest.bypassReadiness) || !reachability.isReachable ) {
             /// If the token is being obtained/refreshed, add the task to the queue and return
             let cachedTask = CachedTask(request: urlRequest, retries: numberOfRetries, handler: handler)
-            
             self.cachedTasks.append(cachedTask)
             return
         }
@@ -207,7 +224,7 @@ open class NetworkManager: NSObject, HaloManager {
         case .appPlus:
             if let profile = AuthProfile.loadProfile() {
                 
-                let req = Halo.Request<User>(router: Router.loginUser(profile.toDictionary()), bypassReadiness: true, checkUnauthorised: false).authenticationMode(mode)
+                let req = Halo.Request<User>(Router.loginUser(profile.toDictionary()), bypassReadiness: true, checkUnauthorised: false).authenticationMode(mode)
                 
                 let start = Date()
                 
@@ -250,7 +267,7 @@ open class NetworkManager: NSObject, HaloManager {
                     }
                 }
                 
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                DispatchQueue.global(qos: .background).async {
                     task.resume()
                 }
                 
@@ -299,7 +316,7 @@ open class NetworkManager: NSObject, HaloManager {
                     }
                 }
                 
-                let req = Halo.Request<Any>(router: Router.oAuth(cred, params), bypassReadiness: true).authenticationMode(mode)
+                let req = Halo.Request<Any>(Router.oAuth(cred, params), bypassReadiness: true).authenticationMode(mode)
                 
                 let start = Date()
                 
@@ -345,7 +362,7 @@ open class NetworkManager: NSObject, HaloManager {
                     }
                 }
                 
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                DispatchQueue.global(qos: .background).async {
                     task.resume()
                 }
                 

@@ -118,7 +118,7 @@ class DeviceSpec: BaseSpec {
             describe("its addTag method") {
                 context("when tag is new") {
                     beforeEach {
-                        device.addTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
+                        device.setTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
                     }
                     
                     it("add the tag to tags array and has correct type.") {
@@ -130,8 +130,8 @@ class DeviceSpec: BaseSpec {
                 
                 context("when tag already exists") {
                     beforeEach {
-                        device.addTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
-                        device.addTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueUpdatedTag)
+                        device.setTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
+                        device.setTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueUpdatedTag)
                     }
                     
                     it("update the tag to tags array and has correct type.") {
@@ -145,7 +145,7 @@ class DeviceSpec: BaseSpec {
             describe("its addSystemTag method") {
                 context("when tag is new") {
                     beforeEach {
-                        device.addSystemTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
+                        device.setSystemTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
                     }
                     
                     it("add the tag to tags array and has correct type.") {
@@ -167,7 +167,7 @@ class DeviceSpec: BaseSpec {
                         manyTags["\(DeviceSpec.TestNameTag)\(i)"] = "\(DeviceSpec.TestValueTag)\(i)"
                         i += 1
                     }
-                    device.addTags(tags: manyTags)
+                    device.setTags(tags: manyTags)
                 }
                 
                 it("add all tags") {
@@ -194,7 +194,7 @@ class DeviceSpec: BaseSpec {
                 
                 context("when the tag exists") {
                     beforeEach {
-                        device.addTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
+                        device.setTag(name: DeviceSpec.TestNameTag, value: DeviceSpec.TestValueTag)
                         resultRemoveTag = device.removeTag(name: DeviceSpec.TestNameTag)
                     }
                     

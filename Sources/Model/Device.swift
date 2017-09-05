@@ -106,12 +106,8 @@ public final class Device: NSObject, NSCoding {
     fileprivate func addTag(name: String, value: String, type: String) -> Void {
         let tag = Halo.Tag(name: name, value: value, type: type)
 
-        if let tags = self.tags {
-            if let tag = tags[name] {
-                tag.value = value
-            } else {
-                self.tags![name] = tag
-            }
+        if self.tags != nil {
+            self.tags![name] = tag
         } else {
             self.tags = [name: tag]
         }
@@ -134,12 +130,18 @@ public final class Device: NSObject, NSCoding {
 
      - returns: Returns the removed tag or nil if no tag was found and removed
      */
+    @discardableResult
     public func removeTag(name: String) -> Halo.Tag? {
         if let _ = self.tags {
             return tags!.removeValue(forKey: name)
         }
         
         return nil
+    }
+    
+    @discardableResult
+    public func removeTags(names: [String]) -> [Halo.Tag?] {
+        return names.map { self.removeTag(name: $0) }
     }
 
     // MARK: Storing and loading device

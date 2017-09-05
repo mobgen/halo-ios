@@ -71,7 +71,7 @@ class CoreSpec: BaseSpec {
                     }.name = "Successful appuser stub"
                     
                     waitUntil { done in
-                        mgr.startup { success in
+                        mgr.startup(UIApplication()) { success in
                             done()
                         }
                     }
@@ -101,7 +101,7 @@ class CoreSpec: BaseSpec {
                         return fixture(filePath: filePath!, status: 401, headers: ["Content-Type": "application/json"])
                     }.name = "Failed oauth stub"
                     
-                    mgr.startup()
+                    mgr.startup(UIApplication())
                 }
                 
                 afterEach {
@@ -123,7 +123,7 @@ class CoreSpec: BaseSpec {
                     expect(res).toNot(beNil())
                     switch res! {
                     case .success(_, _):
-                        XCTFail("Expected Failure, got<\(res)")
+                        XCTFail("Expected Failure, got<\(String(describing: res))")
                         break
                     default:
                         break
@@ -168,7 +168,7 @@ class CoreSpec: BaseSpec {
         
         describe("Registering an addon") {
             
-            var addon: Addon?
+            var addon: HaloAddon?
             
             beforeEach {
                 addon = DummyAddon()

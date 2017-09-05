@@ -139,7 +139,7 @@ class SearchQuerySpec : BaseSpec {
             
             describe("its relatedTo method") {
                 beforeEach {
-                    searchQueryReturned = searchQuery.addRelatedTo(fieldName: SearchQuerySpec.RelatedToFieldName, instanceIds: SearchQuerySpec.RelatedToInstanceIds)
+                    searchQueryReturned = searchQuery.addRelatedInstances(fieldName: SearchQuerySpec.RelatedToFieldName, instanceIds: SearchQuerySpec.RelatedToInstanceIds)
                 }
                 
                 it("works") {
@@ -240,7 +240,7 @@ class SearchQuerySpec : BaseSpec {
                 var dictReturnedByBody: [String: Any]!
                 let searchFilter = MockSearchFilter.createSearchFilter()
                 let device = Device()
-                device.addTag(name: "testDeviceNameTag", value: "testDeviceValueTag")
+                device.setTag(name: "testDeviceNameTag", value: "testDeviceValueTag")
                 
                 beforeEach {
                     Manager.core.device = device
@@ -313,7 +313,7 @@ class SearchQuerySpec : BaseSpec {
                 var IntReturnedByHash: Int!
                 let searchFilter = MockSearchFilter.createSearchFilter()
                 let device = Device()
-                device.addTag(name: "testDeviceNameTag", value: "testDeviceValueTag")
+                device.setTag(name: "testDeviceNameTag", value: "testDeviceValueTag")
                 
                 beforeEach {
                     Manager.core.device = device

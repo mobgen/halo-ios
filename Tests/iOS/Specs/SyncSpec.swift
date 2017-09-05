@@ -25,7 +25,7 @@ class SyncSpec: BaseSpec {
             
             beforeEach {                
                 Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
-                Manager.core.startup()
+                Manager.core.startup(UIApplication())
             }
             
             afterEach {                
@@ -42,7 +42,7 @@ class SyncSpec: BaseSpec {
                     }.name = "Sync stub"
                     
                     content.removeSyncedInstances(moduleId: moduleId)
-                    content.clearSyncLog(moduleId)
+                    content.clearSyncLog(moduleId: moduleId)
                 }
                 
                 afterEach {
@@ -96,7 +96,7 @@ class SyncSpec: BaseSpec {
                     }.name = "Sync stub"
                     
                     content.removeSyncedInstances(moduleId: moduleId)
-                    content.clearSyncLog(moduleId)
+                    content.clearSyncLog(moduleId: moduleId)
                 }
                 
                 afterEach {

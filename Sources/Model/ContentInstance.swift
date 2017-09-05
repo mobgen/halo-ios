@@ -211,7 +211,7 @@ open class ContentInstance: NSObject, NSCoding {
     }
     
     @discardableResult
-    open func addTag(_ tag: Halo.Tag) -> ContentInstance {
+    open func setTag(_ tag: Halo.Tag) -> ContentInstance {
         self.tags[tag.name] = tag
         return self
     }

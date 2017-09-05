@@ -22,6 +22,7 @@ public enum HaloError: Error, Hashable {
     case noValidCredentialsFound
     case errorResponse(Int)
     case loginError(String?)
+    case registrationError(String?)
     case genericError(Int, String)
     case unknownError(Error?)
     
@@ -39,6 +40,7 @@ public enum HaloError: Error, Hashable {
         case .noValidCredentialsFound: return "No valid credentials were found"
         case .errorResponse(let code): return "An error has occurred (code \(code))"
         case .loginError(let message): return "An error has occurred while trying to log in (\(message as String?))"
+        case .registrationError(let message): return "An error has occurred while trying to register (\(message as String?))"
         case .genericError(let status, let message): return "An error has occurred. Status code: \(status). Message: \(message)"
         case .unknownError(let error):
             if let e = error {

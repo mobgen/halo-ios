@@ -19,7 +19,7 @@ open class SyncQuery: NSObject {
         static let ToSync = "toSync"
     }
 
-    open fileprivate(set) var locale: Locale? = Locale(locale: NSLocale.preferredLanguages[0])
+    open fileprivate(set) var locale: Locale = Manager.content.defaultLocale
     open fileprivate(set) var moduleName: String?
     open fileprivate(set) var moduleId: String = ""
     open fileprivate(set) var fromSync: Date?
@@ -34,9 +34,7 @@ open class SyncQuery: NSObject {
             dict[Keys.ModuleName] = name
         }
         
-        if let loc = locale {
-            dict[Keys.Locale] = loc.description
-        }
+        dict[Keys.Locale] = locale.description
 
         if let from = fromSync {
             dict[Keys.FromSync] = from.timeIntervalSince1970 * 1000

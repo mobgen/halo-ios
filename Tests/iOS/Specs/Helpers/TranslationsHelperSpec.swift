@@ -19,7 +19,7 @@ class TranslationsHelperSpec : BaseSpec {
             
             beforeEach {
                 Manager.core.appCredentials = Credentials(clientId: "halotestappclient", clientSecret: "halotestapppass")
-                Manager.core.startup()
+                Manager.core.startup(UIApplication())
             }
             
             context("with a successful sync stub") {
@@ -33,7 +33,7 @@ class TranslationsHelperSpec : BaseSpec {
                     translationsHelper = MockTranslationsHelper.createTranslationsHelper()
                     
                     Manager.content.removeSyncedInstances(moduleId: MockTranslationsHelper.TestModuleId)
-                    Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
+                    Manager.content.clearSyncLog(moduleId: MockTranslationsHelper.TestModuleId)
                 }
                 
                 afterEach {
@@ -52,7 +52,16 @@ class TranslationsHelperSpec : BaseSpec {
                     
                     it("works") {
                         expect(translationsHelper).toNot(beNil())
-                        let texts = translationsHelper.getAllTexts()
+                        
+                        var texts = [String: String?]()
+                        
+                        waitUntil { done in
+                            translationsHelper.getAllTexts { result in
+                                texts = result
+                                done()
+                            }
+                        }
+ 
                         expect(texts.count).to(equal(1))
                     }
                 }
@@ -69,7 +78,16 @@ class TranslationsHelperSpec : BaseSpec {
                     
                     it("works") {
                         expect(translationsHelper).toNot(beNil())
-                        let texts = translationsHelper.getAllTexts()
+                        
+                        var texts = [String: String?]()
+                        
+                        waitUntil { done in
+                            translationsHelper.getAllTexts { result in
+                                texts = result
+                                done()
+                            }
+                        }
+                        
                         expect(texts.count).to(equal(1))
                     }
                 }
@@ -130,8 +148,17 @@ class TranslationsHelperSpec : BaseSpec {
                         }
                         
                         it("works") {
-                            let texts = translationsHelper.getTexts(keys: "key")
-                            expect(texts["key"]!!).to(equal("value"))
+                            
+                            var text: String?
+                            
+                            waitUntil { done in
+                                translationsHelper.getText(key: "key") { result in
+                                    text = result
+                                    done()
+                                }
+                            }
+                            
+                            expect(text).to(equal("value"))
                         }
                     }
                     
@@ -148,8 +175,17 @@ class TranslationsHelperSpec : BaseSpec {
                         }
                         
                         it("works") {
-                            let texts = translationsHelper.getTexts(keys: "invalid key")
-                            expect(texts["invalid key"]!!).to(equal(MockTranslationsHelper.TestDefaultText))
+                            
+                            var text: String?
+                            
+                            waitUntil { done in
+                                translationsHelper.getText(key: "invalid key") { result in
+                                    text = result
+                                    done()
+                                }
+                            }
+                            
+                            expect(text).to(equal(MockTranslationsHelper.TestDefaultText))
                         }
                     }
                 }
@@ -167,7 +203,16 @@ class TranslationsHelperSpec : BaseSpec {
                     
                     it("works") {
                         expect(translationsHelper).toNot(beNil())
-                        let texts = translationsHelper.getAllTexts()
+                        
+                        var texts = [String: String?]()
+                        
+                        waitUntil { done in
+                            translationsHelper.getAllTexts { result in
+                                texts = result
+                                done()
+                            }
+                        }
+                        
                         expect(texts.count).to(equal(0))
                     }
                 }
@@ -182,7 +227,7 @@ class TranslationsHelperSpec : BaseSpec {
                     }.name = "Successful sync stub"
                     
                     Manager.content.removeSyncedInstances(moduleId: MockTranslationsHelper.TestModuleId)
-                    Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
+                    Manager.content.clearSyncLog(moduleId: MockTranslationsHelper.TestModuleId)
                     
                     translationsHelper = MockTranslationsHelper.createTranslationsHelper()
                 }
@@ -214,7 +259,7 @@ class TranslationsHelperSpec : BaseSpec {
                     }.name = "Successful sync stub with 1 second of request time and 1 second of response time"
                     
                     Manager.content.removeSyncedInstances(moduleId: MockTranslationsHelper.TestModuleId)
-                    Manager.content.clearSyncLog(MockTranslationsHelper.TestModuleId)
+                    Manager.content.clearSyncLog(moduleId: MockTranslationsHelper.TestModuleId)
                     
                     translationsHelper = MockTranslationsHelper.createTranslationsHelper()
                 }

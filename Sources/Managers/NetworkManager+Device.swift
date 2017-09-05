@@ -21,12 +21,13 @@ extension NetworkManager {
 
         if let id = device.id {
 
-            let request = Halo.Request<Halo.Device>(router: Router.segmentationGetDevice(id), bypassReadiness: true)
+            let request = Halo.Request<Halo.Device>(Router.segmentationGetDevice(id), bypassReadiness: true)
             
             do {
                 try request.responseParser(self.deviceParser).responseObject(handler)
             } catch {
                 Manager.core.logMessage(error.localizedDescription, level: .error)
+                handler?(nil, .failure(.unknownError(error)))
             }
 
         } else {
@@ -46,9 +47,9 @@ extension NetworkManager {
         var request: Halo.Request<Halo.Device>
 
         if let id = device.id {
-            request = Halo.Request(router: Router.segmentationUpdateDevice(id, device.toDictionary()), bypassReadiness: bypassReadiness)
+            request = Halo.Request(Router.segmentationUpdateDevice(id, device.toDictionary()), bypassReadiness: bypassReadiness)
         } else {
-            request = Halo.Request(router: Router.segmentationCreateDevice(device.toDictionary()), bypassReadiness: bypassReadiness)
+            request = Halo.Request(Router.segmentationCreateDevice(device.toDictionary()), bypassReadiness: bypassReadiness)
         }
 
         try! request.responseParser(self.deviceParser).responseObject(handler)

@@ -9,7 +9,7 @@
 import Foundation
 @testable import Halo
 
-class MockNetworkAddon : DummyAddon, NetworkAddon {
+class MockNetworkAddon : DummyAddon, HaloNetworkAddon {
     
     override init() {
         super.init()

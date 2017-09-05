@@ -66,7 +66,7 @@ public func and(_ elements: SearchFilter...) -> SearchFilter {
     return filter
 }
 
-enum SearchFilterOperation {
+public enum SearchFilterOperation {
     case eq, neq, gt, lt, gte, lte, `in`, notIn, like
 
     var description: String {
