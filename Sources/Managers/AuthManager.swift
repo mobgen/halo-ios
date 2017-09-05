@@ -50,7 +50,7 @@ public class AuthManager: NSObject, HaloManager {
                       stayLoggedIn: Bool = Manager.auth.stayLoggedIn,
                       completionHandler handler: @escaping (HTTPURLResponse?, Result<User?>) -> Void) -> Void {
         
-        let request = Halo.Request<User>(Router.loginUser(authProfile.toDictionary()), bypassReadiness: true, checkUnauthorised: true)
+        let request = Halo.Request<User>(Router.loginUser(authProfile.toDictionary()), bypassReadiness: true, checkUnauthorised: false)
         
         do {
             
