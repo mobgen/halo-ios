@@ -12,7 +12,7 @@ import Foundation
 open class ConsoleLogger: NSObject, Logger {
     
     public func logMessage(_ message: String, level: LogLevel) {
-        NSLog("<HALO/\(level.description)>: \(message)")
+        print("<HALO/\(level.description)>: \(message)")
     }
     
 }
