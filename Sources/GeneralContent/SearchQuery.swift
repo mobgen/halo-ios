@@ -133,7 +133,7 @@ open class SearchQuery: NSObject {
 
         if let tags = self.tags {
             let tagsList = tags.map { $0.toDictionary() }
-            dict[Keys.Tags] = tagsList
+            dict[Keys.SegmentTags] = tagsList
         }
 
         if let include = self.populateFields {
