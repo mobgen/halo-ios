@@ -62,7 +62,7 @@ open class SearchQuery: NSObject {
         static let SearchValues = "searchValues"
         static let MetaSearch = "metaSearch"
         static let Fields = "fields"
-        static let Tags = "segmentTags"
+        static let Tags = "tags"
         static let Include = "include"
         static let Pagination = "pagination"
         static let SegmentTags = "segmentTags"
