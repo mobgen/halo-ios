@@ -232,26 +232,26 @@ open class ContentInstance: NSObject, NSCoding {
         
         dict[Keys.Module] = self.moduleId
         dict[Keys.Name] = self.name
-        dict[Keys.CreatedAt] = self.createdAt.timeIntervalSince1970 * 1000
+        dict[Keys.CreatedAt] = self.createdAt.timeIntervalSince1970.intValue * 1000
         
         if let publishedAt = self.publishedAt {
-            dict[Keys.PublishedAt] = publishedAt.timeIntervalSince1970 * 1000
+            dict[Keys.PublishedAt] = publishedAt.timeIntervalSince1970.intValue * 1000
         }
         
         if let updatedAt = self.updatedAt {
-            dict[Keys.UpdatedAt] = updatedAt.timeIntervalSince1970 * 1000
+            dict[Keys.UpdatedAt] = updatedAt.timeIntervalSince1970.intValue * 1000
         }
         
         if let removedAt = self.removedAt {
-            dict[Keys.RemovedAt] = removedAt.timeIntervalSince1970 * 1000
+            dict[Keys.RemovedAt] = removedAt.timeIntervalSince1970.intValue * 1000
         }
         
         if let deletedAt = self.deletedAt {
-            dict[Keys.DeletedAt] = deletedAt.timeIntervalSince1970 * 1000
+            dict[Keys.DeletedAt] = deletedAt.timeIntervalSince1970.intValue * 1000
         }
         
         if let archivedAt = self.archivedAt {
-            dict[Keys.ArchivedAt] = archivedAt.timeIntervalSince1970 * 1000
+            dict[Keys.ArchivedAt] = archivedAt.timeIntervalSince1970.intValue * 1000
         }
         
         // Set values
