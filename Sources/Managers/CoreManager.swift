@@ -115,11 +115,11 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     let environmentKey = CoreConstants.environmentSettingKey
                     
                     if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                        self.setAppCredentials(withClientId: clientId, withClientSecret: clientSecret)
                     }
                     
                     if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                        self.userCredentials = Credentials(username: username, password: password)
+                        self.setUserCredentials(withUsername: username, withPassword: password)
                     }
                     
                     if let tags = data[CoreConstants.enableSystemTags] as? Bool {
@@ -141,6 +141,32 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     fileprivate override init() {
         super.init()
+    }
+    
+    /**
+     Allows changing the current appcredentials. It will imply a setup process again
+     and that is why a completion handler can be provided. Once the process has finished and the environment is
+     properly configured, it will be called.
+     */
+    public func setAppCredentials(withClientId: String , withClientSecret: String, completionHandler handler: ((Bool) -> Void)? = nil) {
+        
+        self.appCredentials = Credentials(clientId: withClientId, clientSecret: withClientSecret)
+        
+        self.completionHandler = handler
+        self.setup()
+    }
+    
+    /**
+     Allows changing the current user credential. It will imply a setup process again
+     and that is why a completion handler can be provided. Once the process has finished and the environment is
+     properly configured, it will be called.
+     */
+    public func setUserCredentials(withUsername: String , withPassword: String, completionHandler handler: ((Bool) -> Void)? = nil) {
+        
+        self.userCredentials = Credentials(username: withUsername, password: withPassword)
+        
+        self.completionHandler = handler
+        self.setup()
     }
     
     /**
@@ -220,6 +246,14 @@ open class CoreManager: NSObject, HaloManager, Logger {
                 handler(false)
             }
         }
+    }
+    
+    fileprivate func setAppCredentials(withClientId: String , withClientSecret: String) {
+        self.appCredentials = Credentials(clientId: withClientId, clientSecret: withClientSecret)
+    }
+    
+    fileprivate func setUserCredentials(withUsername: String , withPassword: String) {
+        self.userCredentials = Credentials(username: withUsername, password: withPassword)
     }
     
     fileprivate func setEnvironment(_ env: String) {
