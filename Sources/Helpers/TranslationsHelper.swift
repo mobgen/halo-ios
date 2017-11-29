@@ -11,7 +11,8 @@ import Foundation
 @objc(HaloTranslationsHelper)
 open class TranslationsHelper: NSObject {
 
-    fileprivate var moduleId: String = ""
+    fileprivate var moduleId: String?
+    fileprivate var moduleName: String?
     fileprivate var keyField: String?
     fileprivate var valueField: String?
     fileprivate var defaultText: String?
@@ -34,6 +35,15 @@ open class TranslationsHelper: NSObject {
         self.keyField = keyField
         self.valueField = valueField
         self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
+    }
+    
+    public convenience init(moduleName: String, locale: Locale, keyField: String, valueField: String) {
+        self.init()
+        self.moduleName = moduleName
+        self.locale = locale
+        self.keyField = keyField
+        self.valueField = valueField
+        self.syncQuery = SyncQuery(moduleName: moduleName).locale(locale)
     }
 
     @objc(addCompletionHandler:)
@@ -119,7 +129,11 @@ open class TranslationsHelper: NSObject {
 
     open func clearAllTexts() -> Void {
         translationsMap.removeAll()
-        Manager.content.removeSyncedInstances(moduleId: moduleId)
+        if let id = moduleId {
+            Manager.content.removeSyncedInstances(moduleId: id)
+        } else  if let name = moduleId {
+            Manager.content.removeSyncedInstancesByName(moduleName: name)
+        }
     }
     
     open func load() -> Void {
@@ -129,14 +143,20 @@ open class TranslationsHelper: NSObject {
         }
     
         isLoading = true
-        
-        Manager.content.sync(query: syncQuery) { moduleId, error in
-            self.processSyncResult(moduleId: moduleId, error: error)
-            self.completionHandlers.forEach { $0(error) }
+        if let id = moduleId {
+            Manager.content.sync(query: syncQuery) { moduleId, error in
+                self.processSyncResult(moduleId: id, error: error)
+                self.completionHandlers.forEach { $0(error) }
+            }
+        } else if let name = moduleName {
+            Manager.content.syncByName(query: syncQuery) { moduleName , error in
+                self.processSyncResult(moduleName: name, error: error)
+                self.completionHandlers.forEach { $0(error) }
+            }
         }
     }
     
-    fileprivate func processSyncResult(moduleId: String, error: HaloError?) {
+    fileprivate func processSyncResult(moduleId: String? = nil ,moduleName : String? = nil, error: HaloError?) {
         
         self.isLoading = false
         
@@ -145,7 +165,17 @@ open class TranslationsHelper: NSObject {
             return
         }
         
-        let instances = Manager.content.getSyncedInstances(moduleId: moduleId)
+        var instances : [ContentInstance]
+        if let id = moduleId {
+            instances = Manager.content.getSyncedInstances(moduleId: id)
+            setTrasnlationsMap(instances: instances)
+        } else if let name = moduleName {
+            instances = Manager.content.getSyncedInstances(moduleId: name)
+            setTrasnlationsMap(instances: instances)
+        }
+    }
+    
+    fileprivate func setTrasnlationsMap(instances : [ContentInstance]){
         
         if let keyField = self.keyField, let valueField = self.valueField {
             

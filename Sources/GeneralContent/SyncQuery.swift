@@ -21,14 +21,16 @@ open class SyncQuery: NSObject {
 
     open fileprivate(set) var locale: Locale = Manager.content.defaultLocale
     open fileprivate(set) var moduleName: String?
-    open fileprivate(set) var moduleId: String = ""
+    open fileprivate(set) var moduleId: String?
     open fileprivate(set) var fromSync: Date?
     open fileprivate(set) var toSync: Date?
 
     open var body: [String: Any] {
         var dict = [String: Any]()
-
-        dict[Keys.ModuleId] = moduleId
+        
+        if let id = moduleId {
+            dict[Keys.ModuleId] = id
+        }
         
         if let name = moduleName {
             dict[Keys.ModuleName] = name
@@ -54,6 +56,11 @@ open class SyncQuery: NSObject {
     public init(moduleId: String) {
         super.init()
         self.moduleId = moduleId
+    }
+    
+    public init(moduleName: String) {
+        super.init()
+        self.moduleName = moduleName
     }
     
     @discardableResult

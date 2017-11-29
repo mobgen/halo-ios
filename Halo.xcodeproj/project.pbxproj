@@ -248,6 +248,7 @@
 		00CD29AE1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		156E035D1FCECACD006AAFE2 /* ContentManager+Sync+ModuleName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156E035C1FCECACD006AAFE2 /* ContentManager+Sync+ModuleName.swift */; };
 		159C11451FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
 		159C11461FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
 		159C11471FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
@@ -470,6 +471,7 @@
 		00CD29A71E38BB7400CCFB2D /* FileLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		156E035C1FCECACD006AAFE2 /* ContentManager+Sync+ModuleName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContentManager+Sync+ModuleName.swift"; sourceTree = "<group>"; };
 		159C11441FC717C300917A57 /* TimeInterval+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Int.swift"; sourceTree = "<group>"; };
 		281DE8BC1F1662D0005DD8B0 /* NetworkManager+Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Reachability.swift"; sourceTree = "<group>"; };
 		282A5CED1EFC13AE00EFB996 /* ModulesQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesQuery.swift; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 				285B8AFB1F445ADD00ABE570 /* AuthManager+Pocket.swift */,
 				004612301E0BE20000B9B306 /* ContentManager.swift */,
 				0051DFA21E2CDF66005AA4C7 /* ContentManager+Sync.swift */,
+				156E035C1FCECACD006AAFE2 /* ContentManager+Sync+ModuleName.swift */,
 				004612341E0BE20000B9B306 /* CoreManager.swift */,
 				004612311E0BE20000B9B306 /* CoreManager+Addons.swift */,
 				004612321E0BE20000B9B306 /* CoreManager+Auth.swift */,
@@ -1529,6 +1532,7 @@
 				00CD29A41E38BB5D00CCFB2D /* Logger.swift in Sources */,
 				0051DFA31E2CDF66005AA4C7 /* ContentManager+Sync.swift in Sources */,
 				004612791E0BE20000B9B306 /* PaginatedContentInstances.swift in Sources */,
+				156E035D1FCECACD006AAFE2 /* ContentManager+Sync+ModuleName.swift in Sources */,
 				0046126F1E0BE20000B9B306 /* Manager.swift in Sources */,
 				0046126E1E0BE20000B9B306 /* CoreManager.swift in Sources */,
 				004612831E0BE20000B9B306 /* Router.swift in Sources */,
