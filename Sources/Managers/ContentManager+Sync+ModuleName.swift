@@ -110,7 +110,7 @@ extension ContentManager {
                     // Sync again. The first sync might be cached so we need to resync in case there have been changes
                     let query = syncQuery
                     query.fromSync(result.syncDate)
-                    self.sync(query: query, completionHandler: handler)
+                    self.syncByName(query: query, completionHandler: handler)
                 } else {
                     DispatchQueue.main.async {
                         handler(result.moduleId, nil)
