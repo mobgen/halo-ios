@@ -114,11 +114,15 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     let passwordKey = CoreConstants.passwordKey
                     let environmentKey = CoreConstants.environmentSettingKey
                     
-                    if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        self.setAppCredentials(withClientId: clientId, withClientSecret: clientSecret)
+                    if(self.appCredentials != nil) {
+                        self.setAppCredentials(withClientId: self.appCredentials.username, withClientSecret: self.appCredentials.password)
+                    } else if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
+                        self.setAppCredentials(withClientId: clientId,withClientSecret: clientSecret)
                     }
                     
-                    if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
+                    if(self.appCredentials != nil) {
+                        self.setUserCredentials(withUsername: self.appCredentials.username, withPassword: self.appCredentials.password)
+                    } else if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
                         self.setUserCredentials(withUsername: username, withPassword: password)
                     }
                     
@@ -144,29 +148,17 @@ open class CoreManager: NSObject, HaloManager, Logger {
     }
     
     /**
-     Allows changing the current appcredentials. It will imply a setup process again
-     and that is why a completion handler can be provided. Once the process has finished and the environment is
-     properly configured, it will be called.
+     Allows changing the current appcredentials.
      */
-    public func setAppCredentials(withClientId: String , withClientSecret: String, completionHandler handler: ((Bool) -> Void)? = nil) {
-        
+    public func setAppCredentials(withClientId: String , withClientSecret: String) {
         self.appCredentials = Credentials(clientId: withClientId, clientSecret: withClientSecret)
-        
-        self.completionHandler = handler
-        self.setup()
     }
     
     /**
-     Allows changing the current user credential. It will imply a setup process again
-     and that is why a completion handler can be provided. Once the process has finished and the environment is
-     properly configured, it will be called.
+     Allows changing the current user credential.
      */
-    public func setUserCredentials(withUsername: String , withPassword: String, completionHandler handler: ((Bool) -> Void)? = nil) {
-        
+    public func setUserCredentials(withUsername: String , withPassword: String) {
         self.userCredentials = Credentials(username: withUsername, password: withPassword)
-        
-        self.completionHandler = handler
-        self.setup()
     }
     
     /**
