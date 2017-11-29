@@ -115,13 +115,13 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     let environmentKey = CoreConstants.environmentSettingKey
                     
                     if(self.appCredentials != nil) {
-                        self.setAppCredentials(withClientId: self.appCredentials.username, withClientSecret: self.appCredentials.password)
+                        self.setAppCredentials(withClientId: self.appCredentials!.username, withClientSecret: self.appCredentials!.password)
                     } else if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
                         self.setAppCredentials(withClientId: clientId,withClientSecret: clientSecret)
                     }
                     
                     if(self.appCredentials != nil) {
-                        self.setUserCredentials(withUsername: self.appCredentials.username, withPassword: self.appCredentials.password)
+                        self.setUserCredentials(withUsername: self.appCredentials!.username, withPassword: self.appCredentials!.password)
                     } else if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
                         self.setUserCredentials(withUsername: username, withPassword: password)
                     }
@@ -238,14 +238,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
                 handler(false)
             }
         }
-    }
-    
-    fileprivate func setAppCredentials(withClientId: String , withClientSecret: String) {
-        self.appCredentials = Credentials(clientId: withClientId, clientSecret: withClientSecret)
-    }
-    
-    fileprivate func setUserCredentials(withUsername: String , withPassword: String) {
-        self.userCredentials = Credentials(username: withUsername, password: withPassword)
     }
     
     fileprivate func setEnvironment(_ env: String) {
