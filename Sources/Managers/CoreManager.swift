@@ -68,6 +68,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public var appCredentials: Credentials?
     public var userCredentials: Credentials?
     
+    public var env: String?
+    
     public var frameworkVersion: String {
         return Bundle(identifier: "com.mobgen.Halo")!.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
@@ -130,7 +132,9 @@ open class CoreManager: NSObject, HaloManager, Logger {
                         self.enableSystemTags = tags
                     }
                     
-                    if let env = data[environmentKey] as? String {
+                    if(self.env != nil) {
+                        self.setEnvironment(self.env!)
+                    } else if let env = data[environmentKey] as? String {
                         self.setEnvironment(env)
                     }
                 }
@@ -162,6 +166,15 @@ open class CoreManager: NSObject, HaloManager, Logger {
     }
     
     /**
+     Allows changing the current environment against which the connections are made.
+     
+     - parameter env:   The env to set
+     */
+    public func setEndpoint(_ env: String) {
+        self.env = env
+    }
+    
+    /**
      Allows changing the current environment against which the connections are made. It will imply a setup process again
      and that is why a completion handler can be provided. Once the process has finished and the environment is
      properly configured, it will be called.
@@ -179,7 +192,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
         self.completionHandler = handler
         self.setup()
     }
-    
     
     fileprivate func setup() {
         
