@@ -130,9 +130,9 @@ open class TranslationsHelper: NSObject {
     open func clearAllTexts() -> Void {
         translationsMap.removeAll()
         if let id = moduleId {
-            Manager.content.removeSyncedInstances(moduleId: id)
+            Manager.content.removeSyncedInstances(module: id)
         } else  if let name = moduleId {
-            Manager.content.removeSyncedInstancesByName(moduleName: name)
+            Manager.content.removeSyncedInstances(module: name)
         }
     }
     
@@ -143,20 +143,14 @@ open class TranslationsHelper: NSObject {
         }
     
         isLoading = true
-        if let id = moduleId {
-            Manager.content.sync(query: syncQuery) { moduleId, error in
-                self.processSyncResult(moduleId: id, error: error)
-                self.completionHandlers.forEach { $0(error) }
-            }
-        } else if let name = moduleName {
-            Manager.content.syncByName(query: syncQuery) { moduleName , error in
-                self.processSyncResult(moduleName: name, error: error)
-                self.completionHandlers.forEach { $0(error) }
-            }
+        Manager.content.sync(query: syncQuery) { module, error in
+            self.processSyncResult(module: module, error: error)
+            self.completionHandlers.forEach { $0(error) }
         }
+
     }
     
-    fileprivate func processSyncResult(moduleId: String? = nil ,moduleName : String? = nil, error: HaloError?) {
+    fileprivate func processSyncResult(module : String, error: HaloError?) {
         
         self.isLoading = false
         
@@ -166,13 +160,9 @@ open class TranslationsHelper: NSObject {
         }
         
         var instances : [ContentInstance]
-        if let id = moduleId {
-            instances = Manager.content.getSyncedInstances(moduleId: id)
-            setTrasnlationsMap(instances: instances)
-        } else if let name = moduleName {
-            instances = Manager.content.getSyncedInstances(moduleId: name)
-            setTrasnlationsMap(instances: instances)
-        }
+        instances = Manager.content.getSyncedInstances(module: module)
+        setTrasnlationsMap(instances: instances)
+        
     }
     
     fileprivate func setTrasnlationsMap(instances : [ContentInstance]){
