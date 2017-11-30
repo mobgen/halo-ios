@@ -15,13 +15,11 @@ extension ContentManager {
     }
     
     fileprivate func isQueryFromId(_ query: SyncQuery) -> Bool {
-        var isModuleId = true;
         if query.moduleId != nil {
-            isModuleId = true
-        } else if query.moduleName != nil {
-            isModuleId = false
+           return true
+        } else {
+            return false
         }
-        return isModuleId;
     }
     
     
@@ -62,7 +60,6 @@ extension ContentManager {
                 } else {
                     result?.moduleName = self.getModuleIdetifier(query: query)
                 }
-                
                 result?.locale = query.locale
             default: // Everything else
                 break
@@ -140,7 +137,7 @@ extension ContentManager {
                     self.sync(query: query, completionHandler: handler)
                 } else {
                     DispatchQueue.main.async {
-                        handler(result.moduleId, nil)
+                        handler(self.getModuleIdetifier(query: syncQuery), nil)
                     }
                 }
             }
