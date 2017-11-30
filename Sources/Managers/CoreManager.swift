@@ -68,6 +68,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public var appCredentials: Credentials?
     public var userCredentials: Credentials?
     
+    public var env: String?
+    
     public var frameworkVersion: String {
         return Bundle(identifier: "com.mobgen.Halo")!.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
@@ -114,19 +116,25 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     let passwordKey = CoreConstants.passwordKey
                     let environmentKey = CoreConstants.environmentSettingKey
                     
-                    if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                    if(self.appCredentials != nil) {
+                        self.setAppCredentials(withClientId: self.appCredentials!.username, withClientSecret: self.appCredentials!.password)
+                    } else if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
+                        self.setAppCredentials(withClientId: clientId,withClientSecret: clientSecret)
                     }
                     
-                    if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                        self.userCredentials = Credentials(username: username, password: password)
+                    if(self.appCredentials != nil) {
+                        self.setUserCredentials(withUsername: self.appCredentials!.username, withPassword: self.appCredentials!.password)
+                    } else if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
+                        self.setUserCredentials(withUsername: username, withPassword: password)
                     }
                     
                     if let tags = data[CoreConstants.enableSystemTags] as? Bool {
                         self.enableSystemTags = tags
                     }
                     
-                    if let env = data[environmentKey] as? String {
+                    if let envEndpoint = self.env {
+                        self.env = envEndpoint
+                    } else if let env = data[environmentKey] as? String {
                         self.setEnvironment(env)
                     }
                 }
@@ -141,6 +149,20 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     fileprivate override init() {
         super.init()
+    }
+    
+    /**
+     Allows changing the current appcredentials.
+     */
+    public func setAppCredentials(withClientId: String , withClientSecret: String) {
+        self.appCredentials = Credentials(clientId: withClientId, clientSecret: withClientSecret)
+    }
+    
+    /**
+     Allows changing the current user credential.
+     */
+    public func setUserCredentials(withUsername: String , withPassword: String) {
+        self.userCredentials = Credentials(username: withUsername, password: withPassword)
     }
     
     /**
@@ -161,7 +183,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
         self.completionHandler = handler
         self.setup()
     }
-    
     
     fileprivate func setup() {
         
