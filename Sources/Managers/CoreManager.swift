@@ -132,8 +132,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
                         self.enableSystemTags = tags
                     }
                     
-                    if(self.env != nil) {
-                        self.setEnvironment(self.env!)
+                    if let envEndpoint = self.env {
+                        self.env = envEndpoint
                     } else if let env = data[environmentKey] as? String {
                         self.setEnvironment(env)
                     }
@@ -163,15 +163,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
      */
     public func setUserCredentials(withUsername: String , withPassword: String) {
         self.userCredentials = Credentials(username: withUsername, password: withPassword)
-    }
-    
-    /**
-     Allows changing the current environment against which the connections are made.
-     
-     - parameter env:   The env to set
-     */
-    public func setEndpoint(_ env: String) {
-        self.env = env
     }
     
     /**
