@@ -2,7 +2,7 @@
 
 # HALO iOS SDK
 
-![](https://img.shields.io/badge/Swift-2.0-blue.svg) ![](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg) ![](https://img.shields.io/badge/CocoaPods-compatible-brightgreen.svg)
+![](https://img.shields.io/badge/Swift-4.0-blue.svg) ![](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg) ![](https://img.shields.io/badge/CocoaPods-compatible-brightgreen.svg)
 
 ## Getting started
 
