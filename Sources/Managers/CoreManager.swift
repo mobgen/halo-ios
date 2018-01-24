@@ -331,6 +331,16 @@ open class CoreManager: NSObject, HaloManager, Logger {
         }
     }
     
+    //add new methods
+    open func notificationAction (action : String) {
+        self.addons.forEach { (addon) in
+            if let notifAddon = addon as? HaloNotificationsAddon {
+                notifAddon.notificationAction(eventAction: action)
+            }
+        }
+    }
+    //end new methods
+    
     @objc(applicationWillFinishLaunching:)
     open func applicationWillFinishLaunching(_ application: UIApplication) -> Bool {
         return self.addons.reduce(true) { $0 && ($1 as? HaloLifecycleAddon)?.applicationWillFinishLaunching(application, core: self) ?? true }
