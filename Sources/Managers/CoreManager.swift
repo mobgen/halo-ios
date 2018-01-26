@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager, Logger {
@@ -331,15 +332,30 @@ open class CoreManager: NSObject, HaloManager, Logger {
         }
     }
     
-    //add new methods
-    open func notificationAction (action : String) {
+    @objc(center:didReceive:core:completionHandler:)
+    @available(iOS 10.0, *)
+    open func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,core: Halo.CoreManager,fetchCompletionHandler completionHandler: @escaping () -> Void) -> Void {
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? HaloNotificationsAddon {
-                notifAddon.notificationAction(eventAction: action)
+                notifAddon.userNotificationCenter(center, didReceive: response, core: self, fetchCompletionHandler: completionHandler)
             }
         }
     }
-    //end new methods
+    
+    open func notificationAction(notificationEvent : HaloNotificationEvent, completionHandler handler: @escaping (HaloNotificationEvent?,HaloError?) -> Void) -> Void {
+        self.sendNotificationEvent(notificationEvent) { (response, result) in
+            switch result {
+            case .success(let haloNotificationEvent, _):
+                 if let event = haloNotificationEvent {
+                    handler(event, nil)
+                    print("Send a push event: " + event.action)
+                }
+            case .failure(let error):
+                handler(nil,error)
+                print("Push event error: " + error.description)
+            }
+        }
+    }
     
     @objc(applicationWillFinishLaunching:)
     open func applicationWillFinishLaunching(_ application: UIApplication) -> Bool {

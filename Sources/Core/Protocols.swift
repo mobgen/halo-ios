@@ -103,8 +103,10 @@ public protocol HaloNotificationsAddon: HaloAddon {
 
     @objc(application:didReceiveRemoteNotification:core:userInteraction:fetchCompletionHandler:)
     func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: Halo.CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Void
-    @objc(action:)
-    func notificationAction(eventAction : String)
+    
+    @objc(center:didReceive:core:completionHandler:)
+    @available(iOSApplicationExtension 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, core: Halo.CoreManager, fetchCompletionHandler completionHandler: @escaping () -> Void) -> Void
 }
 
 @objc
