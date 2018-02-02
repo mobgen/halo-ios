@@ -332,7 +332,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         }
     }
     
-    @objc(center:didReceive:core:completionHandler:)
+    @objc(userNotificationCenter:didReceive:core:completionHandler:)
     @available(iOS 10.0, *)
     open func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,core: Halo.CoreManager,fetchCompletionHandler completionHandler: @escaping () -> Void) -> Void {
         self.addons.forEach { (addon) in
