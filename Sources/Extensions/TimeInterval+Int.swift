@@ -10,8 +10,8 @@ import Foundation
 
 extension TimeInterval {
     
-    var intValue : Int {
-        return Int(self)
+    var intValue : Int64 {
+        return Int64(self)
     }
     
 }
