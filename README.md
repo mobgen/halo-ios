@@ -2,15 +2,15 @@
 
 # HALO iOS SDK
 
-![](https://img.shields.io/badge/Swift-2.0-blue.svg) ![](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg) ![](https://img.shields.io/badge/CocoaPods-compatible-brightgreen.svg)
+![](https://img.shields.io/badge/Swift-4.0-blue.svg) ![](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg) ![](https://img.shields.io/badge/CocoaPods-compatible-brightgreen.svg)
 
 ## Getting started
 
-A getting started guide and some other information related to integrating and setting up the SDK can be found in the [wiki](https://bitbucket.org/mobgen/halo-sdk-ios/wiki/Home).
+A getting started guide and some other information related to integrating and setting up the SDK can be found in the [wiki](https://mobgen.github.io/halo-documentation/ios_getting_started.html).
 
 ## API documentation
 
-The latest API documentation (Swift oriented) can be checked [here](http://borjasantos.bitbucket.org/docs/ios/halo-sdk/).
+The latest API documentation (Swift oriented) can be checked [here](https://mobgen.github.io/halo-documentation/ios_home.html).
 
 ## Contribute
 

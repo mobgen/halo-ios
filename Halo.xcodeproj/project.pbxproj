@@ -248,6 +248,11 @@
 		00CD29AE1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		159C11451FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
+		159C11461FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
+		159C11471FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
+		15B5B206201B774A00DE7E8C /* HaloNotificationEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B5B205201B774A00DE7E8C /* HaloNotificationEvent.swift */; };
+		15B5B208201B77BC00DE7E8C /* CoreManager+NotificationEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B5B207201B77BC00DE7E8C /* CoreManager+NotificationEvents.swift */; };
 		281DE8BD1F1662D0005DD8B0 /* NetworkManager+Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281DE8BC1F1662D0005DD8B0 /* NetworkManager+Reachability.swift */; };
 		282A5CEE1EFC13AE00EFB996 /* ModulesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A5CED1EFC13AE00EFB996 /* ModulesQuery.swift */; };
 		283CDB231EB1E9B2007C6098 /* BatchResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */; };
@@ -467,6 +472,9 @@
 		00CD29A71E38BB7400CCFB2D /* FileLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		159C11441FC717C300917A57 /* TimeInterval+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Int.swift"; sourceTree = "<group>"; };
+		15B5B205201B774A00DE7E8C /* HaloNotificationEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotificationEvent.swift; sourceTree = "<group>"; };
+		15B5B207201B77BC00DE7E8C /* CoreManager+NotificationEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+NotificationEvents.swift"; sourceTree = "<group>"; };
 		281DE8BC1F1662D0005DD8B0 /* NetworkManager+Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Reachability.swift"; sourceTree = "<group>"; };
 		282A5CED1EFC13AE00EFB996 /* ModulesQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesQuery.swift; sourceTree = "<group>"; };
 		283CDB221EB1E9B2007C6098 /* BatchResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchResultOperation.swift; sourceTree = "<group>"; };
@@ -606,6 +614,7 @@
 				004612211E0BE20000B9B306 /* UIImage+Async.swift */,
 				00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */,
 				283CDB271EB20D00007C6098 /* KeyPath.swift */,
+				159C11441FC717C300917A57 /* TimeInterval+Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -646,6 +655,7 @@
 				004612311E0BE20000B9B306 /* CoreManager+Addons.swift */,
 				004612321E0BE20000B9B306 /* CoreManager+Auth.swift */,
 				004612331E0BE20000B9B306 /* CoreManager+Modules.swift */,
+				15B5B207201B77BC00DE7E8C /* CoreManager+NotificationEvents.swift */,
 				004612351E0BE20000B9B306 /* Manager.swift */,
 				004612391E0BE20000B9B306 /* NetworkManager.swift */,
 				004612361E0BE20000B9B306 /* NetworkManager+Device.swift */,
@@ -659,6 +669,7 @@
 		0046123A1E0BE20000B9B306 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				15B5B204201B771A00DE7E8C /* NotificationEvent */,
 				287E534F1ED5CD9D00BAC7F8 /* Content */,
 				287E53511ED5CDC000BAC7F8 /* ContentSync */,
 				0046123D1E0BE20000B9B306 /* Device.swift */,
@@ -906,6 +917,14 @@
 				00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */,
 			);
 			path = Logging;
+			sourceTree = "<group>";
+		};
+		15B5B204201B771A00DE7E8C /* NotificationEvent */ = {
+			isa = PBXGroup;
+			children = (
+				15B5B205201B774A00DE7E8C /* HaloNotificationEvent.swift */,
+			);
+			name = NotificationEvent;
 			sourceTree = "<group>";
 		};
 		283CDB261EB1EA1E007C6098 /* InstanceBatch */ = {
@@ -1331,6 +1350,7 @@
 				000F31EE1E27772400059909 /* SyncQuery.swift in Sources */,
 				000F32061E27785300059909 /* NetworkManager+Device.swift in Sources */,
 				000F31ED1E27772400059909 /* SearchQuery.swift in Sources */,
+				159C11461FC717C300917A57 /* TimeInterval+Int.swift in Sources */,
 				000F32181E27785C00059909 /* DeviceInfo.swift in Sources */,
 				285B8AFD1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */,
 				000F32071E27785300059909 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
@@ -1405,6 +1425,7 @@
 				000F31F21E27772400059909 /* SyncQuery.swift in Sources */,
 				000F32111E27785400059909 /* NetworkManager+Device.swift in Sources */,
 				000F31F11E27772400059909 /* SearchQuery.swift in Sources */,
+				159C11471FC717C300917A57 /* TimeInterval+Int.swift in Sources */,
 				000F32261E27785C00059909 /* DeviceInfo.swift in Sources */,
 				285B8AFE1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */,
 				000F32121E27785400059909 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
@@ -1498,6 +1519,8 @@
 				285B8AFC1F445ADD00ABE570 /* AuthManager+Pocket.swift in Sources */,
 				004612771E0BE20000B9B306 /* DeviceInfo.swift in Sources */,
 				004612711E0BE20000B9B306 /* NetworkManager+NSURLSessionDelegate.swift in Sources */,
+				15B5B208201B77BC00DE7E8C /* CoreManager+NotificationEvents.swift in Sources */,
+				15B5B206201B774A00DE7E8C /* HaloNotificationEvent.swift in Sources */,
 				285B8AF31F442B2E00ABE570 /* Pocket.swift in Sources */,
 				00CC8FC31E5C57E3006BE149 /* UIColor+Hex.swift in Sources */,
 				00CD29A81E38BB7400CCFB2D /* FileLogger.swift in Sources */,
@@ -1543,6 +1566,7 @@
 				004612851E0BE20000B9B306 /* DataProvider.swift in Sources */,
 				0046125D1E0BE20000B9B306 /* UIDevice+Extra.swift in Sources */,
 				003CC0CA1E54675D008B0532 /* ModuleFieldType.swift in Sources */,
+				159C11451FC717C300917A57 /* TimeInterval+Int.swift in Sources */,
 				0046127D1E0BE20000B9B306 /* SyncResult.swift in Sources */,
 				004612651E0BE20000B9B306 /* KeychainHelper.swift in Sources */,
 				004612861E0BE20000B9B306 /* NetworkDataProvider.swift in Sources */,

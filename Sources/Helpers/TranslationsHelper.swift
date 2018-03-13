@@ -11,7 +11,8 @@ import Foundation
 @objc(HaloTranslationsHelper)
 open class TranslationsHelper: NSObject {
 
-    fileprivate var moduleId: String = ""
+    fileprivate var moduleId: String?
+    fileprivate var moduleName: String?
     fileprivate var keyField: String?
     fileprivate var valueField: String?
     fileprivate var defaultText: String?
@@ -34,6 +35,15 @@ open class TranslationsHelper: NSObject {
         self.keyField = keyField
         self.valueField = valueField
         self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
+    }
+    
+    public convenience init(moduleName: String, locale: Locale, keyField: String, valueField: String) {
+        self.init()
+        self.moduleName = moduleName
+        self.locale = locale
+        self.keyField = keyField
+        self.valueField = valueField
+        self.syncQuery = SyncQuery(moduleName: moduleName).locale(locale)
     }
 
     @objc(addCompletionHandler:)
@@ -119,7 +129,11 @@ open class TranslationsHelper: NSObject {
 
     open func clearAllTexts() -> Void {
         translationsMap.removeAll()
-        Manager.content.removeSyncedInstances(moduleId: moduleId)
+        if let id = moduleId {
+            Manager.content.removeSyncedInstances(module: id)
+        } else  if let name = moduleId {
+            Manager.content.removeSyncedInstances(module: name)
+        }
     }
     
     open func load() -> Void {
@@ -129,14 +143,14 @@ open class TranslationsHelper: NSObject {
         }
     
         isLoading = true
-        
-        Manager.content.sync(query: syncQuery) { moduleId, error in
-            self.processSyncResult(moduleId: moduleId, error: error)
+        Manager.content.sync(query: syncQuery) { module, error in
+            self.processSyncResult(module: module, error: error)
             self.completionHandlers.forEach { $0(error) }
         }
+
     }
     
-    fileprivate func processSyncResult(moduleId: String, error: HaloError?) {
+    fileprivate func processSyncResult(module : String, error: HaloError?) {
         
         self.isLoading = false
         
@@ -145,7 +159,13 @@ open class TranslationsHelper: NSObject {
             return
         }
         
-        let instances = Manager.content.getSyncedInstances(moduleId: moduleId)
+        var instances : [ContentInstance]
+        instances = Manager.content.getSyncedInstances(module: module)
+        setTrasnlationsMap(instances: instances)
+        
+    }
+    
+    fileprivate func setTrasnlationsMap(instances : [ContentInstance]){
         
         if let keyField = self.keyField, let valueField = self.valueField {
             

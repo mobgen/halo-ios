@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 @objc(HaloCoreManager)
 open class CoreManager: NSObject, HaloManager, Logger {
@@ -68,6 +69,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public var appCredentials: Credentials?
     public var userCredentials: Credentials?
     
+    public var env: String?
+    
     public var frameworkVersion: String {
         return Bundle(identifier: "com.mobgen.Halo")!.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
@@ -114,19 +117,25 @@ open class CoreManager: NSObject, HaloManager, Logger {
                     let passwordKey = CoreConstants.passwordKey
                     let environmentKey = CoreConstants.environmentSettingKey
                     
-                    if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
-                        self.appCredentials = Credentials(clientId: clientId, clientSecret: clientSecret)
+                    if(self.appCredentials != nil) {
+                        self.setAppCredentials(withClientId: self.appCredentials!.username, withClientSecret: self.appCredentials!.password)
+                    } else if let clientId = data[clientIdKey] as? String, let clientSecret = data[clientSecretKey] as? String {
+                        self.setAppCredentials(withClientId: clientId,withClientSecret: clientSecret)
                     }
                     
-                    if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
-                        self.userCredentials = Credentials(username: username, password: password)
+                    if(self.appCredentials != nil) {
+                        self.setUserCredentials(withUsername: self.appCredentials!.username, withPassword: self.appCredentials!.password)
+                    } else if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
+                        self.setUserCredentials(withUsername: username, withPassword: password)
                     }
                     
                     if let tags = data[CoreConstants.enableSystemTags] as? Bool {
                         self.enableSystemTags = tags
                     }
                     
-                    if let env = data[environmentKey] as? String {
+                    if let envEndpoint = self.env {
+                        self.env = envEndpoint
+                    } else if let env = data[environmentKey] as? String {
                         self.setEnvironment(env)
                     }
                 }
@@ -141,6 +150,20 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
     fileprivate override init() {
         super.init()
+    }
+    
+    /**
+     Allows changing the current appcredentials.
+     */
+    public func setAppCredentials(withClientId: String , withClientSecret: String) {
+        self.appCredentials = Credentials(clientId: withClientId, clientSecret: withClientSecret)
+    }
+    
+    /**
+     Allows changing the current user credential.
+     */
+    public func setUserCredentials(withUsername: String , withPassword: String) {
+        self.userCredentials = Credentials(username: withUsername, password: withPassword)
     }
     
     /**
@@ -161,7 +184,6 @@ open class CoreManager: NSObject, HaloManager, Logger {
         self.completionHandler = handler
         self.setup()
     }
-    
     
     fileprivate func setup() {
         
@@ -306,6 +328,31 @@ open class CoreManager: NSObject, HaloManager, Logger {
         self.addons.forEach { (addon) in
             if let notifAddon = addon as? HaloNotificationsAddon {
                 notifAddon.application(app, didReceiveRemoteNotification: userInfo, core: self, userInteraction: user, fetchCompletionHandler: completionHandler)
+            }
+        }
+    }
+    
+    @objc(userNotificationCenter:didReceive:core:completionHandler:)
+    @available(iOS 10.0, *)
+    open func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,core: Halo.CoreManager,fetchCompletionHandler completionHandler: @escaping () -> Void) -> Void {
+        self.addons.forEach { (addon) in
+            if let notifAddon = addon as? HaloNotificationsAddon {
+                notifAddon.userNotificationCenter(center, didReceive: response, core: self, fetchCompletionHandler: completionHandler)
+            }
+        }
+    }
+    
+    open func notificationAction(notificationEvent : HaloNotificationEvent, completionHandler handler: @escaping (HaloNotificationEvent?,HaloError?) -> Void) -> Void {
+        self.sendNotificationEvent(notificationEvent) { (response, result) in
+            switch result {
+            case .success(let haloNotificationEvent, _):
+                 if let event = haloNotificationEvent {
+                    handler(event, nil)
+                    print("Send a push event: " + event.action)
+                }
+            case .failure(let error):
+                handler(nil,error)
+                print("Push event error: " + error.description)
             }
         }
     }

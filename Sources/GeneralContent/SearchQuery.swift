@@ -133,7 +133,7 @@ open class SearchQuery: NSObject {
 
         if let tags = self.tags {
             let tagsList = tags.map { $0.toDictionary() }
-            dict[Keys.Tags] = tagsList
+            dict[Keys.SegmentTags] = tagsList
         }
 
         if let include = self.populateFields {
@@ -147,7 +147,16 @@ open class SearchQuery: NSObject {
         if self.segmentWithDevice {
             if let device = Halo.Manager.core.device, let tags = device.tags {
                 if tags.count > 0 {
-                    dict[Keys.SegmentTags] = tags.map { $1.toDictionary() }
+                    if dict[Keys.SegmentTags] != nil {
+                        let userTags = tags.map { $1.toDictionary() }
+                        var existingItems = dict[Keys.SegmentTags] as? [[String: Any]] ?? [[String: Any]]()
+                        userTags.forEach({ (tag) in
+                            existingItems.append(tag)
+                        })
+                        dict[Keys.SegmentTags] = existingItems
+                    } else {
+                        dict[Keys.SegmentTags] = tags.map { $1.toDictionary() }
+                    }
                 }
             }
         }
