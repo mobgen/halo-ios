@@ -123,8 +123,8 @@ open class CoreManager: NSObject, HaloManager, Logger {
                         self.setAppCredentials(withClientId: clientId,withClientSecret: clientSecret)
                     }
                     
-                    if(self.appCredentials != nil) {
-                        self.setUserCredentials(withUsername: self.appCredentials!.username, withPassword: self.appCredentials!.password)
+                    if(self.userCredentials != nil) {
+                        self.setUserCredentials(withUsername: self.userCredentials!.username, withPassword: self.userCredentials!.password)
                     } else if let username = data[usernameKey] as? String, let password = data[passwordKey] as? String {
                         self.setUserCredentials(withUsername: username, withPassword: password)
                     }

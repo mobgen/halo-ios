@@ -19,10 +19,9 @@ open class FileLogger: NSObject, Logger {
         super.init()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
 
-        if let bundleName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") {
-            let filename = "\(bundleName)-\(NSDate().timeIntervalSince1970).txt"
-            filePath = dir?.appendingPathComponent(filename)
-        }
+        let filename = "\("Halo")-\(NSDate().timeIntervalSince1970).txt"
+        filePath = dir?.appendingPathComponent(filename)
+
     }
     
     public func logMessage(_ message: String, level: LogLevel) {
