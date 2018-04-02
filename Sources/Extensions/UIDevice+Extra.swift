@@ -47,6 +47,16 @@ public extension UIDevice {
              "iPhone9,3"    : return "iPhone 7"
         case "iPhone9,2",
              "iPhone9,4"    : return "iPhone 7 Plus"
+
+        case "iPhone10,1",
+             "iPhone10,4"    : return "iPhone 8"
+        case "iPhone10,2",
+             "iPhone10,5"    : return "iPhone 8 Plus"
+
+        case "iPhone10,3",
+             "iPhone10,6"    : return "iPhone X"
+
+
         // iPad
         case "iPad1,1"		: return "iPad 1"
         case "iPad2,1",
@@ -74,11 +84,21 @@ public extension UIDevice {
         case "iPad5,1",
              "iPad5,2"      : return  "iPad Mini 4"
         case "iPad5,3",
-             "iPad5,4"		: return "iPad Air 2"
+             "iPad5,4",
+             "iPad6,11",
+             "iPad6,12"		: return "iPad Air 2"
+
         case "iPad6,3",
              "iPad6,4"      : return "iPad Pro (9.7 inch)"
         case "iPad6,7",
              "iPad6,8"      : return "iPad Pro (12.9 inch)"
+
+        case "iPad7,1",
+             "iPad7,2"      : return "iPad Pro (12.9 inch, 2nd generation)"
+
+        case "iPad7,3",
+             "iPad7,4"      : return "iPad Pro (10.5-inch)"
+
         // iPod
         case "iPod1,1"		: return "iPod touch 1G"
         case "iPod2,1"		: return "iPod touch 2G"
