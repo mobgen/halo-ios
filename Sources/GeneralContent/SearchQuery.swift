@@ -55,6 +55,7 @@ open class SearchQuery: NSObject {
     struct Keys {
         static let ModuleName = "moduleName"
         static let ModuleIds = "moduleIds"
+        static let ModuleNames = "moduleNames"
         static let InstanceIds = "instanceIds"
         static let RelatedTo = "relatedTo"
         static let RelatedToFieldName = "fieldName"
@@ -73,6 +74,7 @@ open class SearchQuery: NSObject {
 
     private(set) var moduleName: String?
     private(set) var moduleIds: [String]?
+    private(set) var moduleNames: [String]?
     private(set) var instanceIds: [String]?
     private(set) var relatedTo: [[String: Any]] = []
     private(set) var conditions: [String: Any]?
@@ -109,6 +111,10 @@ open class SearchQuery: NSObject {
 
         if let moduleName = self.moduleName {
             dict[Keys.ModuleName] = moduleName
+        }
+
+        if let moduleNames = self.moduleNames {
+            dict[Keys.ModuleNames] = moduleNames
         }
         
         if let instances = self.instanceIds {
@@ -235,6 +241,13 @@ open class SearchQuery: NSObject {
     @discardableResult
     open func moduleName(_ name: String) -> Halo.SearchQuery {
         self.moduleName = name
+        return self
+    }
+
+    @objc(moduleNames:)
+    @discardableResult
+    open func moduleNames(_ names: [String]) -> Halo.SearchQuery {
+        self.moduleNames = names
         return self
     }
     
