@@ -181,7 +181,6 @@
 		004612891E0BE20000B9B306 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612541E0BE20000B9B306 /* Request.swift */; };
 		0046128E1E0BE20C00B9B306 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128C1E0BE20C00B9B306 /* KeychainItemAccessibility.swift */; };
 		0046128F1E0BE20C00B9B306 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */; };
-		004612931E0BE21400B9B306 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 004612911E0BE21400B9B306 /* halo.cer */; };
 		004612B81E0BE29A00B9B306 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004612A71E0BE27B00B9B306 /* Halo.framework */; };
 		004612E31E0BE49F00B9B306 /* DummyAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004612C01E0BE49000B9B306 /* DummyAddon.swift */; };
 		004612E51E0BE4A700B9B306 /* content_instance.json in Resources */ = {isa = PBXBuildFile; fileRef = 004612C31E0BE49000B9B306 /* content_instance.json */; };
@@ -227,11 +226,6 @@
 		009961581C32A2F200EC72F9 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC6F1BCFB788004216EE /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		009961591C32A2F200EC72F9 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC701BCFB788004216EE /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0099615A1C32A2F200EC72F9 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 004FEC711BCFB788004216EE /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		009CD8961E1E4D9A005168D7 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 004612911E0BE21400B9B306 /* halo.cer */; };
-		009CD8971E1E4D9A005168D7 /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 004612911E0BE21400B9B306 /* halo.cer */; };
-		009CD89D1E1E4DB8005168D7 /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 009CD89B1E1E4DB8005168D7 /* mobgen.cer */; };
-		009CD89E1E1E4DB8005168D7 /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 009CD89B1E1E4DB8005168D7 /* mobgen.cer */; };
-		009CD8A61E1E99A3005168D7 /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 009CD89B1E1E4DB8005168D7 /* mobgen.cer */; };
 		00A409221D0FE72F005D4FB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A409211D0FE72F005D4FB0 /* Foundation.framework */; };
 		00AA69501D268E5B00F0C455 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E2B5A1C524DAB00FACAB2 /* libz.tbd */; };
 		00CC8FC31E5C57E3006BE149 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */; };
@@ -248,6 +242,15 @@
 		00CD29AE1E38BBD000CCFB2D /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */; };
 		00F1060E1D99416A00557900 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; };
 		00F106131D9946A100557900 /* Halo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 006A5FAD1B318CAC0045395A /* Halo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0D037F9220D285CB00F581EF /* zhalo2018Cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9120D285CB00F581EF /* zhalo2018Cert.cer */; };
+		0D037F9320D285CB00F581EF /* zhalo2018Cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9120D285CB00F581EF /* zhalo2018Cert.cer */; };
+		0D037F9420D285CB00F581EF /* zhalo2018Cert.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9120D285CB00F581EF /* zhalo2018Cert.cer */; };
+		0D037F9720D2864500F581EF /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9520D2864400F581EF /* mobgen.cer */; };
+		0D037F9820D2864500F581EF /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9520D2864400F581EF /* mobgen.cer */; };
+		0D037F9920D2864500F581EF /* mobgen.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9520D2864400F581EF /* mobgen.cer */; };
+		0D037F9A20D2864500F581EF /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9620D2864500F581EF /* halo.cer */; };
+		0D037F9B20D2864500F581EF /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9620D2864500F581EF /* halo.cer */; };
+		0D037F9C20D2864500F581EF /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9620D2864500F581EF /* halo.cer */; };
 		159C11451FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
 		159C11461FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
 		159C11471FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
@@ -411,7 +414,6 @@
 		004612541E0BE20000B9B306 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		0046128C1E0BE20C00B9B306 /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		0046128D1E0BE20C00B9B306 /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
-		004612911E0BE21400B9B306 /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.cer; sourceTree = "<group>"; };
 		0046129A1E0BE26A00B9B306 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		004612A71E0BE27B00B9B306 /* Halo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Halo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		004612B31E0BE29A00B9B306 /* Halo-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Halo-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -465,13 +467,15 @@
 		008E2B061C5132DC00FACAB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		008E2B581C524D7F00FACAB2 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		008E2B5A1C524DAB00FACAB2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		009CD89B1E1E4DB8005168D7 /* mobgen.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobgen.cer; sourceTree = "<group>"; };
 		00A409211D0FE72F005D4FB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		00CC8FC21E5C57E3006BE149 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		00CD29A31E38BB5D00CCFB2D /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		00CD29A71E38BB7400CCFB2D /* FileLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		00CD29AB1E38BBD000CCFB2D /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		00F106141D9946B700557900 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		0D037F9120D285CB00F581EF /* zhalo2018Cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = zhalo2018Cert.cer; sourceTree = "<group>"; };
+		0D037F9520D2864400F581EF /* mobgen.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobgen.cer; sourceTree = "<group>"; };
+		0D037F9620D2864500F581EF /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.cer; sourceTree = "<group>"; };
 		159C11441FC717C300917A57 /* TimeInterval+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Int.swift"; sourceTree = "<group>"; };
 		15B5B205201B774A00DE7E8C /* HaloNotificationEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotificationEvent.swift; sourceTree = "<group>"; };
 		15B5B207201B77BC00DE7E8C /* CoreManager+NotificationEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+NotificationEvents.swift"; sourceTree = "<group>"; };
@@ -741,9 +745,10 @@
 		004612901E0BE21400B9B306 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				009CD89B1E1E4DB8005168D7 /* mobgen.cer */,
+				0D037F9120D285CB00F581EF /* zhalo2018Cert.cer */,
+				0D037F9620D2864500F581EF /* halo.cer */,
+				0D037F9520D2864400F581EF /* mobgen.cer */,
 				004613051E0BE86500B9B306 /* Halo.h */,
-				004612911E0BE21400B9B306 /* halo.cer */,
 				004613001E0BE55000B9B306 /* Info-iOS.plist */,
 				004613011E0BE55000B9B306 /* Info-tvOS.plist */,
 				004613021E0BE55000B9B306 /* Info-watchOS.plist */,
@@ -1261,8 +1266,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009CD89D1E1E4DB8005168D7 /* mobgen.cer in Resources */,
-				009CD8961E1E4D9A005168D7 /* halo.cer in Resources */,
+				0D037F9820D2864500F581EF /* mobgen.cer in Resources */,
+				0D037F9B20D2864500F581EF /* halo.cer in Resources */,
+				0D037F9320D285CB00F581EF /* zhalo2018Cert.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1270,8 +1276,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009CD89E1E1E4DB8005168D7 /* mobgen.cer in Resources */,
-				009CD8971E1E4D9A005168D7 /* halo.cer in Resources */,
+				0D037F9920D2864500F581EF /* mobgen.cer in Resources */,
+				0D037F9C20D2864500F581EF /* halo.cer in Resources */,
+				0D037F9420D285CB00F581EF /* zhalo2018Cert.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1286,8 +1293,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009CD8A61E1E99A3005168D7 /* mobgen.cer in Resources */,
-				004612931E0BE21400B9B306 /* halo.cer in Resources */,
+				0D037F9720D2864500F581EF /* mobgen.cer in Resources */,
+				0D037F9A20D2864500F581EF /* halo.cer in Resources */,
+				0D037F9220D285CB00F581EF /* zhalo2018Cert.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

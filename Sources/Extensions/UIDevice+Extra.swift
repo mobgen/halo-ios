@@ -4,7 +4,7 @@
 //
 //  Created by Borja Santos-Díez on 07/08/15.
 //  Copyright © 2015 MOBGEN Technology. All rights reserved.
-//
+//  https://www.theiphonewiki.com/wiki/Models
 
 import UIKit
 
@@ -47,6 +47,16 @@ public extension UIDevice {
              "iPhone9,3"    : return "iPhone 7"
         case "iPhone9,2",
              "iPhone9,4"    : return "iPhone 7 Plus"
+
+        case "iPhone10,1",
+             "iPhone10,4"    : return "iPhone 8"
+        case "iPhone10,2",
+             "iPhone10,5"    : return "iPhone 8 Plus"
+
+        case "iPhone10,3",
+             "iPhone10,6"    : return "iPhone X"
+
+
         // iPad
         case "iPad1,1"		: return "iPad 1"
         case "iPad2,1",
@@ -74,11 +84,25 @@ public extension UIDevice {
         case "iPad5,1",
              "iPad5,2"      : return  "iPad Mini 4"
         case "iPad5,3",
-             "iPad5,4"		: return "iPad Air 2"
+             "iPad5,4"      : return "iPad Air 2"
+
+        case "iPad6,11",
+             "iPad6,12"     : return "iPad (5th generation)"
+
         case "iPad6,3",
              "iPad6,4"      : return "iPad Pro (9.7 inch)"
         case "iPad6,7",
              "iPad6,8"      : return "iPad Pro (12.9 inch)"
+
+        case "iPad7,1",
+             "iPad7,2"      : return "iPad Pro (12.9 inch, 2nd generation)"
+
+        case "iPad7,3",
+             "iPad7,4"      : return "iPad Pro (10.5-inch)"
+
+        case "iPad7,5",
+             "iPad7,6"      : return "iPad (6th generation)"
+
         // iPod
         case "iPod1,1"		: return "iPod touch 1G"
         case "iPod2,1"		: return "iPod touch 2G"
@@ -86,6 +110,7 @@ public extension UIDevice {
         case "iPod4,1"		: return "iPod touch 4"
         case "iPod5,1"		: return "iPod touch 5"
         case "iPod7,1"		: return "iPod touch 6"
+
         // Apple Watch
         case "Watch1,1",
              "Watch1,2"		: return "Apple Watch"
@@ -93,10 +118,17 @@ public extension UIDevice {
              "Watch2,4"     : return "Apple Watch Series 2"
         case "Watch2,6",
              "Watch2,7"     : return "Apple Watch Series 1"
+        case "Watch3,1",
+             "Watch3,2",
+             "Watch3,3",
+             "Watch3,4"     : return "Apple Watch Series 3"
+
         // Apple TV
         case "AppleTV2,1"   : return "Apple TV 2G"
         case "AppleTV3,1",
              "AppleTV3,2"	: return "Apple TV 3"
+        case "AppleTV5,3"   : return "Apple TV (4th generation)"
+        case "AppleTV6,2"   : return "Apple TV 4K"
         // Others
         case "x86_64",
              "i386"         : return "Simulator"
