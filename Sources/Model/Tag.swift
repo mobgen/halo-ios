@@ -101,7 +101,7 @@ public final class Tag: NSObject, NSCoding {
     }
 
     public override func isEqual(_ object: Any?) -> Bool {
-        if type(of: object) != type(of: self) {
+        if Swift.type(of: object) != Swift.type(of: self) {
             return false
         } else {
             let other = object as! Halo.Tag
