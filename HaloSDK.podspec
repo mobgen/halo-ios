@@ -9,6 +9,7 @@ Pod::Spec.new do |spec|
   spec.source           = { :git => 'https://github.com/mobgen/halo-ios.git', :tag => '2.6.0' }
   spec.source_files     = 'Sources/**/*.swift', 'Libraries/**/*.swift'
 
+
   spec.platforms        = { :ios => '8.0' }
   spec.requires_arc     = true
   spec.frameworks       = 'Foundation', 'SystemConfiguration'
