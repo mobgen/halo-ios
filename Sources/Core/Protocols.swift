@@ -65,7 +65,7 @@ public protocol HaloLifecycleAddon: HaloAddon {
     func applicationWillFinishLaunching(_ app: UIApplication, core: Halo.CoreManager) -> Bool
     
     @objc(applicationDidFinishLaunching:core:launchOptions:)
-    func applicationDidFinishLaunching(_ app: UIApplication, core: Halo.CoreManager, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool
+    func applicationDidFinishLaunching(_ app: UIApplication, core: Halo.CoreManager, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool
     
     @objc(applicationDidEnterBackground:core:)
     func applicationDidEnterBackground(_ app: UIApplication, core: Halo.CoreManager) -> Void
@@ -84,7 +84,7 @@ public protocol HaloLifecycleAddon: HaloAddon {
 public protocol HaloDeeplinkingAddon: HaloAddon {
     
     @objc(application:openURL:options:)
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool
     
     @objc(application:openURL:sourceApplication:annotation:)
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool

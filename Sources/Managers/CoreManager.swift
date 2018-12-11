@@ -363,7 +363,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     }
     
     @objc(applicationDidFinishLaunching:launchOptions:)
-    open func applicationDidFinishLaunching(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    open func applicationDidFinishLaunching(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return self.addons.reduce(true) { $0 && ($1 as? HaloLifecycleAddon)?.applicationDidFinishLaunching(application, core: self, didFinishLaunchingWithOptions: launchOptions) ?? true }
     }
     
@@ -378,7 +378,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     }
     
     @objc(application:openURL:options:)
-    open func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    open func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return self.addons.reduce(false) { $0 || ($1 as? HaloDeeplinkingAddon)?.application(app, open: url, options: options) ?? false }
     }
     

@@ -12,11 +12,11 @@ import UIKit
 /// Helper class intended to be used as superclass by any AppDelegate (Swift only)
 open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
     
-    open func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    open func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return Manager.core.applicationWillFinishLaunching(application)
     }
     
-    open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return Manager.core.applicationDidFinishLaunching(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -53,7 +53,7 @@ open class HaloAppDelegate: UIResponder, UIApplicationDelegate {
         Manager.core.application(application, didReceiveRemoteNotification: userInfo as [NSObject : AnyObject], userInteraction: true)
     }
     
-    open func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    open func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return Manager.core.application(app, open: url, options: options)
     }
     
