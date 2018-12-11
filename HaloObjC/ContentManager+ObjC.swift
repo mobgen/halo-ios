@@ -112,7 +112,7 @@ public extension ContentManager {
         
         self.sync(query: query) { (moduleId, error) in
             
-            var info: [AnyHashable: String]? = nil
+            var info: [String: Any]? = nil
             
             if let error = error {
                 info = [NSLocalizedDescriptionKey: error.description]
