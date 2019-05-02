@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   spec.license          = 'Apache License, Version 2.0'
   spec.author           = { 'Juan Soilan Lopez' => 'juan.soilan@mobgen.com' }
   spec.source           = { :git => 'https://github.com/mobgen/halo-ios.git', :tag => '2.6.0' }
-  spec.source_files     = 'Sources/**/*.swift', 'Libraries/**/*.swift'
+  spec.source_files     = 'Source/**/*.swift', 'Libraries/**/*.swift'
 
 
   spec.platforms        = { :ios => '8.0' }

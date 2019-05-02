@@ -164,7 +164,7 @@ public final class Device: NSObject, NSCoding {
             
             // Check if credentials match...
             if let device = NSKeyedUnarchiver.unarchiveObject(with: encodedObject) as? Halo.Device,
-                let hash = Manager.core.appCredentials?.hashValue,
+                let hash = Manager.core.appCredentials?.hash,
                 let deviceHash = device.credentialsHash {
                     return (hash == deviceHash) ? device : Device()
             }

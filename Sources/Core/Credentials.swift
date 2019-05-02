@@ -19,8 +19,9 @@ open class Credentials: NSObject {
     var username: String = ""
     var password: String = ""
     var type: CredentialType = .app
-    
-    open override var hashValue: Int {
+
+    // https://developer.apple.com/documentation/xcode_release_notes/xcode_10_2_release_notes/swift_5_release_notes_for_xcode_10_2?language=objc
+    open override var hash: Int {
         return "\(username):\(password)".hashValue
     }
     
