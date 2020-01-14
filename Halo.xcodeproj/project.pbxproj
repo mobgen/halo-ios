@@ -251,6 +251,18 @@
 		0D037F9A20D2864500F581EF /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9620D2864500F581EF /* halo.cer */; };
 		0D037F9B20D2864500F581EF /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9620D2864500F581EF /* halo.cer */; };
 		0D037F9C20D2864500F581EF /* halo.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D037F9620D2864500F581EF /* halo.cer */; };
+		0D34601123CE190800721B72 /* AmazonRootCA2.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600D23CE190700721B72 /* AmazonRootCA2.cer */; };
+		0D34601223CE190800721B72 /* AmazonRootCA2.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600D23CE190700721B72 /* AmazonRootCA2.cer */; };
+		0D34601323CE190800721B72 /* AmazonRootCA2.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600D23CE190700721B72 /* AmazonRootCA2.cer */; };
+		0D34601423CE190800721B72 /* AmazonRootCA3.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600E23CE190800721B72 /* AmazonRootCA3.cer */; };
+		0D34601523CE190800721B72 /* AmazonRootCA3.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600E23CE190800721B72 /* AmazonRootCA3.cer */; };
+		0D34601623CE190800721B72 /* AmazonRootCA3.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600E23CE190800721B72 /* AmazonRootCA3.cer */; };
+		0D34601723CE190800721B72 /* AmazonRootCA4.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600F23CE190800721B72 /* AmazonRootCA4.cer */; };
+		0D34601823CE190800721B72 /* AmazonRootCA4.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600F23CE190800721B72 /* AmazonRootCA4.cer */; };
+		0D34601923CE190800721B72 /* AmazonRootCA4.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34600F23CE190800721B72 /* AmazonRootCA4.cer */; };
+		0D34601A23CE190800721B72 /* AmazonRootCA1.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34601023CE190800721B72 /* AmazonRootCA1.cer */; };
+		0D34601B23CE190800721B72 /* AmazonRootCA1.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34601023CE190800721B72 /* AmazonRootCA1.cer */; };
+		0D34601C23CE190800721B72 /* AmazonRootCA1.cer in Resources */ = {isa = PBXBuildFile; fileRef = 0D34601023CE190800721B72 /* AmazonRootCA1.cer */; };
 		159C11451FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
 		159C11461FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
 		159C11471FC717C300917A57 /* TimeInterval+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C11441FC717C300917A57 /* TimeInterval+Int.swift */; };
@@ -476,6 +488,10 @@
 		0D037F9120D285CB00F581EF /* zhalo2018Cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = zhalo2018Cert.cer; sourceTree = "<group>"; };
 		0D037F9520D2864400F581EF /* mobgen.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobgen.cer; sourceTree = "<group>"; };
 		0D037F9620D2864500F581EF /* halo.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.cer; sourceTree = "<group>"; };
+		0D34600D23CE190700721B72 /* AmazonRootCA2.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonRootCA2.cer; sourceTree = "<group>"; };
+		0D34600E23CE190800721B72 /* AmazonRootCA3.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonRootCA3.cer; sourceTree = "<group>"; };
+		0D34600F23CE190800721B72 /* AmazonRootCA4.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonRootCA4.cer; sourceTree = "<group>"; };
+		0D34601023CE190800721B72 /* AmazonRootCA1.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonRootCA1.cer; sourceTree = "<group>"; };
 		159C11441FC717C300917A57 /* TimeInterval+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Int.swift"; sourceTree = "<group>"; };
 		15B5B205201B774A00DE7E8C /* HaloNotificationEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotificationEvent.swift; sourceTree = "<group>"; };
 		15B5B207201B77BC00DE7E8C /* CoreManager+NotificationEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreManager+NotificationEvents.swift"; sourceTree = "<group>"; };
@@ -745,6 +761,10 @@
 		004612901E0BE21400B9B306 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0D34601023CE190800721B72 /* AmazonRootCA1.cer */,
+				0D34600D23CE190700721B72 /* AmazonRootCA2.cer */,
+				0D34600E23CE190800721B72 /* AmazonRootCA3.cer */,
+				0D34600F23CE190800721B72 /* AmazonRootCA4.cer */,
 				0D037F9120D285CB00F581EF /* zhalo2018Cert.cer */,
 				0D037F9620D2864500F581EF /* halo.cer */,
 				0D037F9520D2864400F581EF /* mobgen.cer */,
@@ -1267,8 +1287,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D037F9820D2864500F581EF /* mobgen.cer in Resources */,
+				0D34601223CE190800721B72 /* AmazonRootCA2.cer in Resources */,
 				0D037F9B20D2864500F581EF /* halo.cer in Resources */,
 				0D037F9320D285CB00F581EF /* zhalo2018Cert.cer in Resources */,
+				0D34601523CE190800721B72 /* AmazonRootCA3.cer in Resources */,
+				0D34601B23CE190800721B72 /* AmazonRootCA1.cer in Resources */,
+				0D34601823CE190800721B72 /* AmazonRootCA4.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,8 +1301,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D037F9920D2864500F581EF /* mobgen.cer in Resources */,
+				0D34601323CE190800721B72 /* AmazonRootCA2.cer in Resources */,
 				0D037F9C20D2864500F581EF /* halo.cer in Resources */,
 				0D037F9420D285CB00F581EF /* zhalo2018Cert.cer in Resources */,
+				0D34601623CE190800721B72 /* AmazonRootCA3.cer in Resources */,
+				0D34601C23CE190800721B72 /* AmazonRootCA1.cer in Resources */,
+				0D34601923CE190800721B72 /* AmazonRootCA4.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,8 +1322,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D037F9720D2864500F581EF /* mobgen.cer in Resources */,
+				0D34601123CE190800721B72 /* AmazonRootCA2.cer in Resources */,
 				0D037F9A20D2864500F581EF /* halo.cer in Resources */,
 				0D037F9220D285CB00F581EF /* zhalo2018Cert.cer in Resources */,
+				0D34601423CE190800721B72 /* AmazonRootCA3.cer in Resources */,
+				0D34601A23CE190800721B72 /* AmazonRootCA1.cer in Resources */,
+				0D34601723CE190800721B72 /* AmazonRootCA4.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
