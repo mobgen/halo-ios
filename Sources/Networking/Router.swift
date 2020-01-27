@@ -13,7 +13,7 @@ import Foundation
 public enum Router {
 
     /// Common base url of all the API endpoints
-    public static var baseURL = URL(string: "https://halo.mobgen.com")
+    public static var baseURL = URL(string: "https://halo-db.com")
 
     /// Token to be used for authentication purposes
     static var appToken: Token?

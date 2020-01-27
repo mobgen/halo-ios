@@ -38,13 +38,13 @@ public enum HaloEnvironment {
     var baseUrl: URL {
         switch self {
         case .int:
-            return URL(string: "https://halo-int.mobgen.com")!
+            return URL(string: "https://int.halo-db.com")!
         case .qa:
-            return URL(string: "https://halo-qa.mobgen.com")!
+            return URL(string: "https://stage.halo-db.com")!
         case .stage:
-            return URL(string: "https://halo-stage.mobgen.com")!
+            return URL(string: "https://stage.halo-db.com")!
         case .prod:
-            return URL(string: "https://halo.mobgen.com")!
+            return URL(string: "https://halo-db.com")!
         case .custom(let url):
             return URL(string: url)!
         }
