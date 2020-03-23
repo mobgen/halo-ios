@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objcMembers @objc(HaloTranslationsHelper)
+@objc(HaloTranslationsHelper)
 open class TranslationsHelper: NSObject {
 
     fileprivate var moduleId: String?
@@ -136,7 +136,7 @@ open class TranslationsHelper: NSObject {
         }
     }
     
-    open func load() -> Void {
+    @objc open func load() -> Void {
 
         if isLoading {
             return
