@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc(HaloTranslationsHelper)
+@objcMembers @objc(HaloTranslationsHelper)
 open class TranslationsHelper: NSObject {
 
     fileprivate var moduleId: String?
@@ -28,7 +28,7 @@ open class TranslationsHelper: NSObject {
         super.init()
     }
 
-    public convenience init(moduleId: String, locale: Locale, keyField: String, valueField: String) {
+    @objc public convenience init(moduleId: String, locale: Locale, keyField: String, valueField: String) {
         self.init()
         self.moduleId = moduleId
         self.locale = locale
@@ -37,7 +37,7 @@ open class TranslationsHelper: NSObject {
         self.syncQuery = SyncQuery(moduleId: moduleId).locale(locale)
     }
     
-    public convenience init(moduleName: String, locale: Locale, keyField: String, valueField: String) {
+    @objc public convenience init(moduleName: String, locale: Locale, keyField: String, valueField: String) {
         self.init()
         self.moduleName = moduleName
         self.locale = locale
@@ -127,7 +127,7 @@ open class TranslationsHelper: NSObject {
         }
     }
 
-    open func clearAllTexts() -> Void {
+    @objc open func clearAllTexts() -> Void {
         translationsMap.removeAll()
         if let id = moduleId {
             Manager.content.removeSyncedInstances(module: id)

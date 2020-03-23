@@ -388,9 +388,9 @@ open class NetworkManager: NSObject, HaloManager {
 
 }
 
-public extension Manager {
+@objc public extension Manager {
     
-    public static let network: NetworkManager = {
+    @objc static let network: NetworkManager = {
         return NetworkManager()
     }()
     

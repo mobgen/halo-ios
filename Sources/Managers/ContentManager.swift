@@ -59,9 +59,9 @@ open class ContentManager: NSObject, HaloManager {
     }
 }
 
-public extension Manager {
+@objc public extension Manager {
     
-    public static let content: ContentManager = {
+    @objc static let content: ContentManager = {
         return ContentManager()
     }()
     

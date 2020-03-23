@@ -8,14 +8,14 @@
 
 import Halo
 
-public extension CoreManager {
+@objc public extension CoreManager {
 
-    public var env: String {
+     var env: String {
         return self.environment.description
     }
     
     @objc(modulesWithQuery:success:failure:)
-    public func modules(query: ModulesQuery, success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
+     func modules(query: ModulesQuery, success: @escaping (HTTPURLResponse?, PaginatedModules) -> Void,
                         failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
 
         self.getModules(query: query) { (response, result) in
@@ -32,7 +32,7 @@ public extension CoreManager {
     }
     
     @objc(setEnvironment:withCompletionHandler:)
-    public func setEnvironment(env: String, completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
+     func setEnvironment(env: String, completionHandler handler: ((Bool) -> Void)? = nil) -> Void {
         
         var envir: HaloEnvironment!
         

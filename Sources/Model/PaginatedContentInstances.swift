@@ -16,8 +16,8 @@ open class PaginatedContentInstances: NSObject, NSCoding {
         static let Instances = "instances"
     }
 
-    open internal(set) var paginationInfo: PaginationInfo
-    open internal(set) var instances: [Halo.ContentInstance]
+    @objc open internal(set) var paginationInfo: PaginationInfo
+    @objc open internal(set) var instances: [Halo.ContentInstance]
 
     init(paginationInfo: PaginationInfo, instances: [Halo.ContentInstance]) {
         self.paginationInfo = paginationInfo

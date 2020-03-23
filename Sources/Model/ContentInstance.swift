@@ -42,7 +42,7 @@ open class ContentInstance: NSObject, NSCoding {
     open internal(set) var name: String = ""
 
     /// Collection of key-value pairs which make up the information of this instance
-    open internal(set) var values: [String: Any] = [:]
+    @objc open internal(set) var values: [String: Any] = [:]
 
     /// Date in which the content was created
     open internal(set) var createdAt: Date

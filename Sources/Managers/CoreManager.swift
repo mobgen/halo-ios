@@ -17,7 +17,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     var completionHandler: ((Bool) -> Void)?
     
     /// Delegate that will handle launching completion and other important steps in the flow
-    public var delegate: ManagerDelegate?
+    @objc public var delegate: ManagerDelegate?
     
     public internal(set) var loggers: [Logger] = []
     
@@ -28,7 +28,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public internal(set) var dataProvider: DataProvider = DataProviderManager.online
     
     ///
-    public var logLevel: LogLevel = .warning
+    @objc public var logLevel: LogLevel = .warning
     
     ///
     let lockQueue = DispatchQueue(label: "com.mobgen.halo.lockQueue", attributes: [])
@@ -81,7 +81,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
     public var enableSystemTags: Bool = false
     
     /// Instance holding all the device-related information
-    public var device: Device?
+    @objc public var device: Device?
     
     public internal(set) var addons: [HaloAddon] = []
     
@@ -413,7 +413,7 @@ open class CoreManager: NSObject, HaloManager, Logger {
         }
     }
     
-    public func addLogger(_ logger: Logger) {
+    @objc public func addLogger(_ logger: Logger) {
         self.loggers.append(logger)
     }
     
@@ -432,9 +432,9 @@ open class CoreManager: NSObject, HaloManager, Logger {
     
 }
 
-public extension Manager {
+@objc public extension Manager {
     
-    public static let core: CoreManager = {
+    @objc static let core: CoreManager = {
         return CoreManager()
     }()
     

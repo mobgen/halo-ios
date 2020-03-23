@@ -33,32 +33,32 @@ open class Module: NSObject, NSCoding {
     open internal(set) var customerId: Int?
 
     /// Unique identifier of the module
-    open internal(set) var id: String?
+    @objc open internal(set) var id: String?
 
     /// Visual name of the module
-    open internal(set) var name: String?
+    @objc open internal(set) var name: String?
 
     /// Identifies the module as single item module
-    open internal(set) var isSingle: Bool = false
+    @objc open internal(set) var isSingle: Bool = false
 
     /// Date in which the module was created
-    open internal(set) var createdAt: Date?
+    @objc open internal(set) var createdAt: Date?
 
     /// Date of the last update performed in this module
-    open internal(set) var updatedAt: Date?
+    @objc open internal(set) var updatedAt: Date?
 
     /// Name of the user who created the module in the first place
-    open internal(set) var createdBy: String?
+    @objc open internal(set) var createdBy: String?
     
     /// Name of the user who updated the module in last place
-    open internal(set) var updatedBy: String?
+    @objc open internal(set) var updatedBy: String?
 
-    open internal(set) var deletedAt: Date?
+    @objc open internal(set) var deletedAt: Date?
     
-    open internal(set) var deletedBy: String?
+    @objc open internal(set) var deletedBy: String?
     
     /// Dictionary of tags associated to this module
-    open internal(set) var tags: [String: Halo.Tag] = [:]
+    @objc open internal(set) var tags: [String: Halo.Tag] = [:]
 
     fileprivate override init() {
         super.init()
@@ -69,7 +69,7 @@ open class Module: NSObject, NSCoding {
 
      - parameter dict:   Dictionary containing the information about the module
      */
-    open static func fromDictionary(dict: [String: AnyObject]) -> Halo.Module {
+    @objc static func fromDictionary(dict: [String: AnyObject]) -> Halo.Module {
 
         let module = Module()
 
@@ -107,7 +107,7 @@ open class Module: NSObject, NSCoding {
         return module
     }
 
-    public required init?(coder aDecoder: NSCoder) {
+    @objc public required init?(coder aDecoder: NSCoder) {
         super.init()
         id = aDecoder.decodeObject(forKey: Keys.Id) as? String
         customerId = aDecoder.decodeObject(forKey: Keys.Customer) as? Int
@@ -122,7 +122,7 @@ open class Module: NSObject, NSCoding {
         deletedBy = aDecoder.decodeObject(forKey: Keys.DeletedBy) as? String
     }
 
-    open func encode(with aCoder: NSCoder) {
+    @objc open func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: Keys.Id)
         aCoder.encode(customerId, forKey: Keys.Customer)
         aCoder.encode(name, forKey: Keys.Name)

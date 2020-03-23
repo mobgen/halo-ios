@@ -16,8 +16,8 @@ open class PaginatedModules: NSObject, NSCoding {
         static let Modules = "modules"
     }
 
-    open internal(set) var paginationInfo: PaginationInfo
-    open internal(set) var modules: [Halo.Module]
+    @objc open internal(set) var paginationInfo: PaginationInfo
+    @objc open internal(set) var modules: [Halo.Module]
 
     init(paginationInfo: PaginationInfo, modules: [Halo.Module]) {
         self.paginationInfo = paginationInfo

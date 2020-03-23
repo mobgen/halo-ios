@@ -36,7 +36,7 @@ public final class Device: NSObject, NSCoding {
     public var email: String?
 
     /// An alias that also identifies the user
-    public var alias: String?
+    @objc public var alias: String?
 
     /// List of devices linked to this user
     public var info: Halo.DeviceInfo?
