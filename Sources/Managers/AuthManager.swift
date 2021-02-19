@@ -35,7 +35,7 @@ public class AuthManager: NSObject, HaloManager {
     }
     
     public func removeObserver(_ observer: AuthManagerObserver) -> Void {
-        if let idx = observers.index(where: { $0 === observer }) {
+        if let idx = observers.firstIndex(where: { $0 === observer }) {
             observers.remove(at: idx)
         }
     }
@@ -187,7 +187,7 @@ public class AuthManager: NSObject, HaloManager {
 
 public extension Manager {
     
-    public static let auth: AuthManager = {
+    static let auth: AuthManager = {
         return AuthManager()
     }()
     

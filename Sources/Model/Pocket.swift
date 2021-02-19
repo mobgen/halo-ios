@@ -26,7 +26,7 @@ public class Pocket: NSObject {
         
         // Do not append duplicated values
         if let list = references[key], let referencesList = list {
-            if referencesList.index(of: value) == nil {
+            if referencesList.firstIndex(of: value) == nil {
                 references[key]??.append(value)
             }
         }
@@ -40,7 +40,7 @@ public class Pocket: NSObject {
             return false
         }
         
-        if let list = list, let index = list.index(of: value) {
+        if let list = list, let index = list.firstIndex(of: value) {
             references[key]??.remove(at: index)
             return true
         }

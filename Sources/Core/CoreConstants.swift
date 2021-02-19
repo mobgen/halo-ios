@@ -10,7 +10,7 @@
 open class CoreConstants {
 
     /// Key to be used to store the latest environment used
-    open static let environmentKey = "HaloEnvironment"
+    public static let environmentKey = "HaloEnvironment"
 
     /// Key which identifies the client id within the configuration plist
     static let clientIdKey = "CLIENT_ID"

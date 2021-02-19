@@ -16,13 +16,13 @@ public extension CoreManager {
      - parameter a: Add-on implementation
      */
     @objc(registerAddon:)
-    public func registerAddon(addon a: HaloAddon) -> Void {
+    func registerAddon(addon a: HaloAddon) -> Void {
         a.willRegisterAddon(haloCore: self)
         self.addons.append(a)
         a.didRegisterAddon(haloCore: self)
     }
     
-    public func getAddons<T: HaloAddon>(type: T.Type) -> [T] {
+    func getAddons<T: HaloAddon>(type: T.Type) -> [T] {
         return self.addons.filter { $0 is T } as! [T]
     }
     

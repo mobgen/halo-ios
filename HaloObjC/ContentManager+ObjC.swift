@@ -18,7 +18,7 @@ public extension ContentManager {
     // MARK: Content search
     
     @objc(searchWithQuery:success:failure:)
-    public func search(query: Halo.SearchQuery,
+    func search(query: Halo.SearchQuery,
                              success: @escaping (HTTPURLResponse?, PaginatedContentInstances, Bool) -> Void,
                              failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
         
@@ -37,7 +37,7 @@ public extension ContentManager {
     }
     
     @objc(searchAsDataWithQuery:success:failure:)
-    public func searchAsData(query: Halo.SearchQuery,
+    func searchAsData(query: Halo.SearchQuery,
                              success: @escaping (HTTPURLResponse?, Data, Bool) -> Void,
                              failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
     
@@ -56,7 +56,7 @@ public extension ContentManager {
     // Content manipulation
     
     @objc(saveInstance:withSuccess:failure:)
-    public func saveInstance(_ instance: ContentInstance,
+    func saveInstance(_ instance: ContentInstance,
                              success: @escaping (HTTPURLResponse?, ContentInstance?, Bool) -> Void,
                              failure: @escaping (HTTPURLResponse?, Error) -> Void) {
         
@@ -72,7 +72,7 @@ public extension ContentManager {
     }
     
     @objc(deleteInstanceWithId:success:failure:)
-    public func deleteInstance(_ instanceId: String,
+    func deleteInstance(_ instanceId: String,
                                success: @escaping (HTTPURLResponse?, ContentInstance?, Bool) -> Void,
                                failure: @escaping (HTTPURLResponse?, Error) -> Void) {
         
@@ -90,7 +90,7 @@ public extension ContentManager {
     // MARK: Batch operations
     
     @objc(performBatchOperations:withSuccess:failure:)
-    public func performBatchOperations(_ operations: BatchOperations,
+    func performBatchOperations(_ operations: BatchOperations,
                                        success: @escaping (HTTPURLResponse?, BatchResult?, Bool) -> Void,
                                        failure: @escaping (HTTPURLResponse?, Error) -> Void) {
      
@@ -108,7 +108,7 @@ public extension ContentManager {
     // MARK: Content sync
     
     @objc(syncWithQuery:completionHandler:)
-    public func syncObjC(query: SyncQuery, completionHandler handler: @escaping (String, Error?) -> Void) -> Void {
+    func syncObjC(query: SyncQuery, completionHandler handler: @escaping (String, Error?) -> Void) -> Void {
         
         self.sync(query: query) { (moduleId, error) in
             

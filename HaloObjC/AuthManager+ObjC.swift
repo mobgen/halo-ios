@@ -14,7 +14,7 @@ public extension AuthManager {
     // MARK: Login and registration
     
     @objc(loginWithAuthProfile:stayLoggedIn:success:failure:)
-    public func loginObjC(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn,
+    func loginObjC(authProfile: AuthProfile, stayLoggedIn: Bool = Manager.auth.stayLoggedIn,
                           success: @escaping (HTTPURLResponse?, User) -> Void,
                           failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
         
@@ -34,7 +34,7 @@ public extension AuthManager {
     }
     
     @objc(registerWithAuthProfile:userProfile:success:failure:)
-    public func registerObjC(authProfile: AuthProfile, userProfile: UserProfile,
+    func registerObjC(authProfile: AuthProfile, userProfile: UserProfile,
                              success: @escaping (HTTPURLResponse?, UserProfile) -> Void,
                              failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
         
@@ -57,7 +57,7 @@ public extension AuthManager {
     // MARK: Pocket
     
     @objc(getPocketWithFilter:success:failure:)
-    public func getPocketWithSuccess(_ filterReferences: [String]?, success: @escaping (HTTPURLResponse?, Pocket) -> Void,
+    func getPocketWithSuccess(_ filterReferences: [String]?, success: @escaping (HTTPURLResponse?, Pocket) -> Void,
                                      failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
         
         self.getPocket(filterReferences: filterReferences) { response, result in
@@ -78,7 +78,7 @@ public extension AuthManager {
     }
     
     @objc(savePocket:withSuccess:failure:)
-    public func savePocket(_ pocket: Pocket,
+    func savePocket(_ pocket: Pocket,
                            success: @escaping (HTTPURLResponse?, Pocket) -> Void,
                            failure: @escaping (HTTPURLResponse?, Error) -> Void) -> Void {
         
